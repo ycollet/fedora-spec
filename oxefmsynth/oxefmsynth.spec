@@ -58,8 +58,8 @@ make
 %__install -m 644 LICENSE   %{buildroot}/%{_datadir}/%{name}/doc/
 
 %files
-%{_libdir}/
-%{_datadir}/
+%{_libdir}/*
+%{_datadir}/*
 
 %changelog
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.3.4
