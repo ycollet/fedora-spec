@@ -3,12 +3,12 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:         vopa
+Name:         vopa-lv2
 Version:      1.0.0
 Release:      1%{?dist}
 Summary:      A LV2 amplifier controlled via MIDI messages
 URL:          https://github.com/ycollet/vopa
-Source0:      https://github.com/ycollet/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:      https://github.com/ycollet/vopa/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Group:        Applications/Multimedia
 License:      GPLv2+
 
@@ -18,7 +18,7 @@ BuildRequires: lv2-devel
 A LV2 amplifier controlled via MIDI messages
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn vopa-%{commit0}
 
 %build
 
