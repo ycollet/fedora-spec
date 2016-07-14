@@ -593,6 +593,15 @@ qsampler
 projectM-jack
 projectM-pulseaudio
 
+protrekkr
+#oxefmsynth
+stretchplayer
+sfarkxtc
+lenmus
+GrandOrgue
+picoloop
+jm2cv
+
 #language
 chuck
 miniaudicle
