@@ -3,10 +3,6 @@
 %global gittag0 v0.6.7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global commit1 f723310bb33e7229e3338d69c3a9b48d5d8093af
-%global gittag1 v0.4.3
-%global shortcommit1 %(c=%{commit0}; echo ${c:0:7})
-
 Name:           sisco.lv2
 Version:        0.6.7
 Release:        1%{?dist}

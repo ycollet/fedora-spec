@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 6f7970ad5759e1203c2ea56eb11af0287d96966f
+%global commit0 f8b473561364e0aab457f8d017ee7723b2bf5606
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:           mod-pitchshifter
-Version:        0.9
+Version:        0.9.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        mod-pitchshifter LV2 set of plugins from portalmod
 

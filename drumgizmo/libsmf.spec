@@ -5,7 +5,7 @@
 
 Summary: MIDI library
 Name: libsmf
-Version: 1.3
+Version: 1.3.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia

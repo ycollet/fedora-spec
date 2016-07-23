@@ -8,10 +8,10 @@ Release:          1%{?dist}
 
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
-#  svn export -r 1427 http://svn.code.sf.net/p/tuxguitar/code/trunk tuxguitar-1.3-1427
-#  tar -czvf tuxguitar-1.3-1427.tar.gz tuxguitar-1.3-1427
+#  svn export -r 1462 http://svn.code.sf.net/p/tuxguitar/code/trunk tuxguitar-1.3-1462
+#  tar -czvf tuxguitar-1.3-1462.tar.gz tuxguitar-1.3-1462
 URL:              http://tuxguitar.sourceforge.com
-Source0:          tuxguitar-1.3-1427.tar.gz
+Source0:          tuxguitar-1.3-1462.tar.gz
 Source1:          tuxguitar-1.3.sh
 Source2:          tuxguitar3.desktop
 License:          LGPLv2+
@@ -41,7 +41,7 @@ hammer-on/pull-off effects, support for tuplets, time signature management,
 tempo management, gp3/gp4/gp5/gp6 import and export.
 
 %prep
-%setup -q -n tuxguitar-1.3-1427
+%setup -q -n tuxguitar-1.3-1462
 
 %build
 
@@ -116,7 +116,7 @@ EOF
 %__install -m 755 %{SOURCE1} %{buildroot}/%{_bindir}/
 mv %{buildroot}/%{_bindir}/tuxguitar-1.3.sh %{buildroot}/%{_bindir}/%{name}
 
-cd build-scripts/tuxguitar-linux-x86_64/target/tuxguitar-%{version}-SNAPSHOT-linux-x86_64/
+cd build-scripts/tuxguitar-linux-x86_64/target/tuxguitar-SNAPSHOT-linux-x86_64/
 
 %__install -m 755 -d %{buildroot}%{_datadir}/%{name}/dist/
 %__install -m 755 -d %{buildroot}%{_datadir}/%{name}/doc/

@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           mda-lv2
-Version:        0.9
+Version:        0.9.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        MDA LV2 set of plugins from portalmod
 

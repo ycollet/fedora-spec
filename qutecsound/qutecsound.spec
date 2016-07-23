@@ -1,3 +1,6 @@
+# Disable production of debug package. Problem with fedora 23
+%global debug_package %{nil}
+
 Name:         qutecsound
 Version:      0.9.0
 Release:      1%{?dist}

@@ -67,6 +67,7 @@ BuildRequires: stk-devel
 BuildRequires: qt4-devel
 BuildRequires: fltk-devel
 BuildRequires: cmake
+BuildRequires: sed
 BuildRequires: desktop-file-utils
 BuildRequires: fltk-fluid
 BuildRequires: fltk-devel
@@ -137,13 +138,14 @@ developing addons for %{name}.
 %patch3 -p1
 %patch4 -p1
 
-#%patch0 -p1 -b .libexecdir
-#%patch1 -p1 -b .nowine
-
 # remove spurious x-bits
 find . -type f -exec chmod 0644 {} \;
 
 %build
+
+# Fix a problem in header
+sed -i -e "s/GCC \"__VERSION__/GCC 6.1.1\"/g" include/versioninfo.h
+
 %cmake \
        -DWANT_SDL:BOOL=OFF \
        -DWANT_PORTAUDIO:BOOL=OFF \
@@ -163,9 +165,11 @@ find . -type f -exec chmod 0644 {} \;
        -DCMAKE_INSTALL_LIBDIR=%{_lib} \
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
        .
+
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
+
 make DESTDIR=%{buildroot} install
 
 desktop-file-install --vendor '' \

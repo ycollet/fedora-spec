@@ -59,7 +59,7 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_bindir}/drumgizmo
 %{_libdir}/*
 %{_datadir}/man/*
-
+%exclude %{_bindir}/dgreftest
 
 %changelog
 * Thu May 12 2016 Yann Collette <ycollette dot nospam at free.fr> 0.9.10-1

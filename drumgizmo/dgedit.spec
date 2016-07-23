@@ -22,7 +22,7 @@ BuildRequires: libao-devel
 The DrumGizmo drumkit editor DGEdit is currently in a functioning, but very early phase of development. All of the essentials for importing, editing and exporting the raw drumkit recordings are there - but it is not exactly user friendly. 
 
 %prep
-%setup -q -c %{name}
+%setup -qn %{name}-%version
 
 %build
 

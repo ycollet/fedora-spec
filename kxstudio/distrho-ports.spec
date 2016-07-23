@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 7bcbc9bf43f8acc273d3007345ac1985ba54f9a4
+%global commit0 e3969853ec9ba897c50ac060f0167313e2a18b29
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:           DISTRHO-Ports
-Version:        1.0.0
+Version:        1.0.0.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A set of LV2 plugins
 

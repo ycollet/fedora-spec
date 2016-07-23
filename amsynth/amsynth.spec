@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 0b7f204de0ff6d54938962bce1097f703d11e582
+%global commit0 c3521d9fad52ab8481bae417e192f53b288ac4da
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Software Synthesizer
 Name: amsynth
-Version: 1.5.1
+Version: 1.5.1.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia

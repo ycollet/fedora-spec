@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 5a010a02f664791d6b0f4e685d242f13c1fdf86d
+%global commit0 b5a573453b810115ecb864969f4cde1725f8dc6a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         jalv_select
-Version:      0.7.0
+Version:      0.7.0.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      A LV2 synthetizer launcher for Jack audio
 URL:          https://github.com/brummer10/jalv_select

@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 922601d76b5959949253695267dbc83609077aeb
+%global commit0 404058e2bdcf41165d00e61fa3f78a273920b81b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:           zam-plugins
-Version:        3.5
+Version:        3.7.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        Zam LV2 set of plugins
 
@@ -47,6 +47,7 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags}
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags} install
 
 %files
+%{_bindir}/*
 %{_libdir}/lv2/*
 
 %files -n ladspa-zam

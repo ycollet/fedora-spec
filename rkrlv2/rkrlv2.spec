@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 e0a080b7e5ee45e89d703149edc9055e7a10afd8
+%global commit0 bfda328814901007190d86deee403658a5cf68f1
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           rkrlv2
-Version:        0.0.1
+Version:        0.0.1.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        Rakarrack LV2 plugins
 URL:            https://github.com/ssj71/rkrlv2

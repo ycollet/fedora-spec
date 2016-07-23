@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 75a8d58380f9977722d39a72ec22fc3880d480ca
+%global commit0 e7d5b7bb2fe6f0c6bc6e6a148c9899fb859300ed
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         lenmus
-Version:      5.4.1
+Version:      5.4.1.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      An app to study music theory and train you ear
 Group:        Applications/Multimedia

@@ -22,7 +22,6 @@ BuildRequires:  fltk-devel
 BuildRequires:  libsigc++20-devel
 BuildRequires:  jack-audio-connection-kit-devel
 BuildRequires:  desktop-file-utils
-BuildRequires:  imake
 BuildRequires:  libXpm-devel
 BuildRequires:  ladspa-devel
 BuildRequires:  liblrdf-devel

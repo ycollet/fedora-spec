@@ -5,7 +5,7 @@
 
 Summary: sfArk library
 Name: sfArkLib
-Version: 2.24
+Version: 2.24.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia

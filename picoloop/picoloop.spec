@@ -2,12 +2,12 @@
 #%global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 c02ef34407fb35b080de14f433dac90eefa018e9
+%global commit0 286157a79964d6622084253747452da3fe75bfbc
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           picoloop
-Version:        0.67
+Version:        0.67.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        An audio sequencer
 

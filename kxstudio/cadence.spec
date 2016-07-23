@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:           Cadence
-Version:        master
+Version:        1.0.0.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A JACK control center
 

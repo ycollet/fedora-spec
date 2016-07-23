@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:           swh-lv2
-Version:        0.9
+Version:        0.9.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        SWH LV2 set of plugins from portalmod
 
@@ -29,7 +29,7 @@ SWH LV2 set of plugins from portalmod
 make %{?_smp_mflags}
 
 %install 
-make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
+make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install-system
 
 %files
 %{_libdir}/lv2/*

@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 f04d65acc0ecb52437c52793c3995ad747c00e20
+%global commit0 6dbcd64ba122c2fe1342962c51744b7663925658
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           helm
-Version:        1.0.0
+Version:        1.0.0.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A LV2 / standalone synth
 
@@ -12,6 +12,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/mtytel/helm
 Source0:        https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:         helm-0001-fix-type-problem.patch
 
 BuildRequires: liblo-devel
 BuildRequires: alsa-lib-devel
@@ -28,6 +29,7 @@ A LV2 / standalone synth
 
 %prep
 %setup -qn %{name}-%{commit0}
+%patch0 -p1
 
 sed -i "s/\/lib\//\/lib64\//g" Makefile
 
@@ -55,6 +57,8 @@ fi
 %{_bindir}/*
 %{_libdir}/lv2/*
 %{_datadir}/helm/*
+%{_datadir}/doc/helm/*
+%{_mandir}/man1/helm.1.gz
 
 %changelog
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta

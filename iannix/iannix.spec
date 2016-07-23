@@ -1,7 +1,7 @@
 # http://www.iannix.org/
 
 # Global variables for github repository
-%global commit0 f84becdcbe154b20a53aa2622068cb8f6fda0755
+%global commit0 ac7169321979d358094f3da7c4f620f4e010f4dd
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +9,7 @@
 %global debug_package %{nil}
 
 Name:         IanniX
-Version:      0.9.16
+Version:      0.9.16.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      A graphic / MIDI / OSC player
 URL:          https://github.com/iannix/Iannix
@@ -19,8 +19,11 @@ License:      GPLv2+
 
 Source0:      https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1:      iannix.xml
+Patch0:       iannix-0001-fix-missing-glew.patch
 
-BuildRequires: qt4-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtscript-devel
+BuildRequires: glew-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 
@@ -29,10 +32,11 @@ IanniX is a graphical open source sequencer, based on Iannis Xenakis works, for 
 
 %prep
 %setup -qn %{name}-%{commit0}
+%patch0 -p1
 
 %build
 
-qmake-qt4 IanniX.pro
+qmake-qt5 IanniX.pro
 make VERBOSE=1 %{?_smp_mflags}
 
 %install

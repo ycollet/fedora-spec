@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 b0c472e956258fdb596aac58f5451adee9315c83
+%global commit0 07f3ba739e3eef8cbade8fbd1c5bda2d215aa475
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         lomse
-Version:      0.19.0
+Version:      0.19.0.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      A free open source library for rendering music scores
 Group:        Applications/Multimedia

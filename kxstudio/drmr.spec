@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           drmr
-Version:        1.0.0
+Version:        1.0.0.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A drum LV2 plugin
 

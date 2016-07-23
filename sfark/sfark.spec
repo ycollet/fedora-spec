@@ -5,7 +5,7 @@
 
 Summary: sfArk tool
 Name: sfarkxtc
-Version: 0.1
+Version: 0.1.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia

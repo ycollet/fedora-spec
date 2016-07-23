@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 e1351224e635614262518e1b9e05aa96d76fff2c
+%global commit0 db9fa7507640e7bf19a610583481f120a7723550
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           oxefmsynth
-Version:        1.3.4
+Version:        1.3.4.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A FM synthetized
 
@@ -32,7 +32,7 @@ A FM synthetizer
 tar xvfj %{SOURCE1}
 export VSTSDK_PATH=vst/vstsdk2.4/
 
-make
+make -f Makefile.vstlinux CFLAGS=-Wno-narrowing
 
 %install 
 

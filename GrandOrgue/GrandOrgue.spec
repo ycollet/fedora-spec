@@ -8,9 +8,9 @@ License:      GPLv2+
 URL:          http://sourceforge.net/projects/ourorgan
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
-#  svn export -r 2118 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2118
-#  tar cvfz ourorgan-2118.tar.gz ourorgan-2118
-%define revision 2118
+#  svn export -r 2141 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2141
+#  tar cvfz ourorgan-2141.tar.gz ourorgan-2141
+%define revision 2141
 Source0:      ourorgan-%{revision}.tar.gz
 
 BuildRequires: desktop-file-utils
