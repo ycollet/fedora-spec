@@ -1,0 +1,38 @@
+From 1ceb884a9d4acbadc625e70f0afec893d65a508d Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 23 Jul 2016 19:06:57 +0200
+Subject: [PATCH] fix missing glew
+
+---
+ IanniX.pro          | 2 +-
+ render/uirender.cpp | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/IanniX.pro b/IanniX.pro
+index 4753073..bc68822 100644
+--- a/IanniX.pro
++++ b/IanniX.pro
+@@ -227,7 +227,7 @@ linux* {
+     DEFINES                  += __LINUX_ALSA__
+     DEFINES                  += AVOID_TIMESTAMPING
+     DEFINES                  += __linux__
+-    LIBS                     += -lasound
++    LIBS                     += -lasound -lGLEW
+     PKGCONFIG                += alsa
+     !qesp_linux_udev:DEFINES += QESP_NO_UDEV
+     qesp_linux_udev: LIBS    += -ludev
+diff --git a/render/uirender.cpp b/render/uirender.cpp
+index 7f49855..40585da 100644
+--- a/render/uirender.cpp
++++ b/render/uirender.cpp
+@@ -21,6 +21,7 @@
+     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
++#include <GL/glew.h>
+ #include "uirender.h"
+ #include "ui_uirender.h"
+ 
+-- 
+2.7.4
+

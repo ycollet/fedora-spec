@@ -1,0 +1,43 @@
+From b89f63575c762762de3c7a1689d62c3a270e858b Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 23 Jul 2016 19:33:14 +0200
+Subject: [PATCH] fix type problem
+
+---
+ JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/lpc_flac.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/lpc_flac.c b/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/lpc_flac.c
+index 87e2321..a1ca961 100644
+--- a/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/lpc_flac.c
++++ b/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/lpc_flac.c
+@@ -57,7 +57,7 @@
+ #elif defined(__GNUC__)
+ #define copysign __builtin_copysign
+ #endif
+-static inline long int lround(double x) {
++static inline long int jlround(double x) {
+     return (long)(x + copysign (0.5, x));
+ }
+ /* If this fails, we are in the presence of a mid 90's compiler, move along... */
+@@ -210,7 +210,7 @@ int FLAC__lpc_quantize_coefficients(const FLAC__real lp_coeff[], unsigned order,
+ 		FLAC__int32 q;
+ 		for(i = 0; i < order; i++) {
+ 			error += lp_coeff[i] * (1 << *shift);
+-			q = lround(error);
++			q = jlround(error);
+ 
+ #ifdef FLAC__OVERFLOW_DETECT
+ 			if(q > qmax+1) /* we expect q==qmax+1 occasionally due to rounding */
+@@ -239,7 +239,7 @@ int FLAC__lpc_quantize_coefficients(const FLAC__real lp_coeff[], unsigned order,
+ #endif
+ 		for(i = 0; i < order; i++) {
+ 			error += lp_coeff[i] / (1 << nshift);
+-			q = lround(error);
++			q = jlround(error);
+ #ifdef FLAC__OVERFLOW_DETECT
+ 			if(q > qmax+1) /* we expect q==qmax+1 occasionally due to rounding */
+ 				fprintf(stderr,"FLAC__lpc_quantize_coefficients: quantizer overflow: q>qmax %d>%d shift=%d cmax=%f precision=%u lpc[%u]=%f\n",q,qmax,*shift,cmax,precision+1,i,lp_coeff[i]);
+-- 
+2.7.4
+

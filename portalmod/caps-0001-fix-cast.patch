@@ -1,0 +1,25 @@
+From 8c46c8cbf3f3063e38f9e6773802a74b0b58e3a6 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 23 Jul 2016 21:25:01 +0200
+Subject: [PATCH] fix cast
+
+---
+ AutoFilter.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/AutoFilter.cc b/AutoFilter.cc
+index fc087d0..bd6b12f 100644
+--- a/AutoFilter.cc
++++ b/AutoFilter.cc
+@@ -69,7 +69,7 @@ AutoFilter::activate()
+ void
+ AutoFilter::cycle (uint frames)
+ {
+-	div_t qr = div (frames, blocksize);
++	div_t qr = div ((int)frames, (int)blocksize);
+ 	int blocks = qr.quot;
+ 	if (qr.rem) ++blocks;
+ 	double over_blocks = 1./blocks;
+-- 
+2.7.4
+
