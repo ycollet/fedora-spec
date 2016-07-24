@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Name=MilkyTracker
+Comment=Module tracker
+Exec=milkytracker %U
+Terminal=false
+Type=Application
+Icon=milkytracker
+StartupNotify=false
+Categories=AudioVideo;Audio;Sequencer;
