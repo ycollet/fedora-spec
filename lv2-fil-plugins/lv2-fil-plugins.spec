@@ -1,0 +1,109 @@
+%global pkgname lv2fil
+
+Summary:	Four-band parametric equalizers
+Name:		lv2-fil-plugins
+Version:	2.0
+Release:	13%{?dist}
+# lv2_ui.h is LGPLv2+
+# log.*, lv2filter.*, lv2plugin.c are GPLv2
+# The rest is GPLv2+
+# The author claims GPLv2 for the software
+License:	LGPLv2+ and GPLv2 and GPLv2+
+Group:		Applications/Multimedia
+URL:		http://nedko.arnaudov.name/soft/lv2fil/
+Source:		http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildRequires:	liblo-devel
+BuildRequires:	lv2-devel
+BuildRequires:	python
+
+Requires:	lv2
+Requires:	pycairo
+Requires:	pygtk2
+Requires:	pyliblo
+
+%description
+Stereo and mono LV2 plugins, four-band parametric equalizers.
+Each section has an active/bypass switch, frequency, bandwidth and
+gain controls. There is also a global bypass switch and gain control.
+
+The 2nd order resonant filters are implemented using a Mitra-Regalia
+style lattice filter, which has the nice property of being stable
+even while parameters are being changed.
+
+All switches and controls are internally smoothed, so they can be
+used 'live' without any clicks or zipper noises. This should make
+this plugin a good candidate for use in systems that allow automation
+of plugin control ports, such as Ardour, or for stage use.
+
+The GUI provides knobs and toggle buttons for tweaking filter
+parameters. It also provides frequency response widget with
+differently colored curve for each section and separate curve for
+total equalization effect.
+
+%prep
+%setup -q -n %{pkgname}-%{version}
+
+%build
+export CFLAGS="%{optflags}"
+export LINKFLAGS="-lm"
+./waf configure --lv2-dir=%{_libdir}/lv2
+./waf %{?_smp_mflags} -v
+
+%install
+rm -rf %{buildroot}
+./waf install --destdir=%{buildroot} -v
+# Fix weird permissions on installed files
+chmod 755 %{buildroot}%{_libdir}/lv2/filter.lv2/filter.so
+chmod 755 %{buildroot}%{_libdir}/lv2/filter.lv2/ui
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root,-)
+%doc AUTHORS COPYING README NEWS
+%{_libdir}/lv2/filter.lv2/
+
+
+%changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0-13
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
+* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-11
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
+* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Tue May 22 2012 Brendna Jones <brendan.s.jones@gmail.com> - 2.0-6
+- Rebuilt against new lv2
+
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Fri Jul 16 2010 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 2.0-3
+- More language fixes
+
+* Fri Dec 11 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 2.0-2
+- Obey American English rules (equaliser -> equalizer)
+- Fix license. Add comments.
+
+* Thu Nov 13 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 2.0-1
+- initial build
