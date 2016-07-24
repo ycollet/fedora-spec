@@ -497,7 +497,7 @@ non-session-manager
 muse
 rosegarden4
 mixxx
-#YC: temporary missing milkytracker
+milkytracker
 
 # audio-plugins
 calf
