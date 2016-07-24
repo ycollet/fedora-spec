@@ -19,6 +19,9 @@ Source0:        https://github.com/zamaudio/%{name}/archive/%{commit0}.tar.gz#/%
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: fftw-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: liblo-devel
+BuildRequires: mesa-libGL-devel
 
 %description
 Zam LV2 set of plugins
