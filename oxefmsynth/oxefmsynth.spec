@@ -16,6 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/oxesoft/oxefmsynth
 Source0:        https://github.com/oxesoft/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1:        http://ycollette.free.fr/LMMS/vst.tar.bz2
+Patch0:         oxefmsynth-0001-fix-ressources-generation.patch
 
 BuildRequires: libX11-devel
 BuildRequires: wget
@@ -26,13 +27,14 @@ A FM synthetizer
 
 %prep
 %setup -qn %{name}-%{commit0}
+%patch0 -p1
 
 %build
 
 tar xvfj %{SOURCE1}
 export VSTSDK_PATH=vst/vstsdk2.4/
 
-make -f Makefile.vstlinux CFLAGS=-Wno-narrowing
+make 
 
 %install 
 

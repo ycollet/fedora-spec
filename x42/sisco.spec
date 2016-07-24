@@ -32,11 +32,11 @@ A LV2 oscilloscope
 cd build-sisco.lv2
 git checkout v0.6.7
 make submodules
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} %{?_smp_mflags}
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
 
 %install 
 cd build-sisco.lv2
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} %{?_smp_mflags} install
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags} install
 
 %files
 %{_bindir}/*

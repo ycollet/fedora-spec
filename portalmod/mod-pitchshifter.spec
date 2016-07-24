@@ -22,6 +22,7 @@ BuildRequires: fftw
 BuildRequires: python3
 BuildRequires: python3-mpmath
 BuildRequires: armadillo-devel
+BuildRequires: SuperLU-devel
 
 %description
 mod-pitchshifter LV2 set of plugins from portalmod

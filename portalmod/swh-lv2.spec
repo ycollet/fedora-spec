@@ -17,6 +17,7 @@ URL:            https://github.com/portalmod/swh-lv2
 Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: lv2-devel
+BuildRequires: fftw-devel
 
 %description
 SWH LV2 set of plugins from portalmod
