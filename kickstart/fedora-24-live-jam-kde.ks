@@ -525,7 +525,7 @@ ladspa-wasp-plugins
 # lv2 plugins
 lv2
 lv2-avw-plugins
-#lv2-fil-plugins
+lv2-fil-plugins
 lv2-invada-plugins
 lv2-kn0ck0ut
 lv2-ll-plugins
@@ -595,10 +595,11 @@ protrekkr
 oxefmsynth
 stretchplayer
 sfarkxtc
-# YC: to be fixed lenmus
+lenmus
 GrandOrgue
 picoloop
 jm2cv
+rakarrack
 
 #language
 chuck

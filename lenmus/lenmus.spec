@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 e7d5b7bb2fe6f0c6bc6e6a148c9899fb859300ed
+%global commit0 0e5819a01a916444f5cabd2be3c911cd084c6bc4
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         lenmus
-Version:      5.4.1.%{shortcommit0}
+Version:      5.4.2.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      An app to study music theory and train you ear
 Group:        Applications/Multimedia
@@ -12,7 +12,6 @@ License:      GPLv2+
 
 URL:          https://github.com/lenmus/lenmus
 Source0:      https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:       lenmus_0001-fix-install.patch
 
 BuildRequires: boost-devel
 BuildRequires: desktop-file-utils
@@ -24,7 +23,7 @@ BuildRequires: portaudio-devel
 BuildRequires: cmake
 BuildRequires: wxGTK3-devel
 BuildRequires: sqlite-devel
-BuildRequires: lomse-devel
+#BuildRequires: lomse-devel
 
 %description
 LenMus Phonascus, "the teacher of music", is a free program to help you in the study of music theory and ear training.
@@ -42,15 +41,8 @@ about the project or for further details about releases.
 
 %prep
 %setup -qn %{name}-%{commit0}
-%patch0 -p1
 
 %build
-
-# -Werror=format-security -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1
-#export CFLAGS="-fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic"
-
-#-Werror=format-security -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1
-#export CXXFLAGS="-fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic"
 
 %cmake -D_filename:FILEPATH=/usr/include/wx-3.0/wx/version.h \
        -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/wx-config-3.0 \
@@ -68,8 +60,8 @@ desktop-file-install --vendor '' \
         --add-category X-Sound \
         --add-category=Midi \
         --add-category=Audio \
-        --dir %{buildroot}%{_datadir}/%{name}/%{version}/res \
-        %{buildroot}%{_datadir}/%{name}/%{version}/res/desktop/%{name}.desktop
+        --dir %{buildroot}%{_datadir}/applications \
+        %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %post
 touch --no-create %{_datadir}/mime/packages &>/dev/null || :
@@ -90,6 +82,7 @@ fi
 %{_datadir}/%{name}/*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
+%{_datadir}/man/*
 
 %changelog
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-1

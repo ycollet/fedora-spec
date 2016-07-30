@@ -21,7 +21,7 @@ BuildRequires:	python
 Requires:	lv2
 Requires:	pycairo
 Requires:	pygtk2
-Requires:	pyliblo
+Requires:	python2-pyliblo
 
 %description
 Stereo and mono LV2 plugins, four-band parametric equalizers.
