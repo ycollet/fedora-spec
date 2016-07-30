@@ -1,7 +1,7 @@
 Summary: Additional DrumKits for Hydrogen
 Name: hydrogen-drumkits
 Version: 0.9.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
 Group: Applications/Multimedia
 URL: http://www.hydrogen-music.org
@@ -31,6 +31,14 @@ Source21: http://downloads.sourceforge.net/hydrogen/HipHop-2.h2drumkit
 Source22: http://downloads.sourceforge.net/hydrogen/HipHop-1.h2drumkit
 Source23: http://downloads.sourceforge.net/hydrogen/3355606kit.h2drumkit
 Source24: http://downloads.sourceforge.net/hydrogen/VariBreaks.h2drumkit
+
+# From http://www.bandshed.net/sounds/h2drumkit/
+Source25: http://www.bandshed.net/sounds/h2drumkit/AVL-BlackPearl-4A-1.0.h2drumkit
+Source26: http://www.bandshed.net/sounds/h2drumkit/AVL-BlackPearl-4B-1.0.h2drumkit
+Source27: http://www.bandshed.net/sounds/h2drumkit/AVL-BlackPearl-5-1.0.h2drumkit
+Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-RedZep-4-1.0.h2drumkit
+Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-RedZep-5-1.0.h2drumkit
+Source30: http://www.bandshed.net/sounds/h2drumkit/Gimme%20A%20Hand%201.0.h2drumkit
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
