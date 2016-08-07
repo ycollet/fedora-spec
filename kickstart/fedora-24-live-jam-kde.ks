@@ -491,7 +491,6 @@ phasex
 # guitar
 guitarix
 tuxguitar
-tuxguitar3
 sooperlooper
 
 # recodring and DAW
@@ -845,7 +844,6 @@ cp /usr/share/applications/mscore.desktop         /home/lescuizines/Desktop
 cp /usr/share/applications/qtractor.desktop       /home/lescuizines/Desktop
 cp /usr/share/applications/audacity.desktop       /home/lescuizines/Desktop
 cp /usr/share/applications/tuxguitar.desktop      /home/lescuizines/Desktop
-cp /usr/share/applications/tuxguitar3.desktop     /home/lescuizines/Desktop
 cp /usr/share/applications/xfce4-terminal.desktop /home/lescuizines/Desktop
 cp /usr/share/applications/carla.desktop          /home/lescuizines/Desktop
 cp /usr/share/applications/cadence.desktop        /home/lescuizines/Desktop
