@@ -15,8 +15,12 @@ auth --useshadow --passalgo=sha512
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
+zerombr
+clearpart --all
 part / --size 10240 --fstype ext4
-services --enabled=NetworkManager --disabled=network,sshd
+services --enabled=NetworkManager,ModemManager --disabled=network,sshd
+network --bootproto=dhcp --device=link --activate
+shutdown
 
 #enable threaded irqs
 bootloader --append="threadirqs"
@@ -192,6 +196,7 @@ action "Adding live user" useradd \$USERADDARGS -c "Live System User" lescuizine
 passwd -d lescuizines > /dev/null
 usermod -aG wheel lescuizines > /dev/null
 usermod -aG jackuser lescuizines > /dev/null
+usermod -aG root lescuizines > /dev/null
 
 # Remove root password lock
 passwd -d root > /dev/null
@@ -343,6 +348,9 @@ rm -f /boot/initramfs*
 # make sure there aren't core files lying around
 rm -f /core*
 
+# remove random seed, the newly installed instance should make it's own
+rm -f /var/lib/systemd/random-seed
+
 # convince readahead not to collect
 # FIXME: for systemd
 
@@ -354,6 +362,10 @@ fi
 
 echo 'File created by kickstart. See systemd-update-done.service(8).' \
     | tee /etc/.updated >/var/.updated
+
+# Drop the rescue kernel and initramfs, we don't need them on the live media itself.
+# See bug 1317709
+rm -f /boot/*-rescue*
 
 %end
 
