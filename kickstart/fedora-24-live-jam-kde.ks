@@ -29,8 +29,8 @@ bootloader --append="threadirqs"
 repo --name=ccrma --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
 repo --name=ccrma-core --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/$releasever/$basearch
 
-repo --name=rpmfusion --baseurl=http://download1.rpmfusion.org/free/fedora/development/$releasever/Everything/$basearch/os/
-repo --name=rpmfusion-non-free --baseurl=http://download1.rpmfusion.org/nonfree/fedora/development/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-non-free --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
 repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/updates/testing/$releasever/$basearch/
 repo --name=rpmfusion-free-update --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
 
