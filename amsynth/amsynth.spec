@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 c3521d9fad52ab8481bae417e192f53b288ac4da
+%global commit0 c518e0e913c4df72c046d83e5ec2494786d06bb7
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -21,6 +21,7 @@ BuildRequires: dssi-devel
 BuildRequires: liblo-devel
 BuildRequires: lash-devel
 BuildRequires: lv2-devel
+BuildRequires: pandoc
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
@@ -55,7 +56,7 @@ Amsynth DSSI plugin
 %setup -qn %{name}-%{commit0}
 
 %build
-autoreconf --force --install
+./autogen.sh
 export CXXFLAGS="-fPIC -std=c++11"
 %configure
 %{__make} %{_smp_mflags}
@@ -77,9 +78,11 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %doc AUTHORS ChangeLog COPYING INSTALL NEWS README
 %{_bindir}/amsynth
 %{_datadir}/amsynth/*
+%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/*%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/amsynth.png
 %{_datadir}/icons/hicolor/scalable/apps/amsynth.svg
+%{_datadir}/locale/*
 
 %files -n dssi-amsynth
 %{_libdir}/dssi/*
