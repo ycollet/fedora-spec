@@ -1,6 +1,6 @@
 Summary: Software Synthesizer
 Name: drumgizmo
-Version: 0.9.10
+Version: 0.9.12
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
