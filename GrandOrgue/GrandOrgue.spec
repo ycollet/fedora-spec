@@ -11,7 +11,7 @@ URL:          http://sourceforge.net/projects/ourorgan
 #  svn export -r 2141 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2141
 #  tar cvfz ourorgan-2141.tar.gz ourorgan-2141
 %define revision 2141
-Source0:      ourorgan-%{revision}.tar.gz
+Source0:      ourorgan-%{version}.tar.gz
 
 BuildRequires: desktop-file-utils
 BuildRequires: cmake
@@ -19,12 +19,13 @@ BuildRequires: wxGTK3-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: systemd-devel
+BuildRequires: wavpack-devel
 
 %description
 GrandOrgue is a sample based pipe organ simulator.
 
 %prep
-%setup -qn ourorgan-%{revision}
+%setup -qn ourorgan-%{version}
 
 %build
 
