@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 39c5cbb3b53c6306a69cd9f0af38fd1a6cccb2d9
+%global commit0 8aa4efc58ddc9641376048b55fc7097b45986792
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           Carla
 Version:        2.0.0.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A rack manager JACK
 
 Group:          Applications/Multimedia

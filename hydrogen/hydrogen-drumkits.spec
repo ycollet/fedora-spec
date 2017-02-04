@@ -1,15 +1,15 @@
 Summary: Additional DrumKits for Hydrogen
 Name: hydrogen-drumkits
 Version: 0.9.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
 Group: Applications/Multimedia
 URL: http://www.hydrogen-music.org
 
 Source0:  http://downloads.sourceforge.net/hydrogen/ForzeeStereo.h2drumkit
-Source1:  http://downloads.sourceforge.net/hydrogen/circAfrique.h2drumkit
+Source1:  http://downloads.sourceforge.net/hydrogen/circAfrique v4.h2drumkit
 Source2:  http://downloads.sourceforge.net/hydrogen/BJA_Pacific.h2drumkit
-Source3:  http://downloads.sourceforge.net/hydrogen/deathmetal-drumkit.h2drumkit
+Source3:  http://downloads.sourceforge.net/hydrogen/DeathMetal.h2drumkit
 Source4:  http://downloads.sourceforge.net/hydrogen/Millo_MultiLayered3.h2drumkit
 Source5:  http://downloads.sourceforge.net/hydrogen/Millo_MultiLayered2.h2drumkit
 Source6:  http://downloads.sourceforge.net/hydrogen/Millo-Drums_v.1.h2drumkit
@@ -33,12 +33,12 @@ Source23: http://downloads.sourceforge.net/hydrogen/3355606kit.h2drumkit
 Source24: http://downloads.sourceforge.net/hydrogen/VariBreaks.h2drumkit
 
 # From http://www.bandshed.net/sounds/h2drumkit/
-Source25: http://www.bandshed.net/sounds/h2drumkit/AVL-BlackPearl-4A-1.0.h2drumkit
-Source26: http://www.bandshed.net/sounds/h2drumkit/AVL-BlackPearl-4B-1.0.h2drumkit
-Source27: http://www.bandshed.net/sounds/h2drumkit/AVL-BlackPearl-5-1.0.h2drumkit
-Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-RedZep-4-1.0.h2drumkit
-Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-RedZep-5-1.0.h2drumkit
-Source30: http://www.bandshed.net/sounds/h2drumkit/Gimme%20A%20Hand%201.0.h2drumkit
+Source25: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-4A-1.1.h2drumkit
+Source26: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-4B-1.1.h2drumkit
+Source27: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-5-1.1.h2drumkit
+Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-4-1.1.h2drumkit
+Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-5-1.1.h2drumkit
+Source30: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/Gimme%20A%20Hand%201.1.h2drumkit
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
@@ -64,7 +64,7 @@ install -dm 0755 $RPM_BUILD_ROOT%{_datadir}/hydrogen/data/drumkits
 # Now copy everything into the $RPM_BUILD_ROOT
 # "Forzee Stereo Drumkit"
 # "circAfrique v4"
-for drumkitdir in 3355606kit ColomboAcousticDrumkit ElectricEmpireKit  \
+for drumkitdir in 3355606kit Boss_DR-110 ColomboAcousticDrumkit ElectricEmpireKit ForzeeStereo \
 		  HardElectro1 K-27_Trash_Kit Millo_MultiLayered3 Techno-1 YamahaVintageKit \
 		  BJA_Pacific Classic-626 DeathMetal ErnysPercussion HipHop-1 Millo-Drums_v.1 \
 		  Synthie-1 TR808909 Classic-808 EasternHop-1  \
@@ -72,9 +72,7 @@ for drumkitdir in 3355606kit ColomboAcousticDrumkit ElectricEmpireKit  \
   cp -a $drumkitdir  $RPM_BUILD_ROOT%{_datadir}/hydrogen/data/drumkits
 done
 
-cp -a Forzee\ Stereo\ Drumkit $RPM_BUILD_ROOT%{_datadir}/hydrogen/data/drumkits
 cp -a circAfrique\ v4 $RPM_BUILD_ROOT%{_datadir}/hydrogen/data/drumkits
-cp -a Boss\ DR-110 $RPM_BUILD_ROOT%{_datadir}/hydrogen/data/drumkits
 
 %clean
 rm -rf $RPM_BUILD_ROOT

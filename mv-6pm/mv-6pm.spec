@@ -1,8 +1,8 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:         mv-6pm
-Version:      0.5.0
+Name:         6PM
+Version:      0.9
 Release:      1%{?dist}
 Summary:      A Jack audio synthetizer
 URL:          http://sourceforge.net/projects/mv-6pm/
@@ -10,7 +10,7 @@ Group:        Applications/Multimedia
 
 License:      GPLv2+
 
-Source0:      mv-6pm-0.5.0.tar.gz
+Source0:      6PM_v0.9.tgz
 Source1:      mv-6pm.desktop
 Patch1:       mv-6pm-use-global-presets.patch
 
@@ -28,10 +28,12 @@ BuildRequires: jack-audio-connection-kit-devel
 6PM is a phase modulation (PM) synthesizer made of six oscillators. 
 
 %prep
-%setup0 -q
+%setup -qn %{name}_v%{version}
+
 
 %build
 
+cd src
 qmake-qt5 6PM.pro
 make VERBOSE=1 %{?_smp_mflags}
 
@@ -47,10 +49,10 @@ make VERBOSE=1 %{?_smp_mflags}
 %__cp -r Presets/* %{buildroot}%{_datadir}/mv-6pm/Presets/
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 6pm %{buildroot}%{_bindir}/%{name}
+%__install -m 644 src/6pm %{buildroot}%{_bindir}/%{name}
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 images/icon.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%__install -m 644 src/images/icon.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # install mv-6pm.desktop properly.
 desktop-file-install --vendor '' \

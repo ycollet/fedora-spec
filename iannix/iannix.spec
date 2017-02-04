@@ -1,7 +1,7 @@
 # http://www.iannix.org/
 
 # Global variables for github repository
-%global commit0 ac7169321979d358094f3da7c4f620f4e010f4dd
+%global commit0 6d15cf694c5dc9e958bc4617811ff07d75326d81
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +9,7 @@
 %global debug_package %{nil}
 
 Name:         IanniX
-Version:      0.9.16.%{shortcommit0}
+Version:      0.9.17.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      A graphic / MIDI / OSC player
 URL:          https://github.com/iannix/Iannix

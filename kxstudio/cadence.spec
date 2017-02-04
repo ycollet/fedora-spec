@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 dea02f6421f040f70377e13501ccee1b5d9e0658
+%global commit0 92034ff82ceb65413a3e301b27b634978b754a9a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:           Cadence
 Version:        1.0.0.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A JACK control center
 
 Group:          Applications/Multimedia

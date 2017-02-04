@@ -1,5 +1,5 @@
-# Global variables for github repository
-%global commit0 6dbcd64ba122c2fe1342962c51744b7663925658
+# Global variables for github repository #6dbcd64ba122c2fe1342962c51744b7663925658
+%global commit0 352fba329cd8342e801969c0adb3b2103b3d5700
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -12,7 +12,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/mtytel/helm
 Source0:        https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         helm-0001-fix-type-problem.patch
+#Patch0:         helm-0001-fix-type-problem.patch
 
 BuildRequires: liblo-devel
 BuildRequires: alsa-lib-devel
@@ -29,7 +29,7 @@ A LV2 / standalone synth
 
 %prep
 %setup -qn %{name}-%{commit0}
-%patch0 -p1
+#%patch0 -p1
 
 sed -i "s/\/lib\//\/lib64\//g" Makefile
 

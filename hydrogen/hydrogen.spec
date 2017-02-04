@@ -7,7 +7,7 @@ Group:        Applications/Multimedia
 
 License:      GPLv2+
 
-Source0:      %{name}-%{version}.zip
+Source0:      %{name}-%{version}.tar.gz
 # Remove the "you are using the development version" warning
 # http://sourceforge.net/mailarchive/forum.php?forum_name=hydrogen-devel
 # See the "0.9.5 is out" thread

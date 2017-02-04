@@ -1,5 +1,5 @@
 Name:           leiningen
-Version:        2.5.3
+Version:        2.7.1
 Release:        1%{?dist}
 Summary:        Clojure project automation tool
 
@@ -34,7 +34,7 @@ chmod +x lein
 export PATH=`pwd`:$PATH
 
 cd leiningen-core
-mvn clean package
+#mvn clean package
 lein bootstrap
 cd ..
 bin/lein uberjar
