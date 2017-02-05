@@ -6,9 +6,9 @@ Summary:        A digital audio workstation for JACK
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://non.tuxfamily.org/
-Source0:        non-20130520-git3946d392216ee999b560d8b7cdee7c4347110e29.tar.bz2
+Source0:        non-20130520-gite7f4a1c4b9e513391a732f35fdecb79ee796c712.tar.bz2
 # sh non-snapshot.sh (rev>
-Source1:        non-snapshot.sh
+#Source1:        non-snapshot.sh
 # notified upstream of the following along with incorrect FSF address headers
 Patch1:         non-daw-desktop.patch
 Patch2:         non-daw-0001-add-lib64-in-ladspa-search-path.patch

@@ -1,12 +1,11 @@
 # Do not check any files here for requires
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
-
 #HOSTING-SERVICE:  "github.com"
 %global OWNER samaaron
 
 Name:           sonic-pi
-Version:        2.9.0
+Version:        2.11.1
 %global gittag0 v%{version}
 Release:        2%{?dist}
 Summary:        A musical programming environment 
@@ -14,7 +13,7 @@ License:        MIT
 URL:            http://sonic-pi.net/
 Source0:        https://github.com/%{OWNER}/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 
-BuildRequires: qt-devel, qscintilla-devel, supercollider-devel, cmake, libffi-devel, ruby-devel
+BuildRequires: qt5-qtbase-devel, qscintilla-qt5-devel, qwt-qt5-devel, supercollider-devel, cmake, libffi-devel, ruby-devel
 Requires:   pulseaudio-module-jack 
 Requires:   supercollider-sc3-plugins
 
@@ -36,8 +35,11 @@ popd
 pushd app/gui/qt/
 cp -f ruby_help.tmpl ruby_help.h
 ../../server/bin/qt-doc.rb -o ruby_help.h
-lrelease-qt4 SonicPi.pro
-qmake-qt4 -o Makefile SonicPi.pro
+
+sed -i "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
+
+lrelease-qt5 SonicPi.pro
+qmake-qt5 -o Makefile SonicPi.pro
 make
 
 

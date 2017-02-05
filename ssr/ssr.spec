@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 4cce5de6507ac91c9befc3cffa6afef73425f2a7
+%global commit0 c20e56a8eabb2677b0c538d0d056ff48d4cfc971
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Simple Screen Recorder
 Name: ssr
-Version: 0.3.6.%{shortcommit0}
+Version: 0.3.8.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia

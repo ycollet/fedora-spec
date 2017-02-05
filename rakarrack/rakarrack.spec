@@ -6,7 +6,7 @@ License: GPL
 Group: Applications/Multimedia
 URL:            git://git.code.sf.net/p/rakarrack/git
 Source0:        rakarrack.tar.gz
-Patch0:         rakarrack-0001-fix-distortion-and-ftlk.patch
+#Patch0:         rakarrack-0001-fix-distortion-and-ftlk.patch
 
 BuildRequires: alsa-lib-devel
 BuildRequires: alsa-utils
@@ -39,7 +39,7 @@ notes to MIDI devices like synthesizers.
 %prep
 %setup -qn %{name}
 
-%patch0 -p1 
+#%patch0 -p1 
 
 %build
 ./autogen.sh

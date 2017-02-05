@@ -2,15 +2,15 @@
 %global debug_package %{nil}
 
 Name:         polyphone
-Version:      1.6.0
-Release:      1%{?dist}
+Version:      1.8
+Release:      2%{?dist}
 Summary:      A SF2 sound font editor
-URL:          http://www.polyphone.fr/
+URL:          http://polyphone-sourndfour.com/fr/
 Group:        Applications/Multimedia
 
 License:      GPLv2+
 
-Source0:      %{name}-%{version}.zip
+Source0:      %{name}-%{version}-src.zip
 Source1:      polyphone.desktop
 Source2:      polyphone.xml
 
@@ -34,12 +34,12 @@ The goal of Polyphone is to provide:
 * Polyphone is licensed under GNU General Public License. Anyone may thus access the source code, and is welcome to help in the development of the program.
 
 %prep
-%setup0 -q
+%setup0 -qn %{name}-%{version}-src
 
 %build
 
 cd trunk
-qmake-qt4 polyphone.pro
+qmake-qt4 "DEFINES+=USE_LOCAL_RTMIDI" polyphone.pro
 make VERBOSE=1 %{?_smp_mflags}
 cd ..
 

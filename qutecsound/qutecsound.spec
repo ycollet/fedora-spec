@@ -1,16 +1,21 @@
+# Global variables for github repository
+%global commit0 1daea22b855a5acb279d62e1fcb5a82c9433cf4b
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 Name:         qutecsound
-Version:      0.9.0
+Version:      0.9.3
 Release:      1%{?dist}
 Summary:      A csound file editor
-URL:          http://qutecsound.sourceforge.net/
+URL:          https://github.com/CsoundQt/CsoundQt
 Group:        Applications/Multimedia
 
 License:      GPLv2+
 
-Source0:      %{name}-%{version}.tar.gz
+Source0:      https://github.com/CsoundQt/CsoundQt/archive/%{commit0}.tar.gz#/CsoundQt-%{shortcommit0}.tar.gz
 Source1:      qutecsound.desktop
 Source2:      qutecsound.xml
 
@@ -24,7 +29,7 @@ BuildRequires: csound-manual
 CsoundQt is a frontend for Csound featuring a highlighting editor with autocomplete, interactive widgets and integrated help. It is a cross-platform and aims to be a simple yet powerful and complete development environment for Csound. It can open files created by MacCsound. Csound is a musical programming language with a very long history, with roots in the origins of computer music. It is still being maintained by an active community and despite its age, is still one of the most powerful tools for sound processing and synthesis. CsoundQt hopes to bring the power of Csound to a larger group of people, by reducing Csound''s intial learning curve, and by giving users more immediate control of their sound. It hopes to be both a simple tool for the beginner, as well as a powerful tool for experienced users.
 
 %prep
-%setup0 -q
+%setup0 -qn CsoundQt-%{commit0}
 
 %build
 

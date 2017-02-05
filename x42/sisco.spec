@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 62d537d3c6055e1ad7abb3c3987f8dd864e387ff
-%global gittag0 v0.6.7
+%global commit0 5f49d9b27d63f4da9b100f9ce5176c25468606e8
+%global gittag0 v0.7.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           sisco.lv2
-Version:        0.6.7
+Version:        0.7.1
 Release:        1%{?dist}
 Summary:        A LV2 oscilloscope
 
@@ -30,7 +30,7 @@ A LV2 oscilloscope
 
 %build
 cd build-sisco.lv2
-git checkout v0.6.7
+git checkout %{gittag0}
 make submodules
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
 
