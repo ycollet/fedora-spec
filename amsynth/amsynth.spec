@@ -25,6 +25,7 @@ BuildRequires: pandoc
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
+BuildRequires: gettext-devel
 
 %description
 amSynth is a software synthesizer, taking inspiration from the

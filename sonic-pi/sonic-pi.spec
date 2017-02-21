@@ -13,7 +13,14 @@ License:        MIT
 URL:            http://sonic-pi.net/
 Source0:        https://github.com/%{OWNER}/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 
-BuildRequires: qt5-qtbase-devel, qscintilla-qt5-devel, qwt-qt5-devel, supercollider-devel, cmake, libffi-devel, ruby-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qscintilla-qt5-devel
+BuildRequires: qwt-qt5-devel
+BuildRequires: supercollider-devel
+BuildRequires: cmake
+BuildRequires: libffi-devel
+BuildRequires: ruby-devel
+BuildRequires: aubio-devel
 Requires:   pulseaudio-module-jack 
 Requires:   supercollider-sc3-plugins
 
