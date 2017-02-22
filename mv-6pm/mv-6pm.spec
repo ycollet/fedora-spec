@@ -10,7 +10,7 @@ Group:        Applications/Multimedia
 
 License:      GPLv2+
 
-Source0:      6PM_v0.9.tgz
+Source0:      https://sourceforge.net/projects/mv-6pm/files/6PM_v0.9.tgz
 Source1:      mv-6pm.desktop
 Patch1:       mv-6pm-use-global-presets.patch
 

@@ -1,5 +1,7 @@
+%define revision 2222
+
 Name:         GrandOrgue
-Version:      0.3.1
+Version:      0.3.1.%{revision}
 Release:      2%{?dist}
 Summary:      GrandOrgue is a sample based pipe organ simulator.
 Group:        Applications/Multimedia
@@ -10,8 +12,7 @@ URL:          http://sourceforge.net/projects/ourorgan
 # following commands to generate the tarball:
 #  svn export -r 2222 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2222
 #  tar cvfz ourorgan-2222.tar.gz ourorgan-2222
-%define revision 2222
-Source0:      ourorgan-%{version}.tar.gz
+Source0:      ourorgan-%{revision}.tar.gz
 
 BuildRequires: desktop-file-utils
 BuildRequires: cmake
@@ -26,7 +27,7 @@ BuildRequires: fftw-devel
 GrandOrgue is a sample based pipe organ simulator.
 
 %prep
-%setup -qn ourorgan-%{version}
+%setup -qn ourorgan-%{revision}
 
 %build
 

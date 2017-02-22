@@ -43,7 +43,9 @@ CsoundQt is a frontend for Csound featuring a highlighting editor with autocompl
 # CSOUND_INCLUDE_DIR
 # CSOUND_LIBRARY_DIR
 
-qmake-qt4 CSOUND_LIBRARY_DIR=/usr/%{_lib} qcs.pro
+# DEBUG: DEFINES+="Q_NULLPTR=0" is an awful hack ...
+
+qmake-qt4 CSOUND_LIBRARY_DIR=/usr/%{_lib} DEFINES+="Q_NULLPTR=0" qcs.pro
 make VERBOSE=1 %{?_smp_mflags}
 cd ..
 
@@ -65,6 +67,7 @@ cd ..
 
 %__install -m 644 templates/* %{buildroot}%{_datadir}/%{name}/templates/
 %__install -m 644 doc/*       %{buildroot}%{_datadir}/%{name}/doc/
+%__install -m 644 COPYING     %{buildroot}%{_datadir}/%{name}/doc/
 %__cp      -r     examples/*  %{buildroot}%{_datadir}/%{name}/examples/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
@@ -94,7 +97,7 @@ fi
 
 
 %files
-%doc ChangeLog BUILDING COPYING
+%doc ChangeLog COPYING
 %{_bindir}/qutecsound
 %{_datadir}/applications/qutecsound.desktop
 %{_datadir}/mime/packages/qutecsound.xml

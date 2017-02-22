@@ -7,14 +7,16 @@
 %global debug_package %{nil}
 
 Name:           zam-plugins
-Version:        3.7.%{shortcommit0}
+#Version:        3.8.%{shortcommit0}
+Version:        3.8
 Release:        1%{?dist}
 Summary:        Zam LV2 set of plugins
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/zamaudio/zam-plugins
-Source0:        https://github.com/zamaudio/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Source0:        https://github.com/zamaudio/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:        zam-plugins-%{version}.zip
 
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
@@ -41,13 +43,16 @@ Group:          Applications/Multimedia
 Zam VST plugin
 
 %prep
-%setup -qn %{name}-%{commit0}
+#%setup -qn %{name}-%{commit0}
+%setup -qn %{name}-%{version}
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags}
+#make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags} ZamPhono
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
 
 %install 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags} install
+#make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags} install
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 
 %files
 %{_bindir}/*

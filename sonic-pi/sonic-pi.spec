@@ -22,6 +22,7 @@ BuildRequires: cmake
 BuildRequires: libffi-devel
 BuildRequires: ruby-devel
 BuildRequires: aubio-devel
+BuildRequires: boost-devel
 Requires:   pulseaudio-module-jack 
 Requires:   supercollider-sc3-plugins
 
