@@ -16,6 +16,7 @@ Source0:        https://github.com/%{OWNER}/%{name}/archive/%{gittag0}/%{name}-%
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qscintilla-qt5-devel
 BuildRequires: qwt-qt5-devel
+BuildRequires: qt5-linguist
 BuildRequires: supercollider-devel
 BuildRequires: cmake
 BuildRequires: libffi-devel

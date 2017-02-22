@@ -26,6 +26,7 @@ BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: gettext-devel
+BuildRequires: intltool
 
 %description
 amSynth is a software synthesizer, taking inspiration from the

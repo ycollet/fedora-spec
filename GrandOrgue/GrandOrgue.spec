@@ -20,6 +20,7 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: systemd-devel
 BuildRequires: wavpack-devel
+BuildRequires: fftw-devel
 
 %description
 GrandOrgue is a sample based pipe organ simulator.
