@@ -15,7 +15,12 @@ Group:        Applications/Multimedia
 License:      GPLv2+
 
 BuildRequires: lv2-devel
+BuildRequires: sratom-devel
+BuildRequires: mesa-libGL-devel
+BuildRequires: libX11-devel
+BuildRequires: libXext-devel
 BuildRequires: cmake
+BuildRequires: flex
 
 %description
 An investigative LV2 plugin bundle

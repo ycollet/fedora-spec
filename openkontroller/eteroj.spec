@@ -13,6 +13,8 @@ Group:        Applications/Multimedia
 License:      GPLv2+
 
 BuildRequires: lv2-devel
+BuildRequires: libuv-devel
+BuildRequires: sratom-devel
 BuildRequires: cmake
 
 %description
