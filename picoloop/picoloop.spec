@@ -2,12 +2,12 @@
 #%global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 286157a79964d6622084253747452da3fe75bfbc
+%global commit0 7cf4aba1002c1cf5f05d0e97686e00314b7e2ff6
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           picoloop
-Version:        0.67.%{shortcommit0}
+Version:        0.76b.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        An audio sequencer
 
@@ -18,9 +18,10 @@ Source0:        https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}
 
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: SDL-devel
-BuildRequires: SDL_image-devel
-BuildRequires: SDL_ttf-devel
+BuildRequires: SDL2-devel
+BuildRequires: SDL2_image-devel
+BuildRequires: SDL2_gfx-devel
+BuildRequires: SDL2_ttf-devel
 BuildRequires: pulseaudio-libs-devel
 
 %description
@@ -30,21 +31,21 @@ All parameters are set step-wise, so you can make huge variation of sound on the
 There are four channels, playing simultaneously.
 
 %prep
-%setup -qn audio-%{commit0}
+%setup -qn %{name}-%{commit0}
 
 
 %build
 
 cd picoloop
 
-%make_build -f Makefile.RtMidi_debian clean
-%make_build -f Makefile.RtAudio_debian clean
-%make_build -f Makefile.PatternPlayer_debian_RtAudio clean
+%make_build -f Makefile.RtMidi_debian_sdl20 clean
+%make_build -f Makefile.RtAudio_debian_sdl20 clean
+%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 clean
 
-%make_build -f Makefile.RtMidi_debian  CFLAGS="-std=c++11 -O3 -Wall -I.. -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
-%make_build -f Makefile.RtAudio_debian CFLAGS="-std=c++11 -O3 -Wall -I.. -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
-%make_build -f Makefile.PatternPlayer_debian_RtAudio DIRTOCREATE
-%make_build -f Makefile.PatternPlayer_debian_RtAudio CFLAGS="-c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -fpermissive" LDFLAGS="-lasound -lSDL -lSDL_ttf -lpthread -lpulse -lpulse-simple"
+%make_build -f Makefile.RtMidi_debian_sdl20  CFLAGS="-std=c++11 -O3 -Wall -I.. -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
+%make_build -f Makefile.RtAudio_debian_sdl20 CFLAGS="-std=c++11 -O3 -Wall -I.. -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
+%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 DIRTOCREATE
+%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 #CFLAGS="-c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -fpermissive" LDFLAGS="-lasound -lSDL -lSDL_ttf -lpthread -lpulse -lpulse-simple"
 
 %install
 
@@ -62,7 +63,7 @@ Categories=Audio;
 EOF
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 picoloop/PatternPlayer_debian_Rtaudio %{buildroot}%{_bindir}/%{name}
+%__install -m 644 picoloop/PatternPlayer_debian_Rtaudio_sdl20 %{buildroot}%{_bindir}/%{name}
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/patch/MDADrum/
 %__install -m 644 picoloop/patch/MDADrum/create_patchlist.sh %{buildroot}%{_datadir}/%{name}/patch/MDADrum/
