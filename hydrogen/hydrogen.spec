@@ -11,7 +11,7 @@ Source0:      %{name}-%{version}.tar.gz
 # Remove the "you are using the development version" warning
 # http://sourceforge.net/mailarchive/forum.php?forum_name=hydrogen-devel
 # See the "0.9.5 is out" thread
-Patch1:       hydrogen-devel-warning.patch
+#Patch1:       hydrogen-devel-warning.patch
 
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
@@ -61,7 +61,7 @@ WASP XShaper LADSPA plugin
 %prep
 %setup0 -q
 sed -i -e "s/Sound/X-Sound/g" linux/hydrogen.desktop
-%patch1 -p1 -b .nodevver
+#%patch1 -p1 -b .nodevver
 
 %build
 
@@ -134,7 +134,9 @@ fi
 %{_bindir}/h2synth
 %{_datadir}/hydrogen/
 %{_datadir}/applications/hydrogen.desktop
+%{_datadir}/appdata/hydrogen.appdata.xml
 %{_libdir}/*.so
+%exclude %{_usr}/man/*
 %exclude %{_includedir}/%{name}
 
 %files -n ladspa-wasp-booster
