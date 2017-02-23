@@ -18,6 +18,7 @@ Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/
 
 BuildRequires: lv2-devel
 BuildRequires: fftw-devel
+BuildRequires: libxslt
 
 %description
 SWH LV2 set of plugins from portalmod
@@ -27,6 +28,7 @@ SWH LV2 set of plugins from portalmod
 
 %build
 #make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags}
+make %{?_smp_mflags} real-clean
 make %{?_smp_mflags}
 
 %install 
