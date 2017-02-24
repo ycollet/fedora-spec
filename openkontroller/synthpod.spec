@@ -17,6 +17,7 @@ License:      GPLv2+
 BuildRequires: lv2-devel
 BuildRequires: lilv-devel
 BuildRequires: sratom-devel
+BuildRequires: nanomsg-devel
 BuildRequires: efl-devel
 BuildRequires: elementary-devel
 BuildRequires: jack-audio-connection-kit-devel
