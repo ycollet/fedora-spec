@@ -19,6 +19,7 @@ BuildRequires: lilv-devel
 BuildRequires: sratom-devel
 BuildRequires: efl-devel
 BuildRequires: elementary-devel
+BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: cmake
 
 %description
