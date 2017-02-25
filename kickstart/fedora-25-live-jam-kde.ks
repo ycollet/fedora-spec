@@ -432,7 +432,7 @@ gnome-keyring-pam
 
 # drop some system-config things
 #-system-config-boot
--system-config-network
+#-system-config-network
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
@@ -517,7 +517,7 @@ jack-rack
 ladspa
 helm
 DISTRHO-Ports
-mv-6pm
+6PM
 synthpod
 
 # ladpsa plugins
@@ -531,7 +531,7 @@ ladspa-rev-plugins
 ladspa-swh-plugins
 ladspa-tap-plugins
 ladspa-vco-plugins
-ladspa-vocoder-plugins
+# F25 - not available - ladspa-vocoder-plugins
 ladspa-wasp-plugins
 
 # lv2 plugins
