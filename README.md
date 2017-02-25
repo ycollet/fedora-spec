@@ -54,11 +54,19 @@ keepcache = 0
 
 This is the content of the repo conf file found in /etc/yum.repo.d.
 
-To create the LiveCD:
+To create the LiveCD using livecd-creator:
 
-As a root used:
+As a root user:
 ```
 $ livecd-creator --verbose --config=fedora-24-live-jam-kde.ks --fslabel=LesCuizines
+```
+
+To create the LiceCD using livemedia-creator:
+
+As a root user:
+```
+$ setenforce Permissive
+$ livemedia-creator --make-iso --ks fedora-25-live-jam-kde.ks --image-name LesCuizines --iso-name livecd-fefora25-mao.iso --iso-only --releasever 25 --no-virt --resultdir=/var/lmc
 ```
 
 To test the ISO file:

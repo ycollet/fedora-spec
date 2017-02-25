@@ -23,9 +23,8 @@ network --bootproto=dhcp --device=link --activate
 shutdown
 
 #enable threaded irqs
-bootloader --append="threadirqs"
+bootloader --location=mbr --append="threadirqs"
 
-# add CCRMA and rpmfusion repos
 repo --name=ccrma --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
 repo --name=ccrma-core --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/$releasever/$basearch
 
@@ -34,8 +33,9 @@ repo --name=rpmfusion-non-free --baseurl=http://download1.rpmfusion.org/nonfree/
 repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/updates/testing/$releasever/$basearch/
 repo --name=rpmfusion-free-update --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
 
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
-repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
+repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
+url --mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 
 repo --name="Copr repo for MAO by ycollet" --baseurl=https://copr-be.cloud.fedoraproject.org/results/ycollet/linuxmao/fedora-$releasever-$basearch/
 
@@ -384,9 +384,6 @@ fi
 # List packages to be installed #
 #################################
 
-#enable threaded irqs
-bootloader --append="threadirqs"
-
 %packages
 
 # save some space
@@ -436,6 +433,7 @@ gnome-keyring-pam
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
+-libcrypt-nss
 
 # alsa
 alsa-firmware
