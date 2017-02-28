@@ -66,7 +66,7 @@ To create the LiceCD using livemedia-creator:
 As a root user:
 ```
 $ setenforce Permissive
-$ livemedia-creator --make-iso --ks fedora-25-live-jam-kde.ks --image-name LesCuizines --iso-name livecd-fefora25-mao.iso --iso-only --releasever 25 --no-virt --resultdir=/var/lmc
+$ livemedia-creator --make-iso --ks fedora-25-live-jam-kde.ks --project LesCuizines --iso-name livecd-fefora25-mao.iso --iso-only --releasever 25 --volid LesCuizines --title LesCuizines --resultdir /var/lmc --no-virt
 ```
 
 To test the ISO file:

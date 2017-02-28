@@ -18,7 +18,8 @@ xconfig --startxonboot
 zerombr
 clearpart --all
 part / --size 10240 --fstype ext4
-services --enabled=NetworkManager,ModemManager --disabled=network,sshd
+#services --enabled=NetworkManager,ModemManager --disabled=network,sshd
+services --enabled=NetworkManager --disabled=network,sshd
 network --bootproto=dhcp --device=link --activate
 shutdown
 
@@ -386,6 +387,13 @@ fi
 
 %packages
 
+# system packages
+syslinux
+#grub2-efi
+#shim
+#shim-unsigned
+grub2
+
 # save some space
 -mpage
 -sox
@@ -539,7 +547,7 @@ lv2-fil-plugins
 lv2-invada-plugins
 lv2-kn0ck0ut
 lv2-ll-plugins
-lv2-swh-plugins
+#lv2-swh-plugins
 lv2-vocoder-plugins
 lv2-zynadd-plugins
 lv2dynparam
@@ -719,13 +727,13 @@ thunderbird
 mkdir -p $INSTALL_ROOT/home/lescuizines/SoundFonts
 mkdir -p $INSTALL_ROOT/home/lescuizines/GuitarPro
 
-cp /home/collette/SoundFonts/63mg\ The\ Xioad\ Bank.sf2        $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/SF2/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/SF2/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/63mg\ The\ Xioad\ Bank.sf2                $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/Instruments/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/Instruments/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
 
-cp -r /home/collette/TuxGuitar/GuitarPro/Cake            $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
-cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry      $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
-cp /home/collette/SoundFonts/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
+cp -r /home/collette/TuxGuitar/GuitarPro/Cake           $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
+cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry     $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
+cp /home/collette/SoundFont/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
 
 %end
 
