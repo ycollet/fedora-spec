@@ -59,6 +59,9 @@ repo --name="Copr repo for MAO by ycollet" --baseurl=https://copr-be.cloud.fedor
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
 kernel
+kernel-modules
+kernel-modules-extra
+kernel-tools
 kernel-rt
 
 # This was added a while ago, I think it falls into the category of
@@ -88,7 +91,7 @@ cat > /etc/rc.d/init.d/livesys << EOF
 # chkconfig: 345 00 99
 # description: Init script for live image.
 ### BEGIN INIT INFO
-# X-Start-Before: display-manager
+# X-Start-Before: display-manager chronyd
 ### END INIT INFO
 
 . /etc/init.d/functions
@@ -235,7 +238,9 @@ touch /.liveimg-configured
 
 # add static hostname to work around xauth bug
 # https://bugzilla.redhat.com/show_bug.cgi?id=679486
-echo "localhost" > /etc/hostname
+# the hostname must be something else than 'localhost'
+# https://bugzilla.redhat.com/show_bug.cgi?id=1370222
+echo "localhost-live" > /etc/hostname
 
 EOF
 
@@ -314,21 +319,11 @@ chmod 755 /etc/rc.d/init.d/livesys-late
 # enable tmpfs for /tmp
 systemctl enable tmp.mount
 
-# As livecd-creator is still yum based, we only get yum's yumdb during the
-# image compose. Migrate this over to dnf so that dnf and PackageKit can keep
-# track where packages came from.
-if [ ! -d /var/lib/dnf ]; then
-  mkdir -p /var/lib/dnf
-  mv /var/lib/yum/yumdb /var/lib/dnf/
-  rm -rf /var/lib/yum/
-fi
-
 # make it so that we don't do writing to the overlay for things which
 # are just tmpdirs/caches
 # note https://bugzilla.redhat.com/show_bug.cgi?id=1135475
 cat >> /etc/fstab << EOF
 vartmp   /var/tmp    tmpfs   defaults   0  0
-varcacheyum /var/cache/yum  tmpfs   mode=0755,context=system_u:object_r:rpm_var_cache_t:s0   0   0
 EOF
 
 # work around for poor key import UI in PackageKit
@@ -368,8 +363,14 @@ echo 'File created by kickstart. See systemd-update-done.service(8).' \
 # See bug 1317709
 rm -f /boot/*-rescue*
 
-%end
+# Disable network service here, as doing it in the services line
+# fails due to RHBZ #1369794
+/sbin/chkconfig network off
 
+# Remove machine-id on pre generated images
+rm -f /etc/machine-id
+touch /etc/machine-id
+%end
 
 %post --nochroot
 cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
@@ -578,6 +579,7 @@ tap-lv2
 sisco.lv2
 mda-lv2
 rkrlv2
+ams-lv2
 
 # dssi
 nekobee-dssi
@@ -634,11 +636,8 @@ rakarrack
 chuck
 miniaudicle
 supercollider
-#FC24 supercollider-mathlib
-#FC24 supercollider-quarks
 supercollider-sc3-plugins
 supercollider-vim
-#FC24 supercollider-cruciallib
 sonic-pi
 #YC: temporary missing pd-extended
 lmms
@@ -651,7 +650,6 @@ fedora-jam-backgrounds
 # Misc. Utils
 screen
 multimedia-menus
-kernel-tools
 xterm
 
 # Include Mozilla Firefox and Thunderbird
