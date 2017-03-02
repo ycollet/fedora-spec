@@ -389,11 +389,13 @@ fi
 %packages
 
 # system packages
+
+dracut-live
+grub2
 syslinux
 #grub2-efi
 #shim
 #shim-unsigned
-grub2
 
 # save some space
 -mpage
