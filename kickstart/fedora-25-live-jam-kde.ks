@@ -16,9 +16,8 @@ selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
 zerombr
-clearpart --all
+clearpart --all --initlabel
 part / --size 10240 --fstype ext4
-#services --enabled=NetworkManager,ModemManager --disabled=network,sshd
 services --enabled=NetworkManager --disabled=network,sshd
 network --bootproto=dhcp --device=link --activate
 shutdown
@@ -26,21 +25,23 @@ shutdown
 #enable threaded irqs
 bootloader --location=mbr --append="threadirqs"
 
-repo --name=ccrma --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
+repo --name=ccrma      --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
 repo --name=ccrma-core --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/$releasever/$basearch
 
-repo --name=rpmfusion --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
-repo --name=rpmfusion-non-free --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
 repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/updates/testing/$releasever/$basearch/
-repo --name=rpmfusion-free-update --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
+repo --name=rpmfusion-free-update    --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
 
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
+repo --name=fedora  --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
+
 url --mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 
 repo --name="Copr repo for MAO by ycollet" --baseurl=https://copr-be.cloud.fedoraproject.org/results/ycollet/linuxmao/fedora-$releasever-$basearch/
 
 %packages
+
 @base-x
 @guest-desktop-agents
 @standard
@@ -55,22 +56,6 @@ repo --name="Copr repo for MAO by ycollet" --baseurl=https://copr-be.cloud.fedor
 -scim*
 -ibus*
 -iok
-
-# Explicitly specified here:
-# <notting> walters: because otherwise dependency loops cause yum issues.
-kernel
-kernel-modules
-kernel-modules-extra
-kernel-tools
-kernel-rt
-
-# This was added a while ago, I think it falls into the category of
-# "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
-# for now.
-memtest86+
-
-# Without this, initramfs generation during live image creation fails: #1242586
-dracut-live
 
 # Make live images easy to shutdown and the like in libvirt
 qemu-guest-agent
@@ -390,9 +375,24 @@ fi
 
 # system packages
 
+# Explicitly specified here:
+# <notting> walters: because otherwise dependency loops cause yum issues.
+kernel
+kernel-modules
+kernel-modules-extra
+kernel-tools
+kernel-rt
+
+# This was added a while ago, I think it falls into the category of
+# "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
+# for now.
+memtest86+
+
+syslinux
+
+# Without this, initramfs generation during live image creation fails: #1242586
 dracut-live
 grub2
-syslinux
 #grub2-efi
 #shim
 #shim-unsigned
