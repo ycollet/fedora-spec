@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 92034ff82ceb65413a3e301b27b634978b754a9a
+%global commit0 accdcf4dfd2440d38d5465e282825f3be25fd3fe
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,13 +8,14 @@
 
 Name:           Cadence
 Version:        1.0.0.%{shortcommit0}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A JACK control center
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/falkTX/Cadence
 Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:         cadence_001_fedora_support.patch
 
 BuildRequires: python3-qt4-devel
 BuildRequires: qt-devel
@@ -31,6 +32,7 @@ A JACK control center
 
 %prep
 %setup -qn %{name}-%{commit0}
+%patch0 -p1
 
 %build
 make PREFIX=/usr DESTDIR=%{buildroot} %{?_smp_mflags}
