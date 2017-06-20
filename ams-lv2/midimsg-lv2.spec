@@ -14,6 +14,7 @@ URL:            https://github.com/blablack/midimsg-lv2
 Source0:        https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: lv2-devel
+BuildRequires: python
 
 %description
 A collection of basic LV2 plugins to translate midi messages to usable values
