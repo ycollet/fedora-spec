@@ -41,6 +41,7 @@ Patch2: lmms-1.1.3-0003-fix-lib64-carla.patch
 Patch3: lmms-1.1.3-0004-fix-swh-compilation.patch
 Patch4: lmms-1.1.3-0005-fix-carla-plugin-loading.patch
 Patch5: lmms-1.1.3-0006-fix-indent.patch
+Patch6: lmms-1.1.3-0007-fix-versioninfo.patch
 
 # move the vst and zynaddsubfx plugins to libexecdir.
 #Patch0:         lmms-1.1.3-libexecdir.patch
@@ -139,6 +140,7 @@ developing addons for %{name}.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 # remove spurious x-bits
 find . -type f -exec chmod 0644 {} \;
