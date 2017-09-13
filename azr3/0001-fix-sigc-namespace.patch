@@ -1,0 +1,92 @@
+From 52b90722cb82e062a1d90f5f8be1a18f0e8223d7 Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Wed, 13 Sep 2017 14:59:44 +0200
+Subject: [PATCH] fix sigc namespace
+
+---
+ azr3/azr3gui.cpp | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/azr3/azr3gui.cpp b/azr3/azr3gui.cpp
+index 7675922..40f9ed1 100644
+--- a/azr3/azr3gui.cpp
++++ b/azr3/azr3gui.cpp
+@@ -80,7 +80,7 @@ AZR3GUI::AZR3GUI()
+     connect(mem_fun(*this, &AZR3GUI::splitpoint_changed));
+   Menu* menu = create_menu();
+   m_tbox->signal_button_press_event().
+-    connect(bind(mem_fun(*this, &AZR3GUI::popup_menu), menu));
++    connect(sigc::bind(mem_fun(*this, &AZR3GUI::popup_menu), menu));
+   
+   // keyboard split switch
+   m_splitswitch = add_switch(m_fbox, -1, 537, 49, Switch::Mini);
+@@ -141,8 +141,8 @@ AZR3GUI::AZR3GUI()
+   // mode switcher
+   Widget* eb = add_clickbox(m_fbox, 14, 319, 14, 44);
+   eb->signal_button_press_event().
+-    connect(sigc::hide(bind(bind(mem_fun(*this, &AZR3GUI::change_mode), 
+-				 ref(m_fbox)), false)));
++    connect(sigc::hide(sigc::bind(sigc::bind(mem_fun(*this, &AZR3GUI::change_mode), 
++                                             sigc::ref(m_fbox)), false)));
+   m_fx_widgets.push_back(eb);
+   
+   // Mr Valve controls
+@@ -182,8 +182,8 @@ AZR3GUI::AZR3GUI()
+   // mode switcher 2
+   Widget* eb2 = add_clickbox(m_vbox, 14, 53, 14, 44);
+   eb2->signal_button_press_event().
+-    connect(sigc::hide(bind(bind(mem_fun(*this, &AZR3GUI::change_mode), 
+-				 ref(m_fbox)), true)));
++    connect(sigc::hide(sigc::bind(sigc::bind(mem_fun(*this, &AZR3GUI::change_mode), 
++                                             sigc::ref(m_fbox)), true)));
+ 
+   // vibrato controls
+   add_switch(m_vbox, n_1_vibrato, 39, 17, Switch::Green);
+@@ -352,7 +352,7 @@ Knob* AZR3GUI::add_knob(Fixed& fbox, RefPtr<Pixmap>& pm, int port,
+   knob->set_style(s);
+   if (port >= 0 && port < m_adj.size()) {
+     knob->get_adjustment().signal_value_changed().
+-      connect(compose(bind<0>(mem_fun(*this, &AZR3GUI::control_changed), port),
++      connect(compose(sigc::bind<0>(mem_fun(*this, &AZR3GUI::control_changed), port),
+ 		      mem_fun(knob->get_adjustment(), 
+ 			      &Adjustment::get_value)));
+     assert(m_adj[port] == 0);
+@@ -382,7 +382,7 @@ Drawbar* AZR3GUI::add_drawbar(Fixed& fbox, RefPtr<Pixmap>& pm, int port,
+   db->set_style(s);
+   if (port >= 0 && port < m_adj.size()) {
+     db->get_adjustment().signal_value_changed().
+-      connect(compose(bind<0>(mem_fun(*this, &AZR3GUI::control_changed), port),
++      connect(compose(sigc::bind<0>(mem_fun(*this, &AZR3GUI::control_changed), port),
+ 		      mem_fun(db->get_adjustment(), &Adjustment::get_value)));
+     assert(m_adj[port] == 0);
+     m_adj[port] = &db->get_adjustment();
+@@ -397,7 +397,7 @@ Switch* AZR3GUI::add_switch(Fixed& fbox, int port,
+   fbox.put(*sw, xoffset, yoffset);
+   if (port >= 0 && port < m_adj.size()) {
+     sw->get_adjustment().signal_value_changed().
+-      connect(compose(bind<0>(mem_fun(*this, &AZR3GUI::control_changed),port),
++      connect(compose(sigc::bind<0>(mem_fun(*this, &AZR3GUI::control_changed),port),
+ 		      mem_fun(sw->get_adjustment(), &Adjustment::get_value)));
+     assert(m_adj[port] == 0);
+     m_adj[port] = &sw->get_adjustment();
+@@ -489,7 +489,7 @@ void AZR3GUI::update_program_menu() {
+     oss<<setw(2)<<setfill('0')<<iter->first<<' '<<iter->second.substr(0, 23);
+     MenuItem* item = manage(new MenuItem(oss.str()));
+     item->signal_activate().
+-      connect(bind(mem_fun(*this, &AZR3GUI::program_changed), iter->first));
++      connect(sigc::bind(mem_fun(*this, &AZR3GUI::program_changed), iter->first));
+     m_program_menu->items().push_back(*item);
+     item->show();
+     item->get_child()->modify_bg(STATE_NORMAL, m_menu_bg);
+@@ -503,7 +503,7 @@ void AZR3GUI::update_split_menu() {
+   for (int i = 0; i < 128; ++i) {
+     MenuItem* item = manage(new MenuItem(note2str(i)));
+     item->signal_activate().
+-      connect(bind(mem_fun(*m_splitpoint_adj, &Adjustment::set_value),
++      connect(sigc::bind(mem_fun(*m_splitpoint_adj, &Adjustment::set_value),
+ 		   i / 128.0));
+     m_split_menu->items().push_back(*item);
+     item->show();
+-- 
+2.13.5
+
