@@ -24,6 +24,7 @@ BuildRequires: glfw-devel
 BuildRequires: portmidi-devel
 BuildRequires: portaudio-devel
 BuildRequires: libcurl-devel
+BuildRequires: jansson-devel
 
 %description
 A modular synthetizer
