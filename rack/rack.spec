@@ -12,6 +12,8 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/VCVRack/Rack.git
 
+Source0:        rack.png
+
 BuildRequires: git
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
@@ -28,24 +30,35 @@ A modular synthetizer
 
 %prep
 
-git clone https://github.com/VCVRack/Rack.git
+[ ! -d Rack ] && git clone https://github.com/VCVRack/Rack.git
 cd Rack
+git pull
 sed -i -e "s/-march=core2//g" compile.mk
 git submodule init
 git submodule update
 cd plugins
-git clone https://github.com/VCVRack/AudibleInstruments.git
+[ ! -d AudibleInstruments ] && git clone https://github.com/VCVRack/AudibleInstruments.git
 cd AudibleInstruments
+git pull
 git submodule init
 git submodule update
 cd ..
-git clone https://github.com/VCVRack/Befaco.git
-git clone https://github.com/VCVRack/ESeries.git
-https://github.com/VCVRack/Fundamental.git
+[ ! -d Befaco ] && git clone https://github.com/VCVRack/Befaco.git
+cd Befaco
+git pull
+cd ..
+[ ! -d ESeries ] && git clone https://github.com/VCVRack/ESeries.git
+cd ESeries
+git pull
+cd ..
+[ ! -d Fundamental ] && git clone https://github.com/VCVRack/Fundamental.git
+cd Fundamental
+git pull
+cd ..
 
 %build
 cd Rack
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 cd Rack
@@ -55,8 +68,9 @@ mkdir -p %{buildroot}%{_datadir}/pixmaps/
 mkdir -p %{buildroot}%{_datadir}/man/man1/
 mkdir -p %{buildroot}%{_datadir}/applications/
 
-install -m 755 postfish %{buildroot}%{_bindir}/
-install -m 644 %{S:1} %{buildroot}%{_datadir}/pixmaps/Rack.png
+install -m 755 Rack       %{buildroot}%{_bindir}/
+install -m 755 Rack.sh    %{buildroot}%{_bindir}/
+install -m 644 %{SOURCE0} %{buildroot}%{_datadir}/pixmaps/rack.png
 
 cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
 [Desktop Entry]
@@ -71,7 +85,6 @@ EOF
 
 %files
 %{_bindir}/*
-%{_libdir}/lv2/*
 %{_datadir}/*
 
 %changelog
