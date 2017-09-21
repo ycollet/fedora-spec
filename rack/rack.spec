@@ -1,6 +1,7 @@
 # Global variables for github repository
-%global commit0 5f49d9b27d63f4da9b100f9ce5176c25468606e8
-%global gittag0 v0.7.1
+%global commit0 4e075332fa0867a65740c8a55eb7bce063ae3527
+#%global gittag0 v0.3.1
+%global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           Rack
@@ -35,7 +36,10 @@ A modular synthetizer
 [ ! -d Rack ] && git clone https://github.com/VCVRack/Rack.git
 cd Rack
 git pull
+
 sed -i -e "s/-march=core2//g" compile.mk
+sed -i -e "s/-g//g" compile.mk
+
 git submodule init
 git submodule update
 cd plugins
