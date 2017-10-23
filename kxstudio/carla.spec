@@ -1,5 +1,7 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
-%global commit0 8aa4efc58ddc9641376048b55fc7097b45986792
+%global commit0 1e78076f01c961c1656a7124caa8c3011e0a139e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -76,5 +78,7 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
+- update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
 - Initial build

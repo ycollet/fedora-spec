@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 a88340b36db6847fbd603af8cac768381bbcf8bb
+%global commit0 e11e2b204c14b8e370a0bf5beafa5f162fedb8e9
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -36,18 +36,15 @@ A set of LV2 plugins
 %prep
 %setup -qn %{name}-%{commit0}
 
-sed -i "s/PREFIX = \/usr\/local/PREFIX = \/usr/g" Makefile
-sed -i "s/\/lib\//\/lib64\//g" Makefile
-
 %build
 
 tar xvfz %SOURCE1
 export PATH=`pwd`:$PATH
 ./scripts/premake-update.sh linux
-make DESTDIR=%{buildroot} lv2 %{?_smp_mflags}
+make PREFIX=/usr LIBDIR=/usr/lib64 DESTDIR=%{buildroot} lv2 %{?_smp_mflags}
 
 %install 
-make DESTDIR=%{buildroot} lv2 %{?_smp_mflags} install
+make PREFIX=/usr LIBDIR=/usr/lib64 DESTDIR=%{buildroot} lv2 %{?_smp_mflags} install
 
 rm -rf %{buildroot}/usr/src
 
@@ -69,5 +66,7 @@ fi
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
+- update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
 - Initial build

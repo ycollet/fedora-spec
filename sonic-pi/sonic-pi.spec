@@ -5,7 +5,7 @@
 %global OWNER samaaron
 
 Name:           sonic-pi
-Version:        2.11.1
+Version:        3.0
 %global gittag0 v%{version}
 Release:        2%{?dist}
 Summary:        A musical programming environment 
@@ -51,14 +51,12 @@ lrelease-qt5 SonicPi.pro
 qmake-qt5 -o Makefile SonicPi.pro
 make
 
-
 %install
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_datadir}/applications/
 cp -Rip app/ %{buildroot}%{_datadir}/%{name}/
 ln -s %{_datadir}/%{name}/app/gui/qt/rp-app-bin %{buildroot}%{_bindir}/%{name}
-
 
 
 cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF

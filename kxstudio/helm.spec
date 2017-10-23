@@ -1,5 +1,5 @@
 # Global variables for github repository #6dbcd64ba122c2fe1342962c51744b7663925658
-%global commit0 352fba329cd8342e801969c0adb3b2103b3d5700
+%global commit0 927d2ed27f71a735c3ff2a1226ce3129d1544e7e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -56,10 +56,15 @@ fi
 %files
 %{_bindir}/*
 %{_libdir}/lv2/*
+%{_libdir}/lxvst/*
 %{_datadir}/helm/*
 %{_datadir}/doc/helm/*
 %{_mandir}/man1/helm.1.gz
+%{_datadir}/applications/helm.desktop
+%{_datadir}/icons/hicolor/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
+- update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
 - Initial build

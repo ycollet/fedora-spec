@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           beatslash-lv2
-Version:        1.0.0.%{shortcommit0}
+Version:        1.0.5.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats
 
@@ -48,5 +48,6 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.5
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

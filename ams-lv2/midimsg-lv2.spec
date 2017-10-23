@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           midimsg-lv2
-Version:        1.0.0.%{shortcommit0}
+Version:        0.0.4.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A collection of basic LV2 plugins to translate midi messages to usable values
 
@@ -34,5 +34,6 @@ A collection of basic LV2 plugins to translate midi messages to usable values
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.4
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

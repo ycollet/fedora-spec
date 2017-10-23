@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 accdcf4dfd2440d38d5465e282825f3be25fd3fe
+%global commit0 e91750e39acb119cf97f8105a7acc28a8901a4e2
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -62,5 +62,7 @@ fi
 %{_sysconfdir}/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - master
+- update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - master
 - Initial build

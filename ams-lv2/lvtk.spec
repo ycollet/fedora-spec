@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:           lvtk
-Version:        1.2.0.%{shortcommit0}
+Version:        2.0.0.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        LV2 Toolkit
 
@@ -39,5 +39,6 @@ was mostly done by Lars Luthman in lv2-c++-tools.
 %{_includedir}/*
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.2.0
 - Initial build

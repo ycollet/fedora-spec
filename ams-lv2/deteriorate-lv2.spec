@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           deteriorate-lv2
-Version:        1.0.0.%{shortcommit0}
+Version:        1.0.6.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        deteriorate-lv2 is a set of plugins to destroy and deteriorate the sound quality of a live input
 
@@ -46,5 +46,6 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.6
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

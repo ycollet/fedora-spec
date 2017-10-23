@@ -29,7 +29,6 @@ BuildRequires: libarchive-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: rubberband-devel
 BuildRequires: cmake
-BuildRequires: scons
 BuildRequires: desktop-file-utils
 BuildRequires: filesystem
 
@@ -149,6 +148,9 @@ fi
 %{_libdir}/ladspa/libwasp_xshaper.so 
 
 %changelog
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9.7-11
+- Remove scons
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9.6-11
 - Update to version 0.9.6
 
