@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 90b0fb307708fbd8316d9e6b922c2cffb38048a4
+%global commit0 1c9811a4986683e66805d3642de3e331d2ccc463
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         eteroj.lv2
-Version:      0.2.0
+Version:      0.4.0
 Release:      1%{?dist}
 Summary:      OSC injection/ejection from/to UDP/TCP/Serial for LV2
 URL:          https://github.com/OpenMusicKontrollers/eteroj.lv2
@@ -35,5 +35,8 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.4.0
+- update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.2.0
 - Initial build

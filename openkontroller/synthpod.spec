@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 81189de710103f1479a45460a54fadba356f9ca4
+%global commit0 3712300508b45c86c57b318d5d0f075ad59c6a55
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -22,6 +22,10 @@ BuildRequires: efl-devel
 BuildRequires: elementary-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: cmake
+BuildRequires: zita-alsa-pcmi-devel
+BuildRequires: xcb-util-wm-devel
+BuildRequires: mesa-libGL-devel
+BuildRequires: libuv-devel
 
 %description
 Lightweight Nonlinear LV2 Plugin Container
@@ -50,5 +54,8 @@ make DESTDIR=%{buildroot} install
 %{_datarootdir}/*
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1.0
+- update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.1.0
 - Initial build

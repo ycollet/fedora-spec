@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 1ca28cfda085096fce492995a7291b6c2518f33a
+%global commit0 0f58f7b60413d3f81a54de6c7faeddc81d46817e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:         sherlock.lv2
-Version:      0.12.0
+Version:      0.16.0
 Release:      1%{?dist}
 Summary:      An investigative LV2 plugin bundle
 URL:          https://github.com/OpenMusicKontrollers/sherlock.lv2
@@ -40,5 +40,8 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.16.0
+- update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.12.0
 - Initial build

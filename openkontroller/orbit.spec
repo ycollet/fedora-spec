@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 0bf7f1c4c8f6475784d302eba1f947683235e79c
+%global commit0 e079b03bbc0cadb30e3aeae05e1cff916a13c90c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -14,6 +14,7 @@ License:      GPLv2+
 
 BuildRequires: lv2-devel
 BuildRequires: cmake
+BuildRequires: zlib-devel
 
 %description
 LV2 Event Looper

@@ -1,3 +1,4 @@
+%global debug_package %{nil}
 %define revision 19609
 
 Name:         postfish
