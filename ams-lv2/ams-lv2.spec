@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
 %global commit0 0f60ee0a0e6df64877210dfee2d30f126dc3137f
 %global gittag0 master
@@ -19,6 +21,7 @@ BuildRequires: gtkmm24-devel
 BuildRequires: gtk2-devel
 BuildRequires: cairo-devel
 BuildRequires: lvtk
+BuildRequires: fftw-devel
 
 %description
 AMS LV2 set of plugins synth (from Alsa Modular Synth)

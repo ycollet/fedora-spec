@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
 %global commit0 45044ce015c7a79b93a88aba1f0c19e2c00206d8
 %global gittag0 master
