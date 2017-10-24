@@ -3,20 +3,19 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
+# Disable production of debug package.
 %global debug_package %{nil}
 
 Name:           zam-plugins
-#Version:        3.8.%{shortcommit0}
-Version:        3.8
+Version:        3.9
 Release:        1%{?dist}
 Summary:        Zam LV2 set of plugins
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/zamaudio/zam-plugins
-#Source0:        https://github.com/zamaudio/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source0:        zam-plugins-%{version}.zip
+# in the zam repository -> make dist
+Source0:        zam-plugins-%{version}.tar.xz
 
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
@@ -43,15 +42,12 @@ Group:          Applications/Multimedia
 Zam VST plugin
 
 %prep
-#%setup -qn %{name}-%{commit0}
 %setup -qn %{name}-%{version}
 
 %build
-#make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags} ZamPhono
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
 
 %install 
-#make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} HAVE_DGL=1 %{?_smp_mflags} install
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 
 %files
@@ -65,5 +61,8 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 %{_libdir}/vst/* 
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 3.9
+- update version to 3.9
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 3.5
 - Initial build

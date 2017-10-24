@@ -3,6 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+# Disable production of debug package.
+%global debug_package %{nil}
+
 Summary: sfArk tool
 Name: sfarkxtc
 Version: 0.1.%{shortcommit0}

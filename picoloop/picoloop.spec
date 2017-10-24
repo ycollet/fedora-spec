@@ -1,13 +1,13 @@
-# Disable production of debug package. Problem with fedora 23
-#%global debug_package %{nil}
+# Disable production of debug package.
+%global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 7cf4aba1002c1cf5f05d0e97686e00314b7e2ff6
+%global commit0 5fe939b44a2d744477846b759ebc85d69bd5680c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           picoloop
-Version:        0.76b.%{shortcommit0}
+Version:        0.77b.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        An audio sequencer
 

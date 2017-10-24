@@ -11,6 +11,7 @@ Source1:        %{name}.desktop
 Patch0:         milkytracker-0.90.86-alsalib.patch
 Patch1:         milkytracker-0.90.86-system-rtmidi.patch
 Patch2:         milkytracker-0.90.86-zziplib-fixes.patch
+Patch3:         milkytracker-0.90.86-fix-abs-usage.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  autoconf
@@ -34,6 +35,7 @@ find . -regex '.*\.\(cpp\|h\|inl\)' -print0 | xargs -0 chmod 644
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 # Explicitly remove source files
 rm -rf src/compression/zlib/

@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 1daea22b855a5acb279d62e1fcb5a82c9433cf4b
+%global commit0 71982fff0c4327cde2cafc3652aa95c5a01fd623
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
+# Disable production of debug package.
 %global debug_package %{nil}
 
 Name:         qutecsound
-Version:      0.9.3
+Version:      0.9.5b
 Release:      1%{?dist}
 Summary:      A csound file editor
 URL:          https://github.com/CsoundQt/CsoundQt

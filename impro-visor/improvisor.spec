@@ -5,9 +5,9 @@
 # Please submit bugfixes or comments to toni@links2linux.de
 
 %define name            improvisor
-%define maj             8
+%define maj             9
 %define min             1
-%define patch           1
+%define patch           0
 %define version         %{maj}.%{min}%{patch}
 %define release         1
 

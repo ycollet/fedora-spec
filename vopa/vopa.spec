@@ -3,6 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+# Disable production of debug package.
+%global debug_package %{nil}
+
 Name:         vopa-lv2
 Version:      1.0.0
 Release:      1%{?dist}

@@ -14,27 +14,27 @@ lmms            done
 ams-lv2         done
 rack
 openkontroller  done
-iannix
+iannix          ---
 postfish        done
 tuxguitar       no
-vopa
-x42
-zam
-rakarrack       bug
+vopa            ---
+x42             ---
+zam             ---
+rakarrack       ---
 rkrlv2          done
 sfark           ---
 ssr             later
-stretchplayer
+stretchplayer   ---
 portalmod
-qutecsound
+qutecsound      ---
 radium          later
 oxefmsynth      done
-picoloop
-milkytracker    bug
+picoloop        bug
+milkytracker    ---
 mv-6pm          done
 ninjam          done
 kickstart       no
-leiningen
-impro-visor
+leiningen       ---
+impro-visor     ---
 horgand
-amsynth         ---
+amsynth         done

@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 5f49d9b27d63f4da9b100f9ce5176c25468606e8
-%global gittag0 v0.7.1
+%global commit0 f55f93e5554a21abc31939f2359ad3ae653c5eb2
+%global gittag0 v0.7.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           sisco.lv2
-Version:        0.7.1
+Version:        0.7.2
 Release:        1%{?dist}
 Summary:        A LV2 oscilloscope
 

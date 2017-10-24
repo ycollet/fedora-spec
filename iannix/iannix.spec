@@ -1,15 +1,15 @@
 # http://www.iannix.org/
 
 # Global variables for github repository
-%global commit0 6d15cf694c5dc9e958bc4617811ff07d75326d81
+%global commit0 fb9cc1cdeb13b82575228a9eb577a308dfcb03b2
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
+# Disable production of debug package.
 %global debug_package %{nil}
 
 Name:         IanniX
-Version:      0.9.17.%{shortcommit0}
+Version:      0.9.19.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      A graphic / MIDI / OSC player
 URL:          https://github.com/iannix/Iannix
