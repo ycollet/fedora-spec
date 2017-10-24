@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
 %global commit0 a593de0836790a3437b861cf0eb7acd1b581e512
 %global gittag0 lv2unstable

@@ -18,6 +18,7 @@ Source0:        https://github.com/lvtk/%{name}/archive/%{commit0}.tar.gz#/%{nam
 
 BuildRequires: lv2-devel
 BuildRequires: python
+BuildRequires: gtkmm24-devel
 
 %description
 This software package contains libraries that wrap the LV2 C API and

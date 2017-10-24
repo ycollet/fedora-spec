@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:         hydrogen
 Version:      0.9.7
 Release:      11%{?dist}

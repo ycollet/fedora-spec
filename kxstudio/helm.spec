@@ -23,6 +23,7 @@ BuildRequires: freetype-devel
 BuildRequires: libXrandr-devel
 BuildRequires: libXinerama-devel
 BuildRequires: libXcursor-devel
+BuildRequires: libcurl-devel
 
 %description
 A LV2 / standalone synth
