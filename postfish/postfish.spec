@@ -24,6 +24,7 @@ BuildRequires: gtk2-devel
 BuildRequires: glib2-devel
 BuildRequires: libao-devel
 BuildRequires: gzip
+BuildRequires: perl
 
 %description
 The Postfish is a digital audio post-processing, restoration, filtering and mixdown tool.
