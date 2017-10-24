@@ -6,8 +6,8 @@ Summary:        A digital audio workstation for JACK
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://non.tuxfamily.org/
-Source0:        non-20130520-gite7f4a1c4b9e513391a732f35fdecb79ee796c712.tar.bz2
-# sh non-snapshot.sh (rev>
+Source0:        non-20171023-git1904aba516341287ac297cefbbcd185f643e5538.tar.bz2
+# sh non-snapshot.sh 1904aba516341287ac297cefbbcd185f643e5538
 #Source1:        non-snapshot.sh
 # notified upstream of the following along with incorrect FSF address headers
 Patch1:         non-daw-desktop.patch
@@ -25,6 +25,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  libXpm-devel
 BuildRequires:  ladspa-devel
 BuildRequires:  liblrdf-devel
+BuildRequires:  python2
 
 %description
 Non-daw is a digital audio workstation for JACK
@@ -57,7 +58,7 @@ non-sequencer is a powerful, lightweight, real-time, pattern-based MIDI
 sequencer
 
 %prep
-%setup -q -n non-20130520
+%setup -q -n non-20171023
 #sed -i -e "s|'-D_GNU_SOURCE' ]|'-D_GNU_SOURCE' ] +'%{optflags}'.split(' ')|" wscript
 
 %patch2 -p1
@@ -126,7 +127,10 @@ fi
 %{_datadir}/pixmaps/non-sequencer
 
 %changelog
-* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0-7.git13c3ca8
+* Tue Oct 24 2017  Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git43e5538
+- update to non-20171023-git1904aba516341287ac297cefbbcd185f643e5538
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0-7.git13c3ca8w
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.2.0-6.git13c3ca8

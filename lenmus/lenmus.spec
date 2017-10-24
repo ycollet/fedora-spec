@@ -23,6 +23,7 @@ BuildRequires: portaudio-devel
 BuildRequires: cmake
 BuildRequires: wxGTK3-devel
 BuildRequires: sqlite-devel
+BuildRequires: jack-audio-connection-kit-devel
 #BuildRequires: lomse-devel
 
 %description

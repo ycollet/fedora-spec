@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:           Jamulus
-Version:        3.4.1
+Version:        3.4.2
 Release:        1%{?dist}
 Summary:        Jamulus
 URL:            http://llcon.sourceforge.net/
@@ -11,7 +11,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
 # original tarfile can be found here:
-Source0:        http://downloads.sourceforge.net/project/llcon/Jamulus/3.4.1/Jamulus-3.4.1.tar.gz
+Source0:        http://downloads.sourceforge.net/project/llcon/Jamulus/3.4.2/Jamulus-3.4.2.tar.gz
 
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
@@ -68,5 +68,6 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 3.4.2-1
 * Sat May 30 2015 Yann Collette <ycollette.nospam@free.fr> - 3.4.1-1
 - Initial release

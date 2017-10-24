@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 2219167b351bc5f08001b55653fd4e21eada3559
+%global commit0 bf4eca3115858246764d2294f34c73fe4082d040
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -45,5 +45,8 @@ make DESTDIR=%{buildroot} install
 %{_datadir}/rkr.lv2/*
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
+- update master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
 - Initial build

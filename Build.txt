@@ -1,0 +1,40 @@
+polyphone       ---
+non-daw         done
+lenmus          done
+lv2-fil-plugins done
+jamulus         done
+GrandOrgue
+azr3            done
+sonic-pi
+drumgizmo       done
+hydrogen        done
+jalv-select     done
+kxstudio        done
+lmms            done
+ams-lv2         done
+rack
+openkontroller
+iannix
+postfish        ---
+tuxguitar       no
+vopa
+x42
+zam
+rakarrack       bug
+rkrlv2          ---
+sfark
+ssr
+stretchplayer
+portalmod
+qutecsound
+radium
+oxefmsynth      done
+picoloop
+milkytracker
+mv-6pm          done
+ninjam
+kickstart
+leiningen
+impro-visor
+horgand
+amsynth

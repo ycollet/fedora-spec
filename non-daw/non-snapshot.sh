@@ -17,7 +17,7 @@ cleanup() {
 unset CDPATH
 pwd=$(pwd)
 name=non
-version=20130520
+version=20171023
 
 pushd "$tmp" >/dev/null
 echo "Fetching git revision: $1"

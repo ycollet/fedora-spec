@@ -38,8 +38,7 @@ The goal of Polyphone is to provide:
 
 %build
 
-cd trunk
-qmake-qt4 "DEFINES+=USE_LOCAL_RTMIDI" polyphone.pro
+qmake-qt4 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
 make VERBOSE=1 %{?_smp_mflags}
 cd ..
 
@@ -49,13 +48,13 @@ cd ..
 %__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 trunk/RELEASE/polyphone %{buildroot}%{_bindir}/
+%__install -m 644 RELEASE/polyphone %{buildroot}%{_bindir}/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
 %__install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 trunk/ressources/logo.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%__install -m 644 ressources/logo.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # install polyphon.desktop properly.
 desktop-file-install --vendor '' \
@@ -83,7 +82,7 @@ fi
 
 
 %files
-%doc trunk/changelog trunk/README
+%doc changelog README
 %{_bindir}/polyphone
 %{_datadir}/applications/polyphone.desktop
 %{_datadir}/mime/packages/polyphone.xml
@@ -91,5 +90,7 @@ fi
 
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 1.8.0-1
+- Update to 1.8.0
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-1
 - Initial spec file 1.6.0
