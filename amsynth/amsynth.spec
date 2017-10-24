@@ -1,16 +1,16 @@
 # Global variables for github repository
-%global commit0 c518e0e913c4df72c046d83e5ec2494786d06bb7
+%global commit0 e328fe0ad7c93242fb1d3eb0919b809e993b7222
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Software Synthesizer
-Name: amsynth
-Version: 1.5.1.%{shortcommit0}
+Name:    amsynth
+Version: 1.8.0.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            https://github.com/nixxcode/amsynth
-Source0:        https://github.com/nixxcode/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+URL:     https://github.com/amsynth/amsynth
+Source0: https://github.com/amsynth/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: alsa-lib-devel
 BuildRequires: gtkmm24-devel
@@ -85,6 +85,8 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_datadir}/icons/hicolor/48x48/apps/amsynth.png
 %{_datadir}/icons/hicolor/scalable/apps/amsynth.svg
 %{_datadir}/locale/*
+%{_datadir}/appdata/*
+%{_mandir}/*
 
 %files -n dssi-amsynth
 %{_libdir}/dssi/*
@@ -96,6 +98,9 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_libdir}/vst/*
 
 %changelog
+* Tue Oct 24 2017 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-1
+- update to 1.8.0
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 1.5.1-1
 - updated to 1.5.1
 - added a DSSI package

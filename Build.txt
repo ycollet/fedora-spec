@@ -22,7 +22,7 @@ x42
 zam
 rakarrack       bug
 rkrlv2          done
-sfark
+sfark           ---
 ssr             later
 stretchplayer
 portalmod
@@ -30,11 +30,11 @@ qutecsound
 radium          later
 oxefmsynth      done
 picoloop
-milkytracker
+milkytracker    bug
 mv-6pm          done
-ninjam
+ninjam          done
 kickstart       no
 leiningen
 impro-visor
 horgand
-amsynth
+amsynth         ---
