@@ -1,0 +1,43 @@
+From 620df08d25d8bdc36a6098e67381d506cb6e2672 Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Wed, 25 Oct 2017 16:10:42 +0200
+Subject: [PATCH] fix rpaths
+
+---
+ editors/sc-ide/CMakeLists.txt | 4 ++--
+ lang/CMakeLists.txt           | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/editors/sc-ide/CMakeLists.txt b/editors/sc-ide/CMakeLists.txt
+index 94d8077..ea273ec 100644
+--- a/editors/sc-ide/CMakeLists.txt
++++ b/editors/sc-ide/CMakeLists.txt
+@@ -1,8 +1,8 @@
+ cmake_minimum_required( VERSION 2.8.11 )
+ 
+ # This makes sclang/scide work with a Qt installation at a fixed, non-system location.
+-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
++#SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
++#SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+ 
+ find_package(Qt5Core)
+ find_package(Qt5Concurrent)
+diff --git a/lang/CMakeLists.txt b/lang/CMakeLists.txt
+index fe52223..a3b8bbe 100644
+--- a/lang/CMakeLists.txt
++++ b/lang/CMakeLists.txt
+@@ -1,8 +1,8 @@
+ cmake_minimum_required(VERSION 2.8.11)
+ 
+ # This makes sclang/scide work with a Qt installation at a fixed location.
+-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
++#SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
++#SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+ 
+ include_directories(${CMAKE_SOURCE_DIR}/include/common
+                     ${CMAKE_SOURCE_DIR}/include/lang
+-- 
+2.13.6
+

@@ -16,6 +16,8 @@ License:        GPLv2+
 URL:            https://github.com/yoyz/audio
 Source0:        https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+Patch0:         picoloop-0001-fix-makefile.patch
+
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: SDL2-devel
@@ -33,6 +35,7 @@ There are four channels, playing simultaneously.
 %prep
 %setup -qn %{name}-%{commit0}
 
+%patch0 -p1 
 
 %build
 
@@ -42,10 +45,13 @@ cd picoloop
 %make_build -f Makefile.RtAudio_debian_sdl20 clean
 %make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 clean
 
-%make_build -f Makefile.RtMidi_debian_sdl20  CFLAGS="-std=c++11 -O3 -Wall -I.. -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
-%make_build -f Makefile.RtAudio_debian_sdl20 CFLAGS="-std=c++11 -O3 -Wall -I.. -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
+mkdir -p debianrtaudio_sdl20/Machine/Lgptsampler
+
+# CFLAGS="-std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -D__SDL20__ -DSCREEN_MULT=2  -fpermissive -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
+%make_build -f Makefile.RtMidi_debian_sdl20  
+%make_build -f Makefile.RtAudio_debian_sdl20 
 %make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 DIRTOCREATE
-%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 #CFLAGS="-c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -fpermissive" LDFLAGS="-lasound -lSDL -lSDL_ttf -lpthread -lpulse -lpulse-simple"
+%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 #CFLAGS="-std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -D__SDL20__ -DSCREEN_MULT=2  -fpermissive" # -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__  -DHAVE_GETTIMEOFDAY
 
 %install
 

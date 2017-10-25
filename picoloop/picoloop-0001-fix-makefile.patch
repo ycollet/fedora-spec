@@ -1,0 +1,103 @@
+From 55f98e461a6cc6321726c19ae9e299ce62c48664 Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Wed, 25 Oct 2017 14:49:51 +0200
+Subject: [PATCH] fix makefile
+
+---
+ .../Makefile.PatternPlayer_debian_RtAudio_sdl20    | 59 ++++++++++++++++------
+ 1 file changed, 44 insertions(+), 15 deletions(-)
+
+diff --git a/picoloop/Makefile.PatternPlayer_debian_RtAudio_sdl20 b/picoloop/Makefile.PatternPlayer_debian_RtAudio_sdl20
+index 02859ad..87178af 100644
+--- a/picoloop/Makefile.PatternPlayer_debian_RtAudio_sdl20
++++ b/picoloop/Makefile.PatternPlayer_debian_RtAudio_sdl20
+@@ -1,28 +1,26 @@
+ #CC=g++-4.4
+ CC=g++
+-#CFLAGS=-c -DLINUX -I. -LSDL/lib -ggdb -pg
++#CFLAGS=-c -DLINUX -I. -LSDL/lib  -pg
+ #LDFLAGS=-lSDL -lSDL_gfx -lSDL_ttf -lpthread  RtAudio.o  -pg
+ #LDFLAGS=-lSDL -lSDL_gfx -lSDL_ttf -lpthread  RtAudio.o 
+ 
+ #CFLAGS=-c -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP
+ 
+-
+-
+-CFLAGS=-c -O3 -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP -ggdb -ffast-math
+-CFLAGS=-c -O3 -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP -ggdb  -pg
+-CFLAGS=-Wall -c -O3 -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP -ggdb 
+-CFLAGS= -c -O3 -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -ggdb  -fpermissive -pg
+-CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -ggdb  -fpermissive -pg -DDUMP_AUDIO=0
+-CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -ggdb  -fpermissive 
+-CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -ggdb   -DDUMP_AUDIO=1
+-CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -ggdb   -DDUMP_AUDIO=1 -DFIXED
+-CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -ggdb   -DDUMP_AUDIO=1  -fpermissive
+-CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -ggdb   -DDUMP_AUDIO=1  -DDEBUGPRINTF -fpermissive
+-CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -ggdb                   -DDEBUGPRINTF -DSCREEN_MULT=2  -fpermissive
++CFLAGS=-c -O3 -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP -ffast-math
++CFLAGS=-c -O3 -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP -pg
++CFLAGS=-Wall -c -O3 -DLINUX -I. -LSDL/lib -DLINUX_DESKTOP  
++CFLAGS= -c -O3 -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -fpermissive -pg
++CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -fpermissive -pg -DDUMP_AUDIO=0
++CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP fpermissive 
++CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -DDUMP_AUDIO=1
++CFLAGS= -c -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -DLINUX_DESKTOP -DDUMP_AUDIO=1 -DFIXED
++CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -DDUMP_AUDIO=1  -fpermissive
++CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DLINUX_DESKTOP -DDUMP_AUDIO=1   -fpermissive
++CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -DSCREEN_MULT=2  -fpermissive
+ 
+ 
+ CFLAGS_SDLVERS=-D__SDL20__
+-CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -ggdb  ${CFLAGS_SDLVERS}                 -DDEBUGPRINTF -DSCREEN_MULT=2  -fpermissive
++CFLAGS= -c -std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP ${CFLAGS_SDLVERS} -DSCREEN_MULT=2  -fpermissive
+ 
+ LDFLAGS=-lasound -lSDL -lSDL_gfx -lSDL_ttf -lpthread -pg
+ LDFLAGS=-lasound -lSDL           -lSDL_ttf -lpthread -pg
+@@ -78,6 +76,36 @@ SOURCES=PatternPlayer.cpp \
+ 		      MidiInSystem.cpp	       \
+ 		      MachineCheck.cpp	       \
+ 		      WaveFileWriter.cpp       \
++                      Machine/Lgptsampler/char.cpp \
++                      Machine/Lgptsampler/Config.cpp \
++                      Machine/Lgptsampler/DEBSystem.cpp \
++                      Machine/Lgptsampler/FileSystem.cpp \
++                      Machine/Lgptsampler/Filters.cpp \
++                      Machine/Lgptsampler/Groove.cpp \
++                      Machine/Lgptsampler/LgptsamplerMachine.cpp \
++                      Machine/Lgptsampler/LgptsamplerUserInterface.cpp \
++                      Machine/Lgptsampler/Logger.cpp \
++                      Machine/Lgptsampler/Observable.cpp \
++                      Machine/Lgptsampler/Persistent.cpp \
++                      Machine/Lgptsampler/Result.cpp \
++                      Machine/Lgptsampler/SampleInstrument.cpp \
++                      Machine/Lgptsampler/SamplePool.cpp \
++                      Machine/Lgptsampler/SampleVariable.cpp \
++                      Machine/Lgptsampler/ServiceRegistry.cpp \
++                      Machine/Lgptsampler/SingletonRegistry.cpp \
++                      Machine/Lgptsampler/SRPUpdaters.cpp \
++                      Machine/Lgptsampler/Status.cpp \
++                      Machine/Lgptsampler/SubService.cpp \
++                      Machine/Lgptsampler/SyncMaster.cpp \
++                      Machine/Lgptsampler/TablePlayback.cpp \
++                      Machine/Lgptsampler/TimeService.cpp \
++                      Machine/Lgptsampler/Trace.cpp \
++                      Machine/Lgptsampler/UnixFileSystem.cpp \
++                      Machine/Lgptsampler/VariableContainer.cpp \
++                      Machine/Lgptsampler/Variable.cpp \
++                      Machine/Lgptsampler/WatchedVariable.cpp \
++                      Machine/Lgptsampler/WavFile.cpp \
++                      Machine/Lgptsampler/wildcard.cpp \
+ 		      Machine/Picosynth/PicosynthUserInterface.cpp \
+ 		      Machine/Picosynth/PicosynthADSR.cpp        \
+ 		      Machine/Picosynth/PicosynthVCO.cpp         \
+@@ -250,6 +278,7 @@ DIRTOCREATE:
+ 	-mkdir -p $(OBJDIR)/Machine/MidiOutSystem
+ 	-mkdir -p $(OBJDIR)/Machine/MDADrum
+ 	-mkdir -p $(OBJDIR)/Machine/SIDSynth
++	-mkdir -p $(OBJDIR)/Machine/Lgptsampler
+ 
+ $(EXECUTABLE): $(DEPENDENCYINOBJDIR) $(OBJECTSINOBJDIR)
+ 	$(CC) $(OBJTOLINKINOBJDIR)  $(OBJECTSINOBJDIR) -o $@ $(LDFLAGS)
+-- 
+2.13.6
+
