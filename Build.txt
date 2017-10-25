@@ -37,5 +37,5 @@ leiningen         done
 impro-visor       done
 horgand           done
 amsynth           done
-supercollider     ---
-supercollider-sc3 
+supercollider     done
+supercollider-sc3 ---

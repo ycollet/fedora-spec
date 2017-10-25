@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 * Thu Jun 27 2013 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.6-0.3.gbd15edb
 - update to latest git for 3.6.5
 
-* Tue Apr 22 2013 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.6-0.2.g96a5f32
+* Mon Apr 22 2013 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.6-0.2.g96a5f32
 - update to latest git for 3.6.4
 - changed release numbering to use git describe string
 
@@ -147,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 - sc3-plugins is no longer part of the sc3 source tree so split the
   package again... sigh... all plugins are in one package
 
-* Tue Mar 26 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.20090325-0.svn350.1
+* Thu Mar 26 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.20090325-0.svn350.1
 - udpate to latest svn
 - add patch to dynamically link against stk shared library
 - symbolic machines moved into tagsystemugens
@@ -179,7 +179,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sat Nov 17 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
 - Headers are now coming from a different location
 
-* Fri Jul 26 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 0.2007.07.26-1.119svn
+* Thu Jul 26 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 0.2007.07.26-1.119svn
 - updated to revision 119
 
 * Fri Mar  9 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 0.20070308-1.64svn
