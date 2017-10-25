@@ -3,7 +3,9 @@
 # package are under the same license as the package itself.
 #
 # Please submit bugfixes or comments to toni@links2linux.de
-
+#
+# in the source directory, remove the sc directory (supercollider for windows).
+#
 %define name            improvisor
 %define maj             9
 %define min             1
@@ -89,6 +91,7 @@ sheets for standard and jazz tunes.
 %build
 
 %install
+
 # jars
 %__install -dm 755 %{buildroot}%{_javadir}
 %__install -m 644 %{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
@@ -109,6 +112,24 @@ done
 
 %__install -dm 755 %{buildroot}%{_datadir}/%{name}/leadsheets
 %__cp -a leadsheets/* %{buildroot}%{_datadir}/%{name}/leadsheets
+
+%__install -dm 755 %{buildroot}%{_datadir}/%{name}/connectomes
+%__cp -a connectomes/* %{buildroot}%{_datadir}/%{name}/connectomes
+
+%__install -dm 755 %{buildroot}%{_datadir}/%{name}/midi
+%__cp -a midi/* %{buildroot}%{_datadir}/%{name}/midi
+
+%__install -dm 755 %{buildroot}%{_datadir}/%{name}/voicings
+%__cp -a voicings/* %{buildroot}%{_datadir}/%{name}/voicings
+
+%__install -dm 755 %{buildroot}%{_datadir}/%{name}/transforms
+%__cp -a transforms/* %{buildroot}%{_datadir}/%{name}/transforms
+
+%__install -dm 755 %{buildroot}%{_datadir}/%{name}/fractals
+%__cp -a fractals/* %{buildroot}%{_datadir}/%{name}/fractals
+
+%__install -dm 755 %{buildroot}%{_datadir}/%{name}/counts
+%__cp -a counts/* %{buildroot}%{_datadir}/%{name}/counts
 
 # startscript
 %__install -dm 755 %{buildroot}%{_bindir}
@@ -152,10 +173,25 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/styleExtract/*
 %dir %{_datadir}/%{name}/vocab
 %{_datadir}/%{name}/vocab/*
+%dir %{_datadir}/%{name}/connectomes
+%{_datadir}/%{name}/connectomes/*
+%dir %{_datadir}/%{name}/midi
+%{_datadir}/%{name}/midi/*
+%dir %{_datadir}/%{name}/voicings
+%{_datadir}/%{name}/voicings/*
+%dir %{_datadir}/%{name}/transforms
+%{_datadir}/%{name}/transforms/*
+%dir %{_datadir}/%{name}/fractals
+%{_datadir}/%{name}/fractals/*
+%dir %{_datadir}/%{name}/counts
+%{_datadir}/%{name}/counts/*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Oct 25 2017 Yann Collette <ycollette dot nospam at free.fr> 9.10
+- upgrade to 9.10
+
 * Sat Jun 06 2015 Yann Collette <ycollette dot nospam at free.fr> 7.00
 - upgrade to 7.00
 
