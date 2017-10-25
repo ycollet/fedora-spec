@@ -1,11 +1,11 @@
 # Global variables for github repository
 %global commit0 4e075332fa0867a65740c8a55eb7bce063ae3527
-#%global gittag0 v0.3.1
-%global gittag0 master
+%global gittag0 v0.4.0
+#%global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           Rack
-Version:        0.3.1
+Version:        0.4.0
 Release:        1%{?dist}
 Summary:        A modular synthetizer
 
@@ -27,6 +27,7 @@ BuildRequires: portaudio-devel
 BuildRequires: libcurl-devel
 BuildRequires: jansson-devel
 BuildRequires: gtk2-devel
+BuildRequires: rtmidi-devel
 
 %description
 A modular synthetizer
@@ -36,9 +37,16 @@ A modular synthetizer
 [ ! -d Rack ] && git clone https://github.com/VCVRack/Rack.git
 cd Rack
 git pull
+git checkout %{gittag0}
+
+rm -rf include/rtmidi
+mkdir -p include/rtmidi
+ln -s /usr/include/RtMidi.h include/rtmidi/RtMidi.h 
+CURRENT_PATH=`pwd`
 
 sed -i -e "s/-march=core2//g" compile.mk
 sed -i -e "s/-g//g" compile.mk
+echo "CXXFLAGS += -I$CURRENT_PATH/include" >> compile.mk
 
 git submodule init
 git submodule update
@@ -61,6 +69,26 @@ cd ..
 cd Fundamental
 git pull
 cd ..
+
+#[ ! -d ML_modules ] && git clone https://github.com/martin-lueders/ML-modules.git
+#cd ML_modules
+#git pull
+#cd ..
+
+#[ ! -d vcv_luckyxxl ] && git clone https://github.com/luckyxxl/vcv_luckyxxl.git
+#cd vcv_luckyxxl
+#git pull
+#cd ..
+
+#[ ! -d vcvrackplugins_av500 ] && git clone https://github.com/av500/vcvrackplugins_av500.git
+#cd vcvrackplugins_av500
+#git pull
+#cd ..
+
+#[ ! -d vcvrackplugins_dekstop ] && git clone https://github.com/av500/vcvrackplugins_dekstop.git
+#cd vcvrackplugins_dekstop
+#git pull
+#cd ..
 
 %build
 cd Rack
@@ -94,5 +122,8 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.4.0
+- update to version 0.4.0
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.3.1
 - Initial build

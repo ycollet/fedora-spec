@@ -12,7 +12,7 @@ jalv-select     done
 kxstudio        done
 lmms            done
 ams-lv2         done
-rack
+rack		done
 openkontroller  done
 iannix          done
 postfish        done
@@ -25,7 +25,7 @@ rkrlv2          done
 sfark           done
 ssr             later
 stretchplayer   done
-portalmod
+portalmod       done
 qutecsound      done
 radium          later
 oxefmsynth      done
@@ -35,6 +35,6 @@ mv-6pm          done
 ninjam          done
 kickstart       no
 leiningen       done
-impro-visor     ---
-horgand
+impro-visor     done
+horgand         done
 amsynth         done

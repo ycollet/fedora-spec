@@ -3,6 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+# Disable production of debug package.
+%global debug_package %{nil}
+
 Name:           mda-lv2
 Version:        0.9.%{shortcommit0}
 Release:        1%{?dist}

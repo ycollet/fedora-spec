@@ -1,9 +1,9 @@
 # Global variables for github repository
-%global commit0 9f9195d8b572f9b0bf70441ac8f65e300f351bbe
+%global commit0 d404edc4d79fb59ee77bb9e87ce51de050e70a88
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
+# Disable production of debug package.
 %global debug_package %{nil}
 
 Name:           mod-pitchshifter
@@ -40,5 +40,8 @@ make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9
+- update to latest master version
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9
 - Initial build

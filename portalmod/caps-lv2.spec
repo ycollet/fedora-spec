@@ -1,9 +1,9 @@
 # Global variables for github repository
-%global commit0 6ebc49b578583ecc7604f9fc361366e7b0fa7922
+%global commit0 072e2feb5c09d0fb51300e688b7e4f32b75e9c89
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
+# Disable production of debug package.
 %global debug_package %{nil}
 
 Name:           caps-lv2
@@ -34,5 +34,8 @@ make LV2_DEST=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9
+- Update to latest master version
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9
 - Initial build
