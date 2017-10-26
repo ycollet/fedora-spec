@@ -5,7 +5,7 @@
 %global OWNER samaaron
 
 Name:           sonic-pi
-Version:        3.0
+Version:        3.0.1
 %global gittag0 v%{version}
 Release:        2%{?dist}
 Summary:        A musical programming environment 
@@ -25,7 +25,7 @@ BuildRequires: aubio-devel
 BuildRequires: boost-devel
 Requires:   pulseaudio-module-jack 
 Requires:   supercollider-sc3-plugins
-
+Requires:   supercollider
 
 %description
 Sonic Pi is an open source programming environment designed to explore and
@@ -81,6 +81,9 @@ desktop-file-install  --vendor "fedora" --dir=%{buildroot}%{_datadir}/applicatio
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Tue Oct 26 2017 Yann Collette <ycollette.nospam@free.fr> update to 3.0.1
+- update to 3.0.1
+
 * Mon Dec 28 2015 Ismael Olea <ismael@olea.org> 2.8.0-2
 - Added missed supercollider-sc3-plugins dependency https://github.com/samaaron/sonic-pi/issues/897#issuecomment-167682120
 
