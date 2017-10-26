@@ -1,41 +1,42 @@
-polyphone         done
-non-daw           done
-lenmus            done
-lv2-fil-plugins   done
-jamulus           done
-GrandOrgue        done
-azr3              done
-sonic-pi          later
-drumgizmo         done
-hydrogen          done
-jalv-select       done
-kxstudio          done
-lmms              done
-ams-lv2           done
-rack		  done
-openkontroller    done
-iannix            done
-postfish          done
-tuxguitar         no
-vopa              done
-x42               done
-zam               done
-rakarrack         done
-rkrlv2            done
-sfark             done
-ssr               later
-stretchplayer     done
-portalmod         done
-qutecsound        done
-radium            later
-oxefmsynth        done
-picoloop          done
-milkytracker      done
-mv-6pm            done
-ninjam            done
-leiningen         done
-impro-visor       done
-horgand           done
-amsynth           done
-supercollider     done
-supercollider-sc3 ---
+                  Build  Test
+polyphone         done   no
+non-daw           done   no
+lenmus            done   no
+lv2-fil-plugins   done   no
+jamulus           done   no
+GrandOrgue        done   no
+azr3              done   no
+sonic-pi          done   no
+drumgizmo         done   no
+hydrogen          done   no
+jalv-select       done   no
+kxstudio          done   no
+lmms              done   no
+ams-lv2           done   no
+rack		  done   no
+openkontroller    done   no
+iannix            done   no
+postfish          done   no
+tuxguitar         no     no
+vopa              done   no
+x42               done   no
+zam               done   no
+rakarrack         done   no
+rkrlv2            done   no
+sfark             done   no
+ssr               later  no
+stretchplayer     done   no
+portalmod         done   no
+qutecsound        done   no
+radium            later  no
+oxefmsynth        done   no
+picoloop          done   no
+milkytracker      done   no
+mv-6pm            done   no
+ninjam            done   no
+leiningen         done   no
+impro-visor       done   no
+horgand           done   no
+amsynth           done   no
+supercollider     done   no
+supercollider-sc3 done   no
