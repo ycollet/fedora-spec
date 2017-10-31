@@ -14,6 +14,7 @@ Source0:      https://github.com/OpenMusicKontrollers/patchmatrix/archive/%{comm
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libX11-devel

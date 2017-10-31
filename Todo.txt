@@ -1,5 +1,2 @@
-http://traverso-daw.org/
 http://mdesigner.free.fr/index.php?Application
-https://github.com/OpenMusicKontrollers/patchmatrix
 http://octavian.sourceforge.net/screenshots.html
-http://web.comhem.se/luna/
