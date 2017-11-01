@@ -1,0 +1,21 @@
+From 6d621a9f686a453cc70a4e4ba25024def946af81 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Wed, 1 Nov 2017 20:32:53 +0100
+Subject: [PATCH] add missing library
+
+---
+ Makefile.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.inc b/Makefile.inc
+index 3ac8549..e434e3b 100644
+--- a/Makefile.inc
++++ b/Makefile.inc
+@@ -1,3 +1,3 @@
+ CFLAGS=  -I/usr/include/alsa  -I/usr/include/freetype2 -I/usr/include/libpng16  -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libdrm  
+-LDFLAGS= -lX11  -lasound  -lXft  -lcairo  -ljack 
++LDFLAGS= -lX11  -lasound  -lXft  -lcairo  -ljack -lpthread 
+ JACK_MIN_VERSION=1.9.10
+-- 
+2.13.6
+

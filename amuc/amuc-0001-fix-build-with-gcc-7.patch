@@ -1,0 +1,53 @@
+From 37debba2c72175241821f79afd82fb16db93f521 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Wed, 1 Nov 2017 20:17:25 +0100
+Subject: [PATCH] fix build with gcc 7
+
+---
+ Makefile.inc       | 3 +++
+ src/amuc.cpp       | 3 ++-
+ src/mono-synth.cpp | 4 ++--
+ 3 files changed, 7 insertions(+), 3 deletions(-)
+ create mode 100644 Makefile.inc
+
+diff --git a/Makefile.inc b/Makefile.inc
+new file mode 100644
+index 0000000..3ac8549
+--- /dev/null
++++ b/Makefile.inc
+@@ -0,0 +1,3 @@
++CFLAGS=  -I/usr/include/alsa  -I/usr/include/freetype2 -I/usr/include/libpng16  -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libdrm  
++LDFLAGS= -lX11  -lasound  -lXft  -lcairo  -ljack 
++JACK_MIN_VERSION=1.9.10
+diff --git a/src/amuc.cpp b/src/amuc.cpp
+index b26773c..e736be4 100644
+--- a/src/amuc.cpp
++++ b/src/amuc.cpp
+@@ -613,7 +613,8 @@ struct MeterView {
+   static const int meter_dim=6;
+   Array<int,meter_dim> m;
+   MeterView(Rect rect) {
+-    m=(int[meter_dim]){ 6,8,12,16,24,32 };
++    //m=(int[meter_dim]){ 6,8,12,16,24,32 };
++    m={ 6,8,12,16,24,32 };
+     meter=new HSlider(top_win,rect,MR,0,meter_dim-1,"meter",0,0,meter_cmd,cBackground);
+     draw(app->act_meter);
+   }
+diff --git a/src/mono-synth.cpp b/src/mono-synth.cpp
+index 749eb91..4b410e5 100644
+--- a/src/mono-synth.cpp
++++ b/src/mono-synth.cpp
+@@ -226,8 +226,8 @@ struct SquareWav:WaveSrc {  // squarewave
+ 
+ struct Flutter {
+   float pos1,pos2,pos3;
+-  static const float mult2=1.7,
+-                     mult3=2.7;
++  static constexpr float mult2=1.7,
++                         mult3=2.7;
+   Flutter():pos1(0),pos2(0),pos3(0) { }
+   float get(float freq) {
+     pos1+=freq; if (pos1>1.) pos1-=1.;
+-- 
+2.13.6
+
