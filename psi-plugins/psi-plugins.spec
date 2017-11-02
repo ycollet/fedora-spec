@@ -20,7 +20,10 @@ BuildRequires: lv2-devel
 BuildRequires: python
 BuildRequires: fltk-devel
 BuildRequires: fltk-fluid
+BuildRequires: non-ntk-devel
+BuildRequires: non-ntk-fluid
 BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: liblo-devel
 
 %description
 psi-plugins is a small collection of LV2 plugins ideal for (but not limited to)
@@ -75,7 +78,8 @@ Roland JP8000/JP8080 but has since widened is scope.
 %{__rm} -rf %{buildroot}
 
 %files
-%doc LICENSE README.md midi_gate-psi.lv2/README.md midi_rnd-psi.lv2/README.md sidechain_gate-psi.lv2/README.md super_welle.lv2/README.md
+%doc LICENSE README.md
+#midi_gate-psi.lv2/README.md midi_rnd-psi.lv2/README.md sidechain_gate-psi.lv2/README.md super_welle.lv2/README.md
 
 %files -n lv2-midi_gate-psi
 %{_libdir}/lv2/midi_gate-psi.lv2/*
