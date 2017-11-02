@@ -3,6 +3,8 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+%global debug_package %{nil}
+
 %define __waf ./waf
 
 Summary:        PSI LV2 Plugins
