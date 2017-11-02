@@ -16,8 +16,8 @@ Source0:        https://github.com/ycollet/%{name}/archive/%{commit0}.tar.gz#/%{
 
 BuildRequires: lv2-devel
 BuildRequires: python
-BuildRequires: fltk-devel
-BuildRequires: fltk-fluid
+BuildRequires: non-ntk-devel
+BuildRequires: non-ntk-fluid
 BuildRequires: jack-audio-connection-kit-devel
 
 %description
