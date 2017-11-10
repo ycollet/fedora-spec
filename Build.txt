@@ -40,3 +40,8 @@ horgand           done   no
 amsynth           done   no
 supercollider     done   no
 supercollider-sc3 done   no
+mx44              done   no
+amuc              done   no
+psi-plugins-doc   done   no
+patchmatrix       done   no
+traverso          done   no
