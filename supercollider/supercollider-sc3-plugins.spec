@@ -8,10 +8,11 @@
 #
 # 2016.11.25: Version-3.7.1-102-gf1200cd
 # 2017.10.25: Version-3.7.1-141-g5342a4a
+# 2017.11.02: Version-3.7.1(147-g04a3dca
 #
 %define gitver 3.7.1
-%define gittag g5342a4a
-%define gitrev 141
+%define gittag g04a3dca
+%define gitrev 147
 
 Summary: Collection of SuperCollider plugins
 Name: supercollider-sc3-plugins
@@ -79,8 +80,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* The Nov 2 2017  Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.147.g04a3dca
+- update to version 3.7.1-147-g04a3dca
+
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.141.g5342a4a
-- update to latest git for 3.7.2 release
+- update to latest git for 3.7.1 release
 
 * Fri Nov 25 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.7.1-1.102.gf1200cd
 - update to latest git for 3.7.2 release

@@ -28,7 +28,6 @@ BuildRequires: fluidsynth-devel
 BuildRequires: fftw-devel
 BuildRequires: mxml-devel
 BuildRequires: zlib-devel
-BuildRequires: non-ntk-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: non-ntk-fluid
 BuildRequires: non-ntk-devel
