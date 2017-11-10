@@ -50,6 +50,7 @@ repo --name="Copr repo for MAO by ycollet" --baseurl=https://copr-be.cloud.fedor
 @input-methods
 @multimedia
 @hardware-support
+dnf
 
 # exclude input methods:
 -m17n*
@@ -65,7 +66,7 @@ qemu-guest-agent
 %post
 
 # Install language pack
-yum -y langinstall French
+dnf -y langinstall French
 
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
@@ -429,7 +430,6 @@ gnome-keyring-pam
 -gimp-help
 -desktop-backgrounds-basic
 -realmd                     # only seems to be used in GNOME
--PackageKit*                # we switched to yumex, so we don't need this
 -aspell-*                   # dictionaries are big
 -gnumeric
 -foomatic-db-ppds
@@ -874,5 +874,8 @@ chown -R lescuizines:lescuizines /home/lescuizines/
 restorecon -R /home/lescuizines/
 
 EOF
+
+# Restart grub2
+grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %end
