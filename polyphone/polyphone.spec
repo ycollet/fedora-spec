@@ -5,7 +5,7 @@ Name:         polyphone
 Version:      1.8
 Release:      2%{?dist}
 Summary:      A SF2 sound font editor
-URL:          http://polyphone-sourndfour.com/fr/
+URL:          https://polyphone-soundfonts.com/
 Group:        Applications/Multimedia
 
 License:      GPLv2+
