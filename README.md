@@ -69,7 +69,7 @@ To create the LiveCD using livecd-creator:
 
 As a root user:
 ```
-$ livecd-creator --verbose --config=fedora-26-live-jam-kde.ks --fslabel=LesCuizines
+$ livecd-creator --verbose --config=fedora-26-live-jam-kde.ks --fslabel=LesCuizines --releasever 26
 ```
 
 To create the LiceCD using livemedia-creator:
