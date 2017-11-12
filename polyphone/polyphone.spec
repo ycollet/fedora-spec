@@ -1,20 +1,19 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
 
 Name:         polyphone
-Version:      1.8
-Release:      2%{?dist}
+Version:      1.9
+Release:      1%{?dist}
 Summary:      A SF2 sound font editor
 URL:          https://polyphone-soundfonts.com/
 Group:        Applications/Multimedia
 
 License:      GPLv2+
 
-Source0:      %{name}-%{version}-src.zip
+# Uses Github without tags or banches
+Source0:      https://github.com/davy7125/polyphone/raw/master/versions/%{name}-%{version}-src.zip
 Source1:      polyphone.desktop
 Source2:      polyphone.xml
 
-BuildRequires: qt4-devel
+BuildRequires: qt5-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -34,11 +33,11 @@ The goal of Polyphone is to provide:
 * Polyphone is licensed under GNU General Public License. Anyone may thus access the source code, and is welcome to help in the development of the program.
 
 %prep
-%setup0 -qn %{name}-%{version}-src
+%setup0 -qn trunk
 
 %build
 
-qmake-qt4 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
+qmake-qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
 make VERBOSE=1 %{?_smp_mflags}
 cd ..
 
