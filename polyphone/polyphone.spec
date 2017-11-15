@@ -2,19 +2,26 @@
 %global debug_package %{nil}
 
 Name:         polyphone
-Version:      1.8
-Release:      2%{?dist}
+Version:      1.9
+Release:      1%{?dist}
 Summary:      A SF2 sound font editor
 URL:          https://polyphone-soundfonts.com/
 Group:        Applications/Multimedia
 
 License:      GPLv2+
 
+# Download polyphone-1.9-src.zip
+# unzip polyphone-1.9-src.zip
+# mv trunk polyphone-1.9-src
+# rm polyphone-1.9-src.zip
+# zip -r polyphone-1.9-src.zip polyphone-1.9-src/*
+
 Source0:      %{name}-%{version}-src.zip
 Source1:      polyphone.desktop
 Source2:      polyphone.xml
 
-BuildRequires: qt4-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtbase-gui
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -38,7 +45,7 @@ The goal of Polyphone is to provide:
 
 %build
 
-qmake-qt4 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
+qmake-qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
 make VERBOSE=1 %{?_smp_mflags}
 cd ..
 
@@ -90,6 +97,8 @@ fi
 
 
 %changelog
+* Wed Nov 15 2017 Yann Collette <ycollette.nospam@free.fr> - 1.9.0-1
+- update to 1.9.0
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 1.8.0-1
 - Update to 1.8.0
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-1
