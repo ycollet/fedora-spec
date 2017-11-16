@@ -22,6 +22,7 @@ Source2:      polyphone.xml
 
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtbase-gui
+BuildRequires: qt5-qtsvg-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -31,6 +32,7 @@ BuildRequires: stk-devel
 BuildRequires: qcustomplot-devel 
 BuildRequires: libvorbis-devel 
 BuildRequires: libogg-devel 
+BuildRequires: zlib-devel
 
 %description
 Polyphone is a free software for editing soundfonts in format sf2. These files contain a multitude of audio samples put together and configured so as to form musical instruments that can be used by synthesizers such as fluidsynth and played using a MIDI keyboard.
