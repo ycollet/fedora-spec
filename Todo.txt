@@ -3,4 +3,3 @@ http://x42-plugins.com/x42/x42-avldrums
 https://github.com/progwolff/performer
 https://github.com/lucianodato/noise-repellent
 https://github.com/brummer10/screcord.lv2
-https://github.com/brummer10/GxPlugins.lv2
