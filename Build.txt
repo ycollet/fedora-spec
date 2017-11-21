@@ -45,3 +45,5 @@ amuc              done   no
 psi-plugins-doc   done   no
 patchmatrix       done   no
 traverso          done   no
+gxplugins	  done	 no
+screcord	  done	 no
