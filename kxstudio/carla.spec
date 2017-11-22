@@ -7,7 +7,7 @@
 
 Name:           Carla
 Version:        2.0.0.%{shortcommit0}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A rack manager JACK
 
 Group:          Applications/Multimedia
@@ -31,8 +31,11 @@ BuildRequires: zlib-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: non-ntk-fluid
 BuildRequires: non-ntk-devel
+BuildRequires: jack-audio-connection-kit-devel
 #BuildRequires: linuxsampler-devel
 #BuildRequires: libprojectM-devel
+
+Requires(pre): python3-qt5
 
 %description
 A rack manager for JACK
@@ -77,6 +80,8 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Wed Nov 22 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
+- add a missing requires
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
 - update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
