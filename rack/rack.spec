@@ -1,11 +1,11 @@
 # Global variables for github repository
 %global commit0 4e075332fa0867a65740c8a55eb7bce063ae3527
-%global gittag0 v0.4.0
+%global gittag0 v0.5.0
 #%global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           Rack
-Version:        0.4.0
+Version:        0.5.0
 Release:        1%{?dist}
 Summary:        A modular synthetizer
 
@@ -25,9 +25,12 @@ BuildRequires: glfw-devel
 BuildRequires: portmidi-devel
 BuildRequires: portaudio-devel
 BuildRequires: libcurl-devel
+BuildRequires: openssl-devel
 BuildRequires: jansson-devel
 BuildRequires: gtk2-devel
 BuildRequires: rtmidi-devel
+BuildRequires: speex-devel
+BuildRequires: speexdsp-devel
 
 %description
 A modular synthetizer
@@ -37,6 +40,7 @@ A modular synthetizer
 [ ! -d Rack ] && git clone https://github.com/VCVRack/Rack.git
 cd Rack
 git pull
+git checkout -- compile.mk
 git checkout %{gittag0}
 
 rm -rf include/rtmidi
@@ -50,12 +54,22 @@ echo "CXXFLAGS += -I$CURRENT_PATH/include" >> compile.mk
 
 git submodule init
 git submodule update
-cd plugins
+
+cd dep
+git submodule init
+git submodule update
+sed -i -e "s/--with-ssl=\"\$(LOCAL)\"/--with-ssl/g" Makefile
+
+cd ../plugins
 [ ! -d AudibleInstruments ] && git clone https://github.com/VCVRack/AudibleInstruments.git
 cd AudibleInstruments
 git pull
 git submodule init
 git submodule update
+cd eurorack 
+git submodule init
+git submodule update
+cd ..
 cd ..
 [ ! -d Befaco ] && git clone https://github.com/VCVRack/Befaco.git
 cd Befaco
@@ -73,26 +87,46 @@ cd ..
 #[ ! -d ML_modules ] && git clone https://github.com/martin-lueders/ML-modules.git
 #cd ML_modules
 #git pull
+#%make_build
 #cd ..
 
 #[ ! -d vcv_luckyxxl ] && git clone https://github.com/luckyxxl/vcv_luckyxxl.git
 #cd vcv_luckyxxl
 #git pull
+#%make_build
 #cd ..
 
 #[ ! -d vcvrackplugins_av500 ] && git clone https://github.com/av500/vcvrackplugins_av500.git
 #cd vcvrackplugins_av500
 #git pull
+#%make_build
 #cd ..
 
 #[ ! -d vcvrackplugins_dekstop ] && git clone https://github.com/av500/vcvrackplugins_dekstop.git
 #cd vcvrackplugins_dekstop
 #git pull
+#%make_build
 #cd ..
 
 %build
 cd Rack
+cd dep
+make
+cd ..
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+cd plugins
+cd AudibleInstruments
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+cd ..
+cd Befaco
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+cd ..
+cd ESeries
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+cd ..
+cd Fundamental
+make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+
 
 %install 
 cd Rack
@@ -122,6 +156,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Tue Dec 26 2017 Yann Collette <ycollette.nospam@free.fr> - 0.5.0
+- update to version 0.5.0
+
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.4.0
 - update to version 0.4.0
 
