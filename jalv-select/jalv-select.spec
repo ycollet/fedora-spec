@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 4bb437c370d27f969f7ad899ce341703459a8877
+%global commit0 75a52292550178db2e3d82b5656ffd836382c9ef
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         jalv_select
-Version:      0.9.0.%{shortcommit0}
+Version:      1.0.0.%{shortcommit0}
 Release:      1%{?dist}
 Summary:      A LV2 synthetizer launcher for Jack audio
 URL:          https://github.com/brummer10/jalv_select
@@ -72,6 +72,7 @@ fi
 %{_mandir}/man1/jalv.select.*
 
 %changelog
+* Thu Jan 18 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9.0-1
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-1
 - Initial spec file 0.7.0
