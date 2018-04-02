@@ -46,7 +46,7 @@ against the %{version} kernel package.
 
 %prep
 %setup -q -n linux-%{version}
-sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}/g' Makefile
+sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt/g' Makefile
 cp %{SOURCE1} .config
 make olddefconfig
 
