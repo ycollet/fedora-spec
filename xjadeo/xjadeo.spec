@@ -31,6 +31,7 @@ BuildRequires: freetype-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: libXv-devel
 BuildRequires: SDL2-devel
+BuildRequires: libXpm-devel
 
 %description
 xjadeo is a simple video player that gets sync from jack.
