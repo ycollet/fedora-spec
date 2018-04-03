@@ -5,7 +5,7 @@
 %define krel 1
 %define kversion %{kver}-%{krel}-rt
 
-Name: kernel
+Name: kernel-rt-mao
 Summary: The Linux Real Time Kernel
 Version: %{kver}
 Release: %{krel}%{?dist}
@@ -16,8 +16,9 @@ URL: http://www.kernel.org
 Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
 Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-%{version}-rt17.patch.gz
+BuildRequires: elfutils-libelf-devel
 BuildRoot: %{_tmppath}/%{name}-%{PACKAGE_VERSION}-root
-Provides:  kernel-%{version}
+Provides:  kernel-rt-mao-%{version}
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
 
@@ -27,8 +28,6 @@ The Linux Real Time Kernel, the operating system core itself
 %package headers
 Summary: Header files for the Linux real time kernel for use by glibc
 Group: Development/System
-Obsoletes: kernel-headers
-Provides: kernel-headers = %{version}
 %description headers
 Kernel-headers includes the C header files that specify the interface
 between the Linux kernel and userspace libraries and programs.  The
@@ -40,7 +39,7 @@ glibc package.
 Summary: Development package for building real time kernel modules to match the %{version} kernel
 Group: System Environment/Kernel
 AutoReqProv: no
-%description -n kernel-devel
+%description devel
 This package provides real time kernel headers and makefiles sufficient to build modules
 against the %{version} kernel package.
 
