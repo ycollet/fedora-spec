@@ -16,7 +16,16 @@ URL: http://www.kernel.org
 Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
 Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-%{version}-rt17.patch.gz
-BuildRequires: elfutils-libelf-devel
+
+BuildRequires: openssl-devel, openssl
+BuildRequires: kmod, patch, bash, tar, git
+BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
+BuildRequires: gcc, binutils, redhat-rpm-config, hmaccalc, bison, flex
+BuildRequires: net-tools, hostname, bc, elfutils-devel
+BuildRequires: rpm-build, elfutils, elfutils-libelf-devel
+BuildRequires: sparse
+BuildRequires: pesign >= 0.10-4
+
 BuildRoot: %{_tmppath}/%{name}-%{PACKAGE_VERSION}-root
 Provides:  kernel-rt-mao-%{version}
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
