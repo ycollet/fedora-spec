@@ -70,7 +70,7 @@ KBUILD_IMAGE=$(make image_name)
   mkdir -p $RPM_BUILD_ROOT/boot $RPM_BUILD_ROOT/lib/modules
 %endif
 
-INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= modules_install
+INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= INSTALL_MOD_STRIP=1 CONFIG_MODULE_COMPRESS=1 CONFIG_MODULE_COMPRESS_XZ=1 modules_install
 
 %ifarch ia64
   cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kversion}
@@ -95,7 +95,7 @@ cp .config $RPM_BUILD_ROOT/boot/config-%{kversion}
 
 rm -f $RPM_BUILD_ROOT/lib/modules/%{kversion}/{build,source}
 mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}
-EXCLUDES="--exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d"
+EXCLUDES="--exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.ko.xz --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d"
 tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kversion};tar xvf -)
 cd $RPM_BUILD_ROOT/lib/modules/%{kversion}
 ln -sf /usr/src/kernels/%{kversion} build
