@@ -88,10 +88,10 @@ make %{?_smp_mflags} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_in
 cp System.map $RPM_BUILD_ROOT/boot/System.map-%{kversion}
 cp .config $RPM_BUILD_ROOT/boot/config-%{kversion}
 
-%ifnarch ppc64
-  bzip2 -9 --keep vmlinux
-  mv vmlinux.bz2 $RPM_BUILD_ROOT/boot/vmlinux-%{kversion}.bz2
-%endif
+#%ifnarch ppc64
+#  bzip2 -9 --keep vmlinux
+#  mv vmlinux.bz2 $RPM_BUILD_ROOT/boot/vmlinux-%{kversion}.bz2
+#%endif
 
 rm -f $RPM_BUILD_ROOT/lib/modules/%{kversion}/{build,source}
 mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}
