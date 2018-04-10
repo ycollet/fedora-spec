@@ -59,6 +59,12 @@ cp %{SOURCE1} .config
 make olddefconfig
 
 %build
+
+cp_vmlinux()
+{
+  eu-strip --remove-comment -o "$2" "$1"
+}
+
 make clean && make %{?_smp_mflags}
 
 %install
@@ -76,37 +82,24 @@ INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= INSTAL
   cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kversion}
   ln -s efi/vmlinuz-%{kversion} $RPM_BUILD_ROOT/boot/
 %else
-  %ifarch ppc64
-    cp vmlinux arch/powerpc/boot
-    cp arch/powerpc/boot/$KBUILD_IMAGE $RPM_BUILD_ROOT/boot/vmlinuz-%{kversion}
-  %else
-    cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/vmlinuz-%{kversion}
-  %endif
+  cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/vmlinuz-%{kversion}
 %endif
 
 make %{?_smp_mflags} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_install
 cp System.map $RPM_BUILD_ROOT/boot/System.map-%{kversion}
 cp .config $RPM_BUILD_ROOT/boot/config-%{kversion}
 
-#%ifnarch ppc64
-#  bzip2 -9 --keep vmlinux
-#  mv vmlinux.bz2 $RPM_BUILD_ROOT/boot/vmlinux-%{kversion}.bz2
-#%endif
-
 rm -f $RPM_BUILD_ROOT/lib/modules/%{kversion}/{build,source}
 mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}
 EXCLUDES="--exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.ko.xz --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d"
 tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kversion};tar xvf -)
-cd $RPM_BUILD_ROOT/lib/modules/%{kversion}
-ln -sf /usr/src/kernels/%{kversion} build
-ln -sf /usr/src/kernels/%{kversion} source
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion} -a -r /boot/System.map-%{kversion} ]; then
-  cp /boot/vmlinuz-%{kversion} /boot/.vmlinuz-%{kversion}-mao
+  cp /boot/vmlinuz-%{kversion}    /boot/.vmlinuz-%{kversion}-mao
   cp /boot/System.map-%{kversion} /boot/.System.map-%{kversion}-mao
   rm -f /boot/vmlinuz-%{kversion} /boot/System.map-%{kversion}
   /sbin/installkernel %{kversion} /boot/.vmlinuz-%{kversion}-mao /boot/.System.map-%{kversion}-mao
@@ -122,8 +115,6 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 %files
 %defattr (-, root, root)
 /lib/modules/%{kversion}
-%exclude /lib/modules/%{kversion}/build
-%exclude /lib/modules/%{kversion}/source
 /boot/*
 
 %files headers
@@ -133,5 +124,3 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 %files devel
 %defattr (-, root, root)
 /usr/src/kernels/%{kversion}
-/lib/modules/%{kversion}/build
-/lib/modules/%{kversion}/source
