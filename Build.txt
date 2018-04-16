@@ -47,3 +47,8 @@ patchmatrix       done   no
 traverso          done   no
 gxplugins	  done	 no
 screcord	  done	 no
+performer	  done	 no
+noise-repellent	  done	 no
+xjadeo		  done	 no
+schismtracker	  done	 no
+kernel		  done	 no
