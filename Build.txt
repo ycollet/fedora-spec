@@ -1,54 +1,55 @@
-                  Build  Test
-polyphone         done   no
-non-daw           done   no
-lenmus            done   no
-lv2-fil-plugins   done   no
-jamulus           done   no
-GrandOrgue        done   no
-azr3              done   no
-sonic-pi          done   no
-drumgizmo         done   no
-hydrogen          done   no
-jalv-select       done   no
-kxstudio          done   no
-lmms              done   no
-ams-lv2           done   no
-rack		  done   no
-openkontroller    done   no
-iannix            done   no
-postfish          done   no
-tuxguitar         no     no
-vopa              done   no
-x42               done   no
-zam               done   no
-rakarrack         done   no
-rkrlv2            done   no
-sfark             done   no
-ssr               later  no
-stretchplayer     done   no
-portalmod         done   no
-qutecsound        done   no
+
+		  Build  Test	26	27	28
+polyphone         done   no	X	X
+non-daw           done   no	X	X
+lenmus            done   no	X	X
+lv2-fil-plugins   done   no	X	X
+jamulus           done   no	X	X
+GrandOrgue        done   no	X	X
+azr3              done   no	X	X
+sonic-pi          done   no	X	X
+drumgizmo         done   no	X	X
+hydrogen          done   no	X	X
+jalv-select       done   no	X	X
+kxstudio          done   no	X	X
+lmms              done   no	X	X
+ams-lv2           done   no	X	X
+rack		  done   no	X	X
+openkontroller    done   no	X	X
+iannix            done   no	X	X
+postfish          done   no	X	X
+tuxguitar         updated in main repo
+vopa              done   no	X	X
+x42               done   no	X	X
+zam               done   no	X	X
+rakarrack         done   no	X	X
+rkrlv2            done   no	X	X
+sfark             done   no	X	X
+ssr               in rpmfusion now
+stretchplayer     done   no	X	X
+portalmod         done   no	X	X
+qutecsound        done   no	X	X
 radium            later  no
-oxefmsynth        done   no
-picoloop          done   no
-milkytracker      done   no
-mv-6pm            done   no
-ninjam            done   no
-leiningen         done   no
-impro-visor       done   no
-horgand           done   no
-amsynth           done   no
-supercollider     done   no
-supercollider-sc3 done   no
-mx44              done   no
-amuc              done   no
-psi-plugins-doc   done   no
-patchmatrix       done   no
-traverso          done   no
-gxplugins	  done	 no
-screcord	  done	 no
-performer	  done	 no
-noise-repellent	  done	 no
-xjadeo		  done	 no
-schismtracker	  done	 no
-kernel		  done	 no
+oxefmsynth        done   no	X	X
+picoloop          done   no	X	X
+milkytracker      done   no	X	X
+mv-6pm            done   no	X	X
+ninjam            done   no	X	X
+leiningen         done   no	X	X
+impro-visor       done   no	X	X
+horgand           done   no	X	X
+amsynth           done   no	X	X
+supercollider     done   no	X	X
+supercollider-sc3 done   no	X	X
+mx44              done   no	X	X
+amuc              done   no	X	X
+psi-plugins-doc   done   no	X	X
+patchmatrix       done   no	X	X
+traverso          done   no	X	X
+gxplugins	  done	 no	X	X
+screcord	  done	 no	X	X
+performer	  done	 no	X	X
+noise-repellent	  done	 no	X	X
+xjadeo		  done	 no	X	X
+schismtracker	  done	 no	X	X
+kernel		  done	 no	X	X
