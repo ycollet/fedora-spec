@@ -41,7 +41,7 @@ SimpleScreenRecorder is a Linux program created to record programs and games.
 
 # install polyphon.desktop properly.
 desktop-file-install --vendor '' \
-        --add-category X-Video \
+        --add-category=X-Video \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/simplescreenrecorder.desktop

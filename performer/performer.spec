@@ -57,7 +57,7 @@ sed -i -e "s/AudioVideo/X-AudioVideo/g" performer.desktop
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
-        --add-category X-Sound \
+        --add-category=X-Sound \
         --add-category=Midi \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \

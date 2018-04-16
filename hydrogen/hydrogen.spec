@@ -104,8 +104,8 @@ make DESTDIR=%{buildroot} install
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
-        --add-category X-Drumming \
-        --add-category X-Sound \
+        --add-category=X-Drumming \
+        --add-category=X-Sound \
         --add-category=Midi \
         --add-category=Sequencer \
         --add-category=X-Jack \

@@ -55,7 +55,7 @@ make DESTDIR=%{buildroot} install
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
-        --add-category X-Sound \
+        --add-category=X-Sound \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop

@@ -52,7 +52,7 @@ sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
 # install smjack.desktop properly.
 desktop-file-install --vendor '' \
-        --add-category X-Sound \
+        --add-category=X-Sound \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/smjack.desktop

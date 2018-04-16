@@ -42,7 +42,7 @@ make DESTDIR=%{buildroot} PREFIX=%{_usr} %{?_smp_mflags}
 make DESTDIR=%{buildroot} PREFIX=%{_usr} %{?_smp_mflags} install
 
 desktop-file-install --vendor '' \
-        --add-category X-Sound \
+        --add-category=X-Sound \
         --add-category=Midi \
         --add-category=Sequencer \
         --add-category=X-Jack \

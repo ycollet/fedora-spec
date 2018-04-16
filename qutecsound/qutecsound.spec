@@ -75,7 +75,7 @@ cd ..
 
 # install qutecsound.desktop properly.
 desktop-file-install --vendor '' \
-        --add-category X-Sound \
+        --add-category=X-Sound \
         --add-category=Midi \
         --add-category=Sequencer \
         --dir %{buildroot}%{_datadir}/applications \

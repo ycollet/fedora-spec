@@ -8,7 +8,10 @@ License:        GPLv3+
 URL:            https://github.com/schismtracker/schismtracker
 Source0:        schismtracker-20180209.zip
 # download https://github.com/schismtracker/schismtracker/archive/schismtracker-master.zip
-# rename master.zip into schismtracher-master.zip
+# unzip schismtracker-master.zip
+# mv schismtracker-master schismtracker-20180209
+# zip -r schismtracker-20180209.zip schismtracker-20180209
+# rm -rf schismtracker-20180209
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
