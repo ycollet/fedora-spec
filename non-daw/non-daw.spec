@@ -40,10 +40,6 @@ non-mixer is a powerful, reliable and fast modular Digital Audio Mixer
 %package -n non-session-manager
 Summary:        A session manager for JACK
 Group:          Applications/Multimedia
-## this can't work, maybe want something like:
-## Obsoletes: non-session-manager < 1.0.0-0.6
-## instead?? -- rex
-#Obsoletes:      non-session-manager%{?_isa} = 1.0.0-0.5.gitae6b78cf
 
 %description -n non-session-manager
 non-session-manager is an audio project session manager. It preserves
@@ -59,8 +55,8 @@ sequencer
 
 %prep
 %setup -q -n non-20171023
-#sed -i -e "s|'-D_GNU_SOURCE' ]|'-D_GNU_SOURCE' ] +'%{optflags}'.split(' ')|" wscript
 
+%patch1 -p1
 %patch2 -p1
 
 %build

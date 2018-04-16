@@ -41,5 +41,5 @@ A tuner for jack, with full jack session managment support
 %{_datadir}/*
 
 %changelog
-* Tue Dec 25 2017 Yann Collette <ycollette.nospam@free.fr> - 3.0
+* Mon Dec 25 2017 Yann Collette <ycollette.nospam@free.fr> - 3.0
 - Initial build

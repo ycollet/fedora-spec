@@ -80,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
-* The Nov 2 2017  Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.147.g04a3dca
+* Thu Nov 2 2017  Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.147.g04a3dca
 - update to version 3.7.1-147-g04a3dca
 
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.141.g5342a4a

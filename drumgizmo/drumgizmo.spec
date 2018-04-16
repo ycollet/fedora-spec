@@ -1,12 +1,12 @@
 Summary: Software Synthesizer
-Name: drumgizmo
+Name:    drumgizmo
 Version: 0.9.14
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            http://git.drumgizmo.org/drumgizmo.git
-Source0:        drumgizmo-%version.tar.gz
-Source1:        drumgizmo_autogen.sh
+Group:   Applications/Multimedia
+URL:     http://git.drumgizmo.org/drumgizmo.git
+Source0: drumgizmo-%version.tar.gz
+Source1: drumgizmo_autogen.sh
 
 BuildRequires: autoconf
 BuildRequires: automake

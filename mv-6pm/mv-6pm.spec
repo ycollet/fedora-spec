@@ -30,6 +30,7 @@ BuildRequires: jack-audio-connection-kit-devel
 %prep
 %setup -qn %{name}_v%{version}
 
+%patch1 -p1
 
 %build
 

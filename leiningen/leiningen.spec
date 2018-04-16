@@ -25,7 +25,7 @@ plugins.
 
 
 %prep
-%setup
+%setup -q
 
 %build
 

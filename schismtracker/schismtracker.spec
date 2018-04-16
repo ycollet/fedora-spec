@@ -29,7 +29,7 @@ version of the [Modplug](https://openmpt.org/legacy_software) engine, with a
 number of bugfixes and changes to [improve IT].
 
 %prep
-%setup
+%setup -q
 
 %build
 

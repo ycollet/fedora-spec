@@ -37,7 +37,7 @@ IanniX is a graphical open source sequencer, based on Iannis Xenakis works, for 
 %build
 
 qmake-qt5 IanniX.pro
-make VERBOSE=1 %{?_smp_mflags}
+%{__make} VERBOSE=1 %{?_smp_mflags}
 
 %install
 

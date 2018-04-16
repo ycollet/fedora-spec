@@ -105,5 +105,5 @@ rm -rf %{buildroot}
 - Obey American English rules (equaliser -> equalizer)
 - Fix license. Add comments.
 
-* Thu Nov 13 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 2.0-1
+* Fri Nov 13 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 2.0-1
 - initial build
