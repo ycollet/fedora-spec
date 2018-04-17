@@ -38,17 +38,17 @@ sonic ideas into reality.
 %setup -qn %{name}-%{version} 
 
 %build
-pushd app/server/bin
-././compile-extensions.rb
-popd
-pushd app/gui/qt/
-cp -f ruby_help.tmpl ruby_help.h
-../../server/bin/qt-doc.rb -o ruby_help.h
+
+cd app/server/bin
 
 sed -i "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
 
+ruby ../../server/ruby/bin/compile-extensions.rb
+ruby ../../server/ruby/bin/i18n-tool.rb -t
+cp -f ruby_help.tmpl ruby_help.h
+ruby ../../server/ruby/bin/qt-doc.rb -o ruby_help.h
 lrelease-qt5 SonicPi.pro
-qmake-qt5 -o Makefile SonicPi.pro
+qmake-qt5 SonicPi.pro
 make
 
 %install
@@ -81,6 +81,9 @@ desktop-file-install  --vendor "fedora" --dir=%{buildroot}%{_datadir}/applicatio
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Tue Apr 17 2018 Yann Collette <ycollette.nospam@free.fr> update build process
+- update build process
+
 * Thu Oct 26 2017 Yann Collette <ycollette.nospam@free.fr> update to 3.0.1
 - update to 3.0.1
 
