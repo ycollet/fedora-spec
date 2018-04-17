@@ -1,17 +1,19 @@
 # Do not check any files here for requires
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
-#HOSTING-SERVICE:  "github.com"
-%global OWNER samaaron
+# Global variables for github repository
+%global commit0 3b1bb2cc71862beaa6ce18a75fc7c90fe8bc65ac
+%global gittag0 v3.1.0
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           sonic-pi
-Version:        3.0.1
+Version:        3.1.0
 %global gittag0 v%{version}
 Release:        2%{?dist}
 Summary:        A musical programming environment 
 License:        MIT
 URL:            http://sonic-pi.net/
-Source0:        https://github.com/%{OWNER}/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qscintilla-qt5-devel
@@ -39,7 +41,7 @@ sonic ideas into reality.
 
 %build
 
-cd app/server/bin
+cd app/gui/qt
 
 sed -i "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
 
@@ -58,6 +60,30 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 cp -Rip app/ %{buildroot}%{_datadir}/%{name}/
 ln -s %{_datadir}/%{name}/app/gui/qt/rp-app-bin %{buildroot}%{_bindir}/%{name}
 
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/atomic_reference.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/atomic/ext/atomic_reference.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/atomic_reference.so
+
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ffi_c.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ffi-1.9.17/ext/ffi_c/ffi_c.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ffi_c.so
+
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/did_you_mean/method_receiver.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/did_you_mean-0.10.0/ext/did_you_mean/method_receiver.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/did_you_mean/method_receiver.so
+
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ruby_prof.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ruby-prof-0.15.8/ext/ruby_prof/ruby_prof.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ruby_prof.so
+
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/fast_osc.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fast_osc.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/fast_osc.so
+
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/rugged.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.26.0/ext/rugged/rugged.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/rugged.so
+
 
 cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF
 [Desktop Entry]
@@ -72,7 +98,10 @@ Type=Application
 Categories=Application;AudioVideo;Audio;Development;IDE;Music;Education;
 X-AppInstall-Package=%{name}
 EOF
-desktop-file-install  --vendor "fedora" --dir=%{buildroot}%{_datadir}/applications/ %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop 
+
+desktop-file-install  --vendor "fedora" \
+                      --dir=%{buildroot}%{_datadir}/applications/ \
+                      %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop 
 
 
 %files
@@ -83,6 +112,8 @@ desktop-file-install  --vendor "fedora" --dir=%{buildroot}%{_datadir}/applicatio
 %changelog
 * Tue Apr 17 2018 Yann Collette <ycollette.nospam@free.fr> update build process
 - update build process
+- update to 3.1.0
+- remove duplicated so
 
 * Thu Oct 26 2017 Yann Collette <ycollette.nospam@free.fr> update to 3.0.1
 - update to 3.0.1
