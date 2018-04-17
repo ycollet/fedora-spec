@@ -727,9 +727,9 @@ thunderbird
 mkdir -p $INSTALL_ROOT/home/lescuizines/SoundFonts
 mkdir -p $INSTALL_ROOT/home/lescuizines/GuitarPro
 
-cp /home/collette/SoundFonts/63mg\ The\ Xioad\ Bank.sf2                $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/Instruments/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/Instruments/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFonts/63mg\ The\ Xioad\ Bank.sf2        $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFonts/SF2/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFonts/SF2/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
 
 cp -r /home/collette/TuxGuitar/GuitarPro/Cake            $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
 cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry      $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
