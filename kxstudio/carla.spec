@@ -15,6 +15,8 @@ License:        GPLv2+
 URL:            https://github.com/falkTX/Carla
 Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+Patch0:         carla-0001-change-default-path.patch
+
 BuildRequires: python-qt5-devel
 BuildRequires: python-magic
 BuildRequires: liblo-devel
@@ -42,6 +44,8 @@ A rack manager for JACK
 
 %prep
 %setup -qn %{name}-%{commit0}
+
+%patch0 -p1 
 
 %build
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} %{?_smp_mflags}

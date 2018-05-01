@@ -1,0 +1,40 @@
+From 2203923479831fe2b50a2aa263bb40d58f52c544 Mon Sep 17 00:00:00 2001
+From: Yann COLLETTE <ycollette.nospam@free.fr>
+Date: Tue, 1 May 2018 17:02:08 +0200
+Subject: [PATCH] change default path
+
+---
+ source/carla_shared.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/source/carla_shared.py b/source/carla_shared.py
+index dd390632..b892c462 100644
+--- a/source/carla_shared.py
++++ b/source/carla_shared.py
+@@ -404,19 +404,19 @@ else:
+     splitter = ":"
+ 
+     DEFAULT_LADSPA_PATH  = HOME + "/.ladspa"
+-    DEFAULT_LADSPA_PATH += ":/usr/lib/ladspa"
++    DEFAULT_LADSPA_PATH += ":/usr/lib64/ladspa"
+     DEFAULT_LADSPA_PATH += ":/usr/local/lib/ladspa"
+ 
+     DEFAULT_DSSI_PATH    = HOME + "/.dssi"
+-    DEFAULT_DSSI_PATH   += ":/usr/lib/dssi"
++    DEFAULT_DSSI_PATH   += ":/usr/lib64/dssi"
+     DEFAULT_DSSI_PATH   += ":/usr/local/lib/dssi"
+ 
+     DEFAULT_LV2_PATH     = HOME + "/.lv2"
+-    DEFAULT_LV2_PATH    += ":/usr/lib/lv2"
++    DEFAULT_LV2_PATH    += ":/usr/lib64/lv2"
+     DEFAULT_LV2_PATH    += ":/usr/local/lib/lv2"
+ 
+     DEFAULT_VST2_PATH    = HOME + "/.vst"
+-    DEFAULT_VST2_PATH   += ":/usr/lib/vst"
++    DEFAULT_VST2_PATH   += ":/usr/lib64/vst"
+     DEFAULT_VST2_PATH   += ":/usr/local/lib/vst"
+ 
+     DEFAULT_GIG_PATH     = HOME + "/.sounds/gig"
+-- 
+2.14.3
+
