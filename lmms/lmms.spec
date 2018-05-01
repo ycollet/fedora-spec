@@ -3,9 +3,9 @@
 %global gittag0 v1.1.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           lmms
+Name:           lmms-mao
 Version:        1.1.3
-Release:        1%{?dist}
+Release:        7%{?dist}
 Summary:        Linux MultiMedia Studio
 URL:            http://lmms.sourceforge.net/
 Group:          Applications/Multimedia
@@ -33,7 +33,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
 # original tarfile can be found here:
-Source0:        https://github.com/lmms/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:        https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
 
 Patch0: lmms-1.1.3-0001-fix-gcc-5.patch
 Patch1: lmms-1.1.3-0002-fix-case-carla.patch
@@ -43,13 +43,6 @@ Patch4: lmms-1.1.3-0005-fix-carla-plugin-loading.patch
 Patch5: lmms-1.1.3-0006-fix-indent.patch
 Patch6: lmms-1.1.3-0007-fix-versioninfo.patch
 Patch7: lmms-1.1.3-0008-fix-gcc-7-compilation.patch
-
-# move the vst and zynaddsubfx plugins to libexecdir.
-#Patch0:         lmms-1.1.3-libexecdir.patch
-
-# build with vst support but without having wine. that is a tiny patch
-# upstream isn't really interested in.
-#Patch1:         lmms-1.1.3-vst-nowine.patch
 
 # according to upstream we should at least support oss, alsa, and
 # jack. output via pulseaudio has high latency, but we enable it
@@ -75,23 +68,6 @@ BuildRequires: desktop-file-utils
 BuildRequires: fltk-fluid
 BuildRequires: fltk-devel
 BuildRequires: Carla
-%ifarch %ix86
-BuildRequires: wine-devel 
-%endif
-
-Requires:      ladspa-caps-plugins
-Requires:      ladspa-tap-plugins
-Requires:      ladspa-swh-plugins
-Requires:      ladspa-calf-plugins
-# the version included in lmms contains patches sent to, but not yet
-# applied by cmt's upstream.
-#Requires: ladspa-cmt-plugins
-
-# the -vst subpackage can only be built on ix86, but is also usable
-# (and thus should be installed) on x86_64.
-%ifarch %ix86 x86_64
-Requires:       %{name}-vst = %{version}-%{release}
-%endif
 
 %global __provides_exclude_from ^%{_libdir}/lmms/.*$
 %global __requires_exclude ^libvstbase\\.so.*$|^libZynAddSubFxCore\\.so.*$
@@ -114,26 +90,25 @@ Features
  * creating beats and basslines using the Beat-/Bassline-Editor
  * easy-to-use piano-roll for editing patterns and melodies
  * instrument- and effect-plugins
- * support for hosting VST(i)- and LADSPA-plugins (instruments/effects)
  * automation-editor
  * MIDI-support
 
 
 %package devel
-Summary:        Development files for %{name}
+Summary:        Development files for lmms
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Requires:       lmms-mao = %{version}-%{release}
 
 
 %description devel
-The %{name}-devel package contains header files for
-developing addons for %{name}.
+The lmms-devel package contains header files for
+developing addons for lmms.
 
 # rpath needed e.g. for /usr/libexec/RemoteZynAddSubFx
 %global _cmake_skip_rpath %{nil}
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn lmms-%{commit0}
 
 %patch0 -p1 
 %patch1 -p1
@@ -160,14 +135,8 @@ sed -i -e "s/GCC \"__VERSION__/GCC 6.1.1\"/g" include/versioninfo.h
        -DWANT_SWH:BOOL=ON \
        -DWANT_CALF:BOOL=OFF \
        -DWANT_CARLA:BOOL=ON \
-%ifarch %ix86
-       -DWANT_VST:BOOL=ON \
-%else
        -DWANT_VST:BOOL=OFF \
-%endif
-%ifarch x86_64
        -DWANT_VST_NOWINE:BOOL=ON \
-%endif
        -DCMAKE_INSTALL_LIBDIR=%{_lib} \
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
        .
@@ -183,7 +152,7 @@ desktop-file-install --vendor '' \
         --add-category=Sequencer \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
-        %{buildroot}%{_datadir}/applications/%{name}.desktop
+        %{buildroot}%{_datadir}/applications/lmms.desktop
 
 
 %post
@@ -204,37 +173,26 @@ fi
 
 %files
 #%doc AUTHORS COPYING README TODO
-%{_bindir}/%{name}
-%{_libdir}/%{name}
+%{_bindir}/lmms
+%{_libdir}/lmms
 #%{_libexecdir}/RemoteZynAddSubFx
-%{_datadir}/%{name}
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/mime/packages/%{name}.xml
-%{_datadir}/pixmaps/%{name}.png
-%{_mandir}/man*/%{name}*
-%exclude %{_datadir}/menu/%{name}
+%{_datadir}/lmms
+%{_datadir}/applications/lmms.desktop
+%{_datadir}/mime/packages/lmms.xml
+%{_datadir}/pixmaps/lmms.png
+%{_mandir}/man*/lmms*
+%exclude %{_datadir}/menu/lmms
 
 
 %files devel
-%{_includedir}/%{name}
-
-
-%ifarch %ix86
-
-%package vst
-Summary:        VST hosting plugin for %{name}
-Group:          Applications/Multimedia
-
-%description vst
-This package contains the necessary files to host VST plugins.
-
-%files vst
-%{_libexecdir}/RemoteVstPlugin*
-
-%endif # ifarch %%ix86
+%{_includedir}/lmms
 
 
 %changelog
+* Tue May 1 2018 Yann Colletet <ycollette.nospam@free.fr> - 1.1.3-7
+- Rename lmms -> lmms-mao to ease install
+- Remove vst part (this package is only built on 64 bits arch)
+
 * Sat May 30 2015 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-6
 - lmms-1.1.3-libexecdir.patch
 - lmms-1.1.3-vst-nowine.patch
