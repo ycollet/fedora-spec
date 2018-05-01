@@ -10,6 +10,9 @@ Summary:        Linux MultiMedia Studio
 URL:            http://lmms.sourceforge.net/
 Group:          Applications/Multimedia
 
+# Because dnf does not find a carla so file
+AutoReqProv:    no
+
 # - lmms itself is GPLv2+
 # - included third-party code
 #   - libsamplerate: GPLv2+ (but we use the system one)

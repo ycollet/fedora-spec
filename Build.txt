@@ -11,8 +11,8 @@ sonic-pi          done   no	X	X
 drumgizmo         done   no	X	X
 hydrogen          done   no	X	X
 jalv-select       done   no	X	X
-kxstudio          done   no	X	X
-lmms              done   no	X	X
+kxstudio          done   no	X	X       *
+lmms              done   no	X	X       *
 ams-lv2           done   no	X	X
 rack		  done   no	X	X
 openkontroller    done   no	X	X
@@ -53,3 +53,6 @@ noise-repellent	  done	 no	X	X
 xjadeo		  done	 no	X	X
 schismtracker	  done	 no	X	X
 kernel		  done	 no	X	X
+
+X: done
+*: running

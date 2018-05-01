@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 1e78076f01c961c1656a7124caa8c3011e0a139e
+%global commit0 086bfcc01112284567f30b574c1e1d56602fa650
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           Carla
 Version:        2.0.0.%{shortcommit0}
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A rack manager JACK
 
 Group:          Applications/Multimedia
@@ -84,6 +84,10 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Tue May 1 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
+- version 4
+- update default folders
+- update to master
 * Wed Nov 22 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
 - add a missing requires
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
