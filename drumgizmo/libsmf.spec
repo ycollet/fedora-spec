@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 fd5abd50de6a65af3db3a5c5579dc08068deb616
+%global commit0 692e728d2c13caa3896880216f19f5565ea03886
 %global gittag0 libsmf-1.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: MIDI library
 Name: libsmf
 Version: 1.3.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL:            https://github.com/stump/libsmf
@@ -64,5 +64,7 @@ XTRA="X-MIDI"
 %{_includedir}/*
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-2
+- update to commit fd5abd50
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 1.3-1
 - Initial release of spec file for 1.3

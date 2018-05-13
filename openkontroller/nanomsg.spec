@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 096998834451219ee7813d8977f6a4027b0ccb43
+%global commit0 19e01dcaf1afda031143ae171d8eeadd0c49fee1
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:         nanomsg
-Version:      1.0.0
+Version:      1.1.2
 Release:      1%{?dist}
 Summary:      The nanomsg library is a simple high-performance implementation of several "scalability protocols"
 URL:          https://github.com/nanomsg/nanomsg
@@ -47,5 +47,7 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Sat May 12 2017 Yann Collette <ycollette.nospam@free.fr> - 1.1.2
+- update to 1.1.2
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

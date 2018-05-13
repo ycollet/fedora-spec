@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 de26a3c8c8c2227e6d7fba3dcb54ec5fe2def258
+%global commit0 cab6e0dfb2ce20e4ad34b067d1281ec0b193598a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,14 +8,13 @@
 
 Name:           tap-lv2
 Version:        0.9.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        TAP LV2 set of plugins from portalmod
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/portalmod/tap-lv2
 Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         tap-0001-fix-misleading-indent.patch
 
 BuildRequires: lv2-devel
 
@@ -24,7 +23,6 @@ TAP LV2 set of plugins from portalmod
 
 %prep
 %setup -qn %{name}-%{commit0}
-%patch0 -p1
 
 %build
 make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags}
@@ -36,5 +34,7 @@ make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
+- update to latest master
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9-1
 - Initial build

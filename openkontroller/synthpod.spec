@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 3712300508b45c86c57b318d5d0f075ad59c6a55
+%global commit0 4995be8180731b802641d72f532063c3d7686af9
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 
 Name:         synthpod
 Version:      0.1.0
-Release:      1%{?dist}
+Release:      2%{?dist}
 Summary:      Lightweight Nonlinear LV2 Plugin Container
 URL:          https://github.com/OpenMusicKontrollers/synthpod
 Source0:      https://github.com/OpenMusicKontrollers/synthpod/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -21,11 +21,14 @@ BuildRequires: nanomsg-devel
 BuildRequires: efl-devel
 BuildRequires: elementary-devel
 BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: cmake
 BuildRequires: zita-alsa-pcmi-devel
 BuildRequires: xcb-util-wm-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libuv-devel
+BuildRequires: meson
+BuildRequires: cairo-devel
+BuildRequires: qt-devel
+BuildRequires: qt5-qtbase-devel
 
 %description
 Lightweight Nonlinear LV2 Plugin Container
@@ -35,18 +38,15 @@ Lightweight Nonlinear LV2 Plugin Container
 
 %build
 
-%ifarch x86_64 amd64 ia32e
-sed -i "s/lib\/synthpod/lib64\/synthpod/g" CMakeLists.txt
-sed -i "s/lib\/lv2/lib64\/lv2/g" CMakeLists.txt
-sed -i "s/DESTINATION lib/DESTINATION lib64/g" app/CMakeLists.txt
-sed -i "s/DESTINATION lib/DESTINATION lib64/g" ui/CMakeLists.txt
-%endif
+VERBOSE=1 meson --prefix=/usr build
+cd build
 
-%cmake .
-make VERBOSE=1 %{?_smp_mflags}
+DESTDIR=%{buildroot} VERBOSE=1 ninja 
 
 %install 
-make DESTDIR=%{buildroot} install
+
+cd build
+DESTDIR=%{buildroot} ninja install
 
 %files
 %{_bindir}/*
@@ -54,8 +54,10 @@ make DESTDIR=%{buildroot} install
 %{_datarootdir}/*
 
 %changelog
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1.0
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
 - update to latest master
-
+- switch to meson build
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1
+- update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.1.0
 - Initial build

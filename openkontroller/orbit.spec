@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 e079b03bbc0cadb30e3aeae05e1cff916a13c90c
+%global commit0 55c1e1438222e1e56ef692576bf0a8ce3389c3a5
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:         orbit.lv2
 Version:      0.1.0
-Release:      1%{?dist}
+Release:      2%{?dist}
 Summary:      LV2 Event Looper
 URL:          https://github.com/OpenMusicKontrollers/orbit.lv2
 Source0:      https://github.com/OpenMusicKontrollers/orbit.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -34,5 +34,7 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.1.0
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
+- update to latest master
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1
 - Initial build

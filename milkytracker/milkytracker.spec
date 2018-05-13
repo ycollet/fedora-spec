@@ -1,54 +1,45 @@
-Name:           milkytracker
-Version:        0.90.86
-Release:        3%{?dist}
-Summary:        Module tracker software for creating music
+# Global variables for github repository
+%global commit0 69bd7f0e360db370bf982b4c8e16b371cc8aabfe
+%global gittag0 v1.02.00
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Group:          Applications/Multimedia
-License:        GPLv3+
-URL:            http://www.milkytracker.org/
-Source0:        http://milkytracker.org/files/%{name}-%{version}.tar.bz2
-Source1:        %{name}.desktop
-Patch0:         milkytracker-0.90.86-alsalib.patch
-Patch1:         milkytracker-0.90.86-system-rtmidi.patch
-Patch2:         milkytracker-0.90.86-zziplib-fixes.patch
-Patch3:         milkytracker-0.90.86-fix-abs-usage.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Name:          milkytracker
+Version:       1.02.00
+Release:       1%{?dist}
+Summary:       Module tracker software for creating music
+Group:         Applications/Multimedia
+License:       GPLv3+
+URL:           https://github.com/milkytracker/MilkyTracker
+Source0:       https://github.com/milkytracker/MilkyTracker/archive/%{commit0}.tar.gz#/MilkyTracker-%{shortcommit0}.tar.gz
+Source1:       %{name}.desktop
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  SDL-devel
-BuildRequires:  desktop-file-utils
-BuildRequires:  rtmidi-devel
-BuildRequires:  zlib-devel
-BuildRequires:  jack-audio-connection-kit-devel
+BuildRequires: SDL2-devel
+BuildRequires: SDL2-static
+BuildRequires: desktop-file-utils
+BuildRequires: rtmidi-devel
+BuildRequires: zlib-devel
+BuildRequires: alsa-lib-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: cmake
 
-Provides:       bundled(zziplib) = 0.13.47
+Provides:      bundled(zziplib) = 0.13.47
 
 %description
 MilkyTracker is an application for creating music in the .MOD and .XM formats.
 Its goal is to be free replacement for the popular Fasttracker II software.
 
 %prep
-%setup -q
-find . -regex '.*\.\(cpp\|h\|inl\)' -print0 | xargs -0 chmod 644
-
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-
-# Explicitly remove source files
-rm -rf src/compression/zlib/
-rm -rf src/midi/rtmidi/
+%setup -qn MilkyTracker-%{commit0}
 
 %build
-autoreconf
-%configure
+
+%cmake -DCMAKE_BUILD_TYPE=RELEASE .
+
 make %{?_smp_mflags}
 
-
 %install
-rm -rf %{buildroot}
+
 make install DESTDIR=%{buildroot}
 
 # copy the icon
@@ -69,16 +60,15 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS COPYING NEWS README.md ChangeLog.md
 %{_bindir}/milkytracker
-%if 0%{?fedora} && 0%{?fedora} < 19
-%{_datadir}/applications/fedora-%{name}.desktop
-%else
-%{_datadir}/applications/%{name}.desktop
-%endif
+%{_datadir}/applications/*
 %{_datadir}/pixmaps/milkytracker.png
+%{_datadir}/milkytracker/songs/*
+%{_datadir}/doc/MilkyTracker/*
 
 %changelog
+* Sun May 13 2018 Yann Collette <ycollette dot nospam at free dot fr> 1.02.00
 * Tue Jun 28 2016 Joonas Sarajärvi <muep@iki.fi> - 0.90.86-3
 - Rebuilt to make the package available after unretirement
 

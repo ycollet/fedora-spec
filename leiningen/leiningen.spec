@@ -1,5 +1,5 @@
 Name:           leiningen
-Version:        2.8.0
+Version:        2.8.1
 Release:        1%{?dist}
 Summary:        Clojure project automation tool
 

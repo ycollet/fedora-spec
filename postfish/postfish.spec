@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%define revision 19609
+%define revision 19646
 
 Name:         postfish
 Version:      %{revision}.svn
@@ -11,8 +11,8 @@ License:      GPLv2+
 URL:          https://svn.xiph.org/trunk/postfish
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
-#  svn export -r 19609 https://svn.xiph.org/trunk/postfish postfish-19609
-#  tar cvfz postfish-19609.tar.gz postfish-19609
+#  svn export -r 19646 https://svn.xiph.org/trunk/postfish postfish-19646
+#  tar cvfz postfish-19646.tar.gz postfish-19646
 
 Source0:      postfish-%{revision}.tar.gz
 Source1:      postfish.png
@@ -100,5 +100,7 @@ fi
 %{_sysconfdir}/*
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr>
+- switch to 19646
 * Wed Sep 13 2017 Yann Collette <ycollette.nospam@free.fr> - Initial version
 - Initial version

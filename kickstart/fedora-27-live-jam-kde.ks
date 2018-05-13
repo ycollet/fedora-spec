@@ -394,7 +394,7 @@ syslinux
 dracut-live
 grub2
 grub2-tools
-#grub2-efi
+grub2-efi
 #shim
 #shim-unsigned
 
@@ -736,6 +736,10 @@ cp -r /home/collette/TuxGuitar/GuitarPro/Cake            $INSTALL_ROOT/home/lesc
 cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry      $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
 cp /home/collette/SoundFonts/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
 
+for rhgbfile in EFI/boot/isolinux.cfg EFI/boot/grub.conf isolinux/isolinux.cfg
+do
+  echo "# uglifying $LIVE_ROOT/$rhgbfile"
+done
 %end
 
 %post
@@ -877,6 +881,6 @@ restorecon -R /home/lescuizines/
 EOF
 
 # Restart grub2
-grub2-mkconfig -o /boot/grub2/grub.cfg
+/usr/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %end

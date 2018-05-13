@@ -1,7 +1,7 @@
 Summary:       Tool for describing builds
-Name:          premake
+Name:          premake3
 Version:       3.7
-Release:       1%{?dist}
+Release:       2%{?dist}
 License:       GPLv3+
 Group:         Developpment
 URL:           http://sourceforge.net/projects/premake/
@@ -29,5 +29,7 @@ rm -rf %{buildroot}
 %{_bindir}/*
 
 %changelog
+* Sat May 12 2017 Yann Collette <ycollette.nospam@free.fr> - 3.7-2
+- change package name
 * Fri Jun 19 2015 Yann Collette <ycollette.nospam@free.fr> - 3.7-1
 - initial release

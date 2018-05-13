@@ -31,7 +31,7 @@ The three sections have separate sustain and percussion switches as well as sepa
 %patch1 -p1 -b .nodevver
 
 %build
-./configure --prefix=%{_prefix} --libdir=%{_libdir} CFLAGS="${CFLAGS:-%optflags}"
+./configure --prefix=%{_prefix} --libdir=%{_libdir} #CFLAGS="${CFLAGS:-%optflags}"
 %{__make}
 
 %install

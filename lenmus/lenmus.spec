@@ -45,6 +45,8 @@ about the project or for further details about releases.
 
 %build
 
+sed -ie "s/target_link_libraries ( \${LENMUS}/target_link_libraries ( \${LENMUS} jack/g" CMakeLists.txt
+
 %cmake -D_filename:FILEPATH=/usr/include/wx-3.0/wx/version.h \
        -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/wx-config-3.0 \
        -DPortTime_LIBRARY:FILEPATH=/usr/%{_lib}/libportaudio.so \

@@ -25,9 +25,11 @@ BuildRequires: libffi-devel
 BuildRequires: ruby-devel
 BuildRequires: aubio-devel
 BuildRequires: boost-devel
-Requires:   pulseaudio-module-jack 
-Requires:   supercollider-sc3-plugins
-Requires:   supercollider
+
+Requires(pre):   pulseaudio-module-jack 
+Requires(pre):   supercollider-sc3-plugins
+Requires(pre):   supercollider
+Requires(pre):   ruby
 
 %description
 Sonic Pi is an open source programming environment designed to explore and

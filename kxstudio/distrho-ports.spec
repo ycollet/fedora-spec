@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 e11e2b204c14b8e370a0bf5beafa5f162fedb8e9
+%global commit0 a82fff059baafc03f7c0e8b9a99f383af7bfbd79
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:           DISTRHO-Ports
 Version:        1.0.0.%{shortcommit0}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A set of LV2 plugins
 
 Group:          Applications/Multimedia
@@ -66,7 +66,9 @@ fi
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
+- update to a82fff059baafc03f7c0e8b9a99f383af7bfbd79
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-2
 - update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
 - Initial build

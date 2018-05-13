@@ -15,6 +15,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/moddevices/caps-lv2
 Source0:        https://github.com/moddevices/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:         caps-0001-replace-pow10f-by-exp10f.patch
 
 BuildRequires: lv2-devel
 
@@ -24,13 +25,9 @@ Caps LV2 set of plugins from portalmod
 %prep
 %setup -qn %{name}-%{commit0}
 
-%build
+%patch0 -p1 
 
-# to allow pow10f, we need to define _GNU_SOURCE
-for Files in `find . -name Makefile`
-do
-    sed -ie "s/-ffast-math/-ffast-math -D_GNU_SOURCE/g" $Files
-done
+%build
 
 make LV2_DEST=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags}
 

@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5
+%global commit0 d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,28 +7,27 @@
 %global debug_package %{nil}
 
 # git clone https://github.com/brummer10/GxPlugins.lv2.git
-# mv GxPlugins.lv2 GxPlugins.lv2.a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5
-# cd GxPlugins.lv2.a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5
+# mv GxPlugins.lv2 GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
+# cd GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
 # git submodule init
 # git submodule update
 # cd ..
-# tar cvfz GxPlugins.lv2.a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5.tar.gz GxPlugins.lv2.a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5
+# tar cvfz GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5.tar.gz GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
 
-Name:           lv2-GxBottleRocket-plugin
-Version:        0.3.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        LV2 Analogue simulation of a tube preamp
+Name:          lv2-GxBottleRocket-plugin
+Version:       0.4.%{shortcommit0}
+Release:       1%{?dist}
+Summary:       LV2 Analogue simulation of a tube preamp
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/brummer10/GxPlugins.lv2
-SOURCE0:        GxPlugins.lv2.a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5.tar.gz
+Group:         Applications/Multimedia
+License:       GPLv2+
+URL:           https://github.com/brummer10/GxPlugins.lv2
+SOURCE0:       GxPlugins.lv2.%{commit0}.tar.gz
 
 BuildRequires: lv2-devel
 BuildRequires: python
 BuildRequires: gtk2-devel
 BuildRequires: glib2-devel
-BuildRequires: git
 
 %description
 LV2 Analogue simulation of a tube preamp
@@ -135,8 +134,76 @@ Group:   Applications/Multimedia
 %description -n lv2-GxVoodoFuzz-plugin
 Simulation impressed by the Voodoo Lab (*) SuperFuzz pedal.
 
+%package -n lv2-AxisFace-plugin
+Summary: Simulation of the Axis Face Silicon Pedal
+Group:    Applications/Multimedia
+%description -n lv2-AxisFace-plugin
+Simulation of the Axis Face Silicon Pedal
+
+%package -n lv2-DOP250-plugin
+Summary: Overdrive Preamp Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-DOP250-plugin
+Overdrive Preamp Pedal simulation
+
+%package -n lv2-Heathkit-plugin
+Summary: Distortion Booster Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-Heathkit-plugin
+Distortion Booster Pedal simulation
+
+%package -n lv2-KnightFuzz-plugin
+Summary: Vintage Fuzz Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-KnightFuzz-plugin
+This is a really nasty Fuzz Pedal,
+which act at lower/ moderate settings as a ultra dark fuzz,
+when settings get cranked up, it becomes more and more high harmonics.
+
+%package -n lv2-liquiddrive-plugin
+Summary: Liquid Drive provides a tonal response with a warm mild to aggressive overdrive, which can do anything from Blues to Hard Rock
+Group:   Applications/Multimedia
+%description -n lv2-liquiddrive-plugin
+Liquid Drive provides a tonal response with a warm mild to aggressive overdrive, which can do anything from Blues to Hard Rock
+
+%package -n lv2-maestro_fz1b-plugin
+Summary: Vintage Fuzz Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-maestro_fz1b-plugin
+Vintage Fuzz Pedal simulation
+
+%package -n lv2-maestro_fz1s-plugin
+Summary: Vintage Fuzz Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-maestro_fz1s-plugin
+Vintage Fuzz Pedal simulation
+
+%package -n lv2-MicroAmp-plugin
+Summary: The MicroAmp is designed to be a transparent clean volume booster.
+Group:   Applications/Multimedia
+%description -n lv2-MicroAmp-plugin
+The MicroAmp is designed to be a transparent clean volume booster.
+
+%package -n lv2-quack-plugin
+Summary: Envelope controlled wah pedal with some extra features
+Group:   Applications/Multimedia
+%description -n lv2-quack-plugin
+Envelope controlled wah pedal with some extra features
+
+%package -n lv2-SunFace-plugin
+Summary: A classic fuzz face with some light modifications
+Group:   Applications/Multimedia
+%description -n lv2-SunFace-plugin
+A classic fuzz face with some light modifications
+
+%package -n lv2-TubeDistortion-plugin
+Summary: Simulation of a Tube based Distortion Pedal.
+Group:   Applications/Multimedia
+%description -n lv2-TubeDistortion-plugin
+Simulation of a Tube based Distortion Pedal.
+
 %prep
-%setup -qn GxPlugins.lv2.a4a3477c856416a0b62b060dcf6b8d44c9b2fdd5
+%setup -qn GxPlugins.lv2.%{commit0}
 
 %build
 
@@ -145,6 +212,39 @@ Simulation impressed by the Voodoo Lab (*) SuperFuzz pedal.
 %install 
 
 make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
+
+%files -n lv2-AxisFace-plugin
+%{_libdir}/lv2/gx_AxisFace.lv2/*
+
+%files -n lv2-DOP250-plugin
+%{_libdir}/lv2/gx_DOP250.lv2/*
+
+%files -n lv2-Heathkit-plugin
+%{_libdir}/lv2/gx_Heathkit.lv2/*
+
+%files -n lv2-KnightFuzz-plugin
+%{_libdir}/lv2/gx_KnightFuzz.lv2/*
+
+%files -n lv2-liquiddrive-plugin
+%{_libdir}/lv2/gx_liquiddrive.lv2/*
+
+%files -n lv2-maestro_fz1b-plugin
+%{_libdir}/lv2/gx_maestro_fz1b.lv2/*
+
+%files -n lv2-maestro_fz1s-plugin
+%{_libdir}/lv2/gx_maestro_fz1s.lv2/*
+
+%files -n lv2-MicroAmp-plugin
+%{_libdir}/lv2/gx_MicroAmp.lv2/*
+
+%files -n lv2-quack-plugin
+%{_libdir}/lv2/gx_quack.lv2/*
+
+%files -n lv2-SunFace-plugin
+%{_libdir}/lv2/gx_SunFace.lv2/*
+
+%files -n lv2-TubeDistortion-plugin
+%{_libdir}/lv2/gx_TubeDistortion.lv2/*
 
 %files -n lv2-GxGuvnor-plugin
 %{_libdir}/lv2/gx_guvnor.lv2/*
@@ -201,5 +301,6 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %{_libdir}/lv2/gx_bottlerocket.lv2/*
 
 %changelog
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4
 * Mon Nov 20 2017 Yann Collette <ycollette.nospam@free.fr> - 0.3
 - Initial build

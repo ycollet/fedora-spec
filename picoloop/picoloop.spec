@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 5fe939b44a2d744477846b759ebc85d69bd5680c
+%global commit0 b20eeebdce2dc676adc6e39d472f7224c973f3d0
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           picoloop
-Version:        0.77b.%{shortcommit0}
+Version:        0.77d.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        An audio sequencer
 
@@ -16,7 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/yoyz/audio
 Source0:        https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-Patch0:         picoloop-0001-fix-makefile.patch
+#Patch0:         picoloop-0001-fix-makefile.patch
 
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
@@ -35,7 +35,7 @@ There are four channels, playing simultaneously.
 %prep
 %setup -qn %{name}-%{commit0}
 
-%patch0 -p1 
+#%patch0 -p1 
 
 %build
 
@@ -50,7 +50,7 @@ mkdir -p debianrtaudio_sdl20/Machine/Lgptsampler
 # CFLAGS="-std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -D__SDL20__ -DSCREEN_MULT=2  -fpermissive -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
 %make_build -f Makefile.RtMidi_debian_sdl20  
 %make_build -f Makefile.RtAudio_debian_sdl20 
-%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 DIRTOCREATE
+#%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 DIRTOCREATE
 %make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 #CFLAGS="-std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -D__SDL20__ -DSCREEN_MULT=2  -fpermissive" # -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__  -DHAVE_GETTIMEOFDAY
 
 %install
@@ -69,7 +69,7 @@ Categories=Audio;
 EOF
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 picoloop/PatternPlayer_debian_Rtaudio_sdl20 %{buildroot}%{_bindir}/%{name}
+%__install -m 644 picoloop/PatternPlayer_debian_Rtaudio %{buildroot}%{_bindir}/%{name}
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/patch/MDADrum/
 %__install -m 644 picoloop/patch/MDADrum/create_patchlist.sh %{buildroot}%{_datadir}/%{name}/patch/MDADrum/
@@ -138,5 +138,6 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.67
 - Initial build

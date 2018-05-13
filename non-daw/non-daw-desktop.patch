@@ -1,6 +1,6 @@
 diff -Nurp non-daw-20120722/timeline/non-daw.desktop.in non-daw-20120722.upd/timeline/non-daw.desktop.in
---- non-daw-20120722/timeline/non-daw.desktop.in	2012-07-24 09:18:38.000000000 +0200
-+++ non-daw-20120722.upd/timeline/non-daw.desktop.in	2012-07-24 10:30:21.956785645 +0200
+--- a/timeline/non-daw.desktop.in	2012-07-24 09:18:38.000000000 +0200
++++ b/timeline/non-daw.desktop.in	2012-07-24 10:30:21.956785645 +0200
 @@ -1,8 +1,8 @@
  [Desktop Entry]
  Name=Non DAW

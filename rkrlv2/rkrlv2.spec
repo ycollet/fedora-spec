@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 bf4eca3115858246764d2294f34c73fe4082d040
+%global commit0 d8c17d3c976107e5c012970276d7cf0aa059f15b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           rkrlv2
 Version:        0.0.1.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Rakarrack LV2 plugins
 URL:            https://github.com/ssj71/rkrlv2
 Group:          Applications/Multimedia
@@ -45,8 +45,9 @@ make DESTDIR=%{buildroot} install
 %{_datadir}/rkr.lv2/*
 
 %changelog
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
+- update to latest master
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - update master
-
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
 - Initial build

@@ -1,4 +1,4 @@
-%define revision 2242
+%define revision 2294
 
 Name:         GrandOrgue
 Version:      0.3.1.%{revision}
@@ -10,8 +10,8 @@ License:      GPLv2+
 URL:          http://sourceforge.net/projects/ourorgan
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
-#  svn export -r 2242 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2242
-#  tar cvfz ourorgan-2242.tar.gz ourorgan-2242
+#  svn export -r 2294 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2294
+#  tar cvfz ourorgan-2294.tar.gz ourorgan-2294
 Source0:      ourorgan-%{revision}.tar.gz
 
 BuildRequires: desktop-file-utils
@@ -69,6 +69,8 @@ fi
 %{_libdir}/*
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
+- update to release 2294
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
 - update to release 2242
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1

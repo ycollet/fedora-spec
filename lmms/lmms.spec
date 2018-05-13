@@ -128,7 +128,8 @@ find . -type f -exec chmod 0644 {} \;
 %build
 
 # Fix a problem in header
-sed -i -e "s/GCC \"__VERSION__/GCC 6.1.1\"/g" include/versioninfo.h
+sed -ie "s/GCC \"__VERSION__/GCC 6.1.1\"/g" include/versioninfo.h
+sed -ie "s/SET(WERROR_FLAGS/#SET(WERROR_FLAGS/g" CMakeLists.txt
 
 %cmake \
        -DWANT_SDL:BOOL=OFF \

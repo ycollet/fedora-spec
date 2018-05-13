@@ -1,7 +1,7 @@
 # http://www.iannix.org/
 
 # Global variables for github repository
-%global commit0 fb9cc1cdeb13b82575228a9eb577a308dfcb03b2
+%global commit0 1294f84ba809ebf5262a1c7071a18ac5ff4109b0
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,8 +9,8 @@
 %global debug_package %{nil}
 
 Name:         IanniX
-Version:      0.9.19.%{shortcommit0}
-Release:      1%{?dist}
+Version:      0.9.20.%{shortcommit0}
+Release:      2%{?dist}
 Summary:      A graphic / MIDI / OSC player
 URL:          https://github.com/iannix/Iannix
 Group:        Applications/Multimedia
@@ -86,5 +86,7 @@ fi
 
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-2
+- update to the latest master
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9.16-1
 - Initial spec file 0.9.16

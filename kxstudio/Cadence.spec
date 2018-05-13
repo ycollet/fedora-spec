@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 e91750e39acb119cf97f8105a7acc28a8901a4e2
+%global commit0 b82db9af8d0beb5c89731fee6f8de2d9db87e263
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:           Cadence
 Version:        1.0.0.%{shortcommit0}
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A JACK control center
 
 Group:          Applications/Multimedia
@@ -17,8 +17,8 @@ URL:            https://github.com/falkTX/Cadence
 Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:         cadence_001_fedora_support.patch
 
-BuildRequires: python3-qt4-devel
-BuildRequires: qt-devel
+BuildRequires: python3-qt5-devel
+BuildRequires: qt5-qtbase-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: pulseaudio-module-jack
 BuildRequires: python3-dbus
@@ -26,6 +26,10 @@ BuildRequires: a2jmidid
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: jack-audio-connection-kit-dbus
 BuildRequires: jack_capture
+
+Requires(pre): python3-qt5
+Requires(pre): jack_capture
+Requires(pre): a2jmidid
 
 %description
 A JACK control center
@@ -62,6 +66,8 @@ fi
 %{_sysconfdir}/*
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - master
+- update to latest master + qt5
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - master
 - update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - master

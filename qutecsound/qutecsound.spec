@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 71982fff0c4327cde2cafc3652aa95c5a01fd623
+%global commit0 3d42eec624067e2c78026406706d3361643d854e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:         qutecsound
-Version:      0.9.5b
+Version:      0.9.6b
 Release:      1%{?dist}
 Summary:      A csound file editor
 URL:          https://github.com/CsoundQt/CsoundQt
@@ -106,5 +106,7 @@ fi
 
 
 %changelog
-* Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-1
-- Initial spec file 1.6.0
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.6b-1
+- update to 0.9.6b
+* Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9.5b-1
+- Initial spec file

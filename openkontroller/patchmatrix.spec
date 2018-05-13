@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 f379aad8146a2a6e45db7966b0657beb61bc1ac2
+%global commit0 b4a060046bdf5af61ad145dd2f6c2a59a172082b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 
 Name:         patchmatrix
 Version:      0.12.0
-Release:      1%{?dist}
+Release:      2%{?dist}
 Summary:      A JACK patchbay in flow matrix style
 URL:          https://github.com/OpenMusicKontrollers/patchmatrix
 Source0:      https://github.com/OpenMusicKontrollers/patchmatrix/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -19,7 +19,7 @@ BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libX11-devel
 BuildRequires: libXext-devel
-BuildRequires: cmake
+BuildRequires: meson
 
 %description
 A JACK patchbay in flow matrix style
@@ -29,21 +29,23 @@ A JACK patchbay in flow matrix style
 
 %build
 
-mkdir build
+VERBOSE=1 meson --prefix=/usr build
 cd build
-%cmake ..
 
-make VERBOSE=1 %{?_smp_mflags}
+DESTDIR=%{buildroot} VERBOSE=1 ninja 
 
 %install
 
 cd build
-make DESTDIR=%{buildroot} install
+DESTDIR=%{buildroot} ninja install
 
 %files
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.20.0
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+- update to latest master
+- switch to meson build
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-1
 - inital release

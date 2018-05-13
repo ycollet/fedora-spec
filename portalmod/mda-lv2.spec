@@ -4,11 +4,11 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
-%global debug_package %{nil}
+#%global debug_package %{nil}
 
 Name:           mda-lv2
 Version:        0.9.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        MDA LV2 set of plugins from portalmod
 
 Group:          Applications/Multimedia
@@ -36,5 +36,7 @@ MDA LV2 set of plugins synth from portalmod
 %{_libdir}/lv2/*
 
 %changelog
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9
+* Sat May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
+- fix f27 / f28 build
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9-1
 - Initial build

@@ -1,7 +1,7 @@
 Summary: Software Synthesizer
 Name:    drumgizmo
 Version: 0.9.14
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://git.drumgizmo.org/drumgizmo.git
@@ -62,6 +62,7 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %exclude %{_bindir}/dgreftest
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-2
 * Mon Oct 23 2017 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-1
 * Thu May 12 2016 Yann Collette <ycollette dot nospam at free.fr> 0.9.10-1
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.9.8.1-1

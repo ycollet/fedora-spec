@@ -1,7 +1,7 @@
 Summary: Software Synthesizer
 Name: dgedit
 Version: 0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL:            http://git.drumgizmo.org/dgedit.git
@@ -11,7 +11,8 @@ BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: pkgconfig
-BuildRequires: qt4-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-linguist
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -25,6 +26,9 @@ The DrumGizmo drumkit editor DGEdit is currently in a functioning, but very earl
 %setup -qn %{name}-%version
 
 %build
+
+sed -ie "s/lupdate/lupdate-qt5/g" src/Makefile.am
+sed -ie "s/lrelease/lrelease-qt5/g" src/Makefile.am
 
 ./autogen.sh
 %configure
@@ -47,7 +51,10 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING INSTALL NEWS README
 %{_bindir}/dgedit
+%{_datadir}/locale/*
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.1-2
+- update to eeef75b159369a6441641c2c14c217c29b02a3ff
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - Initial release of spec file for 0.1

@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 db9fa7507640e7bf19a610583481f120a7723550
+%global commit0 f42210e48c8359dc2188ddf2b64b66b363a7edbe
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           oxefmsynth
-Version:        1.3.4.%{shortcommit0}
+Version:        1.3.5.%{shortcommit0}
 Release:        1%{?dist}
 Summary:        A FM synthetized
 
@@ -64,5 +64,6 @@ make
 %{_datadir}/*
 
 %changelog
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 1.3.5
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.3.4
 - Initial build

@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 7ecca58f7419feda84e07988ec29bf835da87aa9
+%global commit0 7f8496d967acb8e2eb64c6cbb0853cd2c8d7844d
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 
 Name:         midi_matrix.lv2
 Version:      0.20.0
-Release:      1%{?dist}
+Release:      2%{?dist}
 Summary:      A LV2 Plugin Bundle
 URL:          https://github.com/OpenMusicKontrollers/midi_matrix.lv2
 Source0:      https://github.com/OpenMusicKontrollers/midi_matrix.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -38,8 +38,9 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.20.0
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
 - update to latest master
-
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-1
+- update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.18.0
 - Initial build

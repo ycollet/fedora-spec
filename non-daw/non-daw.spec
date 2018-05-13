@@ -1,3 +1,5 @@
+# Version: 5ae43bb27c42387052a73e5ffc5d33efb9d946a9
+
 Name:           non-daw
 Version:        1.2.0
 Release:        8.git3946d39%{?dist}
@@ -6,12 +8,11 @@ Summary:        A digital audio workstation for JACK
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://non.tuxfamily.org/
-Source0:        non-20171023-git1904aba516341287ac297cefbbcd185f643e5538.tar.bz2
+Source0:        non-20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9.tar.gz
 # sh non-snapshot.sh 1904aba516341287ac297cefbbcd185f643e5538
 #Source1:        non-snapshot.sh
 # notified upstream of the following along with incorrect FSF address headers
-Patch1:         non-daw-desktop.patch
-Patch2:         non-daw-0001-add-lib64-in-ladspa-search-path.patch
+#Patch2:         non-daw-0001-add-lib64-in-ladspa-search-path.patch
 
 BuildRequires:  non-ntk-devel
 BuildRequires:  non-ntk-fluid
@@ -54,10 +55,9 @@ non-sequencer is a powerful, lightweight, real-time, pattern-based MIDI
 sequencer
 
 %prep
-%setup -q -n non-20171023
+%setup -q -n non-daw-20120722
 
-%patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 
 %build
 CFLAGS="%{optflags}" CXXFLAGS="%{optflags} -std=c++11" ./waf configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-debug
@@ -123,6 +123,9 @@ fi
 %{_datadir}/pixmaps/non-sequencer
 
 %changelog
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git5ae43bb
+- update to 20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9
+
 * Tue Oct 24 2017  Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git43e5538
 - update to non-20171023-git1904aba516341287ac297cefbbcd185f643e5538
 
