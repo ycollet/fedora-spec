@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
-%global debug_package %{nil}
+#%global debug_package %{nil}
 
 Name:           caps-lv2
 Version:        0.9.%{shortcommit0}
@@ -25,6 +25,13 @@ Caps LV2 set of plugins from portalmod
 %setup -qn %{name}-%{commit0}
 
 %build
+
+# to allow pow10f, we need to define _GNU_SOURCE
+for Files in `find . -name Makefile`
+do
+    sed -ie "s/-ffast-math/-ffast-math -D_GNU_SOURCE/g" $Files
+done
+
 make LV2_DEST=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags}
 
 %install 
