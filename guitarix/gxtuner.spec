@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 281b21af1e9003c1780eacd58cdeba0f5dc59577
+%global commit0 792d453da0f3a599408008f0f1107823939d730d
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:           gxtuner
 Version:        3.0.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A tuner for jack, with full jack session managment support
 
 Group:          Applications/Multimedia
@@ -41,5 +41,7 @@ A tuner for jack, with full jack session managment support
 %{_datadir}/*
 
 %changelog
-* Mon Dec 25 2017 Yann Collette <ycollette.nospam@free.fr> - 3.0
+* Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 3.0-2
+- update to latest master
+* Mon Dec 25 2017 Yann Collette <ycollette.nospam@free.fr> - 3.0-1
 - Initial build

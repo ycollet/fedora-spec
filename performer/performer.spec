@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 b9d38b78c33ce29df320bea3182c8b5965bead49
+%global commit0 7c616a8a7d7fedd2fa5bfd7ce1f5d867d80cab0a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:         performer
-Version:      1.0.1
+Version:      1.0.2
 Release:      1%{?dist}
 Summary:      Live performance audio session manager using Carla
 URL:          https://github.com/progwolff/performer
@@ -84,5 +84,7 @@ fi
 %{_datadir}/*
 
 %changelog
+* Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+- update to latest version
 * Tue Nov 28 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1
 - Initial version of spec file

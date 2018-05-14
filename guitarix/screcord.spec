@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 fe323aab08118fa99d3f2d332337d30f00a35f5a
+%global commit0 36fbff9a02cb7c6e9296da00ac0fdd18fdda08c4
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:           lv2-screcord-plugin
 Version:        0.1.%{shortcommit0}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A simple Lv2 capture plugin
 
 Group:          Applications/Multimedia
@@ -37,5 +37,7 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %{_libdir}/lv2/sc_record.lv2/*
 
 %changelog
-* Tue Nov 21 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1
+* Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1-2
+- update to latest master
+* Tue Nov 21 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1-1
 - Initial build

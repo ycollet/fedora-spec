@@ -1,22 +1,23 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 a949eba8427228332781e8b153fe0400f97215a5
+%global commit0 3f704d7ce467c128e96555aa1bf24f13a1aff713
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           noise-repellent-lv2
-Version:        0.1.4.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        A lv2 plug-in for broadband noise reduction.
+Name:          noise-repellent-lv2
+Version:       0.1.4.%{shortcommit0}
+Release:       2%{?dist}
+Summary:       A lv2 plug-in for broadband noise reduction.
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/lucianodato/noise-repellent
-Source0:        https://github.com/lucianodato/noise-repellent/archive/%{commit0}.tar.gz#/noise-repellent-%{shortcommit0}.tar.gz
+Group:         Applications/Multimedia
+License:       GPLv2+
+URL:           https://github.com/lucianodato/noise-repellent
+Source0:       https://github.com/lucianodato/noise-repellent/archive/%{commit0}.tar.gz#/noise-repellent-%{shortcommit0}.tar.gz
 
 BuildRequires: lv2-devel
 BuildRequires: fftw-devel
+BuildRequires: meson
 
 %description
 A lv2 plug-in for broadband noise reduction.
@@ -42,14 +43,24 @@ Limitations
 
 %build
 
-%make_build
+%ifarch x86_64
+	VERBOSE=1 meson --prefix=/usr/lib64/lv2 build
+%else
+	VERBOSE=1 meson --prefix=/usr/lib/lv2 build
+%endif
+
+cd build
+DESTDIR=%{buildroot} VERBOSE=1 ninja 
 
 %install 
-%make_install PREFIX=%{buildroot}/usr LV2DIR=$PREFIX/%{_libdir}/lv2/ OPTIMIZATIONS= 
+cd build
+DESTDIR=%{buildroot} ninja install
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
-* Tue Nov 28 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1.4
+* Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.4-2
+- update to latest version + meson build
+* Tue Nov 28 2017 Yann Collette <ycollette.nospam@free.fr> - 0.1.4-1
 - Initial build

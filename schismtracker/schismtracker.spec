@@ -1,19 +1,17 @@
+# Global variables for github repository
+%global commit0 fb983f84d6e6f0aef8bbacecfc307085f35306ec
+%global gittag0 20180513
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Name:           schismtracker
-Version:        20180209
+Version:        20180513
 Release:        1%{?dist}
 Summary:        Module tracker software for creating music
 
 Group:          Applications/Multimedia
 License:        GPLv3+
 URL:            https://github.com/schismtracker/schismtracker
-Source0:        schismtracker-20180209.zip
-# download https://github.com/schismtracker/schismtracker/archive/schismtracker-master.zip
-# unzip schismtracker-master.zip
-# mv schismtracker-master schismtracker-20180209
-# zip -r schismtracker-20180209.zip schismtracker-20180209
-# rm -rf schismtracker-20180209
-
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:        https://github.com/schismtracker/schismtracker/archive/%{commit0}.tar.gz#/schismtracker-%{shortcommit0}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -29,7 +27,7 @@ version of the [Modplug](https://openmpt.org/legacy_software) engine, with a
 number of bugfixes and changes to [improve IT].
 
 %prep
-%setup -q
+%setup -qn %{name}-%{commit0}
 
 %build
 
@@ -55,6 +53,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon May 14 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180513-1
+- update to latest version
 * Sat Apr 14 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180209-1
 - Initial version of the package
 

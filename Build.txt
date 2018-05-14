@@ -35,10 +35,10 @@ picoloop          done   no	X	X	X
 milkytracker      done   no	X	X	X
 mv-6pm            done   no	X	X	X
 ninjam            done   no	X	X	X
-leiningen         done   no	X	X	-
-impro-visor       done   no	X	X	-
-horgand           done   no	X	X	-
-amsynth           done   no	X	X	-
+leiningen         done   no	X	X	X
+impro-visor       done   no	X	X	à corriger - trop gros
+horgand           done   no	X	X	X
+amsynth           done   no	X	X	X
 supercollider     done   no	X	X	X
 supercollider-sc3 done   no	X	X	X
 mx44              done   no	X	X	X
@@ -46,13 +46,13 @@ amuc              done   no	X	X	X
 psi-plugins-doc   done   no	X	X	X
 patchmatrix       done   no	X	X	X
 traverso          done   no	X	X	X
-gxplugins	  done	 no	X	X
-screcord	  done	 no	X	X
-performer	  done	 no	X	X
-noise-repellent	  done	 no	X	X
-xjadeo		  done	 no	X	X
-schismtracker	  done	 no	X	X
-kernel		  done	 no	X	X	X
+gxplugins	  done	 no	X	X	X
+screcord	  done	 no	X	X	X
+performer	  done	 no	X	X	X
+noise-repellent	  done	 no	X	X	X
+xjadeo		  done	 no	X	X	X
+schismtracker	  done	 no	X	X	X
+kernel		  done	 no	X	X	à corriger
 libgig            done	 no	no	no	X
 
 X: done
