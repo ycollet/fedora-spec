@@ -16,6 +16,7 @@ Source0:        https://github.com/schismtracker/schismtracker/archive/%{commit0
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  SDL-devel
+BuildRequires:  python
 
 %description
 Schism Tracker is a free and open-source reimplementation of [Impulse
