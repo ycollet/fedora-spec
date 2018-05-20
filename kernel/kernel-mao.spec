@@ -1,6 +1,6 @@
 %define kmaj 4
-%define kmin 14
-%define kpat 20
+%define kmin 16
+%define kpat 8
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 1
 %define kversion %{kver}-%{krel}-rt
@@ -15,7 +15,7 @@ Vendor: The Linux Community
 URL: http://www.kernel.org
 Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
-Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-%{version}-rt17.patch.gz
+Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.16/older/patch-%{version}-rt3.patch.gz
 
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar, git
@@ -65,7 +65,7 @@ cp_vmlinux()
   eu-strip --remove-comment -o "$2" "$1"
 }
 
-make clean && make %{?_smp_mflags}
+make clean &&  make %{?_smp_mflags}
 
 %install
 KBUILD_IMAGE=$(make image_name)
