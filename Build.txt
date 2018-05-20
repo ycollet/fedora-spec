@@ -36,7 +36,7 @@ milkytracker      done   no	X	X	X
 mv-6pm            done   no	X	X	X
 ninjam            done   no	X	X	X
 leiningen         done   no	X	X	X
-impro-visor       done   no	X	X	à corriger - trop gros
+impro-visor       done   no	X	X	X
 horgand           done   no	X	X	X
 amsynth           done   no	X	X	X
 supercollider     done   no	X	X	X
@@ -52,7 +52,7 @@ performer	  done	 no	X	X	X
 noise-repellent	  done	 no	X	X	X
 xjadeo		  done	 no	X	X	X
 schismtracker	  done	 no	X	X	X
-kernel		  done	 no	X	X	à corriger
+kernel		  done	 no	X	X	X
 libgig            done	 no	no	no	X
 
 X: done
