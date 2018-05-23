@@ -16,7 +16,7 @@ Vendor: The Linux Community
 URL: http://www.kernel.org
 Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
-Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.16/older/patch-%{version}-rt%{ktr}.patch.gz
+Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.16/older/patch-%{version}-rt%{krt}.patch.gz
 
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar, git
