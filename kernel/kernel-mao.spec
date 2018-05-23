@@ -2,7 +2,8 @@
 %define kmin 16
 %define kpat 8
 %define kver %{kmaj}.%{kmin}.%{kpat}
-%define krel 1
+%define krel 2
+%define krt  3
 %define kversion %{kver}-%{krel}-rt
 
 Name: kernel-rt-mao
@@ -15,7 +16,7 @@ Vendor: The Linux Community
 URL: http://www.kernel.org
 Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
-Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.16/older/patch-%{version}-rt3.patch.gz
+Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.16/older/patch-%{version}-rt%{ktr}.patch.gz
 
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar, git
@@ -54,7 +55,7 @@ against the %{version} kernel package.
 
 %prep
 %setup -q -n linux-%{version}
-sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt/g' Makefile
+sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt%{krt}/g' Makefile
 cp %{SOURCE1} .config
 make olddefconfig
 
