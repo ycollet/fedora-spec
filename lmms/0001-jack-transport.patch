@@ -1,24 +1,23 @@
-From 97dc100914e9360f7a769ef014a01d07ed577cc5 Mon Sep 17 00:00:00 2001
+From 65237c94b1ef1fbf6dd3117b649d5961821c06e3 Mon Sep 17 00:00:00 2001
 From: Yann COLLETTE <ycollette.nospam@free.fr>
-Date: Tue, 1 May 2018 19:30:01 +0200
+Date: Wed, 23 May 2018 19:17:52 +0200
 Subject: [PATCH] jack transport
 
 ---
- include/AudioJack.h            |  21 ++++--
+ include/AudioJack.h            |  19 ++++--
  include/Engine.h               |   9 ++-
  include/ITransport.h           |  40 ++++++++++++
- include/Song.h                 |  45 +++++++------
- include/TimeLineWidget.h       |   1 +
- src/core/Engine.cpp            |   4 +-
- src/core/Song.cpp              |  74 +++++++++++++++++----
- src/core/audio/AudioJack.cpp   | 143 +++++++++++++++++++++++++++++++++--------
+ include/Song.h                 |  44 ++++++-------
+ src/core/Engine.cpp            |   2 +
+ src/core/Song.cpp              |  67 +++++++++++++++----
+ src/core/audio/AudioJack.cpp   | 142 +++++++++++++++++++++++++++++++++--------
  src/gui/TimeLineWidget.cpp     |   4 +-
  src/gui/editors/SongEditor.cpp |   9 +++
- 10 files changed, 276 insertions(+), 74 deletions(-)
+ 9 files changed, 265 insertions(+), 71 deletions(-)
  create mode 100644 include/ITransport.h
 
 diff --git a/include/AudioJack.h b/include/AudioJack.h
-index 83717f251..5116241ae 100644
+index 83717f251..4bc675d48 100644
 --- a/include/AudioJack.h
 +++ b/include/AudioJack.h
 @@ -41,13 +41,15 @@
@@ -65,10 +64,9 @@ index 83717f251..5116241ae 100644
  	int processCallback( jack_nframes_t _nframes, void * _udata );
  
  	static int staticProcessCallback( jack_nframes_t _nframes,
--							void * _udata );
+ 							void * _udata );
 -	static void shutdownCallback( void * _udata );
-+					  void* _udata );
-+	static void staticShutdownCallback( void* _udata );
++	static void staticShutdownCallback( void * _udata );
  
  
  	jack_client_t * m_client;
@@ -160,7 +158,7 @@ index 000000000..a32bb2aa6
 +
 +#endif
 diff --git a/include/Song.h b/include/Song.h
-index 8b2c21316..394b438a5 100644
+index 8b2c21316..4ed0aa9cf 100644
 --- a/include/Song.h
 +++ b/include/Song.h
 @@ -36,6 +36,7 @@
@@ -171,7 +169,7 @@ index 8b2c21316..394b438a5 100644
  
  class AutomationTrack;
  class Pattern;
-@@ -48,12 +49,13 @@ const bpm_t MaxTempo = 999;
+@@ -48,7 +49,7 @@ const bpm_t MaxTempo = 999;
  const tick_t MaxSongLength = 9999 * DefaultTicksPerTact;
  
  
@@ -180,13 +178,7 @@ index 8b2c21316..394b438a5 100644
  {
  	Q_OBJECT
  	mapPropertyFromModel( int,getTempo,setTempo,m_tempoModel );
- 	mapPropertyFromModel( int,masterPitch,setMasterPitch,m_masterPitchModel );
- 	mapPropertyFromModel( int,masterVolume,setMasterVolume, m_masterVolumeModel );
-+
- public:
- 	enum PlayModes
- 	{
-@@ -87,7 +89,13 @@ public:
+@@ -87,7 +88,13 @@ public:
  		{
  			return m_currentFrame;
  		}
@@ -201,7 +193,7 @@ index 8b2c21316..394b438a5 100644
  
  	private:
  		float m_currentFrame;
-@@ -105,36 +113,22 @@ public:
+@@ -105,36 +112,22 @@ public:
  
  	inline int getMilliseconds() const
  	{
@@ -244,7 +236,7 @@ index 8b2c21316..394b438a5 100644
  	}
  
  	inline int getTacts() const
-@@ -302,6 +296,11 @@ public:
+@@ -302,6 +295,11 @@ public:
  
  	inline void setLoadOnLauch(bool value) { m_loadOnLaunch = value; }
  
@@ -256,7 +248,7 @@ index 8b2c21316..394b438a5 100644
  public slots:
  	void playSong();
  	void record();
-@@ -410,7 +409,7 @@ private:
+@@ -410,7 +408,7 @@ private:
  	const Pattern* m_patternToPlay;
  	bool m_loopPattern;
  
@@ -265,30 +257,15 @@ index 8b2c21316..394b438a5 100644
  	tick_t m_elapsedTicks;
  	tact_t m_elapsedTacts;
  
-diff --git a/include/TimeLineWidget.h b/include/TimeLineWidget.h
-index 7629694ca..78ebcff45 100644
---- a/include/TimeLineWidget.h
-+++ b/include/TimeLineWidget.h
-@@ -139,6 +139,7 @@ public:
- 	{
- 		m_savedPos = _pos;
- 	}
-+
- 	inline const MidiTime & savedPos() const
- 	{
- 		return m_savedPos;
 diff --git a/src/core/Engine.cpp b/src/core/Engine.cpp
-index a53abbe5d..0c8db8137 100644
+index a53abbe5d..0c1a56dd8 100644
 --- a/src/core/Engine.cpp
 +++ b/src/core/Engine.cpp
-@@ -37,8 +37,9 @@
- float LmmsCore::s_framesPerTick;
- Mixer* LmmsCore::s_mixer = NULL;
+@@ -39,6 +39,7 @@ Mixer* LmmsCore::s_mixer = NULL;
  FxMixer * LmmsCore::s_fxMixer = NULL;
--BBTrackContainer * LmmsCore::s_bbTrackContainer = NULL;
+ BBTrackContainer * LmmsCore::s_bbTrackContainer = NULL;
  Song * LmmsCore::s_song = NULL;
 +ITransport * LmmsCore::s_transport = NULL;
-+BBTrackContainer * LmmsCore::s_bbTrackContainer = NULL;
  ProjectJournal * LmmsCore::s_projectJournal = NULL;
  Ladspa2LMMS * LmmsCore::s_ladspaManager = NULL;
  DummyTrackContainer * LmmsCore::s_dummyTC = NULL;
@@ -301,7 +278,7 @@ index a53abbe5d..0c8db8137 100644
  
  	PresetPreviewPlayHandle::cleanup();
 diff --git a/src/core/Song.cpp b/src/core/Song.cpp
-index 1d0e7ed20..31a6de620 100644
+index 775c0c588..1cf7ba3f7 100644
 --- a/src/core/Song.cpp
 +++ b/src/core/Song.cpp
 @@ -85,10 +85,10 @@ Song::Song() :
@@ -321,52 +298,40 @@ index 1d0e7ed20..31a6de620 100644
  		m_playPos[m_playMode].setCurrentFrame( framesToPlay +
  								currentFrame );
 -		m_elapsedMilliSeconds[m_playMode] += MidiTime::ticksToMilliseconds(framesToPlay / framesPerTick, getTempo());
-+		m_elapsedMilliSeconds += MidiTime::ticksToMilliseconds( framesToPlay / framesPerTick, getTempo());
++		m_elapsedMilliSeconds += MidiTime::ticksToMilliseconds(framesToPlay / framesPerTick, getTempo());
  		m_elapsedTacts = m_playPos[Mode_PlaySong].getTact();
  		m_elapsedTicks = ( m_playPos[Mode_PlaySong].getTicks() % ticksPerTact() ) / 48;
  	}
-@@ -422,7 +422,9 @@ void Song::processAutomations(const TrackList &tracklist, MidiTime timeStart, fp
+@@ -422,7 +422,8 @@ void Song::processAutomations(const TrackList &tracklist, MidiTime timeStart, fp
  	Track::tcoVector tcos;
  	for (Track* track : tracks)
  	{
 -		if (track->type() == Track::AutomationTrack) {
-+		if((track->type()==Track::AutomationTrack)&&
-+                   !track->isMuted())
-+                {
++		if ((track->type() == Track::AutomationTrack) && !track->isMuted())
++		{
  			track->getTCOsInRange(tcos, 0, timeStart);
  		}
  	}
-@@ -430,7 +432,9 @@ void Song::processAutomations(const TrackList &tracklist, MidiTime timeStart, fp
+@@ -430,7 +431,9 @@ void Song::processAutomations(const TrackList &tracklist, MidiTime timeStart, fp
  	// Process recording
  	for (TrackContentObject* tco : tcos)
  	{
 -		auto p = dynamic_cast<AutomationPattern *>(tco);
 +		auto p = dynamic_cast<AutomationPattern*>(tco);
-+                if(!p) continue;
++		if(!p) continue;
 +
  		MidiTime relTime = timeStart - p->startPosition();
  		if (p->isRecording() && relTime >= 0 && relTime < p->length())
  		{
-@@ -601,7 +605,7 @@ void Song::setPlayPos( tick_t ticks, PlayModes playMode )
- {
- 	tick_t ticksFromPlayMode = m_playPos[playMode].getTicks();
- 	m_elapsedTicks += ticksFromPlayMode - ticks;
--	m_elapsedMilliSeconds[m_playMode] += MidiTime::ticksToMilliseconds( ticks - ticksFromPlayMode, getTempo() );
-+	m_elapsedMilliSeconds += MidiTime::ticksToMilliseconds( ticks - ticksFromPlayMode, getTempo() );
- 	m_playPos[playMode].setTicks( ticks );
- 	m_playPos[playMode].setCurrentFrame( 0.0f );
- 
-@@ -654,33 +658,43 @@ void Song::stop()
+@@ -654,33 +657,39 @@ void Song::stop()
  		switch( tl->behaviourAtStop() )
  		{
  			case TimeLineWidget::BackToZero:
 -				m_playPos[m_playMode].setTicks(0);
 -				m_elapsedMilliSeconds[m_playMode] = 0;
-+				//m_playPos[m_playMode].setTicks( 0 );
-+				//m_elapsedMilliSeconds = 0;
 +				Engine::transport()->transportLocate(0);
-+				if( gui && gui->songEditor() &&
-+						( tl->autoScroll() == TimeLineWidget::AutoScrollEnabled ) )
++				if ( gui && gui->songEditor() &&
++				     ( tl->autoScroll() == TimeLineWidget::AutoScrollEnabled ) )
 +				{
 +					gui->songEditor()->m_editor->updatePosition(0);
 +				}
@@ -378,8 +343,6 @@ index 1d0e7ed20..31a6de620 100644
 -					m_playPos[m_playMode].setTicks(tl->savedPos().getTicks());
 -					setToTime(tl->savedPos());
 -
-+					//m_playPos[m_playMode].setTicks( tl->savedPos().getTicks() );
-+					//setToTime(tl->savedPos());
 +					Engine::transport()->transportLocate(tl->savedPos().frames(Engine::framesPerTick()));
 +					if( gui && gui->songEditor() &&
 +					    ( tl->autoScroll() == TimeLineWidget::AutoScrollEnabled ) )
@@ -408,7 +371,7 @@ index 1d0e7ed20..31a6de620 100644
  
  	m_playPos[m_playMode].setCurrentFrame( 0 );
  
-@@ -1363,3 +1377,37 @@ QString Song::errorSummary()
+@@ -1363,3 +1372,37 @@ QString Song::errorSummary()
  
  	return errors;
  }
@@ -420,7 +383,7 @@ index 1d0e7ed20..31a6de620 100644
 +
 +void Song::transportStart()
 +{
-+	if(!isPlaying())
++	if (!isPlaying())
 +	{
 +		if(isPaused()) togglePause();
 +		else playSong();
@@ -429,7 +392,7 @@ index 1d0e7ed20..31a6de620 100644
 +
 +void Song::transportStop()
 +{
-+	if(isPlaying())
++	if (isPlaying())
 +	{
 +		togglePause();
 +	}
@@ -437,7 +400,7 @@ index 1d0e7ed20..31a6de620 100644
 +
 +void Song::transportLocate(f_cnt_t _frame)
 +{
-+	if(currentFrame()!=_frame)
++	if (currentFrame()!=_frame)
 +	{
 +		tick_t t=_frame/Engine::framesPerTick();
 +		PlayPos& p=getPlayPos(playMode());
@@ -447,7 +410,7 @@ index 1d0e7ed20..31a6de620 100644
 +	}
 +}
 diff --git a/src/core/audio/AudioJack.cpp b/src/core/audio/AudioJack.cpp
-index 4d730eed4..ae39ed0aa 100644
+index 4d730eed4..39b1f89e6 100644
 --- a/src/core/audio/AudioJack.cpp
 +++ b/src/core/audio/AudioJack.cpp
 @@ -26,11 +26,13 @@
@@ -552,15 +515,14 @@ index 4d730eed4..ae39ed0aa 100644
  }
  
  
-@@ -337,11 +343,73 @@ void AudioJack::renamePort( AudioPort * _port )
+@@ -337,11 +343,72 @@ void AudioJack::renamePort( AudioPort * _port )
  #endif
  }
  
 +const QString AudioJack::transportMode()
 +{
 +	QString r=ConfigManager::inst()->value( "audiojack","transport" );
-+	if(r.isEmpty()||
-+	   ((r!="independent")&&(r!="slave")&&(r!="client")&&(r!="master")))
++	if(r.isEmpty() || ( (r!="independent") && (r!="slave") && (r!="client") && (r!="master") ) )
 +	{
 +		r="independent";
 +		ConfigManager::inst()->setValue( "audiojack", "transport", r);
@@ -626,7 +588,7 @@ index 4d730eed4..ae39ed0aa 100644
  	QMutexLocker m( &m_processingMutex );
  
  	// do midi processing first so that midi input can
-@@ -355,8 +423,8 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
+@@ -355,8 +422,8 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
  	for( int c = 0; c < channels(); ++c )
  	{
  		m_tempOutBufs[c] =
@@ -637,7 +599,7 @@ index 4d730eed4..ae39ed0aa 100644
  	}
  
  #ifdef AUDIO_PORT_SUPPORT
-@@ -403,15 +471,15 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
+@@ -403,15 +470,15 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
  		if( m_framesDoneInCurBuf == m_framesToDoInCurBuf )
  		{
  			m_framesToDoInCurBuf = getNextBuffer( m_outBuf );
@@ -656,7 +618,7 @@ index 4d730eed4..ae39ed0aa 100644
  	{
  		for( int c = 0; c < channels(); ++c )
  		{
-@@ -420,6 +488,8 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
+@@ -420,6 +487,8 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
  		}
  	}
  
@@ -665,7 +627,7 @@ index 4d730eed4..ae39ed0aa 100644
  	return 0;
  }
  
-@@ -428,18 +498,18 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
+@@ -428,18 +497,18 @@ int AudioJack::processCallback( jack_nframes_t _nframes, void * _udata )
  
  int AudioJack::staticProcessCallback( jack_nframes_t _nframes, void * _udata )
  {
@@ -690,7 +652,7 @@ index 4d730eed4..ae39ed0aa 100644
  }
  
  
-@@ -449,6 +519,11 @@ void AudioJack::shutdownCallback( void * _udata )
+@@ -449,6 +518,11 @@ void AudioJack::shutdownCallback( void * _udata )
  AudioJack::setupWidget::setupWidget( QWidget * _parent ) :
  	AudioDeviceSetupWidget( AudioJack::name(), _parent )
  {
@@ -702,7 +664,7 @@ index 4d730eed4..ae39ed0aa 100644
  	QString cn = ConfigManager::inst()->value( "audiojack", "clientname" );
  	if( cn.isEmpty() )
  	{
-@@ -457,10 +532,6 @@ AudioJack::setupWidget::setupWidget( QWidget * _parent ) :
+@@ -457,10 +531,6 @@ AudioJack::setupWidget::setupWidget( QWidget * _parent ) :
  	m_clientName = new QLineEdit( cn, this );
  	m_clientName->setGeometry( 10, 20, 160, 20 );
  
@@ -713,7 +675,7 @@ index 4d730eed4..ae39ed0aa 100644
  	LcdSpinBoxModel * m = new LcdSpinBoxModel( /* this */ );
  	m->setRange( DEFAULT_CHANNELS, SURROUND_CHANNELS );
  	m->setStep( 2 );
-@@ -472,6 +543,20 @@ AudioJack::setupWidget::setupWidget( QWidget * _parent ) :
+@@ -472,6 +542,20 @@ AudioJack::setupWidget::setupWidget( QWidget * _parent ) :
  	m_channels->setLabel( tr( "CHANNELS" ) );
  	m_channels->move( 180, 20 );
  
@@ -734,7 +696,7 @@ index 4d730eed4..ae39ed0aa 100644
  }
  
  
-@@ -488,9 +573,11 @@ AudioJack::setupWidget::~setupWidget()
+@@ -488,9 +572,11 @@ AudioJack::setupWidget::~setupWidget()
  void AudioJack::setupWidget::saveSettings()
  {
  	ConfigManager::inst()->setValue( "audiojack", "clientname",
@@ -767,10 +729,10 @@ index 86dd43b51..935cefbf3 100644
  			m_pos.setCurrentFrame( 0 );
  			updatePosition();
 diff --git a/src/gui/editors/SongEditor.cpp b/src/gui/editors/SongEditor.cpp
-index 320003178..7bd92756b 100644
+index 52e91a260..c7f7bca0b 100644
 --- a/src/gui/editors/SongEditor.cpp
 +++ b/src/gui/editors/SongEditor.cpp
-@@ -754,6 +754,13 @@ void SongEditorWindow::resizeEvent(QResizeEvent *event)
+@@ -764,6 +764,13 @@ void SongEditorWindow::resizeEvent(QResizeEvent *event)
  void SongEditorWindow::play()
  {
  	emit playTriggered();
@@ -784,7 +746,7 @@ index 320003178..7bd92756b 100644
  	if( Engine::getSong()->playMode() != Song::Mode_PlaySong )
  	{
  		Engine::getSong()->playSong();
-@@ -762,6 +769,7 @@ void SongEditorWindow::play()
+@@ -772,6 +779,7 @@ void SongEditorWindow::play()
  	{
  		Engine::getSong()->togglePause();
  	}
@@ -792,7 +754,7 @@ index 320003178..7bd92756b 100644
  }
  
  
-@@ -783,6 +791,7 @@ void SongEditorWindow::recordAccompany()
+@@ -793,6 +801,7 @@ void SongEditorWindow::recordAccompany()
  
  void SongEditorWindow::stop()
  {
