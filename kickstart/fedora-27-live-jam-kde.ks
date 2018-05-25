@@ -67,6 +67,9 @@ qemu-guest-agent
 # Install language pack
 dnf -y langinstall French
 
+# Install rt kernel
+dnf -y install kernel-rt-mao
+
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
 #!/bin/bash
@@ -381,7 +384,6 @@ kernel
 kernel-modules
 kernel-modules-extra
 kernel-tools
-kernel-rt-mao
 
 # This was added a while ago, I think it falls into the category of
 # "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
