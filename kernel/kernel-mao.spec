@@ -23,9 +23,10 @@ BuildRequires: kmod, patch, bash, tar, git
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
 BuildRequires: gcc, binutils, redhat-rpm-config, hmaccalc, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
-BuildRequires: rpm-build, elfutils, elfutils-libelf-devel
+BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
 BuildRequires: sparse
 BuildRequires: pesign >= 0.10-4
+BuildRequires: grub2-tools
 
 BuildRoot: %{_tmppath}/%{name}-%{PACKAGE_VERSION}-root
 Provides:  kernel-rt-mao-%{version}
