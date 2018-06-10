@@ -1,0 +1,29 @@
+From 06a25b76832c3384ec015cf02388ed3a7e200e05 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sun, 10 Jun 2018 00:18:22 +0200
+Subject: [PATCH 2/3] cmake no error
+
+---
+ CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e5815da5f..33f29e900 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -337,9 +337,9 @@ CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/plugins/zynaddsubfx/zynaddsubfx.rc.in" "${CM
+ 
+ # set compiler flags
+ SET(WERROR_FLAGS "-Wall -Werror=unused-function -Wno-sign-compare -Wno-strict-overflow")
+-IF(NOT LMMS_BUILD_APPLE)
+-   SET(WERROR_FLAGS "${WERROR_FLAGS} -Werror")
+-ENDIF()
++#IF(NOT LMMS_BUILD_APPLE)
++#   SET(WERROR_FLAGS "${WERROR_FLAGS} -Werror")
++#ENDIF()
+ 
+ # Due to a regression in gcc-4.8.X, we need to disable array-bounds check
+ IF (CMAKE_COMPILER_IS_GNUCXX AND ((CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL "4.8.0") OR (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER "4.8.0")))
+-- 
+2.13.6
+

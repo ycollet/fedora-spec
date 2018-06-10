@@ -3,15 +3,15 @@
 %global gittag0 v1.1.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           lmms-mao
-Version:        1.1.3
-Release:        7%{?dist}
-Summary:        Linux MultiMedia Studio
-URL:            http://lmms.sourceforge.net/
-Group:          Applications/Multimedia
+Name:        lmms-mao
+Version:     1.1.3
+Release:     8%{?dist}
+Summary:     Linux MultiMedia Studio
+URL:         http://lmms.sourceforge.net/
+Group:       Applications/Multimedia
 
 # Because dnf does not find a carla so file
-AutoReqProv:    no
+AutoReqProv: no
 
 # - lmms itself is GPLv2+
 # - included third-party code
@@ -33,19 +33,22 @@ AutoReqProv:    no
 #   - embedded zynaddsubfx plugin: GPLv2+
 #     - fltk (zynaddsubfx): LGPLv2+, with exceptions (but we use
 #       system's fltk)
-License:        GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
+License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
 # original tarfile can be found here:
-Source0:        https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
+Source0: https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
 
-Patch0: lmms-1.1.3-0001-fix-gcc-5.patch
-Patch1: lmms-1.1.3-0002-fix-case-carla.patch
-Patch2: lmms-1.1.3-0003-fix-lib64-carla.patch
-Patch3: lmms-1.1.3-0004-fix-swh-compilation.patch
-Patch4: lmms-1.1.3-0005-fix-carla-plugin-loading.patch
-Patch5: lmms-1.1.3-0006-fix-indent.patch
-Patch6: lmms-1.1.3-0007-fix-versioninfo.patch
-Patch7: lmms-1.1.3-0008-fix-gcc-7-compilation.patch
+Patch0:  lmms-1.1.3-0001-fix-gcc-5.patch
+Patch1:  lmms-1.1.3-0002-fix-case-carla.patch
+Patch2:  lmms-1.1.3-0003-fix-lib64-carla.patch
+Patch3:  lmms-1.1.3-0004-fix-swh-compilation.patch
+Patch4:  lmms-1.1.3-0005-fix-carla-plugin-loading.patch
+Patch5:  lmms-1.1.3-0006-fix-indent.patch
+Patch6:  lmms-1.1.3-0007-fix-versioninfo.patch
+Patch7:  lmms-1.1.3-0008-fix-gcc-7-compilation.patch
+Patch8:  lmms-1.1.3-0009-jack-transport.patch
+Patch9:  lmms-1.1.3-0010-cmake-no-error.patch
+#Patch10: lmms-1.1.3-0011-add-missing-carla-switch-case.patch
 
 # according to upstream we should at least support oss, alsa, and
 # jack. output via pulseaudio has high latency, but we enable it
@@ -121,6 +124,9 @@ developing addons for lmms.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
+#%patch10 -p1
 
 # remove spurious x-bits
 find . -type f -exec chmod 0644 {} \;
@@ -193,7 +199,10 @@ fi
 
 
 %changelog
-* Tue May 1 2018 Yann Colletet <ycollette.nospam@free.fr> - 1.1.3-7
+* Sun Jun 10 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-8
+- add a jack transport patch
+
+* Tue May 1 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-7
 - Rename lmms -> lmms-mao to ease install
 - Remove vst part (this package is only built on 64 bits arch)
 

@@ -1,0 +1,103 @@
+From 6baae037dbfccab6675dc1336ca6318581cb0b68 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 9 Jun 2018 22:27:01 +0200
+Subject: [PATCH 1/3] jack transport
+
+---
+ include/AudioJack.h          |  1 +
+ include/song.h               |  4 ++--
+ src/core/audio/AudioJack.cpp | 10 ++++++++++
+ src/core/song.cpp            | 15 +++++++++++++++
+ 4 files changed, 28 insertions(+), 2 deletions(-)
+
+diff --git a/include/AudioJack.h b/include/AudioJack.h
+index 946dc8b3c..088267cdd 100644
+--- a/include/AudioJack.h
++++ b/include/AudioJack.h
+@@ -55,6 +55,7 @@ public:
+ 			"JACK (JACK Audio Connection Kit)" );
+ 	}
+ 
++	void syncTransport( bool playing );
+ 
+ 	class setupWidget : public AudioDevice::setupWidget
+ 	{
+diff --git a/include/song.h b/include/song.h
+index 173d5d063..c24b066a7 100644
+--- a/include/song.h
++++ b/include/song.h
+@@ -292,8 +292,8 @@ private slots:
+ 	void savePos();
+ 
+ 	void updateFramesPerTick();
+-
+-
++	
++	void onPlaybackStateChanged();
+ 
+ private:
+ 	song();
+diff --git a/src/core/audio/AudioJack.cpp b/src/core/audio/AudioJack.cpp
+index 3dd6d3a75..38b139972 100644
+--- a/src/core/audio/AudioJack.cpp
++++ b/src/core/audio/AudioJack.cpp
+@@ -99,6 +99,16 @@ AudioJack::~AudioJack()
+ 
+ 
+ 
++void AudioJack::syncTransport( bool playing )
++{
++	if (playing) {
++		jack_transport_start(  m_client );
++	} else {
++		jack_transport_stop( m_client );
++	}
++}
++
++
+ 
+ void AudioJack::restartAfterZombified()
+ {
+diff --git a/src/core/song.cpp b/src/core/song.cpp
+index cbf51f6b9..560cd6be0 100644
+--- a/src/core/song.cpp
++++ b/src/core/song.cpp
+@@ -31,6 +31,7 @@
+ #include <math.h>
+ 
+ #include "song.h"
++#include "AudioJack.h"
+ #include "AutomationTrack.h"
+ #include "AutomationEditor.h"
+ #include "bb_editor.h"
+@@ -112,6 +113,8 @@ song::song() :
+ /*	connect( &m_masterPitchModel, SIGNAL( dataChanged() ),
+ 			this, SLOT( masterPitchChanged() ) );*/
+ 
++	connect( this, SIGNAL( playbackStateChanged() ), this, SLOT( onPlaybackStateChanged() ) );
++	
+ 	qRegisterMetaType<note>( "note" );
+ }
+ 
+@@ -126,6 +129,18 @@ song::~song()
+ 
+ 
+ 
++void song::onPlaybackStateChanged()
++{
++	#ifdef LMMS_HAVE_JACK
++	AudioJack *device = dynamic_cast<AudioJack*>(engine::mixer()->audioDev());
++	if (device) {
++		device->syncTransport(m_playing);
++	}
++	#endif
++}
++
++
++
+ 
+ void song::masterVolumeChanged()
+ {
+-- 
+2.13.6
+

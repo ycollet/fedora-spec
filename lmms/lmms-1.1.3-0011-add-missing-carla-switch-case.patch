@@ -1,0 +1,24 @@
+From 88efb28bd6ced9896480b36deecde12ee96969bd Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sun, 10 Jun 2018 00:18:46 +0200
+Subject: [PATCH 3/3] add missing carla switch case
+
+---
+ plugins/carlabase/carla.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/plugins/carlabase/carla.cpp b/plugins/carlabase/carla.cpp
+index 553701e8a..dcd400509 100644
+--- a/plugins/carlabase/carla.cpp
++++ b/plugins/carlabase/carla.cpp
+@@ -259,6 +259,7 @@ intptr_t CarlaInstrument::handleDispatcher(const NativeHostDispatcherOpcode opco
+     case NATIVE_HOST_OPCODE_RELOAD_MIDI_PROGRAMS:
+     case NATIVE_HOST_OPCODE_RELOAD_ALL:
+     case NATIVE_HOST_OPCODE_HOST_IDLE:
++    case NATIVE_HOST_OPCODE_INTERNAL_PLUGIN:
+         // nothing
+         break;
+     case NATIVE_HOST_OPCODE_UI_UNAVAILABLE:
+-- 
+2.13.6
+
