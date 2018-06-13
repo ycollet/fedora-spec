@@ -60,7 +60,8 @@ against the %{version} kernel package.
 %setup -q -n linux-%{version}
 
 %patch0 -p1
-#sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt%{krt}/g' Makefile
+
+sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt%{krt}/g' Makefile
 cp %{SOURCE1} .config
 make oldconfig
 
