@@ -1,9 +1,9 @@
 %define kmaj 4
-%define kmin 14
-%define kpat 40
+%define kmin 16
+%define kpat 12
 %define kver %{kmaj}.%{kmin}.%{kpat}
-%define krel 2
-%define krt  30
+%define krel 3
+%define krt  5
 %define kversion %{kver}-%{krel}-rt%{krt}
 
 Name: kernel-rt-mao
@@ -14,9 +14,11 @@ License: GPL
 Group: System Environment/Kernel
 Vendor: The Linux Community
 URL: http://www.kernel.org
+
 Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
-Source2: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-%{version}-rt%{krt}.patch.gz
+
+Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{version}-rt%{krt}.patch.gz
 
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar, git
@@ -56,9 +58,11 @@ against the %{version} kernel package.
 
 %prep
 %setup -q -n linux-%{version}
-sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt%{krt}/g' Makefile
+
+%patch0 -p1
+#sed -i.ORIG '/^EXTRAVERSION/ s/=/= -%{krel}-rt%{krt}/g' Makefile
 cp %{SOURCE1} .config
-make olddefconfig
+make oldconfig
 
 %build
 
@@ -128,6 +132,9 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 /usr/src/kernels/%{kversion}
 
 %changelog
+* Wed Jun 13 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.12-rt5-3
+- fix a huge config problem
+
 * Sun Jun 10 2018 Yann Collette <ycollette.nospam@free.fr> - 4.14.40-2
 - add 4.14.40-rt30 kernel (4.16 kernels are xrunning)
 
