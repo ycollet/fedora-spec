@@ -4,7 +4,8 @@
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 3
 %define krt  5
-%define kversion %{kver}-%{krel}-rt%{krt}
+#%define kversion %{kver}-%{krel}-rt%{krt}
+%define kversion %{kver}-rt%{krt}
 
 Name: kernel-rt-mao
 Summary: The Linux Real Time Kernel
