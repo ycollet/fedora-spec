@@ -1,10 +1,9 @@
 %define kmaj 4
 %define kmin 16
-%define kpat 12
+%define kpat 15
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 3
-%define krt  5
-#%define kversion %{kver}-%{krel}-rt%{krt}
+%define krt  7
 %define kversion %{kver}-rt%{krt}
 
 Name: kernel-rt-mao
@@ -133,6 +132,9 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 /usr/src/kernels/%{kversion}
 
 %changelog
+* Sat Jun 23 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.15-rt7-3
+- add 4.16.15-rt7 kernel
+
 * Wed Jun 13 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.12-rt5-3
 - fix a huge config problem
 
