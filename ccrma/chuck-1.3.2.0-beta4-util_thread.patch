@@ -1,0 +1,10 @@
+--- chuck-1.3.2.0-beta-4/src/util_thread.h~	2013-04-20 02:37:04.000000000 -0700
++++ chuck-1.3.2.0-beta-4/src/util_thread.h	2013-09-04 13:37:54.000000000 -0700
+@@ -35,6 +35,7 @@
+ #define __UTIL_THREAD_H__
+ 
+ #include "chuck_def.h"
++#include <unistd.h>
+ #include <stdio.h>
+ 
+ 

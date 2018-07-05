@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Aeolus
+Comment=Synthesized Pipe Organ
+Icon=
+Type=Application
+Exec=aeolus
+Terminal=false
+StartupWMClass=aeolus
+Encoding=UTF-8

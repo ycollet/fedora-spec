@@ -1,0 +1,10 @@
+/etc/pd/plugins-enabled/README
+
+Pd GUI plugins found in this directory will be automatically loaded on startup.
+You can create symlinks to plugins to enable them:
+
+    $ pd-gui-plugin available
+    tclprompt
+    kiosk
+    patch2svg
+    $ sudo pd-gui-plugin --system enable kiosk

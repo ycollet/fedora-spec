@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Snd
+Comment=the Snd sound editor
+Icon=snd.png
+Type=Application
+Exec=snd
+Terminal=false
+Encoding=UTF-8

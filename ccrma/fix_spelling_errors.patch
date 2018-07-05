@@ -1,0 +1,27 @@
+Description: fixed spelling errors
+Author: IOhannes m zmölnig
+Last-Update: 2016-05-09
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- puredata.orig/doc/1.manual/x2.htm
++++ puredata/doc/1.manual/x2.htm
+@@ -153,7 +153,7 @@
+ <P> The connections in the patch (the lines between the boxes) are also of two
+ types: control and signal.  The type of connection depends on the outlet it
+ comes from.  Signal connections are represented by thicker lines than control
+-connections; in the patch above, the two bottom conections are signal and the
++connections; in the patch above, the two bottom connections are signal and the
+ others are control.  In general, a control connection may be made to a signal
+ inlet; if numbers are sent over it they are automatially converted to
+ signals.  Signal connections may not be made to control inlets; some sort
+--- puredata.orig/man/pdsend.1
++++ puredata/man/pdsend.1
+@@ -5,7 +5,7 @@
+ .B pdsend
+ \fIport-number\fR [\fIhostname\fR] [udp|tcp]
+ .SH DESCRIPTION
+-Pdsend sends messages to pd(1), via a socket conection, from pdsend's
++Pdsend sends messages to pd(1), via a socket connection, from pdsend's
+ standard input.  This input can be any stream of Pd messages separated by
+ semicolons.  This is probably the easiest way to control pd from another
+ application.  The protocol used is easy to implement and is called FUDI.

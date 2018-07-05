@@ -1,0 +1,20 @@
+--- jacktrip-1.0.5/src/jacktrip_globals.cpp~	2009-06-30 09:28:52.000000000 -0700
++++ jacktrip-1.0.5/src/jacktrip_globals.cpp	2009-07-21 16:14:00.000000000 -0700
+@@ -38,6 +38,7 @@
+ #include "jacktrip_globals.h"
+ #include "jacktrip_types.h"
+ 
++#include <stdio.h>
+ #if defined ( __LINUX__ )
+ #include <sched.h>
+ #endif //__LINUX__
+--- jacktrip-1.0.5/src/JackTripWorker.h~	2009-06-30 09:28:52.000000000 -0700
++++ jacktrip-1.0.5/src/JackTripWorker.h	2009-07-21 16:14:15.000000000 -0700
+@@ -39,6 +39,7 @@
+ #define __JACKTRIPWORKER_H__
+ 
+ #include <iostream>
++#include <stdint.h>
+ 
+ #include <QThreadPool>
+ #include <QObject>

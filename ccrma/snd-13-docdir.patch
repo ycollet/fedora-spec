@@ -1,0 +1,27 @@
+--- snd-13/snd-help.c~	2013-03-18 07:13:26.000000000 -0700
++++ snd-13/snd-help.c	2013-03-19 09:52:33.000000000 -0700
+@@ -3355,6 +3355,12 @@
+ static const char *html_directory(void)
+ {
+   int i;
++
++#ifdef MUS_DEFAULT_DOC_DIR
++  if (mus_file_probe(MUS_DEFAULT_DOC_DIR "/snd.html"))
++    return(MUS_DEFAULT_DOC_DIR);
++#endif
++
+   if (mus_file_probe("snd.html"))
+     return(mus_getcwd());
+ 
+@@ -3371,11 +3377,6 @@
+       if (happy) return(html_dir(ss));
+     }
+ 
+-#ifdef MUS_DEFAULT_DOC_DIR
+-  if (mus_file_probe(MUS_DEFAULT_DOC_DIR "/snd.html"))
+-    return(MUS_DEFAULT_DOC_DIR);
+-#endif
+-
+   for (i = 0; i < DOC_DIRECTORIES; i++)
+     if (mus_file_probe(doc_files[i])) return(doc_directories[i]);
+ 

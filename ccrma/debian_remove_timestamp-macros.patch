@@ -1,0 +1,35 @@
+Description: remove C-macros for timestamps
+ For reproducible builds, we don't want timestamps in the builds.
+ Instead we should set the version to be displayed to the Debian
+ package version (use PD_TEST_VERSION) for this.
+Author: IOhannes m zmölnig
+Last-Update: 2015-05-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- puredata.orig/src/s_main.c
++++ puredata/src/s_main.c
+@@ -30,8 +30,11 @@
+ #define str(s) #s
+ 
+ char *pd_version = "Pd-" stringify(PD_MAJOR_VERSION) "." stringify(PD_MINOR_VERSION) "." stringify(PD_BUGFIX_VERSION) " (" stringify(PD_TEST_VERSION) ")";
+-char pd_compiletime[] = __TIME__;
+-char pd_compiledate[] = __DATE__;
++#ifdef PD_TIMESTAMP_STRING
++char pd_compiletimestamp[] = PD_TIMESTAMP_STRING;
++#else
++char pd_compiletimestamp[] = "compiled " __TIME__ " " __DATE__;
++#endif
+ 
+ void pd_init(void);
+ int sys_argparse(int argc, char **argv);
+@@ -299,8 +302,8 @@
+     if (sys_argparse(argc-1, argv+1))           /* parse cmd line */
+         return (1);
+     sys_afterargparse();                    /* post-argparse settings */
+-    if (sys_verbose || sys_version) fprintf(stderr, "%s compiled %s %s\n",
+-        pd_version, pd_compiletime, pd_compiledate);
++    if (sys_verbose || sys_version) fprintf(stderr, "%s %s\n",
++        pd_version, pd_compiletimestamp);
+     if (sys_version)    /* if we were just asked our version, exit here. */
+         return (0);
+     sys_setsignalhandlers();

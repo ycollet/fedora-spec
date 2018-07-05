@@ -1,0 +1,10 @@
+--- jacktrip-1.0.5/src/jacktrip_globals.cpp~	2012-09-13 13:33:13.000000000 -0700
++++ jacktrip-1.0.5/src/jacktrip_globals.cpp	2012-09-13 13:33:43.000000000 -0700
+@@ -39,6 +39,7 @@
+ #include "jacktrip_types.h"
+ 
+ #include <stdio.h>
++#include <unistd.h>
+ #if defined ( __LINUX__ )
+ #include <sched.h>
+ #endif //__LINUX__

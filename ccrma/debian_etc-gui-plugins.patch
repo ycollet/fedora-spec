@@ -1,0 +1,19 @@
+Description: search for GUI plugins in /etc/pd/plugins-enabled
+ this gives us a standard path where the user can symlink-enable their
+ system-wide GUI plugins.
+Author: IOhannes m zmölnig
+Origin: Debian
+Last-Update: 2016-02-17
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- puredata.orig/tcl/pd-gui.tcl
++++ puredata/tcl/pd-gui.tcl
+@@ -715,7 +715,7 @@
+     load_plugin_script [file join $::sys_guidir pd_deken.tcl]
+ 
+     # load other installed plugins
+-    foreach pathdir [concat $::sys_searchpath $::sys_staticpath] {
++    foreach pathdir [concat $::sys_searchpath "/etc/pd/plugins-enabled" $::sys_staticpath] {
+         set dir [file normalize $pathdir]
+         if { ! [file isdirectory $dir]} {continue}
+         foreach filename [glob -directory $dir -nocomplain -types {f} -- \
