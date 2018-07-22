@@ -1,9 +1,9 @@
 %define kmaj 4
 %define kmin 16
-%define kpat 15
+%define kpat 18
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 3
-%define krt  7
+%define krt  10
 %define kversion %{kver}-rt%{krt}
 
 Name: kernel-rt-mao
