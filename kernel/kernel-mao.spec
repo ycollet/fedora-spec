@@ -4,21 +4,21 @@
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 3
 %define krt  10
-%define kversion %{kver}-rt%{krt}
+%define kversion %{kver}
 
 Name: kernel-rt-mao
 Summary: The Linux Real Time Kernel
-Version: %{kver}
+Version: %{kversion}.rt%{krt}
 Release: %{krel}%{?dist}
 License: GPL
 Group: System Environment/Kernel
 Vendor: The Linux Community
 URL: http://www.kernel.org
 
-Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{version}.tar.gz
+Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{kversion}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
 
-Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{version}-rt%{krt}.patch.gz
+Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kversion}-rt%{krt}.patch.gz
 
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar, git
@@ -57,7 +57,7 @@ This package provides real time kernel headers and makefiles sufficient to build
 against the %{version} kernel package.
 
 %prep
-%setup -q -n linux-%{version}
+%setup -q -n linux-%{kversion}
 
 %patch0 -p1
 
@@ -95,7 +95,7 @@ make %{?_smp_mflags} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_in
 cp System.map $RPM_BUILD_ROOT/boot/System.map-%{kversion}
 cp .config $RPM_BUILD_ROOT/boot/config-%{kversion}
 
-rm -f $RPM_BUILD_ROOT/lib/modules/%{kversion}/{build,source}
+rm -f $RPM_BUILD_ROOT/lib/modules/%{kversion}-rt%{krt}/{build,source}
 mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}
 EXCLUDES="--exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.ko.xz --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d"
 tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kversion};tar xvf -)
@@ -120,7 +120,7 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 
 %files
 %defattr (-, root, root)
-/lib/modules/%{kversion}
+/lib/modules/%{kversion}-rt%{krt}
 /boot/*
 
 %files headers
@@ -132,6 +132,9 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 /usr/src/kernels/%{kversion}
 
 %changelog
+* Sun Jul 22 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.18-rt10-3
+- add 4.16.18-rt10 kernel
+
 * Sat Jun 23 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.15-rt7-3
 - add 4.16.15-rt7 kernel
 
