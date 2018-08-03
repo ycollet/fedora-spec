@@ -11,6 +11,7 @@ BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: pkgconfig
+BuildRequires: chrpath
 
 # Drumgizmo LV2 plugin
 BuildRequires: lv2-devel
@@ -42,6 +43,9 @@ DrumGizmo is an open source, multichannel, multilayered, cross-platform drum plu
 
 %{__rm} -rf %{buildroot}
 %{__make} DESTDIR=%{buildroot} install
+
+chrpath --delete $RPM_BUILD_ROOT%{_bindir}/drumgizmo
+chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 
 %clean
 %{__rm} -rf %{buildroot}
