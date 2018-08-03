@@ -1,42 +1,40 @@
 Summary: Software Synthesizer
 Name:    drumgizmo
-Version: 0.9.14
-Release: 2%{?dist}
+Version: 0.9.15
+Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://git.drumgizmo.org/drumgizmo.git
-Source0: drumgizmo-%version.tar.gz
-Source1: drumgizmo_autogen.sh
+Source0: http://www.drumgizmo.org/releases/drumgizmo-%version/drumgizmo-%version.tar.gz
 
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: pkgconfig
-BuildRequires: alsa-lib-devel
+
+# Drumgizmo LV2 plugin
 BuildRequires: lv2-devel
-BuildRequires: desktop-file-utils
-BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: libsndfile-devel
 BuildRequires: zita-resampler-devel
+BuildRequires: libsndfile-devel
+BuildRequires: libX11-devel
+BuildRequires: libXext-devel
+
+# Drumgizmo command-line tools
 BuildRequires: expat-devel
-BuildRequires: libpng-devel
-BuildRequires: cppunit-devel
+BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsmf-devel
-BuildRequires: gettext-devel
-BuildRequires: libxcb-devel
-BuildRequires: mesa-libGLU-devel
+BuildRequires: alsa-lib-devel
 
 %description
-DrumGizmo is an open source cross-platform drum plugin and stand-alone application. It is comparable to several commercial drum plugin products. 
+DrumGizmo is an open source, multichannel, multilayered, cross-platform drum plugin and stand-alone application. It enables you to compose drums in midi and mix them with a multichannel approach. It is comparable to that of mixing a real drumkit that has been recorded with a multimic setup.
 
 %prep
 %setup -qn %{name}-%version
 
 %build
 
-cp %{SOURCE1} .
-./drumgizmo_autogen.sh
-%configure --enable-lv2 --libdir=%{_libdir}
+%configure --enable-lv2 --libdir=%{_libdir} 
+# --disable-cli --with-lv2dir=
 
 %{__make} DESTDIR=%{buildroot} %{_smp_mflags}
 
@@ -44,11 +42,6 @@ cp %{SOURCE1} .
 
 %{__rm} -rf %{buildroot}
 %{__make} DESTDIR=%{buildroot} install
-
-# desktop file categories
-BASE="X-PlanetCCRMA X-Fedora Application AudioVideo"
-XTRA="X-Synthesis X-MIDI X-Jack"
-%{__mkdir} -p %{buildroot}%{_datadir}/applications
 
 %clean
 %{__rm} -rf %{buildroot}
