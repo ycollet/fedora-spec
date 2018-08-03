@@ -6,8 +6,8 @@
 Summary: MIDI library
 Name: libsmf
 Version: 1.3.%{shortcommit0}
-Release: 2%{?dist}
-License: GPL
+Release: 3%{?dist}
+License: BSD
 Group: Applications/Multimedia
 URL:            https://github.com/stump/libsmf
 Source0:        https://github.com/stump/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -45,17 +45,12 @@ autoreconf --force --install
 %{__rm} -rf %{buildroot}
 %{__make} DESTDIR=%{buildroot} install
 
-# desktop file categories
-BASE="Development AudioVideo"
-XTRA="X-MIDI"
-%{__mkdir} -p %{buildroot}%{_datadir}/applications
-
 %clean
 %{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING NEWS
+%doc COPYING NEWS README
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/man/*
@@ -64,6 +59,8 @@ XTRA="X-MIDI"
 %{_includedir}/*
 
 %changelog
+* Sat Jun 09 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-3
+- update to commit 692e728
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-2
 - update to commit fd5abd50
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 1.3-1
