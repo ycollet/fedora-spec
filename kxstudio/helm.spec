@@ -1,13 +1,12 @@
 %global debug_package %{nil}
 
-# Global variables for github repository #6dbcd64ba122c2fe1342962c51744b7663925658
-%global commit0 756e767e4d20e77836f45b4ba016ea547d7cf474
+%global commit0 abdedd527e6e1cf86636f0f1e8a3e75b06ed166a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           helm
 Version:        1.0.0.%{shortcommit0}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A LV2 / standalone synth
 
 Group:          Applications/Multimedia
@@ -67,6 +66,8 @@ fi
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Sat Aug 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
+- update to abdedd527e6e1cf86636f0f1e8a3e75b06ed166a
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-2
 - update to 756e767e4d20e77836f45b4ba016ea547d7cf474 
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-1
