@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 fb983f84d6e6f0aef8bbacecfc307085f35306ec
-%global gittag0 20180513
+%global commit0 27a385734909b9ffcab705669d34d0fc88733d71
+%global gittag0 20180810
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:           schismtracker
-Version:        20180513
+Version:        20180810
 Release:        1%{?dist}
 Summary:        Module tracker software for creating music
 
@@ -54,6 +54,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Aug 11 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180810-1
+- update to latest version
 * Mon May 14 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180513-1
 - update to latest version
 * Sat Apr 14 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180209-1
