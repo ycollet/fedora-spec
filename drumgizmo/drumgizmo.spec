@@ -1,6 +1,6 @@
 Summary: Software Synthesizer
 Name:    drumgizmo
-Version: 0.9.15
+Version: 0.9.16
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -59,6 +59,8 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 %exclude %{_bindir}/dgreftest
 
 %changelog
+* Sun Aug 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.16-2
+* Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.15-2
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-2
 * Mon Oct 23 2017 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-1
 * Thu May 12 2016 Yann Collette <ycollette dot nospam at free.fr> 0.9.10-1
