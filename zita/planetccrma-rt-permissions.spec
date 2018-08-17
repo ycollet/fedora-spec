@@ -12,6 +12,8 @@ Source2: rt-permissions.ck
 URL: http://ccrma.stanford.edu/planetccrma/software/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: perl
+
 %if 0%{?fedora} >= 17
 %define MAX_PRIORITY 99
 %else

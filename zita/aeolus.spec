@@ -1,4 +1,4 @@
-%define aeolus_ver 0.9.0
+%define aeolus_ver 0.9.5
 %define stops_ver  0.3.0
 
 %define	desktop_vendor planetccrma
@@ -10,8 +10,8 @@ Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL: http://www.kokkinizita.net/linuxaudio/aeolus/index.html
-Source0: http://www.kokkinizita.net/linuxaudio/downloads/aeolus-%{aeolus_ver}%{?aeolus_rel:-%{aeolus_rel}}.tar.bz2
-Source1: http://www.kokkinizita.net/linuxaudio/downloads/stops-%{stops_ver}.tar.bz2
+Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/aeolus-%{aeolus_ver}%{?aeolus_rel:-%{aeolus_rel}}.tar.bz2
+Source1: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-%{stops_ver}.tar.bz2
 Source2: aeolus.desktop
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Packager: Fernando Lopez-Lezcano
@@ -24,11 +24,8 @@ Provides:  aeolus-stops
 BuildRequires: desktop-file-utils zita-alsa-pcmi-devel clthreads-devel clxclient-devel
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel desktop-file-utils
 BuildRequires: readline-devel
-%if 0%{?fedora} >= 5 || 0%{?rhel} >= 5
 BuildRequires: libX11-devel libXft-devel
-%else
-BuildRequires: XFree86-devel
-%endif
+BuildRequires: perl
 
 # for some reason building on fc15 generates a dependency on a weirdly
 # named "package" (somebignumber.debug) that of course does not exist,
@@ -110,6 +107,9 @@ desktop-file-install --vendor %{desktop_vendor} \
 %{_datadir}/applications/%{desktop_vendor}-aeolus.desktop
 
 %changelog
+* Fri Aug 17 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.5-1
+- update to 0.9.5
+
 * Thu Oct 17 2013 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.9.0-1
 - update to latest for fc19
 

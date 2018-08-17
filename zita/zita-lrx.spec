@@ -5,7 +5,7 @@ Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL: http://kokkinizita.linuxaudio.org/linuxaudio/
-Source0: %{name}-%{version}.tar.bz2
+Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: jack-audio-connection-kit-devel

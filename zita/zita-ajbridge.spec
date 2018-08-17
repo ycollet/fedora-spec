@@ -1,11 +1,11 @@
 Summary: Full quality multichannel audio over a local IP network
 Name: zita-ajbridge
-Version: 0.6.0
+Version: 0.7.0
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL: http://kokkinizita.linuxaudio.org/linuxaudio/
-Source0: %{name}-%{version}.tar.bz2
+Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: jack-audio-connection-kit-devel alsa-lib-devel
@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/*/*
 
 %changelog
+* Fri Aug 17 2018 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-1
+- update to 0.7.0
+
 * Thu Sep 22 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 0.6.0-1
 - update to 0.6.0
 
