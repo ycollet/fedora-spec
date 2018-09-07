@@ -66,11 +66,6 @@ make oldconfig
 
 %build
 
-cp_vmlinux()
-{
-  eu-strip --remove-comment -o "$2" "$1"
-}
-
 make clean &&  make %{?_smp_mflags}
 
 %install
