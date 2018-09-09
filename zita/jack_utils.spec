@@ -1,11 +1,12 @@
 Summary: Jack_utils contains three small command line programs: jack_fpmon, jack_check, jack_proxy
-Name: jack_utils
+Name:    jack_utils
 Version: 0.0.1
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/linuxaudio/
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: jack-audio-connection-kit-devel

@@ -1,13 +1,14 @@
 %global debug_package %{nil}
 
 Summary: An A/B convertor and the metering and monitoring. 
-Name: tetraproc
+Name:    tetraproc
 Version: 0.8.2
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/linuxaudio/
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: jack-audio-connection-kit-devel

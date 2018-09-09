@@ -1,11 +1,12 @@
 Summary: Convolution Engine for JACK, based on FFT convolution and using non-uniform partition sizes
-Name: jconvolver
+Name:    jconvolver
 Version: 1.0.2
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/linuxaudio/
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: jack-audio-connection-kit-devel

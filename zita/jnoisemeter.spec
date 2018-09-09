@@ -1,11 +1,12 @@
 Summary: jnoisemeter is a small app designed to measure audio test signals and in particular noise signals.
-Name: jnoisemeter
+Name:    jnoisemeter
 Version: 0.2.2
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/linuxaudio/
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: clthreads-devel clxclient-devel

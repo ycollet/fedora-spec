@@ -1,11 +1,12 @@
 Summary: Full quality multichannel audio over a local IP network
-Name: zita-njbridge
+Name:    zita-njbridge
 Version: 0.4.2
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/linuxaudio/
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: jack-audio-connection-kit-devel

@@ -4,18 +4,19 @@
 %define	desktop_vendor planetccrma
 
 Summary: Aeolus, a synthesized pipe organ
-Name: aeolus
+Name:    aeolus
 Version: %{aeolus_ver}%{?aeolus_rel:.%{aeolus_rel}}
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://www.kokkinizita.net/linuxaudio/aeolus/index.html
+Group:   Applications/Multimedia
+URL:     http://www.kokkinizita.net/linuxaudio/aeolus/index.html
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/aeolus-%{aeolus_ver}%{?aeolus_rel:-%{aeolus_rel}}.tar.bz2
 Source1: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-%{stops_ver}.tar.bz2
 Source2: aeolus.desktop
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Packager: Fernando Lopez-Lezcano
-Vendor: Planet CCRMA
+
+BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Packager:     Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 Obsoletes: aeolus-stops <= 0.3.1-1

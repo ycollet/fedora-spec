@@ -1,15 +1,16 @@
 %define build_session 0
 
 Summary: Grant rt permissions to all users or to active sessions
-Name: planetccrma-rt-permissions
+Name:    planetccrma-rt-permissions
 Version: 2012.09.19
 Release: 1%{?dist}
 License: GPL3
-Group: Applications/Multimedia
+Group:   Applications/Multimedia
 Source0: 99-rt-permissions-all.conf
 Source1: 99-rt-permissions.conf
 Source2: rt-permissions.ck
-URL: http://ccrma.stanford.edu/planetccrma/software/
+URL:     http://ccrma.stanford.edu/planetccrma/software/
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: perl

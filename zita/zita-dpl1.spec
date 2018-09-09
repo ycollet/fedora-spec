@@ -1,11 +1,12 @@
 Summary: zita-dpl1 is a look-ahead digital peak level limiter using some special algorithms to allow fast response without excessive LF distortion.
-Name: zita-dpl1
+Name:    zita-dpl1
 Version: 0.3.3
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/linuxaudio/
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: cairo-devel libpng-devel
