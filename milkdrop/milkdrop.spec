@@ -77,6 +77,11 @@ mv milkdrop-md-presets  md
 mv milkdrop-megapack    megapack
 mv milkdrop-vlc-presets vlc
 
+rm md/presets/*.jar
+rm md/presets/*.bat
+
+find . -name "*.cmake" -exec rm {} \;
+
 popd
 
 %clean
