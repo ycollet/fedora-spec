@@ -65,11 +65,22 @@ mv presets_milkdrop_104-2.0.0-Source milkdrop-1.0.4
 
 popd
 
-7z x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/md
-7z x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/megapack
-7z x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/vlc
+7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
+7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
+7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
+
+pushd .
+
+cd $RPM_BUILD_ROOT%{_datadir}/projectm/presets
+
+mv milkdrop-md-presets  md
+mv milkdrop-megapack    megapack
+mv milkdrop-vlc-presets vlc
+
+popd
 
 %clean
+
 rm -rf $RPM_BUILD_ROOT
 
 %files
