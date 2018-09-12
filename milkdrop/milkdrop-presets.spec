@@ -14,6 +14,7 @@ Source4: https://sourceforge.net/projects/projectm/files/presets-samples/presets
 Source5: http://ycollette.free.fr/Milkdrop/milkdrop-md-presets.zip
 Source6: http://ycollette.free.fr/Milkdrop/milkdrop-megapack.zip
 Source7: http://ycollette.free.fr/Milkdrop/milkdrop-vlc-presets.zip
+Source8: http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -35,6 +36,27 @@ Group:   Applications/Multimedia
 
 %description megapack
 Extra presets for ProjectM (megapack presets)
+
+%package bltc201
+Summary: Extra presets for ProjectM (bltc201 presets)
+Group:   Applications/Multimedia
+
+%description bltc201
+Extra presets for ProjectM (bltc201 presets)
+
+%package tryptonaut
+Summary: Extra presets for ProjectM (tryptonaut presets)
+Group:   Applications/Multimedia
+
+%description tryptonaut
+Extra presets for ProjectM (tryptonaut presets)
+
+%package yin
+Summary: Extra presets for ProjectM (yin presets)
+Group:   Applications/Multimedia
+
+%description yin
+Extra presets for ProjectM (yin presets)
 
 %prep
 
@@ -68,6 +90,7 @@ popd
 7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
+7za x %{SOURCE8} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 
 pushd .
 
@@ -77,9 +100,17 @@ mv milkdrop-md-presets  md
 mv milkdrop-megapack    megapack
 mv milkdrop-vlc-presets vlc
 
+mv presets/presets_bltc201    bltc201
+mv presets/presets_tryptonaut tryptonaut
+mv presets/presets_yin        yin
+
+rm -rf presets
+
 rm md/presets/*.jar
 rm md/presets/*.bat
 
+find . -name "..[a-zA-Z]*" -exec rm {} \;
+find . -name ".[a-zA-Z]*"  -exec rm {} \;
 find . -name "*.cmake" -exec rm {} \;
 
 popd
@@ -95,12 +126,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/projectm/presets/milkdrop-1.0.4/*
 %{_datadir}/projectm/presets/native-2.0.0/*
 %{_datadir}/projectm/presets/vlc/*
+%{_datadir}/projectm/presets/bltc201/*
+%{_datadir}/projectm/presets/tryptonaut/*
+%{_datadir}/projectm/presets/yin/*
 
 %files md
 %{_datadir}/projectm/presets/md/*
 
 %files megapack
 %{_datadir}/projectm/presets/megapack/*
+%{_datadir}/projectm/presets/megapack/\.*
+%{_datadir}/projectm/presets/megapack/\.\.*
+
+%files bltc201
+%{_datadir}/projectm/presets/bltc201/*
+
+%files tryptonaut
+%{_datadir}/projectm/presets/tryptonaut/*
+
+%files yin
+%{_datadir}/projectm/presets/yin/*
 
 %changelog
 * Sun Sep 09 2018 Yann Collette <ycollette dot nospam at free.fr> 1.0.0-1
