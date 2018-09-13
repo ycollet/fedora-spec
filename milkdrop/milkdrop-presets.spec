@@ -106,9 +106,11 @@ rm -rf presets
 rm md/presets/*.jar
 rm md/presets/*.bat
 
-find . -name "..[a-zA-Z]*" -exec rm {} \;
-find . -name ".[a-zA-Z]*"  -exec rm {} \;
-find . -name "*.cmake"     -exec rm {} \;
+find . -name "..[a-zA-Z]*"  -exec rm {} \;
+find . -name ".[a-zA-Z]*"   -exec rm {} \;
+find . -name "...[a-zA-Z]*" -exec rm {} \;
+find . -name ".. [a-zA-Z]*" -exec rm {} \;
+find . -name "*.cmake"      -exec rm {} \;
 
 # Cleanup
 rm -rf milkdrop-2.0.0/CMakeFiles
@@ -116,14 +118,11 @@ rm -rf milkdrop-1.0.4/CMakeFiles
 rm -rf projectm-2.0.0/CMakeFiles
 rm -rf presets-2.0.0/CMakeFiles
 
-find . -type f -exec chmod a-x {} \;
-
 # Rename
 find . -name "*.MILK" -exec mv {} `basename {} .MILK`.milk \;
 find . -name "*.MILk" -exec mv {} `basename {} .MILk`.milk \;
 find . -name "*.MIL"  -exec mv {} `basename {} .MIL`.milk \;
 find . -name "*.mil"  -exec mv {} `basename {} .mil`.milk \;
-
 
 popd
 
