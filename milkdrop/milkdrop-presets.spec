@@ -106,11 +106,12 @@ rm -rf presets
 rm md/presets/*.jar
 rm md/presets/*.bat
 
-find . -name "..[a-zA-Z]*"  -exec rm {} \;
-find . -name ".[a-zA-Z]*"   -exec rm {} \;
-find . -name "...[a-zA-Z]*" -exec rm {} \;
-find . -name ".. [a-zA-Z]*" -exec rm {} \;
-find . -name "*.cmake"      -exec rm {} \;
+find . -name "..[a-zA-Z]*"   -exec rm {} \;
+find . -name ".[a-zA-Z]*"    -exec rm {} \;
+find . -name "...[a-zA-Z]*"  -exec rm {} \;
+find . -name ".. [a-zA-Z]*"  -exec rm {} \;
+find . -name "...@[a-zA-Z]*" -exec rm {} \;
+find . -name "*.cmake"       -exec rm {} \;
 
 # Cleanup
 rm -rf milkdrop-2.0.0/CMakeFiles
