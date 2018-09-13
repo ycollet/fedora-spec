@@ -9,12 +9,11 @@ URL:     http://projectm.sourceforge.net
 Source0: https://sourceforge.net/projects/projectm/files/presets-samples/presets-2.0.0-Source.tar.gz
 Source1: https://sourceforge.net/projects/projectm/files/presets-samples/presets-projectm-2.0.0-Source.tar.gz
 Source2: https://sourceforge.net/projects/projectm/files/presets-samples/presets-milkdrop_200-2.0.0-Source.tar.gz
-Source3: https://sourceforge.net/projects/projectm/files/presets-samples/NativePresets-2.0.0-Source.tar.gz
-Source4: https://sourceforge.net/projects/projectm/files/presets-samples/presets-milkdrop_104-2.0.0-Source.tar.gz
-Source5: http://ycollette.free.fr/Milkdrop/milkdrop-md-presets.zip
-Source6: http://ycollette.free.fr/Milkdrop/milkdrop-megapack.zip
-Source7: http://ycollette.free.fr/Milkdrop/milkdrop-vlc-presets.zip
-Source8: http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip
+Source3: https://sourceforge.net/projects/projectm/files/presets-samples/presets-milkdrop_104-2.0.0-Source.tar.gz
+Source4: http://ycollette.free.fr/Milkdrop/milkdrop-md-presets.zip
+Source5: http://ycollette.free.fr/Milkdrop/milkdrop-megapack.zip
+Source6: http://ycollette.free.fr/Milkdrop/milkdrop-vlc-presets.zip
+Source7: http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -73,7 +72,6 @@ tar xvfz %{SOURCE0} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 tar xvfz %{SOURCE1} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 tar xvfz %{SOURCE2} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 tar xvfz %{SOURCE3} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-tar xvfz %{SOURCE4} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 
 pushd .
 
@@ -82,15 +80,14 @@ cd $RPM_BUILD_ROOT%{_datadir}/projectm/presets
 mv presets-2.0.0-Source              presets-2.0.0
 mv presets-projectm-2.0.0-Source     projectm-2.0.0
 mv presets_milkdrop_200-2.0.0-Source milkdrop-2.0.0
-mv NativePresets-2.0.0-Source        native-2.0.0
 mv presets_milkdrop_104-2.0.0-Source milkdrop-1.0.4
 
 popd
 
+7za x %{SOURCE4} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-7za x %{SOURCE8} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
 
 pushd .
 
@@ -111,7 +108,19 @@ rm md/presets/*.bat
 
 find . -name "..[a-zA-Z]*" -exec rm {} \;
 find . -name ".[a-zA-Z]*"  -exec rm {} \;
-find . -name "*.cmake" -exec rm {} \;
+find . -name "*.cmake"     -exec rm {} \;
+
+# Cleanup
+rm -rf milkdrop-2.0.0/CMakeFiles
+rm -rf milkdrop-1.0.4/CMakeFiles
+rm -rf projectm-2.0.0/CMakeFiles
+rm -rf presets-2.0.0/CMakeFiles
+
+# Rename
+find . -name "*.MILK" -exec mv {} `basename {} .MILK`.milk \;
+find . -name "*.MILk" -exec mv {} `basename {} .MILk`.milk \;
+find . -name "*.MIL"  -exec mv {} `basename {} .MIL`.milk \;
+find . -name "*.mil"  -exec mv {} `basename {} .mil`.milk \;
 
 popd
 
@@ -124,7 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/projectm/presets/projectm-2.0.0/*
 %{_datadir}/projectm/presets/milkdrop-2.0.0/*
 %{_datadir}/projectm/presets/milkdrop-1.0.4/*
-%{_datadir}/projectm/presets/native-2.0.0/*
 %{_datadir}/projectm/presets/vlc/*
 
 %files md
@@ -132,8 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files megapack
 %{_datadir}/projectm/presets/megapack/*
-%{_datadir}/projectm/presets/megapack/\.*
-%{_datadir}/projectm/presets/megapack/\.\.*
 
 %files bltc201
 %{_datadir}/projectm/presets/bltc201/*
