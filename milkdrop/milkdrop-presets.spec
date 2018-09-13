@@ -126,9 +126,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/projectm/presets/milkdrop-1.0.4/*
 %{_datadir}/projectm/presets/native-2.0.0/*
 %{_datadir}/projectm/presets/vlc/*
-%{_datadir}/projectm/presets/bltc201/*
-%{_datadir}/projectm/presets/tryptonaut/*
-%{_datadir}/projectm/presets/yin/*
 
 %files md
 %{_datadir}/projectm/presets/md/*
