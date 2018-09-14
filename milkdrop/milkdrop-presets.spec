@@ -1,5 +1,5 @@
 Summary: Additional presets for ProjectM
-Name:    projectm-extra-presets
+Name:    projectM-extra-presets
 Version: 1.0.0
 Release: 1%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
@@ -20,42 +20,42 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: p7zip tar
 
 %description
-A collection of additional preset for ProjectM.
+A collection of additional preset for projectM.
 
 %package md
-Summary: Extra presets for ProjectM (md presets)
+Summary: Extra presets for projectM (md presets)
 Group:   Applications/Multimedia
 
 %description md
-Extra presets for ProjectM (md presets)
+Extra presets for projectM (md presets)
 
 %package megapack
-Summary: Extra presets for ProjectM (megapack presets)
+Summary: Extra presets for projectM (megapack presets)
 Group:   Applications/Multimedia
 
 %description megapack
-Extra presets for ProjectM (megapack presets)
+Extra presets for projectM (megapack presets)
 
 %package bltc201
-Summary: Extra presets for ProjectM (bltc201 presets)
+Summary: Extra presets for projectM (bltc201 presets)
 Group:   Applications/Multimedia
 
 %description bltc201
-Extra presets for ProjectM (bltc201 presets)
+Extra presets for projectM (bltc201 presets)
 
 %package tryptonaut
-Summary: Extra presets for ProjectM (tryptonaut presets)
+Summary: Extra presets for projectM (tryptonaut presets)
 Group:   Applications/Multimedia
 
 %description tryptonaut
-Extra presets for ProjectM (tryptonaut presets)
+Extra presets for projectM (tryptonaut presets)
 
 %package yin
-Summary: Extra presets for ProjectM (yin presets)
+Summary: Extra presets for projectM (yin presets)
 Group:   Applications/Multimedia
 
 %description yin
-Extra presets for ProjectM (yin presets)
+Extra presets for projectM (yin presets)
 
 %prep
 
@@ -66,16 +66,16 @@ echo "Nothing to build."
 rm -rf $RPM_BUILD_ROOT
 
 # These directories are owned by hydrogen:
-install -dm 0755 $RPM_BUILD_ROOT%{_datadir}/projectm/presets
+install -dm 0755 $RPM_BUILD_ROOT%{_datadir}/projectM/presets
 
-tar xvfz %{SOURCE0} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-tar xvfz %{SOURCE1} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-tar xvfz %{SOURCE2} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-tar xvfz %{SOURCE3} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
+tar xvfz %{SOURCE0} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+tar xvfz %{SOURCE1} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+tar xvfz %{SOURCE2} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+tar xvfz %{SOURCE3} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
 
 pushd .
 
-cd $RPM_BUILD_ROOT%{_datadir}/projectm/presets
+cd $RPM_BUILD_ROOT%{_datadir}/projectM/presets
 
 mv presets-2.0.0-Source              presets-2.0.0
 mv presets-projectm-2.0.0-Source     projectm-2.0.0
@@ -84,14 +84,14 @@ mv presets_milkdrop_104-2.0.0-Source milkdrop-1.0.4
 
 popd
 
-7za x %{SOURCE4} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
-7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectm/presets/
+7za x %{SOURCE4} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
 
 pushd .
 
-cd $RPM_BUILD_ROOT%{_datadir}/projectm/presets
+cd $RPM_BUILD_ROOT%{_datadir}/projectM/presets
 
 mv milkdrop-md-presets  md
 mv milkdrop-megapack    megapack
@@ -100,6 +100,8 @@ mv milkdrop-vlc-presets vlc
 mv presets/presets_bltc201    bltc201
 mv presets/presets_tryptonaut tryptonaut
 mv presets/presets_yin        yin
+
+chmod a+rwx,g+rx,o+rx md megapack vlc bltc201 tryptonaut yin
 
 rm -rf presets
 
@@ -125,6 +127,9 @@ find . -name "*.MILk" -exec mv {} `basename {} .MILk`.milk \;
 find . -name "*.MIL"  -exec mv {} `basename {} .MIL`.milk \;
 find . -name "*.mil"  -exec mv {} `basename {} .mil`.milk \;
 
+# Remove exec right
+find . -name "*.milk"  -exec chmod a-x {} \;
+
 popd
 
 %clean
@@ -132,26 +137,26 @@ popd
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{_datadir}/projectm/presets/presets-2.0.0/*
-%{_datadir}/projectm/presets/projectm-2.0.0/*
-%{_datadir}/projectm/presets/milkdrop-2.0.0/*
-%{_datadir}/projectm/presets/milkdrop-1.0.4/*
-%{_datadir}/projectm/presets/vlc/*
+%{_datadir}/projectM/presets/presets-2.0.0/*
+%{_datadir}/projectM/presets/projectm-2.0.0/*
+%{_datadir}/projectM/presets/milkdrop-2.0.0/*
+%{_datadir}/projectM/presets/milkdrop-1.0.4/*
+%{_datadir}/projectM/presets/vlc/*
 
 %files md
-%{_datadir}/projectm/presets/md/*
+%{_datadir}/projectM/presets/md/*
 
 %files megapack
-%{_datadir}/projectm/presets/megapack/*
+%{_datadir}/projectM/presets/megapack/*
 
 %files bltc201
-%{_datadir}/projectm/presets/bltc201/*
+%{_datadir}/projectM/presets/bltc201/*
 
 %files tryptonaut
-%{_datadir}/projectm/presets/tryptonaut/*
+%{_datadir}/projectM/presets/tryptonaut/*
 
 %files yin
-%{_datadir}/projectm/presets/yin/*
+%{_datadir}/projectM/presets/yin/*
 
 %changelog
 * Sun Sep 09 2018 Yann Collette <ycollette dot nospam at free.fr> 1.0.0-1
