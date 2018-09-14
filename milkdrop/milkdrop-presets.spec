@@ -101,13 +101,6 @@ mv presets/presets_bltc201    bltc201
 mv presets/presets_tryptonaut tryptonaut
 mv presets/presets_yin        yin
 
-chmod a+rwx,g+rx,o+rx md megapack vlc bltc201 tryptonaut yin
-
-rm -rf presets
-
-rm md/presets/*.jar
-rm md/presets/*.bat
-
 find . -name "..[a-zA-Z]*"   -exec rm {} \;
 find . -name ".[a-zA-Z]*"    -exec rm {} \;
 find . -name "...[a-zA-Z]*"  -exec rm {} \;
@@ -116,6 +109,11 @@ find . -name "...@[a-zA-Z]*" -exec rm {} \;
 find . -name "*.cmake"       -exec rm {} \;
 
 # Cleanup
+rm -rf presets
+
+rm md/presets/*.jar
+rm md/presets/*.bat
+
 rm -rf milkdrop-2.0.0/CMakeFiles
 rm -rf milkdrop-1.0.4/CMakeFiles
 rm -rf projectm-2.0.0/CMakeFiles
@@ -127,7 +125,10 @@ find . -name "*.MILk" -exec mv {} `basename {} .MILk`.milk \;
 find . -name "*.MIL"  -exec mv {} `basename {} .MIL`.milk \;
 find . -name "*.mil"  -exec mv {} `basename {} .mil`.milk \;
 
-# Remove exec right
+# Manage permissions
+
+chmod a+rwx,g+rx,o+rx md megapack vlc bltc201 tryptonaut yin
+
 find . -name "*.milk"  -exec chmod a-x {} \;
 
 popd
