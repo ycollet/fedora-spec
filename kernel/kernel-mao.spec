@@ -3,7 +3,7 @@
 %define kpat 18
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 3
-%define krt  10
+%define krt  12
 %define kversion %{kver}
 
 Name: kernel-rt-mao
@@ -29,6 +29,7 @@ BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
 BuildRequires: sparse
 BuildRequires: pesign >= 0.10-4
 BuildRequires: grub2-tools
+BuildRequires: sed
 
 BuildRoot: %{_tmppath}/%{name}-%{PACKAGE_VERSION}-root
 Provides:  kernel-rt-mao-%{version}
@@ -62,6 +63,9 @@ against the %{version} kernel package.
 %patch0 -p1
 
 cp %{SOURCE1} .config
+sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}/g" Makefile
+echo "" > localversion-rt
+
 make oldconfig
 
 %build
@@ -74,44 +78,46 @@ KBUILD_IMAGE=$(make image_name)
 %ifarch ia64
   mkdir -p $RPM_BUILD_ROOT/boot/efi $RPM_BUILD_ROOT/lib/modules
 %else
-  mkdir -p $RPM_BUILD_ROOT/boot $RPM_BUILD_ROOT/lib/modules
+  mkdir -p $RPM_BUILD_ROOT/boot     $RPM_BUILD_ROOT/lib/modules
 %endif
 
 INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= INSTALL_MOD_STRIP=1 CONFIG_MODULE_COMPRESS=1 CONFIG_MODULE_COMPRESS_XZ=1 modules_install
 
 %ifarch ia64
-  cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kversion}
-  ln -s efi/vmlinuz-%{kversion} $RPM_BUILD_ROOT/boot/
+  cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kversion}-rt%{krt}
+  ln -s efi/vmlinuz-%{kversion}-%{krt} $RPM_BUILD_ROOT/boot/
 %else
-  cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/vmlinuz-%{kversion}
+  cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/vmlinuz-%{kversion}-rt%{krt}
 %endif
 
 make %{?_smp_mflags} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_install
-cp System.map $RPM_BUILD_ROOT/boot/System.map-%{kversion}
-cp .config $RPM_BUILD_ROOT/boot/config-%{kversion}
+cp System.map $RPM_BUILD_ROOT/boot/System.map-%{kversion}-rt%{krt}
+cp .config    $RPM_BUILD_ROOT/boot/config-%{kversion}-rt%{krt}
 
-rm -f $RPM_BUILD_ROOT/lib/modules/%{kversion}-rt%{krt}/{build,source}
-mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}
+rm -f    $RPM_BUILD_ROOT/lib/modules/%{kversion}-rt%{krt}/{build,source}
+mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}-rt%{krt}
 EXCLUDES="--exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.ko.xz --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d"
-tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kversion};tar xvf -)
+tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}-rt%{krt}; tar xvf -)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+# restart grub: grub2-mkconfig -o /boot/grub2/grub.cfg
+
 %post
-if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion} -a -r /boot/System.map-%{kversion} ]; then
-  cp /boot/vmlinuz-%{kversion}    /boot/.vmlinuz-%{kversion}-mao
-  cp /boot/System.map-%{kversion} /boot/.System.map-%{kversion}-mao
-  rm -f /boot/vmlinuz-%{kversion} /boot/System.map-%{kversion}
-  /sbin/installkernel %{kversion} /boot/.vmlinuz-%{kversion}-mao /boot/.System.map-%{kversion}-mao
-  rm -f /boot/.vmlinuz-%{kversion}-mao /boot/.System.map-%{kversion}-mao
+if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion}-rt%{krt} -a -r /boot/System.map-%{kversion}-rt%{krt} ]; then
+  cp /boot/vmlinuz-%{kversion}-rt%{krt}    /boot/.vmlinuz-%{kversion}-rt%{krt}
+  cp /boot/System.map-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
+  rm -f /boot/vmlinuz-%{kversion}-rt%{krt} /boot/System.map-%{kversion}-rt%{krt}
+  /sbin/installkernel %{kversion}-rt%{krt} /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
+  rm -f /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
 fi
 
 rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
 rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
-test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
+test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kversion}-rt%{krt}.img
 
 %files
 %defattr (-, root, root)
@@ -124,9 +130,12 @@ test -e /boot/initramfs-%{kversion}.img && rm -f /boot/initramfs-%{kversion}.img
 
 %files devel
 %defattr (-, root, root)
-/usr/src/kernels/%{kversion}
+/usr/src/kernels/%{kversion}-rt%{krt}
 
 %changelog
+* Sat Sep 8 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.18-rt11-3
+- add 4.16.18-rt11 kernel
+
 * Sun Jul 22 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.18-rt10-3
 - add 4.16.18-rt10 kernel
 
