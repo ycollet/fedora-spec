@@ -13,3 +13,7 @@ Enable CONFIG_HZ_1000 (menu Processor type and features -> Timer frequency -> 10
 Save the configuration file.
 
 Copy back .config file into kernel-config-4.16.
+
+To clean-up the boot menu:
+
+$ grub2-mkconfig -o /boot/grub2/grub.cfg
