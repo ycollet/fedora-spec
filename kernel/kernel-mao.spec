@@ -133,6 +133,9 @@ test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kver
 /usr/src/kernels/%{kversion}-rt%{krt}
 
 %changelog
+* Mon Sep 17 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.18-rt12-3
+- add 4.16.18-rt12 kernel
+
 * Sat Sep 8 2018 Yann Collette <ycollette.nospam@free.fr> - 4.16.18-rt11-3
 - add 4.16.18-rt11 kernel
 
