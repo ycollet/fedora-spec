@@ -30,7 +30,7 @@ Klystrack is a chiptune tracker for making chiptune-like music on a modern compu
 %build
 
 sed -i -e "s/-Werror//g" Makefile
-%{__make} DESTDIR=%{buildroot} PREFIX=/usr RES_PATH=/usr/lib64 CFG=release
+%{__make} DESTDIR=%{buildroot} PREFIX=/usr RES_PATH=/usr/lib64/%{name}/ CFG=release
 
 %install
 
