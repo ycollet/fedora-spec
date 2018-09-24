@@ -46,6 +46,13 @@ SDL_AUDIODRIVER=jack klystrack
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
 
+cat > %{buildroot}/%{_bindir}/%{name}-pulse <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=pulse klystrack
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
+
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
 %__install -m 644 icon/256x256.png %{buildroot}/%{_datadir}/icons/%{name}/
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
