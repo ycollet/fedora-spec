@@ -38,6 +38,14 @@ sed -i -e "s/-Werror//g" Makefile
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 %__cp bin.release/%{name} %{buildroot}/%{_bindir}/
+
+cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=jack klystrack
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
+
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
 %__install -m 644 icon/256x256.png %{buildroot}/%{_datadir}/icons/%{name}/
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
