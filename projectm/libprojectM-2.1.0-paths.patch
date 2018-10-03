@@ -1,0 +1,24 @@
+--- projectM-complete-2.1.0-Source/src/libprojectM/CMakeLists.txt.orig	2012-05-19 23:43:26.000000000 -0400
++++ projectM-complete-2.1.0-Source/src/libprojectM/CMakeLists.txt	2014-05-21 15:52:59.847413848 -0400
+@@ -33,9 +33,9 @@ set(PROJECTM_VERSION 2.1.0)
+ set(PROJECTM_ABI_LEVEL 2)
+ #
+ 
+-ADD_DEFINITIONS(-DCMAKE_INSTALL_PREFIX="\\\"${CMAKE_INSTALL_PREFIX}\\\"")
++ADD_DEFINITIONS(-DCMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
+ 
+-SET(LIB_INSTALL_DIR "\${exec_prefix}/lib"
++SET(LIB_INSTALL_DIR "\${exec_prefix}/lib${LIB_SUFFIX}"
+   CACHE PATH "The subdirectory relative to the install prefix where libraries will be installed (default is /lib)"
+   FORCE)
+ 
+@@ -234,7 +234,7 @@ ENDIF(projectM_FONT_MENU MATCHES "${CMAK
+ FILE(GLOB presets "presets/*.milk" "presets/*.prjm" "presets/*.tga")
+ INSTALL(FILES ${presets} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM/presets)
+ INSTALL(FILES ${Renderer_SOURCE_DIR}/projectM.cg ${Renderer_SOURCE_DIR}/blur.cg DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM/shaders)
+-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libprojectM.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig)
++INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libprojectM.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig)
+ INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/config.inp DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM)
+ INSTALL(FILES projectM.hpp event.h dlldefs.h fatal.h PCM.hpp Common.hpp DESTINATION include/libprojectM)
+-INSTALL(TARGETS projectM DESTINATION lib)
++INSTALL(TARGETS projectM DESTINATION lib${LIB_SUFFIX})
