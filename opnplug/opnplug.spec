@@ -3,10 +3,10 @@
 %global gittag0 v1.0.0-beta.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:        adlplug
+Name:        opnplug
 Version:     1.0.0.b2
 Release:     1%{?dist}
-Summary:     Synthesizer plugin for ADLMIDI (VST/LV2)
+Summary:     Synthesizer plugin for OPNMIDI (VST/LV2)
 URL:         https://github.com/jpcima/ADLplug
 Group:       Applications/Multimedia
 
@@ -22,7 +22,7 @@ BuildRequires: freetype-devel
 BuildRequires: libX11-devel libXft-devel libXrandr-devel libXinerama-devel libXcursor-devel
 
 %description
-Synthesizer plugin for ADLMIDI (VST/LV2)
+Synthesizer plugin for OPNMIDI (VST/LV2)
 
 %prep
 
@@ -34,6 +34,7 @@ mkdir -p build
 
 %cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
+       -DADLplug_CHIP=OPN2 \
        .
 
 make VERBOSE=1 %{?_smp_mflags}
@@ -46,7 +47,7 @@ desktop-file-install --vendor '' \
         --add-category=Midi \
         --add-category=Audio \
         --dir %{buildroot}%{_datadir}/applications \
-        %{buildroot}%{_datadir}/applications/ADLplug.desktop
+        %{buildroot}%{_datadir}/applications/OPNplug.desktop
 
 %post
 touch --no-create %{_datadir}/mime/packages &>/dev/null || :
@@ -63,18 +64,12 @@ fi
 
 %files
 %doc LICENSE README.md
-%{_bindir}/ADLplug
+%{_bindir}/OPNplug
 %{_libdir}/lv2/*
 %{_libdir}/vst/*
-%{_datadir}/applications/ADLplug.desktop
-%{_datadir}/pixmaps/ADLplug.png
+%{_datadir}/applications/OPNplug.desktop
+%{_datadir}/pixmaps/OPNplug.png
 
 %changelog
 * Thu Oct 04 2018 Jean Pierre Cimalando <jp-dev.nospam@inbox.ru> - 1.0.0-beta.2-1
-- update to latest master version
-- update package summary
-- remove a libcurl-devel dependency which became unnecessary
-* Fri Sep 28 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.1-2
-- update to latest master version
-* Sat Sep 22 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.1-1
 - Initial spec file
