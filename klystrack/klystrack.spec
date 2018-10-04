@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 4ab998ee33673b87ba2c63e696c65016d73b5deb
-%global gittag0 v1.7.4
+%global commit0 d166aac653f5233f0383c6f4354f92086e517a52
+%global gittag0 v1.7.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Klystrack is a chiptune tracker for making chiptune-like music on a modern computer.
 Name:    klystrack
-Version: 1.7.4
+Version: 1.7.5
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -98,5 +98,7 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Thu Oct 4 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.5-1
+- update to 1.7.5
 * Fri Sep 21 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.4-1
 - Initial release of spec file
