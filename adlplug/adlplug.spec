@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 4693b43e9ae1db35e2ea2dd0f55486f9c59766d4
-%global gittag0 v1.0.0-beta.2
+%global commit0 bbefb4cfef159681fe68db34cab0585b6b7a2ebc
+%global gittag0 v1.0.0-beta.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:        adlplug
-Version:     1.0.0.b2
+Version:     1.0.0.b3
 Release:     2%{?dist}
 Summary:     Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:         https://github.com/jpcima/ADLplug
@@ -115,6 +115,8 @@ fi
 %{_datadir}/pixmaps/OPNplug.png
 
 %changelog
+* Thu Oct 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
+- update to 1.0.0-beta.3-3
 * Thu Oct 04 2018 Jean Pierre Cimalando <jp-dev.nospam@inbox.ru> - 1.0.0-beta.2-1
 - update to latest master version
 - update package summary
