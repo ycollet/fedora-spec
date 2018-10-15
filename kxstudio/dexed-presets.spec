@@ -10,6 +10,7 @@ Source0: http://ycollette.free.fr/Milkdrop/DX7_AllTheWeb.zip
 Source1: http://ycollette.free.fr/Milkdrop/3221-Dexed_cart_1.0.zip
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildArch: noarch
 
 BuildRequires: p7zip
 
