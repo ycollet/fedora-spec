@@ -15,6 +15,7 @@ Source0:      %{name}-%{version}.tar.gz
 # See the "0.9.5 is out" thread
 #Patch1:       hydrogen-devel-warning.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: flac-devel 
@@ -150,6 +151,9 @@ fi
 %{_libdir}/ladspa/libwasp_xshaper.so 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.7-11
+- update for Fedora 29
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9.7-11
 - Remove scons
 

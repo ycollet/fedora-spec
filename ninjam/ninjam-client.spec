@@ -11,6 +11,7 @@ License:        GPLv2+
 URL:            http://www.cockos.com/ninjam/
 Source0:        http://www.cockos.com/ninjam/downloads/src/cclient_src_v0.01a.tar.gz
 
+BuildRequires:  gcc gcc-c++
 BuildRequires:  ncurses-devel
 BuildRequires:  alsa-lib-devel
 BuildRequires:  libvorbis-devel
@@ -35,5 +36,8 @@ make OPTFLAGS=-fpermissive %{?_smp_mflags}
 %{_bindir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
+- update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
 - Initial build

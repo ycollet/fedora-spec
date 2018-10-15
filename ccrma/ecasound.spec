@@ -21,6 +21,7 @@ Packager: Fernando Lopez-Lezcano, Kai Vehmanen
 Vendor: Planet CCRMA
 Distribution: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: ruby ruby-devel python python-devel 
 BuildRequires: ncurses-devel readline-devel
 BuildRequires: alsa-lib-devel audiofile-devel
@@ -175,6 +176,9 @@ mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
 %{_datadir}/ruby/vendor_ruby/ecasound.rb
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Mon Nov  9 2015 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 2.9.1-1
 - remove install strip option to fix packaging on fc23
 

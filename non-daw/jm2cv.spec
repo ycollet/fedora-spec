@@ -14,6 +14,7 @@ License:        GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPL
 # original tarfile can be found here:
 Source0:        https://github.com/harryhaaren/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: cmake
 
@@ -41,5 +42,8 @@ make DESTDIR=%{buildroot} install
 %{_datadir}/%{name}
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1-1
+- update for Fedora 29
+
 * Sat May 30 2015 Yann Collette <ycollette.nospam@free.fr> - 0.1-1
 - Initial release

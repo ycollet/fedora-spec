@@ -15,6 +15,7 @@ License:        GPLv2+
 URL:            https://github.com/falkTX/drmr
 Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: gtk2-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libsndfile-devel
@@ -41,5 +42,8 @@ make VERBOSE=1 DESTDIR=%{buildroot} %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+- update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

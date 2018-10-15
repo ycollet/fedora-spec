@@ -33,7 +33,7 @@ Provides: supercollider-libscsynth <= 3.4.5
 Obsoletes: supercollider-sclang <= 3.4.5
 Provides: supercollider-sclang <= 3.4.5
 
-BuildRequires: cmake gcc-c++ autoconf automake libtool pkgconfig
+BuildRequires: cmake gcc gcc-c++ autoconf automake libtool pkgconfig
 BuildRequires: jack-audio-connection-kit-devel libsndfile-devel alsa-lib-devel
 Buildrequires: fftw3-devel libcurl-devel emacs w3m ruby
 BuildRequires: avahi-devel libX11-devel libXt-devel
@@ -197,6 +197,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.8.0-1
+- update for Fedora 29
+
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> 3.8.0-1
 - update to 3.8.0
 

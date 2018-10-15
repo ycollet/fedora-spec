@@ -17,6 +17,7 @@ URL:          https://svn.xiph.org/trunk/postfish
 Source0:      postfish-%{revision}.tar.gz
 Source1:      postfish.png
 
+BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
 BuildRequires: make
 BuildRequires: alsa-lib-devel
@@ -100,6 +101,8 @@ fi
 %{_sysconfdir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr>
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr>
 - switch to 19646
 * Wed Sep 13 2017 Yann Collette <ycollette.nospam@free.fr> - Initial version

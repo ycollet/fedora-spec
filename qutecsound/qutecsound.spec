@@ -19,6 +19,7 @@ Source0:      https://github.com/CsoundQt/CsoundQt/archive/%{commit0}.tar.gz#/Cs
 Source1:      qutecsound.desktop
 Source2:      qutecsound.xml
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt4-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -104,8 +105,9 @@ fi
 %{_datadir}/icons/hicolor/*
 %{_datadir}/%{name}/*
 
-
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.6b-1
+- update for Fedora 29
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.6b-1
 - update to 0.9.6b
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9.5b-1

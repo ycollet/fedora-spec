@@ -14,6 +14,7 @@ URL:          https://github.com/lenmus/lomse
 Source0:      https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:       lomse_0001-fix-install.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: boost-devel
 BuildRequires: zlib-devel 
 BuildRequires: libpng-devel
@@ -59,5 +60,8 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.19.0-1
+- update for Fedora 29
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.19.0-1
 - Initial version

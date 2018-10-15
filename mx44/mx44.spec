@@ -9,6 +9,7 @@ Source0:      http://web.comhem.se/luna/Mx44.2.tar.gz
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: gtk2-devel
 BuildRequires: alsa-lib-devel
@@ -39,5 +40,8 @@ cd src
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.44.2
+- Update for Fdora 29
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.44.2
 - inital release

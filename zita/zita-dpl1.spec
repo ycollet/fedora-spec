@@ -9,6 +9,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: cairo-devel libpng-devel
 BuildRequires: clthreads-devel clxclient-devel
 BuildRequires: jack-audio-connection-kit-devel
@@ -50,5 +51,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/zita-dpl1/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.3-1
+- update for Fedora 29
+
 * Fri Sep 7 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.3-1
 - initial release

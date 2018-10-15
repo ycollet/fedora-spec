@@ -11,6 +11,7 @@ Patch2:     libprojectM-qt-2.1.0-paths.patch
 #Fix FTBFS with GCC6
 Patch3:     libprojectM-c++14.patch
 
+BuildRequires:  gcc gcc-c++
 BuildRequires:  ftgl-devel cmake glew-devel
 BuildRequires:  libgomp pulseaudio-libs-devel
 # libprojectM-qt
@@ -185,6 +186,9 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications ../src/projectM-
 %endif
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-10
+- update for Fedora 29
+
 * Wed Oct 3 2018 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-10
 - Rebuilt for bug fix
 

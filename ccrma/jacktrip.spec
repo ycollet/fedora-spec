@@ -14,6 +14,7 @@ Packager: Fernando Lopez-Lezcano & Juan-Pablo Caceres
 Vendor: Planet CCRMA
 Distribution: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 %if 0%{?fedora} >= 9
 BuildRequires: qt-devel
 %else
@@ -60,6 +61,8 @@ cd src
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
 * Thu Sep 13 2012 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 1.0.5-2
 - add patch to fix build on Fedora 17 (gcc4.7)
 

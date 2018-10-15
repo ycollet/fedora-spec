@@ -16,6 +16,7 @@ Patch2:       stretchplayer-disable-mpg123.patch
 
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: qt4-devel
@@ -83,5 +84,8 @@ fi
 %exclude %{_datadir}/%{name}/%{name}.desktop
 
 %changelog
-* Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1- 1
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
+- update for Fedora 29
+
+* Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - Initial release

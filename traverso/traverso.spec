@@ -10,6 +10,7 @@ Source0:      traverso-master.tar.gz
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
@@ -49,5 +50,8 @@ make DESTDIR=%{buildroot} install
 %{_bindir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.49.1
+- update for Fedora 29
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.49.1
 - inital release

@@ -17,6 +17,7 @@ Source0:        https://github.com/ssj71/%{name}/archive/%{commit0}.tar.gz#/%{na
 
 Patch0:         rkrlv2-0001-custom-install-path.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: fftw-devel
@@ -45,9 +46,14 @@ make DESTDIR=%{buildroot} install
 %{_datadir}/rkr.lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
+- update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
 - update to latest master
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - update master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
 - Initial build

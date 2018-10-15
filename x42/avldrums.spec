@@ -24,6 +24,7 @@ License:        GPLv2+
 URL:            https://github.com/brummer10/GxPlugins.lv2
 Source0:        avldrums.lv2.%{commit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: cairo-devel
 BuildRequires: pango-devel
@@ -49,7 +50,11 @@ make PREFIX=%{buildroot}%{_usr} LV2DIR=%{buildroot}%{_libdir}/lv2 install
 %{_libdir}/lv2/avldrums.lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.0
+- update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.0
 - update to 43b28a761ea980d176b66347a6f8a44fb4e84611
+
 * Mon Nov 20 2017 Yann Collette <ycollette.nospam@free.fr> - 0.2.2
 - Initial build

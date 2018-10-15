@@ -7,15 +7,16 @@
 %global debug_package %{nil}
 
 Summary: sfArk tool
-Name: sfarkxtc
+Name:    sfarkxtc
 Version: 0.1.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            https://github.com/raboof/sfarkxtc
-Source0:        https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         sfark-0001-fix-install-path.patch
+Group:   Applications/Multimedia
+URL:     https://github.com/raboof/sfarkxtc
+Source0: https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  sfark-0001-fix-install-path.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: sfArkLib-devel
 BuildRequires: zlib-devel
 
@@ -47,5 +48,7 @@ Converts soundfonts in the legacy sfArk v2 file format to sf2
 %{_bindir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
+- update for Fedora 29
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - Initial release of spec file for 0.1

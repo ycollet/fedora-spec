@@ -14,6 +14,7 @@ Source0:       https://github.com/milkytracker/MilkyTracker/archive/%{commit0}.t
 Source1:       %{name}.desktop
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires: gcc gcc-c++
 BuildRequires: SDL2-devel
 BuildRequires: SDL2-static
 BuildRequires: desktop-file-utils
@@ -68,6 +69,9 @@ rm -rf %{buildroot}
 %{_datadir}/doc/MilkyTracker/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> 1.02.00
+- Update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette dot nospam at free dot fr> 1.02.00
 * Tue Jun 28 2016 Joonas Sarajärvi <muep@iki.fi> - 0.90.86-3
 - Rebuilt to make the package available after unretirement

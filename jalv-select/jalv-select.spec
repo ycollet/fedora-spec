@@ -17,6 +17,7 @@ License:      GPLv2+
 
 Source0:      https://github.com/brummer10/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -70,6 +71,8 @@ fi
 %{_mandir}/man1/jalv.select.*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-2
+- update for Fedora 29
 * Sat Sep 29 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-2
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
 - update to 75a52292550178db2e3d82b5656ffd836382c9ef

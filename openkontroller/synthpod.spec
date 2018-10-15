@@ -14,6 +14,7 @@ Source0:      https://github.com/OpenMusicKontrollers/synthpod/archive/%{commit0
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: lilv-devel
 BuildRequires: sratom-devel
@@ -54,6 +55,8 @@ DESTDIR=%{buildroot} ninja install
 %{_datarootdir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
 - update to latest master
 - switch to meson build

@@ -18,6 +18,7 @@ Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{n
 
 Patch0:         protrekkr-0001-fix-system-libraries.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: SDL-devel
@@ -86,5 +87,7 @@ fi
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+- update for Fedora 29
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

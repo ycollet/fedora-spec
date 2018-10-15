@@ -16,6 +16,7 @@ License:       GPLv2+
 URL:           https://github.com/lvtk/lvtk
 Source0:       https://github.com/lvtk/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: python
 BuildRequires: gtkmm24-devel
@@ -40,6 +41,8 @@ was mostly done by Lars Luthman in lv2-c++-tools.
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0
+- update for Fedora 29
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.2.0
 - Initial build

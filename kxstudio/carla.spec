@@ -17,6 +17,7 @@ Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{n
 
 Patch0:         carla-0001-change-default-path.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel
 BuildRequires: python-magic
 BuildRequires: liblo-devel
@@ -84,6 +85,8 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-5
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-5
 - update to latest master
 * Tue May 1 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-4

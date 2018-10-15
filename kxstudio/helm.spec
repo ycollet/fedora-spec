@@ -15,6 +15,7 @@ URL:            https://github.com/mtytel/helm
 Source0:        https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 #Patch0:         helm-0001-fix-type-problem.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: liblo-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
@@ -66,6 +67,8 @@ fi
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
+- update for Fedora 29
 * Sat Aug 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update to abdedd527e6e1cf86636f0f1e8a3e75b06ed166a
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-2

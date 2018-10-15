@@ -16,6 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/brummer10/gxtuner
 Source0:        https://github.com/brummer10/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: gtk3-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libX11-devel
@@ -41,6 +42,8 @@ A tuner for jack, with full jack session managment support
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.0-2
+- update for Fedora 29
 * Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 3.0-2
 - update to latest master
 * Mon Dec 25 2017 Yann Collette <ycollette.nospam@free.fr> - 3.0-1

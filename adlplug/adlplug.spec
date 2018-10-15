@@ -14,6 +14,7 @@ License: BSL-1.0
 
 Source0: ADLplug.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: cmake
@@ -115,6 +116,8 @@ fi
 %{_datadir}/pixmaps/OPNplug.png
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
+- update for Fedora 29
 * Thu Oct 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
 - update to 1.0.0-beta.3-3
 * Thu Oct 04 2018 Jean Pierre Cimalando <jp-dev.nospam@inbox.ru> - 1.0.0-beta.2-1

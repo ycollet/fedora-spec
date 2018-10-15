@@ -8,6 +8,7 @@ Source0:      http://www.spectmorph.org/downloads/spectmorph-%{version}.tar.bz2
 
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: glib2-devel
@@ -83,5 +84,8 @@ fi
 %{_includedir}/%{name}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1
+- update for Fedora 29
+
 * Tue Apr 10 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1
 - Initial release

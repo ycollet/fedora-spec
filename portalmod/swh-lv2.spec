@@ -16,6 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/portalmod/swh-lv2
 Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: fftw-devel
 BuildRequires: libxslt
@@ -38,5 +39,8 @@ make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install-system
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9
+- update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9
 - Initial build

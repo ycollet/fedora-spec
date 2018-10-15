@@ -13,6 +13,7 @@ License:       GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv
 # original tarfile can be found here:
 Source0:       http://downloads.sourceforge.net/project/llcon/Jamulus/3.4.3/Jamulus-3.4.3.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
@@ -68,7 +69,12 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.4.3-1
+- update for Fedora 29
+
 * Wed Jun 13 2018 Yann Collette <ycollette.nospam@free.fr> - 3.4.3-1
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 3.4.2-1
+
 * Sat May 30 2015 Yann Collette <ycollette.nospam@free.fr> - 3.4.1-1
 - Initial release

@@ -22,6 +22,7 @@ Requires:         java >= 1.7
 Requires:         jpackage-utils
 Requires:         eclipse-swt
 Requires:         soundfont2-default
+BuildRequires:    gcc gcc-c++
 BuildRequires:    alsa-lib-devel
 BuildRequires:    itext-core
 BuildRequires:    desktop-file-utils

@@ -17,6 +17,7 @@ URL:            https://github.com/zamaudio/zam-plugins
 # in the zam repository -> make dist
 Source0:        zam-plugins-3.10-10-g7232969.tar.xz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: fftw-devel
@@ -62,6 +63,8 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 %{_libdir}/vst/* 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.10
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 3.10
 - update version to 3.10
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 3.9

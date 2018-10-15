@@ -4,14 +4,15 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: MIDI library
-Name: libsmf
+Name:    libsmf
 Version: 1.3.%{shortcommit0}
 Release: 3%{?dist}
 License: BSD
-Group: Applications/Multimedia
-URL:            https://github.com/stump/libsmf
-Source0:        https://github.com/stump/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+URL:     https://github.com/stump/libsmf
+Source0: https://github.com/stump/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
@@ -59,6 +60,8 @@ autoreconf --force --install
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-3
+- update for Fedora 29
 * Sat Jun 09 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-3
 - update to commit 692e728
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-2

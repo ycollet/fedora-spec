@@ -24,6 +24,7 @@ URL:           https://github.com/michaelwillis/dragonfly-reverb/
 Source0:       dragonfly-reverb.tar.gz
 #Source0:       https://github.com/michaelwillis/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: fftw-devel
@@ -57,5 +58,8 @@ cp bin/DragonflyReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Mon 15 Oct 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.2-1
+- update for Fedora 29
+
 * Fri Oct 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.2-1
 - Initial build

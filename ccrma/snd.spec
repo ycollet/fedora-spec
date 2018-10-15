@@ -39,6 +39,7 @@ Vendor: Planet CCRMA
 Packager: Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel vorbis-tools speex-tools
 BuildRequires: flac-devel 
@@ -252,6 +253,9 @@ fi
 %endif
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Fri Nov  3 2017 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 17.8-1
 - update to 17.8 of 11/1/2017 for fc26 build
 

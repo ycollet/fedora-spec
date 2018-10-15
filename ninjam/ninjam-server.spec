@@ -11,6 +11,7 @@ License:        GPLv2+
 URL:            http://www.cockos.com/ninjam/
 Source0:        http://www.cockos.com/ninjam/downloads/src/ninjam_server_0.06.tar.gz
 
+BuildRequires:  gcc gcc-c++
 BuildRequires:  ncurses-devel
 BuildRequires:  alsa-lib-devel
 BuildRequires:  libvorbis-devel
@@ -40,5 +41,8 @@ make %{?_smp_mflags}
 %{_datadir}/ninjam/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
+- update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.0.1
 - Initial build

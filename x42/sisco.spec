@@ -12,6 +12,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            https://github.com/x42/sisco.lv2
 
+BuildRequires: gcc gcc-c++
 BuildRequires: git
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
@@ -44,7 +45,11 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LD
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.7.3
+- update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.7.3
 - update to 0.7.3
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.6.7
 - Initial build

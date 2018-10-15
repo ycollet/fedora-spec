@@ -48,6 +48,7 @@ Patch7: utf8.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: autoconf automake libtool
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel
 BuildRequires: gettext-devel desktop-file-utils
@@ -265,6 +266,8 @@ fi
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
 * Wed Nov 23 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 
 - do not create symlinks to documentation
 - finish adding all the pd-gui stuff from Debian

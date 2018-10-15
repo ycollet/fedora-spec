@@ -17,6 +17,7 @@ Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 Packager: Fernando Lopez-Lezcano
 
+BuildRequires: gcc gcc-c++
 BuildRequires: bison flex jack-audio-connection-kit-devel, 
 BuildRequires: alsa-lib-devel libsndfile-devel pulseaudio-libs-devel
 
@@ -85,6 +86,9 @@ cp -a %{SOURCE1} %{buildroot}%{_libdir}/xemacs/site-packages/lisp/chuck/chuck.el
 %{_libdir}/xemacs/site-packages/lisp/chuck/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Wed Oct 12 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.3.6.0-1.220a
 - update to experimental 1.3.6.0 (released for the 220a class)
 

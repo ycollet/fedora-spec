@@ -9,6 +9,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 
 %description
@@ -44,5 +45,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.2-1
+- update for Fedora 29
+
 * Fri Sep 7 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.2-1
 - initial release

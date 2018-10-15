@@ -16,6 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/portalmod/tap-lv2
 Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 
 %description
@@ -34,7 +35,11 @@ make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
+- update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
 - update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9-1
 - Initial build

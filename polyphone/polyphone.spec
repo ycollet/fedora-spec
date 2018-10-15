@@ -20,6 +20,7 @@ Source0:      %{name}-%{version}-src.zip
 Source1:      polyphone.desktop
 Source2:      polyphone.xml
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtbase-gui
 BuildRequires: qt5-qtsvg-devel
@@ -99,9 +100,14 @@ fi
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.9.0-1
+- update for Fedora 29
+
 * Wed Nov 15 2017 Yann Collette <ycollette.nospam@free.fr> - 1.9.0-1
 - update to 1.9.0
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 1.8.0-1
 - Update to 1.8.0
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-1
 - Initial spec file 1.6.0

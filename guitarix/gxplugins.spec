@@ -24,6 +24,7 @@ License:       GPLv2+
 URL:           https://github.com/brummer10/GxPlugins.lv2
 SOURCE0:       GxPlugins.lv2.%{commit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: python
 BuildRequires: gtk2-devel
@@ -301,6 +302,8 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %{_libdir}/lv2/gx_bottlerocket.lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4
+- update for Fedora 29
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4
 * Mon Nov 20 2017 Yann Collette <ycollette.nospam@free.fr> - 0.3
 - Initial build

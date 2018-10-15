@@ -15,6 +15,7 @@ Group:        Applications/Multimedia
 
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtdeclarative-devel
 BuildRequires: extra-cmake-modules
 BuildRequires: qt5-qtwebengine-devel
@@ -84,6 +85,8 @@ fi
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+- update for Fedora 29
 * Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - update to latest version
 * Tue Nov 28 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1

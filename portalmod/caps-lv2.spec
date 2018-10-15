@@ -17,6 +17,7 @@ URL:            https://github.com/moddevices/caps-lv2
 Source0:        https://github.com/moddevices/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:         caps-0001-replace-pow10f-by-exp10f.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 
 %description
@@ -38,6 +39,9 @@ make LV2_DEST=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9
+- update for Fedora 29
+
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9
 - Update to latest master version
 

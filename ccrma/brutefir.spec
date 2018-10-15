@@ -11,6 +11,7 @@ Packager: Fernando Lopez-Lezcano
 Vendor: Planet CCRMA
 Distribution: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: fftw-devel flex alsa-lib-devel jack-audio-connection-kit-devel
 
 %description
@@ -51,6 +52,8 @@ through a simple command line interface.
 %{_bindir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
 * Tue Nov 24 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0k-1
 - updated to 1.0k
 

@@ -15,6 +15,7 @@ URL:     http://xjadeo.sourceforge.net/
 Source0: https://github.com/x42/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: xjadeo.desktop
 
+BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
@@ -96,5 +97,8 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.8.7-1
+- update for Fedora 29
+
 * Mon Apr 2 2018 Yann Collette <ycollette dot nospam at free.fr> 0.8.7-1
 - Initial release of spec file

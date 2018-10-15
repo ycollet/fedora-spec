@@ -7,6 +7,8 @@ Group:         Developpment
 URL:           http://sourceforge.net/projects/premake/
 Source0:       http://downloads.sourceforge.net/premake/premake-src-3.7.zip
 
+BuildRequires: gcc gcc-c++
+
 %description
 Describe your software project with a full-featured scripting language and let Premake write the build scripts for you. With one file your project can support both IDE-addicted Windows coders and Linux command-line junkies!
 
@@ -29,6 +31,8 @@ rm -rf %{buildroot}
 %{_bindir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.7-2
+- update for Fedora 29
 * Sat May 12 2017 Yann Collette <ycollette.nospam@free.fr> - 3.7-2
 - change package name
 * Fri Jun 19 2015 Yann Collette <ycollette.nospam@free.fr> - 3.7-1

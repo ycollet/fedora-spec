@@ -14,6 +14,7 @@ Source0:      https://github.com/OpenMusicKontrollers/midi_matrix.lv2/archive/%{
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libX11-devel
@@ -38,6 +39,8 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
 - update to latest master
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-1

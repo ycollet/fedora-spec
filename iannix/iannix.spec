@@ -21,6 +21,7 @@ Source0:      https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{nam
 Source1:      iannix.xml
 Patch0:       iannix-0001-fix-missing-glew.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtscript-devel
 BuildRequires: glew-devel
@@ -86,7 +87,11 @@ fi
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-2
+- update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-2
 - update to the latest master
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9.16-1
 - Initial spec file 0.9.16

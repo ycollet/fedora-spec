@@ -14,6 +14,7 @@ Source0:      https://github.com/nanomsg/nanomsg/archive/%{commit0}.tar.gz#/%{na
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: cmake
 
 %description
@@ -47,6 +48,8 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.2
+- update for Fedora 29
 * Sat May 12 2017 Yann Collette <ycollette.nospam@free.fr> - 1.1.2
 - update to 1.1.2
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0

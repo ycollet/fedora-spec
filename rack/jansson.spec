@@ -12,6 +12,7 @@ Group:   Development/Libraries
 URL:     https://github.com/akheron/jansson
 Source0: https://github.com/akheron/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: cmake
 
 %description
@@ -63,5 +64,8 @@ The %{name}-devel package contains header files for %{name}.
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 2.10-1
+- update for Fedora 29
+
 * Mon Sep 18 2017 Yann Collette <ycollette dot nospam at free.fr> 2.10-1
 - Initial release of spec file for 2.10-1

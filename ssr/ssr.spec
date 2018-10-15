@@ -12,6 +12,7 @@ Group: Applications/Multimedia
 URL:            https://github.com/MaartenBaert/ssr
 Source0:        https://github.com/MaartenBaert/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
@@ -75,5 +76,7 @@ fi
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.3.6-1
+- update for Fedora 29
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.3.6-1
 - Initial release of spec fil to 0.3.6

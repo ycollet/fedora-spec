@@ -18,6 +18,7 @@ Source0:        https://github.com/oxesoft/%{name}/archive/%{commit0}.tar.gz#/%{
 Source1:        http://ycollette.free.fr/LMMS/vst.tar.bz2
 Patch0:         oxefmsynth-0001-fix-ressources-generation.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: libX11-devel
 BuildRequires: wget
 BuildRequires: unzip
@@ -64,6 +65,10 @@ make
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.3.5
+- update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 1.3.5
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.3.4
 - Initial build

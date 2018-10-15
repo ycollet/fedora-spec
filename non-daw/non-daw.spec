@@ -14,6 +14,7 @@ Source0:        non-20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9.tar.gz
 # notified upstream of the following along with incorrect FSF address headers
 #Patch2:         non-daw-0001-add-lib64-in-ladspa-search-path.patch
 
+BuildRequires:  gcc gcc-c++
 BuildRequires:  non-ntk-devel
 BuildRequires:  non-ntk-fluid
 BuildRequires:  liblo-devel
@@ -123,6 +124,9 @@ fi
 %{_datadir}/pixmaps/non-sequencer
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git5ae43bb
+- update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git5ae43bb
 - update to 20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9
 

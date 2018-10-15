@@ -14,6 +14,7 @@ Packager: Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool pkgconfig
 BuildRequires: libsndfile-devel audiofile-devel doxygen
 %if 0%{?fedora} >= 12
@@ -74,6 +75,8 @@ rmdir %{buildroot}%{_libdir}/libgig
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> 4.1.0-1
+- update for Fedora 29
 
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free dot fr> 4.1.0-1
 - update to 4.1.0

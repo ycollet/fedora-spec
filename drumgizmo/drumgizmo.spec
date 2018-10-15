@@ -7,6 +7,7 @@ Group:   Applications/Multimedia
 URL:     http://git.drumgizmo.org/drumgizmo.git
 Source0: http://www.drumgizmo.org/releases/drumgizmo-%version/drumgizmo-%version.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
@@ -59,6 +60,8 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 %exclude %{_bindir}/dgreftest
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.16-2
+- update for Fedora 29
 * Sun Aug 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.16-2
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.15-2
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-2

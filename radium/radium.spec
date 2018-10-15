@@ -13,6 +13,7 @@ License:        GPLv2+
 URL:            https://github.com/kmatheussen/radium
 Source0:        https://github.com/kmatheussen/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt4-devel
 BuildRequires: libXaw-devel
 BuildRequires: python2-devel
@@ -82,5 +83,8 @@ fi
 %{_datadir}/
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.3.2
+- update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 3.3.2
 - Initial build

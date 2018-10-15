@@ -55,6 +55,7 @@ Patch9:  lmms-1.1.3-0010-cmake-no-error.patch
 # nevertheless as it is standard on fedora now. portaudio support is
 # beta (and causes crashes), sdl is rarely used (?).
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
@@ -199,6 +200,9 @@ fi
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-8
+- update for Fedora 29
+
 * Sun Jun 10 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-8
 - add a jack transport patch
 

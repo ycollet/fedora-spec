@@ -14,6 +14,7 @@ URL:          http://sourceforge.net/projects/ourorgan
 #  tar cvfz ourorgan-2294.tar.gz ourorgan-2294
 Source0:      ourorgan-%{revision}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
 BuildRequires: cmake
 BuildRequires: wxGTK3-devel
@@ -69,9 +70,14 @@ fi
 %{_libdir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
+- update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
 - update to release 2294
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
 - update to release 2242
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
 - Initial version

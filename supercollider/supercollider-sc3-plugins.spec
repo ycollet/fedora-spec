@@ -29,6 +29,7 @@ Packager: Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: cmake supercollider-devel fftw-devel stk-devel
 
 Obsoletes: supercollider-extras < 3.5
@@ -81,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.185-g6983e2d
+- update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.185-g6983e2d
 - update to version 3.7.1-185-g6983e2d
 

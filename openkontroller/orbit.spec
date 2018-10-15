@@ -12,6 +12,7 @@ Source0:      https://github.com/OpenMusicKontrollers/orbit.lv2/archive/%{commit
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: cmake
 BuildRequires: zlib-devel
@@ -34,6 +35,8 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
 - update to latest master
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1

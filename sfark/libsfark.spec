@@ -6,15 +6,16 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: sfArk library
-Name: sfArkLib
+Name:    sfArkLib
 Version: 2.24.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            https://github.com/raboof/sfArkLib
-Source0:        https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         libsfark-0001-fix-install-path.patch
+Group:   Applications/Multimedia
+URL:     https://github.com/raboof/sfArkLib
+Source0: https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  libsfark-0001-fix-install-path.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: zlib-devel
 
 %description
@@ -57,5 +58,7 @@ The %{name}-devel package contains header files for %{name}.
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 2.24-1
+- update for Fedora 29
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 2.24-1
 - Initial release of spec file for 2.24

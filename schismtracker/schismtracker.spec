@@ -13,6 +13,7 @@ License:        GPLv3+
 URL:            https://github.com/schismtracker/schismtracker
 Source0:        https://github.com/schismtracker/schismtracker/archive/%{commit0}.tar.gz#/schismtracker-%{shortcommit0}.tar.gz
 
+BuildRequires:  gcc gcc-c++
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  SDL-devel
@@ -54,10 +55,15 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180810-1
+- update to Fedora 29
+
 * Sat Aug 11 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180810-1
 - update to latest version
+
 * Mon May 14 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180513-1
 - update to latest version
+
 * Sat Apr 14 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180209-1
 - Initial version of the package
 

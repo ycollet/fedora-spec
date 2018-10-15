@@ -17,6 +17,7 @@ URL:            https://github.com/falkTX/Cadence
 Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:         cadence_001_fedora_support.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: python3-qt5-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: pulseaudio-libs-devel
@@ -66,6 +67,8 @@ fi
 %{_sysconfdir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - master
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - master
 - update to latest master + qt5
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - master

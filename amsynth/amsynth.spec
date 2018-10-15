@@ -12,6 +12,7 @@ Group:   Applications/Multimedia
 URL:     https://github.com/amsynth/amsynth
 Source0: https://github.com/amsynth/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: gtkmm24-devel
 BuildRequires: desktop-file-utils
@@ -98,6 +99,9 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_libdir}/vst/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-1
+- update for Fedora 29
+
 * Tue Oct 24 2017 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-1
 - update to 1.8.0
 

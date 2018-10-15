@@ -9,6 +9,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: zita-convolver-devel
 BuildRequires: libsndfile-devel
@@ -57,5 +58,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/jconvolver/config/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+- update for Fedora 29
+
 * Fri Sep 17 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - Initial build

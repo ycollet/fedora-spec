@@ -15,6 +15,7 @@ URL:            https://github.com/VCVRack/Rack.git
 
 Source0:        rack.png
 
+BuildRequires: gcc gcc-c++
 BuildRequires: git
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
@@ -156,6 +157,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.5.0
+- update for Fedora 29
+
 * Tue Dec 26 2017 Yann Collette <ycollette.nospam@free.fr> - 0.5.0
 - update to version 0.5.0
 

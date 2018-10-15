@@ -16,6 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/portalmod/mda-lv2
 Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: python
 
@@ -36,7 +37,11 @@ MDA LV2 set of plugins synth from portalmod
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
+- update for Fedora 29
+
 * Sat May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
 - fix f27 / f28 build
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9-1
 - Initial build

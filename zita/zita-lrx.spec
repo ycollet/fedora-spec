@@ -9,6 +9,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: clthreads-devel clxclient-devel freetype-devel
 BuildRequires: libX11-devel libXft-devel cairo-devel
@@ -48,5 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/zita-lrx
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Thu Aug  8 2013 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 0.1.0-1
 - initial build.

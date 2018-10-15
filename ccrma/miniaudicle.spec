@@ -14,6 +14,7 @@ Packager: Fernando Lopez-Lezcano
 Vendor: Planet CCRMA
 Distribution: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: bison flex qt-devel qscintilla-devel
 BuildRequires: jack-audio-connection-kit-devel alsa-lib-devel
 BuildRequires: libsndfile-devel pulseaudio-libs-devel
@@ -72,6 +73,8 @@ cd src
 %{_bindir}/miniAudicle*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
 * Sun Dec  3 2017 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
 - add rpm CFLAGS/LDFLAGS to qmake profile
 

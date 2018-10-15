@@ -8,6 +8,7 @@ URL:            git://git.code.sf.net/p/rakarrack/git
 Source0:        rakarrack.tar.gz
 #Patch0:         rakarrack-0001-fix-distortion-and-ftlk.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: alsa-utils
 BuildRequires: fltk-devel
@@ -68,5 +69,8 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_datadir}/rakarrack/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.5.1-1
+- update for Fedora 29
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 1.5.1-1
 - initial release 

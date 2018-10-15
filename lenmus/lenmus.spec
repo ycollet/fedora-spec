@@ -13,6 +13,7 @@ License:      GPLv2+
 URL:          https://github.com/lenmus/lenmus
 Source0:      https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: boost-devel
 BuildRequires: desktop-file-utils
 BuildRequires: zlib-devel 
@@ -88,5 +89,8 @@ fi
 %{_datadir}/man/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-1
+- update for Fedora 29
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-1
 - Initial version

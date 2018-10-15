@@ -14,6 +14,7 @@ URL:		http://nedko.arnaudov.name/soft/lv2fil/
 Source:		http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:  gcc gcc-c++
 BuildRequires:	liblo-devel
 BuildRequires:	lv2-devel
 BuildRequires:	python
@@ -68,6 +69,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0-13
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 

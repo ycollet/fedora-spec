@@ -16,6 +16,7 @@ Packager: Fernando Lopez-Lezcano
 Vendor: Planet CCRMA
 Distribution: Planet CCRMA
 
+BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils alsa-lib-devel 
 BuildRequires: cmake gettext-devel
 %if 0%{?fedora} <= 1 && 0%{?rhel} != 5
@@ -79,6 +80,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_mandir}/man1/kmidimon.1.gz
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Tue Jan 18 2011 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.7.1-1
 - added documentation patch to build on fc14
 

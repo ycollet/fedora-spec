@@ -15,6 +15,7 @@ Source0:      https://github.com/ycollet/vopa/archive/%{commit0}.tar.gz#/%{name}
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 
 %description
@@ -34,5 +35,7 @@ make INSTALLDIR=%{buildroot}/%{_libdir}/lv2/ %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+- update for Fedora 29
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

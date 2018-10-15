@@ -14,6 +14,7 @@ Source0:      https://github.com/OpenMusicKontrollers/sherlock.lv2/archive/%{com
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: sratom-devel
 BuildRequires: mesa-libGL-devel
@@ -42,6 +43,8 @@ DESTDIR=%{buildroot} ninja install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
 - update to latest master
 - switch to meson build

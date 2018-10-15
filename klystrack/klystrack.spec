@@ -14,6 +14,7 @@ Group:   Applications/Multimedia
 URL:     http://kometbomb.github.io/klystrack/
 Source0: klystrack.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: make
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
@@ -98,6 +99,8 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.5-1
+- update for Fedora 29
 * Thu Oct 4 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.5-1
 - update to 1.7.5
 * Fri Sep 21 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.4-1

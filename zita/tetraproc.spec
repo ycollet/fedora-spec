@@ -11,6 +11,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: clthreads-devel clxclient-devel
 BuildRequires: libsndfile-devel fftw-devel libpng-devel libXft-devel libX11-devel
@@ -50,5 +51,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/tetraproc/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.8.2-1
+- update for Fedora 29
+
 * Fri Aug 17 2018 Yann Collette <ycollette.nospam@free.fr> - 0.8.2-1
 - first release

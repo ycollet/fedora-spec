@@ -9,6 +9,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel alsa-lib-devel
 BuildRequires: zita-resampler-devel zita-alsa-pcmi-devel
 
@@ -52,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/*/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-1
+- update for Fedora 29
+
 * Fri Aug 17 2018 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-1
 - update to 0.7.0
 

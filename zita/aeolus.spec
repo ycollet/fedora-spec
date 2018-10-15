@@ -22,6 +22,7 @@ Distribution: Planet CCRMA
 Obsoletes: aeolus-stops <= 0.3.1-1
 Provides:  aeolus-stops
 
+BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils zita-alsa-pcmi-devel clthreads-devel clxclient-devel
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel desktop-file-utils
 BuildRequires: readline-devel
@@ -108,6 +109,9 @@ desktop-file-install --vendor %{desktop_vendor} \
 %{_datadir}/applications/%{desktop_vendor}-aeolus.desktop
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.5-1
+- update for Fedora 29
+
 * Fri Aug 17 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.5-1
 - update to 0.9.5
 

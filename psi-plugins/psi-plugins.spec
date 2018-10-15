@@ -16,6 +16,7 @@ Group:          Applications/Multimedia
 URL:            https://github.com/ycollet/psi-plugins
 Source0:        https://github.com/ycollet/psi-plugins/archive/%{commit0}.tar.gz#/psi-plugins-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: python
 BuildRequires: fltk-devel
@@ -94,6 +95,9 @@ Roland JP8000/JP8080 but has since widened is scope.
 %{_libdir}/lv2/super_welle-psi.lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.0.1-2
+- update for Fedora 29
+
 * Thu Nov 2 2017 Yann Collette <ycollette dot nospam at free.fr> 0.0.1-2
 - multi-packages
 

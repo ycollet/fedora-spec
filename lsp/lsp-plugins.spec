@@ -17,6 +17,7 @@ URL:            https://github.com/sadko4u/lsp-plugins
 Source0:        https://github.com/sadko4u/lsp-plugins/archive/%{commit0}.tar.gz#/lsp-plugins-%{shortcommit0}.tar.gz
 Source1:        Makefile.lsp
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsndfile-devel
@@ -57,5 +58,8 @@ cp %{SOURCE1} Makefile
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.4-1
+- update for Fedora 29
+
 * Sun Sep 30 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.4-1
 - Initial release of the spec file

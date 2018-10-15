@@ -15,6 +15,7 @@ License:        MIT
 URL:            http://sonic-pi.net/
 Source0:        https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qscintilla-qt5-devel
 BuildRequires: qwt-qt5-devel
@@ -112,6 +113,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.1.0
+- update for Fedora 29
+
 * Tue Apr 17 2018 Yann Collette <ycollette.nospam@free.fr> update build process
 - update build process
 - update to 3.1.0

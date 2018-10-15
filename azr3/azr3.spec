@@ -9,6 +9,7 @@ Source1:       azr3.png
 Patch1:        0001-fix-sigc-namespace.patch
 License:       GPL
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: atk-devel
@@ -72,5 +73,8 @@ EOF
 %doc AUTHORS COPYING ChangeLog README
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+- update for Fedora 29
+
 * Wed Sep 13 2017 Initial release
 - initial release

@@ -14,6 +14,7 @@ Source0:      https://github.com/OpenMusicKontrollers/patchmatrix/archive/%{comm
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
@@ -44,6 +45,8 @@ DESTDIR=%{buildroot} ninja install
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
 - update to latest master
 - switch to meson build

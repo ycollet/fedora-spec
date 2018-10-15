@@ -17,6 +17,7 @@ Source0:        https://github.com/pjz/%{name}/archive/%{commit0}.tar.gz#/%{name
 Patch0:         amuc-0001-fix-build-with-gcc-7.patch
 Patch1:         amuc-0002-add-missing-library.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: libX11-devel
 BuildRequires: libXft-devel
@@ -76,5 +77,8 @@ fi
 %{_mandir}/man1/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.7
+- update for Fedora 29
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.7
 - initial release

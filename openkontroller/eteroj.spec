@@ -12,6 +12,7 @@ Source0:      https://github.com/OpenMusicKontrollers/eteroj.lv2/archive/%{commi
 Group:        Applications/Multimedia
 License:      GPLv2+
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: libuv-devel
 BuildRequires: sratom-devel
@@ -35,6 +36,8 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-2
+- update for Fedora 29
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-2
 - update to latest master
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1

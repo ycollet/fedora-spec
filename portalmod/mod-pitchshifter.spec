@@ -16,6 +16,7 @@ License:        GPLv2+
 URL:            https://github.com/portalmod/mod-pitchshifter
 Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: fftw-devel
 BuildRequires: fftw
@@ -40,6 +41,9 @@ make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9
+- update for Fedora 29
+
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.9
 - update to latest master version
 

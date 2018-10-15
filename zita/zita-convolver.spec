@@ -9,6 +9,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{versi
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: gcc gcc-c++
 BuildRequires: fftw-devel
 
 %description
@@ -59,5 +60,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-1
+- update for Fedora 29
+
 * Fri Sep 7 2018 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-1
 - Initial build.

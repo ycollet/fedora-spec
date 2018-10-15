@@ -18,6 +18,7 @@ Source0:        https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}
 
 #Patch0:         picoloop-0001-fix-makefile.patch
 
+BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: SDL2-devel
@@ -138,6 +139,10 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d
+- update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.67
 - Initial build
