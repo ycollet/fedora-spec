@@ -3,15 +3,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           radium
-Version:        3.3.2
-Release:        1%{?dist}
-Summary:        A tracker / sequencer
+Name:    radium
+Version: 3.3.2
+Release: 1%{?dist}
+Summary: A tracker / sequencer
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/kmatheussen/radium
-Source0:        https://github.com/kmatheussen/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/kmatheussen/radium
+Source0: https://github.com/kmatheussen/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt4-devel

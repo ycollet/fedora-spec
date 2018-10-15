@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
-Name:         mx44
-Version:      0.44.2
-Release:      1%{?dist}
-Summary:      A JACK patchbay in flow matrix style
-URL:          http://web.comhem.se/luna/
-Source0:      http://web.comhem.se/luna/Mx44.2.tar.gz
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    mx44
+Version: 0.44.2
+Release: 1%{?dist}
+Summary: A JACK patchbay in flow matrix style
+URL:     http://web.comhem.se/luna/
+Source0: http://web.comhem.se/luna/Mx44.2.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel

@@ -5,17 +5,17 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           amuc
-Version:        1.7.%{shortcommit0}
-Release:        2%{?dist}
-Summary:        Amuc - the Amsterdam Music Composer
+Name:    amuc
+Version: 1.7.%{shortcommit0}
+Release: 2%{?dist}
+Summary: Amuc - the Amsterdam Music Composer
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/pjz/amuc.git
-Source0:        https://github.com/pjz/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         amuc-0001-fix-build-with-gcc-7.patch
-Patch1:         amuc-0002-add-missing-library.patch
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/pjz/amuc.git
+Source0: https://github.com/pjz/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  amuc-0001-fix-build-with-gcc-7.patch
+Patch1:  amuc-0002-add-missing-library.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel

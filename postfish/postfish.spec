@@ -1,21 +1,21 @@
 %global debug_package %{nil}
 %define revision 19646
 
-Name:         postfish
-Version:      %{revision}.svn
-Release:      2%{?dist}
-Summary:      The Postfish is a digital audio post-processing, restoration, filtering and mixdown tool.
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    postfish
+Version: %{revision}.svn
+Release: 2%{?dist}
+Summary: The Postfish is a digital audio post-processing, restoration, filtering and mixdown tool.
+Group:   Applications/Multimedia
+License: GPLv2+
 
-URL:          https://svn.xiph.org/trunk/postfish
+URL:     https://svn.xiph.org/trunk/postfish
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
 #  svn export -r 19646 https://svn.xiph.org/trunk/postfish postfish-19646
 #  tar cvfz postfish-19646.tar.gz postfish-19646
 
-Source0:      postfish-%{revision}.tar.gz
-Source1:      postfish.png
+Source0: postfish-%{revision}.tar.gz
+Source1: postfish.png
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
@@ -103,7 +103,9 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr>
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr>
 - switch to 19646
+
 * Wed Sep 13 2017 Yann Collette <ycollette.nospam@free.fr> - Initial version
 - Initial version

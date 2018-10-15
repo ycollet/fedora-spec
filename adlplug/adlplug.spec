@@ -3,12 +3,12 @@
 %global gittag0 v1.0.0-beta.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:        adlplug
-Version:     1.0.0.b3
-Release:     2%{?dist}
-Summary:     Synthesizer plugin for ADLMIDI (VST/LV2)
-URL:         https://github.com/jpcima/ADLplug
-Group:       Applications/Multimedia
+Name:    adlplug
+Version: 1.0.0.b3
+Release: 2%{?dist}
+Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
+URL:     https://github.com/jpcima/ADLplug
+Group:   Applications/Multimedia
 
 License: BSL-1.0
 
@@ -118,13 +118,17 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
 - update for Fedora 29
+
 * Thu Oct 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
 - update to 1.0.0-beta.3-3
+
 * Thu Oct 04 2018 Jean Pierre Cimalando <jp-dev.nospam@inbox.ru> - 1.0.0-beta.2-1
 - update to latest master version
 - update package summary
 - remove a libcurl-devel dependency which became unnecessary
+
 * Fri Sep 28 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.1-2
 - update to latest master version
+
 * Sat Sep 22 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.1-1
 - Initial spec file

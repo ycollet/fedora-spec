@@ -5,17 +5,17 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           Carla
-Version:        2.0.0.%{shortcommit0}
-Release:        5%{?dist}
-Summary:        A rack manager JACK
+Name:    Carla
+Version: 2.0.0.%{shortcommit0}
+Release: 5%{?dist}
+Summary: A rack manager JACK
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/falkTX/Carla
-Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/falkTX/Carla
+Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-Patch0:         carla-0001-change-default-path.patch
+Patch0:  carla-0001-change-default-path.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel
@@ -87,15 +87,20 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-5
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-5
 - update to latest master
+
 * Tue May 1 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-4
 - version 4
 - update default folders
 - update to master
+
 * Wed Nov 22 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
 - add a missing requires
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
 - update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta
 - Initial build

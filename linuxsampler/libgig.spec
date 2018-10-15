@@ -2,17 +2,19 @@
 # define svn 3425
 
 Summary: C++ library for loading Gigasampler files and DLS Level 1/2 files.
-Name: libgig
+Name:    libgig
 Version: 4.1.0
 Release: 1%{?svn:.svn%{svn}.1}%{?dist}
 License: GPL
-Group: System Environment/Libraries
+Group:   System Environment/Libraries
 Source0: http://download.linuxsampler.org/packages/libgig-%{version}%{?svn:-svn%{svn}}.tar.bz2
-URL: http://www.linuxsampler.org/libgig/
+URL:     http://www.linuxsampler.org/libgig/
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Packager: Fernando Lopez-Lezcano
+
+Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
-Vendor: Planet CCRMA
+Vendor:       Planet CCRMA
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool pkgconfig

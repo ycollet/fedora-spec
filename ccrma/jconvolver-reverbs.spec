@@ -1,16 +1,18 @@
 Summary: Impulse Responses for Jconvolver
-Name: jconvolver-reverbs
+Name:    jconvolver-reverbs
 Version: 0.8.7
 Release: 1%{?dist}
 License: Unknown
-Group: Applications/Multimedia
-URL: http://kokkinizita.linuxaudio.org/
-Source: http://kokkinizita.linuxaudio.org/linuxaudio/downloads/jconvolver-reverbs.tar.bz2
+Group:   Applications/Multimedia
+URL:     http://kokkinizita.linuxaudio.org/
+Source:  http://kokkinizita.linuxaudio.org/linuxaudio/downloads/jconvolver-reverbs.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Packager: Fernando Lopez-Lezcano
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
-BuildArch: noarch
+BuildArch:    noarch
 
 Requires: jconvolver
 

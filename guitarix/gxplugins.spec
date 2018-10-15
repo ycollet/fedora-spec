@@ -14,15 +14,15 @@
 # cd ..
 # tar cvfz GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5.tar.gz GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
 
-Name:          lv2-GxBottleRocket-plugin
-Version:       0.4.%{shortcommit0}
-Release:       1%{?dist}
-Summary:       LV2 Analogue simulation of a tube preamp
+Name:    lv2-GxBottleRocket-plugin
+Version: 0.4.%{shortcommit0}
+Release: 1%{?dist}
+Summary: LV2 Analogue simulation of a tube preamp
 
-Group:         Applications/Multimedia
-License:       GPLv2+
-URL:           https://github.com/brummer10/GxPlugins.lv2
-SOURCE0:       GxPlugins.lv2.%{commit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/brummer10/GxPlugins.lv2
+SOURCE0: GxPlugins.lv2.%{commit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -304,6 +304,8 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4
 - update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4
+
 * Mon Nov 20 2017 Yann Collette <ycollette.nospam@free.fr> - 0.3
 - Initial build

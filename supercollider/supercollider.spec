@@ -10,28 +10,30 @@
 %endif
 
 Summary: Object oriented programming environment for real-time audio and video processing
-Name: supercollider
+Name:    supercollider
 Version: 3.8.0
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://supercollider.sourceforge.net/
+Group:   Applications/Multimedia
+URL:     http://supercollider.sourceforge.net/
 
 Source0: SuperCollider-%{version}-%{?gitver:%{gitver}-}Source-linux.tar.bz2
-Patch0: supercollider-0001-fix-build-gcc-7.patch
-Patch1: supercollider-0002-fix-rpath.patch
+Patch0:  supercollider-0001-fix-build-gcc-7.patch
+Patch1:  supercollider-0002-fix-rpath.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
 Requires: emacs w3m-el
-Packager: Fernando Lopez-Lezcano
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 # move back sub-packages into main sc package
 Obsoletes: supercollider-libscsynth <= 3.4.5
-Provides: supercollider-libscsynth <= 3.4.5
+Provides:  supercollider-libscsynth <= 3.4.5
 Obsoletes: supercollider-sclang <= 3.4.5
-Provides: supercollider-sclang <= 3.4.5
+Provides:  supercollider-sclang <= 3.4.5
 
 BuildRequires: cmake gcc gcc-c++ autoconf automake libtool pkgconfig
 BuildRequires: jack-audio-connection-kit-devel libsndfile-devel alsa-lib-devel

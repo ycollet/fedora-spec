@@ -62,9 +62,12 @@ autoreconf --force --install
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-3
 - update for Fedora 29
+
 * Sat Jun 09 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-3
 - update to commit 692e728
+
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 1.3-2
 - update to commit fd5abd50
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 1.3-1
 - Initial release of spec file for 1.3

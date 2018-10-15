@@ -3,19 +3,19 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           rkrlv2
-Version:        0.0.1.%{shortcommit0}
-Release:        2%{?dist}
-Summary:        Rakarrack LV2 plugins
-URL:            https://github.com/ssj71/rkrlv2
-Group:          Applications/Multimedia
+Name:    rkrlv2
+Version: 0.0.1.%{shortcommit0}
+Release: 2%{?dist}
+Summary: Rakarrack LV2 plugins
+URL:     https://github.com/ssj71/rkrlv2
+Group:   Applications/Multimedia
 
-License:        GPLv2+
+License: GPLv2+
 
 # original tarfile can be found here:
-Source0:        https://github.com/ssj71/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/ssj71/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-Patch0:         rkrlv2-0001-custom-install-path.patch
+Patch0:  rkrlv2-0001-custom-install-path.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

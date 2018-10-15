@@ -1,17 +1,19 @@
 Summary: Multimachine jam sessions over the internet
-Name: jacktrip
+Name:    jacktrip
 Version: 1.0.5
 Release: 2%{?dist}
 License: STK
-Group: Applications/Multimedia
-URL: http://ccrma.stanford.edu/groups/soundwire/donwloads/jacktrip/jacktrip-0.27.tar.gz
+Group:   Applications/Multimedia
+URL:     http://ccrma.stanford.edu/groups/soundwire/donwloads/jacktrip/jacktrip-0.27.tar.gz
 Source0: http://jacktrip.googlecode.com/files/jacktrip-%{version}.tar.gz
-Patch0: jacktrip-1.0.5-gcc44.patch
-Patch1: jacktrip-1.0.5-startprocess.patch
-Patch2: jacktrip-1.0.5-gcc47.patch
+Patch0:  jacktrip-1.0.5-gcc44.patch
+Patch1:  jacktrip-1.0.5-startprocess.patch
+Patch2:  jacktrip-1.0.5-gcc47.patch
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Packager: Fernando Lopez-Lezcano & Juan-Pablo Caceres
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano & Juan-Pablo Caceres
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 BuildRequires: gcc gcc-c++

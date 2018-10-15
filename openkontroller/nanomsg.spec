@@ -5,14 +5,14 @@
 
 %global debug_package %{nil}
 
-Name:         nanomsg
-Version:      1.1.2
-Release:      1%{?dist}
-Summary:      The nanomsg library is a simple high-performance implementation of several "scalability protocols"
-URL:          https://github.com/nanomsg/nanomsg
-Source0:      https://github.com/nanomsg/nanomsg/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    nanomsg
+Version: 1.1.2
+Release: 1%{?dist}
+Summary: The nanomsg library is a simple high-performance implementation of several "scalability protocols"
+URL:     https://github.com/nanomsg/nanomsg
+Source0: https://github.com/nanomsg/nanomsg/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
@@ -22,9 +22,9 @@ The nanomsg library is a simple high-performance implementation of several "scal
 For more information check the http://nanomsg.org.
 
 %package devel
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Summary:  Development files for %{name}
+Group:    Development/Libraries
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 The %{name}-devel package contains header files for %{name}.
@@ -50,7 +50,9 @@ make DESTDIR=%{buildroot} install
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.2
 - update for Fedora 29
+
 * Sat May 12 2017 Yann Collette <ycollette.nospam@free.fr> - 1.1.2
 - update to 1.1.2
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

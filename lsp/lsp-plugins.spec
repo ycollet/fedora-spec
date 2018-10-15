@@ -7,15 +7,15 @@
 
 %global _cmake_skip_rpath %{nil}
 
-Summary:        LSP LV2 Plugins
-Name:           lsp-plugins
-Version:        1.1.4
-Release:        1%{?dist}
-License:        GPL
-Group:          Applications/Multimedia
-URL:            https://github.com/sadko4u/lsp-plugins
-Source0:        https://github.com/sadko4u/lsp-plugins/archive/%{commit0}.tar.gz#/lsp-plugins-%{shortcommit0}.tar.gz
-Source1:        Makefile.lsp
+Summary: LSP LV2 Plugins
+Name:    lsp-plugins
+Version: 1.1.4
+Release: 1%{?dist}
+License: GPL
+Group:   Applications/Multimedia
+URL:     https://github.com/sadko4u/lsp-plugins
+Source0: https://github.com/sadko4u/lsp-plugins/archive/%{commit0}.tar.gz#/lsp-plugins-%{shortcommit0}.tar.gz
+Source1: Makefile.lsp
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

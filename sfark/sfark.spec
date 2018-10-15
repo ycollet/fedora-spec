@@ -50,5 +50,6 @@ Converts soundfonts in the legacy sfArk v2 file format to sf2
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - update for Fedora 29
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - Initial release of spec file for 0.1

@@ -3,12 +3,12 @@
 %global gittag0 v1.1.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:        lmms-mao
-Version:     1.1.3
-Release:     8%{?dist}
-Summary:     Linux MultiMedia Studio
-URL:         http://lmms.sourceforge.net/
-Group:       Applications/Multimedia
+Name:    lmms-mao
+Version: 1.1.3
+Release: 8%{?dist}
+Summary: Linux MultiMedia Studio
+URL:     http://lmms.sourceforge.net/
+Group:   Applications/Multimedia
 
 # Because dnf does not find a carla so file
 AutoReqProv: no

@@ -1,18 +1,18 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:         6PM
-Version:      0.9
-Release:      1%{?dist}
-Summary:      A Jack audio synthetizer
-URL:          http://sourceforge.net/projects/mv-6pm/
-Group:        Applications/Multimedia
+Name:    6PM
+Version: 0.9
+Release: 1%{?dist}
+Summary: A Jack audio synthetizer
+URL:     http://sourceforge.net/projects/mv-6pm/
+Group:   Applications/Multimedia
 
-License:      GPLv2+
+License: GPLv2+
 
-Source0:      https://sourceforge.net/projects/mv-6pm/files/6PM_v0.9.tgz
-Source1:      mv-6pm.desktop
-Patch1:       mv-6pm-use-global-presets.patch
+Source0: https://sourceforge.net/projects/mv-6pm/files/6PM_v0.9.tgz
+Source1: mv-6pm.desktop
+Patch1:  mv-6pm-use-global-presets.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: pkgconfig(Qt5Core)
@@ -91,5 +91,6 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-1
 - update for Fedora 29
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-1
 - Initial spec file 0.5.0

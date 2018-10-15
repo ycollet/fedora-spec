@@ -1,20 +1,20 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:           ninjam-client
-Version:        0.0.1
-Release:        1%{?dist}
-Summary:        A realtime network sound client
+Name:    ninjam-client
+Version: 0.0.1
+Release: 1%{?dist}
+Summary: A realtime network sound client
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            http://www.cockos.com/ninjam/
-Source0:        http://www.cockos.com/ninjam/downloads/src/cclient_src_v0.01a.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     http://www.cockos.com/ninjam/
+Source0: http://www.cockos.com/ninjam/downloads/src/cclient_src_v0.01a.tar.gz
 
-BuildRequires:  gcc gcc-c++
-BuildRequires:  ncurses-devel
-BuildRequires:  alsa-lib-devel
-BuildRequires:  libvorbis-devel
+BuildRequires: gcc gcc-c++
+BuildRequires: ncurses-devel
+BuildRequires: alsa-lib-devel
+BuildRequires: libvorbis-devel
 
 %description
 A realtime network sound client

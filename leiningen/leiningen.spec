@@ -1,20 +1,21 @@
-Name:           leiningen
-Version:        2.8.1
-Release:        1%{?dist}
-Summary:        Clojure project automation tool
+Name:    leiningen
+Version: 2.8.1
+Release: 1%{?dist}
+Summary: Clojure project automation tool
 
-License:        EPL
-URL:            https://github.com/technomancy/leiningen
-Source0:        %{name}-%{version}.zip
+License: EPL
+URL:     https://github.com/technomancy/leiningen
+Source0: %{name}-%{version}.zip
 
-BuildArch:      noarch
-BuildRequires:  jpackage-utils
-BuildRequires:  java-devel
-BuildRequires:  maven
-BuildRequires:  clojure
-BuildRequires:  wget
+BuildArch: noarch
 
-Requires:       java
+BuildRequires: jpackage-utils
+BuildRequires: java-devel
+BuildRequires: maven
+BuildRequires: clojure
+BuildRequires: wget
+
+Requires: java
 
 %description
 Working on Clojure projects with tools designed for Java can be an

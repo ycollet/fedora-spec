@@ -6,15 +6,15 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:           mod-pitchshifter
-Version:        0.9.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        mod-pitchshifter LV2 set of plugins from portalmod
+Name:    mod-pitchshifter
+Version: 0.9.%{shortcommit0}
+Release: 1%{?dist}
+Summary: mod-pitchshifter LV2 set of plugins from portalmod
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/portalmod/mod-pitchshifter
-Source0:        https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/portalmod/mod-pitchshifter
+Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

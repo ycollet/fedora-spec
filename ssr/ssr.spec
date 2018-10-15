@@ -4,13 +4,13 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Simple Screen Recorder
-Name: ssr
+Name:    ssr
 Version: 0.3.8.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            https://github.com/MaartenBaert/ssr
-Source0:        https://github.com/MaartenBaert/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+URL:     https://github.com/MaartenBaert/ssr
+Source0: https://github.com/MaartenBaert/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
@@ -78,5 +78,6 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.3.6-1
 - update for Fedora 29
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.3.6-1
 - Initial release of spec fil to 0.3.6

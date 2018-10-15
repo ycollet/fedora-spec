@@ -1,55 +1,55 @@
 # Version: 5ae43bb27c42387052a73e5ffc5d33efb9d946a9
 
-Name:           non-daw
-Version:        1.2.0
-Release:        8.git3946d39%{?dist}
-Summary:        A digital audio workstation for JACK
+Name:    non-daw
+Version: 1.2.0
+Release: 8.git3946d39%{?dist}
+Summary: A digital audio workstation for JACK
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            http://non.tuxfamily.org/
-Source0:        non-20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     http://non.tuxfamily.org/
+Source0: non-20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9.tar.gz
 # sh non-snapshot.sh 1904aba516341287ac297cefbbcd185f643e5538
-#Source1:        non-snapshot.sh
+#Source1: non-snapshot.sh
 # notified upstream of the following along with incorrect FSF address headers
-#Patch2:         non-daw-0001-add-lib64-in-ladspa-search-path.patch
+#Patch2:  non-daw-0001-add-lib64-in-ladspa-search-path.patch
 
-BuildRequires:  gcc gcc-c++
-BuildRequires:  non-ntk-devel
-BuildRequires:  non-ntk-fluid
-BuildRequires:  liblo-devel
-BuildRequires:  libsndfile-devel
-BuildRequires:  fltk-fluid
-BuildRequires:  fltk-devel
-BuildRequires:  libsigc++20-devel
-BuildRequires:  jack-audio-connection-kit-devel
-BuildRequires:  desktop-file-utils
-BuildRequires:  libXpm-devel
-BuildRequires:  ladspa-devel
-BuildRequires:  liblrdf-devel
-BuildRequires:  python2
+BuildRequires: gcc gcc-c++
+BuildRequires: non-ntk-devel
+BuildRequires: non-ntk-fluid
+BuildRequires: liblo-devel
+BuildRequires: libsndfile-devel
+BuildRequires: fltk-fluid
+BuildRequires: fltk-devel
+BuildRequires: libsigc++20-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: desktop-file-utils
+BuildRequires: libXpm-devel
+BuildRequires: ladspa-devel
+BuildRequires: liblrdf-devel
+BuildRequires: python2
 
 %description
 Non-daw is a digital audio workstation for JACK
 
 %package -n non-mixer
-Summary:        A digital audio mixer for JACK
-Group:          Applications/Multimedia
+Summary: A digital audio mixer for JACK
+Group:   Applications/Multimedia
 
 %description -n non-mixer
 non-mixer is a powerful, reliable and fast modular Digital Audio Mixer
 
 %package -n non-session-manager
-Summary:        A session manager for JACK
-Group:          Applications/Multimedia
+Summary: A session manager for JACK
+Group:   Applications/Multimedia
 
 %description -n non-session-manager
 non-session-manager is an audio project session manager. It preserves
 application state including JACK and MIDI connections between audio sessions.
 
 %package -n non-sequencer
-Summary:        A MIDI sequencer for JACK
-Group:          Applications/Multimedia
+Summary: A MIDI sequencer for JACK
+Group:   Applications/Multimedia
 
 %description -n non-sequencer
 non-sequencer is a powerful, lightweight, real-time, pattern-based MIDI 

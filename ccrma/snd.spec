@@ -21,23 +21,26 @@
 %endif
 
 Summary: A sound editor (%{pkgver}, %{snd_date})
-Name: snd
+Name:    snd
 Version: %{pkgver}
 Release: 1%{?dist}
 License: LGPL
-Group: Applications/Multimedia
-Source:	ftp://ccrma-ftp.stanford.edu/pub/Lisp/%{tarname}.tar.bz2
+Group:   Applications/Multimedia
+Source:	 ftp://ccrma-ftp.stanford.edu/pub/Lisp/%{tarname}.tar.bz2
 Source1: snd.png
 Source2: snd.desktop
 Source100: snd-specs.tar.gz
 Patch0: snd-13-docdir.patch
 Patch1: snd-14-lpthread.patch
-URL: http://www-ccrma.stanford.edu/software/snd/
+URL:    http://www-ccrma.stanford.edu/software/snd/
+
 Buildroot: %{_tmppath}/%{name}-%{version}-root
-Requires: hicolor-icon-theme
-Vendor: Planet CCRMA
-Packager: Fernando Lopez-Lezcano
+
+Vendor:       Planet CCRMA
+Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
+
+Requires: hicolor-icon-theme
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel

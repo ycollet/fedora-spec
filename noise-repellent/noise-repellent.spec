@@ -5,15 +5,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:          noise-repellent-lv2
-Version:       0.1.4.%{shortcommit0}
-Release:       2%{?dist}
-Summary:       A lv2 plug-in for broadband noise reduction.
+Name:    noise-repellent-lv2
+Version: 0.1.4.%{shortcommit0}
+Release: 2%{?dist}
+Summary: A lv2 plug-in for broadband noise reduction.
 
-Group:         Applications/Multimedia
-License:       GPLv2+
-URL:           https://github.com/lucianodato/noise-repellent
-Source0:       https://github.com/lucianodato/noise-repellent/archive/%{commit0}.tar.gz#/noise-repellent-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/lucianodato/noise-repellent
+Source0: https://github.com/lucianodato/noise-repellent/archive/%{commit0}.tar.gz#/noise-repellent-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

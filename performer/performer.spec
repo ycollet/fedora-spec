@@ -5,15 +5,15 @@
 
 %global debug_package %{nil}
 
-Name:         performer
-Version:      1.0.2
-Release:      1%{?dist}
-Summary:      Live performance audio session manager using Carla
-URL:          https://github.com/progwolff/performer
-Source0:      https://github.com/progwolff/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Group:        Applications/Multimedia
+Name:    performer
+Version: 1.0.2
+Release: 1%{?dist}
+Summary: Live performance audio session manager using Carla
+URL:     https://github.com/progwolff/performer
+Source0: https://github.com/progwolff/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
 
-License:      GPLv2+
+License: GPLv2+
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtdeclarative-devel
@@ -87,7 +87,9 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - update for Fedora 29
+
 * Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - update to latest version
+
 * Tue Nov 28 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1
 - Initial version of spec file

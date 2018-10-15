@@ -6,14 +6,14 @@
 %global gittag0 v3.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           sonic-pi
-Version:        3.1.0
+Name:    sonic-pi
+Version: 3.1.0
 %global gittag0 v%{version}
-Release:        2%{?dist}
-Summary:        A musical programming environment 
-License:        MIT
-URL:            http://sonic-pi.net/
-Source0:        https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
+Release: 2%{?dist}
+Summary: A musical programming environment 
+License: MIT
+URL:     http://sonic-pi.net/
+Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -27,10 +27,10 @@ BuildRequires: ruby-devel
 BuildRequires: aubio-devel
 BuildRequires: boost-devel
 
-Requires(pre):   pulseaudio-module-jack 
-Requires(pre):   supercollider-sc3-plugins
-Requires(pre):   supercollider
-Requires(pre):   ruby
+Requires(pre): pulseaudio-module-jack 
+Requires(pre): supercollider-sc3-plugins
+Requires(pre): supercollider
+Requires(pre): ruby
 
 %description
 Sonic Pi is an open source programming environment designed to explore and

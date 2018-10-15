@@ -1,38 +1,38 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Summary:          A multitrack tablature editor and player written in Java-SWT
-Name:             tuxguitar3
-Version:          1.3.1
-Release:          1%{?dist}
+Summary: A multitrack tablature editor and player written in Java-SWT
+Name:    tuxguitar3
+Version: 1.3.1
+Release: 1%{?dist}
 
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
 #  svn export -r 1462 http://svn.code.sf.net/p/tuxguitar/code/trunk tuxguitar-1.3-1462
 #  tar -czvf tuxguitar-1.3-1462.tar.gz tuxguitar-1.3-1462
-URL:              http://tuxguitar.sourceforge.com
-Source0:          tuxguitar-1.3-1462.tar.gz
-Source1:          tuxguitar-1.3.sh
-Source2:          tuxguitar3.desktop
-License:          LGPLv2+
-Group:            Applications/Multimedia
+URL:     http://tuxguitar.sourceforge.com
+Source0: tuxguitar-1.3-1462.tar.gz
+Source1: tuxguitar-1.3.sh
+Source2: tuxguitar3.desktop
+License: LGPLv2+
+Group:   Applications/Multimedia
 
-Requires:         itext-core
-Requires:         java >= 1.7
-Requires:         jpackage-utils
-Requires:         eclipse-swt
-Requires:         soundfont2-default
-BuildRequires:    gcc gcc-c++
-BuildRequires:    alsa-lib-devel
-BuildRequires:    itext-core
-BuildRequires:    desktop-file-utils
-BuildRequires:    fluidsynth-devel
-BuildRequires:    jack-audio-connection-kit-devel
-BuildRequires:    java-devel >= 1.7
-BuildRequires:    jpackage-utils
-BuildRequires:    maven
+Requires:      itext-core
+Requires:      java >= 1.7
+Requires:      jpackage-utils
+Requires:      eclipse-swt
+Requires:      soundfont2-default
+BuildRequires: gcc gcc-c++
+BuildRequires: alsa-lib-devel
+BuildRequires: itext-core
+BuildRequires: desktop-file-utils
+BuildRequires: fluidsynth-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: java-devel >= 1.7
+BuildRequires: jpackage-utils
+BuildRequires: maven
 
-BuildRequires:    eclipse-swt
+BuildRequires: eclipse-swt
 
 %description
 TuxGuitar is a guitar tablature editor with player support through midi. It can

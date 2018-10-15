@@ -2,20 +2,22 @@
 %define betar 220a.1
 
 Summary: Real-time audio synthesis and graphics/multimedia language
-Name: chuck
+Name:    chuck
 Version: 1.3.6.0
 Release: 1%{?betar:.beta%{?betar}}%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://chuck.cs.princeton.edu/
+Group:   Applications/Multimedia
+URL:     http://chuck.cs.princeton.edu/
 Source0: http://chuck.cs.princeton.edu/release/files/chuck-%{version}%{?beta:-%{?beta}}.tgz
 # emacs mode from: http://wiki.cs.princeton.edu/index.php/Recent_chuck-mode.el
 Source1: chuck-mode.el
-Patch0: chuck-1.3.2.0-beta4-util_thread.patch
+Patch0:  chuck-1.3.2.0-beta4-util_thread.patch
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+
 Distribution: Planet CCRMA
-Vendor: Planet CCRMA
-Packager: Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
+Packager:     Fernando Lopez-Lezcano
 
 BuildRequires: gcc gcc-c++
 BuildRequires: bison flex jack-audio-connection-kit-devel, 

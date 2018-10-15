@@ -14,15 +14,15 @@
 # cd ..
 # tar cvfz avldrums.lv2.43b28a761ea980d176b66347a6f8a44fb4e84611.tar.gz avldrums.lv2.43b28a761ea980d176b66347a6f8a44fb4e84611
 
-Name:           lv2-avldrums-x42-plugin
-Version:        0.3.0.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        LV2 Analogue simulation of a tube preamp
+Name:    lv2-avldrums-x42-plugin
+Version: 0.3.0.%{shortcommit0}
+Release: 1%{?dist}
+Summary: LV2 Analogue simulation of a tube preamp
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/brummer10/GxPlugins.lv2
-Source0:        avldrums.lv2.%{commit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/brummer10/GxPlugins.lv2
+Source0: avldrums.lv2.%{commit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

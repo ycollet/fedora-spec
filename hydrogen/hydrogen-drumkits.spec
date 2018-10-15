@@ -1,10 +1,10 @@
 Summary: Additional DrumKits for Hydrogen
-Name: hydrogen-drumkits
+Name:    hydrogen-drumkits
 Version: 0.9.6
 Release: 3%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
-Group: Applications/Multimedia
-URL: http://www.hydrogen-music.org
+Group:   Applications/Multimedia
+URL:     http://www.hydrogen-music.org
 
 Source0:  http://downloads.sourceforge.net/hydrogen/ForzeeStereo.h2drumkit
 Source1:  http://downloads.sourceforge.net/hydrogen/circAfrique v4.h2drumkit

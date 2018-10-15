@@ -1,14 +1,14 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:         polyphone
-Version:      1.9
-Release:      1%{?dist}
-Summary:      A SF2 sound font editor
-URL:          https://polyphone-soundfonts.com/
-Group:        Applications/Multimedia
+Name:    polyphone
+Version: 1.9
+Release: 1%{?dist}
+Summary: A SF2 sound font editor
+URL:     https://polyphone-soundfonts.com/
+Group:   Applications/Multimedia
 
-License:      GPLv2+
+License: GPLv2+
 
 # Download polyphone-1.9-src.zip
 # unzip polyphone-1.9-src.zip
@@ -16,9 +16,9 @@ License:      GPLv2+
 # rm polyphone-1.9-src.zip
 # zip -r polyphone-1.9-src.zip polyphone-1.9-src/*
 
-Source0:      %{name}-%{version}-src.zip
-Source1:      polyphone.desktop
-Source2:      polyphone.xml
+Source0: %{name}-%{version}-src.zip
+Source1: polyphone.desktop
+Source2: polyphone.xml
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel

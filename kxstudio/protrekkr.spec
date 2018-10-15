@@ -6,17 +6,17 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           protrekkr
-Version:        1.0.0
-Release:        1%{?dist}
-Summary:        A jack tracker
+Name:    protrekkr
+Version: 1.0.0
+Release: 1%{?dist}
+Summary: A jack tracker
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/falkTX/protrekkr
-Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/falkTX/protrekkr
+Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-Patch0:         protrekkr-0001-fix-system-libraries.patch
+Patch0:  protrekkr-0001-fix-system-libraries.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -89,5 +89,6 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

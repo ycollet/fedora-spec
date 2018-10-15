@@ -3,16 +3,16 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:         lomse
-Version:      0.20.0.%{shortcommit0}
-Release:      1%{?dist}
-Summary:      A free open source library for rendering music scores
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    lomse
+Version: 0.20.0.%{shortcommit0}
+Release: 1%{?dist}
+Summary: A free open source library for rendering music scores
+Group:   Applications/Multimedia
+License: GPLv2+
 
-URL:          https://github.com/lenmus/lomse
-Source0:      https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:       lomse_0001-fix-install.patch
+URL:     https://github.com/lenmus/lomse
+Source0: https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  lomse_0001-fix-install.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: boost-devel

@@ -8,12 +8,12 @@
 %define pkgver 0.47.1
 
 Summary: Pure Data
-Name: puredata
+Name:    puredata
 Version: %{pkgver}
 Release: 1%{?dist}
 License: BSD
-Group: Applications/Multimedia
-URL: http://msp.ucsd.edu/software.html
+Group:   Applications/Multimedia
+URL:     http://msp.ucsd.edu/software.html
 Source0: http://msp.ucsd.edu/Software/pd-%{pdver}.src.tar.gz
 
 # in f27 we are getting leftover debuginfo packages that kill the build
@@ -268,6 +268,7 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
+
 * Wed Nov 23 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 
 - do not create symlinks to documentation
 - finish adding all the pd-gui stuff from Debian

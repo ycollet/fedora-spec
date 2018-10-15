@@ -3,14 +3,14 @@
 %global gittag0 v0.7.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           sisco.lv2
-Version:        0.7.3
-Release:        1%{?dist}
-Summary:        A LV2 oscilloscope
+Name:    sisco.lv2
+Version: 0.7.3
+Release: 1%{?dist}
+Summary: A LV2 oscilloscope
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/x42/sisco.lv2
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/x42/sisco.lv2
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git

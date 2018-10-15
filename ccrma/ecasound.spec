@@ -8,17 +8,19 @@
 %define makepdf 0
 
 Summary: ecasound - multitrack audio processing tool
-Name: ecasound
+Name:    ecasound
 Version: 2.9.1
 Release: 1%{?dist}
-Epoch: 1
-URL: http://www.eca.cx/ecasound
-Source: http://ecasound.seul.org/download/ecasound-%{version}.tar.gz
+Epoch:   1
+URL:     http://www.eca.cx/ecasound
+Source:  http://ecasound.seul.org/download/ecasound-%{version}.tar.gz
 License: GPL
-Group: Applications/Multimedia
+Group:   Applications/Multimedia
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-root-%(id -u -n)
-Packager: Fernando Lopez-Lezcano, Kai Vehmanen
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano, Kai Vehmanen
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 BuildRequires: gcc gcc-c++

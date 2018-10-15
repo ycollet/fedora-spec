@@ -1,33 +1,33 @@
-Name:       libprojectM
-Version:    2.1.0
-Release:    10%{?dist}
-Summary:    The libraries for the projectM music visualization plugin
-Group:      Applications/Multimedia
-License:    LGPLv2+
-URL:        http://projectm.sourceforge.net/
-Source0:    http://downloads.sourceforge.net/projectm/%{version}/projectM-complete-%{version}-Source.tar.gz
-Patch1:     libprojectM-2.1.0-paths.patch
-Patch2:     libprojectM-qt-2.1.0-paths.patch
+Name:    libprojectM
+Version: 2.1.0
+Release: 10%{?dist}
+Summary: The libraries for the projectM music visualization plugin
+Group:   Applications/Multimedia
+License: LGPLv2+
+URL:     http://projectm.sourceforge.net/
+Source0: http://downloads.sourceforge.net/projectm/%{version}/projectM-complete-%{version}-Source.tar.gz
+Patch1:  libprojectM-2.1.0-paths.patch
+Patch2:  libprojectM-qt-2.1.0-paths.patch
 #Fix FTBFS with GCC6
-Patch3:     libprojectM-c++14.patch
+Patch3:  libprojectM-c++14.patch
 
-BuildRequires:  gcc gcc-c++
-BuildRequires:  ftgl-devel cmake glew-devel
-BuildRequires:  libgomp pulseaudio-libs-devel
+BuildRequires: gcc gcc-c++
+BuildRequires: ftgl-devel cmake glew-devel
+BuildRequires: libgomp pulseaudio-libs-devel
 # libprojectM-qt
-BuildRequires:  qt4-devel
+BuildRequires: qt4-devel
 #projectM-jack
-BuildRequires:  jack-audio-connection-kit-devel desktop-file-utils
+BuildRequires: jack-audio-connection-kit-devel desktop-file-utils
 %if !0%{?rhel}
 #projectM-libvisual
-BuildRequires:  libvisual-devel = 1:0.4.0, SDL-devel
+BuildRequires: libvisual-devel = 1:0.4.0, SDL-devel
 %endif
 #projectM-pulseaudio
-BuildRequires:  pulseaudio-libs-devel
+BuildRequires: pulseaudio-libs-devel
 
-BuildRequires:  dejavu-sans-mono-fonts, dejavu-sans-fonts
-Requires:   dejavu-sans-mono-fonts, dejavu-sans-fonts
+BuildRequires: dejavu-sans-mono-fonts, dejavu-sans-fonts
 
+Requires: dejavu-sans-mono-fonts, dejavu-sans-fonts
 
 %description
 projectM is an awesome music visualizer. There is nothing better in the world

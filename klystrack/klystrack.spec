@@ -101,7 +101,9 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.5-1
 - update for Fedora 29
+
 * Thu Oct 4 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.5-1
 - update to 1.7.5
+
 * Fri Sep 21 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.4-1
 - Initial release of spec file

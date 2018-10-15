@@ -6,16 +6,16 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:           DISTRHO-Ports
-Version:        1.0.0.%{shortcommit0}
-Release:        3%{?dist}
-Summary:        A set of LV2 plugins
+Name:    DISTRHO-Ports
+Version: 1.0.0.%{shortcommit0}
+Release: 3%{?dist}
+Summary: A set of LV2 plugins
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/DISTRHO/DISTRHO-Ports
-Source0:        https://github.com/DISTRHO/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:        http://downloads.sourceforge.net/premake/premake-linux-3.7.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/DISTRHO/DISTRHO-Ports
+Source0: https://github.com/DISTRHO/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: http://downloads.sourceforge.net/premake/premake-linux-3.7.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: ladspa-devel
@@ -67,11 +67,14 @@ fi
 %{_libdir}/lv2/*
 
 %changelog
-- Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update to a82fff059baafc03f7c0e8b9a99f383af7bfbd79
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-2
 - update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
 - Initial build

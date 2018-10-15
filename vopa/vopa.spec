@@ -6,14 +6,14 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:         vopa-lv2
-Version:      1.0.0
-Release:      1%{?dist}
-Summary:      A LV2 amplifier controlled via MIDI messages
-URL:          https://github.com/ycollet/vopa
-Source0:      https://github.com/ycollet/vopa/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    vopa-lv2
+Version: 1.0.0
+Release: 1%{?dist}
+Summary: A LV2 amplifier controlled via MIDI messages
+URL:     https://github.com/ycollet/vopa
+Source0: https://github.com/ycollet/vopa/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -37,5 +37,6 @@ make INSTALLDIR=%{buildroot}/%{_libdir}/lv2/ %{?_smp_mflags} install
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - Initial build

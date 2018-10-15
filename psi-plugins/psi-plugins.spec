@@ -7,14 +7,14 @@
 
 %define __waf ./waf
 
-Summary:        PSI LV2 Plugins
-Name:           psi-plugins-doc
-Version:        0.0.1
-Release:        2%{?dist}
-License:        GPL
-Group:          Applications/Multimedia
-URL:            https://github.com/ycollet/psi-plugins
-Source0:        https://github.com/ycollet/psi-plugins/archive/%{commit0}.tar.gz#/psi-plugins-%{shortcommit0}.tar.gz
+Summary: PSI LV2 Plugins
+Name:    psi-plugins-doc
+Version: 0.0.1
+Release: 2%{?dist}
+License: GPL
+Group:   Applications/Multimedia
+URL:     https://github.com/ycollet/psi-plugins
+Source0: https://github.com/ycollet/psi-plugins/archive/%{commit0}.tar.gz#/psi-plugins-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

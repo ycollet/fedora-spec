@@ -15,6 +15,7 @@ Source1: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-%{stops_v
 Source2: aeolus.desktop
 
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA

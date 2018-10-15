@@ -1,13 +1,13 @@
 %define revision 2294
 
-Name:         GrandOrgue
-Version:      0.3.1.%{revision}
-Release:      2%{?dist}
-Summary:      GrandOrgue is a sample based pipe organ simulator.
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    GrandOrgue
+Version: 0.3.1.%{revision}
+Release: 2%{?dist}
+Summary: GrandOrgue is a sample based pipe organ simulator.
+Group:   Applications/Multimedia
+License: GPLv2+
 
-URL:          http://sourceforge.net/projects/ourorgan
+URL:     http://sourceforge.net/projects/ourorgan
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
 #  svn export -r 2294 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2294

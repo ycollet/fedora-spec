@@ -1,14 +1,16 @@
 Summary: Generic FIR filter (convolution) engine
-Name: brutefir
+Name:    brutefir
 Version: 1.0k
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://www.ludd.luth.se/~torger/brutefir.html
+Group:   Applications/Multimedia
+URL:     http://www.ludd.luth.se/~torger/brutefir.html
 Source0: http://www.ludd.luth.se/~torger/files/brutefir-%{version}.tar.gz
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
-Packager: Fernando Lopez-Lezcano
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 BuildRequires: gcc gcc-c++
@@ -54,13 +56,13 @@ through a simple command line interface.
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
+
 * Tue Nov 24 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0k-1
 - updated to 1.0k
 
 * Tue Feb  5 2008 Arnaud Gomes-do-Vale <Arnaud.Gomes@ircam.fr>
 - fixed build on x86_64
 
-* Sun Apr 15 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0i-2
 * Sun Apr 15 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0i-2
 - added --build-id to the linker call so that debuginfo is properly
   generated (see: http://fedoraproject.org/wiki/Releases/FeatureBuildId)

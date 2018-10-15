@@ -5,15 +5,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           ams-lv2
-Version:        1.2.1.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        AMS LV2 set of plugins (from Alsa Modular Synth)
+Name:    ams-lv2
+Version: 1.2.1.%{shortcommit0}
+Release: 1%{?dist}
+Summary: AMS LV2 set of plugins (from Alsa Modular Synth)
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/blablack/ams-lv2
-Source0:        https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/blablack/ams-lv2
+Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -51,5 +51,6 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.1
 - update for Fedora 29
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.2.1
 - Initial build

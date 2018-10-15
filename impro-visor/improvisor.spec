@@ -6,37 +6,39 @@
 #
 # in the source directory, remove the sc directory (supercollider for windows).
 #
-%define name            improvisor
-%define maj             9
-%define min             1
-%define patch           0
-%define version         %{maj}.%{min}%{patch}
-%define release         1
+%define name    improvisor
+%define maj     9
+%define min     1
+%define patch   0
+%define version %{maj}.%{min}%{patch}
+%define release 1
 
-Name:                   %{name}
-Version:                %{version}
-Release:                %{release}
-Summary:                Impro-Visor is a music notation program for jazz musicians
-License:                GPL
-URL:                    http://www.cs.hmc.edu/~keller/jazz/improvisor/
-#Source0:                http://sourceforge.net/projects/impro-visor/files/Impro-Visor%207.0%20Release/
-Source0:                %{name}%{maj}%{min}%{patch}.zip
-Source1:                %{name}.sh
-Source2:                %{name}.png
-BuildArch:              noarch
-BuildRequires:          unzip
-BuildRequires:          desktop-file-utils
-BuildRequires:          java-devel
+Name:     %{name}
+Version:  %{version}
+Release:  %{release}
+Summary:  Impro-Visor is a music notation program for jazz musicians
+License:  GPL
+URL:      http://www.cs.hmc.edu/~keller/jazz/improvisor/
+#Source0:  http://sourceforge.net/projects/impro-visor/files/Impro-Visor%207.0%20Release/
+Source0:  %{name}%{maj}%{min}%{patch}.zip
+Source1:  %{name}.sh
+Source2:  %{name}.png
 
-Requires:               jpackage-utils
+BuildArch: noarch
+
+BuildRequires: unzip
+BuildRequires: desktop-file-utils
+BuildRequires: java-devel
+
+Requires:jpackage-utils
 %if 0%{?rhel}
-Requires(post):         jpackage-utils
-Requires(postun):       jpackage-utils
+Requires(post):   jpackage-utils
+Requires(postun): jpackage-utils
 %endif
-Requires:               ant
-Requires:               java >= 1.5
+Requires: ant
+Requires: java >= 1.5
 
-BuildRoot:              %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Impro-Visor (short for Improvisation Advisor) is a music notation

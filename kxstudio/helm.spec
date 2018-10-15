@@ -4,16 +4,16 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           helm
-Version:        1.0.0.%{shortcommit0}
-Release:        3%{?dist}
-Summary:        A LV2 / standalone synth
+Name:    helm
+Version: 1.0.0.%{shortcommit0}
+Release: 3%{?dist}
+Summary: A LV2 / standalone synth
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/mtytel/helm
-Source0:        https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-#Patch0:         helm-0001-fix-type-problem.patch
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/mtytel/helm
+Source0: https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Patch0:  helm-0001-fix-type-problem.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: liblo-devel
@@ -69,11 +69,15 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update for Fedora 29
+
 * Sat Aug 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update to abdedd527e6e1cf86636f0f1e8a3e75b06ed166a
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-2
 - update to 756e767e4d20e77836f45b4ba016ea547d7cf474 
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-1
 - update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta
 - Initial build

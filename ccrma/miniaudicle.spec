@@ -2,16 +2,18 @@
 %define betar 220a.1
 
 Summary: Light weight ChucK development environment
-Name: miniaudicle
+Name:    miniaudicle
 Version: 1.3.6.0
 Release: 1%{?betar:.beta%{?betar}}%{?dist}
 License: LGPL
-Group: Applications/Multimedia
-URL: http://audicle.cs.princeton.edu/mini/
+Group:   Applications/Multimedia
+URL:     http://audicle.cs.princeton.edu/mini/
 Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Packager: Fernando Lopez-Lezcano
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 BuildRequires: gcc gcc-c++
@@ -75,6 +77,7 @@ cd src
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
+
 * Sun Dec  3 2017 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
 - add rpm CFLAGS/LDFLAGS to qmake profile
 

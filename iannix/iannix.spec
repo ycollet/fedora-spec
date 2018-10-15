@@ -8,18 +8,18 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:         IanniX
-Version:      0.9.20.%{shortcommit0}
-Release:      2%{?dist}
-Summary:      A graphic / MIDI / OSC player
-URL:          https://github.com/iannix/Iannix
-Group:        Applications/Multimedia
+Name:    IanniX
+Version: 0.9.20.%{shortcommit0}
+Release: 2%{?dist}
+Summary: A graphic / MIDI / OSC player
+URL:     https://github.com/iannix/Iannix
+Group:   Applications/Multimedia
 
-License:      GPLv2+
+License: GPLv2+
 
-Source0:      https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:      iannix.xml
-Patch0:       iannix-0001-fix-missing-glew.patch
+Source0: https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: iannix.xml
+Patch0:  iannix-0001-fix-missing-glew.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel

@@ -1,20 +1,23 @@
 %define	desktop_vendor planetccrma
 
 Summary: ALSA MIDI monitor
-Name: kmidimon
+Name:    kmidimon
 Version: 0.7.1
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://kmetronome.sourceforge.net/kmidimon/
+Group:   Applications/Multimedia
+URL:     http://kmetronome.sourceforge.net/kmidimon/
 Source0: http://dl.sf.net/sourceforge/kmidimon/kmidimon-%{version}.tar.bz2
 Source1: kmidimon.desktop
-Patch0: kmidimon-0.7.1-dtd.patch
+Patch0:  kmidimon-0.7.1-dtd.patch
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: hicolor-icon-theme
-Packager: Fernando Lopez-Lezcano
-Vendor: Planet CCRMA
+
+Packager:     Fernando Lopez-Lezcano
+Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
+
+Requires: hicolor-icon-theme
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils alsa-lib-devel 

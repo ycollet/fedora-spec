@@ -6,16 +6,16 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:           zam-plugins
-Version:        3.10
-Release:        1%{?dist}
-Summary:        Zam LV2 set of plugins
+Name:    zam-plugins
+Version: 3.10
+Release: 1%{?dist}
+Summary: Zam LV2 set of plugins
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/zamaudio/zam-plugins
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/zamaudio/zam-plugins
 # in the zam repository -> make dist
-Source0:        zam-plugins-3.10-10-g7232969.tar.xz
+Source0: zam-plugins-3.10-10-g7232969.tar.xz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -65,9 +65,12 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.10
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 3.10
 - update version to 3.10
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 3.9
 - update version to 3.9
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 3.5
 - Initial build

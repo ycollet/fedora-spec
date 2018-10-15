@@ -6,16 +6,16 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:           Cadence
-Version:        1.0.0.%{shortcommit0}
-Release:        4%{?dist}
-Summary:        A JACK control center
+Name:    Cadence
+Version: 1.0.0.%{shortcommit0}
+Release: 4%{?dist}
+Summary: JACK control center
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/falkTX/Cadence
-Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         cadence_001_fedora_support.patch
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/falkTX/Cadence
+Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  cadence_001_fedora_support.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python3-qt5-devel
@@ -69,9 +69,12 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - master
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - master
 - update to latest master + qt5
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - master
 - update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - master
 - Initial build

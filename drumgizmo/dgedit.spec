@@ -57,7 +57,9 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.1-2
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.1-2
 - update to eeef75b159369a6441641c2c14c217c29b02a3ff
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - Initial release of spec file for 0.1

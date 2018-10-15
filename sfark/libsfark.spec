@@ -60,5 +60,6 @@ The %{name}-devel package contains header files for %{name}.
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 2.24-1
 - update for Fedora 29
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 2.24-1
 - Initial release of spec file for 2.24

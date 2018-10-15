@@ -6,16 +6,16 @@
 # Disable production of debug package.
 #%global debug_package %{nil}
 
-Name:           caps-lv2
-Version:        0.9.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        Caps LV2 set of plugins from portalmod
+Name:    caps-lv2
+Version: 0.9.%{shortcommit0}
+Release: 1%{?dist}
+Summary: Caps LV2 set of plugins from portalmod
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/moddevices/caps-lv2
-Source0:        https://github.com/moddevices/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:         caps-0001-replace-pow10f-by-exp10f.patch
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/moddevices/caps-lv2
+Source0: https://github.com/moddevices/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  caps-0001-replace-pow10f-by-exp10f.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

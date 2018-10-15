@@ -4,16 +4,16 @@
 #%global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           Rack
-Version:        0.5.0
-Release:        1%{?dist}
-Summary:        A modular synthetizer
+Name:    Rack
+Version: 0.5.0
+Release: 1%{?dist}
+Summary: A modular synthetizer
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/VCVRack/Rack.git
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/VCVRack/Rack.git
 
-Source0:        rack.png
+Source0: rack.png
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git

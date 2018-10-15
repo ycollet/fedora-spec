@@ -3,15 +3,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:         lenmus
-Version:      5.4.2.%{shortcommit0}
-Release:      1%{?dist}
-Summary:      An app to study music theory and train you ear
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    lenmus
+Version: 5.4.2.%{shortcommit0}
+Release: 1%{?dist}
+Summary: An app to study music theory and train you ear
+Group:   Applications/Multimedia
+License: GPLv2+
 
-URL:          https://github.com/lenmus/lenmus
-Source0:      https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+URL:     https://github.com/lenmus/lenmus
+Source0: https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: boost-devel

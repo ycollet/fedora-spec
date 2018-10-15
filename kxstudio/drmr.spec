@@ -5,15 +5,15 @@
 %global gittag0 lv2unstable
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           drmr
-Version:        1.0.0.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        A drum LV2 plugin
+Name:    drmr
+Version: 1.0.0.%{shortcommit0}
+Release: 1%{?dist}
+Summary: A drum LV2 plugin
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/falkTX/drmr
-Source0:        https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/falkTX/drmr
+Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: gtk2-devel

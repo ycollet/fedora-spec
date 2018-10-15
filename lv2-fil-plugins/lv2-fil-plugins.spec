@@ -1,28 +1,29 @@
 %global pkgname lv2fil
 
-Summary:	Four-band parametric equalizers
-Name:		lv2-fil-plugins
-Version:	2.0
-Release:	13%{?dist}
+Summary: Four-band parametric equalizers
+Name:    lv2-fil-plugins
+Version: 2.0
+Release: 13%{?dist}
 # lv2_ui.h is LGPLv2+
 # log.*, lv2filter.*, lv2plugin.c are GPLv2
 # The rest is GPLv2+
 # The author claims GPLv2 for the software
-License:	LGPLv2+ and GPLv2 and GPLv2+
-Group:		Applications/Multimedia
-URL:		http://nedko.arnaudov.name/soft/lv2fil/
-Source:		http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+License: LGPLv2+ and GPLv2 and GPLv2+
+Group:   Applications/Multimedia
+URL:     http://nedko.arnaudov.name/soft/lv2fil/
+Source:  http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.tar.bz2
 
-BuildRequires:  gcc gcc-c++
-BuildRequires:	liblo-devel
-BuildRequires:	lv2-devel
-BuildRequires:	python
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires:	lv2
-Requires:	pycairo
-Requires:	pygtk2
-Requires:	python2-pyliblo
+BuildRequires: gcc gcc-c++
+BuildRequires: liblo-devel
+BuildRequires: lv2-devel
+BuildRequires: python
+
+Requires: lv2
+Requires: pycairo
+Requires: pygtk2
+Requires: python2-pyliblo
 
 %description
 Stereo and mono LV2 plugins, four-band parametric equalizers.

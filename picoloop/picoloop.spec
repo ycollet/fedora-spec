@@ -6,17 +6,17 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           picoloop
-Version:        0.77d.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        An audio sequencer
+Name:    picoloop
+Version: 0.77d.%{shortcommit0}
+Release: 1%{?dist}
+Summary: An audio sequencer
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/yoyz/audio
-Source0:        https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/yoyz/audio
+Source0: https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-#Patch0:         picoloop-0001-fix-makefile.patch
+#Patch0: picoloop-0001-fix-makefile.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel

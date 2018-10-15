@@ -1,11 +1,11 @@
-Summary:       Tool for describing builds
-Name:          premake3
-Version:       3.7
-Release:       2%{?dist}
-License:       GPLv3+
-Group:         Developpment
-URL:           http://sourceforge.net/projects/premake/
-Source0:       http://downloads.sourceforge.net/premake/premake-src-3.7.zip
+Summary: Tool for describing builds
+Name:    premake3
+Version: 3.7
+Release: 2%{?dist}
+License: GPLv3+
+Group:   Developpment
+URL:     http://sourceforge.net/projects/premake/
+Source0: http://downloads.sourceforge.net/premake/premake-src-3.7.zip
 
 BuildRequires: gcc gcc-c++
 
@@ -33,7 +33,9 @@ rm -rf %{buildroot}
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.7-2
 - update for Fedora 29
+
 * Sat May 12 2017 Yann Collette <ycollette.nospam@free.fr> - 3.7-2
 - change package name
+
 * Fri Jun 19 2015 Yann Collette <ycollette.nospam@free.fr> - 3.7-1
 - initial release

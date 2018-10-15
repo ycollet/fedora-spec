@@ -6,18 +6,18 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:         qutecsound
-Version:      0.9.6b
-Release:      1%{?dist}
-Summary:      A csound file editor
-URL:          https://github.com/CsoundQt/CsoundQt
-Group:        Applications/Multimedia
+Name:    qutecsound
+Version: 0.9.6b
+Release: 1%{?dist}
+Summary: A csound file editor
+URL:     https://github.com/CsoundQt/CsoundQt
+Group:   Applications/Multimedia
 
-License:      GPLv2+
+License: GPLv2+
 
-Source0:      https://github.com/CsoundQt/CsoundQt/archive/%{commit0}.tar.gz#/CsoundQt-%{shortcommit0}.tar.gz
-Source1:      qutecsound.desktop
-Source2:      qutecsound.xml
+Source0: https://github.com/CsoundQt/CsoundQt/archive/%{commit0}.tar.gz#/CsoundQt-%{shortcommit0}.tar.gz
+Source1: qutecsound.desktop
+Source2: qutecsound.xml
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt4-devel
@@ -108,7 +108,9 @@ fi
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.6b-1
 - update for Fedora 29
+
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.6b-1
 - update to 0.9.6b
+
 * Mon Jun 01 2015 Yann Collette <ycollette.nospam@free.fr> - 0.9.5b-1
 - Initial spec file

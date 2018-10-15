@@ -16,28 +16,31 @@
 %define gitrev 185
 
 Summary: Collection of SuperCollider plugins
-Name: supercollider-sc3-plugins
+Name:    supercollider-sc3-plugins
 Version: %{gitver}
 Release: 1%{?gitrev:.%{gitrev}}%{?gittag:.%{gittag}}%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL: http://sc3-plugins.sourceforge.net/
+Group:   Applications/Multimedia
+URL:     http://sc3-plugins.sourceforge.net/
 Source0: sc3-plugins-src-%{gittag}.tar.gz
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: supercollider >= 3.5
-Packager: Fernando Lopez-Lezcano
+
+Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
-Vendor: Planet CCRMA
+Vendor:       Planet CCRMA
+
+Requires: supercollider >= 3.5
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake supercollider-devel fftw-devel stk-devel
 
 Obsoletes: supercollider-extras < 3.5
-Provides: supercollider-extras = %{version}-%{release}
+Provides:  supercollider-extras = %{version}-%{release}
 Obsoletes: supercollider-beastmulchplugins < 3.5
-Provides: supercollider-beastmulchplugins = %{version}-%{release}
+Provides:  supercollider-beastmulchplugins = %{version}-%{release}
 Obsoletes: supercollider-bbcut2 < 3.5
-Provides: supercollider-bbcut2 = %{version}-%{release}
+Provides:  supercollider-bbcut2 = %{version}-%{release}
 
 %description
 Collection of SuperCollider plugins

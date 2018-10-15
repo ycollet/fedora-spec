@@ -4,13 +4,13 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Software Synthesizer
-Name: horgand
+Name:    horgand
 Version: 1.15.0
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            https://github.com/ycollet/horgand
-Source0:        https://github.com/ycollet/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+URL:     https://github.com/ycollet/horgand
+Source0: https://github.com/ycollet/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
@@ -65,5 +65,6 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.15.0-1
 - update for Fedora 29
+
 * Thu May 12 2016 Yann Collette <ycollette dot nospam at free.fr> 1.15.0-1
 - Initial release of spec fil to 1.15.0

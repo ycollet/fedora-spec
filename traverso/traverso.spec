@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global debug_package %{nil}
 
-Name:         traverso
-Version:      0.49.1
-Release:      1%{?dist}
-Summary:      Traverso: A Multitrack Audio Recorder and Editor
-URL:          https://savannah.nongnu.org/projects/traverso/
-Source0:      traverso-master.tar.gz
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    traverso
+Version: 0.49.1
+Release: 1%{?dist}
+Summary: Traverso: A Multitrack Audio Recorder and Editor
+URL:     https://savannah.nongnu.org/projects/traverso/
+Source0: traverso-master.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel

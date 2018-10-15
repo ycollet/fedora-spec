@@ -6,15 +6,15 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-Name:          lvtk
-Version:       2.0.0.%{shortcommit0}
-Release:       1%{?dist}
-Summary:       LV2 Toolkit
+Name:    lvtk
+Version: 2.0.0.%{shortcommit0}
+Release: 1%{?dist}
+Summary: LV2 Toolkit
 
-Group:         Applications/Multimedia
-License:       GPLv2+
-URL:           https://github.com/lvtk/lvtk
-Source0:       https://github.com/lvtk/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/lvtk/lvtk
+Source0: https://github.com/lvtk/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -43,6 +43,8 @@ was mostly done by Lars Luthman in lv2-c++-tools.
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0
 - update for Fedora 29
+
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.2.0
 - Initial build

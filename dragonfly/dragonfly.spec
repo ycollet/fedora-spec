@@ -6,14 +6,15 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:          dragonfly-reverb
-Version:       0.9.2
-Release:       1%{?dist}
-Summary:       DragonFly reverberation plugin
+Name:    dragonfly-reverb
+Version: 0.9.2
+Release: 1%{?dist}
+Summary: DragonFly reverberation plugin
 
-Group:         Applications/Multimedia
-License:       GPLv2+
-URL:           https://github.com/michaelwillis/dragonfly-reverb/
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/michaelwillis/dragonfly-reverb/
+
 # git clone --recurse https://github.com/michaelwillis/dragonfly-reverb/
 # cp -r dragonfly-reverb /tmp/dragonfly-reverb
 # cd /tmp/dragonfly-reverb
@@ -21,8 +22,8 @@ URL:           https://github.com/michaelwillis/dragonfly-reverb/
 # cd ..
 # tar cvfz dragonfly-reverb.tar.gz dragonfly-reverb/*
 
-Source0:       dragonfly-reverb.tar.gz
-#Source0:       https://github.com/michaelwillis/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: dragonfly-reverb.tar.gz
+#Source0: https://github.com/michaelwillis/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

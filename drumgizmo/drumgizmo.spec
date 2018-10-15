@@ -62,10 +62,16 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.16-2
 - update for Fedora 29
+
 * Sun Aug 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.16-2
+
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.15-2
+
 * Sat May 12 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-2
+
 * Mon Oct 23 2017 Yann Collette <ycollette dot nospam at free.fr> 0.9.14-1
+
 * Thu May 12 2016 Yann Collette <ycollette dot nospam at free.fr> 0.9.10-1
+
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 0.9.8.1-1
 - Initial release of spec fil to 0.9.8.1

@@ -1,12 +1,12 @@
 Summary: Guitar Amplifier emulator
-Name: rakarrack
+Name:    rakarrack
 Version: 0.6.2
 Release: 2%{?dist}
 License: GPL
-Group: Applications/Multimedia
-URL:            git://git.code.sf.net/p/rakarrack/git
-Source0:        rakarrack.tar.gz
-#Patch0:         rakarrack-0001-fix-distortion-and-ftlk.patch
+Group:   Applications/Multimedia
+URL:     git://git.code.sf.net/p/rakarrack/git
+Source0: rakarrack.tar.gz
+#Patch0:  rakarrack-0001-fix-distortion-and-ftlk.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel

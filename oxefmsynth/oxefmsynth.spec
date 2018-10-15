@@ -6,17 +6,17 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           oxefmsynth
-Version:        1.3.5.%{shortcommit0}
-Release:        1%{?dist}
-Summary:        A FM synthetized
+Name:    oxefmsynth
+Version: 1.3.5.%{shortcommit0}
+Release: 1%{?dist}
+Summary: A FM synthetized
 
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            https://github.com/oxesoft/oxefmsynth
-Source0:        https://github.com/oxesoft/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:        http://ycollette.free.fr/LMMS/vst.tar.bz2
-Patch0:         oxefmsynth-0001-fix-ressources-generation.patch
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     https://github.com/oxesoft/oxefmsynth
+Source0: https://github.com/oxesoft/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
+Patch0:  oxefmsynth-0001-fix-ressources-generation.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: libX11-devel

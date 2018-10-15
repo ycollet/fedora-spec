@@ -5,14 +5,14 @@
 
 %global debug_package %{nil}
 
-Name:         sherlock.lv2
-Version:      0.16.0
-Release:      2%{?dist}
-Summary:      An investigative LV2 plugin bundle
-URL:          https://github.com/OpenMusicKontrollers/sherlock.lv2
-Source0:      https://github.com/OpenMusicKontrollers/sherlock.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Group:        Applications/Multimedia
-License:      GPLv2+
+Name:    sherlock.lv2
+Version: 0.16.0
+Release: 2%{?dist}
+Summary: An investigative LV2 plugin bundle
+URL:     https://github.com/OpenMusicKontrollers/sherlock.lv2
+Source0: https://github.com/OpenMusicKontrollers/sherlock.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv2+
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -45,10 +45,13 @@ DESTDIR=%{buildroot} ninja install
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
 - update for Fedora 29
+
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
 - update to latest master
 - switch to meson build
+
 * Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-1
 - update to latest master
+
 * Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.12.0
 - Initial build

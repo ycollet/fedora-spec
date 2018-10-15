@@ -3,21 +3,21 @@
 %global gittag0 20180810
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:           schismtracker
-Version:        20180810
-Release:        1%{?dist}
-Summary:        Module tracker software for creating music
+Name:    schismtracker
+Version: 20180810
+Release: 1%{?dist}
+Summary: Module tracker software for creating music
 
-Group:          Applications/Multimedia
-License:        GPLv3+
-URL:            https://github.com/schismtracker/schismtracker
-Source0:        https://github.com/schismtracker/schismtracker/archive/%{commit0}.tar.gz#/schismtracker-%{shortcommit0}.tar.gz
+Group:   Applications/Multimedia
+License: GPLv3+
+URL:     https://github.com/schismtracker/schismtracker
+Source0: https://github.com/schismtracker/schismtracker/archive/%{commit0}.tar.gz#/schismtracker-%{shortcommit0}.tar.gz
 
-BuildRequires:  gcc gcc-c++
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  SDL-devel
-BuildRequires:  python
+BuildRequires: gcc gcc-c++
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: SDL-devel
+BuildRequires: python
 
 %description
 Schism Tracker is a free and open-source reimplementation of [Impulse
