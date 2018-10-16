@@ -1,11 +1,10 @@
 Name:    spectmorph
-Version: 0.4.0
+Version: 0.4.1
 Release: 1%{?dist}
 Summary: SpectMorph is a free software project which allows to analyze samples of musical instruments, and to combine them (morphing)
 URL:     http://www.spectmorph.org
 Group:   Applications/Multimedia
-Source0: http://www.spectmorph.org/downloads/spectmorph-%{version}.tar.bz2
-
+Source0: http://www.spectmorph.org/files/releases/spectmorph-%{version}.tar.bz2
 License: GPLv2+
 
 BuildRequires: gcc gcc-c++
@@ -84,8 +83,9 @@ fi
 %{_includedir}/%{name}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.1-1
 - update for Fedora 29
+- update to 0.4.1
 
 * Tue Apr 10 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1
 - Initial release

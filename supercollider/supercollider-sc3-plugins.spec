@@ -4,16 +4,20 @@
 # git describe
 #
 # mv sc3-plugins sc3-plugins-src-gXXXXXXX
+# cd sc3-plugins-src-gXXXXXXX
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
 # tar cvzf sc3-plugins-src-gXXXXXXX.tar.gz sc3-plugins-src-gXXXXXXX
 #
 # 2016.11.25: Version-3.7.1-102-gf1200cd
 # 2017.10.25: Version-3.7.1-141-g5342a4a
 # 2017.11.02: Version-3.7.1-147-g04a3dca
 # 2018.05.12: Version-3.7.1-185-g6983e2d
+# 2018.10.15: Version-3.7.1-270-g5e83bd9
 
 %define gitver 3.7.1
-%define gittag g6983e2d
-%define gitrev 185
+%define gittag g5e83bd9
+%define gitrev 270
 
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
@@ -87,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.185-g6983e2d
 - update for Fedora 29
+- update to Version-3.7.1-270-g5e83bd9
 
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.185-g6983e2d
 - update to version 3.7.1-185-g6983e2d

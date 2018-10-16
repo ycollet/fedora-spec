@@ -1,5 +1,5 @@
 #
-# https://github.com/supercollider/supercollider/releases/tag/Version-3.8.0
+# https://github.com/supercollider/supercollider/releases/tag/Version-3.8.1
 
 # build options
 %define cmakeopts -DCMAKE_C_FLAGS="%{optflags} -fext-numeric-literals" -DCMAKE_CXX_FLAGS="%{optflags} -fext-numeric-literals"
@@ -11,7 +11,7 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
-Version: 3.8.0
+Version: 3.8.1
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -201,6 +201,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.8.0-1
 - update for Fedora 29
+- update to 3.8.1
 
 * Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> 3.8.0-1
 - update to 3.8.0
