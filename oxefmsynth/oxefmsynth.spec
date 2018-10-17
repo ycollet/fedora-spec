@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 f42210e48c8359dc2188ddf2b64b66b363a7edbe
+%global commit0 fe078ea036991081c3a28bb388a3fecd0e8e3a5d
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -16,7 +16,6 @@ License: GPLv2+
 URL:     https://github.com/oxesoft/oxefmsynth
 Source0: https://github.com/oxesoft/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
-Patch0:  oxefmsynth-0001-fix-ressources-generation.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: libX11-devel
@@ -28,7 +27,6 @@ A FM synthetizer
 
 %prep
 %setup -qn %{name}-%{commit0}
-%patch0 -p1
 
 %build
 
@@ -67,6 +65,7 @@ make
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.3.5
 - update for Fedora 29
+- update to fe078ea036991081c3a28bb388a3fecd0e8e3a5d
 
 * Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 1.3.5
 
