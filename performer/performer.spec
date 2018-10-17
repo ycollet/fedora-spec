@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 7c616a8a7d7fedd2fa5bfd7ce1f5d867d80cab0a
+%global commit0 59ce476dc03d494bf6aa33f6443f625e7be098c3
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 
 Name:    performer
 Version: 1.0.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Live performance audio session manager using Carla
 URL:     https://github.com/progwolff/performer
 Source0: https://github.com/progwolff/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -85,8 +85,9 @@ fi
 %{_datadir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-2
 - update for Fedora 29
+- update to 59ce476dc03d494bf6aa33f6443f625e7be098c3
 
 * Mon May 14 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - update to latest version
