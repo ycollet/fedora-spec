@@ -1,15 +1,15 @@
-# Version: 5ae43bb27c42387052a73e5ffc5d33efb9d946a9
+# Version: c15bfa85fdd74c1720be84277424e0f11403c81d
 
 Name:    non-daw
 Version: 1.2.0
-Release: 8.git3946d39%{?dist}
+Release: 9.gitc15bfa85%{?dist}
 Summary: A digital audio workstation for JACK
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     http://non.tuxfamily.org/
-Source0: non-20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9.tar.gz
-# sh non-snapshot.sh 1904aba516341287ac297cefbbcd185f643e5538
+Source0: non-20171023-gitc15bfa85fdd74c1720be84277424e0f11403c81d.tar.bz2
+# sh non-snapshot.sh c15bfa85fdd74c1720be84277424e0f11403c81d
 #Source1: non-snapshot.sh
 # notified upstream of the following along with incorrect FSF address headers
 #Patch2:  non-daw-0001-add-lib64-in-ladspa-search-path.patch
@@ -56,7 +56,7 @@ non-sequencer is a powerful, lightweight, real-time, pattern-based MIDI
 sequencer
 
 %prep
-%setup -q -n non-daw-20120722
+%setup -q -n non-20171023
 
 #%patch2 -p1
 
@@ -89,6 +89,7 @@ fi
 
 %files
 %doc COPYING
+%exclude %{_bindir}/bin/import-ardour-session
 %{_bindir}/import*
 %{_bindir}/%{name}
 %{_bindir}/non-timeline
@@ -124,8 +125,9 @@ fi
 %{_datadir}/pixmaps/non-sequencer
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git5ae43bb
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-9.git5ae43bb
 - update for Fedora 29
+- update to c15bfa85fdd74c1720be84277424e0f11403c81d
 
 * Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-7.git5ae43bb
 - update to 20180512-git5ae43bb27c42387052a73e5ffc5d33efb9d946a9
