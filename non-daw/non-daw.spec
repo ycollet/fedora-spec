@@ -28,6 +28,7 @@ BuildRequires: libXpm-devel
 BuildRequires: ladspa-devel
 BuildRequires: liblrdf-devel
 BuildRequires: python2
+BuildRequires: python3
 
 %description
 Non-daw is a digital audio workstation for JACK
