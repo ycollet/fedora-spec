@@ -21,6 +21,7 @@ BuildRequires: gtkmm24-devel
 BuildRequires: gtk2-devel
 BuildRequires: cairo-devel
 BuildRequires: lvtk
+BuildRequires: sed
 
 %description
 beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats. They are meant to be used live, but it is up to your imagination what to do!
@@ -40,6 +41,11 @@ sed -i -e "s/lvtk-gtkui-1/lvtk-gtkui-2/g" wscript
 
 for Files in src/*.cpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
+
+# For Fedora 29
+%if 0%{?fedora} >= 19
+  for Files in `grep -lr "/usr/bin/env.*python"`; do sed -ie "s/env python/python2/g" $Files; done
+%endif
 
 ./waf configure --destdir=%{buildroot} --libdir=%{_libdir}
 ./waf

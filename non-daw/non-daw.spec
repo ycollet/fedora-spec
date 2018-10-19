@@ -28,7 +28,7 @@ BuildRequires: libXpm-devel
 BuildRequires: ladspa-devel
 BuildRequires: liblrdf-devel
 BuildRequires: python2
-BuildRequires: python3
+BuildRequires: sed
 
 %description
 Non-daw is a digital audio workstation for JACK
@@ -60,6 +60,11 @@ sequencer
 %setup -q -n non-20171023
 
 #%patch2 -p1
+
+# For Fedora 29
+%if 0%{?fedora} >= 19
+  for Files in `grep -lr "/usr/bin/env.*python"`; do sed -ie "s/env python/python2/g" $Files; done
+%endif
 
 %build
 CFLAGS="%{optflags}" CXXFLAGS="%{optflags} -std=c++11" ./waf configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-debug
