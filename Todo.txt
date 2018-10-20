@@ -1,18 +1,2 @@
 http://octavian.sourceforge.net/screenshots.html
 
-zita-bls1
-zita-rev1
-zita-mu1
-zita-resampler
-ebumeter
-jconvolver
-tetraproc / tetracal
-aliki
-ambdec
-jaaa
-japa
-jnoisemeter
-jnoise
-jack_delay
-yass
-
