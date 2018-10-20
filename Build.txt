@@ -1,59 +1,65 @@
 
-		  Build  Test	26	27	28
-polyphone         done   no	X	X	X
-non-daw           done   no	X	X	X	
-lenmus            done   no	X	X	X
-lv2-fil-plugins   done   no	X	X	X
-jamulus           done   no	X	X	X
-GrandOrgue        done   no	X	X	X
-azr3              done   no	X	X	X
-sonic-pi          done   no	X	X	X
-drumgizmo         done   no	X	X	X
-hydrogen          done   no	X	X	X
-jalv-select       done   no	X	X	X
-kxstudio          done   no	X	X       X
-lmms              done   no	X	X       X
-ams-lv2           done   no	X	X	X
-rack		  done   no	X	X
-openkontroller    done   no	X	X	X
-iannix            done   no	X	X	X
-postfish          done   no	X	X	X
+		  Build  Test	26	27	28	29
+polyphone         done   no	X	X	X	X
+non-daw           done   no	X	X	X	X
+lenmus            done   no	X	X	X	X
+lv2-fil-plugins   done   no	X	X	X	X
+jamulus           done   no	X	X	X	X
+GrandOrgue        done   no	X	X	X	X
+azr3              done   no	X	X	X	X
+sonic-pi          done   no	X	X	X	FAIL
+drumgizmo         done   no	X	X	X	X
+hydrogen          done   no	X	X	X	X
+jalv-select       done   no	X	X	X	X
+kxstudio          done   no	X	X       X	X
+lmms              done   no	X	X       X	X
+ams-lv2           done   no	X	X	X	X
+rack		  done   no	X	X		
+openkontroller    done   no	X	X	X	X
+iannix            done   no	X	X	X	X
+postfish          done   no	X	X	X	X
 tuxguitar         updated in main repo
-vopa              done   no	X	X	X
-x42               done   no	X	X	X
-zam               done   no	X	X	X
-rakarrack         done   no	X	X	X
-rkrlv2            done   no	X	X	X
-sfark             done   no	X	X	X
+vopa              done   no	X	X	X	X
+x42               done   no	X	X	X	MISSING
+zam               done   no	X	X	X	X
+rakarrack         done   no	X	X	X	X
+rkrlv2            done   no	X	X	X	X
+sfark             done   no	X	X	X	X
 ssr               in rpmfusion now
-stretchplayer     done   no	X	X	X
-portalmod         done   no	X	X	X
-qutecsound        done   no	X	X	X
+stretchplayer     done   no	X	X	X	X
+portalmod         done   no	X	X	X	X
+qutecsound        done   no	X	X	X	X
 radium            later  no
-oxefmsynth        done   no	X	X	X
-picoloop          done   no	X	X	X
-milkytracker      done   no	X	X	X
-mv-6pm            done   no	X	X	X
-ninjam            done   no	X	X	X
-leiningen         done   no	X	X	X
-impro-visor       done   no	X	X	X
-horgand           done   no	X	X	X
-amsynth           done   no	X	X	X
-supercollider     done   no	X	X	X
-supercollider-sc3 done   no	X	X	X
-mx44              done   no	X	X	X
-amuc              done   no	X	X	X
-psi-plugins-doc   done   no	X	X	X
-patchmatrix       done   no	X	X	X
-traverso          done   no	X	X	X
-gxplugins	  done	 no	X	X	X
-screcord	  done	 no	X	X	X
-performer	  done	 no	X	X	X
-noise-repellent	  done	 no	X	X	X
-xjadeo		  done	 no	X	X	X
-schismtracker	  done	 no	X	X	X
-kernel		  done	 no	X	X	X
-libgig            done	 no	no	no	X
+oxefmsynth        done   no	X	X	X	X
+picoloop          done   no	X	X	X	X
+milkytracker      done   no	X	X	X	X
+mv-6pm            done   no	X	X	X	X
+ninjam            done   no	X	X	X	X
+leiningen         done   no	X	X	X	X
+impro-visor       done   no	X	X	X	X
+horgand           done   no	X	X	X	X
+amsynth           done   no	X	X	X	X
+supercollider     done   no	X	X	X	X
+supercollider-sc3 done   no	X	X	X	X
+mx44              done   no	X	X	X	X
+amuc              done   no	X	X	X	X
+psi-plugins-doc   done   no	X	X	X	X
+patchmatrix       done   no	X	X	X	X
+traverso          done   no	X	X	X	X
+gxplugins	  done	 no	X	X	X	X
+screcord	  done	 no	X	X	X	X
+performer	  done	 no	X	X	X	X
+noise-repellent	  done	 no	X	X	X	X
+xjadeo		  done	 no	X	X	X	X
+schismtracker	  done	 no	X	X	X	X
+kernel		  done	 no	X	X	X	X
+libgig            done	 no	no	no	X	X
+kernel-rt	  done	 no	no	X	X	X
+zita		  done	 no	no	X	X	X
+dexed		  done	 no	no	X	X	X
+projectM	  done	 no	no	X	X	X
+ADLPlug		  done	 no	no	X	X	X
+klystrack	  done	 no	no	X	X	X
 
 X: done
 *: running
