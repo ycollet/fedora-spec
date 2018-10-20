@@ -19,6 +19,7 @@ License: GPLv2+
 Source0: %{name}-%{version}-src.zip
 Source1: polyphone.desktop
 Source2: polyphone.xml
+Patch0: polyphone-0001-add-missing-QAction.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -45,6 +46,8 @@ The goal of Polyphone is to provide:
 
 %prep
 %setup0 -qn %{name}-%{version}-src
+
+%patch0 -p1
 
 %build
 

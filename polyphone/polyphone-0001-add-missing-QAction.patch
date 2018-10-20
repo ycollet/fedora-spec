@@ -1,0 +1,24 @@
+From 575fa3a1f05dd2fa305f5601a3da233215a69b59 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 20 Oct 2018 19:03:16 +0200
+Subject: [PATCH] add missing QAction
+
+---
+ configuration/config.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configuration/config.cpp b/configuration/config.cpp
+index 93b30cb..90b304f 100644
+--- a/configuration/config.cpp
++++ b/configuration/config.cpp
+@@ -26,6 +26,7 @@
+ #include <QDir>
+ #include <QColorDialog>
+ #include <QDesktopServices>
++#include <QAction>
+ #include "config.h"
+ #include "ui_config.h"
+ #include "mainwindow.h"
+-- 
+2.13.6
+
