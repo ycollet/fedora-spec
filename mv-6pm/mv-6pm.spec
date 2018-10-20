@@ -12,7 +12,6 @@ License: GPLv2+
 
 Source0: https://sourceforge.net/projects/mv-6pm/files/6PM_v0.9.tgz
 Source1: mv-6pm.desktop
-Patch1:  mv-6pm-use-global-presets.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: pkgconfig(Qt5Core)
@@ -30,8 +29,6 @@ BuildRequires: jack-audio-connection-kit-devel
 
 %prep
 %setup -qn %{name}_v%{version}
-
-%patch1 -p1
 
 %build
 
