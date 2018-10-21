@@ -12,18 +12,21 @@ keyboard fr-latin9
 timezone Europe/Paris
 
 auth --useshadow --passalgo=sha512
+# SELinux configuration
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
+# Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 10240 --fstype ext4
-services --enabled=NetworkManager --disabled=network,sshd
+part / --size 8192 --fstype="ext4"
+services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 shutdown
+rootpw --plaintext lescuizines
 
 #enable threaded irqs
-bootloader --location=mbr --append="threadirqs"
+bootloader --location=none --append="threadirqs nopti"
 
 repo --name=ccrma      --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
 repo --name=ccrma-core --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/$releasever/$basearch
@@ -66,9 +69,6 @@ qemu-guest-agent
 
 # Install language pack
 dnf -y langinstall French
-
-# Install rt kernel
-dnf -y install kernel-rt-mao
 
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
@@ -327,8 +327,6 @@ rm -f /var/lib/rpm/__db*
 # go ahead and pre-make the man -k cache (#455968)
 /usr/bin/mandb
 
-# save a little bit of space at least...
-rm -f /boot/initramfs*
 # make sure there aren't core files lying around
 rm -f /core*
 
@@ -358,6 +356,7 @@ rm -f /boot/*-rescue*
 # Remove machine-id on pre generated images
 rm -f /etc/machine-id
 touch /etc/machine-id
+
 %end
 
 %post --nochroot
@@ -368,6 +367,7 @@ if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
   if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
   cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
 fi
+
 %end
 
 #################################
@@ -384,6 +384,7 @@ kernel
 kernel-modules
 kernel-modules-extra
 kernel-tools
+kernel-rt-mao
 
 # This was added a while ago, I think it falls into the category of
 # "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
@@ -730,18 +731,14 @@ thunderbird
 mkdir -p $INSTALL_ROOT/home/lescuizines/SoundFonts
 mkdir -p $INSTALL_ROOT/home/lescuizines/GuitarPro
 
-cp /home/collette/SoundFont/63mg\ The\ Xioad\ Bank.sf2        $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFont/SF2/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFont/SF2/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/63mg\ The\ Xioad\ Bank.sf2                $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/Instruments/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/Instruments/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
 
 cp -r /home/collette/TuxGuitar/GuitarPro/Cake           $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
 cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry     $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
 cp /home/collette/SoundFont/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
 
-for rhgbfile in EFI/boot/isolinux.cfg EFI/boot/grub.conf isolinux/isolinux.cfg
-do
-  echo "# uglifying $LIVE_ROOT/$rhgbfile"
-done
 %end
 
 %post
@@ -771,6 +768,7 @@ PREFERRED=/usr/bin/startxfce4
 DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
+# add initscript
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 mkdir -p /home/lescuizines/.config/xfce4
@@ -876,13 +874,32 @@ cp /usr/share/applications/ardour4.desktop        /home/lescuizines/Desktop
 
 chmod +x /home/lescuizines/Desktop/*.desktop
 
+# Disable plasma-pk-updates (bz #1436873 and 1206760)
+echo "Removing plasma-pk-updates package."
+rpm -e plasma-pk-updates
+
+# Disable baloo
+cat > /home/lescuizines/.config/baloofilerc << BALOO_EOF
+[Basic Settings]
+Indexing-Enabled=false
+BALOO_EOF
+
+# Disable kres-migrator
+cat > /home/lescuizines/.kde/share/config/kres-migratorrc << KRES_EOF
+[Migration]
+Enabled=false
+KRES_EOF
+
+# Disable kwallet migrator
+cat > /home/lescuizines/.config/kwalletrc << KWALLET_EOL
+[Migration]
+alreadyMigrated=true
+KWALLET_EOL
+
 # make sure to set the right permissions and selinux contexts
 chown -R lescuizines:lescuizines /home/lescuizines/
 restorecon -R /home/lescuizines/
 
 EOF
-
-# Restart grub2
-/usr/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %end
