@@ -32,7 +32,10 @@ BuildRequires: grub2-tools
 BuildRequires: sed
 
 BuildRoot: %{_tmppath}/%{name}-%{PACKAGE_VERSION}-root
-Provides:  kernel-rt-mao-%{version}
+
+Provides:  kernel = %{version}
+Provides:  kernel-rt-mao = %{version}
+
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
 
