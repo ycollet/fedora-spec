@@ -2,7 +2,7 @@
 %define kmin 18
 %define kpat 12
 %define kver %{kmaj}.%{kmin}.%{kpat}
-%define krel 3
+%define krel 4
 %define krt  7
 %define kversion %{kver}
 
