@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 bde19c3eba7d572209e2153a21d4aa21c8a562e2
+%global commit0 1b787a5956ed8f231d10db74b37aaaf2f39e5db6
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:    dragonfly-reverb
-Version: 0.9.3
+Version: 0.9.5
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -23,7 +23,6 @@ URL:     https://github.com/michaelwillis/dragonfly-reverb/
 # tar cvfz dragonfly-reverb.tar.gz dragonfly-reverb/*
 
 Source0: dragonfly-reverb.tar.gz
-#Source0: https://github.com/michaelwillis/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -37,7 +36,6 @@ BuildRequires: mesa-libGL-devel
 A free hall-style reverb based on freeverb3 algorithms
 
 %prep
-# %setup -qn %{name}-%{commit0}
 %setup -qn %{name}
 
 %build
@@ -59,6 +57,9 @@ cp bin/DragonflyReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Fri Oct 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.5-1
+- update to 0.9.5
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.3-1
 - update for Fedora 29
 - update to 0.9.3
