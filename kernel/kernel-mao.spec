@@ -1,9 +1,9 @@
 %define kmaj 4
 %define kmin 18
-%define kpat 12
+%define kpat 16
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 4
-%define krt  7
+%define krt  8
 %define kversion %{kver}
 
 Name: kernel-rt-mao
@@ -136,6 +136,9 @@ test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kver
 /usr/src/kernels/%{kversion}-rt%{krt}
 
 %changelog
+* Sat Oct 27 2018 Yann Collette <ycollette.nospam@free.fr> - 4.18.16-rt8-4
+- add 4.18.16-rt8 kernel
+
 * Wed Oct 10 2018 Yann Collette <ycollette.nospam@free.fr> - 4.18.12-rt7-3
 - add 4.18.12-rt7 kernel
 
