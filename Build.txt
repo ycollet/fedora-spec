@@ -33,7 +33,8 @@ radium            later  no
 oxefmsynth        done   no	X	X	X	X
 picoloop          done   no	X	X	X	X
 milkytracker      done   no	X	X	X	X
-mv-6pm            done   no	X	X	X	X
+6PM		  done	 no		X	X	X
+mv-6pm            done   no	X	
 ninjam            done   no	X	X	X	X
 leiningen         done   no	X	X	X	X
 impro-visor       done   no	X	X	X	X
