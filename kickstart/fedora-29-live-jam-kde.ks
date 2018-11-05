@@ -570,7 +570,7 @@ lv2-sorcer
 lv2-fabla
 lv2-artyfx-plugins
 lv2-EQ10Q-plugins
-lv2-linuxsampler-plugins
+#lv2-linuxsampler-plugins # FC28 not yet present
 lv2-mdaEPiano
 lv2-mdala-plugins
 swh-lv2
@@ -622,8 +622,8 @@ ladish
 japa
 radium-compressor
 solfege
-linuxsampler
-qsampler
+#linuxsampler #FC28 not present
+#qsampler #FC28 not present
 projectM-jack
 projectM-pulseaudio
 
@@ -643,7 +643,7 @@ miniaudicle
 supercollider
 supercollider-sc3-plugins
 supercollider-vim
-sonic-pi
+#sonic-pi # FC28 temporary missing
 #YC: temporary missing pd-extended
 lmms
 faust
@@ -717,7 +717,7 @@ thunderbird
 
 # Not really useful
 #-fedora-jam-backgrounds-kde
--tigervnc-server-minimal
+# FC28 required now -tigervnc-server-minimal
 -abiword
 -xfburn
 -lyx-fonts
