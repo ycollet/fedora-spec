@@ -15,6 +15,7 @@ Vendor: Planet CCRMA
 BuildRequires: intltool gtkmm30-devel libgig-devel libsndfile-devel
 BuildRequires: linuxsampler-devel libxslt-devel docbook-style-xsl
 BuildRequires: gcc gcc-c++
+BuildRequires: jack-audio-connection-kit-devel
 
 %description
 Gigedit is an instrument editor for gig files. Gig files are
