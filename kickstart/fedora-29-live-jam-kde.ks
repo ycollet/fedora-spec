@@ -570,7 +570,7 @@ lv2-sorcer
 lv2-fabla
 lv2-artyfx-plugins
 lv2-EQ10Q-plugins
-#lv2-linuxsampler-plugins # FC28 not yet present
+lv2-linuxsampler-plugins
 lv2-mdaEPiano
 lv2-mdala-plugins
 swh-lv2
@@ -622,8 +622,8 @@ ladish
 japa
 radium-compressor
 solfege
-#linuxsampler #FC28 not present
-#qsampler #FC28 not present
+linuxsampler
+qsampler
 projectM-jack
 projectM-pulseaudio
 
