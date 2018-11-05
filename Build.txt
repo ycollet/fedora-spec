@@ -61,6 +61,12 @@ dexed		  done	 no	no	X	X	X
 projectM	  done	 no	no	X	X	X
 ADLPlug		  done	 no	no	X	X	X
 klystrack	  done	 no	no	X	X	X
+gigedit		  done	 no	no	X	X	X
+libgig		  done	 no	no	X	X	X
+liblscp		  done	 no	no	X	X	X
+linuxsampler	  done	 no	no	X	X	X
+miniaudicle	  done	 no	no	X	X	X
+qsampler	  done	 no	no	X	X	X
 
 X: done
 *: running
