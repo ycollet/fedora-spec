@@ -13,7 +13,7 @@ Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ perl
 BuildRequires: fftw-devel flex alsa-lib-devel jack-audio-connection-kit-devel
 
 %description
