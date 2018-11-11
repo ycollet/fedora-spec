@@ -1,11 +1,11 @@
 # Global variables for github repository
 %global commit0 bbefb4cfef159681fe68db34cab0585b6b7a2ebc
-%global gittag0 v1.0.0-beta.3
+%global gittag0 v1.0.0-beta.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    adlplug
-Version: 1.0.0.b3
-Release: 2%{?dist}
+Version: 1.0.0.b4
+Release: 3%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
 Group:   Applications/Multimedia
@@ -106,6 +106,8 @@ fi
 %{_libdir}/vst/ADLplug.so
 %{_datadir}/applications/ADLplug.desktop
 %{_datadir}/pixmaps/ADLplug.png
+%{_datadir}/icons/hicolor/32x32/apps/ADLplug.png
+%{_datadir}/icons/hicolor/96x96/apps/ADLplug.png
 
 %files -n opnplug
 %doc LICENSE README.md
@@ -114,8 +116,13 @@ fi
 %{_libdir}/vst/OPNplug.so
 %{_datadir}/applications/OPNplug.desktop
 %{_datadir}/pixmaps/OPNplug.png
+%{_datadir}/icons/hicolor/32x32/apps/OPNplug.png
+%{_datadir}/icons/hicolor/96x96/apps/OPNplug.png
 
 %changelog
+* Sun Nov 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.4-3
+- update to 1.1.0-beta.4.3
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
 - update for Fedora 29
 
