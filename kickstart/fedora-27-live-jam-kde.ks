@@ -41,7 +41,7 @@ repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=
 
 url --mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 
-repo --name="Copr repo for MAO by ycollet" --baseurl=https://copr-be.cloud.fedoraproject.org/results/ycollet/linuxmao/fedora-$releasever-$basearch/
+repo --name="CoprLinuxMAO" --baseurl=https://copr-be.cloud.fedoraproject.org/results/ycollet/linuxmao/fedora-$releasever-$basearch/
 
 %packages
 

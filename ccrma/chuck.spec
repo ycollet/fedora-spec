@@ -1,17 +1,15 @@
-%define beta 220a-1
-%define betar 220a.1
+%global debug_package %{nil}
 
 Summary: Real-time audio synthesis and graphics/multimedia language
 Name:    chuck
-Version: 1.3.6.0
-Release: 1%{?betar:.beta%{?betar}}%{?dist}
+Version: 1.4.0.0
+Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://chuck.cs.princeton.edu/
-Source0: http://chuck.cs.princeton.edu/release/files/chuck-%{version}%{?beta:-%{?beta}}.tgz
+Source0: http://chuck.cs.princeton.edu/release/files/chuck-%{version}.tgz
 # emacs mode from: http://wiki.cs.princeton.edu/index.php/Recent_chuck-mode.el
 Source1: chuck-mode.el
-Patch0:  chuck-1.3.2.0-beta4-util_thread.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -19,7 +17,7 @@ Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
 Packager:     Fernando Lopez-Lezcano
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ perl
 BuildRequires: bison flex jack-audio-connection-kit-devel, 
 BuildRequires: alsa-lib-devel libsndfile-devel pulseaudio-libs-devel
 
@@ -31,8 +29,7 @@ directly in the program flow.  Other potentially useful features include
 the ability to write/change programs on-the-fly.
 
 %prep
-%setup -q -n chuck-%{version}%{?beta:-%{?beta}}
-%patch0 -p1
+%setup -q -n chuck-%{version}
 
 %build
 cd src
@@ -54,20 +51,21 @@ perl -p -i -e "s|-O3|-O3 %{optflags}|g" makefile.pulse
 # build jack version
 %{__make} clean
 %{__make} linux-jack
+%{__mv} chuck chuck-jack
 
 %install
+
 %{__rm} -rf %{buildroot}
-
-# install jack version (last built)
-cd src
 %{__mkdir} -p %{buildroot}%{_bindir}
-%{__make} DESTDIR=%{buildroot}%{_bindir} linux-jack install
 
 # install alsa version
-install -m 755 chuck-alsa %{buildroot}%{_bindir}/chuck-alsa
+install -m 755 src/chuck-alsa %{buildroot}%{_bindir}/chuck-alsa
 
 # install alsa version
-install -m 755 chuck-pulse %{buildroot}%{_bindir}/chuck-pulse
+install -m 755 src/chuck-pulse %{buildroot}%{_bindir}/chuck-pulse
+
+# install jack version
+install -m 755 src/chuck-jack %{buildroot}%{_bindir}/chuck-jack
 
 # install emacs mode
 mkdir -p %{buildroot}%{_datadir}/emacs/site-lisp/
@@ -82,14 +80,15 @@ cp -a %{SOURCE1} %{buildroot}%{_libdir}/xemacs/site-packages/lisp/chuck/chuck.el
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING DEVELOPER PROGRAMMER QUICKSTART README 
-%doc THANKS TODO VERSIONS doc examples
+%doc THANKS TODO VERSIONS examples
 %{_bindir}/*
 %{_datadir}/emacs/site-lisp/*
 %{_libdir}/xemacs/site-packages/lisp/chuck/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.4.0.0-1
 - update for Fedora 29
+- update to 1.4.0.0
 
 * Wed Oct 12 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.3.6.0-1.220a
 - update to experimental 1.3.6.0 (released for the 220a class)

@@ -48,7 +48,7 @@ Patch7: utf8.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ perl
 BuildRequires: autoconf automake libtool
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel
 BuildRequires: gettext-devel desktop-file-utils

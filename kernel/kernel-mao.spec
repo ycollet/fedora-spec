@@ -2,7 +2,7 @@
 %define kmin 18
 %define kpat 16
 %define kver %{kmaj}.%{kmin}.%{kpat}
-%define krel 4
+%define krel 5
 %define krt  8
 %define kversion %{kver}
 
@@ -108,13 +108,14 @@ rm -rf $RPM_BUILD_ROOT
 # restart grub: grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %post
-if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion}-rt%{krt} -a -r /boot/System.map-%{kversion}-rt%{krt} ]; then
-  cp /boot/vmlinuz-%{kversion}-rt%{krt}    /boot/.vmlinuz-%{kversion}-rt%{krt}
-  cp /boot/System.map-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
-  rm -f /boot/vmlinuz-%{kversion}-rt%{krt} /boot/System.map-%{kversion}-rt%{krt}
-  /sbin/installkernel %{kversion}-rt%{krt} /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
-  rm -f /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
-fi
+/bin/kernel-install add %{kversion}-rt%{krt} /lib/modules/%{kversion}-rt%{krt}
+#if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion}-rt%{krt} -a -r /boot/System.map-%{kversion}-rt%{krt} ]; then
+#  cp /boot/vmlinuz-%{kversion}-rt%{krt}    /boot/.vmlinuz-%{kversion}-rt%{krt}
+#  cp /boot/System.map-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
+#  rm -f /boot/vmlinuz-%{kversion}-rt%{krt} /boot/System.map-%{kversion}-rt%{krt}
+#  /sbin/installkernel %{kversion}-rt%{krt} /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
+#  rm -f /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
+#fi
 
 rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
 
@@ -136,6 +137,9 @@ test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kver
 /usr/src/kernels/%{kversion}-rt%{krt}
 
 %changelog
+* Sun Oct 28 2018 Yann Collette <ycollette.nospam@free.fr> - 4.18.16-rt8-5
+- fix kernel install
+
 * Sat Oct 27 2018 Yann Collette <ycollette.nospam@free.fr> - 4.18.16-rt8-4
 - add 4.18.16-rt8 kernel
 

@@ -1,0 +1,187 @@
+# svn co https://svn.linuxsampler.org/svn/linuxsampler/trunk linuxsampler
+# define svn 2680
+
+Summary: Linux Sampler
+Name: linuxsampler
+Version: 2.1.0
+Release: 1%{?dist}
+License: GPL
+Group: Applications/Multimedia
+URL: http://www.linuxsampler.org/
+Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Packager: Fernando Lopez-Lezcano
+Distribution: Planet CCRMA
+Vendor: Planet CCRMA
+
+BuildRequires: automake autoconf libtool pkgconfig
+BuildRequires: libgig-devel alsa-lib-devel sqlite-devel
+BuildRequires: jack-audio-connection-kit-devel libsndfile-devel
+BuildRequires: dssi-devel slv2-devel
+BuildRequires: gcc gcc-c++
+BuildRequires: perl-XML-Parser flex bison
+
+%description
+LinuxSampler is a work in progress. The goal is to produce a free,
+open source pure software audio sampler with professional grade
+features, comparable to both hardware and commercial Windows/Mac
+software samplers.
+
+%package devel
+Summary: Linux Sampler development files
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description devel
+Libraries and include files for Linux Sampler development
+
+%package dssi
+Summary: Linux Sampler DSSI plugin
+Group: Applications/Multimedia
+Requires: %{name} = %{version}-%{release}
+
+%description dssi
+Linuxsampler plugin for the Disposable Soft Synth Interface (DSSI).
+
+%package -n lv2-linuxsampler-plugins
+Summary: Linux Sampler LV2 plugin
+Group: Applications/Multimedia
+Requires: %{name} = %{version}-%{release}
+
+%description -n lv2-linuxsampler-plugins
+Linuxsampler plugin for the LV2 plugin standard.
+
+%prep
+%setup -q -n linuxsampler%{!?svn:-%{version}}
+if [ -f Makefile.cvs ]; then make -f Makefile.cvs; fi
+
+%build
+%configure
+%{__make} %{?__smp_mflags}
+
+%install
+%{__rm} -rf %{buildroot}
+%{__make} DESTDIR=%{buildroot} install
+# add path to linuxsampler libraries
+mkdir -p %{buildroot}%{_sysconfdir}/ld.so.conf.d/
+echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsampler.conf
+
+%clean
+%{__rm} -rf %{buildroot}
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%files
+%defattr(-,root,root,-)
+%doc AUTHORS ChangeLog COPYING NEWS README
+%{_bindir}/linuxsampler
+%{_libdir}/linuxsampler/*.so.*
+%{_mandir}/man1/*
+/var/lib/linuxsampler/instruments.db
+%{_sysconfdir}/ld.so.conf.d/linuxsampler.conf
+%{_bindir}/ls_instr_script
+%{_bindir}/lscp
+
+%files devel
+%defattr(-,root,root)
+%doc
+%{_libdir}/linuxsampler/*.so
+%{_libdir}/linuxsampler/*.a
+%exclude %{_libdir}/linuxsampler/*.la
+%{_libdir}/pkgconfig/*
+%{_includedir}/linuxsampler
+
+%files dssi
+%{_libdir}/dssi/linuxsampler.so
+%exclude %{_libdir}/dssi/linuxsampler.a
+%exclude %{_libdir}/dssi/linuxsampler.la
+
+%files -n lv2-linuxsampler-plugins
+%{_libdir}/lv2/linuxsampler.lv2/linuxsampler.so
+%{_libdir}/lv2/linuxsampler.lv2/linuxsampler.ttl
+%{_libdir}/lv2/linuxsampler.lv2/manifest.ttl
+%exclude %{_libdir}/lv2/linuxsampler.lv2/linuxsampler.a
+%exclude %{_libdir}/lv2/linuxsampler.lv2/linuxsampler.la
+
+%changelog
+* Sun Aug 28 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 2.0.0-1
+- update to 2.0.0
+
+* Wed Dec 10 2014 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-6.svn2680.1
+- update to svn 2680, fixes fc21 build problems
+- add ls_instr_script lscp to the file list
+
+* Wed May 30 2012 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-6.svn2346.1
+- update to svn 2346, fixes fc17 build problems
+
+* Wed Mar  7 2012 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-6.svn2325.1
+- update to current svn for bzf support
+
+* Sat Sep 18 2010 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-5
+- add /etc/ld.so.conf.d/linuxsampler.conf so that libraries can be
+  found by other programs (gigedit is affected, fix thanks to Luis
+  Garrido), add ldconfig post(un) scripts, add bison build
+  requirement
+
+* Tue May 25 2010 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-3
+- remove patch (does not seem to affect linuxsampler but remove it
+  anyway), the problem with pitch bend was range being set to 0 in 
+  certain instruments - that can be edited with gigedit (right click
+  on the instrument to get to the options panel)
+
+* Tue Nov 10 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-2
+- added patch to ignore PitchBendRange (defaults to 0, ie: no pitch
+  bend so copy code that uses it from previous version)
+
+* Sat Nov  7 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 1.0.0-1
+- updated to 1.0.0, number of voices is now runtime controllable
+- added dssi and lv2 build requirements, linuxsampler can now be a
+  plugin in both standards
+- create linuxsample-dssi and lv2-linuxsampler-plugins subpackages
+
+* Sun Mar 29 2009 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.5.1-3
+- changed voices from 64 to 96 and streams from 90 to 110
+
+* Mon Jul  7 2008 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.5.1-2
+- added patch to build on fc9 with gcc 4.3
+
+* Tue May 13 2008 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.5.1-1
+- updated to 0.5.1
+
+* Wed Nov 14 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.5.0-1
+- updated to version 0.5.0
+- added sqlite-devel build requirement
+- add intruments.db to file list, no longer a libdir/linuxsampler/include
+  directory
+
+* Wed Jan 17 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.4.0-2
+- assembler was being mistakenly turned on despite --disable-asm, 
+  default now is off and nothing is needed (if disable-asm is used
+  asm is turned on!)
+
+* Wed Dec  6 2006 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.4.0-1
+- updated to 0.4.0
+- added include and pkgconfig files to file list
+- split development files into -devel package
+
+* Wed Apr  5 2006 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.3.3-1
+- updated to 0.3.3
+- assembler optimizations are broken, disable them
+
+* Sun Jul  3 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
+- added gcc4 patch, posted by Andreas Persson in the linuxsampler
+  mailing list
+
+* Fri Jul  1 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
+- added sse flags to gig engine build
+
+* Wed Jun 29 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.3.2-1
+- updated to 0.3.2
+
+* Thu May 26 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.3.1-1
+- updated to official 0.3.1 release (from cvs)
+
+* Thu Jan 20 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 2004.01.20
+- initial build.

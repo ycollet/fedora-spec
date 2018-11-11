@@ -11,24 +11,40 @@ lang fr_FR.UTF-8
 keyboard fr-latin9
 timezone Europe/Paris
 
-auth --useshadow --enablemd5
+auth --useshadow --passalgo=sha512
+# SELinux configuration
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
-part / --size 3072 --fstype ext4
-services --enabled=NetworkManager --disabled=network,sshd
+# Clear the Master Boot Record
+zerombr
+clearpart --all --initlabel
+part / --size 8192 --fstype="ext4"
+services --disabled="sshd" --enabled="NetworkManager"
+network --bootproto=dhcp --device=link --activate
+shutdown
+rootpw --plaintext lescuizines
 
-# add CCRMA and rpmfusion repos
-repo --name=ccrma --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
+#enable threaded irqs
+bootloader --location=none --append="threadirqs nopti"
+
+repo --name=ccrma      --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
 repo --name=ccrma-core --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/$releasever/$basearch
-repo --name=rpmfusion --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
-repo --name=rpmfusion-non-free --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
-repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
+
+repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/updates/testing/$releasever/$basearch/
+repo --name=rpmfusion-free-update    --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
+
+repo --name=fedora  --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
+repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
+
+url --mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 
 repo --name="CoprLinuxMAO" --baseurl=https://copr-be.cloud.fedoraproject.org/results/ycollet/linuxmao/fedora-$releasever-$basearch/
 
 %packages
+
 @base-x
 @guest-desktop-agents
 @standard
@@ -37,22 +53,12 @@ repo --name="CoprLinuxMAO" --baseurl=https://copr-be.cloud.fedoraproject.org/res
 @input-methods
 @multimedia
 @hardware-support
+dnf
 
 # exclude input methods:
--m17n*
 -scim*
 -ibus*
 -iok
-
-# Explicitly specified here:
-# <notting> walters: because otherwise dependency loops cause yum issues.
-kernel
-kernel-rt
-
-# This was added a while ago, I think it falls into the category of
-# "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
-# for now.
-memtest86+
 
 # Make live images easy to shutdown and the like in libvirt
 qemu-guest-agent
@@ -62,7 +68,7 @@ qemu-guest-agent
 %post
 
 # Install language pack
-yum -y langinstall French
+dnf -y langinstall French
 
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
@@ -73,7 +79,7 @@ cat > /etc/rc.d/init.d/livesys << EOF
 # chkconfig: 345 00 99
 # description: Init script for live image.
 ### BEGIN INIT INFO
-# X-Start-Before: display-manager
+# X-Start-Before: display-manager chronyd
 ### END INIT INFO
 
 . /etc/init.d/functions
@@ -173,12 +179,6 @@ if ! strstr "\`cat /proc/cmdline\`" nopersistenthome && [ -n "\$homedev" ] ; the
   action "Mounting persistent /home" mountPersistentHome
 fi
 
-# make it so that we don't do writing to the overlay for things which
-# are just tmpdirs/caches
-mount -t tmpfs -o mode=0755 varcacheyum /var/cache/yum
-mount -t tmpfs vartmp /var/tmp
-[ -x /sbin/restorecon ] && /sbin/restorecon /var/cache/yum /var/tmp >/dev/null 2>&1
-
 if [ -n "\$configdone" ]; then
   exit 0
 fi
@@ -186,8 +186,9 @@ fi
 # add fedora user with no passwd
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" lescuizines
 passwd -d lescuizines > /dev/null
-usermod -aG wheel lescuizines > /dev/null
+usermod -aG wheel    lescuizines > /dev/null
 usermod -aG jackuser lescuizines > /dev/null
+usermod -aG root     lescuizines > /dev/null
 
 # Remove root password lock
 passwd -d root > /dev/null
@@ -208,7 +209,7 @@ systemctl stop mdmonitor.service 2> /dev/null || :
 systemctl stop mdmonitor-takeover.service 2> /dev/null || :
 
 # don't enable the gnome-settings-daemon packagekit plugin
-gsettings set org.gnome.settings-daemon.plugins.updates active 'false' || :
+gsettings set org.gnome.software download-updates 'false' || :
 
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
@@ -217,12 +218,17 @@ systemctl --no-reload disable atd.service 2> /dev/null || :
 systemctl stop crond.service 2> /dev/null || :
 systemctl stop atd.service 2> /dev/null || :
 
+# Don't sync the system clock when running live (RHBZ #1018162)
+sed -i 's/rtcsync//' /etc/chrony.conf
+
 # Mark things as configured
-/bin/touch /.liveimg-configured
+touch /.liveimg-configured
 
 # add static hostname to work around xauth bug
 # https://bugzilla.redhat.com/show_bug.cgi?id=679486
-echo "localhost" > /etc/hostname
+# the hostname must be something else than 'localhost'
+# https://bugzilla.redhat.com/show_bug.cgi?id=1370222
+echo "localhost-live" > /etc/hostname
 
 EOF
 
@@ -246,7 +252,7 @@ exists() {
     \$*
 }
 
-/bin/touch /.liveimg-late-configured
+touch /.liveimg-late-configured
 
 # read some variables out of /proc/cmdline
 for o in \`cat /proc/cmdline\` ; do
@@ -301,9 +307,16 @@ chmod 755 /etc/rc.d/init.d/livesys-late
 # enable tmpfs for /tmp
 systemctl enable tmp.mount
 
+# make it so that we don't do writing to the overlay for things which
+# are just tmpdirs/caches
+# note https://bugzilla.redhat.com/show_bug.cgi?id=1135475
+cat >> /etc/fstab << EOF
+vartmp   /var/tmp    tmpfs   defaults   0  0
+EOF
+
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-#releasever=22#$(rpm -q --qf '%{version}\n' fedora-release)
+releasever=$(rpm -q --qf '%{version}\n' --whatprovides system-release)
 basearch=$(uname -i)
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this LiveCD"
@@ -314,44 +327,84 @@ rm -f /var/lib/rpm/__db*
 # go ahead and pre-make the man -k cache (#455968)
 /usr/bin/mandb
 
-# save a little bit of space at least...
-rm -f /boot/initramfs*
 # make sure there aren't core files lying around
 rm -f /core*
+
+# remove random seed, the newly installed instance should make it's own
+rm -f /var/lib/systemd/random-seed
 
 # convince readahead not to collect
 # FIXME: for systemd
 
+# forcibly regenerate fontconfig cache (so long as this live image has
+# fontconfig) - see #1169979
+if [ -x /usr/bin/fc-cache ] ; then
+   fc-cache -f
+fi
+
+echo 'File created by kickstart. See systemd-update-done.service(8).' \
+    | tee /etc/.updated >/var/.updated
+
+# Drop the rescue kernel and initramfs, we don't need them on the live media itself.
+# See bug 1317709
+rm -f /boot/*-rescue*
+
+# Disable network service here, as doing it in the services line
+# fails due to RHBZ #1369794
+/sbin/chkconfig network off
+
+# Remove machine-id on pre generated images
+rm -f /etc/machine-id
+touch /etc/machine-id
+
 %end
 
-
 %post --nochroot
-cp $INSTALL_ROOT/usr/share/doc/*-release/GPL $LIVE_ROOT/GPL
+cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
 
 # only works on x86, x86_64
 if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
   if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
   cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
 fi
+
 %end
 
 #################################
 # List packages to be installed #
 #################################
 
-# DVD size partition
-part / --size 10240 --fstype ext4
-
-#enable threaded irqs
-bootloader --append="threadirqs"
-
 %packages
+
+# system packages
+
+# Explicitly specified here:
+# <notting> walters: because otherwise dependency loops cause yum issues.
+kernel
+kernel-modules
+kernel-modules-extra
+kernel-tools
+kernel-rt-mao
+
+# This was added a while ago, I think it falls into the category of
+# "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
+# for now.
+memtest86+
+
+syslinux
+
+# Without this, initramfs generation during live image creation fails: #1242586
+dracut-live
+grub2
+grub2-tools
+grub2-efi
+#shim
+#shim-unsigned
 
 # save some space
 -mpage
 -sox
 -hplip
--hpijs
 -numactl
 -isdn4k-utils
 -autofs
@@ -380,7 +433,6 @@ gnome-keyring-pam
 -gimp-help
 -desktop-backgrounds-basic
 -realmd                     # only seems to be used in GNOME
--PackageKit*                # we switched to yumex, so we don't need this
 -aspell-*                   # dictionaries are big
 -gnumeric
 -foomatic-db-ppds
@@ -391,10 +443,11 @@ gnome-keyring-pam
 
 # drop some system-config things
 #-system-config-boot
--system-config-network
+#-system-config-network
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
+-libcrypt-nss
 
 # alsa
 alsa-firmware
@@ -450,15 +503,14 @@ phasex
 # guitar
 guitarix
 tuxguitar
-tuxguitar3
 sooperlooper
 
 # recodring and DAW
 audacity
-ardour4
-ardour4-audiobackend-alsa
-ardour4-audiobackend-jack
-ardour4-audiobackend-dummy
+ardour5
+ardour5-audiobackend-alsa
+ardour5-audiobackend-jack
+ardour5-audiobackend-dummy
 seq24
 qtractor
 non-daw
@@ -477,7 +529,8 @@ jack-rack
 ladspa
 helm
 DISTRHO-Ports
-mv-6pm
+6PM
+synthpod
 
 # ladpsa plugins
 ladspa-amb-plugins
@@ -490,7 +543,7 @@ ladspa-rev-plugins
 ladspa-swh-plugins
 ladspa-tap-plugins
 ladspa-vco-plugins
-ladspa-vocoder-plugins
+# F26 - not available - ladspa-vocoder-plugins
 ladspa-wasp-plugins
 
 # lv2 plugins
@@ -500,7 +553,7 @@ lv2-fil-plugins
 lv2-invada-plugins
 lv2-kn0ck0ut
 lv2-ll-plugins
-lv2-swh-plugins
+swh-lv2
 lv2-vocoder-plugins
 lv2-zynadd-plugins
 lv2dynparam
@@ -520,6 +573,18 @@ lv2-EQ10Q-plugins
 lv2-linuxsampler-plugins
 lv2-mdaEPiano
 lv2-mdala-plugins
+swh-lv2
+orbit.lv2
+midi_matrix.lv2
+sherlock.lv2
+eteroj.lv2
+zam-plugins
+vopa-lv2
+tap-lv2
+#sisco.lv2
+mda-lv2
+rkrlv2
+ams-lv2
 
 # dssi
 nekobee-dssi
@@ -535,7 +600,6 @@ zita-alsa-pcmi
 zita-convolver
 zita-lrx
 zita-njbridge
-zita-ajbridge
 zita-resampler
 
 # writing & publishing
@@ -554,7 +618,6 @@ qastools
 arpage
 realTimeConfigQuickScan
 rtirq
-patchage
 ladish
 japa
 radium-compressor
@@ -564,24 +627,27 @@ qsampler
 projectM-jack
 projectM-pulseaudio
 
+protrekkr
+oxefmsynth
+stretchplayer
+sfarkxtc
+lenmus
+GrandOrgue
+picoloop
+jm2cv
+rakarrack
+
 #language
 chuck
 miniaudicle
 supercollider
-supercollider-mathlib
-supercollider-quarks
 supercollider-sc3-plugins
 supercollider-vim
-#FC22 supercollider-midifile
-#FC22 supercollider-redclasses
-#FC22 supercollider-world
-#FC22 supercollider-bbcut2
-supercollider-cruciallib
-pd-extended
+#sonic-pi # FC28 temporary missing
+#YC: temporary missing pd-extended
 lmms
 faust
 faust-tools
-#FC22 pd-faust
 
 # fedora jam theming (to be customized)
 fedora-jam-backgrounds
@@ -589,8 +655,8 @@ fedora-jam-backgrounds
 # Misc. Utils
 screen
 multimedia-menus
-kernel-tools
 xterm
+emacs
 
 # Include Mozilla Firefox and Thunderbird
 firefox
@@ -608,7 +674,7 @@ thunderbird
 -kernel-debug-modules-extra  ## Part of kernel debug
 -kernel-debug                ## Dont need the debug kernel upon install
 -aspell-*                    ## Dictionaries are big and take up space
--hunspell-*                  ## Dictionaries
+#-hunspell-*                  ## Dictionaries
 -man-pages-*                 ## Dictionaries
 -words                       ## Dictionaries
 -krb5-auth-dialog            ## Legacy and cmdline things we don't want
@@ -639,19 +705,19 @@ thunderbird
 -fprintd-pam                 ## We don't want printer support out of the box.
 -fprintd                     ## We don't want printer support out of the box.
 -libfprint                   ## We don't want printer support out of the box.
--python-cups                 ## We don't want printer support out of the box.
+# FC24 -python-cups                 ## We don't want printer support out of the box.
 -system-config-printer-libs  ## We don't want printer support out of the box.
--gnu-free-fonts-common       ## Fonts take up space
--gnu-free-mono-fonts         ## Fonts take up space
--gnu-free-sans-fonts         ## Fonts take up space
--gnu-free-serif-fonts        ## Fonts take up space
+# FC27 -gnu-free-fonts-common       ## Fonts take up space
+# FC27 -gnu-free-mono-fonts         ## Fonts take up space
+# FC27 -gnu-free-sans-fonts         ## Fonts take up space
+# FC27 -gnu-free-serif-fonts        ## Fonts take up space
 -ibus-typing-booster         ## Tab completion in libreoffice and the likes Unneeded
 -libtranslit                 ## Tab
 -libtranslit-m17n            ## Tab
 
 # Not really useful
--fedora-jam-backgrounds-kde
--tigervnc-server-minimal
+#-fedora-jam-backgrounds-kde
+# FC28 required now -tigervnc-server-minimal
 -abiword
 -xfburn
 -lyx-fonts
@@ -665,13 +731,13 @@ thunderbird
 mkdir -p $INSTALL_ROOT/home/lescuizines/SoundFonts
 mkdir -p $INSTALL_ROOT/home/lescuizines/GuitarPro
 
-cp /home/collette/SoundFonts/63mg\ The\ Xioad\ Bank.sf2        $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/SF2/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/SF2/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/63mg\ The\ Xioad\ Bank.sf2        $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/SF2/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
+cp /home/collette/SoundFont/SF2/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
 
-cp -r /home/collette/TuxGuitar/GuitarPro/Cake            $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
-cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry      $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
-cp /home/collette/SoundFonts/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
+cp -r /home/collette/TuxGuitar/GuitarPro/Cake           $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
+cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry     $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
+cp /home/collette/SoundFont/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
 
 %end
 
@@ -702,6 +768,7 @@ PREFERRED=/usr/bin/startxfce4
 DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
+# add initscript
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 mkdir -p /home/lescuizines/.config/xfce4
@@ -800,13 +867,34 @@ cp /usr/share/applications/mscore.desktop         /home/lescuizines/Desktop
 cp /usr/share/applications/qtractor.desktop       /home/lescuizines/Desktop
 cp /usr/share/applications/audacity.desktop       /home/lescuizines/Desktop
 cp /usr/share/applications/tuxguitar.desktop      /home/lescuizines/Desktop
-cp /usr/share/applications/tuxguitar3.desktop     /home/lescuizines/Desktop
 cp /usr/share/applications/xfce4-terminal.desktop /home/lescuizines/Desktop
 cp /usr/share/applications/carla.desktop          /home/lescuizines/Desktop
 cp /usr/share/applications/cadence.desktop        /home/lescuizines/Desktop
 cp /usr/share/applications/ardour4.desktop        /home/lescuizines/Desktop
 
 chmod +x /home/lescuizines/Desktop/*.desktop
+
+# Disable plasma-pk-updates (bz #1436873 and 1206760)
+echo "Removing plasma-pk-updates package."
+rpm -e plasma-pk-updates
+
+# Disable baloo
+cat > /home/lescuizines/.config/baloofilerc << BALOO_EOF
+[Basic Settings]
+Indexing-Enabled=false
+BALOO_EOF
+
+# Disable kres-migrator
+cat > /home/lescuizines/.kde/share/config/kres-migratorrc << KRES_EOF
+[Migration]
+Enabled=false
+KRES_EOF
+
+# Disable kwallet migrator
+cat > /home/lescuizines/.config/kwalletrc << KWALLET_EOL
+[Migration]
+alreadyMigrated=true
+KWALLET_EOL
 
 # make sure to set the right permissions and selinux contexts
 chown -R lescuizines:lescuizines /home/lescuizines/
