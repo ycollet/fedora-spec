@@ -67,6 +67,7 @@ liblscp		  done	 no	no	X	X	X
 linuxsampler	  done	 no	no	X	X	X
 miniaudicle	  done	 no	no	X	X	X
 qsampler	  done	 no	no	X	X	X
+JUCE		  done	 no	no	X	X	X
 
 X: done
 *: running
