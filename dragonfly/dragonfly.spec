@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 1b787a5956ed8f231d10db74b37aaaf2f39e5db6
+%global commit0 6dbf784e41d90c92ff69ef06ed2b0d6f50b65d9c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:    dragonfly-reverb
-Version: 0.9.5
+Version: 1.0.0
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -57,6 +57,9 @@ cp bin/DragonflyReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Tue Nov 13 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
+- update to 1.0.0
+
 * Fri Oct 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.5-1
 - update to 0.9.5
 
