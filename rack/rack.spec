@@ -66,6 +66,8 @@ echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURR
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
 
+sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/g" src/asset.cpp
+
 %build
 cd dep
 cd glfw
@@ -82,6 +84,7 @@ mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/pixmaps/
 mkdir -p %{buildroot}%{_datadir}/man/man1/
 mkdir -p %{buildroot}%{_datadir}/applications/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/
 
 install -m 755 Rack       %{buildroot}%{_bindir}/
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/rack.png
@@ -100,6 +103,7 @@ EOF
 %files
 %{_bindir}/*
 %{_datadir}/*
+%{_libexecdir}/*
 
 %changelog
 * Wed Nov 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2b

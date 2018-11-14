@@ -7,14 +7,14 @@ lv2-fil-plugins   done   no	X	X	X	X
 jamulus           done   no	X	X	X	X
 GrandOrgue        done   no	X	X	X	X
 azr3              done   no	X	X	X	X
-sonic-pi          done   no	X	X	X	FAIL
+sonic-pi          done   no	X	X	FAIL	FAIL
 drumgizmo         done   no	X	X	X	X
 hydrogen          done   no	X	X	X	X
 jalv-select       done   no	X	X	X	X
 kxstudio          done   no	X	X       X	X
 lmms              done   no	X	X       X	X
 ams-lv2           done   no	X	X	X	X
-rack		  done   no	X	X		
+rack		  done   no	X	0.5.0	0.6.2b	0.6.2b		
 openkontroller    done   no	X	X	X	X
 iannix            done   no	X	X	X	X
 postfish          done   no	X	X	X	X
@@ -68,6 +68,10 @@ linuxsampler	  done	 no	no	X	X	X
 miniaudicle	  done	 no	no	X	X	X
 qsampler	  done	 no	no	X	X	X
 JUCE		  done	 no	no	X	X	X
+brutefir	  done	 no	no	X	X	X
+dragonfly-reverb  done	 no	no	X	X	X
+chuck		  done	 no	no	X	X	X
+puredata	  done	 no	no	X	X	X
 
 X: done
 *: running
