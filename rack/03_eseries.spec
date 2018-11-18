@@ -1,19 +1,19 @@
 # Global variables for github repository
-%global commit0 23f14c9f8c0d03dcc6f3e6d5ca6a982a541698cd
-%global gittag0 v0.6.2b
+%global commit0 d96a06d2ac6a99040f46523368a662d09597bfba
+%global gittag0 v0.6.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    Rack
-Version: 0.6.2b
-Release: 2%{?dist}
-Summary: A modular synthetizer
+Name:    rack-ESeries
+Version: 0.6.0
+Release: 1%{?dist}
+Summary: A plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/VCVRack/Rack.git
+URL:     https://github.com/VCVRack/ESeries
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -30,7 +30,7 @@ URL:     https://github.com/VCVRack/Rack.git
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: rack.png
+Source1: https://github.com/VCVRack/ESeries/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -52,10 +52,10 @@ BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
 
 %description
-A modular synthetizer
+Based on Synthesis Technology - http://synthtech.com/ Eurorack modules.
 
 %prep
-%setup -qn %{name}
+%setup -qn Rack
 
 CURRENT_PATH=`pwd`
 
@@ -68,56 +68,22 @@ sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
 
 sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/g" src/asset.cpp
 
-%build
-cd dep
-cd glfw
-cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON .
-make
-make install
+mkdir eseries_plugin
+tar xvfz %{SOURCE1} --directory=eseries_plugin --strip-components=1 
 
-cd ../..
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+%build
+
+cd eseries_plugin
+make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_bindir}/
-mkdir -p %{buildroot}%{_datadir}/pixmaps/
-mkdir -p %{buildroot}%{_datadir}/man/man1/
-mkdir -p %{buildroot}%{_datadir}/applications/
-mkdir -p %{buildroot}%{_libexecdir}/Rack/
-
-install -m 755 Rack       %{buildroot}%{_bindir}/
-install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/rack.png
-cp -r res %{buildroot}%{_libexecdir}/Rack/
-
-cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
-[Desktop Entry]
-Name=Rack
-Comment=A modular synthetizer.
-Exec=/usr/bin/Rack
-Type=Application
-Terminal=0
-Icon=/usr/share/pixmaps/rack.png
-Categories=AudioVideo;
-EOF
+mkdir -p %{buildroot}%{_libexecdir}/Rack/ESeries/
+cp -r eseries_plugin/dist/ESeries/* %{buildroot}%{_libexecdir}/Rack/ESeries/
 
 %files
-%{_bindir}/*
-%{_datadir}/*
 %{_libexecdir}/*
 
 %changelog
-* Wed Nov 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2b
-- update to 0.6.2b
-
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.5.0
-- update for Fedora 29
-
-* Tue Dec 26 2017 Yann Collette <ycollette.nospam@free.fr> - 0.5.0
-- update to version 0.5.0
-
-* Wed Oct 25 2017 Yann Collette <ycollette.nospam@free.fr> - 0.4.0
-- update to version 0.4.0
-
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.3.1
-- Initial build
+* Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0
+- initial specfile
