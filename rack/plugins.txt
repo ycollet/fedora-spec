@@ -1,6 +1,6 @@
 21kHz-rack-plugins
-Alikins-rack-plugins
-AmalgamatedHarmonics
+Alikins-rack-plugins		0.6.2
+AmalgamatedHarmonics		0.6.3
 aP-Modules
 ArableInstruments
 arjo_modules
@@ -8,23 +8,21 @@ AS
 AudibleInstruments		0.6.0
 Autodafe
 Autodafe-Drums
-BaconPlugs
+BaconPlugs			0.6.0
 BBI
-Beckstrom_Research_Rack
+Beckstrom_Research_Rack		0.6.0
 Befaco				0.6.0
 Bidoo
-BogaudioModules
+BogaudioModules			0.6.0
 BokontepByteBeatMachine
 CastleRocktronics
 cf
 CharredDesert
-clone.sh
-clone.sh~
-computerscare-vcv-modules
-dBiz
-DHE-Modules
+computerscare-vcv-modules	0.6.0
+dBiz				0.6.0
+DHE-Modules			0.6.0
 DrumKit
-Erratic
+Erratic				0.6.0
 ESeries				0.6.0
 Formula
 FrozenWasteland
@@ -35,7 +33,7 @@ huaba
 ImpromptuModular
 JW-Modules
 Koralfx-Modules
-LFSR
+LFSR				0.6.0
 LOGinstruments
 LRTRack
 ML_modules
@@ -52,19 +50,19 @@ RackPlugins
 RJModules
 RODENTMODULES
 Sculpt-O-Sound
-SerialRacker
+SerialRacker			0.6.0
 sonusmodular
 southpole-vcvrack
-SquinkyVCV
+SquinkyVCV			0.6.0
 stochasm
 Strums_Mental_VCV_Modules
-SubmarineFree
+SubmarineFree			0.6.0
 submarine-prototype-vcv
-SubmarineUtility
+SubmarineUtility		0.6.0
 SynthKit
 Torpedo
 TriggerFish-VCV
-trowaSoft-VCV
+trowaSoft-VCV			0.6.0
 unless_modules
 ValleyRackFree
 vcv-gratrix
@@ -80,3 +78,30 @@ vcvrackplugins_av500
 vcvrackplugins_dekstop
 vcvrack-rtlsdr
 VCVRack-Simple
+
+
+01 - Fundamental
+02 - Befaco
+03 - ESeries
+04 - AudibleInstruments
+05 - Alikins-rack-plugins
+06 - AmalgamatedHarmonics
+07 - BaconPlugs
+08 - Beckstrom_Research_Rack
+09 - BogaudioModules
+10 - computerscare-vcv-modules
+11 - dBiz
+12 - DHE-Modules
+13 - Erratic
+14 - LFSR
+15 - LRTRack
+16 - SerialRacker
+17 - SquinkyVCV
+18 - SubmarineFree
+19 - SubmarineUtility
+20 - trowaSoft-VCV
+
+21 - VCV_moDllz/ has tags v0.6
+22 - vcvmods/ has tags v0.6
+23 - VCV-Rack-Plugins/ has tags v0.6
+24 - vcvrack-rtlsdr/ has tags v0.6
