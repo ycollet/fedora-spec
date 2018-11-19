@@ -70,15 +70,14 @@ vcv-karatesnoopy
 vcv-link
 vcv_luckyxxl
 VCVMicroTools
-VCV_moDllz
+VCV_moDllz			0.6.0
 vcvmods
 VCVRack-plugin-JE
-VCV-Rack-Plugins
+VCV-Rack-Plugins		0.6.0
 vcvrackplugins_av500
 vcvrackplugins_dekstop
-vcvrack-rtlsdr
+vcvrack-rtlsdr			0.6.0
 VCVRack-Simple
-
 
 01 - Fundamental
 02 - Befaco
@@ -100,8 +99,7 @@ VCVRack-Simple
 18 - SubmarineFree
 19 - SubmarineUtility
 20 - trowaSoft-VCV
-
-21 - VCV_moDllz/ has tags v0.6
-22 - vcvmods/ has tags v0.6
-23 - VCV-Rack-Plugins/ has tags v0.6
-24 - vcvrack-rtlsdr/ has tags v0.6
+21 - VCV_moDllz
+22 - vcvmods
+23 - VCV-Rack-Plugins
+24 - vcvrack-rtlsdr
