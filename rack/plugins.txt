@@ -1,83 +1,78 @@
-21kHz-rack-plugins
-Alikins-rack-plugins		0.6.2
-AmalgamatedHarmonics		0.6.3
-aP-Modules
-ArableInstruments
-arjo_modules
-AS
-AudibleInstruments		0.6.0
-Autodafe
-Autodafe-Drums
-BaconPlugs			0.6.0
-BBI
-Beckstrom_Research_Rack		0.6.0
-Befaco				0.6.0
-Bidoo
-BogaudioModules			0.6.0
-BokontepByteBeatMachine
-CastleRocktronics
-cf
-CharredDesert
-computerscare-vcv-modules	0.6.0
-dBiz				0.6.0
-DHE-Modules			0.6.0
-DrumKit
-Erratic				0.6.0
-ESeries				0.6.0
-Formula
-FrozenWasteland
-Fundamental			0.6.0
-Geodesics
-hetrickcv
-huaba
-ImpromptuModular
-JW-Modules
-Koralfx-Modules
-LFSR				0.6.0
-LOGinstruments
-LRTRack
-ML_modules
-modular80
-MrLumps
-NauModular
-NLNRI_VCVRackPlugins
-Nohmad
-Ohmer-Modules
-PG-Instruments
-PvC
-qwelk
-RackPlugins
-RJModules
-RODENTMODULES
-Sculpt-O-Sound
-SerialRacker			0.6.0
-sonusmodular
-southpole-vcvrack
-SquinkyVCV			0.6.0
-stochasm
-Strums_Mental_VCV_Modules
-SubmarineFree			0.6.0
-submarine-prototype-vcv
-SubmarineUtility		0.6.0
-SynthKit
-Torpedo
-TriggerFish-VCV
-trowaSoft-VCV			0.6.0
-unless_modules
-ValleyRackFree
-vcv-gratrix
-vcv-karatesnoopy
-vcv-link
-vcv_luckyxxl
-VCVMicroTools
-VCV_moDllz			0.6.0
-vcvmods
-VCVRack-plugin-JE
-VCV-Rack-Plugins		0.6.0
-vcvrackplugins_av500
-vcvrackplugins_dekstop
-vcvrack-rtlsdr			0.6.0
-VCVRack-Simple
+VERSION = 0.6.1		./dBiz/Makefile					done
+VERSION = 0.6.12	./AS/Makefile
+VERSION = 0.6.0		./Sculpt-O-Sound/Makefile
+VERSION = 0.6.2		./Alikins-rack-plugins/Makefile			done
+VERSION = 0.6.2		./Formula/Makefile
+VERSION = 0.6.21	./LFSR/Makefile					done
+VERSION = 0.6.8		./cf/Makefile
+VERSION = 0.6.3		./modular80/Makefile
+VERSION = 0.6.3		./DHE-Modules/Makefile				done
+VERSION = 0.6.0		./qwelk/Makefile
+VERSION = 0.6.0dev	./vcvrack-rtlsdr/Makefile			done
+VERSION = 0.6.3		./huaba/Makefile
+VERSION = 0.6.0		./LOGinstruments/Makefile
+VERSION = 0.6.4		./CharredDesert/Makefile
+VERSION = 0.6.1		./SerialRacker/Makefile				done
+VERSION = 0.6.3.1	./AmalgamatedHarmonics/Makefile			done
+VERSION = 0.6.0		./NLNRI_VCVRackPlugins/Makefile
+VERSION = 0.6.2		./SynthKit/Makefile
+VERSION = 0.6.3		./Strums_Mental_VCV_Modules/Makefile
+VERSION = 0.6.0		./Beckstrom_Research_Rack/Makefile		done
+VERSION = 0.6.4		./trowaSoft-VCV/Makefile			done
+VERSION = 0.6.0		./VCVRack-Simple/Makefile
+VERSION = 0.6.0		./southpole-vcvrack/Makefile
+VERSION = 0.6.1		./vcv-karatesnoopy/Makefile
+VERSION = 0.6.0		./ESeries/Makefile				done
+VERSION = 0.6.4		./computerscare-vcv-modules/Makefile		done
+VERSION = 0.6.1		./vcvmods/Makefile				done
+VERSION = 0.6.0		./Befaco/Makefile				done
+VERSION = 0.6.12	./ImpromptuModular/Makefile
+VERSION = 0.6.10	./BogaudioModules/Makefile			done
+VERSION = 0.6.10	./SquinkyVCV/Makefile				done
+VERSION = 0.6.2		./RackPlugins/Makefile
+VERSION = 0.6.0		./vcv-gratrix/Makefile
+VERSION = 0.6.1		./21kHz-rack-plugins/Makefile
+VERSION = 0.6.2		./BaconPlugs/Makefile				done
+VERSION = 0.6.0		./Torpedo/Makefile
+VERSION = 0.6.4		./Geodesics/Makefile
+VERSION = 0.6.8		./SubmarineFree/Makefile			done
+VERSION = 0.6.4		./DrumKit/Makefile
+VERSION = 0.5.0		./CastleRocktronics/Makefile
+VERSION = 0.6.3		./JW-Modules/Makefile
+VERSION = 0.6.21	./Bidoo/Makefile
+VERSION = 0.6.2		./SubmarineUtility/Makefile			done
+VERSION = 0.6.0		./aP-Modules/Makefile
+VERSION = 0.6.9		./Koralfx-Modules/Makefile
+VERSION = 0.6.1 	./vcv-link/Makefile
+VERSION = 0.6.0		./PvC/Makefile
+VERSION = 0.6.1		./submarine-prototype-vcv/Makefile
+VERSION = 0.6.0		./hetrickcv/Makefile
+VERSION = 0.6.0		./Nohmad/Makefile
+VERSION = 0.6.1		./NauModular/Makefile
+VERSION = 0.6.0		./MrLumps/Makefile
+VERSION = 0.6.0		./BBI/Makefile
+VERSION = 0.6.1		./RJModules/Makefile
+VERSION = 0.6.2		./unless_modules/Makefile
+VERSION = 0.6.3		./VCV-Rack-Plugins/Makefile			done
+VERSION = 0.6.4		./PG-Instruments/Makefile
+VERSION = 0.6.0		./stochasm/Makefile
+VERSION = 0.6.0		./vcv_luckyxxl/Makefile
+VERSION = 0.6.3		./AudibleInstruments/Makefile			done
+VERSION = 0.6.6		./ValleyRackFree/Makefile
+VERSION = 0.6.3		./ML_modules/Makefile
+VERSION = 0.6.7		./FrozenWasteland/Makefile
+VERSION = 0.6.0		./VCVMicroTools/Makefile
+VERSION = 0.6.1		./RODENTMODULES/Makefile
+VERSION = 0.6.4		./LRTRack/Makefile				done
+VERSION = 0.6.6		./VCV_moDllz/Makefile				done
+VERSION = 0.6.2		./Fundamental/Makefile				done
+VERSION = 0.6.0		./arjo_modules/Makefile
+VERSION = 0.6.4		./Ohmer-Modules/Makefile
+VERSION = 0.6.2		./Erratic/Makefile				done
+VERSION = 0.6.0		./ArableInstruments/Makefile			done
+VERSION = 0.6.2		./sonusmodular/Makefile
+VERSION = 0.6.1		./BokontepByteBeatMachine/Makefile
+VERSION = 0.6.4		./TriggerFish-VCV/Makefile
 
 01 - Fundamental
 02 - Befaco
