@@ -8,7 +8,7 @@
 
 Name:    JUCE
 Version: 5.4.1.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: JUCE Framework
 URL:     https://github.com/WeAreROLI/JUCE.git
 Group:   Applications/Multimedia
@@ -46,23 +46,43 @@ live-coding engine which can be used for rapid prototyping.
 cd doxygen
 sed -i -e "s/python/python2/g" Makefile
 
-make CONFIG=Release
+# Remove old compilation flags and use compilation flags from Fedora
+sed -i -e "s/-march=native//g" Makefile
+sed -i -e "s/-O3//g" Makefile
+
+make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}" 
 cd ../extras
 
 cd AudioPluginHost/Builds/LinuxMakefile/
-make CONFIG=Release
+
+sed -i -e "s/-march=native//g" Makefile
+sed -i -e "s/-O3//g" Makefile
+
+make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 cd BinaryBuilder/Builds/LinuxMakefile/
-make CONFIG=Release
+
+sed -i -e "s/-march=native//g" Makefile
+sed -i -e "s/-O3//g" Makefile
+
+make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 cd Projucer/Builds/LinuxMakefile/
-make CONFIG=Release
+
+sed -i -e "s/-march=native//g" Makefile
+sed -i -e "s/-O3//g" Makefile
+
+make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 cd UnitTestRunner/Builds/LinuxMakefile/
-make CONFIG=Release
+
+sed -i -e "s/-march=native//g" Makefile
+sed -i -e "s/-O3//g" Makefile
+
+make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 %install
@@ -89,5 +109,8 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Wed Nov 21 2018 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-2
+- fix compilation flags
+
 * Mon Nov 12 2018 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-1
 - initial specfile
