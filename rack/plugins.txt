@@ -1,22 +1,22 @@
 VERSION = 0.6.1		./dBiz/Makefile					done
-VERSION = 0.6.12	./AS/Makefile
-VERSION = 0.6.0		./Sculpt-O-Sound/Makefile
+VERSION = 0.6.12	./AS/Makefile					done
+VERSION = 0.6.0		./Sculpt-O-Sound/Makefile			done
 VERSION = 0.6.2		./Alikins-rack-plugins/Makefile			done
-VERSION = 0.6.2		./Formula/Makefile
+VERSION = 0.6.2		./Formula/Makefile				done
 VERSION = 0.6.21	./LFSR/Makefile					done
-VERSION = 0.6.8		./cf/Makefile
-VERSION = 0.6.3		./modular80/Makefile
+VERSION = 0.6.8		./cf/Makefile					done
+VERSION = 0.6.3		./modular80/Makefile				done
 VERSION = 0.6.3		./DHE-Modules/Makefile				done
-VERSION = 0.6.0		./qwelk/Makefile
+VERSION = 0.6.0		./qwelk/Makefile				done
 VERSION = 0.6.0dev	./vcvrack-rtlsdr/Makefile			done
-VERSION = 0.6.3		./huaba/Makefile
-VERSION = 0.6.0		./LOGinstruments/Makefile
-VERSION = 0.6.4		./CharredDesert/Makefile
+VERSION = 0.6.3		./huaba/Makefile				done
+VERSION = 0.6.0		./LOGinstruments/Makefile			done
+VERSION = 0.6.4		./CharredDesert/Makefile			done
 VERSION = 0.6.1		./SerialRacker/Makefile				done
 VERSION = 0.6.3.1	./AmalgamatedHarmonics/Makefile			done
-VERSION = 0.6.0		./NLNRI_VCVRackPlugins/Makefile
-VERSION = 0.6.2		./SynthKit/Makefile
-VERSION = 0.6.3		./Strums_Mental_VCV_Modules/Makefile
+VERSION = 0.6.0		./NLNRI_VCVRackPlugins/Makefile			done
+VERSION = 0.6.2		./SynthKit/Makefile				done
+VERSION = 0.6.3		./Strums_Mental_VCV_Modules/Makefile		done
 VERSION = 0.6.0		./Beckstrom_Research_Rack/Makefile		done
 VERSION = 0.6.4		./trowaSoft-VCV/Makefile			done
 VERSION = 0.6.0		./VCVRack-Simple/Makefile
@@ -98,3 +98,16 @@ VERSION = 0.6.4		./TriggerFish-VCV/Makefile
 22 - vcvmods
 23 - VCV-Rack-Plugins
 24 - vcvrack-rtlsdr
+25 - ArableInstruments
+26 - AS
+27 - SculptOSound
+28 - Formula
+29 - cf
+30 - modular80
+31 - qwelk
+32 - huaba
+33 - LOGinstruments
+34 - CharredDesert
+35 - NLNRI
+36 - SynthKit
+37 - StrumsMental
