@@ -47,12 +47,12 @@ VERSION = 0.6.1 	./vcv-link/Makefile				KO
 VERSION = 0.6.0		./PvC/Makefile					done
 VERSION = 0.6.1		./submarine-prototype-vcv/Makefile		done
 VERSION = 0.6.0		./hetrickcv/Makefile				done
-VERSION = 0.6.0		./Nohmad/Makefile
-VERSION = 0.6.1		./NauModular/Makefile
-VERSION = 0.6.0		./MrLumps/Makefile
-VERSION = 0.6.0		./BBI/Makefile
-VERSION = 0.6.1		./RJModules/Makefile
-VERSION = 0.6.2		./unless_modules/Makefile
+VERSION = 0.6.0		./Nohmad/Makefile				done
+VERSION = 0.6.1		./NauModular/Makefile				done
+VERSION = 0.6.0		./MrLumps/Makefile				KO
+VERSION = 0.6.0		./BBI/Makefile					done
+VERSION = 0.6.1		./RJModules/Makefile				done
+VERSION = 0.6.2		./unless_modules/Makefile			done
 VERSION = 0.6.3		./VCV-Rack-Plugins/Makefile			done
 VERSION = 0.6.4		./PG-Instruments/Makefile
 VERSION = 0.6.0		./stochasm/Makefile
@@ -111,3 +111,28 @@ VERSION = 0.6.4		./TriggerFish-VCV/Makefile
 35 - NLNRI
 36 - SynthKit
 37 - StrumsMental
+38 - VCVRackSimple
+39 - SouthPole
+40 - vcv-karatesnoopy
+41 - ImpromptuModular
+42 - RackPlugins
+43 - vcv-gratix
+44 - 21KhzRack
+45 - Torpedo
+46 - Geodesics
+47 - DrumKit
+48 - CasteRocktronic
+49 - JW-Modules
+50 - Bidoo
+51 - aP-Modules
+52 - KoralFX
+53 - vcv-link
+54 - PvC
+55 - SubmarineProto
+56 - hetrickcv
+57 - Nohmad
+58 - NauModular
+59 - MrLumps
+60 - BBI
+61 - RJModules
+62 - unless_modules
