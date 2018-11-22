@@ -54,25 +54,25 @@ VERSION = 0.6.0		./BBI/Makefile					done
 VERSION = 0.6.1		./RJModules/Makefile				done
 VERSION = 0.6.2		./unless_modules/Makefile			done
 VERSION = 0.6.3		./VCV-Rack-Plugins/Makefile			done
-VERSION = 0.6.4		./PG-Instruments/Makefile
-VERSION = 0.6.0		./stochasm/Makefile
-VERSION = 0.6.0		./vcv_luckyxxl/Makefile
+VERSION = 0.6.4		./PG-Instruments/Makefile			done
+VERSION = 0.6.0		./stochasm/Makefile				done
+VERSION = 0.6.0		./vcv_luckyxxl/Makefile				done
 VERSION = 0.6.3		./AudibleInstruments/Makefile			done
-VERSION = 0.6.6		./ValleyRackFree/Makefile
-VERSION = 0.6.3		./ML_modules/Makefile
-VERSION = 0.6.7		./FrozenWasteland/Makefile
-VERSION = 0.6.0		./VCVMicroTools/Makefile
-VERSION = 0.6.1		./RODENTMODULES/Makefile
+VERSION = 0.6.6		./ValleyRackFree/Makefile			done
+VERSION = 0.6.3		./ML_modules/Makefile				done
+VERSION = 0.6.7		./FrozenWasteland/Makefile			KO
+VERSION = 0.6.0		./VCVMicroTools/Makefile			done
+VERSION = 0.6.1		./RODENTMODULES/Makefile			done
 VERSION = 0.6.4		./LRTRack/Makefile				done
 VERSION = 0.6.6		./VCV_moDllz/Makefile				done
 VERSION = 0.6.2		./Fundamental/Makefile				done
-VERSION = 0.6.0		./arjo_modules/Makefile
-VERSION = 0.6.4		./Ohmer-Modules/Makefile
+VERSION = 0.6.0		./arjo_modules/Makefile				done
+VERSION = 0.6.4		./Ohmer-Modules/Makefile			KO
 VERSION = 0.6.2		./Erratic/Makefile				done
 VERSION = 0.6.0		./ArableInstruments/Makefile			done
-VERSION = 0.6.2		./sonusmodular/Makefile
-VERSION = 0.6.1		./BokontepByteBeatMachine/Makefile
-VERSION = 0.6.4		./TriggerFish-VCV/Makefile
+VERSION = 0.6.2		./sonusmodular/Makefile				done (gitlab)
+VERSION = 0.6.1		./BokontepByteBeatMachine/Makefile		done
+VERSION = 0.6.4		./TriggerFish-VCV/Makefile			done
 
 01 - Fundamental
 02 - Befaco
@@ -136,3 +136,16 @@ VERSION = 0.6.4		./TriggerFish-VCV/Makefile
 60 - BBI
 61 - RJModules
 62 - unless_modules
+63 - PG-Instruments
+64 - stochasm
+65 - vcv_luckyxxl
+66 - ValleyRackFree
+67 - ML_Modules
+68 - FrozenWasteland
+69 - VCVMicroTools
+70 - RodentModules
+71 - arjo_modules
+72 - Ohmer-Modules
+73 - sonusmodular
+74 - Bokontep
+75 - TriggerFish
