@@ -70,9 +70,11 @@ VERSION = 0.6.0		./arjo_modules/Makefile				done
 VERSION = 0.6.4		./Ohmer-Modules/Makefile			KO
 VERSION = 0.6.2		./Erratic/Makefile				done
 VERSION = 0.6.0		./ArableInstruments/Makefile			done
-VERSION = 0.6.2		./sonusmodular/Makefile				done (gitlab)
+VERSION = 0.6.2		./sonusmodular/Makefile				done
 VERSION = 0.6.1		./BokontepByteBeatMachine/Makefile		done
 VERSION = 0.6.4		./TriggerFish-VCV/Makefile			done
+
+KO prefixed files does not build ...
 
 01 - Fundamental
 02 - Befaco
@@ -116,23 +118,23 @@ VERSION = 0.6.4		./TriggerFish-VCV/Makefile			done
 40 - vcv-karatesnoopy
 41 - ImpromptuModular
 42 - RackPlugins
-43 - vcv-gratix
+KO - 43 - vcv-gratix
 44 - 21KhzRack
 45 - Torpedo
 46 - Geodesics
 47 - DrumKit
-48 - CasteRocktronic
+KO - 48 - CasteRocktronic
 49 - JW-Modules
 50 - Bidoo
 51 - aP-Modules
 52 - KoralFX
-53 - vcv-link
+KO - 53 - vcv-link
 54 - PvC
 55 - SubmarineProto
 56 - hetrickcv
 57 - Nohmad
 58 - NauModular
-59 - MrLumps
+KO - 59 - MrLumps
 60 - BBI
 61 - RJModules
 62 - unless_modules
@@ -141,11 +143,57 @@ VERSION = 0.6.4		./TriggerFish-VCV/Makefile			done
 65 - vcv_luckyxxl
 66 - ValleyRackFree
 67 - ML_Modules
-68 - FrozenWasteland
+KO - 68 - FrozenWasteland
 69 - VCVMicroTools
 70 - RodentModules
 71 - arjo_modules
-72 - Ohmer-Modules
+KO - 72 - Ohmer-Modules
 73 - sonusmodular
 74 - Bokontep
 75 - TriggerFish
+
+* Download sources:
+
+** Sources to be download manually:
+
+rack_04_audibleinstruments.spec:Source1: AudibleInstruments.tar.gz
+rack_25_ArableInstruments.spec:Source1: ArableInstruments.tar.gz
+rack_30_modular80.spec:Source1: modular80.tar.gz
+rack_34_CharredDesert.spec:Source1: CharredDesert.tar.gz
+rack_36_SynthKit.spec:Source1: SynthKit.tar.gz
+rack_39_SouthPole.spec:Source1: southpole-vcvrack.tar.gz
+rack_47_DrumKit.spec:Source1: DrumKit.tar.gz
+rack_53_vcv-link.spec:Source1: vcv-link.tar.gz
+rack_62_unless_modules.spec:Source1: unless_modules.tar.gz
+rack_73_sonusmodular.spec:Source1: sonusmodular.tar.gz
+
+** All the others can be downloaded with spectool -g
+
+for Ext in 01 02 03 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 26 27 28 29 31 32 33 35 37 38 40 41 42 43 44 45 46 48 49 50 51 52 54 55 56 57 58 59 60 61 63 64 65 66 67 68 69 70 71 72 74 75
+do
+  Files=`ls rack_$Ext*.spec`
+  echo "Building $Files"
+  spectool -g $Files
+done
+
+* Building all the spec files:
+
+** Remove all files from ~/rpmbuild/SRPMS
+
+rm ~/rpmbuild/SRPMS/*
+
+for Ext in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 49 50 51 52 54 55 56 57 58 60 61 62 63 64 65 66 67 69 70 71 73 74 75
+do
+  Files=`ls rack_$Ext*.spec`
+  echo "Building $Files"
+  rpmbuild -ba $Files
+done
+
+** Upload srpms packages to copr:
+
+cd ~/rpmbuild/SRPMS
+for Files in *.src.rpm
+do
+  echo "Uploading $Files"
+  copr-cli build linuxmao $Files
+done

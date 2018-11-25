@@ -29,7 +29,7 @@ URL:     https://github.com/JerrySievert/CharredDesert
 # cd ..
 # tar cvfz Rack.tar.gz Rack/*
 
-# git clone --recuse https://github.com/JerrySievert/CharredDesert
+# git clone --recurse https://github.com/JerrySievert/CharredDesert
 # cd CharredDesert
 # find . -name ".git" -exec rm -rf {} \;
 # cd ..

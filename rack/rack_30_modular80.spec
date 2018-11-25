@@ -29,8 +29,11 @@ URL:     https://github.com/cschol/modular80
 # cd ..
 # tar cvfz Rack.tar.gz Rack/*
 
-# git clone --recursive https://github.com/cschol/modular80
+# git clone https://github.com/cschol/modular80
 # cd modular80
+# git checkout 0.6.3
+# git submodule init
+# git submodule update
 # find . -name ".git" -exec rm -rf {} \;
 # cd ..
 # tar cvfz modular80.tar.gz modular80/*

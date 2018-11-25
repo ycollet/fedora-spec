@@ -84,11 +84,11 @@ mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/pixmaps/
 mkdir -p %{buildroot}%{_datadir}/man/man1/
 mkdir -p %{buildroot}%{_datadir}/applications/
-mkdir -p %{buildroot}%{_libexecdir}/Rack/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/
 
 install -m 755 Rack       %{buildroot}%{_bindir}/
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/rack.png
-cp -r res %{buildroot}%{_libexecdir}/Rack/
+cp -r res %{buildroot}%{_libexecdir}/Rack/plugins/
 
 cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
 [Desktop Entry]

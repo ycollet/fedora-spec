@@ -29,8 +29,9 @@ URL:     https://github.com/sonusdept/sonusmodular
 # cd ..
 # tar cvfz Rack.tar.gz Rack/*
 
-# git clone --recurse https://github.com/sonusdept/sonusmodular
+# git clone --recurse https://gitlab.com/sonusdept/sonusmodular.git
 # cd sonusmodular
+# git checkout 0.6.2
 # find . -name ".git" -exec rm -rf {} \;
 # cd ..
 # tar cvfz sonusmodular.tar.gz sonusmodular/*

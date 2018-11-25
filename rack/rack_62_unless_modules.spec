@@ -29,7 +29,7 @@ URL:     https://github.com/unlessgames/unless_modules.git
 # cd ..
 # tar cvfz Rack.tar.gz Rack/*
 
-# git clone --recurse https://github.com/unlessgames/unless_modules.git
+# git clone --recurse https://gitlab.com/unlessgames/unless_modules.git
 # cd unless_modules
 # find . -name ".git" -exec rm -rf {} \;
 # cd ..
