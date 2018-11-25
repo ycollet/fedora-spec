@@ -499,6 +499,11 @@ ams
 aeolus
 minicomputer
 phasex
+Rack
+rack-Befaco
+rack-Fundamental
+rack-AudibleInstruments
+rack-ESeries
 
 # guitar
 guitarix
