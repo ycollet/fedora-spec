@@ -8,7 +8,7 @@
 
 Name:    rack-21kHz
 Version: 0.6.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia

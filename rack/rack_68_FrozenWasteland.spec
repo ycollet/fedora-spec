@@ -8,7 +8,7 @@
 
 Name:    rack-FrozenWasteland
 Version: 0.6.7
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia

@@ -8,7 +8,7 @@
 
 Name:    rack-arjo_modules
 Version: 0.6.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia

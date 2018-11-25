@@ -8,7 +8,7 @@
 
 Name:    rack-LFSR
 Version: 0.6.21
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia

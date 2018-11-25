@@ -8,7 +8,7 @@
 
 Name:    rack-Koralfx-Modules
 Version: 0.6.9
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia
