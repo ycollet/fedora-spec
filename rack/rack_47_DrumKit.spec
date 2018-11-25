@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/DrumKit/
-cp -r DrumKit_plugin/dist/DrumKit/* %{buildroot}%{_libexecdir}/Rack/DrumKit/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/DrumKit/
+cp -r DrumKit_plugin/dist/DrumKit/* %{buildroot}%{_libexecdir}/Rack/plugins/DrumKit/
 
 %files
 %{_libexecdir}/*

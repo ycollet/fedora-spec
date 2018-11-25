@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/FrozenWasteland/
-cp -r FrozenWasteland_plugin/dist/FrozenWasteland/* %{buildroot}%{_libexecdir}/Rack/FrozenWasteland/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/FrozenWasteland/
+cp -r FrozenWasteland_plugin/dist/FrozenWasteland/* %{buildroot}%{_libexecdir}/Rack/plugins/FrozenWasteland/
 
 %files
 %{_libexecdir}/*

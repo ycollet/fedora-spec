@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/JW-Modules/
-cp -r JW-Modules_plugin/dist/JW-Modules/* %{buildroot}%{_libexecdir}/Rack/JW-Modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/JW-Modules/
+cp -r JW-Modules_plugin/dist/JW-Modules/* %{buildroot}%{_libexecdir}/Rack/plugins/JW-Modules/
 
 %files
 %{_libexecdir}/*

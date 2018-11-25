@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/PvC/
-cp -r PvC_plugin/dist/PvC/* %{buildroot}%{_libexecdir}/Rack/PvC/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/PvC/
+cp -r PvC_plugin/dist/PvC/* %{buildroot}%{_libexecdir}/Rack/plugins/PvC/
 
 %files
 %{_libexecdir}/*

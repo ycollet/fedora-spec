@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/TriggerFish-Elements/
-cp -r TriggerFish-Elements_plugin/dist/TriggerFish-Elements/* %{buildroot}%{_libexecdir}/Rack/TriggerFish-Elements/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/TriggerFish-Elements/
+cp -r TriggerFish-Elements_plugin/dist/TriggerFish-Elements/* %{buildroot}%{_libexecdir}/Rack/plugins/TriggerFish-Elements/
 
 %files
 %{_libexecdir}/*

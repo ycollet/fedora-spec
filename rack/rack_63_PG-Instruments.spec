@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/PG-Instruments/
-cp -r PG-Instruments_plugin/dist/PG-Instruments/* %{buildroot}%{_libexecdir}/Rack/PG-Instruments/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/PG-Instruments/
+cp -r PG-Instruments_plugin/dist/PG-Instruments/* %{buildroot}%{_libexecdir}/Rack/plugins/PG-Instruments/
 
 %files
 %{_libexecdir}/*

@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/BeckstromResearch/
-cp -r BeckstromResearch_plugin/dist/BeckstromResearch/* %{buildroot}%{_libexecdir}/Rack/BeckstromResearch/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/BeckstromResearch/
+cp -r BeckstromResearch_plugin/dist/BeckstromResearch/* %{buildroot}%{_libexecdir}/Rack/plugins/BeckstromResearch/
 
 %files
 %{_libexecdir}/*

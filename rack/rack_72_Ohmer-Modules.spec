@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Ohmer/
-cp -r Ohmer_plugin/dist/Ohmer/* %{buildroot}%{_libexecdir}/Rack/Ohmer/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Ohmer/
+cp -r Ohmer_plugin/dist/Ohmer/* %{buildroot}%{_libexecdir}/Rack/plugins/Ohmer/
 
 %files
 %{_libexecdir}/*

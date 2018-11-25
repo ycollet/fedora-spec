@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/ESeries/
-cp -r eseries_plugin/dist/ESeries/* %{buildroot}%{_libexecdir}/Rack/ESeries/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/ESeries/
+cp -r eseries_plugin/dist/ESeries/* %{buildroot}%{_libexecdir}/Rack/plugins/ESeries/
 
 %files
 %{_libexecdir}/*

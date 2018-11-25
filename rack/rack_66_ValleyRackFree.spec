@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Valley/
-cp -r Valley_plugin/dist/Valley/* %{buildroot}%{_libexecdir}/Rack/Valley/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Valley/
+cp -r Valley_plugin/dist/Valley/* %{buildroot}%{_libexecdir}/Rack/plugins/Valley/
 
 %files
 %{_libexecdir}/*

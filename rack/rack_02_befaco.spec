@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Befaco/
-cp -r befaco_plugin/dist/Befaco/* %{buildroot}%{_libexecdir}/Rack/Befaco/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Befaco/
+cp -r befaco_plugin/dist/Befaco/* %{buildroot}%{_libexecdir}/Rack/plugins/Befaco/
 
 %files
 %{_libexecdir}/*

@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/com-soundchasing-stochasm/
-cp -r com-soundchasing-stochasm_plugin/dist/com-soundchasing-stochasm/* %{buildroot}%{_libexecdir}/Rack/com-soundchasing-stochasm/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/com-soundchasing-stochasm/
+cp -r com-soundchasing-stochasm_plugin/dist/com-soundchasing-stochasm/* %{buildroot}%{_libexecdir}/Rack/plugins/com-soundchasing-stochasm/
 
 %files
 %{_libexecdir}/*

@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/aP-Modules/
-cp -r aP-Modules_plugin/dist/aP-Modules/* %{buildroot}%{_libexecdir}/Rack/aP-Modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/aP-Modules/
+cp -r aP-Modules_plugin/dist/aP-Modules/* %{buildroot}%{_libexecdir}/Rack/plugins/aP-Modules/
 
 %files
 %{_libexecdir}/*

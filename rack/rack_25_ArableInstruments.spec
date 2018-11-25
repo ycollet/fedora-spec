@@ -83,8 +83,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/ArableInstruments/
-cp -r ArableInstruments_plugin/dist/ArableInstruments/* %{buildroot}%{_libexecdir}/Rack/ArableInstruments/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/ArableInstruments/
+cp -r ArableInstruments_plugin/dist/ArableInstruments/* %{buildroot}%{_libexecdir}/Rack/plugins/ArableInstruments/
 
 %files
 %{_libexecdir}/*

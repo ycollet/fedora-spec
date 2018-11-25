@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/SubmarineFree/
-cp -r SubmarineFree_plugin/dist/SubmarineFree/* %{buildroot}%{_libexecdir}/Rack/SubmarineFree/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/SubmarineFree/
+cp -r SubmarineFree_plugin/dist/SubmarineFree/* %{buildroot}%{_libexecdir}/Rack/plugins/SubmarineFree/
 
 %files
 %{_libexecdir}/*

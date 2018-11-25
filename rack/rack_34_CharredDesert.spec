@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/CharredDesert/
-cp -r CharredDesert_plugin/dist/CharredDesert/* %{buildroot}%{_libexecdir}/Rack/CharredDesert/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/CharredDesert/
+cp -r CharredDesert_plugin/dist/CharredDesert/* %{buildroot}%{_libexecdir}/Rack/plugins/CharredDesert/
 
 %files
 %{_libexecdir}/*

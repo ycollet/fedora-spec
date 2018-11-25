@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/squinkylabs-plug1/
-cp -r squinkylabs-plug1_plugin/dist/squinkylabs-plug1/* %{buildroot}%{_libexecdir}/Rack/squinkylabs-plug1/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/squinkylabs-plug1/
+cp -r squinkylabs-plug1_plugin/dist/squinkylabs-plug1/* %{buildroot}%{_libexecdir}/Rack/plugins/squinkylabs-plug1/
 
 %files
 %{_libexecdir}/*

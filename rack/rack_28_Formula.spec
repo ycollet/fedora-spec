@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/FrankBussFormula/
-cp -r FrankBussFormula_plugin/dist/FrankBussFormula/* %{buildroot}%{_libexecdir}/Rack/FrankBussFormula/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/FrankBussFormula/
+cp -r FrankBussFormula_plugin/dist/FrankBussFormula/* %{buildroot}%{_libexecdir}/Rack/plugins/FrankBussFormula/
 
 %files
 %{_libexecdir}/*

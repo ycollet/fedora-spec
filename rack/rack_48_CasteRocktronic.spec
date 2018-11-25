@@ -81,8 +81,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/CastleRocktronics/
-cp -r CastleRocktronics_plugin/dist/CastleRocktronics/* %{buildroot}%{_libexecdir}/Rack/CastleRocktronics/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/CastleRocktronics/
+cp -r CastleRocktronics_plugin/dist/CastleRocktronics/* %{buildroot}%{_libexecdir}/Rack/plugins/CastleRocktronics/
 
 %files
 %{_libexecdir}/*

@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/luckyxxl/
-cp -r luckyxxl_plugin/dist/luckyxxl/* %{buildroot}%{_libexecdir}/Rack/luckyxxl/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/luckyxxl/
+cp -r luckyxxl_plugin/dist/luckyxxl/* %{buildroot}%{_libexecdir}/Rack/plugins/luckyxxl/
 
 %files
 %{_libexecdir}/*

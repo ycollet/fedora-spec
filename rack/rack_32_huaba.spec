@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/huaba/
-cp -r huaba_plugin/dist/huaba/* %{buildroot}%{_libexecdir}/Rack/huaba/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/huaba/
+cp -r huaba_plugin/dist/huaba/* %{buildroot}%{_libexecdir}/Rack/plugins/huaba/
 
 %files
 %{_libexecdir}/*

@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Nohmad/
-cp -r Nohmad_plugin/dist/Nohmad/* %{buildroot}%{_libexecdir}/Rack/Nohmad/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Nohmad/
+cp -r Nohmad_plugin/dist/Nohmad/* %{buildroot}%{_libexecdir}/Rack/plugins/Nohmad/
 
 %files
 %{_libexecdir}/*

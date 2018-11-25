@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/tnorris-BostonBrightonModules/
-cp -r tnorris-BostonBrightonModules_plugin/dist/tnorris-BostonBrightonModules/* %{buildroot}%{_libexecdir}/Rack/tnorris-BostonBrightonModules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/tnorris-BostonBrightonModules/
+cp -r tnorris-BostonBrightonModules_plugin/dist/tnorris-BostonBrightonModules/* %{buildroot}%{_libexecdir}/Rack/plugins/tnorris-BostonBrightonModules/
 
 %files
 %{_libexecdir}/*

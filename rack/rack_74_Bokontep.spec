@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/BOKONTEPByteBeatMachine/
-cp -r BOKONTEPByteBeatMachine_plugin/dist/BOKONTEPByteBeatMachine/* %{buildroot}%{_libexecdir}/Rack/BOKONTEPByteBeatMachine/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/BOKONTEPByteBeatMachine/
+cp -r BOKONTEPByteBeatMachine_plugin/dist/BOKONTEPByteBeatMachine/* %{buildroot}%{_libexecdir}/Rack/plugins/BOKONTEPByteBeatMachine/
 
 %files
 %{_libexecdir}/*

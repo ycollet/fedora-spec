@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/NonLinearInstruments/
-cp -r NonLinearInstruments_plugin/dist/NonLinearInstruments/* %{buildroot}%{_libexecdir}/Rack/NonLinearInstruments/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/NonLinearInstruments/
+cp -r NonLinearInstruments_plugin/dist/NonLinearInstruments/* %{buildroot}%{_libexecdir}/Rack/plugins/NonLinearInstruments/
 
 %files
 %{_libexecdir}/*

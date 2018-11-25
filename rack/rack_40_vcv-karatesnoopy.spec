@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/KarateSnoopy/
-cp -r KarateSnoopy_plugin/dist/KarateSnoopy/* %{buildroot}%{_libexecdir}/Rack/KarateSnoopy/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/KarateSnoopy/
+cp -r KarateSnoopy_plugin/dist/KarateSnoopy/* %{buildroot}%{_libexecdir}/Rack/plugins/KarateSnoopy/
 
 %files
 %{_libexecdir}/*

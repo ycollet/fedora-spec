@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/21kHz/
-cp -r 21kHz_plugin/dist/21kHz/* %{buildroot}%{_libexecdir}/Rack/21kHz/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/21kHz/
+cp -r 21kHz_plugin/dist/21kHz/* %{buildroot}%{_libexecdir}/Rack/plugins/21kHz/
 
 %files
 %{_libexecdir}/*

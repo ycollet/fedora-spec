@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/cf/
-cp -r cf_plugin/dist/cf/* %{buildroot}%{_libexecdir}/Rack/cf/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/cf/
+cp -r cf_plugin/dist/cf/* %{buildroot}%{_libexecdir}/Rack/plugins/cf/
 
 %files
 %{_libexecdir}/*

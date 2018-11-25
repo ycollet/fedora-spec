@@ -85,8 +85,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/AudibleInstruments/
-cp -r audibleinstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexecdir}/Rack/AudibleInstruments/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/AudibleInstruments/
+cp -r audibleinstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexecdir}/Rack/plugins/AudibleInstruments/
 
 %files
 %{_libexecdir}/*

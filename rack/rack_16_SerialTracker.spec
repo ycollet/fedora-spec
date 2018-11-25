@@ -85,8 +85,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/SerialRacker/
-cp -r SerialRacker_plugin/dist/SerialRacker/* %{buildroot}%{_libexecdir}/Rack/SerialRacker/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/SerialRacker/
+cp -r SerialRacker_plugin/dist/SerialRacker/* %{buildroot}%{_libexecdir}/Rack/plugins/SerialRacker/
 
 %files
 %{_libexecdir}/*

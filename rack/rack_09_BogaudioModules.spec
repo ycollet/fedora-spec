@@ -89,8 +89,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Bogaudio/
-cp -r Bogaudio_plugin/dist/Bogaudio/* %{buildroot}%{_libexecdir}/Rack/Bogaudio/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Bogaudio/
+cp -r Bogaudio_plugin/dist/Bogaudio/* %{buildroot}%{_libexecdir}/Rack/plugins/Bogaudio/
 
 %files
 %{_libexecdir}/*

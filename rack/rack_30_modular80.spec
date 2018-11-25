@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/modular80/
-cp -r modular80_plugin/dist/modular80/* %{buildroot}%{_libexecdir}/Rack/modular80/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/modular80/
+cp -r modular80_plugin/dist/modular80/* %{buildroot}%{_libexecdir}/Rack/plugins/modular80/
 
 %files
 %{_libexecdir}/*

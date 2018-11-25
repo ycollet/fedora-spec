@@ -94,8 +94,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Alikins/
-cp -r alikins_plugin/dist/Alikins/* %{buildroot}%{_libexecdir}/Rack/Alikins/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Alikins/
+cp -r alikins_plugin/dist/Alikins/* %{buildroot}%{_libexecdir}/Rack/plugins/Alikins/
 
 %files
 %{_libexecdir}/*

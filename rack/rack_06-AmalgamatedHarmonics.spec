@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/AmalgamatedHarmonics/
-cp -r AmalgamatedHarmonics_plugin/dist/AmalgamatedHarmonics/* %{buildroot}%{_libexecdir}/Rack/AmalgamatedHarmonics/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/AmalgamatedHarmonics/
+cp -r AmalgamatedHarmonics_plugin/dist/AmalgamatedHarmonics/* %{buildroot}%{_libexecdir}/Rack/plugins/AmalgamatedHarmonics/
 
 %files
 %{_libexecdir}/*

@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/AS/
-cp -r AS_plugin/dist/AS/* %{buildroot}%{_libexecdir}/Rack/AS/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/AS/
+cp -r AS_plugin/dist/AS/* %{buildroot}%{_libexecdir}/Rack/plugins/AS/
 
 %files
 %{_libexecdir}/*

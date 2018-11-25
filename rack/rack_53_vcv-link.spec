@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/StellareModular-Link/
-cp -r StellareModular-Link_plugin/dist/StellareModular-Link/* %{buildroot}%{_libexecdir}/Rack/StellareModular-Link/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/StellareModular-Link/
+cp -r StellareModular-Link_plugin/dist/StellareModular-Link/* %{buildroot}%{_libexecdir}/Rack/plugins/StellareModular-Link/
 
 %files
 %{_libexecdir}/*

@@ -91,8 +91,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/BaconMusic/
-cp -r BaconPlugs_plugin/dist/BaconMusic/* %{buildroot}%{_libexecdir}/Rack/BaconMusic/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/BaconMusic/
+cp -r BaconPlugs_plugin/dist/BaconMusic/* %{buildroot}%{_libexecdir}/Rack/plugins/BaconMusic/
 
 %files
 %{_libexecdir}/*

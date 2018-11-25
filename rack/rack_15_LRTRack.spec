@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/LindenbergResearch/
-cp -r LindenbergResearch_plugin/dist/LindenbergResearch/* %{buildroot}%{_libexecdir}/Rack/LindenbergResearch/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/LindenbergResearch/
+cp -r LindenbergResearch_plugin/dist/LindenbergResearch/* %{buildroot}%{_libexecdir}/Rack/plugins/LindenbergResearch/
 
 %files
 %{_libexecdir}/*

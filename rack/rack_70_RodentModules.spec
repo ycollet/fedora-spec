@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/RODENTMODULES/
-cp -r RODENTMODULES_plugin/dist/RODENTMODULES/* %{buildroot}%{_libexecdir}/Rack/RODENTMODULES/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/RODENTMODULES/
+cp -r RODENTMODULES_plugin/dist/RODENTMODULES/* %{buildroot}%{_libexecdir}/Rack/plugins/RODENTMODULES/
 
 %files
 %{_libexecdir}/*

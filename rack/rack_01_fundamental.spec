@@ -75,12 +75,15 @@ tar xvfz %{SOURCE1} --directory=fundamental_plugin --strip-components=1
 %build
 
 cd fundamental_plugin
+
+sed -i -e "s/src_delete/\/\/src_delete/g" src/Delay.cpp
+
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Fundamental/
-cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack/Fundamental/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Fundamental/
+cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack/plugins/Fundamental/
 
 %files
 %{_libexecdir}/*

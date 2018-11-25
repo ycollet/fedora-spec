@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/SynthKit/
-cp -r SynthKit_plugin/dist/SynthKit/* %{buildroot}%{_libexecdir}/Rack/SynthKit/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/SynthKit/
+cp -r SynthKit_plugin/dist/SynthKit/* %{buildroot}%{_libexecdir}/Rack/plugins/SynthKit/
 
 %files
 %{_libexecdir}/*

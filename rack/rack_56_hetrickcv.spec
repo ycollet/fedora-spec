@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/HetrickCV/
-cp -r HetrickCV_plugin/dist/HetrickCV/* %{buildroot}%{_libexecdir}/Rack/HetrickCV/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/HetrickCV/
+cp -r HetrickCV_plugin/dist/HetrickCV/* %{buildroot}%{_libexecdir}/Rack/plugins/HetrickCV/
 
 %files
 %{_libexecdir}/*

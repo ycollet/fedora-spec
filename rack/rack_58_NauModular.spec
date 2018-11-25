@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/NauModular/
-cp -r NauModular_plugin/dist/NauModular/* %{buildroot}%{_libexecdir}/Rack/NauModular/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/NauModular/
+cp -r NauModular_plugin/dist/NauModular/* %{buildroot}%{_libexecdir}/Rack/plugins/NauModular/
 
 %files
 %{_libexecdir}/*

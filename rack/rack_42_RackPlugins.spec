@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/TheXOR/
-cp -r TheXOR_plugin/dist/TheXOR/* %{buildroot}%{_libexecdir}/Rack/TheXOR/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/TheXOR/
+cp -r TheXOR_plugin/dist/TheXOR/* %{buildroot}%{_libexecdir}/Rack/plugins/TheXOR/
 
 %files
 %{_libexecdir}/*

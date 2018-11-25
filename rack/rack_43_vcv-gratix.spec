@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Gratix/
-cp -r Gratix_plugin/dist/Gratix/* %{buildroot}%{_libexecdir}/Rack/Gratix/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Gratix/
+cp -r Gratix_plugin/dist/Gratix/* %{buildroot}%{_libexecdir}/Rack/plugins/Gratix/
 
 %files
 %{_libexecdir}/*

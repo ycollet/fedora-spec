@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/arjo_modules/
-cp -r arjo_modules_plugin/dist/arjo_modules/* %{buildroot}%{_libexecdir}/Rack/arjo_modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/arjo_modules/
+cp -r arjo_modules_plugin/dist/arjo_modules/* %{buildroot}%{_libexecdir}/Rack/plugins/arjo_modules/
 
 %files
 %{_libexecdir}/*

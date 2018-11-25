@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/trowaSoft/
-cp -r trowaSoft_plugin/dist/trowaSoft/* %{buildroot}%{_libexecdir}/Rack/trowaSoft/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/trowaSoft/
+cp -r trowaSoft_plugin/dist/trowaSoft/* %{buildroot}%{_libexecdir}/Rack/plugins/trowaSoft/
 
 %files
 %{_libexecdir}/*

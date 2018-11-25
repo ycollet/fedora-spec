@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Geodesics/
-cp -r Geodesics_plugin/dist/Geodesics/* %{buildroot}%{_libexecdir}/Rack/Geodesics/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Geodesics/
+cp -r Geodesics_plugin/dist/Geodesics/* %{buildroot}%{_libexecdir}/Rack/plugins/Geodesics/
 
 %files
 %{_libexecdir}/*

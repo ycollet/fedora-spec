@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/LOGinstruments/
-cp -r LOGinstruments_plugin/dist/LOGinstruments/* %{buildroot}%{_libexecdir}/Rack/LOGinstruments/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/LOGinstruments/
+cp -r LOGinstruments_plugin/dist/LOGinstruments/* %{buildroot}%{_libexecdir}/Rack/plugins/LOGinstruments/
 
 %files
 %{_libexecdir}/*

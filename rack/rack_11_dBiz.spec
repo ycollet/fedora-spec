@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/dBiz/
-cp -r dBiz_plugin/dist/dBiz/* %{buildroot}%{_libexecdir}/Rack/dBiz/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/dBiz/
+cp -r dBiz_plugin/dist/dBiz/* %{buildroot}%{_libexecdir}/Rack/plugins/dBiz/
 
 %files
 %{_libexecdir}/*

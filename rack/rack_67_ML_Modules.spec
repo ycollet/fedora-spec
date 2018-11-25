@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/ML_modules/
-cp -r ML_modules_plugin/dist/ML_modules/* %{buildroot}%{_libexecdir}/Rack/ML_modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/ML_modules/
+cp -r ML_modules_plugin/dist/ML_modules/* %{buildroot}%{_libexecdir}/Rack/plugins/ML_modules/
 
 %files
 %{_libexecdir}/*

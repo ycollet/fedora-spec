@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Koralfx-Modules/
-cp -r Koralfx-Modules_plugin/dist/Koralfx-Modules/* %{buildroot}%{_libexecdir}/Rack/Koralfx-Modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Koralfx-Modules/
+cp -r Koralfx-Modules_plugin/dist/Koralfx-Modules/* %{buildroot}%{_libexecdir}/Rack/plugins/Koralfx-Modules/
 
 %files
 %{_libexecdir}/*

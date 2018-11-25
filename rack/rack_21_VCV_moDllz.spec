@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/moDllz/
-cp -r moDllz_plugin/dist/moDllz/* %{buildroot}%{_libexecdir}/Rack/moDllz/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/moDllz/
+cp -r moDllz_plugin/dist/moDllz/* %{buildroot}%{_libexecdir}/Rack/plugins/moDllz/
 
 %files
 %{_libexecdir}/*

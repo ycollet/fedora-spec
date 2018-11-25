@@ -81,8 +81,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Aaron-MicroTools/
-cp -r Aaron-MicroTools_plugin/dist/Aaron-MicroTools/* %{buildroot}%{_libexecdir}/Rack/Aaron-MicroTools/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Aaron-MicroTools/
+cp -r Aaron-MicroTools_plugin/dist/Aaron-MicroTools/* %{buildroot}%{_libexecdir}/Rack/plugins/Aaron-MicroTools/
 
 %files
 %{_libexecdir}/*

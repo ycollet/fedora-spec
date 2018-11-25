@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Bidoo/
-cp -r Bidoo_plugin/dist/Bidoo/* %{buildroot}%{_libexecdir}/Rack/Bidoo/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Bidoo/
+cp -r Bidoo_plugin/dist/Bidoo/* %{buildroot}%{_libexecdir}/Rack/plugins/Bidoo/
 
 %files
 %{_libexecdir}/*

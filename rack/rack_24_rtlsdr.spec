@@ -80,8 +80,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/PulsumQuadratum-SDR/
-cp -r PulsumQuadratum-SDR_plugin/dist/PulsumQuadratum-SDR/* %{buildroot}%{_libexecdir}/Rack/PulsumQuadratum-SDR/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/PulsumQuadratum-SDR/
+cp -r PulsumQuadratum-SDR_plugin/dist/PulsumQuadratum-SDR/* %{buildroot}%{_libexecdir}/Rack/plugins/PulsumQuadratum-SDR/
 
 %files
 %{_libexecdir}/*

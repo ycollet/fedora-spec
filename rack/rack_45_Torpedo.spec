@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/TorpedoDemo/
-cp -r TorpedoDemo_plugin/dist/TorpedoDemo/* %{buildroot}%{_libexecdir}/Rack/TorpedoDemo/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/TorpedoDemo/
+cp -r TorpedoDemo_plugin/dist/TorpedoDemo/* %{buildroot}%{_libexecdir}/Rack/plugins/TorpedoDemo/
 
 %files
 %{_libexecdir}/*

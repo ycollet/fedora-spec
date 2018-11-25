@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/mscHack/
-cp -r mscHack_plugin/dist/mscHack/* %{buildroot}%{_libexecdir}/Rack/mscHack/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/mscHack/
+cp -r mscHack_plugin/dist/mscHack/* %{buildroot}%{_libexecdir}/Rack/plugins/mscHack/
 
 %files
 %{_libexecdir}/*

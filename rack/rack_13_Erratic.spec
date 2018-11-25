@@ -82,8 +82,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/ErraticInstruments/
-cp -r ErraticInstruments_plugin/dist/ErraticInstruments/* %{buildroot}%{_libexecdir}/Rack/ErraticInstruments/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/ErraticInstruments/
+cp -r ErraticInstruments_plugin/dist/ErraticInstruments/* %{buildroot}%{_libexecdir}/Rack/plugins/ErraticInstruments/
 
 %files
 %{_libexecdir}/*

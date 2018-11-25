@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/IO-Simple/
-cp -r IO-Simple_plugin/dist/IO-Simple/* %{buildroot}%{_libexecdir}/Rack/IO-Simple/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/IO-Simple/
+cp -r IO-Simple_plugin/dist/IO-Simple/* %{buildroot}%{_libexecdir}/Rack/plugins/IO-Simple/
 
 %files
 %{_libexecdir}/*

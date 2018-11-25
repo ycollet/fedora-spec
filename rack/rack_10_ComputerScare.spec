@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/computerscare/
-cp -r computerscare_plugin/dist/computerscare/* %{buildroot}%{_libexecdir}/Rack/computerscare/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/computerscare/
+cp -r computerscare_plugin/dist/computerscare/* %{buildroot}%{_libexecdir}/Rack/plugins/computerscare/
 
 %files
 %{_libexecdir}/*

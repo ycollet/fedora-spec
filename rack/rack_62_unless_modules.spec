@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/unless_modules/
-cp -r unless_modules_plugin/dist/unless_modules/* %{buildroot}%{_libexecdir}/Rack/unless_modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/unless_modules/
+cp -r unless_modules_plugin/dist/unless_modules/* %{buildroot}%{_libexecdir}/Rack/plugins/unless_modules/
 
 %files
 %{_libexecdir}/*

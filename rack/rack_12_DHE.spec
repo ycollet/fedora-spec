@@ -82,8 +82,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/DHE-Modules/
-cp -r DHE-Modules_plugin/dist/DHE-Modules/* %{buildroot}%{_libexecdir}/Rack/DHE-Modules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/DHE-Modules/
+cp -r DHE-Modules_plugin/dist/DHE-Modules/* %{buildroot}%{_libexecdir}/Rack/plugins/DHE-Modules/
 
 %files
 %{_libexecdir}/*

@@ -82,8 +82,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/alto777_LFSR/
-cp -r alto777_LFSR_plugin/dist/alto777_LFSR/* %{buildroot}%{_libexecdir}/Rack/alto777_LFSR/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/alto777_LFSR/
+cp -r alto777_LFSR_plugin/dist/alto777_LFSR/* %{buildroot}%{_libexecdir}/Rack/plugins/alto777_LFSR/
 
 %files
 %{_libexecdir}/*

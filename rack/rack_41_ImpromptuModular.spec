@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/ImpromptuModular/
-cp -r ImpromptuModular_plugin/dist/ImpromptuModular/* %{buildroot}%{_libexecdir}/Rack/ImpromptuModular/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/ImpromptuModular/
+cp -r ImpromptuModular_plugin/dist/ImpromptuModular/* %{buildroot}%{_libexecdir}/Rack/plugins/ImpromptuModular/
 
 %files
 %{_libexecdir}/*

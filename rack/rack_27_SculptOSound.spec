@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/Sculpt-O-Sound/
-cp -r Sculpt-O-Sound_plugin/dist/Sculpt-O-Sound/* %{buildroot}%{_libexecdir}/Rack/Sculpt-O-Sound/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Sculpt-O-Sound/
+cp -r Sculpt-O-Sound_plugin/dist/Sculpt-O-Sound/* %{buildroot}%{_libexecdir}/Rack/plugins/Sculpt-O-Sound/
 
 %files
 %{_libexecdir}/*

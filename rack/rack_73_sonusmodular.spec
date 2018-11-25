@@ -84,8 +84,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/SonusModular/
-cp -r SonusModular_plugin/dist/SonusModular/* %{buildroot}%{_libexecdir}/Rack/SonusModular/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/SonusModular/
+cp -r SonusModular_plugin/dist/SonusModular/* %{buildroot}%{_libexecdir}/Rack/plugins/SonusModular/
 
 %files
 %{_libexecdir}/*

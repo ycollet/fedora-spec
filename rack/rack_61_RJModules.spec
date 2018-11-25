@@ -78,8 +78,8 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/RJModules/
-cp -r RJModules_plugin/dist/RJModules/* %{buildroot}%{_libexecdir}/Rack/RJModules/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/RJModules/
+cp -r RJModules_plugin/dist/RJModules/* %{buildroot}%{_libexecdir}/Rack/plugins/RJModules/
 
 %files
 %{_libexecdir}/*
