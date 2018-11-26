@@ -501,9 +501,8 @@ minicomputer
 phasex
 Rack
 rack-Befaco
-rack-Fundamental
-rack-AudibleInstruments
 rack-ESeries
+rack-AudibleInstruments
 
 # guitar
 guitarix
