@@ -8,7 +8,7 @@
 
 Name:    Rack
 Version: 0.6.2c
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A modular synthetizer
 
 Group:   Applications/Multimedia
@@ -30,8 +30,15 @@ URL:     https://github.com/VCVRack/Rack.git
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone https://github.com/VCVRack/manual.git
+# cd manual
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
+# tar cvfz Rack-manual.tar.gz manual/*
+
 Source0: Rack.tar.gz
 Source1: rack.png
+Source2: Rack-manual.tar.gz
 Patch0: rack-0001-add-global-plugins.patch
 
 BuildRequires: gcc gcc-c++
@@ -52,9 +59,19 @@ BuildRequires: rtaudio-devel
 BuildRequires: rtmidi-devel
 BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
+BuildRequires: python2-sphinx
+BuildRequires: python2-recommonmark
 
 %description
 A modular synthetizer
+
+%package doc
+Summary:   Documentation files for Rack
+Group:     Applications/Multimedia
+BuildArch: noarch
+
+%description doc
+Documentation files for Rack
 
 %prep
 %setup -qn %{name}
@@ -72,6 +89,8 @@ sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/
 
 %patch0 -p1 
 
+tar xvfz %{SOURCE2}
+
 %build
 cd dep
 cd glfw
@@ -82,17 +101,23 @@ make install
 cd ../..
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
+cd manual
+make html
+
 %install 
 
 mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/pixmaps/
 mkdir -p %{buildroot}%{_datadir}/man/man1/
 mkdir -p %{buildroot}%{_datadir}/applications/
+mkdir -p %{buildroot}%{_datadir}/Rack/html/
 mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/
 
 install -m 755 Rack       %{buildroot}%{_bindir}/
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/rack.png
 cp -r res %{buildroot}%{_libexecdir}/Rack/
+
+cp -r manual/_build/html/* %{buildroot}%{_datadir}/Rack/html/
 
 cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
 [Desktop Entry]
@@ -110,8 +135,14 @@ EOF
 %{_datadir}/*
 %{_libexecdir}/*
 
+%files doc
+%{_datadir}/*
+
 %changelog
-* Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c
+* Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-4
+- add documentation package
+
+* Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-3
 - update to 0.6.2c
 
 * Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2b
