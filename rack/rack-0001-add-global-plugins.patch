@@ -1,0 +1,32 @@
+From 6716bce3b8a31a4e7d26b3f500e77260b9d101b7 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Mon, 26 Nov 2018 13:26:27 +0100
+Subject: [PATCH] add global plugins
+
+---
+ src/plugin.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/plugin.cpp b/src/plugin.cpp
+index 1c1cc7e..14525df 100644
+--- a/src/plugin.cpp
++++ b/src/plugin.cpp
+@@ -332,6 +332,7 @@ void pluginInit(bool devMode) {
+ 
+ 	// Get local plugins directory
+ 	std::string localPlugins = assetLocal("plugins");
++	std::string globalPlugins = assetGlobal("plugins");
+ 	mkdir(localPlugins.c_str(), 0755);
+ 
+ 	if (!devMode) {
+@@ -347,6 +348,7 @@ void pluginInit(bool devMode) {
+ 	// Extract packages and load plugins
+ 	extractPackages(localPlugins);
+ 	loadPlugins(localPlugins);
++	loadPlugins(globalPlugins);
+ }
+ 
+ void pluginDestroy() {
+-- 
+2.19.1
+

@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 23f14c9f8c0d03dcc6f3e6d5ca6a982a541698cd
-%global gittag0 v0.6.2b
+%global commit0 7d8c04c993fa6d2d37e41bfaef015970e1932e5c
+%global gittag0 v0.6.2c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    Rack
-Version: 0.6.2b
-Release: 2%{?dist}
+Version: 0.6.2c
+Release: 3%{?dist}
 Summary: A modular synthetizer
 
 Group:   Applications/Multimedia
@@ -17,20 +17,22 @@ URL:     https://github.com/VCVRack/Rack.git
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
-# git checkout v0.6.2b
+# #git checkout v0.6.2b
 # git submodule init
 # git submodule update
 # find . -name ".git" -exec rm -rf {} \;
 # cd dep
 # wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
 # unzip 29e4f76ac53b.zip
+# mkdir include
 # cp jpommier-pffft-29e4f76ac53b/*.h include/
 # rm  29e4f76ac53b.zip
-# cd ..
+# cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
 Source1: rack.png
+Patch0: rack-0001-add-global-plugins.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -68,6 +70,8 @@ sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
 
 sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/g" src/asset.cpp
 
+%patch0 -p1 
+
 %build
 cd dep
 cd glfw
@@ -88,7 +92,7 @@ mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/
 
 install -m 755 Rack       %{buildroot}%{_bindir}/
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/rack.png
-cp -r res %{buildroot}%{_libexecdir}/Rack/plugins/
+cp -r res %{buildroot}%{_libexecdir}/Rack/
 
 cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
 [Desktop Entry]
@@ -107,7 +111,13 @@ EOF
 %{_libexecdir}/*
 
 %changelog
-* Wed Nov 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2b
+* Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c
+- update to 0.6.2c
+
+* Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2b
+- fix global plugins loading
+
+* Thu Nov 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2b
 - update to 0.6.2b
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.5.0
