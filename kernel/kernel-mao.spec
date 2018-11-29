@@ -86,6 +86,10 @@ KBUILD_IMAGE=$(make image_name)
 
 INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= INSTALL_MOD_STRIP=1 CONFIG_MODULE_COMPRESS=1 CONFIG_MODULE_COMPRESS_XZ=1 modules_install
 
+# We estimate the size of the initramfs because rpm needs to take this size
+# into consideration when performing disk space calculations. (See bz #530778)
+dd if=/dev/zero of=$RPM_BUILD_ROOT/boot/initramfs-$KernelVer.img bs=1M count=20
+
 %ifarch ia64
   cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kversion}-rt%{krt}
   ln -s efi/vmlinuz-%{kversion}-%{krt} $RPM_BUILD_ROOT/boot/
@@ -108,6 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 # restart grub: grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %post
+# Create the vmlinuz file
 /bin/kernel-install add %{kversion}-rt%{krt} /lib/modules/%{kversion}-rt%{krt}
 #if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion}-rt%{krt} -a -r /boot/System.map-%{kversion}-rt%{krt} ]; then
 #  cp /boot/vmlinuz-%{kversion}-rt%{krt}    /boot/.vmlinuz-%{kversion}-rt%{krt}
@@ -121,12 +126,13 @@ rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
 rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
-test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kversion}-rt%{krt}.img
+#test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kversion}-rt%{krt}.img
 
 %files
 %defattr (-, root, root)
 /lib/modules/%{kversion}-rt%{krt}
 /boot/*
+%ghost /boot/initramfs-%{kversion}-rt%{krt}
 
 %files headers
 %defattr (-, root, root)
