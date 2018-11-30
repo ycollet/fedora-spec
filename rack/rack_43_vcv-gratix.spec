@@ -6,7 +6,7 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-Gratix
+Name:    rack-Gratrix
 Version: 0.6.0
 Release: 2%{?dist}
 Summary: A plugin for Rack
@@ -52,7 +52,7 @@ BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
 
 %description
-Gratix modules for VCV Rack
+Gratrix modules for VCV Rack
 
 %prep
 %setup -qn Rack
@@ -68,18 +68,21 @@ sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
 
 sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/g" src/asset.cpp
 
-mkdir Gratix_plugin
-tar xvfz %{SOURCE1} --directory=Gratix_plugin --strip-components=1 
+mkdir Gratrix_plugin
+tar xvfz %{SOURCE1} --directory=Gratrix_plugin --strip-components=1 
 
 %build
 
-cd Gratix_plugin
+cd Gratrix_plugin
+
+sed -i -e "14i#undef debug" src/Gratrix.hpp
+
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Gratix/
-cp -r Gratix_plugin/dist/Gratix/* %{buildroot}%{_libexecdir}/Rack/plugins/Gratix/
+mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Gratrix/
+cp -r Gratrix_plugin/dist/Gratrix/* %{buildroot}%{_libexecdir}/Rack/plugins/Gratrix/
 
 %files
 %{_libexecdir}/*

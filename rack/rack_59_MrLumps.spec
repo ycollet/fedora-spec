@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 4a67e83d83c1a2ec6a2ea7512c6915d5f5ff5952
+%global commit0 90f4af7e9aef6955e57531f80994ed69caffe188
 %global gittag0 v0.6.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -74,6 +74,9 @@ tar xvfz %{SOURCE1} --directory=MrLumps_plugin --strip-components=1
 %build
 
 cd MrLumps_plugin
+
+sed -i -e "/pulseTime/d" src/SEQEuclid.cpp
+
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 

@@ -29,15 +29,8 @@ URL:     https://github.com/stellare-modular/vcv-link
 # cd ..
 # tar cvfz Rack.tar.gz Rack/*
 
-# git clone https://github.com/stellare-modular/vcv-link
-# cd vcv-link
-# git checkout 0.6.1
-# find . -name ".git" -exec rm -rf {} \;
-# cd ..
-# tar cvfz vcv-link.tar.gz vcv-link/*
-
 Source0: Rack.tar.gz
-Source1: vcv-link.tar.gz
+Source1: https://github.com/stellare-modular/vcv-link/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed

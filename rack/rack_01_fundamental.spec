@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 6ff0fb298cbf27a5cd59adb8682dd980eee248c0
-%global gittag0 v0.6.0
+%global commit0 baa041b7f7325d65a0b86dc29c838ad37ba02c18
+%global gittag0 v0.6.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-Fundamental
-Version: 0.6.0
+Version: 0.6.1
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -76,7 +76,7 @@ tar xvfz %{SOURCE1} --directory=fundamental_plugin --strip-components=1
 
 cd fundamental_plugin
 
-sed -i -e "s/src_delete/\/\/src_delete/g" src/Delay.cpp
+sed -i -e "9,24d" Makefile
 
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
@@ -89,5 +89,5 @@ cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack/plug
 %{_libexecdir}/*
 
 %changelog
-* Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0
+* Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.1
 - initial specfile

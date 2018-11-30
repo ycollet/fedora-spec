@@ -30,7 +30,7 @@ VERSION = 0.6.10	./ImpromptuModular/Makefile				done
 VERSION = 0.6.10	./BogaudioModules/Makefile				done
 VERSION = 0.6.10	./SquinkyVCV/Makefile					done
 VERSION = 0.6.2		./RackPlugins/Makefile					done
-VERSION = 0.6.0		./vcv-gratrix/Makefile					KO
+VERSION = 0.6.0		./vcv-gratrix/Makefile					done
 VERSION = 0.6.1		./21kHz-rack-plugins/Makefile				done
 VERSION = 0.6.2		./BaconPlugs/Makefile					done
 VERSION = 0.6.0		./Torpedo/Makefile					done
@@ -43,13 +43,13 @@ VERSION = 0.6.21	./Bidoo/Makefile					done
 VERSION = 0.6.2		./SubmarineUtility/Makefile				done
 VERSION = 0.6.0		./aP-Modules/Makefile					done
 VERSION = 0.6.9		./Koralfx-Modules/Makefile				done
-VERSION = 0.6.1 	./vcv-link/Makefile					KO
+VERSION = 0.6.1 	./vcv-link/Makefile					KO (Ableton link)
 VERSION = 0.6.0		./PvC/Makefile						done
 VERSION = 0.6.1		./submarine-prototype-vcv/Makefile			done
 VERSION = 0.6.0		./hetrickcv/Makefile					done
 VERSION = 0.6.0		./Nohmad/Makefile					done
 VERSION = 0.6.1		./NauModular/Makefile					done
-VERSION = 0.6.0		./MrLumps/Makefile					KO
+VERSION = 0.6.0		./MrLumps/Makefile					done
 VERSION = 0.6.0		./BBI/Makefile						done
 VERSION = 0.6.1		./RJModules/Makefile					done
 VERSION = 0.6.2		./unless_modules/Makefile				done
@@ -128,7 +128,7 @@ KO prefixed files does not build ...
 40 - vcv-karatesnoopy
 41 - ImpromptuModular
 42 - RackPlugins
-KO - 43 - vcv-gratix
+43 - vcv-gratix
 44 - 21KhzRack
 45 - Torpedo
 46 - Geodesics
@@ -144,7 +144,7 @@ KO - 53 - vcv-link
 56 - hetrickcv
 57 - Nohmad
 58 - NauModular
-KO - 59 - MrLumps
+59 - MrLumps
 60 - BBI
 61 - RJModules
 62 - unless_modules
