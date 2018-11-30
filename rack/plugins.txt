@@ -67,7 +67,7 @@ VERSION = 0.6.4		./LRTRack/Makefile					done
 VERSION = 0.6.6		./VCV_moDllz/Makefile					done
 VERSION = 0.6.2		./Fundamental/Makefile					done
 VERSION = 0.6.0		./arjo_modules/Makefile					done
-VERSION = 0.6.4		./Ohmer-Modules/Makefile				KO
+VERSION = 0.6.4		./Ohmer-Modules/Makefile				done
 VERSION = 0.6.2		./Erratic/Makefile					done
 VERSION = 0.6.0		./ArableInstruments/Makefile				done
 VERSION = 0.6.2		./sonusmodular/Makefile					done
@@ -157,7 +157,7 @@ KO - 68 - FrozenWasteland
 69 - VCVMicroTools
 70 - RodentModules
 71 - arjo_modules
-KO - 72 - Ohmer-Modules
+72 - Ohmer-Modules
 73 - sonusmodular
 74 - Bokontep
 75 - TriggerFish

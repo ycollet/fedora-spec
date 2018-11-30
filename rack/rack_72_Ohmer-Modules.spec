@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 032effcb387752ea62dfcfe6ea5118aac587323a
+%global commit0 2d9d911f4d734c0150c96643542c477fd81a0b0f
 %global gittag0 v0.6.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -74,6 +74,9 @@ tar xvfz %{SOURCE1} --directory=Ohmer_plugin --strip-components=1
 %build
 
 cd Ohmer_plugin
+
+sed -i -e "/pulseTime/d" src/KlokSpid.cpp
+
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
