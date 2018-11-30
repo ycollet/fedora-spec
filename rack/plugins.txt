@@ -74,15 +74,15 @@ VERSION = 0.6.2		./sonusmodular/Makefile					done
 VERSION = 0.6.1		./BokontepByteBeatMachine/Makefile			done
 VERSION = 0.6.4		./TriggerFish-VCV/Makefile				done
 
-VERSION = -             ./HolonicSystems-Free/Makefile				done
-VERSION = -             ./ModularFungi/Makefile					done
-VERSION = -             ./mtsch-plugins/Makefile				done
-VERSION = -             ./NocturnalEncoder/Makefile				done
-VERSION = -             ./noobhour/Makefile					done
-VERSION = -             ./Southpole-parasites/Makefile				done
-VERSION = -             ./rcm/Makefile						done
-VERSION = -             ./STS/Makefile						done
-VERSION = -		./ArableInstruments/Makefile (ParableInstruments)	done
+VERSION = 0.6.1         ./HolonicSystems-Free/Makefile				done
+VERSION = 0.6.2         ./ModularFungi/Makefile					done
+VERSION = 0.6.2         ./mtsch-plugins/Makefile				done
+VERSION = 0.6.1         ./NocturnalEncoder/Makefile				done
+VERSION = 0.6.2         ./noobhour/Makefile					done
+VERSION = 0.6.0         ./Southpole-parasites/Makefile				done
+VERSION = 0.6.5         ./rcm/Makefile						done
+VERSION = 0.6.0.2       ./STS/Makefile						done
+VERSION = 0.6.0		./ArableInstruments/Makefile (ParableInstruments)	done
 
 KO prefixed files does not build ...
 
@@ -202,7 +202,7 @@ done
 
 rm ~/rpmbuild/SRPMS/*
 
-for Ext in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 49 50 51 52 54 55 56 57 58 60 61 62 63 64 65 66 67 69 70 71 73 74 75 76 77 78 79 80 81 82 83 84
+for Ext in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 49 50 51 52 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84
 do
   Files=`ls rack_$Ext*.spec`
   echo "Building $Files"
