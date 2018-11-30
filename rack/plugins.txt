@@ -65,7 +65,7 @@ VERSION = 0.6.0		./VCVMicroTools/Makefile				done
 VERSION = 0.6.1		./RODENTMODULES/Makefile				done
 VERSION = 0.6.4		./LRTRack/Makefile					done
 VERSION = 0.6.6		./VCV_moDllz/Makefile					done
-VERSION = 0.6.2		./Fundamental/Makefile					KA
+VERSION = 0.6.2		./Fundamental/Makefile					done
 VERSION = 0.6.0		./arjo_modules/Makefile					done
 VERSION = 0.6.4		./Ohmer-Modules/Makefile				done
 VERSION = 0.6.2		./Erratic/Makefile					done
@@ -86,7 +86,7 @@ VERSION = 0.6.0		./ArableInstruments/Makefile (ParableInstruments)	KO
 
 KO prefixed files does not build ...
 
-KO - 01 - Fundamental
+01 - Fundamental
 02 - Befaco
 03 - ESeries
 04 - AudibleInstruments

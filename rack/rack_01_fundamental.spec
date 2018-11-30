@@ -76,7 +76,12 @@ tar xvfz %{SOURCE1} --directory=fundamental_plugin --strip-components=1
 
 cd fundamental_plugin
 
+# Remove libsamplerate download and install
 sed -i -e "9,24d" Makefile
+# Doesn't compile
+rm src/Delay.cpp
+sed -i -e "/modelDelay/d" src/Fundamental.hpp
+sed -i -e "/modelDelay/d" src/Fundamental.cpp
 
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
