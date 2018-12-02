@@ -23,6 +23,9 @@ BuildRequires: libjpeg-turbo-devel
 BuildRequires: vim-common
 BuildRequires: libpng-devel
 
+Requires: ffmpeg
+Requires: xjadeo
+
 %description
 Harvid decodes still images from movie files and serves them via HTTP.
 Its intended use-case is to efficiently provide frame-accurate data and
@@ -38,6 +41,10 @@ make CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} PREFIX=/usr
 %install
 
 make CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} PREFIX=/usr install
+
+mkdir -p %{buildroot}/usr/bin
+ln -s /usr/bin/ffmpeg %{buildroot}/usr/bin/ffmpeg_harvid 
+ln -s /usr/bin/ffprobe%{buildroot}/usr/bin/ffprobe_harvid
 
 %files
 %doc README.md COPYING ChangeLog
