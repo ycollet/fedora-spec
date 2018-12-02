@@ -491,6 +491,7 @@ hydrogen
 hydrogen-drumkits
 bristol
 yoshimi
+zynaddsubfx
 swami
 synthv1
 samplv1
@@ -649,7 +650,7 @@ supercollider-sc3-plugins
 supercollider-vim
 #sonic-pi # FC28 temporary missing
 #YC: temporary missing pd-extended
-lmms
+lmms-mao
 faust
 faust-tools
 
