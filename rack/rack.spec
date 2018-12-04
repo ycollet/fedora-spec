@@ -37,8 +37,7 @@ URL:     https://github.com/VCVRack/Rack.git
 # tar cvfz Rack-manual.tar.gz manual/*
 
 Source0: Rack.tar.gz
-Source1: rack.png
-Source2: Rack-manual.tar.gz
+Source1: Rack-manual.tar.gz
 Patch0: rack-0001-add-global-plugins.patch
 
 BuildRequires: gcc gcc-c++
@@ -94,7 +93,7 @@ sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/
 
 %patch0 -p1 
 
-tar xvfz %{SOURCE2}
+tar xvfz %{SOURCE1}
 
 %build
 cd dep
@@ -118,8 +117,8 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 mkdir -p %{buildroot}%{_datadir}/Rack/html/
 mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/
 
-install -m 755 Rack       %{buildroot}%{_bindir}/
-install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/rack.png
+install -m 755 Rack         %{buildroot}%{_bindir}/
+install -m 644 res/icon.png %{buildroot}%{_datadir}/pixmaps/rack.png
 cp -r res %{buildroot}%{_libexecdir}/Rack/
 
 cp -r manual/_build/html/* %{buildroot}%{_datadir}/Rack/html/
