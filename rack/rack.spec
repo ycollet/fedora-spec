@@ -5,14 +5,15 @@
 
 Name:    Rack
 Version: 0.6.2c
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: A modular synthetizer
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/Rack.git
 
-%define with_debug     %{?_with_debug:     1} %{?!_with_debug:     0}
+%define with_debug %{?_with_debug: 1} %{?!_with_debug: 0}
+%define with_glew  %{?_with_glew:  1} %{?!_with_glew:  0}
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -89,7 +90,9 @@ echo "CXXFLAGS += %{build_cxxflags} -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
-
+%if %{with_glew}
+sed -i -e "s/-lGLEW/dep\/lib\/libGLEW.a/g" Makefile
+%endif
 sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/g" src/asset.cpp
 
 %patch0 -p1 
@@ -106,8 +109,14 @@ cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_ME
 %endif
 make
 make install
+cd ..
 
-cd ../..
+%if %{with_glew}
+make lib/libGLEW.a
+%endif
+
+cd ..
+
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 
 cd manual
@@ -148,7 +157,10 @@ EOF
 %{_datadir}/*
 
 %changelog
-* Wed Nov 28 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-6
+* Wed Dec 5 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-6
+- add static glew
+
+* Wed Nov 28 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-5
 - fix compilation flags
 
 * Mon Nov 26 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-4
