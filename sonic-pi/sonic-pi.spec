@@ -9,11 +9,22 @@
 Name:    sonic-pi
 Version: 3.1.0
 %global gittag0 v%{version}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
 Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
+Source1: rugged-0.27.5.tar.gz
+
+# git clone https://github.com/libgit2/rugged.git
+# cd rugger
+# git checkout v0.27.5
+# git submodule init
+# git submodule update
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
+# mv rugger rugger-0.27.5
+# tar cvfz rugger-0.27.5.tar.gz rugger-0.27.5/*
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -42,11 +53,16 @@ sonic ideas into reality.
 %prep
 %setup -qn %{name}-%{version} 
 
+cd app/server/ruby/vendor
+tar xvfz %{SOURCE1}
+
 %build
 
 cd app/gui/qt
 
-sed -i "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
+sed -i -e "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
+sed -i -e "s/rugged-0\.26\.0/rugged-0\.27\.5/g" ../../server/ruby/bin/compile-extensions.rb
+#sed -i -e "454d" mainwindow.cpp # problem with MainWindow::initDocsWindow()
 
 ruby ../../server/ruby/bin/compile-extensions.rb
 ruby ../../server/ruby/bin/i18n-tool.rb -t
@@ -63,29 +79,33 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 cp -Rip app/ %{buildroot}%{_datadir}/%{name}/
 ln -s %{_datadir}/%{name}/app/gui/qt/rp-app-bin %{buildroot}%{_bindir}/%{name}
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/atomic_reference.so
+%define rb_version "2.5.0"
+
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/atomic_reference.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/atomic/ext/atomic_reference.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/atomic_reference.so
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/atomic_reference.so
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ffi_c.so
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ffi_c.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ffi-1.9.17/ext/ffi_c/ffi_c.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ffi_c.so
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ffi_c.so
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/did_you_mean/method_receiver.so
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/did_you_mean/method_receiver.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/did_you_mean-0.10.0/ext/did_you_mean/method_receiver.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/did_you_mean/method_receiver.so
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/did_you_mean/method_receiver.so
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ruby_prof.so
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_prof.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ruby-prof-0.15.8/ext/ruby_prof/ruby_prof.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/ruby_prof.so
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_prof.so
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/fast_osc.so
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fast_osc.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/fast_osc.so
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/rugged.so
-ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.26.0/ext/rugged/rugged.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/2.4.0/rugged.so
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
+#ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.26.0/ext/rugged/rugged.so \
+#   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.27.5/ext/rugged/rugged.so \
+   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 
 
 cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF
@@ -113,7 +133,10 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.1.0
+* Fri Dec 7 2018 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
+- fix for Fedora 29 - update to master (to get rugged-0.27.5)
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.1.0-2
 - update for Fedora 29
 
 * Tue Apr 17 2018 Yann Collette <ycollette.nospam@free.fr> update build process
