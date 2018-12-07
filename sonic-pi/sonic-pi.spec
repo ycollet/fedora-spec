@@ -37,6 +37,8 @@ BuildRequires: libffi-devel
 BuildRequires: ruby-devel
 BuildRequires: aubio-devel
 BuildRequires: boost-devel
+BuildRequires: libcurl-devel
+BuildRequires: openssl-devel
 
 Requires(pre): pulseaudio-module-jack 
 Requires(pre): supercollider-sc3-plugins
