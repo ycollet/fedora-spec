@@ -41,9 +41,11 @@ BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 
 Requires(pre): pulseaudio-module-jack 
+Requires(pre): jack-audio-connection-kit-example-clients
 Requires(pre): supercollider-sc3-plugins
 Requires(pre): supercollider
 Requires(pre): ruby
+Requires(pre): erlang-erts
 
 %description
 Sonic Pi is an open source programming environment designed to explore and
@@ -60,11 +62,26 @@ tar xvfz %{SOURCE1}
 
 %build
 
+##Install osmid (for MIDI support)
+#OSMID_DIR=${SP_APP_SRC}/../../server/native/linux/osmid
+#OSMID_VERSION=391f35f789f18126003d2edf32902eb714726802
+#cd ${SP_ROOT}
+#git clone https://github.com/llloret/osmid.git || true
+#cd osmid
+#git checkout ${OSMID_VERSION}
+#mkdir -p build
+#cd build
+#cmake ..
+#make
+#mkdir -p ${OSMID_DIR}
+#install m2o o2m -t ${OSMID_DIR}
+
 cd app/gui/qt
 
 sed -i -e "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
 sed -i -e "s/rugged-0\.26\.0/rugged-0\.27\.5/g" ../../server/ruby/bin/compile-extensions.rb
 #sed -i -e "454d" mainwindow.cpp # problem with MainWindow::initDocsWindow()
+sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\";/  return QCoreApplication::applicationDirPath() + \"\/..\/share\/sonic-pi\";/g" mainwindow.cpp
 
 ruby ../../server/ruby/bin/compile-extensions.rb
 ruby ../../server/ruby/bin/i18n-tool.rb -t
@@ -76,10 +93,24 @@ make
 
 %install
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_datadir}/%{name}
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/
+mkdir -p %{buildroot}%{_datadir}/%{name}/etc
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -Rip app/ %{buildroot}%{_datadir}/%{name}/
-ln -s %{_datadir}/%{name}/app/gui/qt/rp-app-bin %{buildroot}%{_bindir}/%{name}
+cp -Rip app/gui/qt %{buildroot}%{_datadir}/%{name}/app/qui/qt/
+mv app/gui/qt/sonic-pi %{buildroot}%{_bindir}/%{name}
+cp -ra etc/* %{buildroot}%{_datadir}/%{name}/etc/
+
+rm -rf %{buildroot}%{_datadir}/%{name}/app/qui/qt/wix
+rm -rf %{buildroot}%{_datadir}/%{name}/app/qui/qt/platform
+rm -rf %{buildroot}%{_datadir}/%{name}/app/qui/qt/build
+find %{buildroot}%{_datadir}/%{name}/app/qui/qt -name "*.o" -exec rm {} \;
+find %{buildroot}%{_datadir}/%{name}/app/qui/qt -name "*.cpp" -exec rm {} \;
+find %{buildroot}%{_datadir}/%{name}/app/qui/qt -name "*.h" -exec rm {} \;
+
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/m2o/
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/o2m/
+cp -ra app/server/native/osmid/m2o/* %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/m2o/
+cp -ra app/server/native/osmid/o2m/* %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/o2m/
 
 %define rb_version "2.5.0"
 
