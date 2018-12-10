@@ -15,6 +15,7 @@ License: MIT
 URL:     http://sonic-pi.net/
 Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 Source1: rugged-0.27.5.tar.gz
+Source2: osmid.tar.gz
 
 # git clone https://github.com/libgit2/rugged.git
 # cd rugger
@@ -59,22 +60,18 @@ sonic ideas into reality.
 
 cd app/server/ruby/vendor
 tar xvfz %{SOURCE1}
+cd ../../../..
+
+cd app/server/native/
+tar xvfz %{SOURCE2}
+cd osmid
+mkdir build
+cd build
+cmake ..
+make
+cp m2o o2m ..
 
 %build
-
-##Install osmid (for MIDI support)
-#OSMID_DIR=${SP_APP_SRC}/../../server/native/linux/osmid
-#OSMID_VERSION=391f35f789f18126003d2edf32902eb714726802
-#cd ${SP_ROOT}
-#git clone https://github.com/llloret/osmid.git || true
-#cd osmid
-#git checkout ${OSMID_VERSION}
-#mkdir -p build
-#cd build
-#cmake ..
-#make
-#mkdir -p ${OSMID_DIR}
-#install m2o o2m -t ${OSMID_DIR}
 
 cd app/gui/qt
 
@@ -91,28 +88,39 @@ lrelease-qt5 SonicPi.pro
 qmake-qt5 SonicPi.pro
 make
 
+#Build Erlang files
+cd ../../server/erlang
+erlc osc.erl
+erlc pi_server.erl
+
 %install
-mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/
-mkdir -p %{buildroot}%{_datadir}/%{name}/etc
+mkdir -p %{buildroot}%{_datadir}/%{name}/etc/
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -Rip app/gui/qt %{buildroot}%{_datadir}/%{name}/app/qui/qt/
+cp -Rip app/gui/qt/ %{buildroot}%{_datadir}/%{name}/app/gui/qt/
 mv app/gui/qt/sonic-pi %{buildroot}%{_bindir}/%{name}
 cp -ra etc/* %{buildroot}%{_datadir}/%{name}/etc/
 
-rm -rf %{buildroot}%{_datadir}/%{name}/app/qui/qt/wix
-rm -rf %{buildroot}%{_datadir}/%{name}/app/qui/qt/platform
-rm -rf %{buildroot}%{_datadir}/%{name}/app/qui/qt/build
-find %{buildroot}%{_datadir}/%{name}/app/qui/qt -name "*.o" -exec rm {} \;
-find %{buildroot}%{_datadir}/%{name}/app/qui/qt -name "*.cpp" -exec rm {} \;
-find %{buildroot}%{_datadir}/%{name}/app/qui/qt -name "*.h" -exec rm {} \;
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/wix
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/platform
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/build
+find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.o" -exec rm {} \;
+find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.cpp" -exec rm {} \;
+find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.h" -exec rm {} \;
 
-mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/m2o/
-mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/o2m/
-cp -ra app/server/native/osmid/m2o/* %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/m2o/
-cp -ra app/server/native/osmid/o2m/* %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/o2m/
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
+cp -ra app/server/native/osmid/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
+cp -ra app/server/native/osmid/o2m %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
+
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
+cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 
 %define rb_version "2.5.0"
+
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
+
+cp -ra app/server/ruby/rb-native/%{rb_version}/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
 
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/atomic_reference.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/atomic/ext/atomic_reference.so \
@@ -140,6 +148,22 @@ rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugge
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.27.5/ext/rugged/rugged.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 
+find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
+
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-build-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-fetch-deps
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-ubuntu-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-rpi-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-osx-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/create-pdf
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-app-bin
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/mac-release
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-ubuntu-zesty-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/wix/LICENSE.rtf
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/wix/gen_wix.bat
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/wix/gen_msi.bat
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-osx-sierra-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/mac-build-app
 
 cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF
 [Desktop Entry]
