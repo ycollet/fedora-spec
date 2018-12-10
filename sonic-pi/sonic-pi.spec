@@ -116,6 +116,9 @@ cp -ra app/server/native/osmid/o2m %{buildroot}%{_datadir}/%{name}/app/server/na
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
+cp -ra  app/server/ruby/bin/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
+
 # Manage ruby version for various Fedora version
 %if 0%{?fedora} == 27
 %define rb_version "2.4.0"
@@ -126,6 +129,13 @@ cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlan
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
 
 cp -ra app/server/ruby/rb-native/%{rb_version}/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
+cp -ra app/server/ruby/*.rb %{buildroot}%{_datadir}/%{name}/app/server/ruby/
+
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/vendor/
+cp -ra app/server/ruby/vendor/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/vendor/
+
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/lib/
+cp -ra app/server/ruby/lib/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/lib/
 
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/atomic_reference.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/atomic/ext/atomic_reference.so \
