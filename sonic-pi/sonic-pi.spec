@@ -95,12 +95,13 @@ erlc pi_server.erl
 
 %install
 mkdir -p %{buildroot}%{_bindir}/
-mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/
+mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 mkdir -p %{buildroot}%{_datadir}/%{name}/etc/
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -Rip app/gui/qt/ %{buildroot}%{_datadir}/%{name}/app/gui/qt/
-mv app/gui/qt/sonic-pi %{buildroot}%{_bindir}/%{name}
-cp -ra etc/* %{buildroot}%{_datadir}/%{name}/etc/
+cp -Rip app/gui/qt/       %{buildroot}%{_datadir}/%{name}/app/gui/qt/
+cp -ra app/gui/qt/theme/* %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
+mv app/gui/qt/sonic-pi    %{buildroot}%{_bindir}/%{name}
+cp -ra etc/*              %{buildroot}%{_datadir}/%{name}/etc/
 
 rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/wix
 rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/platform
