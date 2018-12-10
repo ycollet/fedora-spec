@@ -40,13 +40,13 @@ BuildRequires: aubio-devel
 BuildRequires: boost-devel
 BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
+BuildRequires: erlang-erts
 
 Requires(pre): pulseaudio-module-jack 
 Requires(pre): jack-audio-connection-kit-example-clients
 Requires(pre): supercollider-sc3-plugins
 Requires(pre): supercollider
 Requires(pre): ruby
-Requires(pre): erlang-erts
 
 %description
 Sonic Pi is an open source programming environment designed to explore and
@@ -116,7 +116,12 @@ cp -ra app/server/native/osmid/o2m %{buildroot}%{_datadir}/%{name}/app/server/na
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 
+# Manage ruby version for various Fedora version
+%if 0%{?fedora} == 27
+%define rb_version "2.4.0"
+%else
 %define rb_version "2.5.0"
+%endif
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
 
