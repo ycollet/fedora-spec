@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 db70248bc4a528dc51586638e9cd71259cf14b7a
+%global commit0 1d41a52f6b2236f38670c2d3a28ab97c419a4754
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +9,7 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.4
+Version: 1.1.5
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -58,6 +58,9 @@ cp %{SOURCE1} Makefile
 %{_datadir}/*
 
 %changelog
+* Fri Dec 21 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.5-1
+- update to 1.1.5
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.4-1
 - update for Fedora 29
 
