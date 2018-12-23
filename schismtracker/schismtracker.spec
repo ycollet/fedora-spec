@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 27a385734909b9ffcab705669d34d0fc88733d71
-%global gittag0 20180810
+%global commit0 452b3341e5dce5a2ab96e860540492e8b7feb1be
+%global gittag0 20181223
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    schismtracker
-Version: 20180810
+Version: 20181223
 Release: 1%{?dist}
 Summary: Module tracker software for creating music
 
@@ -55,6 +55,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20181223-1
+- update to 20181223
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> - 20180810-1
 - update to Fedora 29
 
