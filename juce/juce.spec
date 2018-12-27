@@ -8,7 +8,7 @@
 
 Name:    JUCE
 Version: 5.4.1.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: JUCE Framework
 URL:     https://github.com/WeAreROLI/JUCE.git
 Group:   Applications/Multimedia
@@ -57,6 +57,8 @@ cd AudioPluginHost/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
 sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
+
 
 make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
@@ -65,6 +67,7 @@ cd BinaryBuilder/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
 sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
 make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
@@ -73,6 +76,7 @@ cd Projucer/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
 sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
 make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
@@ -81,6 +85,7 @@ cd UnitTestRunner/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
 sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
 make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
 cd ../../..
@@ -109,6 +114,9 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Thu Dec 27 2018 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-3
+- activate GPL mode
+
 * Wed Nov 21 2018 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-2
 - fix compilation flags
 
