@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 6dbf784e41d90c92ff69ef06ed2b0d6f50b65d9c
-%global gittag0 master
+%global commit0 3cbae6ee892b29e7eac0a9d8f56d172d92d08083
+%global gittag0 1.1.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    dragonfly-reverb
-Version: 1.0.0
+Version: 1.1.2
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -15,9 +15,11 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
-# git clone --recurse https://github.com/michaelwillis/dragonfly-reverb/
-# cp -r dragonfly-reverb /tmp/dragonfly-reverb
-# cd /tmp/dragonfly-reverb
+# git clone https://github.com/michaelwillis/dragonfly-reverb/
+# cd dragonfly-reverb
+# git checkout 1.1.2
+# git submodule init
+# git submodule update
 # rm -rf .git dpf/.git
 # cd ..
 # tar cvfz dragonfly-reverb.tar.gz dragonfly-reverb/*
@@ -57,6 +59,9 @@ cp bin/DragonflyReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Thu Jan 3 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.2-1
+- update to 1.1.2
+
 * Tue Nov 13 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - update to 1.0.0
 
