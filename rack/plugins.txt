@@ -219,6 +219,10 @@ do
   copr-cli build linuxmao $Files
 done
 
-
-
-
+Todo:
+https://github.com/Aepelzen/AepelzensModules
+https://github.com/NikolajAndersson/RackPlugins
+https://github.com/Coirt/Bark
+https://github.com/hdavid/VCVRack-Holon.ist
+https://github.com/liquidcitymotors/Via-for-VCVRack
+https://github.com/JerrySievert/FXKit
