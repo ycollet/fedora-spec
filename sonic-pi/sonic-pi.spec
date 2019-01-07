@@ -17,15 +17,7 @@ Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{versio
 Source1: rugged-0.27.5.tar.gz
 Source2: osmid.tar.gz
 
-# git clone https://github.com/libgit2/rugged.git
-# cd rugger
-# git checkout v0.27.5
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd ..
-# mv rugger rugger-0.27.5
-# tar cvfz rugger-0.27.5.tar.gz rugger-0.27.5/*
+# Use source.sh to get source files
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -41,6 +33,7 @@ BuildRequires: boost-devel
 BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 BuildRequires: erlang-erts
+BuildRequires: ruby
 
 Requires(pre): pulseaudio-module-jack 
 Requires(pre): jack-audio-connection-kit-example-clients
@@ -77,6 +70,7 @@ cd app/gui/qt
 
 sed -i -e "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
 sed -i -e "s/rugged-0\.26\.0/rugged-0\.27\.5/g" ../../server/ruby/bin/compile-extensions.rb
+# For master exclusively
 #sed -i -e "454d" mainwindow.cpp # problem with MainWindow::initDocsWindow()
 sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\";/  return QCoreApplication::applicationDirPath() + \"\/..\/share\/sonic-pi\";/g" mainwindow.cpp
 
