@@ -1,5 +1,10 @@
 Use build_config.sh from fedora kernel spec repo:
 
+$ tar xvfz linux-4.19.13.tar.gz
+$ gunzip patch-4.19.13-rt10.patch.gz
+$ cd linux-4.19.13
+$ patch -p1 < ../patch-4.19.13-rt10.patch
+
 $ git clone https://src.fedoraproject.org/rpms/kernel.git
 $ cd kernel
 $ ./build_config.sh kernel-4.16.12
@@ -8,7 +13,7 @@ Copy kernel-4.16.12-x86_64.config as '.config' in the linux kernel source direct
 
 $ make xconfig
 
-Enable CONFIG_PREEMPT_RT_FULL (menu Processor type and features -> Preemption model -> Fully preemptible kernel).
+Enable CONFIG_PREEMPT_RT_FULL (menu General setup -> Preemption model -> Fully preemptible kernel).
 Enable CONFIG_HZ_1000 (menu Processor type and features -> Timer frequency -> 1000 Hz).
 Save the configuration file.
 

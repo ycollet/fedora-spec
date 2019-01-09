@@ -1,9 +1,9 @@
 %define kmaj 4
-%define kmin 18
-%define kpat 16
+%define kmin 19
+%define kpat 13
 %define kver %{kmaj}.%{kmin}.%{kpat}
 %define krel 5
-%define krt  8
+%define krt  10
 %define kversion %{kver}
 
 Name: kernel-rt-mao
@@ -143,6 +143,9 @@ rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kversion}-rt%{krt}
 
 %changelog
+* Wed Jan 9 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.13-rt10-5
+- update to 4.19.13-rt10-5
+
 * Sun Oct 28 2018 Yann Collette <ycollette.nospam@free.fr> - 4.18.16-rt8-5
 - fix kernel install
 
