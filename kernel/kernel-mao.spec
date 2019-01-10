@@ -21,7 +21,7 @@ Source1: kernel-config-%{kmaj}.%{kmin}
 Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kversion}-rt%{krt}.patch.gz
 
 BuildRequires: openssl-devel, openssl
-BuildRequires: kmod, patch, bash, tar, git
+BuildRequires: kmod, patch, bash, tar
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
 BuildRequires: gcc, binutils, redhat-rpm-config, hmaccalc, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
@@ -109,19 +109,9 @@ tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kversion}-rt%{krt};
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# restart grub: grub2-mkconfig -o /boot/grub2/grub.cfg
-
 %post
 # Create the vmlinuz file
 /bin/kernel-install add %{kversion}-rt%{krt} /lib/modules/%{kversion}-rt%{krt}
-#if [ -x /sbin/installkernel -a -r /boot/vmlinuz-%{kversion}-rt%{krt} -a -r /boot/System.map-%{kversion}-rt%{krt} ]; then
-#  cp /boot/vmlinuz-%{kversion}-rt%{krt}    /boot/.vmlinuz-%{kversion}-rt%{krt}
-#  cp /boot/System.map-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
-#  rm -f /boot/vmlinuz-%{kversion}-rt%{krt} /boot/System.map-%{kversion}-rt%{krt}
-#  /sbin/installkernel %{kversion}-rt%{krt} /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
-#  rm -f /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
-#fi
-
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
@@ -143,6 +133,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kversion}-rt%{krt}
 
 %changelog
+* Thu Jan 10 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.13-rt10-6
+- update to 4.19.13-rt10-6
+
 * Wed Jan 9 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.13-rt10-5
 - update to 4.19.13-rt10-5
 
