@@ -122,10 +122,10 @@ rm -rf $RPM_BUILD_ROOT
 #  rm -f /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
 #fi
 
-rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
+#grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
-rpm --eval '%{rhel}' | grep -q ^7 && grub2-mkconfig -o /boot/grub2/grub.cfg
+#grub2-mkconfig -o /boot/grub2/grub.cfg
 #test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kversion}-rt%{krt}.img
 
 %files
