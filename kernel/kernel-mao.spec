@@ -122,10 +122,10 @@ rm -rf $RPM_BUILD_ROOT
 #  rm -f /boot/.vmlinuz-%{kversion}-rt%{krt} /boot/.System.map-%{kversion}-rt%{krt}
 #fi
 
-#grub2-mkconfig -o /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
-#grub2-mkconfig -o /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg
 #test -e /boot/initramfs-%{kversion}-rt%{krt}.img && rm -f /boot/initramfs-%{kversion}-rt%{krt}.img
 
 %files
