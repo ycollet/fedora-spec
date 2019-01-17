@@ -72,7 +72,7 @@ against the %{version} kernel package.
 %patch0 -p1
 
 cp %{SOURCE1} .config
-sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}/g" Makefile
+sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
 echo "" > localversion-rt
 
 make oldconfig
