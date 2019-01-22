@@ -1,21 +1,23 @@
 # Global variables for github repository
-%global commit0 d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
-%global gittag0 master
+%global commit0 63f19485984c002caddec734a9ee94faad2acb55
+%global gittag0 v0.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 # git clone https://github.com/brummer10/GxPlugins.lv2.git
-# mv GxPlugins.lv2 GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
-# cd GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
+# mv GxPlugins.lv2 GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55
+# cd GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55
+# git checkout 63f19485984c002caddec734a9ee94faad2acb55
 # git submodule init
 # git submodule update
+# find . -name .git -exec rm -rf {} \;
 # cd ..
-# tar cvfz GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5.tar.gz GxPlugins.lv2.d29bc3950e7a7432d7b326f28b0e32ee8c17dfb5
+# tar cvfz GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55.tar.gz GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55
 
-Name:    lv2-GxBottleRocket-plugin
-Version: 0.4.%{shortcommit0}
+Name:    GxPlugins
+Version: 0.6.%{shortcommit0}
 Release: 1%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
 
@@ -31,7 +33,13 @@ BuildRequires: gtk2-devel
 BuildRequires: glib2-devel
 
 %description
-LV2 Analogue simulation of a tube preamp
+Guitarix LV2 plugins
+
+%package -n lv2-GxBottleRocket-plugin
+Summary: LV2 Analogue simulation of a tube preamp
+Group:   Applications/Multimedia
+%description -n lv2-GxBottleRocket-plugin
+LV2 Analogue simulation of a tube preamp.
 
 %package -n lv2-GxGuvnor-plugin
 Summary: LV2 Overdrive/distortion pedal simulation from Guitarix
@@ -203,6 +211,24 @@ Group:   Applications/Multimedia
 %description -n lv2-TubeDistortion-plugin
 Simulation of a Tube based Distortion Pedal.
 
+%package -n lv2-GxBoobTube-plugin
+Summary: The BoobTube is a little tube boost pedal simulation.
+Group:   Applications/Multimedia
+%description -n lv2-GxBoobTube-plugin
+The BoobTube is a little tube boost pedal simulation, it's a variation of the ValveCaster. It adds some overdrive and tube compression along with boosting the signal.
+
+%package -n lv2-GxCreamMachine-plugin
+Summary: Simulation, based on a tube power amp circuit.
+Group:   Applications/Multimedia
+%description -n lv2-GxCreamMachine-plugin
+Simulation, based on a tube power amp circuit.
+
+%package -n lv2-GxValveCaster-plugin
+Summary: The ValveCaster is a little tube boost pedal simulation.
+Group:   Applications/Multimedia
+%description -n lv2-GxValveCaster-plugin
+The ValveCaster is a little tube boost pedal simulation. It adds some overdrive and tube compression along with boosting the signal.
+
 %prep
 %setup -qn GxPlugins.lv2.%{commit0}
 
@@ -298,10 +324,22 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %files -n lv2-GxVoodoFuzz-plugin
 %{_libdir}/lv2/gx_voodoo.lv2/*
 
-%files
+%files -n lv2-GxBoobTube-plugin
+%{_libdir}/lv2/gx_boobtube.lv2/*
+
+%files -n lv2-GxCreamMachine-plugin
+%{_libdir}/lv2/gx_CreamMachine.lv2/*
+
+%files -n lv2-GxValveCaster-plugin
+%{_libdir}/lv2/gx_valvecaster.lv2/*
+
+%files -n lv2-GxBottleRocket-plugin
 %{_libdir}/lv2/gx_bottlerocket.lv2/*
 
 %changelog
+* Tue Jan 22 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6
+- Update to v0.6
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4
 - update for Fedora 29
 
