@@ -6,21 +6,17 @@
 #
 # in the source directory, remove the sc directory (supercollider for windows).
 #
-%define name    improvisor
-%define maj     9
-%define min     1
-%define patch   0
-%define version %{maj}.%{min}%{patch}
-%define release 1
 
-Name:     %{name}
-Version:  %{version}
-Release:  %{release}
+%define maj 10
+%define min 1
+
+Name:     Impro-Visor
+Version:  %{maj}.%{min}
+Release:  1
 Summary:  Impro-Visor is a music notation program for jazz musicians
 License:  GPL
 URL:      http://www.cs.hmc.edu/~keller/jazz/improvisor/
-#Source0:  http://sourceforge.net/projects/impro-visor/files/Impro-Visor%207.0%20Release/
-Source0:  %{name}%{maj}%{min}%{patch}.zip
+Source0:  %{name}_unix_%{maj}_%{min}.tar.gz
 Source1:  %{name}.sh
 Source2:  %{name}.png
 
@@ -90,13 +86,17 @@ sheets for standard and jazz tunes.
 %prep
 %setup -q -c %{name}
 
+rm -rf %{name}%{maj}.%{min}/sc
+
 %build
 
 %install
 
 # jars
+cd %{name}%{maj}.%{min}
+
 %__install -dm 755 %{buildroot}%{_javadir}
-%__install -m 644 %{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
+%__install -m 644 improvisor.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
 
 pushd %{buildroot}%{_javadir}
 for jar in *-%{version}*; do
@@ -147,7 +147,7 @@ cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 Encoding=UTF-8
 Name=Impro-Visor
 Comment=%{summary}
-Exec=%{name}.sh
+Exec=improvisor.sh
 Icon=%{name}
 Terminal=false
 Type=Application
@@ -161,7 +161,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc *.txt
+%doc Impro-Visor%{maj}.%{min}/*.txt
 %{_bindir}/%{name}.sh
 %{_javadir}/*.jar
 %dir %{_datadir}/%{name}
@@ -191,6 +191,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Jan 23 2019 Yann Collette <ycollette dot nospam at free.fr> 10.1
+- upgrade to 10.1
+
 * Wed Oct 25 2017 Yann Collette <ycollette dot nospam at free.fr> 9.10
 - upgrade to 9.10
 
