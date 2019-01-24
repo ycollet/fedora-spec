@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:    polyphone
-Version: 1.9
+Version: 2.0.1
 Release: 1%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
@@ -10,16 +10,15 @@ Group:   Applications/Multimedia
 
 License: GPLv2+
 
-# Download polyphone-1.9-src.zip
-# unzip polyphone-1.9-src.zip
-# mv trunk polyphone-1.9-src
-# rm polyphone-1.9-src.zip
-# zip -r polyphone-1.9-src.zip polyphone-1.9-src/*
+# Download polyphone-2.0-src.zip
+# unzip polyphone-2.0-src.zip
+# mv trunk polyphone-2.0.1-src
+# rm polyphone-2.0.1-src.zip
+# zip -r polyphone-2.0.1-src.zip polyphone-2.0.1-src/*
 
 Source0: %{name}-%{version}-src.zip
 Source1: polyphone.desktop
 Source2: polyphone.xml
-Patch0: polyphone-0001-add-missing-QAction.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -35,6 +34,8 @@ BuildRequires: qcustomplot-devel
 BuildRequires: libvorbis-devel 
 BuildRequires: libogg-devel 
 BuildRequires: zlib-devel
+BuildRequires: glib2-devel
+BuildRequires: openssl-devel
 
 %description
 Polyphone is a free software for editing soundfonts in format sf2. These files contain a multitude of audio samples put together and configured so as to form musical instruments that can be used by synthesizers such as fluidsynth and played using a MIDI keyboard.
@@ -47,13 +48,10 @@ The goal of Polyphone is to provide:
 %prep
 %setup0 -qn %{name}-%{version}-src
 
-%patch0 -p1
-
 %build
 
 qmake-qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
 make VERBOSE=1 %{?_smp_mflags}
-cd ..
 
 %install
 
@@ -61,13 +59,13 @@ cd ..
 %__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 RELEASE/polyphone %{buildroot}%{_bindir}/
+%__install -m 755 bin/polyphone %{buildroot}%{_bindir}/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
 %__install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 ressources/logo.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%__install -m 644 resources/logo.svg %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.svg
 
 # install polyphon.desktop properly.
 desktop-file-install --vendor '' \
@@ -89,10 +87,8 @@ if [ $1 -eq 0 ] ; then
   update-mime-database %{_datadir}/mime &> /dev/null || :
 fi
 
-
 %posttrans
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 
 %files
 %doc changelog README
@@ -101,8 +97,11 @@ fi
 %{_datadir}/mime/packages/polyphone.xml
 %{_datadir}/icons/hicolor/*
 
-
 %changelog
+* Tue Jan 24 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.1-2
+- fix permission
+- update to 2.0.1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.9.0-1
 - update for Fedora 29
 
