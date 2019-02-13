@@ -1,11 +1,15 @@
 Name:    leiningen
-Version: 2.8.1
+Version: 2.8.3
 Release: 1%{?dist}
 Summary: Clojure project automation tool
 
 License: EPL
 URL:     https://github.com/technomancy/leiningen
-Source0: %{name}-%{version}.zip
+Source0: https://github.com/technomancy/leiningen/releases/download/%{version}/leiningen-%{version}-standalone.zip
+Source1: https://github.com/technomancy/leiningen/raw/%{version}/bin/lein
+Source2: https://github.com/technomancy/leiningen/raw/%{version}/resources/leiningen.png
+Source3: https://raw.githubusercontent.com/technomancy/leiningen/%{version}/bash_completion.bash
+Source4: https://raw.githubusercontent.com/technomancy/leiningen/%{version}/zsh_completion.zsh
 
 BuildArch: noarch
 
@@ -14,6 +18,7 @@ BuildRequires: java-devel
 BuildRequires: maven
 BuildRequires: clojure
 BuildRequires: wget
+BuildRequires: sed
 
 Requires: java
 
@@ -24,45 +29,32 @@ Clojure. Leiningen handles fetching dependencies, running tests,
 packaging your projects and can be easily extended with a number of
 plugins.
 
-
-%prep
-%setup -q
-
 %build
 
-wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-chmod +x lein
-export PATH=`pwd`:$PATH
-
-cd leiningen-core
-#mvn clean package
-lein bootstrap
-cd ..
-bin/lein uberjar
-
+chmod +x %{SOURCE1}
 
 %install
 install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
-install -pm 644 target/%{name}-%{version}-standalone.jar $RPM_BUILD_ROOT/%{_javadir}/
+install -pm 644 %{SOURCE0} $RPM_BUILD_ROOT/%{_javadir}/%{name}-%{version}-standalone.jar
 
 install -d -m 755 $RPM_BUILD_ROOT%{_bindir}
-install -pm 755 bin/lein-pkg $RPM_BUILD_ROOT%{_bindir}/lein
+install -pm 755 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/lein
+
+install -d -m 755 $RPM_BUILD_ROOT%{_datadir}/pixmaps/
+install -pm 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.png
 
 install -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
-install -pm 644 bash_completion.bash $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/lein
+install -pm 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/lein
 
 install -d -m 755 $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
-install -pm 644 zsh_completion.zsh $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions/_lein
+install -pm 644 %{SOURCE4} $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions/_lein
 
-
-%check
-# FIXME
-# debug this; even though it fails, the resulting package is functional
-# LEIN_ROOT=y sh bin/lein-pkg test
-
+sed -i -e "/LEIN_JAR=/d" $RPM_BUILD_ROOT%{_bindir}/lein
+sed -i -e "6iLEIN_JAR=/usr/share/java/leiningen-%{version}-standalone.jar" $RPM_BUILD_ROOT%{_bindir}/lein
+sed -i -e "7iCLASSPATH=" $RPM_BUILD_ROOT%{_bindir}/lein
 
 %files
-%doc COPYING README.md NEWS.md TUTORIAL.md
+
 %{_javadir}/*
 %{_bindir}/lein
 %dir %{_sysconfdir}/bash_completion.d
@@ -70,9 +62,12 @@ install -pm 644 zsh_completion.zsh $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
 %dir %{_datadir}/zsh
 %dir %{_datadir}/zsh/site-functions
 %{_datadir}/zsh/site-functions/_lein
-
+%{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Feb 13 2019 Yann Collette <ycollette.nospam@free.fr> - 2.8.3-1
+- Update to 2.8.3
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.7.1-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
