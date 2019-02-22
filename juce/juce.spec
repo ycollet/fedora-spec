@@ -3,11 +3,11 @@
 
 # Global variables for github repository
 %global commit0 ebe136f7c2bd7e129dc854bb67121e4ce85562c6
-%global gittag0 5.4.2
+%global gittag0 5.4.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    JUCE
-Version: 5.4.2.%{shortcommit0}
+Version: 5.4.3.%{shortcommit0}
 Release: 3%{?dist}
 Summary: JUCE Framework
 URL:     https://github.com/WeAreROLI/JUCE.git
@@ -114,6 +114,9 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Fri Feb 22 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.3-3
+- Switch to 5.4.3
+
 * Fri Feb 8 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.2-3
 - Switch to 5.4.2
 
