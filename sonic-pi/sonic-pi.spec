@@ -2,7 +2,7 @@
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
 # Global variables for github repository
-%global commit0 3b1bb2cc71862beaa6ce18a75fc7c90fe8bc65ac
+%global commit0 5b46247167abaf09ef18a3962270da580f3e31d7
 %global gittag0 v3.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
