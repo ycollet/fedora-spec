@@ -3,11 +3,11 @@
 # Kernel minor version
 %define kmin  19
 # Kernel patch version
-%define kpat  15
+%define kpat  25
 # package version
 %define krel  7
 # RT patch version
-%define krt   12
+%define krt   16
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -139,6 +139,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Fri Mar 1 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.25-rt16-7
+- update to 4.19.25-rt16-7
+
 * Tue Jan 15 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.15-rt12-7
 - update to 4.19.15-rt12-7
 
