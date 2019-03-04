@@ -3,12 +3,12 @@
 
 Summary: Tool for describing builds
 Name:    premake4
-Version: 4.3
+Version: 4.4beta5
 Release: 1%{?dist}
 License: GPLv3+
 Group:   Developpment
 URL:     http://sourceforge.net/projects/premake/
-Source0: https://sourceforge.net/projects/premake/files/Premake/4.3/premake-4.3-src.zip
+Source0: https://sourceforge.net/projects/premake/files/Premake/4.4/premake-4.4-beta5-src.zip
 
 BuildRequires: gcc gcc-c++
 
@@ -16,7 +16,7 @@ BuildRequires: gcc gcc-c++
 Describe your software project with a full-featured scripting language and let Premake write the build scripts for you. With one file your project can support both IDE-addicted Windows coders and Linux command-line junkies!
 
 %prep
-%setup -qn premake-4.3
+%setup -qn premake-4.4-beta5
 
 %build
 cd build/gmake.unix/
@@ -35,5 +35,8 @@ rm -rf %{buildroot}
 %{_bindir}/*
 
 %changelog
+* Mon Mar 4 2019 Yann Collette <ycollette.nospam@free.fr> - 4.4-beta5-1
+- update to 4.4-beta5
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 4.3-1
 - initial release
