@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 1d41a52f6b2236f38670c2d3a28ab97c419a4754
+%global commit0 663a4f1422527c07c3a1e1e01b408392348a1691
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +9,7 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.5
+Version: 1.1.7
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -58,6 +58,9 @@ cp %{SOURCE1} Makefile
 %{_datadir}/*
 
 %changelog
+* Mon Mar 18 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.7-1
+- update to 1.1.7
+
 * Fri Dec 21 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.5-1
 - update to 1.1.5
 
