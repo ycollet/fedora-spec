@@ -1,16 +1,25 @@
 # Global variables for github repository
-%global commit0 bbefb4cfef159681fe68db34cab0585b6b7a2ebc
-%global gittag0 v1.0.0-beta.4
+%global commit0 945834ed37a3bf3620c4c4cb241675c674819555
+%global gittag0 v1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    adlplug
-Version: 1.0.0.b4
+Version: 1.0.0
 Release: 3%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
 Group:   Applications/Multimedia
 
 License: BSL-1.0
+
+# git clone https://github.com/jpcima/ADLplug
+# git checkout v1.0.0
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz ADLplug.tar.gz ADLplug/*
+# rm -rf ADLplug
 
 Source0: ADLplug.tar.gz
 
@@ -120,8 +129,11 @@ fi
 %{_datadir}/icons/hicolor/96x96/apps/OPNplug.png
 
 %changelog
+* Mon Mar 18 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+- update to 1.0.0
+
 * Sun Nov 11 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.4-3
-- update to 1.1.0-beta.4.3
+- update to 1.0.0-beta.4.3
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-beta.3-3
 - update for Fedora 29
