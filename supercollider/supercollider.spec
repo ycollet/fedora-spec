@@ -1,5 +1,5 @@
 #
-# https://github.com/supercollider/supercollider/releases/tag/Version-3.8.1
+# https://github.com/supercollider/supercollider/releases/tag/Version-3.10.2
 
 # build options
 %define cmakeopts -DCMAKE_C_FLAGS="%{optflags} -fext-numeric-literals" -DCMAKE_CXX_FLAGS="%{optflags} -fext-numeric-literals"
@@ -11,15 +11,13 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
-Version: 3.8.1
+Version: 3.10.2
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://supercollider.sourceforge.net/
 
-Source0: SuperCollider-%{version}-%{?gitver:%{gitver}-}Source-linux.tar.bz2
-Patch0:  supercollider-0001-fix-build-gcc-7.patch
-Patch1:  supercollider-0002-fix-rpath.patch
+Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source-linux.tar.bz2
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -40,8 +38,9 @@ BuildRequires: jack-audio-connection-kit-devel libsndfile-devel alsa-lib-devel
 Buildrequires: fftw3-devel libcurl-devel emacs w3m ruby
 BuildRequires: avahi-devel libX11-devel libXt-devel
 BuildRequires: libicu-devel readline-devel
-BuildRequires: qt5-qtbase-devel qt5-qtsensors-devel qt5-qttools-devel
-BuildRequires: qt5-qtlocation-devel qt5-qtwebkit-devel
+BuildRequires: qt5-qtbase-devel qt5-qtsensors-devel qt5-qttools-devel qt5-qtsvg-devel
+BuildRequires: qt5-qtlocation-devel qt5-qtwebkit-devel qt5-qtwebengine-devel
+BuildRequires: qt5-qtwebsockets-devel qt5-qtdeclarative-devel
 BuildRequires: yaml-cpp03-devel 
 BuildRequires: cwiid-devel
 # needed because emacs needs alternatives to be installed
@@ -95,30 +94,26 @@ Requires: supercollider = %{version}-%{release}
 SuperCollider support for the Vim text editor.
 
 %prep
-%setup -q -n SuperCollider-Source
+%setup -qn SuperCollider-Source
 
-%patch0 -p1 
-%patch1 -p1 
+sed -i -e "s/SET(CMAKE_INSTALL_RPATH/#SET(CMAKE_INSTALL_RPATH/g" editors/sc-ide/CMakeLists.txt
+sed -i -e "s/SET(CMAKE_INSTALL_RPATH/#SET(CMAKE_INSTALL_RPATH/g" lang/CMakeLists.txt
 
 %build
 # remove all git directories
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
 
-%ifarch x86_64
-# fix libdir paths in 64 bit architecture
-perl -p -i -e "s|/lib/|/%{_lib}/|g" server/scsynth/CMakeLists.txt
-find . -type f -name CMakeLists.txt -exec grep "ON \"lib\"" {} \; \
-     -exec perl -p -i -e "s|ON \"lib\"|ON \"%{_lib}\"|g" {} \; 
-find . -type f -name CMakeLists.txt -exec grep \"lib/ {} \; \
-     -exec perl -p -i -e "s|\"lib/|\"%{_lib}/|g" {} \; 
-perl -p -i -e "s|ON lib|ON %{_lib}|g" editors/sced/CMakeLists.txt
-perl -p -i -e "s|/usr/lib|%{_libdir}|g" server/supernova/server/main.cpp
-%endif
-
 mkdir build
 pushd build
+
+%ifarch x86_64
+cmake -DSYSTEM_BOOST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE -DCMAKE_INSTALL_PREFIX=%{_prefix} -DLIB_SUFFIX="64" \
+      %{cmakeopts} %{cmakearch} %{?geditver}  ..
+%else
 cmake -DSYSTEM_BOOST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       %{cmakeopts} %{cmakearch} %{?geditver}  ..
+%endif
+
 make clean
 make %{?_smp_mflags}
 popd
@@ -160,7 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/supercollider*
 # scsynth
 %{_bindir}/scsynth
-%{_libdir}/SuperCollider/plugins
+%ghost %{_libdir}/SuperCollider/plugins
 %ifnarch %{arm}
 # supernova
 %{_bindir}/supernova
@@ -185,12 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files vim
 %defattr(-,root,root,-)
-%{_bindir}/sclangpipe_app
-%{_bindir}/scvim
-%{_datadir}/scvim
-%{_datadir}/SuperCollider/Extensions/scvim
-%{_datadir}/vim/registry/supercollider-vim.yaml
-%{_datadir}/vim/addons/*/supercollider*
+%{_datadir}/SuperCollider/Extensions/scide_scvim/SCVim.sc
 
 %files gedit
 %defattr(-,root,root,-)
@@ -199,6 +189,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Mon Mar 25 2019 Yann Collette <ycollette.nospam@free.fr> 3.10.2-1
+- update to 3.10.2
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.8.0-1
 - update for Fedora 29
 - update to 3.8.1

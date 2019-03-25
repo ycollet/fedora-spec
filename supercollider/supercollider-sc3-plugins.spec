@@ -14,10 +14,11 @@
 # 2017.11.02: Version-3.7.1-147-g04a3dca
 # 2018.05.12: Version-3.7.1-185-g6983e2d
 # 2018.10.15: Version-3.7.1-270-g5e83bd9
+# 2019.03.25: Version-3.7.1-296-g42a1bc6
 
 %define gitver 3.7.1
-%define gittag g5e83bd9
-%define gitrev 270
+%define gittag g42a1bc6
+%define gitrev 296
 
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
@@ -52,24 +53,22 @@ Collection of SuperCollider plugins
 %prep
 %setup -q -n sc3-plugins-src-%{gittag}
 
+%ifarch x86_64
+sed -i -e "s/lib\/SuperCollider/lib64\/SuperCollider/g" source/CMakeLists.txt
+%endif
+
 %build
 # remove all git directories
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
 
-%ifarch x86_64
-# fix libdir paths for 64 bit architecture
-find . -type f -name CMakeLists.txt -exec grep "ON \"lib\"" {} \; \
-     -exec perl -p -i -e "s|ON \"lib\"|ON \"%{_lib}\"|g" {} \; -print
-find . -type f -name CMakeLists.txt -exec grep \"lib/ {} \; \
-     -exec perl -p -i -e "s|\"lib/|\"%{_lib}/|g" {} \; -print
-%endif
-
 mkdir build
 pushd build
+
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE \
       -DSC_PATH=/usr/include/SuperCollider \
       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DSUPERNOVA=ON ..
+
 make clean
 make %{?_smp_mflags}
 
@@ -89,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* Mon Mar 25 2019 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6
+- update to Version-3.7.1-296-g42a1bc6
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.185-g6983e2d
 - update for Fedora 29
 - update to Version-3.7.1-270-g5e83bd9
