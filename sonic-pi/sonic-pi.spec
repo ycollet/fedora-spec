@@ -2,7 +2,7 @@
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
 # Global variables for github repository
-%global commit0 5b46247167abaf09ef18a3962270da580f3e31d7
+%global commit0 91ac731bebd89d725ace46c6383dd1efff88f263
 %global gittag0 v3.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -14,7 +14,7 @@ Summary: A musical programming environment
 License: MIT
 URL:     http://sonic-pi.net/
 Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
-Source1: rugged-0.27.5.tar.gz
+Source1: rugged-0.28.0.tar.gz
 Source2: osmid.tar.gz
 
 # Use source.sh to get source files
@@ -155,7 +155,7 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fa
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 #ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.26.0/ext/rugged/rugged.so \
 #   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
-ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.27.5/ext/rugged/rugged.so \
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.0/ext/rugged/rugged.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 
 find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
@@ -200,6 +200,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Tue Mar 26 2019 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
+- update to master (and add rugged-0.28.0)
+
 * Fri Dec 7 2018 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
 - fix for Fedora 29 - update to master (to get rugged-0.27.5)
 
