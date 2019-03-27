@@ -23,10 +23,22 @@
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
 Version: %{gitver}
-Release: 1%{?gitrev:.%{gitrev}}%{?gittag:.%{gittag}}%{?dist}
+Release: 2%{?gitrev:.%{gitrev}}%{?gittag:.%{gittag}}%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://sc3-plugins.sourceforge.net/
+
+# git clone https://github.com/supercollider/sc3-plugins
+# cd sc3-plugins
+# git checkout Version-3.10.0
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# mv sc3-plugins sc3-plugins-src-g42a1bc6
+# tar cvfz sc3-plugins-src-g42a1bc6.tar.gz sc3-plugins-src-g42a1bc6
+# rm -rf sc3-plugins-src-g42a1bc6
+
 Source0: sc3-plugins-src-%{gittag}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -88,7 +100,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
-* Mon Mar 25 2019 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6
+* Wed Mar 27 2019 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6-2
+- fix build
+
+* Mon Mar 25 2019 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6-1
 - update to Version-3.7.1-296-g42a1bc6
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> 3.7.1-1.185-g6983e2d
