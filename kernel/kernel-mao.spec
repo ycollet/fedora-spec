@@ -90,7 +90,7 @@ KBUILD_IMAGE=$(make image_name)
   mkdir -p $RPM_BUILD_ROOT/boot     $RPM_BUILD_ROOT/lib/modules
 %endif
 
-INSTALL_MOD_PATH=$RPM_BUILD_ROOT make %{?_smp_mflags} KBUILD_SRC= mod-fw= INSTALL_MOD_STRIP=1 CONFIG_MODULE_COMPRESS=1 CONFIG_MODULE_COMPRESS_XZ=1 modules_install
+make %{?_smp_mflags} INSTALL_MOD_PATH=$RPM_BUILD_ROOT KBUILD_SRC= mod-fw= INSTALL_MOD_STRIP=1 CONFIG_MODULE_COMPRESS=1 CONFIG_MODULE_COMPRESS_XZ=1 modules_install
 
 # We estimate the size of the initramfs because rpm needs to take this size
 # into consideration when performing disk space calculations. (See bz #530778)
