@@ -12,7 +12,7 @@
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
 Version: 3.10.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://supercollider.sourceforge.net/
@@ -155,7 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/supercollider*
 # scsynth
 %{_bindir}/scsynth
-%ghost %{_libdir}/SuperCollider/plugins
+%{_libdir}/SuperCollider/plugins
 %ifnarch %{arm}
 # supernova
 %{_bindir}/supernova
