@@ -93,6 +93,9 @@ VERSION = 0.6.3 	./Edge/Makefile   					done
 VERSION = 0.6.0 	./MicMusic/Makefile   					done
 VERSION = 0.6.3 	./Quadraphonics/Makefile				done
 VERSION = 0.6.3		./UnforgettableLuncheon/Makefile			done
+VERSION = 0.6.1		./8Mode/Makefile					done
+VERSION = 0.6.0		./ExpertSleepers-Encoders/Makefile			done
+VERSION = 0.6.2		./WhatTheRack/Makefile					done
 
 KO prefixed files does not build ...
 
@@ -192,6 +195,9 @@ KO - 84 - ParableInstruments
 94 - MicMusic
 95 - Quadraphonics
 96 - UnforgettableLuncheon
+97 - 8Mode
+98 - ExpertSleepers-Encoders
+99 - WhatTheRack
 
 * Download sources:
 
@@ -211,7 +217,7 @@ rack_84_ArableInstruments.spec:Source1: ArableInstruments.tar.gz
 
 ** All the others can be downloaded with spectool -g
 
-for Ext in 01 02 03 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 26 27 28 29 31 32 33 35 37 38 40 41 42 43 44 45 46 48 49 50 51 52 54 55 56 57 58 59 60 61 63 64 65 66 67 68 69 70 71 72 74 75 76 77 78 79 80 81 82 83 85 86 87 88 89 90 91 92 93 94 95 96
+for Ext in 01 02 03 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 26 27 28 29 31 32 33 35 37 38 40 41 42 43 44 45 46 48 49 50 51 52 54 55 56 57 58 59 60 61 63 64 65 66 67 68 69 70 71 72 74 75 76 77 78 79 80 81 82 83 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99
 do
   Files=`ls rack_$Ext*.spec`
   echo "Building $Files"
@@ -224,7 +230,7 @@ done
 
 rm ~/rpmbuild/SRPMS/*
 
-for Ext in 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 49 50 51 52 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 85 86 87 88 89 90 91 92 93 94 95 96
+for Ext in 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 49 50 51 52 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99
 do
   Files=`ls rack_$Ext*.spec`
   echo "Building $Files"
