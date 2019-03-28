@@ -94,7 +94,7 @@ make %{?_smp_mflags} INSTALL_MOD_PATH=$RPM_BUILD_ROOT KBUILD_SRC= mod-fw= INSTAL
 
 # We estimate the size of the initramfs because rpm needs to take this size
 # into consideration when performing disk space calculations. (See bz #530778)
-dd if=/dev/zero of=$RPM_BUILD_ROOT/boot/initramfs-$KernelVer%{fcver}.img bs=1M count=20
+dd if=/dev/zero of=$RPM_BUILD_ROOT/boot/initramfs-%{kver}-rt%{krt}%{fcver}.img bs=1M count=20
 
 %ifarch ia64
   cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kver}-rt%{krt}%{fcver}
@@ -116,13 +116,12 @@ tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kver}-rt%{krt}%{fcv
 rm -rf $RPM_BUILD_ROOT
 
 %post
-# Create the vmlinuz file
-/bin/kernel-install add %{kver}-rt%{krt}%{fcver} /lib/modules/%{kver}-rt%{krt}%{fcver}
+# Create the initramfs file
+#/bin/kernel-install add %{kver}-rt%{krt}%{fcver} /lib/modules/%{kver}-rt%{krt}%{fcver}
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
 grub2-mkconfig -o /boot/grub2/grub.cfg
-#test -e /boot/initramfs-%{kver}-rt%{krt}.img && rm -f /boot/initramfs-%{kver}-rt%{krt}.img
 
 %files
 %defattr (-, root, root)
@@ -139,6 +138,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Thu Mar 28 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.25-rt16-8
+- update to 4.19.25-rt16-8
+
 * Fri Mar 1 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.25-rt16-7
 - update to 4.19.25-rt16-7
 
