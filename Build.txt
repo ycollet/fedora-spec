@@ -7,7 +7,7 @@ lv2-fil-plugins   done   no	X	X	X	X
 jamulus           done   no	X	X	X	X
 GrandOrgue        done   no	X	X	X	X
 azr3              done   no	X	X	X	X
-sonic-pi          done   no	X	X	FAIL	FAIL
+sonic-pi          done   no	X	X	X	X
 drumgizmo         done   no	X	X	X	X
 hydrogen          done   no	X	X	X	X
 jalv-select       done   no	X	X	X	X
@@ -72,6 +72,17 @@ brutefir	  done	 no	no	X	X	X
 dragonfly-reverb  done	 no	no	X	X	X
 chuck		  done	 no	no	X	X	X
 puredata	  done	 no	no	X	X	X
+scarlett-mixer	  done	 no	no	no	X	X
+midizap		  done	 no	no	no	X	X
+caps-lv2	  done	 no	no	no	X	X
+opl3bankeditor	  done	 no	no	no	X	X
+lsp-plugins	  done	 no	no	no	X	X
+protracker	  done	 no	no	no	X	X
+common-music	  done	 no	no	no	X	X
+dragonfly-reverb  done	 no	no	no	X	X
+goatracker	  done	 no	no	no	X	X
+glava		  done	 no	no	no	X	X
+harvid		  done	 no	no	no	X	X
 
 X: done
 *: running
