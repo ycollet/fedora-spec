@@ -117,10 +117,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # Create the initramfs file
-#/bin/kernel-install add %{kver}-rt%{krt}%{fcver} /lib/modules/%{kver}-rt%{krt}%{fcver}
+/bin/kernel-install add %{kver}-rt%{krt}%{fcver} /lib/modules/%{kver}-rt%{krt}%{fcver}/vmlinuz
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %postun
+/bin/kernel-install remove %{kver}-rt%{krt}%{fcver} /lib/modules/%{kver}-rt%{krt}%{fcver}/vmlinuz
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %files
