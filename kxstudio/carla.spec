@@ -1,21 +1,20 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 1967b550527dcfa11e334b08b65da9cf7cc68660
+%global commit0 fd4e24fc4f5c3e234359a6a6c7a43a71167ebb30
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Carla
 Version: 2.0.0.%{shortcommit0}
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: A rack manager JACK
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/falkTX/Carla
 Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-Patch0:  carla-0001-change-default-path.patch
+Source1: carla-change-lib.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel
@@ -35,8 +34,8 @@ BuildRequires: mesa-libGL-devel
 BuildRequires: non-ntk-fluid
 BuildRequires: non-ntk-devel
 BuildRequires: jack-audio-connection-kit-devel
-#BuildRequires: linuxsampler-devel
-#BuildRequires: libprojectM-devel
+BuildRequires: linuxsampler-devel
+BuildRequires: libprojectM-devel
 
 Requires(pre): python3-qt5
 
@@ -46,7 +45,9 @@ A rack manager for JACK
 %prep
 %setup -qn %{name}-%{commit0}
 
-%patch0 -p1 
+%ifarch x86_64 amd64
+%{SOURCE1}
+%endif
 
 %build
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} %{?_smp_mflags}
@@ -77,7 +78,6 @@ fi
 %{_libdir}/carla/*
 %{_libdir}/lv2/*
 %{_libdir}/pkgconfig/*
-%{_libdir}/python3/*
 %{_libdir}/vst/
 %{_datadir}/applications/*
 %{_datadir}/carla/*
@@ -85,6 +85,9 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Sat Mar 30 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-6
+- update to 2.0.0-6
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0beta-5
 - update for Fedora 29
 
