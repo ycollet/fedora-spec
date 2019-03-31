@@ -7,11 +7,3 @@ do
     echo "Change path from lib to lib64"
     sed -i -e "s/\/lib\//\/lib64\//g" $Files
 done
-
-FILES=`find . -name "*.py" -exec grep -l "env python$" {} \;`
-
-for Files in $FILES
-do
-    echo "Change python$ to python2$"
-    sed -i -e "s/env python$/env python2/g" $Files
-done

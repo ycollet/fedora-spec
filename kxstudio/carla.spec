@@ -6,7 +6,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Carla
-Version: 2.0.0.%{shortcommit0}
+Version: 2.0.0
 Release: 6%{?dist}
 Summary: A rack manager JACK
 
@@ -15,6 +15,7 @@ License: GPLv2+
 URL:     https://github.com/falkTX/Carla
 Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: carla-change-lib.sh
+Source2: carla-change-py.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel
@@ -48,6 +49,7 @@ A rack manager for JACK
 %ifarch x86_64 amd64
 %{SOURCE1}
 %endif
+%{SOURCE2}
 
 %build
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} %{?_smp_mflags}
