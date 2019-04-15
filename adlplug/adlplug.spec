@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 945834ed37a3bf3620c4c4cb241675c674819555
-%global gittag0 v1.0.0
+%global commit0 17f7fc5c810e1188eee494f1190e47f599479c30
+%global gittag0 v1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    adlplug
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
@@ -13,7 +13,7 @@ Group:   Applications/Multimedia
 License: BSL-1.0
 
 # git clone https://github.com/jpcima/ADLplug
-# git checkout v1.0.0
+# git checkout v1.0.1
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -129,6 +129,9 @@ fi
 %{_datadir}/icons/hicolor/96x96/apps/OPNplug.png
 
 %changelog
+* Mon Apr 15 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.1
+- update to 1.0.1
+
 * Mon Mar 18 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
 - update to 1.0.0
 
