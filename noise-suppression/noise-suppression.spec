@@ -5,9 +5,8 @@
 
 Name:    noise-suppression-for-voice
 Version: 0.2.0
-Release: 1%{?dist}
-Summary: Real-time Noise Suppression Plugin
-Group:   Applications/Multimedia
+Release: 2%{?dist}
+Summary: Real-time Noise Suppression LADSPA / LV2 Plugin
 License: GPLv2+
 
 URL:     https://github.com/werman/noise-suppression-for-voice
@@ -20,8 +19,31 @@ BuildRequires: lv2-devel
 BuildRequires: ladspa-devel
 
 %description
-A real-time noise suppression plugin for voice based on Xiph's RNNoise - https://github.com/xiph/rnnoise.
+A real-time noise suppression LV2 / LADSPA plugin for voice based on Xiph's RNNoise - https://github.com/xiph/rnnoise.
 More info about the base library - https://people.xiph.org/~jm/demo/rnnoise/.
+
+%package -n ladspa-%{name}
+Summary: Real-time Noise Suppression LADSPA Plugin
+Group:   Applications/Multimedia
+
+%package -n lv2-%{name}
+Summary: Real-time Noise Suppression LV2 Plugin
+Group:   Applications/Multimedia
+
+%package -n %{name}-doc
+Summary: Real-time Noise Suppression LADSPA / LV2 Plugin documentation
+Group:   Applications/Multimedia
+
+%description -n ladspa-%{name}
+A real-time noise suppression LADSPA plugin for voice based on Xiph's RNNoise - https://github.com/xiph/rnnoise.
+More info about the base library - https://people.xiph.org/~jm/demo/rnnoise/.
+
+%description -n lv2-%{name}
+A real-time noise suppression LV2 plugin for voice based on Xiph's RNNoise - https://github.com/xiph/rnnoise.
+More info about the base library - https://people.xiph.org/~jm/demo/rnnoise/.
+
+%description -n %{name}-doc
+Documentation related to the real-time noise suppression plugin for voice based on Xiph's RNNoise.
 
 %prep
 %setup -qn %{name}-%{commit0}
@@ -43,10 +65,18 @@ make VERBOSE=1 %{?_smp_mflags}
 
 make DESTDIR=%{buildroot} install
 
-%files
+%files -n %{name}-doc
 %doc README.md LICENSE
-%{_libdir}/*
+
+%files -n ladspa-%{name}
+%{_libdir}/ladspa/*
+
+%files -n lv2-%{name}
+%{_libdir}/lv2/*
 
 %changelog
+* Mon Apr 15 2019 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-2
+- build ladspa and lv2 packages
+
 * Mon Apr 15 2019 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-1
 - Initial version
