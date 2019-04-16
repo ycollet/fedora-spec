@@ -35,7 +35,7 @@ This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plug
 
 %build
 
-make INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ %{?_smp_mflags}
+make INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ CFLAGS="-std=c99 %{build_cflags} -fPIC" %{?_smp_mflags}
 
 %install
 
