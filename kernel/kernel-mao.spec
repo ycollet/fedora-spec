@@ -3,11 +3,11 @@
 # Kernel minor version
 %define kmin  19
 # Kernel patch version
-%define kpat  31
+%define kpat  37
 # package version
-%define krel  7
+%define krel  8
 # RT patch version
-%define krt   18
+%define krt   19
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -139,6 +139,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Mon Apr 29 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.37-rt19-8
+- update to 4.19.37-rt19-8
+
 * Thu Mar 28 2019 Yann Collette <ycollette.nospam@free.fr> - 4.19.31-rt18-8
 - update to 4.19.31-rt18-8
 
