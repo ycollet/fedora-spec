@@ -50,15 +50,17 @@ A VST2 synthetizer
 %prep
 %setup -qn %{name}
 
+%ifarch x86_64
+  sed -i -e "s/lib\/vst/lib64\/vst/g" build-linux.sh
+%endif
+
+sed -i -e "s/python/python2/g" premake5.lua
+
 %build
 
 tar xvfj %{SOURCE1}
 
 export VST2SDK_DIR=vst/vstsdk2.4/
-
-%ifarch x86_64
-  sed -i -e "s/lib\/vst/lib64\/vst/g" build-linux.sh
-%endif
 
 ./build-linux.sh clean-all
 ./build-linux.sh -p vst2 build
