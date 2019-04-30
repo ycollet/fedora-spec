@@ -1,0 +1,10 @@
+diff -Naur yaml-cpp.orig/yaml-cpp.pc.cmake yaml-cpp/yaml-cpp.pc.cmake
+--- yaml-cpp.orig/yaml-cpp.pc.cmake	2012-01-21 02:52:48.000000000 -0600
++++ yaml-cpp/yaml-cpp.pc.cmake	2013-10-16 14:41:06.837360011 -0500
+@@ -7,5 +7,5 @@
+ Description: A YAML parser and emitter for C++
+ Version: @YAML_CPP_VERSION@
+ Requires:
+-Libs: -L${libdir} -lyaml-cpp
++Libs: -L${libdir} -lyaml-cpp03
+ Cflags: -I${includedir}
