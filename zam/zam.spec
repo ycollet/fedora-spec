@@ -15,7 +15,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/zamaudio/zam-plugins
 # in the zam repository -> make dist
-Source0: zam-plugins-3.10-24-g9050e4d.tar.xz
+Source0: zam-plugins-3.10-10-g7232969.tar.xz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -44,7 +44,7 @@ Group:          Applications/Multimedia
 Zam VST plugin
 
 %prep
-%setup -qn zam-plugins-3.10-24-g9050e4d
+%setup -qn zam-plugins-3.10-10-g7232969
 
 %build
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
@@ -63,6 +63,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 %{_libdir}/vst/* 
 
 %changelog
+* Tue Apr 30 2019 Yann Collette <ycollette.nospam@free.fr> - 3.10-2
+- update to zam-plugins-3.10-10-g7232969
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.10-2
 - update for Fedora 29
 - update to zam-plugins-3.10-10-g7232969.tar.xz
