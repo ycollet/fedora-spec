@@ -58,8 +58,8 @@ BuildRequires: rtaudio-devel
 BuildRequires: rtmidi-devel
 BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
-BuildRequires: python2-sphinx
-BuildRequires: python2-recommonmark
+BuildRequires: python3-sphinx
+BuildRequires: python3-recommonmark
 
 %description
 A modular synthetizer
