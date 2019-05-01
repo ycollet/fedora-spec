@@ -39,6 +39,8 @@ sed -i -e "s/lvtk-gtkui-1/lvtk-gtkui-2/g" wscript
 for Files in src/*.cpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 
+find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+
 ./waf configure --destdir=%{buildroot} --libdir=%{_libdir}
 ./waf
 
