@@ -1,12 +1,4 @@
-Uploading package Carla-2.0.0-6.fc28.src.rpm
-100% |################################| 5.1MB 1.9MB/s eta 0:00:00Build was added to linuxmao:
-  https://copr.fedorainfracloud.org/coprs/build/898761
-Created builds: 898761
-Watching build(s): (this may be safely interrupted)
-  01:25:04 Build 898761: starting
-  01:25:35 Build 898761: running
-  01:29:41 Build 898761: failed
-
+gigedit: compilation problem on fedora 30
 
 Build error: Build(s) 898761 failed.
 Uploading package common-music-3.10.2-1.fc28.src.rpm
