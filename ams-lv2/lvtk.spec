@@ -31,7 +31,10 @@ was mostly done by Lars Luthman in lv2-c++-tools.
 
 %build
 
-find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+%endif
 
 ./waf configure --destdir=%{buildroot} --prefix=%{_prefix} --libdir=%{_libdir}
 ./waf %{?_smp_mflags} -v
