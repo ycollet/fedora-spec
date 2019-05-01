@@ -30,6 +30,9 @@ was mostly done by Lars Luthman in lv2-c++-tools.
 %setup -qn %{name}-%{commit0}
 
 %build
+
+find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+
 ./waf configure --destdir=%{buildroot} --prefix=%{_prefix} --libdir=%{_libdir}
 ./waf %{?_smp_mflags} -v
 
