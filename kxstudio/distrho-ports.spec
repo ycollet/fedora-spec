@@ -15,7 +15,6 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/DISTRHO/DISTRHO-Ports
 Source0: https://github.com/DISTRHO/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: http://downloads.sourceforge.net/premake/premake-linux-3.7.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: ladspa-devel
