@@ -1,18 +1,5 @@
 gigedit: compilation problem on fedora 30
 
-Build error: Build(s) 898761 failed.
-Uploading package common-music-3.10.2-1.fc28.src.rpm
-100% |################################| 12.8MB 6.0MB/s eta 0:00:00Build was added to linuxmao:
-  https://copr.fedorainfracloud.org/coprs/build/898766
-Created builds: 898766
-Watching build(s): (this may be safely interrupted)
-  01:40:11 Build 898766: pending
-  01:40:42 Build 898766: importing
-  01:41:12 Build 898766: running
-  01:46:20 Build 898766: failed
-
-
-Build error: Build(s) 898766 failed.
 Uploading package deteriorate-lv2-1.0.6.3104774-1.fc28.src.rpm
 100% |################################| 155kB 185kB/s eta 0:00:00Build was added to linuxmao:
   https://copr.fedorainfracloud.org/coprs/build/898772
