@@ -38,7 +38,7 @@ sed -i -e "s/lvtk-ui-1/lvtk-ui-2/g" wscript
 sed -i -e "s/lvtk-gtkui-1/lvtk-gtkui-2/g" wscript
 
 # For Fedora 29
-%if 0%{?fedora} >= 19
+%if 0%{?fedora} >= 29
   for Files in `grep -lr "/usr/bin/env.*python"`; do sed -ie "s/env python/python2/g" $Files; done
 %endif
 

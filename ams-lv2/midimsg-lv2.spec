@@ -25,6 +25,11 @@ A collection of basic LV2 plugins to translate midi messages to usable values
 %prep
 %setup -qn %{name}-%{commit0}
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  for Files in `grep -lr "/usr/bin/env.*python"`; do sed -ie "s/env python/python2/g" $Files; done
+%endif
+
 %build
 
 ./waf configure --destdir=%{buildroot} --libdir=%{_libdir}
