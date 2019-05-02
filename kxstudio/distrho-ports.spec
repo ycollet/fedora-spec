@@ -26,10 +26,7 @@ BuildRequires: freetype-devel
 BuildRequires: libXrandr-devel
 BuildRequires: libXinerama-devel
 BuildRequires: libXcursor-devel
-# For premake
-%ifarch x86_64 amd64
-BuildRequires: glibc(x86-32)
-%endif
+BuildRequires: premake3
 
 %description
 A set of LV2 plugins
@@ -37,10 +34,15 @@ A set of LV2 plugins
 %prep
 %setup -qn %{name}-%{commit0}
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  sed -i -e "112,123d" libs/juce/source/modules/juce_graphics/colour/juce_PixelFormats.h
+%endif
+
 %build
 
-tar xvfz %SOURCE1
-export PATH=`pwd`:$PATH
+sed -i -e "s/premake --os/premake3 --os/g" scripts/premake-update.sh
+
 ./scripts/premake-update.sh linux
 make PREFIX=/usr LIBDIR=/usr/lib64 DESTDIR=%{buildroot} lv2 %{?_smp_mflags}
 
