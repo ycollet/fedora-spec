@@ -1,6 +1,8 @@
+%global debug_package %{nil}
+
 Name:    common-music
 Version: 3.10.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Common Music (CM) is a real-time music composition system implemented in JUCE/C++ and Scheme.
 URL:     https://sourceforge.net/projects/commonmusic
 Group:   Applications/Multimedia
@@ -30,12 +32,17 @@ Grace provides two coding languages for designing musical algorithms: S7 Scheme,
 %prep
 %setup -qn cm-%{version}
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  sed -i -e "112,123d" juce/modules/juce_graphics/colour/juce_PixelFormats.h
+%endif
+
 %build
 
 find juce/modules -type f -exec chmod a-x {} \;
 
 premake4 --with-jack
-make
+make config=release
 
 %install
 
@@ -51,5 +58,8 @@ cp -ra res/* %{buildroot}/%{_datadir}/cm/res/
 %{_datadir}/cm/res/*
 
 %changelog
+* Tue May 2 2019 Yann Collette <ycollette.nospam@free.fr> - 3.10.2-2
+- Fix release mode and fix for Fedora 30
+
 * Mon Mar 4 2019 Yann Collette <ycollette.nospam@free.fr> - 3.10.2-1
 - initial specfile
