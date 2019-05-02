@@ -46,6 +46,11 @@ Synthesizer plugin for OPNMIDI (VST/LV2)
 
 %setup -qn ADLplug
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  sed -i -e "114,125d" thirdparty/JUCE/modules/juce_graphics/colour/juce_PixelFormats.h
+%endif
+
 %build
 
 mkdir -p build_adl
