@@ -41,6 +41,11 @@ live-coding engine which can be used for rapid prototyping.
 %prep
 %setup -qn %{name}-%{commit0}
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  sed -i -e "114,125d" modules/juce_graphics/colour/juce_PixelFormats.h
+%endif
+
 %build
 
 cd doxygen
@@ -114,6 +119,9 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Thu May 2 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.3-3
+- Fixes for gcc 9
+
 * Fri Feb 22 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.3-3
 - Switch to 5.4.3
 
