@@ -69,7 +69,7 @@ cp m2o o2m ..
 cd app/gui/qt
 
 sed -i -e "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
-sed -i -e "s/rugged-0\.26\.0/rugged-0\.27\.5/g" ../../server/ruby/bin/compile-extensions.rb
+sed -i -e "s/rugged-0\.26\.0/rugged-0\.28\.0/g" ../../server/ruby/bin/compile-extensions.rb
 # For master exclusively
 #sed -i -e "454d" mainwindow.cpp # problem with MainWindow::initDocsWindow()
 sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\";/  return QCoreApplication::applicationDirPath() + \"\/..\/share\/sonic-pi\";/g" mainwindow.cpp
@@ -115,10 +115,12 @@ mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
 cp -ra  app/server/ruby/bin/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
 
 # Manage ruby version for various Fedora version
-%if 0%{?fedora} == 27
 %define rb_version "2.4.0"
-%else
+%if 0%{?fedora} >= 28
 %define rb_version "2.5.0"
+%endif
+%if 0%{?fedora} >= 30
+%define rb_version "2.6.0"
 %endif
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
@@ -200,6 +202,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Thu May 2 2019 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
+- update for Fedora 30
+
 * Tue Mar 26 2019 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
 - update to master (and add rugged-0.28.0)
 
