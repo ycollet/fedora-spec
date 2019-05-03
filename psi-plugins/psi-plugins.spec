@@ -67,6 +67,11 @@ Roland JP8000/JP8080 but has since widened is scope.
 %prep
 %setup -qn psi-plugins-%{commit0}
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+%endif
+
 %build
 %{__waf} configure --prefix=%{_prefix} --libdir=%{_libdir}
 %{__waf} build
