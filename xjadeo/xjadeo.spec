@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 8fa8b57913c35aa23c61e31451157cf42e8d2a41
-%global gittag0 v0.8.7
+%global commit0 e3b3d2a9c20f56662043e4645f651ea707f6553d
+%global gittag0 v0.8.9
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Jack Video Monitor
 Name:    xjadeo
-Version: 0.8.7
+Version: 0.8.9
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -97,6 +97,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Fri May 3 2019 Yann Collette <ycollette dot nospam at free.fr> 0.8.9-1
+- update to 0.8.9-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.8.7-1
 - update for Fedora 29
 
