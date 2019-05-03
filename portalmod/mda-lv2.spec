@@ -3,8 +3,8 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-#%global debug_package %{nil}
+# Disable production of debug package. Problem with fedora 23
+%global debug_package %{nil}
 
 Name:    mda-lv2
 Version: 0.9.%{shortcommit0}
@@ -25,6 +25,11 @@ MDA LV2 set of plugins synth from portalmod
 
 %prep
 %setup -qn %{name}-%{commit0}
+
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+%endif
 
 %build
 ./waf configure --libdir=%{buildroot}%{_libdir}
