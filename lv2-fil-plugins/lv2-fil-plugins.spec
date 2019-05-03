@@ -47,6 +47,11 @@ total equalization effect.
 %prep
 %setup -q -n %{pkgname}-%{version}
 
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
+%endif
+
 %build
 export CFLAGS="%{optflags}"
 export LINKFLAGS="-lm"
