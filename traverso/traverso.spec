@@ -26,6 +26,7 @@ BuildRequires: libvorbis-devel
 BuildRequires: fftw-devel
 BuildRequires: libmad-devel
 BuildRequires: libsamplerate-devel
+BuildRequires: lilv-devel
 
 %description
 Traverso: A Multitrack Audio Recorder and Editor
