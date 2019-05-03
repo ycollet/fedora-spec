@@ -13,7 +13,6 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/mtytel/helm
 Source0: https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-#Patch0:  helm-0001-fix-type-problem.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: liblo-devel
@@ -32,7 +31,11 @@ A LV2 / standalone synth
 
 %prep
 %setup -qn %{name}-%{commit0}
-#%patch0 -p1
+
+# For Fedora 29
+%if 0%{?fedora} >= 29
+  sed -i -e "114,125d" JUCE/modules/juce_graphics/colour/juce_PixelFormats.h
+%endif
 
 sed -i "s/\/lib\//\/lib64\//g" Makefile
 
