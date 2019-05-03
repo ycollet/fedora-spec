@@ -12,6 +12,16 @@ Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://kometbomb.github.io/klystrack/
+
+# git clone https://github.com/kometbomb/klystrack.git
+# cd klystrack
+# git checkout 1.7.5
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz klystrack.tar.gz klystrack/*
+
 Source0: klystrack.tar.gz
 
 BuildRequires: gcc gcc-c++
