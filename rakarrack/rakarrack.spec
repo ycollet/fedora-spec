@@ -7,6 +7,13 @@ Group:   Applications/Multimedia
 URL:     git://git.code.sf.net/p/rakarrack/git
 Source0: rakarrack.tar.gz
 #Patch0:  rakarrack-0001-fix-distortion-and-ftlk.patch
+Patch0: rakarrack-0002-fix-format-use.patch
+
+# git clone git://git.code.sf.net/p/rakarrack/git rakarrack
+# cd rakarrack
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz rakarrack.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -40,7 +47,7 @@ notes to MIDI devices like synthesizers.
 %prep
 %setup -qn %{name}
 
-#%patch0 -p1 
+%patch0 -p1 
 
 %build
 ./autogen.sh

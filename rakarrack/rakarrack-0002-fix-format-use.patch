@@ -1,0 +1,25 @@
+From d142449444a4ad7a0aeacbed815c9eb735c8555e Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Fri, 3 May 2019 14:36:01 +0200
+Subject: [PATCH] fix format use
+
+---
+ src/rakarrack.cxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/rakarrack.cxx b/src/rakarrack.cxx
+index c6ccac8..5e4736d 100755
+--- a/src/rakarrack.cxx
++++ b/src/rakarrack.cxx
+@@ -23583,7 +23583,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
+     Fl_Widget *m = fl_message_icon();
+     m->parent()->copy_label(rkr->jackcliname);
+     sprintf(temp2,"Overwrite \"%s\"?",w->label());
+-    ok=fl_choice(temp2, "No","Yes", NULL);
++    ok=fl_choice("%d", temp2, "No","Yes", NULL);
+    if (!ok)
+    { 
+    o->value(0);
+-- 
+2.21.0
+
