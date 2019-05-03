@@ -1,10 +1,10 @@
 # Global variables for github repository
 %global commit0 38df4d733fff1a9438a89ec8797bc6b6810adfa7
-%global gittag0 v0.7.3
+%global gittag0 v0.8.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    sisco.lv2
-Version: 0.7.3
+Version: 0.8.1
 Release: 1%{?dist}
 Summary: A LV2 oscilloscope
 
@@ -33,11 +33,11 @@ A LV2 oscilloscope
 cd build-sisco.lv2
 git checkout %{gittag0}
 make submodules
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
+make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
 
 %install 
 cd build-sisco.lv2
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags} install
+make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags} install
 
 %files
 %{_bindir}/*
@@ -45,6 +45,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} sisco_VERSION=%{version} LD
 %{_datadir}/*
 
 %changelog
+* Fri May 3 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.1
+- update to 0.8.1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.7.3
 - update for Fedora 29
 
