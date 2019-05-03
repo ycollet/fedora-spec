@@ -30,8 +30,6 @@ AMS LV2 set of plugins synth (from Alsa Modular Synth)
 %prep
 %setup -qn %{name}-%{commit0}
 
-%build
-
 sed -i -e "s/lvtk-plugin-1/lvtk-plugin-2/g" wscript
 sed -i -e "s/lvtk-ui-1/lvtk-ui-2/g" wscript
 sed -i -e "s/lvtk-gtkui-1/lvtk-gtkui-2/g" wscript
@@ -43,6 +41,8 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %if 0%{?fedora} >= 29
   find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
 %endif
+
+%build
 
 ./waf configure --destdir=%{buildroot} --libdir=%{_libdir}
 ./waf
