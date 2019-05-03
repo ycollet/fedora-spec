@@ -2,11 +2,11 @@
 %global debug_package %{nil}
 
 Name:    traverso
-Version: 0.49.1
+Version: 0.49.6
 Release: 1%{?dist}
 Summary: Traverso: A Multitrack Audio Recorder and Editor
 URL:     https://savannah.nongnu.org/projects/traverso/
-Source0: traverso-master.tar.gz
+Source0: traverso-0.49.6.tar.gz
 Group:   Applications/Multimedia
 License: GPLv2+
 
@@ -31,7 +31,7 @@ BuildRequires: libsamplerate-devel
 Traverso: A Multitrack Audio Recorder and Editor
 
 %prep
-%setup -qn %{name}-master
+%setup -qn %{name}-%{version}
 
 %build
 
@@ -50,8 +50,11 @@ make DESTDIR=%{buildroot} install
 %{_bindir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.49.1
+* Fri May 3 2019 Yann Collette <ycollette.nospam@free.fr> - 0.49.6-1
+- update to 0.49.6
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.49.1-1
 - update for Fedora 29
 
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.49.1
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.49.1-1
 - inital release
