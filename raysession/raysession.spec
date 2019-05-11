@@ -22,6 +22,7 @@ BuildRequires: qtchooser
 BuildRequires: liblo-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-linguist
 BuildRequires: gtk-update-icon-cache
 
 Requires(pre): python3-qt5
