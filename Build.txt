@@ -1,88 +1,87 @@
 
-		  Build  Test	26	27	28	29
-polyphone         done   no	X	X	X	X
-non-daw           done   no	X	X	X	X
-lenmus            done   no	X	X	X	X
-lv2-fil-plugins   done   no	X	X	X	X
-jamulus           done   no	X	X	X	X
-GrandOrgue        done   no	X	X	X	X
-azr3              done   no	X	X	X	X
-sonic-pi          done   no	X	X	X	X
-drumgizmo         done   no	X	X	X	X
-hydrogen          done   no	X	X	X	X
-jalv-select       done   no	X	X	X	X
-kxstudio          done   no	X	X       X	X
-lmms              done   no	X	X       X	X
-ams-lv2           done   no	X	X	X	X
-rack		  done   no	X	0.5.0	0.6.2b	0.6.2b		
-openkontroller    done   no	X	X	X	X
-iannix            done   no	X	X	X	X
-postfish          done   no	X	X	X	X
+		  Build  Test	26	27	28	29	30
+polyphone         done   no	X	X	X	X	X
+non-daw           done   no	X	X	X	X	X
+lenmus            done   no	X	X	X	X	X
+lv2-fil-plugins   done   no	X	X	X	X	X
+jamulus           done   no	X	X	X	X	X
+GrandOrgue        done   no	X	X	X	X	X
+azr3              done   no	X	X	X	X	X
+sonic-pi          done   no	X	X	X	X	X
+drumgizmo         done   no	X	X	X	X	X
+hydrogen          done   no	X	X	X	X	X
+jalv-select       done   no	X	X	X	X	X
+kxstudio          done   no	X	X       X	X	X
+lmms              done   no	X	X       X	X	X
+ams-lv2           done   no	X	X	X	X	X
+rack		  done   no	X	0.5.0	0.6.2b	0.6.2b	X	
+openkontroller    done   no	X	X	X	X	X
+iannix            done   no	X	X	X	X	X
+postfish          done   no	X	X	X	X	X
 tuxguitar         updated in main repo
-vopa              done   no	X	X	X	X
+vopa              done   no	X	X	X	X	X
 x42               done   no	X	X	X	MISSING
-zam               done   no	X	X	X	X
-rakarrack         done   no	X	X	X	X
-rkrlv2            done   no	X	X	X	X
-sfark             done   no	X	X	X	X
+zam               done   no	X	X	X	X	X
+rakarrack         done   no	X	X	X	X	X
+rkrlv2            done   no	X	X	X	X	X
+sfark             done   no	X	X	X	X	X
 ssr               in rpmfusion now
-stretchplayer     done   no	X	X	X	X
-portalmod         done   no	X	X	X	X
-qutecsound        done   no	X	X	X	X
+stretchplayer     done   no	X	X	X	X	X
+portalmod         done   no	X	X	X	X	X
+qutecsound        done   no	X	X	X	X	X
 radium            later  no
-oxefmsynth        done   no	X	X	X	X
-picoloop          done   no	X	X	X	X
-milkytracker      done   no	X	X	X	X
-6PM		  done	 no		X	X	X
+oxefmsynth        done   no	X	X	X	X	X
+picoloop          done   no	X	X	X	X	X
+milkytracker      done   no	X	X	X	X	X
+6PM		  done	 no		X	X	X	X
 mv-6pm            done   no	X	
-ninjam            done   no	X	X	X	X
-leiningen         done   no	X	X	X	X
-impro-visor       done   no	X	X	X	X
-horgand           done   no	X	X	X	X
-amsynth           done   no	X	X	X	X
-supercollider     done   no	X	X	X	X
-supercollider-sc3 done   no	X	X	X	X
-mx44              done   no	X	X	X	X
-amuc              done   no	X	X	X	X
-psi-plugins-doc   done   no	X	X	X	X
-patchmatrix       done   no	X	X	X	X
-traverso          done   no	X	X	X	X
-gxplugins	  done	 no	X	X	X	X
-screcord	  done	 no	X	X	X	X
-performer	  done	 no	X	X	X	X
-noise-repellent	  done	 no	X	X	X	X
-xjadeo		  done	 no	X	X	X	X
-schismtracker	  done	 no	X	X	X	X
-kernel		  done	 no	X	X	X	X
-libgig            done	 no	no	no	X	X
-kernel-rt	  done	 no	no	X	X	X
-zita		  done	 no	no	X	X	X
-dexed		  done	 no	no	X	X	X
-projectM	  done	 no	no	X	X	X
-ADLPlug		  done	 no	no	X	X	X
-klystrack	  done	 no	no	X	X	X
-gigedit		  done	 no	no	X	X	X
-libgig		  done	 no	no	X	X	X
-liblscp		  done	 no	no	X	X	X
-linuxsampler	  done	 no	no	X	X	X
-miniaudicle	  done	 no	no	X	X	X
-qsampler	  done	 no	no	X	X	X
-JUCE		  done	 no	no	X	X	X
-brutefir	  done	 no	no	X	X	X
-dragonfly-reverb  done	 no	no	X	X	X
-chuck		  done	 no	no	X	X	X
-puredata	  done	 no	no	X	X	X
-scarlett-mixer	  done	 no	no	no	X	X
-midizap		  done	 no	no	no	X	X
-caps-lv2	  done	 no	no	no	X	X
-opl3bankeditor	  done	 no	no	no	X	X
-lsp-plugins	  done	 no	no	no	X	X
-protracker	  done	 no	no	no	X	X
-common-music	  done	 no	no	no	X	X
-dragonfly-reverb  done	 no	no	no	X	X
-goatracker	  done	 no	no	no	X	X
-glava		  done	 no	no	no	X	X
-harvid		  done	 no	no	no	X	X
+ninjam            done   no	X	X	X	X	X
+leiningen         done   no	X	X	X	X	X
+impro-visor       done   no	X	X	X	X	X
+horgand           done   no	X	X	X	X	X
+amsynth           done   no	X	X	X	X	X
+supercollider     done   no	X	X	X	X	X
+supercollider-sc3 done   no	X	X	X	X	X
+mx44              done   no	X	X	X	X	X
+amuc              done   no	X	X	X	X	X
+psi-plugins-doc   done   no	X	X	X	X	X
+patchmatrix       done   no	X	X	X	X	X
+traverso          done   no	X	X	X	X	X
+gxplugins	  done	 no	X	X	X	X	X
+screcord	  done	 no	X	X	X	X	X
+performer	  done	 no	X	X	X	X	X
+noise-repellent	  done	 no	X	X	X	X	X
+xjadeo		  done	 no	X	X	X	X	X
+schismtracker	  done	 no	X	X	X	X	X
+libgig            done	 no	no	no	X	X	X
+kernel-rt	  done	 no	no	X	X	X	X
+zita		  done	 no	no	X	X	X	X
+dexed		  done	 no	no	X	X	X	X
+projectM	  done	 no	no	X	X	X	X
+ADLPlug		  done	 no	no	X	X	X	X
+klystrack	  done	 no	no	X	X	X	no
+gigedit		  done	 no	no	X	X	X	X
+libgig		  done	 no	no	X	X	X	X
+liblscp		  done	 no	no	X	X	X	X
+linuxsampler	  done	 no	no	X	X	X	X
+miniaudicle	  done	 no	no	X	X	X	X
+qsampler	  done	 no	no	X	X	X	X
+JUCE		  done	 no	no	X	X	X	X
+brutefir	  done	 no	no	X	X	X	X
+dragonfly-reverb  done	 no	no	X	X	X	X
+chuck		  done	 no	no	X	X	X	X
+puredata	  done	 no	no	X	X	X	X
+scarlett-mixer	  done	 no	no	no	X	X	X
+midizap		  done	 no	no	no	X	X	X
+caps-lv2	  done	 no	no	no	X	X	X
+opl3bankeditor	  done	 no	no	no	X	X	X
+lsp-plugins	  done	 no	no	no	X	X	X
+protracker	  done	 no	no	no	X	X	X
+common-music	  done	 no	no	no	X	X	X
+dragonfly-reverb  done	 no	no	no	X	X	X
+goatracker	  done	 no	no	no	X	X	X
+glava		  done	 no	no	no	X	X	X
+harvid		  done	 no	no	no	X	X	X
 
 X: done
 *: running
