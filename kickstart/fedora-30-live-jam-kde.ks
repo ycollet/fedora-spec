@@ -22,6 +22,7 @@ clearpart --all --initlabel
 part / --size 8192 --fstype="ext4"
 services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
+# Shutdown after installation
 shutdown
 rootpw --plaintext lescuizines
 
@@ -104,11 +105,10 @@ livedir="LiveOS"
 for arg in \`cat /proc/cmdline\` ; do
   if [ "\${arg##rd.live.dir=}" != "\${arg}" ]; then
     livedir=\${arg##rd.live.dir=}
-    return
+    continue
   fi
   if [ "\${arg##live_dir=}" != "\${arg}" ]; then
     livedir=\${arg##live_dir=}
-    return
   fi
 done
 
@@ -163,7 +163,6 @@ findPersistentHome() {
   for arg in \`cat /proc/cmdline\` ; do
     if [ "\${arg##persistenthome=}" != "\${arg}" ]; then
       homedev=\${arg##persistenthome=}
-      return
     fi
   done
 }
@@ -217,6 +216,10 @@ systemctl --no-reload disable crond.service 2> /dev/null || :
 systemctl --no-reload disable atd.service 2> /dev/null || :
 systemctl stop crond.service 2> /dev/null || :
 systemctl stop atd.service 2> /dev/null || :
+
+# turn off abrtd on a live image
+systemctl --no-reload disable abrtd.service 2> /dev/null || :
+systemctl stop abrtd.service 2> /dev/null || :
 
 # Don't sync the system clock when running live (RHBZ #1018162)
 sed -i 's/rtcsync//' /etc/chrony.conf

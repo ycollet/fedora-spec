@@ -94,6 +94,11 @@ $ setenforce Permissive
 $ livemedia-creator --make-iso --ks fedora-30-live-jam-kde.ks --project LesCuizines --iso-name livecd-fedora-30-mao.iso --iso-only --releasever 30 --volid LesCuizines --title LesCuizines --resultdir /var/lmc --no-virt
 ```
 
+To check the potential changes from the kickstart file:
+$ dnf install pykickstart.noarch rpmfusion-free-remix-kickstarts.noarch spin-kickstarts.noarch
+$ ksflatten -c /usr/share/spin-kickstarts/fedora-live-xfce.ks -o xfce.ks
+$ meld fedora-30-live-jam-kde.ks xfce.ks &
+
 To test the ISO file:
 Without audio:
 ```
