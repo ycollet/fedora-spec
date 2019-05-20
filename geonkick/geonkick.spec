@@ -22,6 +22,9 @@ BuildRequires: libsndfile-devel
 BuildRequires: rapidjson-devel
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
+BuildRequires: redkite
+BuildRequires: libX11-devel
+BuildRequires: cairo-devel
 
 %description
 Geonkick is a synthesizer that can synthesize elements of percussion.
@@ -30,7 +33,7 @@ The most basic examples are: kick drums, snares, hit-hats, shakers, claps, steak
 %prep
 %setup -qn %{name}-%{commit0}
 
-sed -i -e "s/${CMAKE_INSTALL_PREFIX}\/lib/${CMAKE_INSTALL_PREFIX}\/%{_lib}/g" plugin/lv2/CMakeLists.txt
+sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" plugin/lv2/CMakeLists.txt
 
 %build
 
@@ -64,7 +67,7 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc AUTHORS ChangeLog COPYING* README.txt
+%doc LICENSE README.md
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*
