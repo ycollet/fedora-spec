@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 ec3e1a0448c20ad644296685231fa8b70dbd4cbf
+%global commit0 06cfcc07637c292cbeb0ad9de67e8296f1d4bad2
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 1.5
+Version: 1.5.1
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://github.com/quamplex/geonkick
@@ -73,5 +73,8 @@ fi
 %{_datadir}/*
 
 %changelog
+* Tue May 21 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.1-1
+- update to 1.5.1
+
 * Mon May 20 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5-1
 - initial version of the spec file
