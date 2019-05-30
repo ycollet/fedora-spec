@@ -30,6 +30,7 @@ BuildRequires: cmake
 BuildRequires: desktop-file-utils
 BuildRequires: freetype-devel
 BuildRequires: libX11-devel libXft-devel libXrandr-devel libXinerama-devel libXcursor-devel
+BuildRequires: fltk-devel fltk-fluid
 
 %description
 Effect plugin for ensemble-chorus (VST/LV2)
