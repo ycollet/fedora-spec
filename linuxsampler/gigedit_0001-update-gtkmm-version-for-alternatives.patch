@@ -1,0 +1,294 @@
+From c47166f01b5ab7152b0c6f17a7cd81700aea98f0 Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Tue, 4 Jun 2019 09:40:19 +0200
+Subject: [PATCH] update gtkmm version for alternatives
+
+---
+ src/gigedit/CombineInstrumentsDialog.cpp |  2 +-
+ src/gigedit/MacroEditor.cpp              |  2 +-
+ src/gigedit/ReferencesView.cpp           |  2 +-
+ src/gigedit/compat.h                     | 27 +++++++++++++++++-------
+ src/gigedit/dimensionmanager.cpp         |  2 +-
+ src/gigedit/mainwindow.cpp               | 14 ++++++------
+ src/gigedit/midirules.cpp                |  8 +++----
+ src/gigedit/regionchooser.cpp            |  2 +-
+ src/gigedit/scripteditor.cpp             |  7 +++---
+ 9 files changed, 39 insertions(+), 27 deletions(-)
+
+diff --git a/src/gigedit/CombineInstrumentsDialog.cpp b/src/gigedit/CombineInstrumentsDialog.cpp
+index 9ba85f0..d3ee379 100644
+--- a/src/gigedit/CombineInstrumentsDialog.cpp
++++ b/src/gigedit/CombineInstrumentsDialog.cpp
+@@ -941,7 +941,7 @@ CombineInstrumentsDialog::CombineInstrumentsDialog(Gtk::Window& parent, gig::Fil
+     }
+ 
+     m_buttonBox.set_layout(Gtk::BUTTONBOX_END);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     m_buttonBox.set_margin(5);
+ #else
+     m_buttonBox.set_border_width(5);
+diff --git a/src/gigedit/MacroEditor.cpp b/src/gigedit/MacroEditor.cpp
+index 75277bf..104a6a1 100644
+--- a/src/gigedit/MacroEditor.cpp
++++ b/src/gigedit/MacroEditor.cpp
+@@ -232,7 +232,7 @@ void MacroEditor::buildTreeView(const Gtk::TreeModel::Row& parentRow, const Seri
+         const Serialization::Member& member = parentObject.members()[iMember];
+         const Serialization::Object& object = m_macro.objectByUID(member.uid());
+         
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+         //HACK: on GTKMM 3.9x append() below requires TreeNodeChildren, parentRow.children() returns TreeNodeConstChildren though, probably going to be fixed before final GTKMM4 release though.
+         const Gtk::TreeNodeConstChildren& children = parentRow.children();
+         Gtk::TreeNodeChildren* const pChildren = (Gtk::TreeNodeChildren* const) &children;
+diff --git a/src/gigedit/ReferencesView.cpp b/src/gigedit/ReferencesView.cpp
+index 2e65bc0..e89fba2 100644
+--- a/src/gigedit/ReferencesView.cpp
++++ b/src/gigedit/ReferencesView.cpp
+@@ -66,7 +66,7 @@ ReferencesView::ReferencesView(Gtk::Window& parent) :
+     );
+ 
+     m_buttonBox.set_layout(Gtk::BUTTONBOX_END);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     m_buttonBox.set_margin(5);
+ #else
+     m_buttonBox.set_border_width(5);
+diff --git a/src/gigedit/compat.h b/src/gigedit/compat.h
+index 5d34a49..e03b854 100644
+--- a/src/gigedit/compat.h
++++ b/src/gigedit/compat.h
+@@ -1,5 +1,5 @@
+ /*                                                         -*- c++ -*-
+- * Copyright (C) 2011-2017 Andreas Persson
++ * Copyright (C) 2011-2019 Andreas Persson
+  *
+  * This program is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU General Public License as
+@@ -40,7 +40,7 @@
+ 
+ #ifdef CAIROMM_HEADER_FILE
+ # include CAIROMM_HEADER_FILE(cairommconfig.h)
+-#else
++#elif HAVE_CAIROMMCONFIG_H
+ # include <cairommconfig.h>
+ #endif
+ 
+@@ -50,8 +50,9 @@
+ # include <gtkmmconfig.h>
+ #endif
+ 
+-#ifndef HAS_PANGOMM_CPP11_ENUMS // pangomm > 2.40 : <- just a "guess"
+-# if PANGOMM_MAJOR_VERSION > 2 || (PANGOMM_MAJOR_VERSION == 2 && PANGOMM_MINOR_VERSION > 40)
++#ifndef HAS_PANGOMM_CPP11_ENUMS
++   // new enums introduced in unstable pangomm 2.41.3, but not in stable 2.42
++# if PANGOMM_MAJOR_VERSION > 2 || (PANGOMM_MAJOR_VERSION == 2 && ((PANGOMM_MINOR_VERSION == 41 && PANGOMM_MICRO_VERSION >= 3) || PANGOMM_MINOR_VERSION > 42))
+ #  define HAS_PANGOMM_CPP11_ENUMS 1
+ # else
+ #  define HAS_PANGOMM_CPP11_ENUMS 0
+@@ -61,7 +62,7 @@
+ // Gtk::UIManager had been replaced by Gtk::Builder in GTKMM 3 and removed in GTKMM 4
+ // Gtk::ActionGroup had been replaced by Gio::ActionGroup in GTKMM 3 and removed in GTKMM 4
+ #if !defined(USE_GTKMM_BUILDER) || !defined(USE_GLIB_ACTION) // gtkmm > 3.22 :
+-# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+ #  define USE_GTKMM_BUILDER 1
+ #  define USE_GLIB_ACTION 1
+ # else
+@@ -79,7 +80,7 @@
+ #endif
+ 
+ #ifndef HAS_GTKMM_CPP11_ENUMS // gtkmm > 3.22
+-# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+ #  define HAS_GTKMM_CPP11_ENUMS 1
+ # else
+ #  define HAS_GTKMM_CPP11_ENUMS 0
+@@ -88,7 +89,7 @@
+ 
+ // alignment.h had been removed in GTKMM 4
+ #ifndef HAS_GTKMM_ALIGNMENT // gtkmm > 3.22 :
+-# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+ #  define HAS_GTKMM_ALIGNMENT 0
+ # else
+ #  define HAS_GTKMM_ALIGNMENT 1
+@@ -99,7 +100,7 @@
+ // stock.h had been removed in GTKMM 4
+ // Gtk::VBox, Gtk::HBox and Gtk::HButtonBox had been replaced by Gtk::Box in GTKMM 3 and removed in GTKMM 4
+ #if !defined(USE_GTKMM_GRID) || !defined(HAS_GTKMM_STOCK) || !defined(USE_GTKMM_BOX) || !defined(USE_GTKMM_PANED) // gtkmm > 3.22 :
+-# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++# if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+ #  define USE_GTKMM_GRID 1
+ #  define HAS_GTKMM_STOCK 0
+ #  define USE_GTKMM_BOX 1
+@@ -422,4 +423,14 @@ namespace Glib {
+ 
+ #endif // glibmm 2.31.2
+ 
++
++// glibmm 2.47.3
++
++#if (GLIBMM_MAJOR_VERSION == 2 && GLIBMM_MINOR_VERSION == 47 && GLIBMM_MICRO_VERSION < 3) || \
++    (GLIBMM_MAJOR_VERSION == 2 && GLIBMM_MINOR_VERSION < 47) || GLIBMM_MAJOR_VERSION < 2
++
++#define GLIB_THREADS
++
++#endif
++
+ #endif // GIGEDIT_COMPAT_H
+diff --git a/src/gigedit/dimensionmanager.cpp b/src/gigedit/dimensionmanager.cpp
+index 5bc0617..42138a2 100644
+--- a/src/gigedit/dimensionmanager.cpp
++++ b/src/gigedit/dimensionmanager.cpp
+@@ -278,7 +278,7 @@ DimensionManager::DimensionManager() :
+     scrolledWindow.show();
+     vbox.pack_start(buttonBox, Gtk::PACK_SHRINK);
+     buttonBox.set_layout(Gtk::BUTTONBOX_END);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     buttonBox.set_margin(5);
+ #else
+     buttonBox.set_border_width(5);
+diff --git a/src/gigedit/mainwindow.cpp b/src/gigedit/mainwindow.cpp
+index c66b823..8eed854 100644
+--- a/src/gigedit/mainwindow.cpp
++++ b/src/gigedit/mainwindow.cpp
+@@ -2704,7 +2704,7 @@ PropDialog::PropDialog()
+ #endif
+ 
+     add(vbox);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     table.set_margin(5);
+ #else
+     table.set_border_width(5);
+@@ -2712,7 +2712,7 @@ PropDialog::PropDialog()
+     vbox.add(table);
+     vbox.pack_start(buttonBox, Gtk::PACK_SHRINK);
+     buttonBox.set_layout(Gtk::BUTTONBOX_END);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     buttonBox.set_margin(5);
+ #else
+     buttonBox.set_border_width(5);
+@@ -2863,7 +2863,7 @@ InstrumentProps::InstrumentProps() :
+     table.add(eDimensionKeyRangeHigh);
+ 
+     add(vbox);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     table.set_margin(5);
+ #else
+     table.set_border_width(5);
+@@ -2872,7 +2872,7 @@ InstrumentProps::InstrumentProps() :
+     table.show();
+     vbox.pack_start(buttonBox, Gtk::PACK_SHRINK);
+     buttonBox.set_layout(Gtk::BUTTONBOX_END);
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     buttonBox.set_margin(5);
+ #else
+     buttonBox.set_border_width(5);
+@@ -3325,7 +3325,7 @@ void MainWindow::select_instrument(gig::Instrument* instrument) {
+             show_intruments_tab();
+             m_TreeView.get_selection()->unselect_all();
+             
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+             auto iterSel = model->children()[i].get_iter();
+             m_TreeView.get_selection()->select(iterSel);
+ #else
+@@ -3355,7 +3355,7 @@ bool MainWindow::select_dimension_region(gig::DimensionRegion* dimRgn) {
+             // select and show the respective instrument in the list view
+             show_intruments_tab();
+             m_TreeView.get_selection()->unselect_all();
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+             auto iterSel = model->children()[i].get_iter();
+             m_TreeView.get_selection()->select(iterSel);
+ #else
+@@ -3391,7 +3391,7 @@ void MainWindow::select_sample(gig::Sample* sample) {
+             if (rowSample[m_SamplesModel.m_col_sample] == sample) {
+                 show_samples_tab();
+                 m_TreeViewSamples.get_selection()->unselect_all();
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+                 auto iterSel = rowGroup.children()[s].get_iter();
+                 m_TreeViewSamples.get_selection()->select(iterSel);
+ #else
+diff --git a/src/gigedit/midirules.cpp b/src/gigedit/midirules.cpp
+index 0f1b041..aee093e 100644
+--- a/src/gigedit/midirules.cpp
++++ b/src/gigedit/midirules.cpp
+@@ -40,7 +40,7 @@ MidiRules::MidiRules() :
+     }
+ 
+     set_title(_("Midi Rules"));
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     set_margin(6);
+ #else
+     set_border_width(6);
+@@ -48,7 +48,7 @@ MidiRules::MidiRules() :
+ 
+     add(vbox);
+ 
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     hbox.set_margin(6);
+ #else
+     hbox.set_border_width(6);
+@@ -69,14 +69,14 @@ MidiRules::MidiRules() :
+         sigc::mem_fun(*this, &MidiRules::combo_changed));
+     vbox.pack_start(hbox, Gtk::PACK_SHRINK);
+ 
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     box.set_margin(6);
+ #else
+     box.set_border_width(6);
+ #endif
+     vbox.pack_start(box);
+ 
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     button_box.set_margin(6);
+ #else
+     button_box.set_border_width(6);
+diff --git a/src/gigedit/regionchooser.cpp b/src/gigedit/regionchooser.cpp
+index f1136eb..26a4f70 100644
+--- a/src/gigedit/regionchooser.cpp
++++ b/src/gigedit/regionchooser.cpp
+@@ -354,7 +354,7 @@ bool RegionChooser::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) {
+ #if (GTKMM_MAJOR_VERSION == 2 && GTKMM_MINOR_VERSION < 90) || GTKMM_MAJOR_VERSION < 2
+     const Gdk::Color bg = get_style()->get_bg(Gtk::STATE_NORMAL);
+ #else
+-#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 22)
++#if GTKMM_MAJOR_VERSION > 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION > 24)
+     GdkRGBA gdkBgRGBA;
+     gtk_style_context_get_background_color(get_style_context()->gobj(), &gdkBgRGBA);
+     const Gdk::RGBA bg = Glib::wrap(&gdkBgRGBA, true);
+diff --git a/src/gigedit/scripteditor.cpp b/src/gigedit/scripteditor.cpp
+index 66268f3..e132a6f 100644
+--- a/src/gigedit/scripteditor.cpp
++++ b/src/gigedit/scripteditor.cpp
+@@ -749,11 +749,12 @@ bool ScriptEditor::on_motion_notify_event(GdkEventMotion* e) {
+     //TODO: event throttling would be a good idea here
+     updateIssueTooltip(e);
+ #endif
+-#if GTKMM_MAJOR_VERSION < 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION <= 22)
++#if GTKMM_MAJOR_VERSION < 3 || (GTKMM_MAJOR_VERSION == 3 && GTKMM_MINOR_VERSION <= 24)
+     return ManagedWindow::on_motion_notify_event(e);
+ #else
+-    Gdk::EventMotion em = Glib::wrap(e, true);
+-    return ManagedWindow::on_motion_notify_event(em);
++    return ManagedWindow::on_motion_notify_event(e);
++    //Gdk::EventMotion em = Glib::wrap(e, true);
++    //return ManagedWindow::on_motion_notify_event(em);
+ #endif
+ }
+ 
+-- 
+2.21.0
+

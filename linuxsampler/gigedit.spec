@@ -1,11 +1,12 @@
 Summary: Instrument editor for gig files
 Name: gigedit
 Version: 1.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL2
 Group: Applications/Multimedia
 URL: http://www.linuxsampler.org/
 Source0: http://download.linuxsampler.org/packages/gigedit-%{version}.tar.bz2
+Patch0: gigedit_0001-update-gtkmm-version-for-alternatives.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: hicolor-icon-theme
 Packager: Fernando Lopez-Lezcano
@@ -32,6 +33,8 @@ before editing them in gigedit.
 
 %prep
 %setup -q
+
+%patch0 -p1
 
 %build
 %configure 
@@ -60,6 +63,9 @@ rm -rf %{buildroot}
 %{_datadir}/locale/sv/LC_MESSAGES/gigedit.mo
 
 %changelog
+* Mon Jun 3 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
+- fix build on fedora 30
+
 * Mon Nov 5 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
 - update to 1.1.0
 
