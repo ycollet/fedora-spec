@@ -8,7 +8,10 @@ Release: 1%{?dist}
 License: GPLv3+
 Group:   Developpment
 URL:     http://sourceforge.net/projects/premake/
+
 Source0: https://sourceforge.net/projects/premake/files/Premake/4.4/premake-4.4-beta5-src.zip
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 

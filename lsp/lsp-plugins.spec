@@ -14,8 +14,11 @@ Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/sadko4u/lsp-plugins
+
 Source0: https://github.com/sadko4u/lsp-plugins/archive/%{commit0}.tar.gz#/lsp-plugins-%{shortcommit0}.tar.gz
 Source1: Makefile.lsp
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

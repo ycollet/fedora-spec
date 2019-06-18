@@ -12,6 +12,8 @@ Source0: protracker-r167.tar.gz
 # svn export -r 167 https://svn.code.sf.net/p/protracker/code/ protracker-r167
 # tar cvfz protracker-r167.tar.gz protracker-r167/*
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: make
 BuildRequires: alsa-lib-devel

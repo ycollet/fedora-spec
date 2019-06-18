@@ -15,6 +15,8 @@ Patch0: rakarrack-0002-fix-format-use.patch
 # cd ..
 # tar cvfz rakarrack.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: alsa-utils

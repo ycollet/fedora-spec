@@ -5,11 +5,12 @@ Release: 1%{?dist}
 License: GPL
 Group: System Environment/Libraries
 URL: http://qsampler.sourceforge.net/qsampler-index.html
-Source0: http://download.linuxsampler.org/packages/liblscp-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
+
+Source0: http://download.linuxsampler.org/packages/liblscp-%{version}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automake, autoconf, libtool
 BuildRequires: linuxsampler-devel

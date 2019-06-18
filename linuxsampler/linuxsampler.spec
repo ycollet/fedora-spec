@@ -8,11 +8,12 @@ Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL: http://www.linuxsampler.org/
-Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
+
+Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automake autoconf libtool pkgconfig
 BuildRequires: libgig-devel alsa-lib-devel sqlite-devel

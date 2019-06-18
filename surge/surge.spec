@@ -31,6 +31,8 @@ URL:     https://github.com/surge-synthesizer/surge
 Source0: surge.tar.gz
 Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: libX11-devel
 BuildRequires: premake5

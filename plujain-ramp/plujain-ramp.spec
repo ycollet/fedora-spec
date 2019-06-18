@@ -14,6 +14,8 @@ License: GPLv2+
 URL:     https://github.com/Houston4444/plujain-ramp.git
 Source0: https://github.com/Houston4444/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 

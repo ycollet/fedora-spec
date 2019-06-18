@@ -5,7 +5,10 @@ Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://git.drumgizmo.org/dgedit.git
+
 Source0: dgedit-0.1.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf

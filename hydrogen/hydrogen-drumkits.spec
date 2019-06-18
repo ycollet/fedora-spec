@@ -40,7 +40,8 @@ Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-4
 Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-5-1.1.h2drumkit
 Source30: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/Gimme%20A%20Hand%201.1.h2drumkit
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildArch: noarch
 
 Requires: hydrogen >= 0.9.5

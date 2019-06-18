@@ -11,7 +11,7 @@ Source0: http://chuck.cs.princeton.edu/release/files/chuck-%{version}.tgz
 # emacs mode from: http://wiki.cs.princeton.edu/index.php/Recent_chuck-mode.el
 Source1: chuck-mode.el
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA

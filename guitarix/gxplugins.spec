@@ -23,8 +23,11 @@ Summary: LV2 Analogue simulation of a tube preamp
 
 Group:   Applications/Multimedia
 License: GPLv2+
+
 URL:     https://github.com/brummer10/GxPlugins.lv2
 SOURCE0: GxPlugins.lv2.%{commit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

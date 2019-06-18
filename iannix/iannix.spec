@@ -21,6 +21,8 @@ Source0: https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{
 Source1: iannix.xml
 Patch0:  iannix-0001-fix-missing-glew.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtscript-devel

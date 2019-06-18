@@ -17,7 +17,7 @@ Source:  http://ecasound.seul.org/download/ecasound-%{version}.tar.gz
 License: GPL
 Group:   Applications/Multimedia
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA

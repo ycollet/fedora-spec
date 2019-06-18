@@ -46,7 +46,7 @@ Patch5: debian_remove_timestamp-macros.patch
 Patch6: debian_etc-gui-plugins.patch
 Patch7: utf8.patch
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: autoconf automake libtool

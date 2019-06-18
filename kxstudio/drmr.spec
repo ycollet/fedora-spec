@@ -12,8 +12,11 @@ Summary: A drum LV2 plugin
 
 Group:   Applications/Multimedia
 License: GPLv2+
+
 URL:     https://github.com/falkTX/drmr
 Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: gtk2-devel

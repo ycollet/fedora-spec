@@ -10,10 +10,13 @@ Version: 0.3.0
 Release: 1%{?dist}
 Summary: Live performance audio session manager using Carla
 URL:     https://github.com/ssj71/infamousPlugins.git
-Source0: https://github.com/ssj71/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Group:   Applications/Multimedia
 
+Source0: https://github.com/ssj71/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
 License: GPLv2+
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: cmake
 BuildRequires: extra-cmake-modules

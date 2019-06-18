@@ -6,7 +6,8 @@ Group:         Applications/Multimedia
 License:       GPLv3+
 URL:           https://16-bits.org/ft2.php
 Source0:       https://16-bits.org/ft2clone-b137-code.zip
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: SDL2-devel

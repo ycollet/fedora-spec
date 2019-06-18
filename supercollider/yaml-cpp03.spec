@@ -10,6 +10,8 @@ Source0:        http://yaml-cpp.googlecode.com/files/%{realname}-%{version}.tar.
 
 Patch0:         yaml-cpp03-pkgconf.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires:  cmake
 BuildRequires:  gcc gcc-c++
 

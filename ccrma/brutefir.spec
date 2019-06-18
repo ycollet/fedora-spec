@@ -7,7 +7,7 @@ Group:   Applications/Multimedia
 URL:     http://www.ludd.luth.se/~torger/brutefir.html
 Source0: http://www.ludd.luth.se/~torger/files/brutefir-%{version}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA

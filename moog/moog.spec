@@ -10,11 +10,13 @@ Name:    raffosynth
 Version: 0.1.0
 Release: 1%{?dist}
 Summary: This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plugin for Linux.
-
 Group:   Applications/Multimedia
 License: GPLv3+
+
 URL:     https://github.com/nicoroulet/moog
 Source0: https://github.com/nicoroulet/moog/archive/%{commit0}.tar.gz#/moog-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

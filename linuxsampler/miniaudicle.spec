@@ -4,13 +4,13 @@ Version: 1.3.5.2
 Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
+Vendor:       Planet CCRMA
+Distribution: Planet CCRMA
+
 URL:     http://audicle.cs.princeton.edu/mini/
 Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-
-Vendor:       Planet CCRMA
-Distribution: Planet CCRMA
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: bison flex qt-devel qscintilla-devel

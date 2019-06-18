@@ -8,8 +8,11 @@ Summary: A realtime network sound client
 
 Group:   Applications/Multimedia
 License: GPLv2+
+
 URL:     http://www.cockos.com/ninjam/
 Source0: http://www.cockos.com/ninjam/downloads/src/cclient_src_v0.01a.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: ncurses-devel

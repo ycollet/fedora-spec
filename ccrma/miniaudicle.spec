@@ -7,7 +7,7 @@ Group:   Applications/Multimedia
 URL:     http://audicle.cs.princeton.edu/mini/
 Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA

@@ -10,8 +10,10 @@ Summary:       Module tracker software for creating music
 Group:         Applications/Multimedia
 License:       GPLv3+
 URL:           https://github.com/milkytracker/MilkyTracker
+
 Source0:       https://github.com/milkytracker/MilkyTracker/archive/%{commit0}.tar.gz#/MilkyTracker-%{shortcommit0}.tar.gz
 Source1:       %{name}.desktop
+
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++

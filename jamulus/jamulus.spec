@@ -13,6 +13,8 @@ License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and
 # original tarfile can be found here:
 Source0: http://downloads.sourceforge.net/project/llcon/Jamulus/3.4.3/Jamulus-3.4.3.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel

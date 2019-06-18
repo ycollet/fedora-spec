@@ -19,6 +19,8 @@ Source0: https://github.com/CsoundQt/CsoundQt/archive/%{commit0}.tar.gz#/CsoundQ
 Source1: qutecsound.desktop
 Source2: qutecsound.xml
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: qt4-devel
 BuildRequires: desktop-file-utils

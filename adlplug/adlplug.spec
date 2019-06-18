@@ -9,7 +9,6 @@ Release: 3%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
 Group:   Applications/Multimedia
-
 License: BSL-1.0
 
 # git clone https://github.com/jpcima/ADLplug
@@ -22,6 +21,8 @@ License: BSL-1.0
 # rm -rf ADLplug
 
 Source0: ADLplug.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel

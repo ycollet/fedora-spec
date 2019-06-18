@@ -13,7 +13,11 @@ Summary:        FoxDot is a Python programming environment that provides a fast 
 
 License:        Creative Commons Attribution-ShareAlike 4.0 International Public License
 URL:            https://github.com/Qirky/FoxDot
+
 Source0:        https://github.com/Qirky/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires:  python3-devel python2-devel
 BuildRequires:  supercollider-devel 
 BuildRequires:  python3-setuptools

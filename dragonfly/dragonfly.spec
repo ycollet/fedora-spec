@@ -26,6 +26,8 @@ URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 Source0: dragonfly-reverb.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel

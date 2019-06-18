@@ -5,7 +5,10 @@ Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://git.drumgizmo.org/drumgizmo.git
+
 Source0: http://www.drumgizmo.org/releases/drumgizmo-%version/drumgizmo-%version.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf

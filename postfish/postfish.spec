@@ -17,6 +17,8 @@ URL:     https://svn.xiph.org/trunk/postfish
 Source0: postfish-%{revision}.tar.gz
 Source1: postfish.png
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
 BuildRequires: make

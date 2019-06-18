@@ -6,16 +6,16 @@ Version: 0.8.2
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
+
 URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: clthreads-devel clxclient-devel
 BuildRequires: libsndfile-devel fftw-devel libpng-devel libXft-devel libX11-devel
-#BuildRequires: -lsndfile -lfftw3f -lclxclient -lclthreads -ljack -lpng -lXft -lX11 -lrt
 
 %description
 Tetraproc consists of two parts: the A/B convertor and the

@@ -7,15 +7,16 @@ Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL: http://qsampler.sourceforge.net/qsampler-index.html
-Source0: http://download.linuxsampler.org/packages/qsampler-%{version}.tar.gz
-Source1: qsampler.desktop
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: linuxsampler
-Requires: hicolor-icon-theme
-
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
+Source0: http://download.linuxsampler.org/packages/qsampler-%{version}.tar.gz
+Source1: qsampler.desktop
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+Requires: linuxsampler
+Requires: hicolor-icon-theme
 BuildRequires: qt5-qtbase-devel qt5-linguist qt5-qtx11extras-devel
 BuildRequires: libgig-devel liblscp-devel desktop-file-utils
 BuildRequires: libtool automake autoconf

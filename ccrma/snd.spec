@@ -35,7 +35,7 @@ Patch0: snd-13-docdir.patch
 Patch1: snd-14-lpthread.patch
 URL:    http://www-ccrma.stanford.edu/software/snd/
 
-Buildroot: %{_tmppath}/%{name}-%{version}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA

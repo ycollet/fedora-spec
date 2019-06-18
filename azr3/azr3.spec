@@ -4,10 +4,13 @@ Release: 1%{?dist}
 Summary: This JACK program is a port of the free VST plugin AZR-3
 Group:   Applications/Multimedia
 URL:     http://ll-plugins.nongnu.org/azr3/
+License: GPL
+
 Source:  https://download.savannah.gnu.org/releases/ll-plugins/%{name}-%{version}.tar.bz2
 Source1: azr3.png
 Patch1:  0001-fix-sigc-namespace.patch
-License: GPL
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel

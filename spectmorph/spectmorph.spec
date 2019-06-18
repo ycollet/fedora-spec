@@ -4,8 +4,11 @@ Release: 1%{?dist}
 Summary: SpectMorph is a free software project which allows to analyze samples of musical instruments, and to combine them (morphing)
 URL:     http://www.spectmorph.org
 Group:   Applications/Multimedia
+
 Source0: http://www.spectmorph.org/files/releases/spectmorph-%{version}.tar.bz2
 License: GPLv2+
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel

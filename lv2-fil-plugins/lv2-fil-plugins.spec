@@ -11,6 +11,7 @@ Release: 13%{?dist}
 License: LGPLv2+ and GPLv2 and GPLv2+
 Group:   Applications/Multimedia
 URL:     http://nedko.arnaudov.name/soft/lv2fil/
+
 Source:  http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.tar.bz2
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

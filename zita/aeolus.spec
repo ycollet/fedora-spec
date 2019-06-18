@@ -14,7 +14,7 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/aeolus-%{aeolus
 Source1: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-%{stops_ver}.tar.bz2
 Source2: aeolus.desktop
 
-BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA

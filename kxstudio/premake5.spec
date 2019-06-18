@@ -8,7 +8,10 @@ Release: 1%{?dist}
 License: GPLv3+
 Group:   Developpment
 URL:     https://github/premake/
+
 Source0: https://github.com/premake/premake-core/releases/download/v5.0.0-alpha13/premake-5.0.0-alpha13-src.zip
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 

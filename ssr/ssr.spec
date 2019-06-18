@@ -10,7 +10,10 @@ Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/MaartenBaert/ssr
+
 Source0: https://github.com/MaartenBaert/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf

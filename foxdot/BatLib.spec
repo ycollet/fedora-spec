@@ -13,7 +13,11 @@ Summary:  Various helper classes I use, and external methods my other Quarks use
 
 License:  Creative Commons Attribution-ShareAlike 4.0 International Public License
 URL:      https://github.com/supercollider-quarks/%{name}
+
 Source0:  https://github.com/supercollider-quarks/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 Requires: supercollider
 
 %description

@@ -26,6 +26,8 @@ URL:     https://github.com/pdesaulniers/wolf-shaper
 
 Source0: wolf-shaper.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel

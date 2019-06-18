@@ -6,8 +6,11 @@ Version: 2.75
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
+
 URL:     https://sourceforge.net/projects/goattracker2/
 Source0: https://sourceforge.net/projects/goattracker2/files/GoatTracker 2 Stereo/%{version}/GoatTracker_%{version}_Stereo.zip
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make

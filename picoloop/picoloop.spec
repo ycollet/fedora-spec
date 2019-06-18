@@ -18,6 +18,8 @@ Source0: https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}-%{shor
 
 #Patch0: picoloop-0001-fix-makefile.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel

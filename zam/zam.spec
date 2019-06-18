@@ -17,6 +17,8 @@ URL:     https://github.com/zamaudio/zam-plugins
 # in the zam repository -> make dist
 Source0: zam-plugins-3.11.tar.xz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel

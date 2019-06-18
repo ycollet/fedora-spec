@@ -13,6 +13,8 @@ License: GPLv2+
 # original tarfile can be found here:
 Source0: https://dl.biniou.net/biniou/tar/lebiniou-data-3.28.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: make
 
 %description
