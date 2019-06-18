@@ -98,7 +98,8 @@ fi
 
 
 %files
-%doc ChangeLog COPYING
+%doc ChangeLog
+%license COPYING
 %{_bindir}/qutecsound
 %{_datadir}/applications/qutecsound.desktop
 %{_datadir}/mime/packages/qutecsound.xml

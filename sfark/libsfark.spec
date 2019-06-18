@@ -51,7 +51,8 @@ The %{name}-devel package contains header files for %{name}.
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_libdir}/*
 
 %files devel

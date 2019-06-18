@@ -64,7 +64,8 @@ EOF
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%doc AUTHORS ChangeLog INSTALL NEWS README
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*

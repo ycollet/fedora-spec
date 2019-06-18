@@ -140,7 +140,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README*
+%doc README*
+%license COPYING
 %{_bindir}/sclang
 # in doc
 %exclude %{_datadir}/SuperCollider/AUTHORS

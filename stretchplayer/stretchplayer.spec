@@ -75,7 +75,8 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc AUTHORS ChangeLog COPYING* README.txt INSTALL.txt BUGS.txt
+%doc AUTHORS ChangeLog README.txt INSTALL.txt BUGS.txt
+%license COPYING*
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/*

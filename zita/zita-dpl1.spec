@@ -46,7 +46,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS README COPYING doc
+%doc AUTHORS README doc
+%license COPYING
 %{_bindir}/*
 %{_datadir}/zita-dpl1/*
 

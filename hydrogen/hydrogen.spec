@@ -129,7 +129,8 @@ fi
 
 
 %files
-%doc AUTHORS ChangeLog COPYING* README.txt
+%doc AUTHORS ChangeLog README.txt
+%license COPYING*
 %{_bindir}/hydrogen
 %{_bindir}/h2cli
 %{_bindir}/h2player

@@ -54,7 +54,8 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 
 %files
 %defattr(-,root,root,-)
-%doc changelog COPYING NOTICE.DPF NOTICE.SFZero README.md
+%doc changelog NOTICE.DPF NOTICE.SFZero README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/lv2/*
 

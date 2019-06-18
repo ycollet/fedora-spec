@@ -68,7 +68,8 @@ cd src
 
 %files
 %defattr(-,root,root,-)
-%doc BUGS COPYING README.linux VERSIONS
+%doc BUGS README.linux VERSIONS
+%license COPYING
 %{_bindir}/miniAudicle*
 
 %changelog

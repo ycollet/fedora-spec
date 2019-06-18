@@ -59,7 +59,8 @@ rmdir %{buildroot}%{_libdir}/libgig
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/html
+%doc AUTHORS ChangeLog NEWS README TODO doc/html
+%license COPYING
 %{_bindir}/*
 %{_libdir}/libgig.so*
 %{_libdir}/libakai.so*

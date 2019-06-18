@@ -44,7 +44,8 @@ Converts soundfonts in the legacy sfArk v2 file format to sf2
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/*
 
 %changelog

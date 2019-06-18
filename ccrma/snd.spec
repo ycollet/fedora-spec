@@ -26,6 +26,7 @@ Version: %{pkgver}
 Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
+
 Source:	 ftp://ccrma-ftp.stanford.edu/pub/Lisp/%{tarname}.tar.bz2
 Source1: snd.png
 Source2: snd.desktop
@@ -226,8 +227,9 @@ fi
 
 %files
 %defattr(-, root, root)
-%doc COPYING README.Snd HISTORY.Snd *.html
+%doc README.Snd HISTORY.Snd *.html
 %doc pix
+%license COPYING
 %{_datadir}/icons/hicolor/32x32/apps/snd.png
 %{_datadir}/applications/*snd.desktop
 %{_mandir}/man1/snd.1*

@@ -69,7 +69,8 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS.md CHANGELOG.md COPYING README.md
+%doc AUTHORS.md CHANGELOG.md README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*

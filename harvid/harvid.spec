@@ -47,8 +47,8 @@ ln -s /usr/bin/ffmpeg %{buildroot}/usr/bin/ffmpeg_harvid
 ln -s /usr/bin/ffprobe%{buildroot}/usr/bin/ffprobe_harvid
 
 %files
-%doc README.md COPYING ChangeLog
-
+%doc README.md ChangeLog
+%license COPYING
 %{_bindir}/*
 %{_mandir}/*
 %{_datadir}/*

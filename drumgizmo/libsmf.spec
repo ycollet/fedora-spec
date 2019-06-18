@@ -51,7 +51,8 @@ autoreconf --force --install
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING NEWS README
+%doc NEWS README
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/man/*

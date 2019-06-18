@@ -62,6 +62,8 @@ EOF
 
 %files
 %defattr(-,root,root)
+%doc AUTHORS ChangeLog README
+%license COPYING
 %{_bindir}/azr3
 %{_datadir}/pixmaps/azr3.png
 %{_datadir}/applications/azr3-jack.desktop
@@ -70,7 +72,6 @@ EOF
 %{_datadir}/azr3-jack/*.png
 %{_mandir}/man1/azr3.1*
 %exclude %{_docdir}/azr3-jack/*
-%doc AUTHORS COPYING ChangeLog README
 
 %changelog
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -

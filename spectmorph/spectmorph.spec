@@ -71,7 +71,8 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc AUTHORS COPYING README.md
+%doc AUTHORS README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/applications/*

@@ -124,7 +124,8 @@ mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
 
 %files
 %defattr(-, root, root)
-%doc NEWS COPYING COPYING.GPL COPYING.LGPL README INSTALL AUTHORS BUGS TODO examples
+%doc NEWS README INSTALL AUTHORS BUGS TODO examples
+%license COPYING COPYING.GPL COPYING.LGPL
 %if %makepdf
 %doc Documentation/users_guide/ecasound_users_guide.pdf
 %doc Documentation/users_guide/html_uguide

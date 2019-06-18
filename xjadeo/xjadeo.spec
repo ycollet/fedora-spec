@@ -89,7 +89,8 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README xjadeo.lsm
+%doc AUTHORS ChangeLog INSTALL NEWS README xjadeo.lsm
+%license COPYING
 %{_bindir}/*
 %{_datadir}/man/*
 %{_datadir}/xjadeo/*

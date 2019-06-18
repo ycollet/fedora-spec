@@ -31,8 +31,8 @@ This package contains data files for use with lebiniou - https://gitlab.com/lebi
 make %{?_smp_mflags} DESTDIR=%{buildroot} install
 
 %files
-%doc README.md AUTHORS ChangeLog COPYING THANKS
-
+%doc README.md AUTHORS ChangeLog THANKS
+%license COPYING
 %{_datadir}/*
 
 %changelog

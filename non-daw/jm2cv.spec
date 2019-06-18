@@ -37,7 +37,8 @@ make DESTDIR=%{buildroot} install
 %__install -m 644 example.cfg %{buildroot}%{_datadir}/%{name}/config/
 
 %files
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 

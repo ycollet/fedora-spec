@@ -94,7 +94,7 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
-%doc COPYING
+%license COPYING
 %exclude %{_bindir}/bin/import-ardour-session
 %{_bindir}/import*
 %{_bindir}/%{name}

@@ -53,7 +53,8 @@ Infamous Plugins is a collection of open-source LV2 plugins. It hopefully helps 
 %make_install DESTDIR=%{buildroot}
 
 %files -n lv2-%{name}
-%doc README CHANGELOG COPYING
+%doc README CHANGELOG
+%license COPYING
 %{_bindir}/*
 %{_libdir}/lv2/*
 

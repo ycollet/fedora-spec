@@ -79,8 +79,9 @@ cp -a %{SOURCE1} %{buildroot}%{_libdir}/xemacs/site-packages/lisp/chuck/chuck.el
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING DEVELOPER PROGRAMMER QUICKSTART README 
+%doc AUTHORS DEVELOPER PROGRAMMER QUICKSTART README 
 %doc THANKS TODO VERSIONS examples
+%license COPYING
 %{_bindir}/*
 %{_datadir}/emacs/site-lisp/*
 %{_libdir}/xemacs/site-packages/lisp/chuck/*

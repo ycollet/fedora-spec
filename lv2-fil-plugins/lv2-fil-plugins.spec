@@ -70,7 +70,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README NEWS
+%doc AUTHORS README NEWS
+%license COPYING
 %{_libdir}/lv2/filter.lv2/
 
 

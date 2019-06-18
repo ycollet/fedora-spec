@@ -57,7 +57,8 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%doc AUTHORS ChangeLog INSTALL NEWS README
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/man/*
 %{_datadir}/horgand/*

@@ -95,7 +95,8 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc README COPYING
+%doc README
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/*
 %{_sysconfdir}/*

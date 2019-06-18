@@ -73,7 +73,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files -f kmidimon.lang
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README TODO
+%doc AUTHORS ChangeLog INSTALL NEWS README TODO
+%license COPYING
 %{_bindir}/kmidimon
 %{_datadir}/doc/HTML/en/kmidimon
 %{_datadir}/icons/hicolor/*/apps/kmidimon*

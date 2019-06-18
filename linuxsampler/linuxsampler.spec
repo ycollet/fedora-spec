@@ -75,7 +75,8 @@ echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsa
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING NEWS README
+%doc AUTHORS ChangeLog NEWS README
+%license COPYING
 %{_bindir}/linuxsampler
 %{_libdir}/linuxsampler/*.so.*
 %{_mandir}/man1/*

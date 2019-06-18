@@ -79,7 +79,7 @@ fi
 
 
 %files
-%doc COPYING.txt
+%license COPYING.txt
 %{_bindir}/iannix
 %{_datadir}/applications/IanniX.desktop
 %{_datadir}/mime/packages/IanniX.xml

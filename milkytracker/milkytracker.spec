@@ -61,7 +61,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS README.md ChangeLog.md
+%doc AUTHORS NEWS README.md ChangeLog.md
+%license COPYING
 %{_bindir}/milkytracker
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/milkytracker.png

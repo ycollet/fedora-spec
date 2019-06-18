@@ -47,7 +47,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS INSTALL README.md
+%doc AUTHORS NEWS INSTALL README.md
+%license COPYING
 %{_bindir}/schismtracker
 %{_datadir}/pixmaps/*
 %{_datadir}/man/*

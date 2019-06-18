@@ -53,7 +53,8 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%doc AUTHORS ChangeLog INSTALL NEWS README
+%license COPYING
 %{_bindir}/drumgizmo
 %{_libdir}/*
 %{_datadir}/man/*

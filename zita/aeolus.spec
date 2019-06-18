@@ -102,7 +102,8 @@ desktop-file-install --vendor %{desktop_vendor} \
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING INSTALL
+%doc AUTHORS INSTALL
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_sysconfdir}/*

@@ -55,7 +55,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS README COPYING
+%doc AUTHORS README
+%license COPYING
 %{_bindir}/*
 
 %changelog

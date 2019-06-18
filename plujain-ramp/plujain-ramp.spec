@@ -43,7 +43,8 @@ make DESTDIR=%{buildroot} INSTALL_PATH=/usr/%{_lib}/lv2 VERBOSE=1 %{?_smp_mflags
 make DESTDIR=%{buildroot} INSTALL_PATH=/usr/%{_lib}/lv2 install
 
 %files -n lv2-%{name}
-%doc readme.md COPYING
+%doc readme.md
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
