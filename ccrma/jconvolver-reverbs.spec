@@ -9,7 +9,6 @@ Source:  http://kokkinizita.linuxaudio.org/linuxaudio/downloads/jconvolver-rever
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 BuildArch:    noarch

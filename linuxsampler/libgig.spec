@@ -12,7 +12,6 @@ URL:     http://www.linuxsampler.org/libgig/
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
 

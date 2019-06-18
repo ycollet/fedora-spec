@@ -9,7 +9,6 @@ Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{versio
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 

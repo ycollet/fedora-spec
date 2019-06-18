@@ -43,7 +43,6 @@ Source0: sc3-plugins-src-%{gittag}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
 

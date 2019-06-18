@@ -9,7 +9,7 @@ Source0: http://download.linuxsampler.org/packages/gigedit-%{version}.tar.bz2
 Patch0: gigedit_0001-update-gtkmm-version-for-alternatives.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: hicolor-icon-theme
-Packager: Fernando Lopez-Lezcano
+
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 

@@ -23,7 +23,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Requires: emacs w3m-el
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 

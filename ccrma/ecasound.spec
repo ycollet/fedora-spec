@@ -19,7 +19,6 @@ Group:   Applications/Multimedia
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-root-%(id -u -n)
 
-Packager:     Fernando Lopez-Lezcano, Kai Vehmanen
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 

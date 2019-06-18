@@ -12,7 +12,7 @@ Source1: qsampler.desktop
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: linuxsampler
 Requires: hicolor-icon-theme
-Packager: Fernando Lopez-Lezcano
+
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 

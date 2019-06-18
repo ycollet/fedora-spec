@@ -12,7 +12,6 @@ Patch2:  jacktrip-1.0.5-gcc47.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano & Juan-Pablo Caceres
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 

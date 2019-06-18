@@ -38,7 +38,6 @@ URL:    http://www-ccrma.stanford.edu/software/snd/
 Buildroot: %{_tmppath}/%{name}-%{version}-root
 
 Vendor:       Planet CCRMA
-Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 
 Requires: hicolor-icon-theme

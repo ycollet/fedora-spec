@@ -7,7 +7,7 @@ Group: System Environment/Libraries
 URL: http://qsampler.sourceforge.net/qsampler-index.html
 Source0: http://download.linuxsampler.org/packages/liblscp-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Packager: Fernando Lopez-Lezcano
+
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 

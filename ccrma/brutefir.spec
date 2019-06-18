@@ -9,7 +9,6 @@ Source0: http://www.ludd.luth.se/~torger/files/brutefir-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 

@@ -15,7 +15,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
-Packager:     Fernando Lopez-Lezcano
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: bison flex jack-audio-connection-kit-devel, 

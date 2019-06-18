@@ -10,7 +10,7 @@ Group: Applications/Multimedia
 URL: http://www.linuxsampler.org/
 Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Packager: Fernando Lopez-Lezcano
+
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
