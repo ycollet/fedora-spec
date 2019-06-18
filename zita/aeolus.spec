@@ -1,7 +1,7 @@
 %define aeolus_ver 0.9.7
 %define stops_ver  0.3.0
 
-%define	desktop_vendor planetccrma
+%define desktop_vendor planetccrma
 
 Summary: Aeolus, a synthesized pipe organ
 Name:    aeolus
@@ -21,7 +21,7 @@ Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 Obsoletes: aeolus-stops <= 0.3.1-1
-Provides:  aeolus-stops
+Provides:  aeolus-stops = 0.3.0-1
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils zita-alsa-pcmi-devel clthreads-devel clxclient-devel
@@ -97,8 +97,8 @@ desktop-file-install --vendor %{desktop_vendor} \
   `for c in ${BASE} ${XTRA} ; do echo "--add-category $c " ; done` \
   %{SOURCE2}
 
-# %clean
-# %{__rm} -rf %{buildroot}
+%clean
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

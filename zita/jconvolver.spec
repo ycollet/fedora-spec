@@ -61,5 +61,5 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - update for Fedora 29
 
-* Fri Sep 17 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+* Mon Sep 17 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - Initial build

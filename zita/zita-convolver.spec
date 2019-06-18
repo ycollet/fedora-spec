@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib%{name}.so
 
 %changelog
-* Tue Jun 15 2019 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-2
+* Sat Jun 15 2019 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-2
 - fix package
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-1
