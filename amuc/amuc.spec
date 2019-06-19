@@ -17,6 +17,8 @@ Source0: https://github.com/pjz/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{sho
 Patch0:  amuc-0001-fix-build-with-gcc-7.patch
 Patch1:  amuc-0002-add-missing-library.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: libX11-devel

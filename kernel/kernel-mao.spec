@@ -26,6 +26,8 @@ Source1: kernel-config-%{kmaj}.%{kmin}
 
 Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kver}-rt%{krt}.patch.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
@@ -35,7 +37,7 @@ BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
 BuildRequires: grub2-tools
 BuildRequires: sed
 
-BuildRoot: %{_tmppath}/%{name}-%{PACKAGE_VERSION}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Provides: kernel = %{version}
 Provides: kernel-rt-mao = %{version}

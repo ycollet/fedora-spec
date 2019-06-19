@@ -17,6 +17,8 @@ URL:     https://svn.xiph.org/trunk/postfish
 Source0: postfish-%{revision}.tar.gz
 Source1: postfish.png
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
 BuildRequires: make
@@ -95,7 +97,8 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc README COPYING
+%doc README
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/*
 %{_sysconfdir}/*

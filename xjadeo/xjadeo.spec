@@ -15,6 +15,8 @@ URL:     http://xjadeo.sourceforge.net/
 Source0: https://github.com/x42/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: xjadeo.desktop
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
@@ -89,7 +91,8 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README xjadeo.lsm
+%doc AUTHORS ChangeLog INSTALL NEWS README xjadeo.lsm
+%license COPYING
 %{_bindir}/*
 %{_datadir}/man/*
 %{_datadir}/xjadeo/*

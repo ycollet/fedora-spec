@@ -9,6 +9,8 @@ Source0: http://web.comhem.se/luna/Mx44.2.tar.gz
 Group:   Applications/Multimedia
 License: GPLv2+
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: gtk2-devel

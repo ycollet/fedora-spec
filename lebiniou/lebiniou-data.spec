@@ -13,6 +13,8 @@ License: GPLv2+
 # original tarfile can be found here:
 Source0: https://dl.biniou.net/biniou/tar/lebiniou-data-3.28.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: make
 
 %description
@@ -31,8 +33,8 @@ This package contains data files for use with lebiniou - https://gitlab.com/lebi
 make %{?_smp_mflags} DESTDIR=%{buildroot} install
 
 %files
-%doc README.md AUTHORS ChangeLog COPYING THANKS
-
+%doc README.md AUTHORS ChangeLog THANKS
+%license COPYING
 %{_datadir}/*
 
 %changelog

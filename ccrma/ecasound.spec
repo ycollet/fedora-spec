@@ -17,9 +17,8 @@ Source:  http://ecasound.seul.org/download/ecasound-%{version}.tar.gz
 License: GPL
 Group:   Applications/Multimedia
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano, Kai Vehmanen
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
@@ -124,7 +123,8 @@ mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
 
 %files
 %defattr(-, root, root)
-%doc NEWS COPYING COPYING.GPL COPYING.LGPL README INSTALL AUTHORS BUGS TODO examples
+%doc NEWS README INSTALL AUTHORS BUGS TODO examples
+%license COPYING COPYING.GPL COPYING.LGPL
 %if %makepdf
 %doc Documentation/users_guide/ecasound_users_guide.pdf
 %doc Documentation/users_guide/html_uguide

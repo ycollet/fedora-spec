@@ -10,8 +10,11 @@ Summary: Module tracker software for creating music
 
 Group:   Applications/Multimedia
 License: GPLv3+
+
 URL:     https://github.com/schismtracker/schismtracker
 Source0: https://github.com/schismtracker/schismtracker/archive/%{commit0}.tar.gz#/schismtracker-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
@@ -47,7 +50,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS INSTALL README.md
+%doc AUTHORS NEWS INSTALL README.md
+%license COPYING
 %{_bindir}/schismtracker
 %{_datadir}/pixmaps/*
 %{_datadir}/man/*

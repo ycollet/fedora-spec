@@ -11,7 +11,7 @@ Source1: 99-rt-permissions.conf
 Source2: rt-permissions.ck
 URL:     http://ccrma.stanford.edu/planetccrma/software/
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: perl
 

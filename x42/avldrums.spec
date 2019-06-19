@@ -25,6 +25,8 @@ License: GPLv2+
 URL:     https://github.com/brummer10/GxPlugins.lv2
 Source0: avldrums.lv2.%{commit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: cairo-devel

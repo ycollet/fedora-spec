@@ -14,6 +14,8 @@ Source0: non-20171023-gitc15bfa85fdd74c1720be84277424e0f11403c81d.tar.bz2
 # notified upstream of the following along with incorrect FSF address headers
 #Patch2:  non-daw-0001-add-lib64-in-ladspa-search-path.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: non-ntk-devel
 BuildRequires: non-ntk-fluid
@@ -94,7 +96,7 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
-%doc COPYING
+%license COPYING
 %exclude %{_bindir}/bin/import-ardour-session
 %{_bindir}/import*
 %{_bindir}/%{name}

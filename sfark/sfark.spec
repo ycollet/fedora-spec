@@ -12,9 +12,12 @@ Version: 0.1.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
+
 URL:     https://github.com/raboof/sfarkxtc
 Source0: https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  sfark-0001-fix-install-path.patch
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: sfArkLib-devel
@@ -44,7 +47,8 @@ Converts soundfonts in the legacy sfArk v2 file format to sf2
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/*
 
 %changelog

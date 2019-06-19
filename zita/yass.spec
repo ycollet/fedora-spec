@@ -7,7 +7,7 @@ Group:   Applications/Multimedia
 URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: clthreads-devel clxclient-devel
@@ -44,7 +44,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS README COPYING
+%doc AUTHORS README
+%license COPYING
 %{_bindir}/*
 %{_docdir}/*
 

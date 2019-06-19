@@ -10,7 +10,10 @@ Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/swh/timemachine
+
 Source0: https://github.com/swh/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -64,7 +67,8 @@ EOF
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%doc AUTHORS ChangeLog INSTALL NEWS README
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*

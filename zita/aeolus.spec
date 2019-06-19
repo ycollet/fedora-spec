@@ -1,7 +1,7 @@
 %define aeolus_ver 0.9.7
 %define stops_ver  0.3.0
 
-%define	desktop_vendor planetccrma
+%define desktop_vendor planetccrma
 
 Summary: Aeolus, a synthesized pipe organ
 Name:    aeolus
@@ -14,14 +14,13 @@ Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/aeolus-%{aeolus
 Source1: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-%{stops_ver}.tar.bz2
 Source2: aeolus.desktop
 
-BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 Obsoletes: aeolus-stops <= 0.3.1-1
-Provides:  aeolus-stops
+Provides:  aeolus-stops = 0.3.0-1
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils zita-alsa-pcmi-devel clthreads-devel clxclient-devel
@@ -97,12 +96,13 @@ desktop-file-install --vendor %{desktop_vendor} \
   `for c in ${BASE} ${XTRA} ; do echo "--add-category $c " ; done` \
   %{SOURCE2}
 
-# %clean
-# %{__rm} -rf %{buildroot}
+%clean
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING INSTALL
+%doc AUTHORS INSTALL
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_sysconfdir}/*

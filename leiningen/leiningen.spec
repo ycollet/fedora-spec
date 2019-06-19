@@ -5,6 +5,7 @@ Summary: Clojure project automation tool
 
 License: EPL
 URL:     https://github.com/technomancy/leiningen
+
 Source0: https://github.com/technomancy/leiningen/releases/download/%{version}/leiningen-%{version}-standalone.zip
 Source1: https://github.com/technomancy/leiningen/raw/%{version}/bin/lein
 Source2: https://github.com/technomancy/leiningen/raw/%{version}/resources/leiningen.png
@@ -12,6 +13,8 @@ Source3: https://raw.githubusercontent.com/technomancy/leiningen/%{version}/bash
 Source4: https://raw.githubusercontent.com/technomancy/leiningen/%{version}/zsh_completion.zsh
 
 BuildArch: noarch
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: jpackage-utils
 BuildRequires: java-devel

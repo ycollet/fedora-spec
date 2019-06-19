@@ -19,6 +19,8 @@ Source2: osmid.tar.gz
 
 # Use source.sh to get source files
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qscintilla-qt5-devel

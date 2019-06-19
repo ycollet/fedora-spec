@@ -14,7 +14,10 @@ Summary: A JACK session manager
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/Houston4444/RaySession
+
 Source0: https://github.com/Houston4444/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: python3-qt5-devel
 BuildRequires: python3

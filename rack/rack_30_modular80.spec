@@ -41,6 +41,8 @@ URL:     https://github.com/cschol/modular80
 Source0: Rack.tar.gz
 Source1: modular80.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel

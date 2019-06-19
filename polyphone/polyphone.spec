@@ -16,6 +16,8 @@ License: GPLv2+
 # rm polyphone-2.0.1-src.zip
 # zip -r polyphone-2.0.1-src.zip polyphone-2.0.1-src/*
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 Source0: %{name}-%{version}-src.zip
 Source1: polyphone.desktop
 Source2: polyphone.xml

@@ -13,7 +13,11 @@ Summary:  FoxDot Quark is a required tool to connect FoxDot and SuperCollider.
 
 License:  Creative Commons Attribution-ShareAlike 4.0 International Public License
 URL:      https://github.com/Qirky/%{name}
+
 Source0:  https://github.com/Qirky/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 Requires: supercollider
 Requires: BatLib
 

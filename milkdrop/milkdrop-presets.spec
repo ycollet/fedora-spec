@@ -15,7 +15,8 @@ Source5: http://ycollette.free.fr/Milkdrop/milkdrop-megapack.zip
 Source6: http://ycollette.free.fr/Milkdrop/milkdrop-vlc-presets.zip
 Source7: http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildArch: noarch
 
 BuildRequires: p7zip tar

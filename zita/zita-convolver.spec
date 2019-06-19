@@ -1,13 +1,14 @@
 Summary: convolver function
 Name:    zita-convolver
 Version: 4.0.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
+
 URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: fftw-devel
@@ -19,9 +20,9 @@ nor modify internal data structures, and only data in already
 existing partitions can be modified this way.
 
 %package devel
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Summary:  Development files for %{name}
+Group:    Development/Libraries
+Requires: %{name} = %{version}-%{release}
 
 
 %description devel
@@ -52,14 +53,18 @@ popd
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root,-)
-%doc AUTHORS COPYING README* 
-%{_libdir}/*
+%doc AUTHORS README*
+%license COPYING
+%{_libdir}/lib%{name}.so.*
 
 %files devel
-%{_includedir}/*
+%{_includedir}/%{name}.h
+%{_libdir}/lib%{name}.so
 
 %changelog
+* Sat Jun 15 2019 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-2
+- fix package
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 4.0.3-1
 - update for Fedora 29
 

@@ -12,6 +12,8 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/x42/sisco.lv2
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: git
 BuildRequires: alsa-lib-devel

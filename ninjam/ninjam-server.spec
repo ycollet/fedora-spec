@@ -8,8 +8,11 @@ Summary: A realtime network sound server
 
 Group:   Applications/Multimedia
 License: GPLv2+
+
 URL:     http://www.cockos.com/ninjam/
 Source0: http://www.cockos.com/ninjam/downloads/src/ninjam_server_0.06.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: ncurses-devel

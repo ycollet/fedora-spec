@@ -15,6 +15,8 @@ Source0: %{name}-%{version}.tar.gz
 # See the "0.9.5 is out" thread
 #Patch1:       hydrogen-devel-warning.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
@@ -129,7 +131,8 @@ fi
 
 
 %files
-%doc AUTHORS ChangeLog COPYING* README.txt
+%doc AUTHORS ChangeLog README.txt
+%license COPYING*
 %{_bindir}/hydrogen
 %{_bindir}/h2cli
 %{_bindir}/h2player

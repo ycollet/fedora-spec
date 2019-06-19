@@ -10,6 +10,8 @@ Source0: traverso-0.49.6.tar.gz
 Group:   Applications/Multimedia
 License: GPLv2+
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: alsa-lib-devel

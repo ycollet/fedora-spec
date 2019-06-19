@@ -14,6 +14,8 @@ License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and
 # original tarfile can be found here:
 Source0: https://github.com/harryhaaren/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: cmake
@@ -37,7 +39,8 @@ make DESTDIR=%{buildroot} install
 %__install -m 644 example.cfg %{buildroot}%{_datadir}/%{name}/config/
 
 %files
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 

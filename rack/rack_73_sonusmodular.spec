@@ -39,6 +39,8 @@ URL:     https://github.com/sonusdept/sonusmodular
 Source0: Rack.tar.gz
 Source1: sonusmodular.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel

@@ -22,6 +22,8 @@ Source0: scarlett-mixer.tar.gz
 # tar cvfz scarlett-mixer.tar.gz scarlett-mixer/*
 # rm -rf scarlett-mixer
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel

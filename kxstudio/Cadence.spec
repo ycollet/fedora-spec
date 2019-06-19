@@ -14,8 +14,11 @@ Summary: JACK control center
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/falkTX/Cadence
+
 Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  cadence_001_fedora_support.patch
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc
 BuildRequires: gcc-c++

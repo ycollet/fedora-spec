@@ -35,6 +35,8 @@ AutoReqProv: no
 #       system's fltk)
 License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 # original tarfile can be found here:
 Source0: https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
 

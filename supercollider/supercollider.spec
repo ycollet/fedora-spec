@@ -19,11 +19,10 @@ URL:     http://supercollider.sourceforge.net/
 
 Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source-linux.tar.bz2
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: emacs w3m-el
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
@@ -140,7 +139,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README*
+%doc README*
+%license COPYING
 %{_bindir}/sclang
 # in doc
 %exclude %{_datadir}/SuperCollider/AUTHORS

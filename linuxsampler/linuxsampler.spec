@@ -8,11 +8,12 @@ Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
 URL: http://www.linuxsampler.org/
-Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Packager: Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
+
+Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automake autoconf libtool pkgconfig
 BuildRequires: libgig-devel alsa-lib-devel sqlite-devel
@@ -75,7 +76,8 @@ echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsa
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING NEWS README
+%doc AUTHORS ChangeLog NEWS README
+%license COPYING
 %{_bindir}/linuxsampler
 %{_libdir}/linuxsampler/*.so.*
 %{_mandir}/man1/*

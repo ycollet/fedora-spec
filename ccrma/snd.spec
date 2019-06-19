@@ -26,6 +26,7 @@ Version: %{pkgver}
 Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
+
 Source:	 ftp://ccrma-ftp.stanford.edu/pub/Lisp/%{tarname}.tar.bz2
 Source1: snd.png
 Source2: snd.desktop
@@ -34,10 +35,9 @@ Patch0: snd-13-docdir.patch
 Patch1: snd-14-lpthread.patch
 URL:    http://www-ccrma.stanford.edu/software/snd/
 
-Buildroot: %{_tmppath}/%{name}-%{version}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
-Packager:     Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 
 Requires: hicolor-icon-theme
@@ -226,8 +226,9 @@ fi
 
 %files
 %defattr(-, root, root)
-%doc COPYING README.Snd HISTORY.Snd *.html
+%doc README.Snd HISTORY.Snd *.html
 %doc pix
+%license COPYING
 %{_datadir}/icons/hicolor/32x32/apps/snd.png
 %{_datadir}/applications/*snd.desktop
 %{_mandir}/man1/snd.1*

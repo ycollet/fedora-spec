@@ -17,6 +17,8 @@ URL:     https://github.com/zamaudio/zam-plugins
 # in the zam repository -> make dist
 Source0: zam-plugins-3.11.tar.xz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
@@ -54,7 +56,8 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 
 %files
 %defattr(-,root,root,-)
-%doc changelog COPYING NOTICE.DPF NOTICE.SFZero README.md
+%doc changelog NOTICE.DPF NOTICE.SFZero README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/lv2/*
 

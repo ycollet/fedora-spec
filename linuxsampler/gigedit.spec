@@ -5,14 +5,15 @@ Release: 2%{?dist}
 License: GPL2
 Group: Applications/Multimedia
 URL: http://www.linuxsampler.org/
-Source0: http://download.linuxsampler.org/packages/gigedit-%{version}.tar.bz2
-Patch0: gigedit_0001-update-gtkmm-version-for-alternatives.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: hicolor-icon-theme
-Packager: Fernando Lopez-Lezcano
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
+Source0: http://download.linuxsampler.org/packages/gigedit-%{version}.tar.bz2
+Patch0: gigedit_0001-update-gtkmm-version-for-alternatives.patch
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+Requires: hicolor-icon-theme
 BuildRequires: intltool gtkmm30-devel libgig-devel libsndfile-devel
 BuildRequires: linuxsampler-devel libxslt-devel docbook-style-xsl
 BuildRequires: gcc gcc-c++

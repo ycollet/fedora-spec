@@ -38,6 +38,8 @@ URL:     https://github.com/gbrandt1/southpole-vcvrack
 Source0: Rack.tar.gz
 Source1: southpole-vcvrack.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel

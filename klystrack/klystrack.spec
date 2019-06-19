@@ -24,6 +24,8 @@ URL:     http://kometbomb.github.io/klystrack/
 
 Source0: klystrack.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: make
 BuildRequires: alsa-lib-devel

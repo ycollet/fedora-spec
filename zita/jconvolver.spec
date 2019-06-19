@@ -4,10 +4,11 @@ Version: 1.0.2
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
+
 URL:     http://kokkinizita.linuxaudio.org/linuxaudio/
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -61,5 +62,5 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - update for Fedora 29
 
-* Fri Sep 17 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+* Mon Sep 17 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
 - Initial build

@@ -15,6 +15,8 @@ License: GPLv2+
 # original tarfile can be found here:
 Source0: https://github.com/x42/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++ make
 BuildRequires: libXrender-devel
 BuildRequires: libX11-devel
@@ -47,8 +49,8 @@ ln -s /usr/bin/ffmpeg %{buildroot}/usr/bin/ffmpeg_harvid
 ln -s /usr/bin/ffprobe%{buildroot}/usr/bin/ffprobe_harvid
 
 %files
-%doc README.md COPYING ChangeLog
-
+%doc README.md ChangeLog
+%license COPYING
 %{_bindir}/*
 %{_mandir}/*
 %{_datadir}/*

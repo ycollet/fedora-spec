@@ -7,9 +7,8 @@ Group:   Applications/Multimedia
 URL:     http://audicle.cs.princeton.edu/mini/
 Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
@@ -68,7 +67,8 @@ cd src
 
 %files
 %defattr(-,root,root,-)
-%doc BUGS COPYING README.linux VERSIONS
+%doc BUGS README.linux VERSIONS
+%license COPYING
 %{_bindir}/miniAudicle*
 
 %changelog

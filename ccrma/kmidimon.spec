@@ -13,7 +13,6 @@ Patch0:  kmidimon-0.7.1-dtd.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Packager:     Fernando Lopez-Lezcano
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
@@ -73,7 +72,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files -f kmidimon.lang
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README TODO
+%doc AUTHORS ChangeLog INSTALL NEWS README TODO
+%license COPYING
 %{_bindir}/kmidimon
 %{_datadir}/doc/HTML/en/kmidimon
 %{_datadir}/icons/hicolor/*/apps/kmidimon*

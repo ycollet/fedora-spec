@@ -11,6 +11,8 @@ Patch2:  libprojectM-qt-2.1.0-paths.patch
 #Fix FTBFS with GCC6
 Patch3:  libprojectM-c++14.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: ftgl-devel cmake glew-devel
 BuildRequires: libgomp pulseaudio-libs-devel

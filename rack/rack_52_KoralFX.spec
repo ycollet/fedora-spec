@@ -32,6 +32,8 @@ URL:     https://github.com/koralfx/Koralfx-Modules
 Source0: Rack.tar.gz
 Source1: https://github.com/koralfx/Koralfx-Modules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel

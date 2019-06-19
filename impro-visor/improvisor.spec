@@ -15,12 +15,15 @@ Version:  %{maj}.%{min}
 Release:  1
 Summary:  Impro-Visor is a music notation program for jazz musicians
 License:  GPL
+
 URL:      http://www.cs.hmc.edu/~keller/jazz/improvisor/
 Source0:  %{name}_unix_%{maj}_%{min}.tar.gz
 Source1:  %{name}.sh
 Source2:  %{name}.png
 
 BuildArch: noarch
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: unzip
 BuildRequires: desktop-file-utils

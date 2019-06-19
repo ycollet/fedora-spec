@@ -13,9 +13,12 @@ Summary: A rack manager JACK
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/falkTX/Carla
+
 Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: carla-change-lib.sh
 Source2: carla-change-py.sh
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel

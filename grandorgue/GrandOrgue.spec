@@ -14,6 +14,8 @@ URL:     http://sourceforge.net/projects/ourorgan
 #  tar cvfz ourorgan-2294.tar.gz ourorgan-2294
 Source0:      ourorgan-%{revision}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
 BuildRequires: cmake

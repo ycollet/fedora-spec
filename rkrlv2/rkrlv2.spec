@@ -17,6 +17,8 @@ Source0: https://github.com/ssj71/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{s
 
 Patch0:  rkrlv2-0001-custom-install-path.patch
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: libsamplerate-devel

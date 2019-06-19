@@ -12,6 +12,8 @@ License: GPLv2+
 URL:     https://github.com/werman/noise-suppression-for-voice
 Source0: https://github.com/werman/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
 BuildRequires: alsa-lib-devel

@@ -17,6 +17,8 @@ Source2: tuxguitar3.desktop
 License: LGPLv2+
 Group:   Applications/Multimedia
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 Requires:      itext-core
 Requires:      java >= 1.7
 Requires:      jpackage-utils

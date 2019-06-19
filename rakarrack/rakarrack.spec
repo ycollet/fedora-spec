@@ -15,6 +15,8 @@ Patch0: rakarrack-0002-fix-format-use.patch
 # cd ..
 # tar cvfz rakarrack.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: alsa-utils
@@ -67,7 +69,8 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%doc AUTHORS ChangeLog INSTALL NEWS README
+%license COPYING
 %{_bindir}/*
 %{_datadir}/applications/*
 %{_datadir}/doc/*

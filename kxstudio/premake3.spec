@@ -5,7 +5,10 @@ Release: 2%{?dist}
 License: GPLv3+
 Group:   Developpment
 URL:     http://sourceforge.net/projects/premake/
+
 Source0: http://downloads.sourceforge.net/premake/premake-src-3.7.zip
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 

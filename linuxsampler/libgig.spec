@@ -7,14 +7,13 @@ Version: 4.1.0
 Release: 1%{?svn:.svn%{svn}.1}%{?dist}
 License: GPL
 Group:   System Environment/Libraries
+Distribution: Planet CCRMA
+Vendor:       Planet CCRMA
+
 Source0: http://download.linuxsampler.org/packages/libgig-%{version}%{?svn:-svn%{svn}}.tar.bz2
 URL:     http://www.linuxsampler.org/libgig/
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Packager:     Fernando Lopez-Lezcano
-Distribution: Planet CCRMA
-Vendor:       Planet CCRMA
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool pkgconfig
@@ -59,7 +58,8 @@ rmdir %{buildroot}%{_libdir}/libgig
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/html
+%doc AUTHORS ChangeLog NEWS README TODO doc/html
+%license COPYING
 %{_bindir}/*
 %{_libdir}/libgig.so*
 %{_libdir}/libakai.so*

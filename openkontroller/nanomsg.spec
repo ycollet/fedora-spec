@@ -14,6 +14,8 @@ Source0: https://github.com/nanomsg/nanomsg/archive/%{commit0}.tar.gz#/%{name}-%
 Group:   Applications/Multimedia
 License: GPLv2+
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
 

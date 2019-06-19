@@ -18,6 +18,8 @@ License: GPLv2+
 # original tarfile can be found here:
 Source0: https://github.com/wacossusca34/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++ make
 BuildRequires: libXrender-devel
 BuildRequires: libX11-devel

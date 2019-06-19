@@ -14,7 +14,10 @@ Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/ycollet/psi-plugins
+
 Source0: https://github.com/ycollet/psi-plugins/archive/%{commit0}.tar.gz#/psi-plugins-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel

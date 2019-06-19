@@ -10,7 +10,10 @@ Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/amsynth/amsynth
+
 Source0: https://github.com/amsynth/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -78,7 +81,8 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING INSTALL NEWS README
+%doc AUTHORS ChangeLog INSTALL NEWS README
+%license COPYING
 %{_bindir}/amsynth
 %{_datadir}/amsynth/*
 %{_datadir}/appdata/%{name}.appdata.xml
