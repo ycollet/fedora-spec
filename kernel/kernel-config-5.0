@@ -1,13 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.0.19 Kernel Configuration
+# Linux/x86 5.0.21 Kernel Configuration
 #
 
 #
-# Compiler: gcc (GCC) 7.3.1 20180712 (Red Hat 7.3.1-6)
+# Compiler: gcc (GCC) 9.1.1 20190503 (Red Hat 9.1.1-1)
 #
 CONFIG_CC_IS_GCC=y
-CONFIG_GCC_VERSION=70301
+CONFIG_GCC_VERSION=90101
 CONFIG_CLANG_VERSION=0
 CONFIG_CC_HAS_ASM_GOTO=y
 CONFIG_IRQ_WORK=y
@@ -6081,9 +6081,8 @@ CONFIG_USB_DEFAULT_PERSIST=y
 # CONFIG_USB_OTG_WHITELIST is not set
 CONFIG_USB_LEDS_TRIGGER_USBPORT=m
 CONFIG_USB_MON=y
-CONFIG_USB_WUSB=m
-CONFIG_USB_WUSB_CBAF=m
-# CONFIG_USB_WUSB_CBAF_DEBUG is not set
+# CONFIG_USB_WUSB is not set
+# CONFIG_USB_WUSB_CBAF is not set
 
 #
 # USB Host Controller Drivers
@@ -6112,7 +6111,7 @@ CONFIG_USB_SL811_HCD_ISO=y
 # CONFIG_USB_SL811_CS is not set
 # CONFIG_USB_R8A66597_HCD is not set
 # CONFIG_USB_WHCI_HCD is not set
-CONFIG_USB_HWA_HCD=m
+# CONFIG_USB_HWA_HCD is not set
 # CONFIG_USB_HCD_BCMA is not set
 # CONFIG_USB_HCD_SSB is not set
 # CONFIG_USB_HCD_TEST_MODE is not set
