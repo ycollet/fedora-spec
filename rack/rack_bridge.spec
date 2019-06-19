@@ -33,6 +33,8 @@ Source0: Rack.tar.gz
 Source1: https://github.com/VCVRack/Bridge/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: http://ycollette.free.fr/LMMS/vst.tar.bz2
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel

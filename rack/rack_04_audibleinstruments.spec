@@ -42,6 +42,8 @@ URL:     https://github.com/VCVRack/AudibleInstruments
 Source0: Rack.tar.gz
 Source1: AudibleInstruments.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel

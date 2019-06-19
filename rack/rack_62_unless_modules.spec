@@ -38,6 +38,8 @@ URL:     https://github.com/unlessgames/unless_modules.git
 Source0: Rack.tar.gz
 Source1: unless_modules.tar.gz
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
