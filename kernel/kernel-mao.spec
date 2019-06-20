@@ -21,7 +21,7 @@ Group:   System Environment/Kernel
 Vendor:  The Linux Community
 URL:     http://www.kernel.org
 
-Source0: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-%{kver}.tar.gz
+Source0: https://cdn.kernel.org/pub/linux/kernel/v%{kmaj}.x/linux-%{kver}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
 
 Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kver}-rt%{krt}.patch.gz
