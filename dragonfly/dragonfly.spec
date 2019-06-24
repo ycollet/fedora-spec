@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 c61b6690a892c503f3341db767a7d74b56970e29
-%global gittag0 1.1.4
+%global commit0 b0832a377b9aaf3f3aabce57b9cbee03eac8c597
+%global gittag0 2.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    dragonfly-reverb
-Version: 1.1.4
+Version: 2.0.0
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -17,7 +17,7 @@ URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 # git clone https://github.com/michaelwillis/dragonfly-reverb/
 # cd dragonfly-reverb
-# git checkout 1.1.4
+# git checkout 2.0.0
 # git submodule init
 # git submodule update
 # rm -rf .git dpf/.git
@@ -48,12 +48,16 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
 %install
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyReverb.lv2
+%__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyHallReverb.lv2
+%__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyRoomReverb.lv2
 %__install -m 755 -d %{buildroot}/%{_libdir}/vst
 
-cp bin/DragonflyReverb %{buildroot}/%{_bindir}/
-cp -r bin/DragonflyReverb.lv2/* %{buildroot}/%{_libdir}/lv2/DragonflyReverb.lv2/
-cp bin/DragonflyReverb-vst.so %{buildroot}/%{_libdir}/vst/
+cp bin/DragonflyHallReverb %{buildroot}/%{_bindir}/
+cp bin/DragonflyRoomReverb %{buildroot}/%{_bindir}/
+cp -r bin/DragonflyHallReverb.lv2/* %{buildroot}/%{_libdir}/lv2/DragonflyHallReverb.lv2/
+cp -r bin/DragonflyRoomReverb.lv2/* %{buildroot}/%{_libdir}/lv2/DragonflyRoomReverb.lv2/
+cp bin/DragonflyHallReverb-vst.so %{buildroot}/%{_libdir}/vst/
+cp bin/DragonflyRoomReverb-vst.so %{buildroot}/%{_libdir}/vst/
 
 %files
 %{_bindir}/*
@@ -61,6 +65,9 @@ cp bin/DragonflyReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Mon Jun 24 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-1
+- update to 2.0.0
+
 * Sun Jan 20 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.4-1
 - update to 1.1.4
 
