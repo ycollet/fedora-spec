@@ -7,7 +7,7 @@
 # package version
 %define krel  8
 # RT patch version
-%define krt   12
+%define krt   14
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -141,6 +141,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Wed Jun 26 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt14-8
+- update to 5.0.21-rt14-8
+
 * Wed Jun 19 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt12-8
 - update to 5.0.21-rt12-8
 
