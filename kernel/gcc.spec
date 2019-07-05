@@ -35,15 +35,15 @@ An "old" version of gcc used to compile the kernel RT
 
 %build
 
-./configure --enable-languages=c --prefix=%{buildroot}/opt/%{name}-%{version} --with-bugurl=http://bugzilla.redhat.com/bugzilla \
+./configure --enable-languages=c --prefix=/opt/%{name}-%{version} --with-bugurl=http://bugzilla.redhat.com/bugzilla \
 	--enable-checking=release --with-system-zlib --disable-gomp \
 	--with-gcc-major-version-only --program-suffix=-83 --disable-multilib
 
-make %{?_smp_mflags}
+make DESTDIR=%{buildroot} %{?_smp_mflags}
 
 %install
 
-make install
+make DESTDIR=%{buildroot} install
 
 chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/libcc1.so.0.0.0
 chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/liblsan.so.0.0.0
