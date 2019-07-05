@@ -23,6 +23,7 @@ BuildRequires: python2-devel python3-devel
 BuildRequires: glibc-devel
 BuildRequires: elfutils-devel
 BuildRequires: elfutils-libelf-devel
+BuildRequires: chrpath
 
 Requires: binutils
 
@@ -34,7 +35,7 @@ An "old" version of gcc used to compile the kernel RT
 
 %build
 
-./configure --enable-languages=c --prefix=/opt/%{name}-%{version} --with-bugurl=http://bugzilla.redhat.com/bugzilla \
+./configure --enable-languages=c --prefix=%{buildroot}/opt/%{name}-%{version} --with-bugurl=http://bugzilla.redhat.com/bugzilla \
 	--enable-checking=release --with-system-zlib --disable-gomp \
 	--with-gcc-major-version-only --program-suffix=-83 --disable-multilib
 
@@ -43,6 +44,14 @@ make %{?_smp_mflags}
 %install
 
 make install
+
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/libcc1.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/liblsan.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/libubsan.so.1.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/libtsan.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib64/libasan.so.5.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8/plugin/libcc1plugin.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8/plugin/libcp1plugin.so.0.0.0
 
 %clean
 rm -rf %{buildroot}
