@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Summary: gcc for kernel compilation
-Name:    gcc
+Name:    gcc-retro-8
 Version: 8.3.0
 Release: 1%{?dist}
 License: GPLv3+
