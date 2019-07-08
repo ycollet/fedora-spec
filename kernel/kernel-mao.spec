@@ -31,7 +31,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
-BuildRequires: gcc, binutils, redhat-rpm-config, bison, flex
+BuildRequires: gcc-retro-8
+#BuildRequires: gcc
+BuildRequires: binutils, redhat-rpm-config, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
 BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
 BuildRequires: grub2-tools
@@ -77,13 +79,20 @@ cp %{SOURCE1} .config
 sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
 echo "" > localversion-rt
 
+export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
+
 make oldconfig
 
 %build
 
+export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
+
 make clean && make %{?_smp_mflags}
 
 %install
+
+export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
+
 KBUILD_IMAGE=$(make image_name)
 
 %ifarch ia64
