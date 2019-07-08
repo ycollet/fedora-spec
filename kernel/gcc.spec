@@ -23,7 +23,7 @@ BuildRequires: python2-devel python3-devel
 BuildRequires: glibc-devel
 BuildRequires: elfutils-devel
 BuildRequires: elfutils-libelf-devel
-#BuildRequires: chrpath
+BuildRequires: chrpath
 
 Requires: binutils
 
@@ -45,13 +45,13 @@ make DESTDIR=%{buildroot} %{?_smp_mflags}
 
 make DESTDIR=%{buildroot} install
 
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libcc1.so.0.0.0
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/liblsan.so.0.0.0
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libubsan.so.1.0.0
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libtsan.so.0.0.0
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libasan.so.5.0.0
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8/plugin/libcc1plugin.so.0.0.0
-#chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8/plugin/libcp1plugin.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libcc1.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/liblsan.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libubsan.so.1.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libtsan.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib64/libasan.so.5.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8/plugin/libcc1plugin.so.0.0.0
+chrpath --delete $RPM_BUILD_ROOT/opt/gcc-retro-8-8.3.0/lib/gcc/x86_64-pc-linux-gnu/8/plugin/libcp1plugin.so.0.0.0
 
 %clean
 rm -rf %{buildroot}
