@@ -80,18 +80,21 @@ sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
 echo "" > localversion-rt
 
 export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
+export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
 
 make oldconfig
 
 %build
 
 export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
+export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
 
 make clean && make %{?_smp_mflags}
 
 %install
 
 export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
+export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
 
 KBUILD_IMAGE=$(make image_name)
 
