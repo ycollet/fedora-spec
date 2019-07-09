@@ -31,8 +31,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
+%if 0%{?fedora} && 0%{?fedora} >= 30
 BuildRequires: gcc-retro-8
-#BuildRequires: gcc
+%else
+BuildRequires: gcc
+%endif
 BuildRequires: binutils, redhat-rpm-config, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
 BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
@@ -79,22 +82,28 @@ cp %{SOURCE1} .config
 sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
 echo "" > localversion-rt
 
+%if 0%{?fedora} && 0%{?fedora} >= 30
 export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
 export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
+%endif
 
 make oldconfig
 
 %build
 
+%if 0%{?fedora} && 0%{?fedora} >= 30
 export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
 export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
+%endif
 
 make clean && make %{?_smp_mflags}
 
 %install
 
+%if 0%{?fedora} && 0%{?fedora} >= 30
 export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
 export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
+%endif
 
 KBUILD_IMAGE=$(make image_name)
 
