@@ -33,9 +33,8 @@ BuildRequires: kmod, patch, bash, tar
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
 %if 0%{?fedora} && 0%{?fedora} >= 30
 BuildRequires: gcc-retro-8
-%else
-BuildRequires: gcc
 %endif
+BuildRequires: gcc
 BuildRequires: binutils, redhat-rpm-config, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
 BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
