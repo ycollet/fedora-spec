@@ -7,7 +7,7 @@
 # package version
 %define krel  8
 # RT patch version
-%define krt   15
+%define krt   16
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -31,9 +31,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar
 BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
-%if 0%{?fedora} && 0%{?fedora} >= 30
-BuildRequires: gcc-retro-8
-%endif
 BuildRequires: gcc
 BuildRequires: binutils, redhat-rpm-config, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
@@ -81,28 +78,13 @@ cp %{SOURCE1} .config
 sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
 echo "" > localversion-rt
 
-%if 0%{?fedora} && 0%{?fedora} >= 30
-export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
-export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
-%endif
-
 make oldconfig
 
 %build
 
-%if 0%{?fedora} && 0%{?fedora} >= 30
-export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
-export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
-%endif
-
 make clean && make %{?_smp_mflags}
 
 %install
-
-%if 0%{?fedora} && 0%{?fedora} >= 30
-export PATH=/opt/gcc-retro-8-8.3.0/bin:$PATH
-export LD_LIBRARY_PATH=/opt/gcc-retro-8-8.3.0/%{_lib}:$LD_LIBRARY_PATH
-%endif
 
 KBUILD_IMAGE=$(make image_name)
 
@@ -161,6 +143,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Wed Jul 10 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt16-8
+- update to 5.0.21-rt16-8
+
 * Thu Jul 4 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt15-8
 - update to 5.0.21-rt15-8
 
