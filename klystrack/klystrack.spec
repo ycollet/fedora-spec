@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 d166aac653f5233f0383c6f4354f92086e517a52
-%global gittag0 v1.7.5
+%global commit0 1a0c8afc1187a0e7aa98074a63a6a360eec04b87
+%global gittag0 v1.7.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Klystrack is a chiptune tracker for making chiptune-like music on a modern computer.
 Name:    klystrack
-Version: 1.7.5
+Version: 1.7.6
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -15,7 +15,7 @@ URL:     http://kometbomb.github.io/klystrack/
 
 # git clone https://github.com/kometbomb/klystrack.git
 # cd klystrack
-# git checkout 1.7.5
+# git checkout 1.7.6
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -111,6 +111,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Wed Jul 17 2019 Yann Collette <ycollette dot nospam at free.fr> 1.7.6-1
+- update to 1.7.6-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.7.5-1
 - update for Fedora 29
 
