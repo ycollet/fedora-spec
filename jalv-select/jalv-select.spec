@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 f1e2e18f47128c9c33cd51fd9817043b0a59dac1
+%global commit0 c8f53207b0feb110d35b2bf5b6fd89dc148f27e7
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    jalv_select
-Version: 1.2.0.%{shortcommit0}
+Version: 1.3.0.%{shortcommit0}
 Release: 2%{?dist}
 Summary: A LV2 synthetizer launcher for Jack audio
 URL:     https://github.com/brummer10/jalv_select
@@ -59,10 +59,8 @@ if [ $1 -eq 0 ] ; then
   update-mime-database %{_datadir}/mime &> /dev/null || :
 fi
 
-
 %posttrans
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 
 %files
 %doc README.md
@@ -73,6 +71,9 @@ fi
 %{_mandir}/man1/jalv.select.*
 
 %changelog
+* Wed Jul 17 2019 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-2
+- update to 1.3.0
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-2
 - update for Fedora 29
 
