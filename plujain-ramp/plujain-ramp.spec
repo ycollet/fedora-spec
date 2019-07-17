@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 5f26b08972b6e007de03fcbf7d26e2c9215ff197
+%global commit0 1bc1fed211e140c7330d6035122234afe78e5257
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    plujain-ramp
-Version: 1.0.0
+Version: 1.1.3
 Release: 1%{?dist}
 Summary: Plujain-Ramp is a mono rhythmic tremolo LV2 Audio Plugin
 License: GPLv2+
@@ -50,5 +50,8 @@ make DESTDIR=%{buildroot} INSTALL_PATH=/usr/%{_lib}/lv2 install
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Jul 17 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-1
+- update to 1.1.3
+
 * Fri Apr 19 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial version of the spec file
