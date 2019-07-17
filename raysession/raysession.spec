@@ -2,12 +2,12 @@
 %global __python %{__python3}
 
 # Global variables for github repository
-%global commit0 1c6b6b9de7093d1b50891596c0439767880b5590
-%global gittag0 0.7.1
+%global commit0 2f9796d5d82200516efe23dadd052f76ce1197c5
+%global gittag0 0.7.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    RaySession
-Version: 0.7.1
+Version: 0.7.2
 Release: 1%{?dist}
 Summary: A JACK session manager
 
@@ -66,5 +66,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/raysession/*
 
 %changelog
+* Wed Jul 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7.2-1
+- update to 0.7.2-1
+
 * Sat May 4 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7.1-1
 - Initial spec file
