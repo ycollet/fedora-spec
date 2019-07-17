@@ -1,23 +1,23 @@
 # Global variables for github repository
-%global commit0 63f19485984c002caddec734a9ee94faad2acb55
-%global gittag0 v0.6
+%global commit0 2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
+%global gittag0 v0.7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 # git clone https://github.com/brummer10/GxPlugins.lv2.git
-# mv GxPlugins.lv2 GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55
-# cd GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55
-# git checkout 63f19485984c002caddec734a9ee94faad2acb55
+# mv GxPlugins.lv2 GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
+# cd GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
+# git checkout 2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
 # cd ..
-# tar cvfz GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55.tar.gz GxPlugins.lv2.63f19485984c002caddec734a9ee94faad2acb55
+# tar cvfz GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8.tar.gz GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
 
 Name:    GxPlugins
-Version: 0.6.%{shortcommit0}
+Version: 0.7.%{shortcommit0}
 Release: 1%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
 
@@ -232,6 +232,78 @@ Group:   Applications/Multimedia
 %description -n lv2-GxValveCaster-plugin
 The ValveCaster is a little tube boost pedal simulation. It adds some overdrive and tube compression along with boosting the signal.
 
+%package -n lv2-GxBaJaTubeDriver-plugin
+Summary: Tube based overdrive pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxBaJaTubeDriver-plugin
+Tube based overdrive pedal simulation
+
+%package -n lv2-GxBlueAmp-plugin
+Summary: Single - ended head amplifier simulation inspired by late 1950s Fender “Princeton” and “Champ” amplifier designs, it delivers tight bass, clean mids and highs.
+Group:   Applications/Multimedia
+%description -n lv2-GxBlueAmp-plugin
+Single - ended head amplifier simulation inspired by late 1950s Fender “Princeton” and “Champ” amplifier designs, it delivers tight bass, clean mids and highs.
+
+%package -n lv2-GxClubDrive-plugin
+Summary: Overdrive Pedal Simulation based on a EF86 Pentode Valve Simulation.
+Group:   Applications/Multimedia
+%description -n lv2-GxClubDrive-plugin
+Overdrive Pedal Simulation based on a EF86 Pentode Valve Simulation.
+
+%package -n lv2-GxEpic-plugin
+Summary: Simulation of a class A electric guitar valve amplifier
+Group:   Applications/Multimedia
+%description -n lv2-GxEpic-plugin
+Simulation of a class A electric guitar valve amplifier
+
+%package -n lv2-GxEternity-plugin
+Summary: This low compression overdrive pedal is perfect for any style of music that requires natural sounding overdrive
+Group:   Applications/Multimedia
+%description -n lv2-GxEternity-plugin
+This low compression overdrive pedal is perfect for any style of music that requires natural sounding overdrive
+
+%package -n lv2-GxLuna-plugin
+Summary: Gnarly overdrive pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxLuna-plugin
+Gnarly overdrive pedal simulation
+
+%package -n lv2-GxPlexi-plugin
+Summary: Power Amp simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxPlexi-plugin
+Power Amp simulation
+
+%package -n lv2-GxShakaTube-plugin
+Summary: A overdrive tube pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxShakaTube-plugin
+A overdrive tube pedal simulation
+
+%package -n lv2-GxSloopyBlue-plugin
+Summary: Overdrive pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxSloopyBlue-plugin
+Overdrive pedal simulation
+
+%package -n lv2-GxSupersonic-plugin
+Summary: Tube amp simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxSupersonic-plugin
+Tube amp simulation
+
+%package -n lv2-GxTimRay-plugin
+Summary: Overdrive pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxTimRay-plugin
+Overdrive pedal simulation
+
+%package -n lv2-GxUltraCab-plugin
+Summary: Cabinet simulator Lv2 stereo plugin
+Group:   Applications/Multimedia
+%description -n lv2-GxUltraCab-plugin
+Cabinet simulator Lv2 stereo plugin
+
 %prep
 %setup -qn GxPlugins.lv2.%{commit0}
 
@@ -339,7 +411,46 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %files -n lv2-GxBottleRocket-plugin
 %{_libdir}/lv2/gx_bottlerocket.lv2/*
 
+%files -n lv2-GxBaJaTubeDriver-plugin
+%{_libdir}/lv2/gx_bajatubedriver.lv2/*
+
+%files -n lv2-GxBlueAmp-plugin
+%{_libdir}/lv2/gx_blueamp.lv2/*
+
+%files -n lv2-GxClubDrive-plugin
+%{_libdir}/lv2/gx_clubdrive.lv2/*
+
+%files -n lv2-GxEpic-plugin
+%{_libdir}/lv2/gx_epic.lv2/*
+
+%files -n lv2-GxEternity-plugin
+%{_libdir}/lv2/gx_eternity.lv2/*
+
+%files -n lv2-GxLuna-plugin
+%{_libdir}/lv2/gx_luna.lv2/*
+
+%files -n lv2-GxPlexi-plugin
+%{_libdir}/lv2/gx_plexi.lv2/*
+
+%files -n lv2-GxShakaTube-plugin
+%{_libdir}/lv2/gx_shakatube.lv2/*
+
+%files -n lv2-GxSloopyBlue-plugin
+%{_libdir}/lv2/gx_sloopyblue.lv2/*
+
+%files -n lv2-GxSupersonic-plugin
+%{_libdir}/lv2/gx_supersonic.lv2/*
+
+%files -n lv2-GxTimRay-plugin
+%{_libdir}/lv2/gx_timray.lv2/*
+
+%files -n lv2-GxUltraCab-plugin
+%{_libdir}/lv2/gx_ultracab.lv2/*
+
 %changelog
+* Wed Jul 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7
+- Update to v0.7
+
 * Tue Jan 22 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6
 - Update to v0.6
 
