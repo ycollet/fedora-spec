@@ -1,6 +1,6 @@
 Summary: Software Synthesizer
 Name:    drumgizmo
-Version: 0.9.16
+Version: 0.9.17
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -58,12 +58,15 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README
 %license COPYING
-%{_bindir}/drumgizmo
+%{_bindir}/*
 %{_libdir}/*
 %{_datadir}/man/*
 %exclude %{_bindir}/dgreftest
 
 %changelog
+* Thu Jul 18 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.17-2
+- update to 0.9.17-2
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.9.16-2
 - update for Fedora 29
 
