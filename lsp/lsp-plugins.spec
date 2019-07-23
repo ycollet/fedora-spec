@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 663a4f1422527c07c3a1e1e01b408392348a1691
+%global commit0 543e17e9de3b8dc9de6e31438d1223d792054626
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,14 +9,13 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.7
+Version: 1.1.10
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/sadko4u/lsp-plugins
 
 Source0: https://github.com/sadko4u/lsp-plugins/archive/%{commit0}.tar.gz#/lsp-plugins-%{shortcommit0}.tar.gz
-Source1: Makefile.lsp
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -30,6 +29,7 @@ BuildRequires: expat-devel
 BuildRequires: mesa-libGLU-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: php-cli
+BuildRequires: chrpath
 
 %description
 LSP (Linux Studio Plugins) is a collection of open-source plugins
@@ -40,8 +40,6 @@ currently compatible with LADSPA, LV2 and LinuxVST formats.
 
 %build
 
-cp %{SOURCE1} Makefile
-
 %{__make} DESTDIR=%{buildroot} PREFIX=/usr BUILD_PROFILE=%{_arch} CC_FLAGS=-DLSP_NO_EXPERIMENTAL BIN_PATH=%{_bindir} LIB_PATH=%{_libdir} DOC_PATH=%{_docdir}
 
 %install
@@ -49,6 +47,12 @@ cp %{SOURCE1} Makefile
 %{__rm} -rf %{buildroot}
 
 %{__make} DESTDIR=%{buildroot} PREFIX=/usr BUILD_PROFILE=%{_arch} CC_FLAGS=-DLSP_NO_EXPERIMENTAL BIN_PATH=/usr/bin LIB_PATH=/usr/lib64 DOC_PATH=/usr/share/doc install
+
+chrpath --delete $RPM_BUILD_ROOT/usr/bin/*
+chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/ladspa/*.so
+chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/lsp-plugins/*.so
+chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/lv2/lsp-plugins.lv2/*.so
+chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.so
 
 %clean
 
@@ -61,6 +65,9 @@ cp %{SOURCE1} Makefile
 %{_datadir}/*
 
 %changelog
+* Tue Jul 23 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.10-1
+- update to 1.1.10
+
 * Mon Mar 18 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.7-1
 - update to 1.1.7
 
