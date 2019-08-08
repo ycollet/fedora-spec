@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 43e782fcd38b365354410243190df5838f472d34
+%global commit0 ad49c9182d9d7c1ed25e0319c0e48935b22b0774
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    redkite
-Version: 0.5.2
+Version: 0.6.1
 Release: 1%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://github.com/quamplex/redkite
@@ -46,6 +46,8 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Thu Aug 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-1
+- update to 0.6.1
 * Mon May 27 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.2-1
 - switch to 0.5.2
 * Tue May 21 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-1
