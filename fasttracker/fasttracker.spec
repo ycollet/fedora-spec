@@ -1,11 +1,11 @@
 Name:          fasttracker2
-Version:       0.1b164
+Version:       0.1b166
 Release:       1%{?dist}
 Summary:       Module tracker software for creating music
 Group:         Applications/Multimedia
 License:       GPLv3+
 URL:           https://16-bits.org/ft2.php
-Source0:       https://16-bits.org/ft2clone-b164-code.zip
+Source0:       https://16-bits.org/ft2clone-b166-code.zip
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 %{_bindir}/ft2
 
 %changelog
+* Sat Aug 17 2019 Yann Collette <ycollette dot nospam at free dot fr> 0.1b166-1
+- update to 0.1b166
+
 * Mon Aug 5 2019 Yann Collette <ycollette dot nospam at free dot fr> 0.1b164-1
 - update to 0.1b164
 

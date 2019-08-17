@@ -2,15 +2,15 @@
 
 Summary: ProTracker is a chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker
-Version: 2.3r188
+Version: 2.3r191
 Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://16-bits.org/pt.php
-Source0: protracker-r188.tar.gz
+Source0: protracker-r191.tar.gz
 
-# svn export -r 188 https://svn.code.sf.net/p/protracker/code/ protracker-r188
-# tar cvfz protracker-r188.tar.gz protracker-r188/*
+# svn export -r 191 https://svn.code.sf.net/p/protracker/code/ protracker-r191
+# tar cvfz protracker-r191.tar.gz protracker-r191/*
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -24,7 +24,7 @@ BuildRequires: SDL2-devel
 ProTracker is a chiptune tracker for making chiptune-like music on a modern computer.
 
 %prep
-%setup -qn %{name}-r188
+%setup -qn %{name}-r191
 
 %build
 
@@ -86,6 +86,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Sat Aug 17 2019 Yann Collette <ycollette dot nospam at free.fr> 2.3r191-2
+- update to revision 191
+
 * Wed Jul 17 2019 Yann Collette <ycollette dot nospam at free.fr> 2.3r188-2
 - update to revision 188
 
