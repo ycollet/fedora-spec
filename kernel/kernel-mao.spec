@@ -1,6 +1,3 @@
-# To test some patches. To be removed otherwise.
-# %global _default_patch_fuzz 2
-
 # Kernel major version
 %define kmaj  5
 # Kernel minor version
@@ -28,7 +25,6 @@ Source0: https://cdn.kernel.org/pub/linux/kernel/v%{kmaj}.x/linux-%{kver}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
 
 Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kver}-rt%{krt}.patch.gz
-Patch1: dma-buf-Use-seqlock_t-instread-disabling-preemption.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -77,7 +73,6 @@ against the %{version} kernel package.
 %setup -q -n linux-%{kver}
 
 %patch0 -p1
-%patch1 -p1
 
 cp %{SOURCE1} .config
 sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
