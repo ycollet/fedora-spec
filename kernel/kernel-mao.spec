@@ -1,13 +1,13 @@
 # Kernel major version
 %define kmaj  5
 # Kernel minor version
-%define kmin  0
+%define kmin  2
 # Kernel patch version
-%define kpat  21
-# package version
-%define krel  8
+%define kpat  9
 # RT patch version
-%define krt   16
+%define krt   3
+# package version
+%define krel  9
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -143,8 +143,11 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
-* Wed Jul 10 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt16-8
-- update to 5.0.21-rt16-8
+* Sun Aug 18 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.9-rt3-9
+- update to 5.2.9-rt3-9
+
+* Sat Aug 17 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt16-9
+- update to 5.0.21-rt16-9 - fix a radeon / dma bug
 
 * Thu Jul 4 2019 Yann Collette <ycollette.nospam@free.fr> - 5.0.21-rt15-8
 - update to 5.0.21-rt15-8
