@@ -6,7 +6,7 @@
 Summary: Audio recorder
 Name:    timemachine
 Version: 0.3.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/swh/timemachine
@@ -42,8 +42,7 @@ graph.
 
 %build
 ./autogen.sh
-export CXXFLAGS="%{build_cxxflags}"
-%configure
+%configure CFLAGS="%{build_cflags} -DDEFAULT_FORMAT=\"wav\""
 %{__make} %{_smp_mflags}
 
 %install
@@ -74,5 +73,8 @@ EOF
 %{_datadir}/applications/*
 
 %changelog
+* Wed Aug 21 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-2
+- Set default format to wav instead of w64
+
 * Thu May 9 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-1
 - Initial spec file
