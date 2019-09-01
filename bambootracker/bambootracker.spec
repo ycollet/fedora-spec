@@ -2,13 +2,13 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 8fcc079d3f44f96a0ede7a421d7d8a6a744f394a
-%global gittag0 v0.2.2
+%global commit0 e8ede556cf6c31d1f68314fdb54a7c0e53b8a00b
+%global gittag0 v0.2.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: BambooTracker is a music tracker for the Yamaha YM2608 (OPNA) sound chip which was used in NEC PC-8801/9801 series computers.
 Name:    BambooTracker
-Version: 0.2.2
+Version: 0.2.3
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -52,7 +52,7 @@ cd ..
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
 %__install -m 644 BambooTracker.desktop %{buildroot}%{_datadir}/applications/
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/demos/
-%__install -m 644 demos/* %{buildroot}%{_datadir}/%{name}/demos/
+cp -r demos/* %{buildroot}%{_datadir}/%{name}/demos/
 %__install -m 755 -d %{buildroot}/%{_datadir}/man/man1
 %__install -m 644 BambooTracker.1 %{buildroot}%{_datadir}/man/man1/%{name}.1
 %__install -m 755 -d %{buildroot}/%{_datadir}/man/fr/man1
@@ -78,7 +78,7 @@ update-desktop-database &> /dev/null || :
 %postun
 update-desktop-database &> /dev/null || :
 if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
+    update-mime-database %{_datadir}/mime &> /dev/null || :
 fi
 
 %posttrans
@@ -91,6 +91,9 @@ fi
 %{_datadir}/*
 
 %changelog
+* Sun Sep 1 2019 Yann Collette <ycollette dot nospam at free.fr> 0.2.3-1
+- Update to version 0.2.3
+
 * Thu Jun 27 2019 Yann Collette <ycollette dot nospam at free.fr> 0.2.2-1
 - Update to version 0.2.2
 
