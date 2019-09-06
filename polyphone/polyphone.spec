@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:    polyphone
-Version: 2.0.1
+Version: 2.1.0
 Release: 1%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
@@ -10,11 +10,11 @@ Group:   Applications/Multimedia
 
 License: GPLv2+
 
-# Download polyphone-2.0-src.zip
-# unzip polyphone-2.0-src.zip
-# mv trunk polyphone-2.0.1-src
-# rm polyphone-2.0.1-src.zip
-# zip -r polyphone-2.0.1-src.zip polyphone-2.0.1-src/*
+# Download polyphone-2.1-src.zip
+# unzip polyphone-2.1-src.zip
+# mv source polyphone-2.1.0-src
+# rm polyphone-2.1-src.zip
+# zip -r polyphone-2.1.0-src.zip polyphone-2.1.0-src/*
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -38,6 +38,7 @@ BuildRequires: libogg-devel
 BuildRequires: zlib-devel
 BuildRequires: glib2-devel
 BuildRequires: openssl-devel
+BuildRequires: flac-devel
 
 %description
 Polyphone is a free software for editing soundfonts in format sf2. These files contain a multitude of audio samples put together and configured so as to form musical instruments that can be used by synthesizers such as fluidsynth and played using a MIDI keyboard.
@@ -100,7 +101,10 @@ fi
 %{_datadir}/icons/hicolor/*
 
 %changelog
-* Tue Jan 24 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.1-2
+* Fri Sep 6 2019 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-1
+- update to 2.1.0
+
+* Thu Jan 24 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.1-2
 - fix permission
 - update to 2.0.1
 
