@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 a6b47628866798d3bed9f293abfbb485cb9635ae
+%global commit0 1159a2df09dc369ffdfebfe95cc2e48f17bebfda
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    zrythm
-Version: 0.6.039.%{shortcommit0}
+Version: 0.6.323.%{shortcommit0}
 Release: 1%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -57,6 +57,9 @@ DESTDIR=%{buildroot} ninja install
 %{_datadir}/*
 
 %changelog
+* Sun Sep 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.323-1
+- update to 0.6.323
+
 * Wed Aug 21 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.039-1
 - update to 0.6.039
 
