@@ -1,20 +1,15 @@
 %global debug_package %{nil}
 
-# Global variables for github repository
-%global commit0 1159a2df09dc369ffdfebfe95cc2e48f17bebfda
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    zrythm
-Version: 0.6.323.%{shortcommit0}
-Release: 1%{?dist}
+Version: 0.6.323
+Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-%{commit0}.tar.gz
+Source0: https://download.savannah.nongnu.org/releases/zrythm/zrythm-%{version}.tar.xz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -31,6 +26,8 @@ BuildRequires: qt5-qtbase-devel
 BuildRequires: fftw-devel
 BuildRequires: libgtop2-devel
 BuildRequires: meson
+BuildRequires: help2man
+BuildRequires: python3-sphinx
 
 %description
 Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use. Zrythm sets itself apart from other DAWs by allowing extensive automation via built-in LFOs and envelopes and intuitive MIDI or audio editing and arranging via clips.
@@ -39,13 +36,16 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%setup -qn zrythm-%{commit0}
+%setup -qn zrythm-%{version}
+
+sed -i -e "s/sphinx_build,/'sphinx-build-3',/g" doc/user/meson.build
 
 %build
 
-DESTDIR=%{buildroot} VERBOSE=1 meson --prefix=/usr build
-
+mkdir build
 cd build
+DESTDIR=%{buildroot} VERBOSE=1 meson .. -Dmanpage=true -Duser_manual=true --buildtype release --prefix /usr
+
 DESTDIR=%{buildroot} VERBOSE=1 ninja 
 
 %install 
