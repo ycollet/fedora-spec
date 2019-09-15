@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.6.323
+Version: 0.6.384
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -57,6 +57,9 @@ DESTDIR=%{buildroot} ninja install
 %{_datadir}/*
 
 %changelog
+* Sun Sep 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.384-2
+- update to 0.6.384
+
 * Sun Sep 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.323-1
 - update to 0.6.323
 
