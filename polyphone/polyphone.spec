@@ -1,8 +1,13 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
+# Global variables for github repository
+%global commit0 1087b9aea62252382fc58cc31cab2141ea605a96
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Name:    polyphone
-Version: 2.1.0
+Version: 2.1.1
 Release: 1%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
@@ -10,15 +15,9 @@ Group:   Applications/Multimedia
 
 License: GPLv2+
 
-# Download polyphone-2.1-src.zip
-# unzip polyphone-2.1-src.zip
-# mv source polyphone-2.1.0-src
-# rm polyphone-2.1-src.zip
-# zip -r polyphone-2.1.0-src.zip polyphone-2.1.0-src/*
-
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0: %{name}-%{version}-src.zip
+Source0: https://github.com/davy7125/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: polyphone.desktop
 Source2: polyphone.xml
 
@@ -49,14 +48,18 @@ The goal of Polyphone is to provide:
 * Polyphone is licensed under GNU General Public License. Anyone may thus access the source code, and is welcome to help in the development of the program.
 
 %prep
-%setup0 -qn %{name}-%{version}-src
+%setup -qn %{name}-%{commit0}
 
 %build
+
+cd sources
 
 qmake-qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
+
+cd sources
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
 %__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
@@ -94,13 +97,16 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc changelog README
+%doc sources/changelog README.md sources/README LICENSE.txt
 %{_bindir}/polyphone
 %{_datadir}/applications/polyphone.desktop
 %{_datadir}/mime/packages/polyphone.xml
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Mon Sep 16 2019 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-1
+- update to 2.1.1
+
 * Fri Sep 6 2019 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-1
 - update to 2.1.0
 
