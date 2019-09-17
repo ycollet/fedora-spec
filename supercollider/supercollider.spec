@@ -1,5 +1,5 @@
 #
-# https://github.com/supercollider/supercollider/releases/tag/Version-3.10.2
+# https://github.com/supercollider/supercollider/releases/tag/Version-3.10.3
 
 # build options
 %define cmakeopts -DCMAKE_C_FLAGS="%{optflags} -fext-numeric-literals" -DCMAKE_CXX_FLAGS="%{optflags} -fext-numeric-literals"
@@ -11,7 +11,7 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
-Version: 3.10.2
+Version: 3.10.3
 Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -189,6 +189,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Tue Sep 17 2019 Yann Collette <ycollette.nospam@free.fr> 3.10.3-1
+- update to 3.10.3
+
 * Mon Mar 25 2019 Yann Collette <ycollette.nospam@free.fr> 3.10.2-1
 - update to 3.10.2
 
