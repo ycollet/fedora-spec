@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.6.384
+Version: 0.6.422
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -9,7 +9,8 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://download.savannah.nongnu.org/releases/zrythm/zrythm-%{version}.tar.xz
+#Source0: https://download.savannah.nongnu.org/releases/zrythm/zrythm-%{version}.tar.xz
+Source0: https://download-mirror.savannah.gnu.org/releases/zrythm/zrythm-%{version}.tar.xz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -57,6 +58,9 @@ DESTDIR=%{buildroot} ninja install
 %{_datadir}/*
 
 %changelog
+* Fri Sep 20 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.422-2
+- update to 0.6.422
+
 * Sun Sep 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.384-2
 - update to 0.6.384
 
