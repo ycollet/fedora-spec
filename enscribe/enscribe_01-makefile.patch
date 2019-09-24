@@ -1,0 +1,24 @@
+Subject: Adjust makefile
+Author: Nick Rusnov (assumed)
+
+    * Use CFLAGS and other variables to build
+    * Use DESTDIR for installation
+
+--- a/makefile
++++ b/makefile
+@@ -1,10 +1,9 @@
+ #No nonsense makefile
+ #Make sure you have libgd and libgd-devel installed!
+ 
+-all:
+-	PKG_CONFIG_PATH=$(PKG_CONFIG_PATH):/usr/local/lib/pkgconfig;
+-	gcc `pkg-config --cflags --libs sndfile` -Wall -o enscribe enscribe.c -lgd -lpng -lz -ljpeg -lfreetype -lm
+-
+-install:
+-	install enscribe /usr/local/bin/enscribe
++all: enscribe
++enscribe:
++	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $$(pkg-config --cflags libs sndfile) -o enscribe enscribe.c -lgd -lm $$(pkg-config --libs sndfile)
+ 
++install: enscribe
++	install -D enscribe $(DESTDIR)/usr/bin/enscribe

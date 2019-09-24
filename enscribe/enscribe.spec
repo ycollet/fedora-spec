@@ -8,6 +8,9 @@ License: GPL
 Group:   Applications/Multimedia
 URL:     http://www.coppercloudmusic.com/enscribe/
 Source0: http://coppercloudmusic.com/enscribe/enscribe-%{version}.tgz
+Patch0: enscribe_01-makefile.patch
+Patch1: enscribe_02-FFTblocksizenorm.patch
+Patch2: enscribe_03-fix-typo.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -31,17 +34,24 @@ sections, but they can also ruin an otherwise good song too.
 %prep
 %setup -q
 
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+
 # Force Fedora's optflags
 sed -i 's|gcc |gcc %{optflags} |' makefile
 
 %build
 rm -rf $RPM_BUILD_ROOT
 
-make PREFIX=%{_prefix}
+make DESTDIR=%{buildroot} PREFIX=%{_prefix}
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{_bindir}/
-%__install -m 644 enscribe %{buildroot}%{_bindir}/enscribe
+
+make DESTDIR=%{buildroot} PREFIX=%{_prefix} install
+
+# mkdir -p $RPM_BUILD_ROOT%{_bindir}/
+# %__install -m 644 enscribe %{buildroot}%{_bindir}/enscribe
 
 %clean
 rm -rf $RPM_BUILD_ROOT

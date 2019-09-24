@@ -1,0 +1,30 @@
+Subject: Normalize the two FFT blocksize arguments
+Author: Nick Rusnov <nickrusnov@debian.org>
+
+    Upstream set one to be able to go to 7, but not the other, the
+    are the same now.
+
+--- a/enscribe.c
++++ b/enscribe.c
+@@ -195,6 +195,9 @@
+ 	printf("                           2 = 2048\n");
+ 	printf("                           3 = 4096\n");
+ 	printf("                           4 = 8192\n");
++	printf("                           5 = 16384\n");
++	printf("                           6 = 32768\n");
++	printf("                           7 = 65536\n");
+ 	printf("\n");
+ //	printf("  -t text                Print text instead of image\n");
+ //	printf("  -fs=[font size]        Sets text font size (0 to 4)\n");
+@@ -488,9 +491,9 @@
+ 					{
+ 					strncpy(arg,&(argv[i][6]),255);
+ 					j=atoi(arg);
+-					if ((j<0) || (j>4))
++					if ((j<0) || (j>7))
+ 						{
+-						fprintf(stderr,"Error: You need to specify a transform size between 0 and 4.\n");
++						fprintf(stderr,"Error: You need to specify a transform size between 0 and 7.\n");
+ 						exit(BAD_ARGS);
+ 						}
+ 					else

@@ -1,0 +1,29 @@
+Subject: Fix typos found by lintian
+Author: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+
+--- a/README
++++ b/README
+@@ -128,8 +128,8 @@
+   -hiss, -h              Uses hissing rather than buzzing
+   -oversample, -o        4X oversample audio (adds hiss)
+ 
+-  -mono, -m              Produce mono ouput audio file.
+-  -stereo, -s            Produce stereo ouput audio file (default).
++  -mono, -m              Produce mono output audio file.
++  -stereo, -s            Produce stereo output audio file (default).
+   -rate=[rate]           Set audio sample rate (44100 default).
+ 
+   -wav                   Output wav audio (default)
+--- a/enscribe.c
++++ b/enscribe.c
+@@ -207,8 +207,8 @@
+ 	printf("  -hiss, -h              Uses hissing rather than buzzing\n");
+ 	printf("  -oversample, -o        4X oversample audio (adds hiss)\n");
+ 	printf("\n");
+-	printf("  -mono, -m              Produce mono ouput audio file.\n");
+-	printf("  -stereo, -s            Produce stereo ouput audio file (default).\n");
++	printf("  -mono, -m              Produce mono output audio file.\n");
++	printf("  -stereo, -s            Produce stereo output audio file (default).\n");
+ 	printf("  -rate=[rate]           Set audio sample rate (44100 default).\n");
+ 	printf("\n");
+ 	printf("  -wav                   Output wav audio (default)\n");
