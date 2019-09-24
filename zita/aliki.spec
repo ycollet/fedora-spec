@@ -25,11 +25,11 @@ aliki is used to measure Impulse Responses using a sine sweep and deconvolution.
 %prep
 %setup -q
 
-%build
-rm -rf $RPM_BUILD_ROOT
-
 # Force Fedora's optflags
 sed -i 's|-O2|%{optflags}|' source/Makefile
+
+%build
+rm -rf $RPM_BUILD_ROOT
 
 pushd source
 make PREFIX=%{_prefix}
