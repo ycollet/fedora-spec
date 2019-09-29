@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 b20eeebdce2dc676adc6e39d472f7224c973f3d0
+%global commit0 8b47a7bcd1f7cdce772297b6fa9bb4387c959127
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    picoloop
-Version: 0.77d.%{shortcommit0}
+Version: 0.77e.%{shortcommit0}
 Release: 1%{?dist}
 Summary: An audio sequencer
 
@@ -72,7 +72,7 @@ Categories=Audio;
 EOF
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 picoloop/PatternPlayer_debian_Rtaudio %{buildroot}%{_bindir}/%{name}
+%__install -m 644 picoloop/PatternPlayer_debian_RtAudio_sdl20 %{buildroot}%{_bindir}/%{name}
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/patch/MDADrum/
 %__install -m 644 picoloop/patch/MDADrum/create_patchlist.sh %{buildroot}%{_datadir}/%{name}/patch/MDADrum/
@@ -141,6 +141,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Sun Sep 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.77e
+- update to 0.77e
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d
 - update for Fedora 29
 
