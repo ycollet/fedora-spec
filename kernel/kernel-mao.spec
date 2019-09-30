@@ -3,9 +3,9 @@
 # Kernel minor version
 %define kmin  2
 # Kernel patch version
-%define kpat  14
+%define kpat  17
 # RT patch version
-%define krt   7
+%define krt   9
 # package version
 %define krel  9
 
@@ -143,6 +143,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Mon Sep 30 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.17-rt9-9
+- update to 5.2.17-rt9-9
+
 * Sat Sep 14 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.14-rt7-9
 - update to 5.2.14-rt7-9
 
