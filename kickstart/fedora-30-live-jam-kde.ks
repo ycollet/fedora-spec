@@ -19,7 +19,7 @@ xconfig --startxonboot
 # Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 8192 --fstype="ext4"
+part / --size 16384 --fstype="ext4"
 services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 # Shutdown after installation
@@ -28,9 +28,6 @@ rootpw --plaintext lescuizines
 
 #enable threaded irqs
 bootloader --location=none --append="threadirqs nopti"
-
-repo --name=ccrma      --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetccrma/$releasever/$basearch
-repo --name=ccrma-core --baseurl=http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/$releasever/$basearch
 
 repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
 repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
@@ -352,9 +349,9 @@ echo 'File created by kickstart. See systemd-update-done.service(8).' \
 # See bug 1317709
 rm -f /boot/*-rescue*
 
-# Disable network service here, as doing it in the services line
-# fails due to RHBZ #1369794
-/sbin/chkconfig network off
+#YC 30 # Disable network service here, as doing it in the services line
+#YC 30 # fails due to RHBZ #1369794
+#YC 30 /sbin/chkconfig network off
 
 # Remove machine-id on pre generated images
 rm -f /etc/machine-id
@@ -363,7 +360,7 @@ touch /etc/machine-id
 %end
 
 %post --nochroot
-cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
+#YC 30 cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
 
 # only works on x86, x86_64
 if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
@@ -429,6 +426,7 @@ grub2-efi
 
 # unlock default keyring. FIXME: Should probably be done in comps
 gnome-keyring-pam
+fedora-release
 
 # save some space
 -autofs
@@ -450,7 +448,8 @@ gnome-keyring-pam
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
--libcrypt-nss
+#-libcrypt-nss
+python3
 
 # alsa
 alsa-firmware
@@ -499,7 +498,7 @@ swami
 synthv1
 samplv1
 drumkv1
-ams
+#YC 30 ams
 aeolus
 minicomputer
 phasex
@@ -548,7 +547,7 @@ ladspa-cmt-plugins
 ladspa-fil-plugins
 ladspa-mcp-plugins
 ladspa-rev-plugins
-ladspa-swh-plugins
+#ladspa-swh-plugins
 ladspa-tap-plugins
 ladspa-vco-plugins
 # F26 - not available - ladspa-vocoder-plugins
@@ -557,8 +556,8 @@ ladspa-wasp-plugins
 # lv2 plugins
 lv2
 lv2-avw-plugins
-lv2-fil-plugins
-lv2-invada-plugins
+#YC 30 lv2-fil-plugins
+#YC 30 lv2-invada-plugins
 lv2-kn0ck0ut
 lv2-ll-plugins
 swh-lv2
@@ -617,7 +616,7 @@ mscore
 lilypond
 
 # audio utilities
-jamin
+#YC 30 jamin
 lash
 jack_capture
 jaaa
@@ -652,7 +651,6 @@ supercollider
 supercollider-sc3-plugins
 supercollider-vim
 sonic-pi
-#YC: temporary missing pd-extended
 lmms-mao
 faust
 faust-tools
@@ -905,6 +903,7 @@ alreadyMigrated=true
 KWALLET_EOL
 
 # make sure to set the right permissions and selinux contexts
+setfiles -v /etc/selinux/strict/contexts/files/file_contexts /
 chown -R lescuizines:lescuizines /home/lescuizines/
 restorecon -R /home/lescuizines/
 
