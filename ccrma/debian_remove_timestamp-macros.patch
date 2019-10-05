@@ -1,17 +1,25 @@
-Description: remove C-macros for timestamps
- For reproducible builds, we don't want timestamps in the builds.
- Instead we should set the version to be displayed to the Debian
- package version (use PD_TEST_VERSION) for this.
-Author: IOhannes m zmölnig
+From: =?utf-8?q?IOhannes_m_zm=C3=B6lnig?= <umlaeute@debian.org>
+Date: Tue, 29 Jan 2019 11:31:36 +0100
+Subject: remove C-macros for timestamps
+
+Last-Update: 2015-05-20
+
+For reproducible builds, we don't want timestamps in the builds.
+Instead we should set the version to be displayed to the Debian
+package version (use PD_TEST_VERSION) for this.
 Last-Update: 2015-05-20
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- puredata.orig/src/s_main.c
-+++ puredata/src/s_main.c
-@@ -30,8 +30,11 @@
- #define str(s) #s
+ src/s_main.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/src/s_main.c b/src/s_main.c
+index 8411f02..4355ef0 100644
+--- a/src/s_main.c
++++ b/src/s_main.c
+@@ -32,8 +32,12 @@ char *pd_version = "Pd-" stringify(PD_MAJOR_VERSION) "." \
+ stringify(PD_MINOR_VERSION) "." stringify(PD_BUGFIX_VERSION) "\
+  (" stringify(PD_TEST_VERSION) ")";
  
- char *pd_version = "Pd-" stringify(PD_MAJOR_VERSION) "." stringify(PD_MINOR_VERSION) "." stringify(PD_BUGFIX_VERSION) " (" stringify(PD_TEST_VERSION) ")";
 -char pd_compiletime[] = __TIME__;
 -char pd_compiledate[] = __DATE__;
 +#ifdef PD_TIMESTAMP_STRING
@@ -19,11 +27,12 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 +#else
 +char pd_compiletimestamp[] = "compiled " __TIME__ " " __DATE__;
 +#endif
++
  
  void pd_init(void);
  int sys_argparse(int argc, char **argv);
-@@ -299,8 +302,8 @@
-     if (sys_argparse(argc-1, argv+1))           /* parse cmd line */
+@@ -378,8 +382,8 @@ int sys_main(int argc, char **argv)
+     if (sys_argparse(argc-1, argv+1))           /* parse cmd line args */
          return (1);
      sys_afterargparse();                    /* post-argparse settings */
 -    if (sys_verbose || sys_version) fprintf(stderr, "%s compiled %s %s\n",

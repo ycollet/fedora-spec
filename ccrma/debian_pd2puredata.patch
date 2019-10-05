@@ -1,22 +1,37 @@
-Author: IOhannes m zmölnig <zmoelnig@iem.at>
-Description: in order to allow multiple flavours of Pd
- to be installed simultaneously, puredata will install itself as
- "/usr/bin/puredata" and provide an alternative as "pd"
- .
- This patch ensures that the "puredata" namespace is used throughout
- (both installed binary and library-paths)
---- puredata.orig/configure.ac
-+++ puredata/configure.ac
-@@ -1,5 +1,5 @@
+From: =?utf-8?q?IOhannes_m_zm=C3=B6lnig?= <umlaeute@debian.org>
+Date: Tue, 29 Jan 2019 11:31:36 +0100
+Subject: rename "pd" to "puredata"
+
+in order to allow multiple flavours of Pd
+
+to be installed simultaneously, puredata will install itself as
+"/usr/bin/puredata" and provide an alternative as "pd"
+
+This patch ensures that the "puredata" namespace is used throughout
+(both installed binary and library-paths)
+---
+ configure.ac | 2 +-
+ src/s_main.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 7a6d607..5bf5f48 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2,7 +2,7 @@
+ ##### Prelude #####
+ 
  AC_PREREQ(2.59)
--AC_INIT(pd,0.47.1)
-+AC_INIT(puredata,0.47.1)
+-AC_INIT([pd], [0.50.0])
++AC_INIT([puredata], [0.50.0])
  AC_CONFIG_SRCDIR(src/m_pd.c)
  AC_CONFIG_AUX_DIR([m4/config])
- AM_INIT_AUTOMAKE
---- puredata.orig/src/s_main.c
-+++ puredata/src/s_main.c
-@@ -539,7 +539,7 @@
+ AC_CONFIG_MACRO_DIR([m4/generated])
+diff --git a/src/s_main.c b/src/s_main.c
+index 32438a8..8411f02 100644
+--- a/src/s_main.c
++++ b/src/s_main.c
+@@ -635,7 +635,7 @@ void sys_findprogdir(char *progname)
  #else
      strncpy(sbuf, sbuf2, MAXPDSTRING-30);
      sbuf[MAXPDSTRING-30] = 0;

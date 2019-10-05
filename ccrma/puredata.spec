@@ -4,8 +4,8 @@
 # http://msp.ucsd.edu/Software/pd-0.47-1.src.tar.gz
 # replicate the package structure used by Debian
 
-%define pdver 0.47-1
-%define pkgver 0.47.1
+%define pdver 0.50-0
+%define pkgver 0.50.0
 
 Summary: Pure Data
 Name:    puredata
@@ -37,14 +37,12 @@ Source15: README
 Source16: puredata-gui.sharedmimeinfo
 
 # add relevant debian patches
-Patch0: debian_system_portaudio.patch
-Patch1: fix_spelling_errors.patch
-Patch2: debian_pd2puredata.patch
-Patch3: debian_usrlibpd_path.patch
-Patch4: debian_helpbrowser_puredata-doc.patch
-Patch5: debian_remove_timestamp-macros.patch
-Patch6: debian_etc-gui-plugins.patch
-Patch7: utf8.patch
+Patch1: debian_pd2puredata.patch
+Patch2: debian_usrlibpd_path.patch
+Patch3: debian_helpbrowser_puredata-doc.patch
+Patch4: debian_remove_timestamp-macros.patch
+Patch5: debian_etc-gui-plugins.patch
+Patch6: debian_fixmanpage.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -58,6 +56,7 @@ Requires: puredata-core puredata-doc puredata-extra
 Requires: puredata-gui puredata-utils
 # for the gui plugin
 Requires: python3
+
 
 %description
 Pure Data (also known as Pd) is a real-time graphical programming
@@ -134,15 +133,12 @@ and pdreceive, for sending and receiving FUDI over the net.
 
 %prep
 %setup -q -n pd-%{pdver}
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-# utf8 support does not currently patch cleanly
-# %patch7 -p1
 
 %build
 # fix hardwired lib dir in startup file (why the heck is this hardwired?)
@@ -186,8 +182,17 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/mime/packages/
 install -m 644 %{SOURCE16} $RPM_BUILD_ROOT%{_datadir}/mime/packages/puredata.xml
 
 # hardlink pd-* binaries
-ln -f $RPM_BUILD_ROOT%{_libdir}/puredata/bin/pd $RPM_BUILD_ROOT%{_bindir}/pd
-ln -f $RPM_BUILD_ROOT%{_libdir}/puredata/bin/pd-watchdog $RPM_BUILD_ROOT%{_bindir}/pd-watchdog
+rm -f $RPM_BUILD_ROOT%{_bindir}/pd
+rm -f $RPM_BUILD_ROOT%{_bindir}/pd-watchdog
+rm -r $RPM_BUILD_ROOT%{_libdir}/puredata/bin/pd
+rm -f $RPM_BUILD_ROOT%{_libdir}/puredata/bin/pd-watchdog
+
+cp src/pd-watchdog $RPM_BUILD_ROOT%{_libdir}/puredata/bin/pd-watchdog
+cp src/pd          $RPM_BUILD_ROOT%{_libdir}/puredata/bin/pd
+ln -s %{_libdir}/puredata/bin/pd          $RPM_BUILD_ROOT%{_bindir}/pd
+ln -s %{_libdir}/puredata/bin/pd-watchdog $RPM_BUILD_ROOT%{_bindir}/pd-watchdog
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/puredata/doc/Makefile.am
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -233,12 +238,13 @@ fi
 %{_libdir}/puredata/doc/3.audio.examples/
 %{_libdir}/puredata/doc/4.data.structures/
 %{_libdir}/puredata/doc/6.externs/
+%{_libdir}/puredata/doc/8.topics/
 %{_libdir}/puredata/doc/sound/
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/m_pd.h
-%{_includedir}/pd/
+%{_includedir}/puredata/
 %{_libdir}/pkgconfig/pd.pc
 
 %files extra
@@ -249,7 +255,6 @@ fi
 %defattr(-,root,root,-)
 %{_bindir}/pd-gui
 %{_bindir}/pd-gui-plugin
-%{_bindir}/pd-gui.tcl
 %{_libdir}/puredata/tcl/
 %{_libdir}/puredata/po
 %{_datadir}/applications/puredata.desktop
@@ -266,6 +271,9 @@ fi
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Sat Oct 5 2019 Yann Collette <ycollette.nospam@free.fr> - 0.50.0-1
+- update to 0.50.0-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
 
