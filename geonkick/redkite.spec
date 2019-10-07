@@ -1,17 +1,17 @@
 # Global variables for github repository
-%global commit0 ad49c9182d9d7c1ed25e0319c0e48935b22b0774
+%global commit0 0cc02f0ae0506164e6f6b64da219008e95096f2e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    redkite
-Version: 0.6.1
+Version: 0.8.0
 Release: 1%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://github.com/quamplex/redkite
 Group:   Applications/Multimedia
 License: GPLv2+
 
-Source0: https://github.com/quamplex/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://gitlab.com/geontime/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -23,7 +23,7 @@ BuildRequires: cmake
 Redkite is a small free software and cross-platform GUI toolkit. It is developed in C++11&14 and inspired from other well known GUI toolkits.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn %{name}-v%{version}
 
 sed -i -e "s/${CMAKE_INSTALL_PREFIX}\/lib/${CMAKE_INSTALL_PREFIX}\/%{_lib}/g" CMakeLists.txt
 
@@ -46,6 +46,8 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Mon Oct 7 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.0-1
+- update to 0.8.0
 * Thu Aug 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-1
 - update to 0.6.1
 * Mon May 27 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.2-1

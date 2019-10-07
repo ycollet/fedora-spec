@@ -1,19 +1,19 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 2a0515c6cf1e29320ab691bcacb1ae352c36e6ea
+%global commit0 6797e649d0e628038b9d44f11f5037fbc3d5c720
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 1.8.1
+Version: 1.9.0
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
-URL:     https://github.com/quamplex/geonkick
+URL:     https://gitlab.com/geontime/geonkick
 Group:   Applications/Multimedia
 License: GPLv2+
 
-Source0: https://github.com/quamplex/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://gitlab.com/geontime/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -34,7 +34,7 @@ Geonkick is a synthesizer that can synthesize elements of percussion.
 The most basic examples are: kick drums, snares, hit-hats, shakers, claps, steaks.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn %{name}-v%{version}
 
 sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" plugin/lv2/CMakeLists.txt
 
@@ -76,6 +76,9 @@ fi
 %{_datadir}/*
 
 %changelog
+* Mon Oct 7 2019 Yann Collette <ycollette.nospam@free.fr> - 1.9.0-1
+- update to 1.9.0
+
 * Sun Aug 11 2019 Yann Collette <ycollette.nospam@free.fr> - 1.8.1-1
 - update to 1.8.1
 
