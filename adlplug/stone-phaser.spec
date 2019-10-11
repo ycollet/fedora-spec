@@ -31,8 +31,9 @@ BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: freetype-devel
-BuildRequires: libX11-devel libXft-devel libXrandr-devel libXinerama-devel libXcursor-devel
+BuildRequires: libX11-devel libXft-devel
 BuildRequires: fltk-devel fltk-fluid
+BuildRequires: cairo-devel libpng-devel
 
 %description
 A classic analog phaser effect
