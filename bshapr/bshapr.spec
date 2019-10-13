@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 d8f711bc5e27f7bd46514d874e5a20cdf06d9db9
+%global commit0 41a2daf43f4578151d1b6eb7a9862b917ffb70b6
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Beat / envelope shaper LV2 plugin
 Name:    lv2-BShapr
-Version: 0.3.2
+Version: 0.4.0
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -43,5 +43,7 @@ make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{b
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Oct 13 2019 Yann Collette <ycollette dot nospam at free.fr> 0.4.0-1
+- update to 0.4.0-1
 * Sat Aug 24 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.2-1
 - initial release 
