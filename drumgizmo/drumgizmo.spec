@@ -1,10 +1,10 @@
 Summary: Software Synthesizer
 Name:    drumgizmo
-Version: 0.9.17
+Version: 0.9.18
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
-URL:     http://git.drumgizmo.org/drumgizmo.git
+URL:     https://www.drumgizmo.org/wiki/doku.php
 
 Source0: http://www.drumgizmo.org/releases/drumgizmo-%version/drumgizmo-%version.tar.gz
 
@@ -64,6 +64,9 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 %exclude %{_bindir}/dgreftest
 
 %changelog
+* Tue Oct 15 18 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.18-2
+- update to 0.9.18-2
+
 * Thu Jul 18 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.17-2
 - update to 0.9.17-2
 
