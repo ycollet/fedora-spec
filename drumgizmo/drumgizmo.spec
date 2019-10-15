@@ -49,7 +49,6 @@ DrumGizmo is an open source, multichannel, multilayered, cross-platform drum plu
 %{__make} DESTDIR=%{buildroot} install
 
 chrpath --delete $RPM_BUILD_ROOT%{_bindir}/drumgizmo
-chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -61,10 +60,9 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/dgreftest
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/man/*
-%exclude %{_bindir}/dgreftest
 
 %changelog
-* Tue Oct 15 18 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.18-2
+* Tue Oct 15 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.18-2
 - update to 0.9.18-2
 
 * Thu Jul 18 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.17-2
