@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.6.502
+Version: 0.7.002
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -9,7 +9,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://download-mirror.savannah.gnu.org/releases/zrythm/zrythm-%{version}.tar.xz
+Source0: https://www.zrythm.org/releases//zrythm-%{version}.tar.xz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -83,11 +83,14 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
-%doc AUTHORS COPYING README.md THANKS CHANGELOG.md CONTRIBUTING.md
+%doc AUTHORS THANKS CHANGELOG.md CONTRIBUTING.md
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
+* Thu Oct 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7.002-2
+- update to 0.7.002
+
 * Sun Oct 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.502-2
 - update to 0.6.502
 
