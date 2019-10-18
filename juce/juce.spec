@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 8ec56d15896d687711be348aaace08311ecabcc8
-%global gittag0 5.4.4
+%global commit0 724ae27c71ef809b836df06713cf9e50bc14162b
+%global gittag0 5.4.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    JUCE
-Version: 5.4.4.%{shortcommit0}
+Version: 5.4.5.%{shortcommit0}
 Release: 3%{?dist}
 Summary: JUCE Framework
 URL:     https://github.com/WeAreROLI/JUCE.git
@@ -42,11 +42,6 @@ live-coding engine which can be used for rapid prototyping.
 
 %prep
 %setup -qn %{name}-%{commit0}
-
-# For Fedora 29
-%if 0%{?fedora} >= 29
-  sed -i -e "114,125d" modules/juce_graphics/colour/juce_PixelFormats.h
-%endif
 
 %build
 
@@ -122,6 +117,9 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Fri Oct 18 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.5-3
+- update to 5.4.5
+
 * Thu May 2 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.4-3
 - update to 5.4.4
 
