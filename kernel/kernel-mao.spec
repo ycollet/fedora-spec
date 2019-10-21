@@ -3,9 +3,9 @@
 # Kernel minor version
 %define kmin  2
 # Kernel patch version
-%define kpat  19
+%define kpat  21
 # RT patch version
-%define krt   11
+%define krt   13
 # package version
 %define krel  9
 
@@ -143,6 +143,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Sat Oct 19 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.21-rt13-9
+- update to 5.2.21-rt13-9
+
 * Tue Oct 8 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.19-rt11-9
 - update to 5.2.19-rt11-9
 
@@ -152,7 +155,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 * Sat Sep 14 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.14-rt7-9
 - update to 5.2.14-rt7-9
 
-* Tue Aug 29 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.10-rt5-9
+* Tue Aug 27 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.10-rt5-9
 - update to 5.2.10-rt5-9
 
 * Sun Aug 18 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.9-rt3-9
