@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 1087b9aea62252382fc58cc31cab2141ea605a96
+%global commit0 45ce25e1b01577f930e7d1b5943cb19d3d640c35
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    polyphone
-Version: 2.1.1
+Version: 2.1.3
 Release: 1%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
@@ -18,8 +18,6 @@ License: GPLv2+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: https://github.com/davy7125/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: polyphone.desktop
-Source2: polyphone.xml
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -62,16 +60,18 @@ make VERBOSE=1 %{?_smp_mflags}
 cd sources
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
+%__install -m 644 contrib/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 %__install -m 755 bin/polyphone %{buildroot}%{_bindir}/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
-%__install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
+%__install -m 644 contrib/%{name}.xml %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
 %__install -m 644 resources/logo.svg %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.svg
+
+# TODO: install man pages
 
 # install polyphon.desktop properly.
 desktop-file-install --vendor '' \
@@ -104,6 +104,9 @@ fi
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Wed Oct 23 2019 Yann Collette <ycollette.nospam@free.fr> - 2.1.3-1
+- update to 2.1.3
+
 * Mon Sep 16 2019 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-1
 - update to 2.1.1
 
