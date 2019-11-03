@@ -8,7 +8,7 @@
 
 Name:    picoloop
 Version: 0.77e.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: An audio sequencer
 
 Group:   Applications/Multimedia
@@ -29,6 +29,8 @@ BuildRequires: SDL2_gfx-devel
 BuildRequires: SDL2_ttf-devel
 BuildRequires: pulseaudio-libs-devel
 
+Requires: SDL2_ttf
+
 %description
 Picoloop is a synth Stepsequencer (a nanoloop clone).
 A pattern of 16 notes is played repeatedly while these notes can be edited in various respects like volume, pitch, filter, lfo etc.
@@ -39,6 +41,13 @@ There are four channels, playing simultaneously.
 %setup -qn %{name}-%{commit0}
 
 #%patch0 -p1 
+
+sed -i -e "s/\"font.ttf\"/\"\/usr\/share\/picoloop\/font\/font.ttf\"/g" picoloop/SDL_GUI.cpp
+sed -i -e "s/\"font.bmp\"/\"\/usr\/share\/picoloop\/bmp\/font.bmp\"/g" picoloop/SDL_GUI.cpp
+
+sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" picoloop/Makefile.RtMidi_debian_sdl20
+sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" picoloop/Makefile.RtAudio_debian_sdl20
+sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" picoloop/Makefile.PatternPlayer_debian_RtAudio_sdl20
 
 %build
 
@@ -72,7 +81,7 @@ Categories=Audio;
 EOF
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 picoloop/PatternPlayer_debian_RtAudio_sdl20 %{buildroot}%{_bindir}/%{name}
+%__install -m 755 picoloop/PatternPlayer_debian_RtAudio_sdl20 %{buildroot}%{_bindir}/%{name}
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/patch/MDADrum/
 %__install -m 644 picoloop/patch/MDADrum/create_patchlist.sh %{buildroot}%{_datadir}/%{name}/patch/MDADrum/
@@ -135,6 +144,11 @@ EOF
 
 %__install -m 644 picoloop/documentation/filter/* %{buildroot}%{_datadir}/%{name}/documentation/filter/
 %__install -m 644 picoloop/documentation/gp2x/*   %{buildroot}%{_datadir}/%{name}/documentation/gp2x/
+
+%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/font/
+%__install -m 644 picoloop/font.ttf %{buildroot}%{_datadir}/%{name}/font/
+%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/bmp/
+%__install -m 644 picoloop/font.bmp %{buildroot}%{_datadir}/%{name}/bmp/
 
 %files
 %{_bindir}/*
