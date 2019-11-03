@@ -1,13 +1,13 @@
 %global __python %{__python3}
 
 # Global variables for github repository
-%global commit0 cd80ab30049e711aa5b648c3fdb5621271cb2813
+%global commit0 5da5bfc7a743e35a5d7c2f7a715b41ce2e5853c5
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: A radio automation system
 Name:    rivendell
-Version: 3.1.0
+Version: 3.2.0
 Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
@@ -39,10 +39,16 @@ BuildRequires: libvorbis-devel
 BuildRequires: libmad-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libsndfile-devel
+BuildRequires: flac-devel
+
+Requires: madplay, autofs
+Requires: python3, python3-pycurl, python3-requests, python3-pyserial, python3-mysql
 
 %description
-Rivendell contains a full set of functionality needed to operate a radio
-automation system
+Rivendell is a complete radio broadcast automation solution, with
+facilities for the acquisition, management, scheduling and playout of
+audio content.  Modules for the production and management of podcast
+audio are also included.
 
 %prep
 %setup -qn %{name}-%{commit0}
@@ -67,7 +73,7 @@ LDFLAGS='-Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld'
 export LDFLAGS
 
 %configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-docbook
-%{__make} DESTDIR=%{buildroot} %{?_smp_mflags}
+%{__make} DESTDIR=%{buildroot} #%{?_smp_mflags}
 
 %install
 
@@ -82,6 +88,59 @@ mv %{buildroot}/lib/systemd/system/rivendell.service %{buildroot}/usr/lib/system
 %post
 update-desktop-database -q
 touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
+
+/sbin/ldconfig
+/bin/systemctl daemon-reload
+/usr/sbin/groupadd -r -g 150 %{name} &>/dev/null || :
+/usr/sbin/useradd -o -u 150 -g %{name} -s /bin/false -r -c "Rivendell radio automation system" -d /var/snd %{name} &>/dev/null || :
+if test ! -e /var/snd ; then
+  mkdir -p /var/snd
+  chown rivendell:rivendell /var/snd
+  chmod 775 /var/snd
+fi
+if test ! -d /etc/rivendell.d ; then
+  mkdir -p /etc/rivendell.d
+  chmod 775 /etc/rivendell.d
+fi
+if test ! -e /etc/rd.conf ; then
+  cp /usr/share/doc/rivendell-%{version}/rd.conf-sample /etc/rivendell.d/rd-default.conf
+  ln -s /etc/rivendell.d/rd-default.conf /etc/rd.conf
+fi
+if test ! -h /etc/rd.conf ; then
+  mv /etc/rd.conf /etc/rivendell.d/rd-default.conf
+  ln -s /etc/rivendell.d/rd-default.conf /etc/rd.conf
+fi
+if test ! -e /etc/asound.conf ; then
+  cp /usr/share/doc/rivendell-%{version}/asound.conf-sample /etc/asound.conf
+fi
+/usr/sbin/rddbmgr --modify
+/bin/systemctl restart rivendell
+/bin/systemctl enable rivendell
+/bin/systemctl restart httpd
+/bin/systemctl enable httpd
+if [ -x %{_bindir}/gtk-update-icon-cache ] ; then
+  %{_bindir}/gtk-update-icon-cache -f --quiet %{_datadir}/icons/hicolor || :
+fi
+if test ! -e ${exec_prefix}/libexec/logos ; then
+    mkdir -p ${exec_prefix}/libexec/logos
+fi
+if test ! -f ${exec_prefix}/libexec/logos/webget_logo.png ; then
+    cp /usr/share/doc/rivendell-%{version}/logos/webget_logo.png ${exec_prefix}/libexec/logos/webget_logo.png
+fi
+mkdir -p /var/log/rivendell
+if test ! -e /etc/rsyslog.d/rivendell.conf ; then
+    cp /usr/share/doc/rivendell-%{version}/syslog.conf-sample /etc/rsyslog.d/rivendell.conf
+fi
+/bin/systemctl restart rsyslog
+exit 0
+
+%preun
+if test "$1" = "0" ; then
+  /bin/systemctl stop rivendell
+  /bin/systemctl disable rivendell
+  /bin/systemctl stop rivendell
+fi
+exit 0
 
 %postun
 update-desktop-database -q
@@ -104,5 +163,8 @@ fi
 %{_unitdir}/*
 
 %changelog
+* Sun Nov 3 2019 Yann Collette <ycollette.nospam@free.fr> - 3.2.0-1
+- update to 3.2.0 + some fixes from the rivendell spec file
+
 * Sat Sep 21 2019 Yann Collette <ycollette.nospam@free.fr> - 3.1.0-1
 - initial release of the spec file
