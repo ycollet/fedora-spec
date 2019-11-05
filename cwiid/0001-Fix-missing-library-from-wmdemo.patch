@@ -1,0 +1,25 @@
+From 3e9dc39b9315bc86a007d0c43d1c14f7e67f41e6 Mon Sep 17 00:00:00 2001
+From: Victor Bogado <victor@bogado.net>
+Date: Wed, 5 May 2010 20:08:59 -0300
+Subject: [PATCH] Fix missing library from wmdemo
+
+---
+ wmdemo/Makefile.in |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/wmdemo/Makefile.in b/wmdemo/Makefile.in
+index 56aed58..1eccc02 100644
+--- a/wmdemo/Makefile.in
++++ b/wmdemo/Makefile.in
+@@ -8,7 +8,7 @@ SOURCES = wmdemo.c
+ 
+ CFLAGS += -I@top_builddir@/libcwiid
+ LDFLAGS += -L@top_builddir@/libcwiid
+-LDLIBS += -lcwiid
++LDLIBS += -lcwiid -lbluetooth
+ INST_DIR = @bindir@
+ 
+ include $(COMMON)/include/app.mak
+-- 
+1.6.6.1
+

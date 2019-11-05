@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=wmgui
+GenericName=Wiimote connection tester
+Comment=Test the connection to wiimotes.
+Exec=wmgui
+Icon=wmgui
+Terminal=false
+Type=Application
+Categories=GTK;Utility;System;
+
