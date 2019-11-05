@@ -10,7 +10,7 @@ URL:            http://abstrakraft.org/cwiid/
 
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
 
-# source URL : http://github.com/abstrakraft/cwiid/tarball/%%{git_commit} 
+# source URL : https://github.com/abstrakraft/cwiid/tarball/%%{git_commit} 
 Source0:        abstrakraft-cwiid-%{git_commit}.tar.gz
 Source1:        wmgui.desktop
 
@@ -68,15 +68,14 @@ input sources like the mouse and keyboard.
 
 sed -i -e "s/CFLAGS =/CFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=\/usr\/lib\/rpm\/redhat\/redhat-hardened-cc1 -specs=\/usr\/lib\/rpm\/redhat\/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -I\/usr\/include\/python2.7 -I. /" defs.mak.in
 
-find . -name Makefile.in -exec sed -i -e "s/@PYTHON_VERSION@/2.7/g" {} \;
-
-sed -i -e "s/\$(PYTHON)/python2/g" ./python/Makefile.in
+#find . -name Makefile.in -exec sed -i -e "s/@PYTHON_VERSION@/2.7/g" {} \;
+#sed -i -e "s/\$(PYTHON)/python2/g" ./python/Makefile.in
 
 %build
 aclocal
 autoconf
 
-./configure --prefix=%{_prefix} --sysconfdir=%{_sysconfdir} --libdir=%{_libdir} --disable-static --docdir="%{_pkgdocdir}"
+./configure --prefix=%{_prefix} --sysconfdir=%{_sysconfdir} --libdir=%{_libdir} --disable-static --docdir="%{_pkgdocdir}" --with-python=python2
 make
 
 %install
