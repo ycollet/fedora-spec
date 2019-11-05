@@ -20,7 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
-BuildRequires: python
+BuildRequires: python2
 
 %description
 A collection of basic LV2 plugins to translate midi messages to usable values
