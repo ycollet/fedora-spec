@@ -24,6 +24,7 @@ BuildRequires:  python2
 BuildRequires:  zlib-devel
 BuildRequires:  pkgconfig(glu)
 BuildRequires:  pkgconfig(xft)
+BuildRequires:  gcc gcc-c++
 
 %description
 %{name} is a fork of the FLTK UI toolkit. It employs cairo support and
