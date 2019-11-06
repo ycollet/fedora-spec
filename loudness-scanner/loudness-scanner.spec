@@ -28,6 +28,7 @@ BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtbase-gui
 BuildRequires: qt5-qtsvg-devel
+BuildRequires: qt-devel
 BuildRequires: glib2-devel
 BuildRequires: cmake
 BuildRequires: libsndfile-devel
@@ -40,6 +41,8 @@ BuildRequires: ffmpeg-devel
 BuildRequires: librsvg2-devel
 BuildRequires: gtk2-devel
 BuildRequires: chrpath
+BuildRequires: harfbuzz-devel
+BuildRequires: speexdsp-devel
 
 %description
 loudness-scanner is a tool that scans your music files according to the EBU
@@ -53,7 +56,7 @@ compatible tags to the files.
 
 mkdir build
 cd build
-%cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+%cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS="-fPIC -I/usr/include/harfbuzz/" ..
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
@@ -75,5 +78,8 @@ chrpath --delete $RPM_BUILD_ROOT/usr/bin/*
 %{_includedir}/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-1
+- fix for Fedora 31
+
 * Thu Sep 12 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-1
 - Initial spec file
