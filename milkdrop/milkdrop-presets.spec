@@ -122,6 +122,8 @@ rm -rf projectm-2.0.0/CMakeFiles
 rm -rf presets-2.0.0/CMakeFiles
 
 find . -name "amandio c*" -exec rm {} \;
+find . -name "*.bak" -exec rm {} \;
+find . -name "*.prjm" -exec rm {} \;
 
 # Rename
 find . -name "*.MILK" -exec mv {} `basename {} .MILK`.milk \;
