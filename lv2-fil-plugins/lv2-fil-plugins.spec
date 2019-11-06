@@ -16,10 +16,10 @@ Source:  http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.t
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ sed
 BuildRequires: liblo-devel
 BuildRequires: lv2-devel
-BuildRequires: python
+BuildRequires: python2
 
 Requires: lv2
 Requires: pycairo
@@ -53,6 +53,8 @@ total equalization effect.
   find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
 %endif
 
+sed -i -e "s/lv2core/lv2/g" wscript
+
 %build
 export CFLAGS="%{optflags}"
 export LINKFLAGS="-lm"
@@ -77,7 +79,10 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0-13
+- fix for Fedora 31
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0-13
 - update for Fedora 29
 
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0-13
