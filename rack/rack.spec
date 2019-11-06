@@ -26,7 +26,7 @@ URL:     https://github.com/VCVRack/Rack.git
 # unzip 29e4f76ac53b.zip
 # mkdir include
 # cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
+# rm 29e4f76ac53b.zip
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
@@ -61,6 +61,7 @@ BuildRequires: rtmidi-devel
 BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
 BuildRequires: python3-sphinx
+BuildRequires: python3-sphinx_rtd_theme
 BuildRequires: python3-recommonmark
 
 %description
@@ -159,6 +160,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-6
+- fix for Fedora 31
+
 * Wed Dec 5 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2c-6
 - add static glew
 

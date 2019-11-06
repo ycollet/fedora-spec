@@ -21,7 +21,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
-BuildRequires: python
+BuildRequires: python2
 BuildRequires: fltk-devel
 BuildRequires: fltk-fluid
 BuildRequires: non-ntk-devel
@@ -103,6 +103,9 @@ Roland JP8000/JP8080 but has since widened is scope.
 %{_libdir}/lv2/super_welle-psi.lv2/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
+- fix for Fedora 31
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.0.1-2
 - update for Fedora 29
 

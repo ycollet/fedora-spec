@@ -45,6 +45,9 @@ MDA LV2 set of plugins synth from portalmod
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.9.2
+- fix for Fedora 31
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
 - update for Fedora 29
 

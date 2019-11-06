@@ -121,6 +121,8 @@ rm -rf milkdrop-1.0.4/CMakeFiles
 rm -rf projectm-2.0.0/CMakeFiles
 rm -rf presets-2.0.0/CMakeFiles
 
+find . -name "amandio c*" -exec rm {} \;
+
 # Rename
 find . -name "*.MILK" -exec mv {} `basename {} .MILK`.milk \;
 find . -name "*.MILk" -exec mv {} `basename {} .MILk`.milk \;
@@ -162,5 +164,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/projectM/presets/yin/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
+- fix for Fedora 31
+
 * Sun Sep 09 2018 Yann Collette <ycollette dot nospam at free.fr> 1.0.0-1
 - Initial release
