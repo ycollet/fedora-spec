@@ -26,6 +26,7 @@ BuildRequires: libX11-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: glfw-devel
 BuildRequires: libXcomposite-devel
+BuildRequires: libXext-devel
 
 %description
 GLava is an OpenGL audio spectrum visualizer. Its primary use case is for desktop windows or backgrounds. Displayed to the left is the radial shader module. Development is active, and reporting issues is encouranged.
@@ -48,5 +49,8 @@ make  %{?_smp_mflags} CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} install
 %{_sysconfdir}/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.8-1
+- fix for Fedora 31
+
 * Sun Dec 2 2018 Yann Collette <ycollette.nospam@free.fr> - 1.5.8-1
 - initial spec file
