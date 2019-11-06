@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 a82fff059baafc03f7c0e8b9a99f383af7bfbd79
+%global commit0 7e62235e809e59770d0d91d2c48c3f50ce7c027a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:    DISTRHO-Ports
 Version: 1.0.0.%{shortcommit0}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A set of LV2 plugins
 
 Group:   Applications/Multimedia
@@ -36,10 +36,8 @@ A set of LV2 plugins
 %prep
 %setup -qn %{name}-%{commit0}
 
-# For Fedora 29
-%if 0%{?fedora} >= 29
-  sed -i -e "112,123d" libs/juce/source/modules/juce_graphics/colour/juce_PixelFormats.h
-%endif
+# Bug on Fedora 31 with gcc -> switch to -O2
+find . -name "*.lua" -exec sed -i -e "s/-O3/-O2/g" {} \;
 
 %build
 
@@ -71,6 +69,9 @@ fi
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-4
+- update to 7e62235e809e59770d0d91d2c48c3f50ce7c027a
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update for Fedora 29
 
