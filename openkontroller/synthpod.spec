@@ -17,7 +17,7 @@ Source0: https://github.com/OpenMusicKontrollers/synthpod/archive/%{commit0}.tar
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ sed
 BuildRequires: lv2-devel
 BuildRequires: lilv-devel
 BuildRequires: sratom-devel
@@ -33,12 +33,15 @@ BuildRequires: meson
 BuildRequires: cairo-devel
 BuildRequires: qt-devel
 BuildRequires: qt5-qtbase-devel
+BuildRequires: alsa-lib-devel
 
 %description
 Lightweight Nonlinear LV2 Plugin Container
 
 %prep
 %setup -qn %{name}-%{commit0}
+
+sed -i -e "s/asoundlib.h/alsa\/asoundlib.h/g" bin/synthpod_alsa.c
 
 %build
 
@@ -58,6 +61,9 @@ DESTDIR=%{buildroot} ninja install
 %{_datarootdir}/*
 
 %changelog
+* Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
+- fixe for Fedora 31
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
 - update for Fedora 29
 
