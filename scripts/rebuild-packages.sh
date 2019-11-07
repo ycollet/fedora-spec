@@ -23,16 +23,6 @@
 # Carla
 # Cadence
 
-# FAILED:
-#
-# sonic-pi-3.1.0/app/server/ruby/vendor/rugged-0.26.0/lib/rugged.rb:14:in `require_relative': cannot load such file
-#Creating ../../server/ruby/bin/../rb-native/2.6.0
-#Compiling native extension in /builddir/build/BUILD/sonic-pi-3.1.0/app/server/ruby/vendor/rugged-0.28.0/ext/rugged
-#*** extconf.rb failed ***
-#Could not create Makefile due to some reason, probably lack of necessary
-#libraries and/or headers.  Check the mkmf.log file for more details.  You may
-#need configuration options.
-
 # Reorder srpm file in FILELIST: dependencies first
 FILELIST="linuxsampler-2.1.0-1.fc30.src.rpm
 	liblscp-0.5.8-1.fc30.src.rpm
