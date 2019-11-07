@@ -36,6 +36,7 @@ BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 BuildRequires: erlang-erts
 BuildRequires: ruby
+BuildRequires: zlib-devel
 
 Requires(pre): pulseaudio-module-jack 
 Requires(pre): jack-audio-connection-kit-example-clients
