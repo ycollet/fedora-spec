@@ -205,6 +205,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Thu Nov 7 2019 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
+- fix for Fedora 31
+
 * Thu May 2 2019 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
 - update for Fedora 30
 
