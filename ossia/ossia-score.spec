@@ -54,6 +54,7 @@ BuildRequires: suil-devel
 BuildRequires: avahi-compat-libdns_sd-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: mesa-libGLU-devel
+BuildRequires: unzip
 
 %description
 ossia score is a sequencer for audio-visual artists, designed to create interactive shows
