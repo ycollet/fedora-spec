@@ -62,6 +62,8 @@ ossia score is a sequencer for audio-visual artists, designed to create interact
 %prep
 %setup -qn score-v%{version}
 
+sed -i -e "s/BOOST_MINOR 70/BOOST_MINOR 69/g" 3rdparty/libossia/cmake/OssiaDeps.cmake
+
 %build
 
 mkdir build
