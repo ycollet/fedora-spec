@@ -35,12 +35,13 @@ To test the rebuild of the package using mock:
 $ mock -r fedora-30-x86_64 --rebuild polyphone-2.0.1-1.fc30.src.rpm
 ```
 
-To enable a thirdparty repository, you must add it to /etc/mock/fedora-30-x86_64.cfg for example and then, enable it via the command line. For example:
+To enable a thirdparty repository, you must add it to /etc/mock/templates/fedora-30.tpl for example and then, enable it via the command line. For example:
 ```
 $ mock -r fedora-30-x86_64 --enablerepo=ycollet-linuxmao --rebuild dgedit-0.1-2.fc30.src.rpm
 ```
 
-The portion added to /etc/mock/fedora-2{8,9}-x86_64.cfg and /etc/mock/fedora-30-x86_64.cfg is:
+The portion added to /etc/mock/templates/fedora-{29,30,31}.tpl is:
+
 ```
 [ycollet-linuxmao]
 name=Copr repo for linuxmao owned by ycollet
