@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 3d42eec624067e2c78026406706d3361643d854e
+%global commit0 0816047d7fb48e7d2f7ba88cd484a240c00d8528
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,8 +7,8 @@
 %global debug_package %{nil}
 
 Name:    qutecsound
-Version: 0.9.6b
-Release: 1%{?dist}
+Version: 0.9.6
+Release: 2%{?dist}
 Summary: A csound file editor
 URL:     https://github.com/CsoundQt/CsoundQt
 Group:   Applications/Multimedia
@@ -22,11 +22,14 @@ Source2: qutecsound.xml
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
-BuildRequires: qt4-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: csound-devel
 BuildRequires: csound-manual
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtquickcontrols2-devel
+#BuildRequires: qt5-qtbase-gui
+#BuildRequires: qt5-linguist
 
 %description
 CsoundQt is a frontend for Csound featuring a highlighting editor with autocomplete, interactive widgets and integrated help. It is a cross-platform and aims to be a simple yet powerful and complete development environment for Csound. It can open files created by MacCsound. Csound is a musical programming language with a very long history, with roots in the origins of computer music. It is still being maintained by an active community and despite its age, is still one of the most powerful tools for sound processing and synthesis. CsoundQt hopes to bring the power of Csound to a larger group of people, by reducing Csound''s intial learning curve, and by giving users more immediate control of their sound. It hopes to be both a simple tool for the beginner, as well as a powerful tool for experienced users.
@@ -48,7 +51,7 @@ CsoundQt is a frontend for Csound featuring a highlighting editor with autocompl
 
 # DEBUG: DEFINES+="Q_NULLPTR=0" is an awful hack ...
 
-qmake-qt4 CSOUND_LIBRARY_DIR=/usr/%{_lib} DEFINES+="Q_NULLPTR=0" qcs.pro
+qmake-qt5 CSOUND_LIBRARY_DIR=/usr/%{_lib} DEFINES+="Q_NULLPTR=0" qcs.pro
 make VERBOSE=1 %{?_smp_mflags}
 cd ..
 
@@ -94,10 +97,8 @@ if [ $1 -eq 0 ] ; then
   update-mime-database %{_datadir}/mime &> /dev/null || :
 fi
 
-
 %posttrans
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 
 %files
 %doc ChangeLog
@@ -109,6 +110,9 @@ fi
 %{_datadir}/%{name}/*
 
 %changelog
+* Mon Nov 11 2019 Yann Collette <ycollette.nospam@free.fr> - 0.9.6-2
+- update to 0.9.6
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.6b-1
 - update for Fedora 29
 
