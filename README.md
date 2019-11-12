@@ -2,7 +2,7 @@ The repo related to these packages can be found here:
 
 https://copr.fedorainfracloud.org/coprs/ycollet/linuxmao/
 
-This repo has old packages for Fedora 25, 26 and 27 and up to date packages for Fedora 28, 29 and 30.
+This repo has old packages for Fedora 25, 26, 27 and 28 and up to date packages for Fedora 29, 30 and 31.
 
 To build the spec file:
 - copy it into your rpmbuild/SPEC directory
@@ -132,4 +132,3 @@ Manually, using qemu-kvm command line
 ```
 $ qemu-kvm -m 2048 -name LeCuizines -cdrom fedora-30-LesCuizines.iso -usb -device usb-host,hostbus=2,hostaddr=3
 ```
-
