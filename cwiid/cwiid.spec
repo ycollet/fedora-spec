@@ -6,7 +6,7 @@ Release:        36.20100505git%{git_commit}%{?dist}
 Summary:        Wiimote interface library
 
 License:        GPLv2+
-URL:            http://abstrakraft.org/cwiid/
+URL:            https://github.com/abstrakraft/cwiid
 
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
 
