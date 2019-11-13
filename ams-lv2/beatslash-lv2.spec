@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 45044ce015c7a79b93a88aba1f0c19e2c00206d8
+%global commit0 5886aeb3779a37a5e4ab0b6c715216c22aae4e63
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    beatslash-lv2
-Version: 1.0.5.%{shortcommit0}
+Version: 1.0.6.%{shortcommit0}
 Release: 1%{?dist}
 Summary: beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats
 
@@ -61,10 +61,13 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.5
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-1
+- update to 1.0.6-1
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.5-1
 - update for Fedora 29
 
-* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.5
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.5-1
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
