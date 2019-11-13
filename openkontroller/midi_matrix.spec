@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 7f8496d967acb8e2eb64c6cbb0853cd2c8d7844d
+%global commit0 d847c51287a4dd66d946acaac7222ec752dfb43a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    midi_matrix.lv2
-Version: 0.20.0
+Version: 0.22.0
 Release: 2%{?dist}
 Summary: A LV2 Plugin Bundle
 Group:   Applications/Multimedia
@@ -22,7 +22,7 @@ BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libX11-devel
 BuildRequires: libXext-devel
-BuildRequires: cmake
+BuildRequires: meson
 
 %description
 A LV2 Plugin Bundle
@@ -32,16 +32,23 @@ A LV2 Plugin Bundle
 
 %build
 
-%cmake -DPLUGIN_DEST:Path=%{_lib}/lv2/midi_matrix.lv2 .
-make VERBOSE=1 %{?_smp_mflags}
+VERBOSE=1 meson --prefix=/usr build
+cd build
 
-%install 
-make DESTDIR=%{buildroot} install
+DESTDIR=%{buildroot} VERBOSE=1 ninja
+
+%install
+
+cd build
+DESTDIR=%{buildroot} ninja install
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.22.0-2
+- update to 0.22.0-2
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
 - update for Fedora 29
 
