@@ -21,7 +21,7 @@ Summary: LV2 Analogue simulation of a tube preamp
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/brummer10/GxPlugins.lv2
+URL:     https://github.com/x42/avldrums.lv2.git
 Source0: avldrums.lv2.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
