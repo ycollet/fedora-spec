@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 99202579699d9ca0a5e10cd8de9f9f039f736306
+%global commit0 46beb4891ac6f223b33b298b96764535d8f80e18
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    midimsg-lv2
-Version: 0.0.4.%{shortcommit0}
+Version: 0.0.5.%{shortcommit0}
 Release: 1%{?dist}
 Summary: A collection of basic LV2 plugins to translate midi messages to usable values
 
@@ -45,10 +45,14 @@ A collection of basic LV2 plugins to translate midi messages to usable values
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.4
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.0.5-1
+- update 0.0.5-1
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.4-1
 - update for Fedora 29
 
-* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.4
+* Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 0.0.4-1
+- update to 0.0.4-1
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
