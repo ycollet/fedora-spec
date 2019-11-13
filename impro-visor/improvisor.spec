@@ -8,7 +8,7 @@
 #
 
 %define maj 10
-%define min 1
+%define min 2
 
 Name:     Impro-Visor
 Version:  %{maj}.%{min}
@@ -17,7 +17,7 @@ Summary:  Impro-Visor is a music notation program for jazz musicians
 License:  GPL
 
 URL:      http://www.cs.hmc.edu/~keller/jazz/improvisor/
-Source0:  %{name}_unix_%{maj}_%{min}.tar.gz
+Source0:  https://sourceforge.net/projects/impro-visor/files/Impro-Visor%2010.2%20Release/Impro-Visor_unix_%{maj}_%{min}.tar.gz
 Source1:  %{name}.sh
 Source2:  %{name}.png
 
@@ -194,6 +194,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 10.2
+- update to 10.2
+
 * Wed Jan 23 2019 Yann Collette <ycollette dot nospam at free.fr> 10.1
 - upgrade to 10.1
 
