@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 31047741ba71948d7099406cdc5cb2a6a9d655cc
+%global commit0 93ea1762755d57dd44a45adee55822bacd2c0a3b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    deteriorate-lv2
-Version: 1.0.6.%{shortcommit0}
+Version: 1.0.7.%{shortcommit0}
 Release: 1%{?dist}
 Summary: deteriorate-lv2 is a set of plugins to destroy and deteriorate the sound quality of a live input
 
@@ -58,10 +58,14 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.6
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.7-1
+- update to 1.0.7-1
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-1
 - update for Fedora 29
 
-* Mon Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.6
+* Mon Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-1
+- update to 1.0.6-1
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
