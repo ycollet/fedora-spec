@@ -42,8 +42,6 @@ Lightweight Nonlinear LV2 Plugin Container
 %prep
 %setup -qn %{name}-%{commit0}
 
-sed -i -e "s/asoundlib.h/alsa\/asoundlib.h/g" bin/synthpod_alsa.c
-
 %build
 
 VERBOSE=1 meson --prefix=/usr build
