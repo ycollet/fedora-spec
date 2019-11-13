@@ -2,12 +2,12 @@
 # %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 426f70f5797d45ea9e42429700e166aafd4fbd42
-%global gittag0 1.5.8
+%global commit0 094dec9b009268814751d3801fc7a5068381c90b
+%global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    glava
-Version: 1.5.8.%{shortcommit0}
+Version: 1.6.3
 Release: 1%{?dist}
 Summary: GLava is an OpenGL audio spectrum visualizer
 URL:     https://github.com/wacossusca34/glava.git
@@ -49,6 +49,9 @@ make  %{?_smp_mflags} CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} install
 %{_sysconfdir}/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.6.3-1
+- update to 1.6.3-1
+
 * Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.8-1
 - fix for Fedora 31
 
