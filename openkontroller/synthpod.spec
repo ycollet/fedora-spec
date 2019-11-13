@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 4995be8180731b802641d72f532063c3d7686af9
+%global commit0 7452282d077a0ca685bee07b9f1a967d5b35bdaa
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -7,7 +7,7 @@
 
 Name:    synthpod
 Version: 0.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Lightweight Nonlinear LV2 Plugin Container
 URL:     https://github.com/OpenMusicKontrollers/synthpod
 Group:   Applications/Multimedia
@@ -34,6 +34,7 @@ BuildRequires: cairo-devel
 BuildRequires: qt-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: alsa-lib-devel
+BuildRequires: libevdev-devel
 
 %description
 Lightweight Nonlinear LV2 Plugin Container
@@ -61,6 +62,9 @@ DESTDIR=%{buildroot} ninja install
 %{_datarootdir}/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-3
+- update to 0.1.0-3
+
 * Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
 - fixe for Fedora 31
 
