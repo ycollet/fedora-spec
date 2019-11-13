@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 b4a060046bdf5af61ad145dd2f6c2a59a172082b
+%global commit0 69e616772ab45a77baf58ae1202e16c19649826c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    patchmatrix
-Version: 0.12.0
+Version: 0.16.0
 Release: 2%{?dist}
 Summary: A JACK patchbay in flow matrix style
 URL:     https://github.com/OpenMusicKontrollers/patchmatrix
@@ -48,12 +48,15 @@ DESTDIR=%{buildroot} ninja install
 %{_datadir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
+- update to 0.16.0-2
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.12.0-2
 - update for Fedora 29
 
-* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 0.12.0-2
 - update to latest master
 - switch to meson build
 
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-1
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.12.0-1
 - inital release
