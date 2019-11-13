@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 38df4d733fff1a9438a89ec8797bc6b6810adfa7
-%global gittag0 v0.8.1
+%global commit0 428b66f49c81e72dfc7dd64f628b879467fe04c1
+%global gittag0 v0.8.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    sisco.lv2
-Version: 0.8.1
+Version: 0.8.5
 Release: 1%{?dist}
 Summary: A LV2 oscilloscope
 
@@ -47,6 +47,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 sisco_VERSION=%{vers
 %{_datadir}/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.5
+- update to 0.8.5
+
 * Fri May 3 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.1
 - update to 0.8.1
 
