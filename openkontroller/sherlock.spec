@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 70f3794ad7a79e3764c5d90ec1eddc372a76a7c4
+%global commit0 20033c7faf7e09367c4f9a4f26d235ca3c4ca1aa
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    sherlock.lv2
-Version: 0.16.0
+Version: 0.20.0
 Release: 2%{?dist}
 Summary: An investigative LV2 plugin bundle
 URL:     https://github.com/OpenMusicKontrollers/sherlock.lv2
@@ -46,6 +46,9 @@ DESTDIR=%{buildroot} ninja install
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+- update to 0.20.0-2
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
 - update for Fedora 29
 
