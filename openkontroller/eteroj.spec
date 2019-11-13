@@ -1,10 +1,12 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
-%global commit0 323e31b7dc05beed4249825fdd2546a7fbe57357
+%global commit0 edb38c603f4c3896d37c5b2368911df6155fd8d3
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    eteroj.lv2
-Version: 0.4.0
+Version: 0.6.0
 Release: 2%{?dist}
 Summary: OSC injection/ejection from/to UDP/TCP/Serial for LV2
 URL:     https://github.com/OpenMusicKontrollers/eteroj.lv2
@@ -19,7 +21,7 @@ BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: libuv-devel
 BuildRequires: sratom-devel
-BuildRequires: cmake
+BuildRequires: meson
 
 %description
 OSC injection/ejection from/to UDP/TCP/Serial for LV2
@@ -29,16 +31,23 @@ OSC injection/ejection from/to UDP/TCP/Serial for LV2
 
 %build
 
-%cmake -DPLUGIN_DEST:Path=%{_lib}/lv2/eteroj.lv2 .
-make VERBOSE=1 %{?_smp_mflags}
+VERBOSE=1 meson --prefix=/usr build
+cd build
 
-%install 
-make DESTDIR=%{buildroot} install
+DESTDIR=%{buildroot} VERBOSE=1 ninja
+
+%install
+
+cd build
+DESTDIR=%{buildroot} ninja install
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-2
+- update to 0.6.0-2
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-2
 - update for Fedora 29
 
