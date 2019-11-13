@@ -1,4 +1,6 @@
-%define revision 2294
+%global debug_package %{nil}
+
+%define revision 2330
 
 Name:    GrandOrgue
 Version: 0.3.1.%{revision}
@@ -10,8 +12,8 @@ License: GPLv2+
 URL:     http://sourceforge.net/projects/ourorgan
 # The source for this package was pulled from upstream's vcs.  Use the
 # following commands to generate the tarball:
-#  svn export -r 2294 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2294
-#  tar cvfz ourorgan-2294.tar.gz ourorgan-2294
+#  svn export -r 2330 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2330
+#  tar cvfz ourorgan-2330.tar.gz ourorgan-2330
 Source0:      ourorgan-%{revision}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -68,10 +70,14 @@ fi
 %files
 %doc README license.txt AUTHORS
 %{_bindir}/%{name}
+%{_bindir}/GrandOrgueTool
 %{_datadir}/*
 %{_libdir}/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
+- update to release 2330
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
 - update for Fedora 29
 
