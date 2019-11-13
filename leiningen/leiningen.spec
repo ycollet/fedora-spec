@@ -1,5 +1,5 @@
 Name:    leiningen
-Version: 2.8.3
+Version: 2.9.1
 Release: 1%{?dist}
 Summary: Clojure project automation tool
 
@@ -68,6 +68,9 @@ sed -i -e "7iCLASSPATH=" $RPM_BUILD_ROOT%{_bindir}/lein
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 2.9.1-1
+- update to 2.9.1-1
+
 * Wed Feb 13 2019 Yann Collette <ycollette.nospam@free.fr> - 2.8.3-1
 - Update to 2.8.3
 
