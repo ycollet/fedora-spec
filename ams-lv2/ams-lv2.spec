@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 0f60ee0a0e6df64877210dfee2d30f126dc3137f
+%global commit0 f029b1e4ad7717d11fb3b1b8201ea5abac21d553
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    ams-lv2
-Version: 1.2.1.%{shortcommit0}
+Version: 1.2.2.%{shortcommit0}
 Release: 1%{?dist}
 Summary: AMS LV2 set of plugins (from Alsa Modular Synth)
 
@@ -57,8 +57,11 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.1
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-1
+- update 1.2.2-1
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-1
 - update for Fedora 29
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.2.1
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-1
 - Initial build
