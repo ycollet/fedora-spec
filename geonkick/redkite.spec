@@ -7,7 +7,7 @@ Name:    redkite
 Version: 0.6.2
 Release: 1%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
-URL:     https://github.com/quamplex/redkite
+URL:     https://gitlab.com/geontime/redkite
 Group:   Applications/Multimedia
 License: GPLv2+
 
