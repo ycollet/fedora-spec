@@ -1,11 +1,13 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
-%global commit0 55c1e1438222e1e56ef692576bf0a8ce3389c3a5
+%global commit0 5517c496a7a540a5cf170af3c957e1bb9a0247b2
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    orbit.lv2
 Version: 0.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: LV2 Event Looper
 URL:     https://github.com/OpenMusicKontrollers/orbit.lv2
 Group:   Applications/Multimedia
@@ -17,7 +19,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
-BuildRequires: cmake
+BuildRequires: meson
 BuildRequires: zlib-devel
 
 %description
@@ -28,16 +30,23 @@ LV2 Event Looper
 
 %build
 
-%cmake -DPLUGIN_DEST:Path=%{_lib}/lv2/orbit.lv2 .
-make VERBOSE=1 %{?_smp_mflags}
+VERBOSE=1 meson --prefix=/usr build
+cd build
 
-%install 
-make DESTDIR=%{buildroot} install
+DESTDIR=%{buildroot} VERBOSE=1 ninja
+
+%install
+
+cd build
+DESTDIR=%{buildroot} ninja install
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-3
+- update to 0.1.0-3
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
 - update for Fedora 29
 
