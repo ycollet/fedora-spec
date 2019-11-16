@@ -17,7 +17,7 @@
 
 Name:           vsxu
 Version:        0.6.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Visual programming language animation tool
 License:        GPL-3.0 and LGPL-3.0
 Group:          Productivity/Multimedia/Sound/Visualization
@@ -54,6 +54,7 @@ BuildRequires: libpng-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: SDL2-devel
 BuildRequires: zlib-devel
+BuildRequires: bitstream-vera-sans-fonts
 ExclusiveArch: %ix86 x86_64
 
 %description
@@ -134,6 +135,11 @@ sed -e 's/lib/%{_lib}/' -i programs/artiste/vsxu-artiste-fullscreen.desktop.in \
     -i programs/server/vsxu-server.desktop.in
 # for GLFW2
 sed -e 's/usr\/lib/usr\/%{_lib}\/glfw2/' -i cmake/modules/FindGLFW.cmake
+
+sed -i -e "s/lib\/vsxu\/plugins/%{_lib}\/vsxu\/plugins/g" vsx_platform.h
+
+#   define DEFAULT_FONT "/usr/X11R6/lib/X11/fonts/TTF/Vera.ttf"
+sed -i -e "s/\/usr\/X11R6\/lib\/X11\/fonts\/TTF\/Vera.ttf/\/usr\/share\/fonts\/bitstream-vera\/Vera.ttf/g" engine_graphics/thirdparty/ftgl/test/demo.cpp
 
 %build
 if [ %{_lib} = lib64 ]; then
@@ -312,6 +318,9 @@ rm %{buildroot}/%{_bindir}/vsxu_launcher
 %{_bindir}/raw2wav
 
 %changelog
+* Sat Nov 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3-2
+- fix plugin path
+
 * Sat Nov 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3-1
 - first spec file for vsxu for Fedora 31
 
