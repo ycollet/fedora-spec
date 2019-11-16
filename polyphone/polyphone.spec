@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 45ce25e1b01577f930e7d1b5943cb19d3d640c35
+%global commit0 5f5953d6205c8bba820e8693b380952933574359
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    polyphone
-Version: 2.1.3
+Version: 2.2.0
 Release: 1%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
@@ -19,7 +19,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: https://github.com/davy7125/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ sed
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtbase-gui
 BuildRequires: qt5-qtsvg-devel
@@ -47,6 +47,8 @@ The goal of Polyphone is to provide:
 
 %prep
 %setup -qn %{name}-%{commit0}
+
+sed -i -e "s/usr\/local/usr\//g" sources/polyphone.pro
 
 %build
 
@@ -104,6 +106,9 @@ fi
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Sat Nov 16 2019 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-1
+- update to 2.2.0
+
 * Wed Oct 23 2019 Yann Collette <ycollette.nospam@free.fr> - 2.1.3-1
 - update to 2.1.3
 
