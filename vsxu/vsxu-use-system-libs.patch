@@ -1,0 +1,248 @@
+---
+ lib/compression/CMakeLists.txt                |   42 +++++-----------------
+ lib/compression/src/vsx_compression_lzham.cpp |    2 -
+ lib/compression/src/vsx_compression_lzma.cpp  |    2 -
+ lib/engine_graphics/CMakeLists.txt            |   49 +-------------------------
+ plugins/src/mesh.importers/CMakeLists.txt     |   49 --------------------------
+ 5 files changed, 15 insertions(+), 129 deletions(-)
+
+Index: vsxu-0.6.2/lib/compression/CMakeLists.txt
+===================================================================
+--- vsxu-0.6.2.orig/lib/compression/CMakeLists.txt
++++ vsxu-0.6.2/lib/compression/CMakeLists.txt
+@@ -10,6 +10,9 @@ project (${module_id})
+ # CMAKE PACKAGES ###############################################################
+ ################################################################################
+ find_package(DL REQUIRED)
++include(FindPkgConfig)
++pkg_check_modules(LZMA_SDK REQUIRED clzma)
++pkg_check_modules(LZHAM_CODEC REQUIRED lzham_codec)
+ 
+ ################################################################################
+ # INCLUDES #####################################################################
+@@ -19,6 +22,8 @@ include_directories(
+   ${CMAKE_SOURCE_DIR}/
+   ${CMAKE_SOURCE_DIR}/lib/common/include
+   ${CMAKE_SOURCE_DIR}/lib/compression/include
++  ${LZMA_SDK_INCLUDE_DIRS}
++  ${LZHAM_CODEC_INCLUDE_DIRS}
+ )
+ 
+ file(GLOB_RECURSE HEADER_FILES *.h)
+@@ -52,43 +57,11 @@ set(SOURCES
+ 
+ 
+ add_definitions(-D_7ZIP_ST)
+-set(SOURCES_LZMA
+-  thirdparty/lzma-sdk/C/Alloc.c
+-  thirdparty/lzma-sdk/C/LzmaLib.c
+-  thirdparty/lzma-sdk/C/LzmaEnc.c
+-  thirdparty/lzma-sdk/C/LzmaDec.c
+-  thirdparty/lzma-sdk/C/LzFind.c
+-)
+-
+ 
+ add_definitions(
+   -DLZHAM_NO_THREADING=1
+   -fno-strict-aliasing
+ )
+-include_directories(
+-  ${CMAKE_SOURCE_DIR}/lib/compression/thirdparty/lzham-sdk/include
+-  ${CMAKE_SOURCE_DIR}/lib/compression/thirdparty/lzham-sdk/lzhamcomp
+-  ${CMAKE_SOURCE_DIR}/lib/compression/thirdparty/lzham-sdk/lzhamdecomp
+-)
+-set(SOURCES_LZHAM
+-  thirdparty/lzham-sdk/lzhamlib/lzham_lib.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_assert.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_checksum.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_huffman_codes.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_lzdecompbase.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_lzdecomp.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_mem.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_platform.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_prefix_coding.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_symbol_codec.cpp
+-  #thirdparty/lzham-sdk/lzhamdecomp/lzham_timer.cpp
+-  thirdparty/lzham-sdk/lzhamdecomp/lzham_vector.cpp
+-  thirdparty/lzham-sdk/lzhamcomp/lzham_lzbase.cpp
+-  thirdparty/lzham-sdk/lzhamcomp/lzham_lzcomp.cpp
+-  thirdparty/lzham-sdk/lzhamcomp/lzham_lzcomp_internal.cpp
+-  thirdparty/lzham-sdk/lzhamcomp/lzham_lzcomp_state.cpp
+-  thirdparty/lzham-sdk/lzhamcomp/lzham_match_accel.cpp
+-)
+ 
+ if (WIN32)
+     set(SOURCES_LZMA_OLD
+@@ -159,4 +132,9 @@ if (WIN32)
+   endif()
+ endif()
+ 
++target_link_libraries(${module_id}
++  ${LZMA_SDK_LIBRARIES}
++  ${LZHAM_CODEC_LIBRARIES}
++)
++
+ add_subdirectory(test)
+Index: vsxu-0.6.2/lib/compression/src/vsx_compression_lzham.cpp
+===================================================================
+--- vsxu-0.6.2.orig/lib/compression/src/vsx_compression_lzham.cpp
++++ vsxu-0.6.2/lib/compression/src/vsx_compression_lzham.cpp
+@@ -1,7 +1,7 @@
+ #include <stdio.h>
+ #include <stdint.h>
+ #include <vsx_compression_lzham.h>
+-#include <lib/compression/thirdparty/lzham-sdk/include/lzham.h>
++#include <lzham.h>
+ #include <string/vsx_string.h>
+ 
+ namespace vsx
+Index: vsxu-0.6.2/lib/compression/src/vsx_compression_lzma.cpp
+===================================================================
+--- vsxu-0.6.2.orig/lib/compression/src/vsx_compression_lzma.cpp
++++ vsxu-0.6.2/lib/compression/src/vsx_compression_lzma.cpp
+@@ -1,4 +1,4 @@
+-#include <lib/compression/thirdparty/lzma-sdk/C/LzmaLib.h>
++#include <LzmaLib.h>
+ #include <stdio.h>
+ #include <stdint.h>
+ #include <vsx_compression_lzma.h>
+Index: vsxu-0.6.2/lib/engine_graphics/CMakeLists.txt
+===================================================================
+--- vsxu-0.6.2.orig/lib/engine_graphics/CMakeLists.txt
++++ vsxu-0.6.2/lib/engine_graphics/CMakeLists.txt
+@@ -12,7 +12,8 @@ include(${CMAKE_SOURCE_DIR}/cmake/CMakeF
+ ################################################################################
+ find_package(Threads REQUIRED)
+ find_package(OpenGL REQUIRED)
+-
++include(FindPkgConfig)
++pkg_check_modules(LODEPNG REQUIRED lodepng)
+ 
+ ################################################################################
+ # INCLUDES #####################################################################
+@@ -107,43 +108,6 @@ set( SOURCES_FREETYPE
+     thirdparty/freetype2/src/winfonts/winfnt.c
+ )
+ 
+-set(SOURCES_FTGL
+-    thirdparty/ftgl/src/FTBuffer.cpp
+-    thirdparty/ftgl/src/FTCharmap.cpp
+-    thirdparty/ftgl/src/FTCleanup.cpp
+-    thirdparty/ftgl/src/FTContour.cpp
+-    thirdparty/ftgl/src/FTFace.cpp
+-    thirdparty/ftgl/src/FTFont/FTBitmapFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTBufferFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTExtrudeFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTFontGlue.cpp
+-    thirdparty/ftgl/src/FTFont/FTOutlineFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTPixmapFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTPolygonFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTTextureFont.cpp
+-    thirdparty/ftgl/src/FTFont/FTTriangleExtractorFont.cpp
+-    thirdparty/ftgl/src/FTGL.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTBitmapGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTBufferGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTExtrudeGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTGLGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTGlyphGlue.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTOutlineGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTPixmapGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTPolygonGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTTextureGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyph/FTTriangleExtractorGlyph.cpp
+-    thirdparty/ftgl/src/FTGlyphContainer.cpp
+-    thirdparty/ftgl/src/FTLayout/FTLayout.cpp
+-    thirdparty/ftgl/src/FTLayout/FTLayoutGlue.cpp
+-    thirdparty/ftgl/src/FTLayout/FTSimpleLayout.cpp
+-    thirdparty/ftgl/src/FTLibrary.cpp
+-    thirdparty/ftgl/src/FTPoint.cpp
+-    thirdparty/ftgl/src/FTSize.cpp
+-    thirdparty/ftgl/src/FTVectoriser.cpp
+-)
+-
+ if (WIN32)
+   include_directories( thirdparty/freetype2/include )
+   include_directories( thirdparty/freetype2/include/freetype )
+@@ -160,14 +124,6 @@ set(SOURCES_PERLIN
+ thirdparty/perlin/perlin.cpp
+ )
+ 
+-#lodepng
+-include_directories(
+-    thirdparty/lodepng
+-)
+-set(SOURCES_LODEPNG
+-    thirdparty/lodepng/lodepng.cpp
+-)
+-
+ #jpeg
+ include_directories(
+ thirdparty/mini-jpeg
+@@ -226,5 +182,6 @@ target_link_libraries(
+   ${OPENGL_LIBRARIES}
+   ${PNG_LIBRARIES}
+   ${ZLIB_LIBRARIES}
++  ${LODEPNG_LIBRARIES}
+ )
+ 
+Index: vsxu-0.6.2/plugins/src/mesh.importers/CMakeLists.txt
+===================================================================
+--- vsxu-0.6.2.orig/plugins/src/mesh.importers/CMakeLists.txt
++++ vsxu-0.6.2/plugins/src/mesh.importers/CMakeLists.txt
+@@ -35,55 +35,6 @@ include_directories(${INCLUDE_DIRS})
+ # find the local source files
+ file(GLOB LOCAL_SOURCES "*.cpp")
+ 
+-set(SOURCES
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/animation_action.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/animation.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/animation_cycle.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/bone.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/buffersource.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/cal3d_wrapper.cpp
+-#${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/calxmlbindings.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coreanimatedmorph.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coreanimation.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/corebone.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/corekeyframe.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/corematerial.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coremesh.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coremodel.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coremorphkeyframe.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coremorphtrack.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coreskeleton.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coresubmesh.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coresubmorphtarget.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/coretrack.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/dualquaternion.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/error.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/global.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/hardwaremodel.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/loader.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/matrix.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/mesh.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/mixer.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/model.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/morphtargetmixer.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/physique.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/physiquedualquaternion.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/platform.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/quaternion.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/renderer.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/saver.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/skeleton.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/springsystem.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/streamsource.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/submesh.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/tinybind.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/tinyxml.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/tinyxmlerror.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/tinyxmlparser.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/vector.cpp
+-${CMAKE_CURRENT_LIST_DIR}/cal3d/cal3d/src/cal3d/xmlformat.cpp
+-)
+-
+ file(GLOB_RECURSE HEADER_FILES *.h)
+ 
+ # include common
