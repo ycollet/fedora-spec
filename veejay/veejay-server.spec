@@ -7,7 +7,7 @@
 
 Name:    veejay-server
 Version: 1.5.57
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A 'visual' instrument and realtime video sampler (for live video improvisation) - server part
 URL:     https://github.com/c0ntrol/veejay
 Group:   Applications/Multimedia
@@ -67,10 +67,19 @@ export PKG_CONFIG_PATH=%{buildroot}%{_libdir}/pkgconfig
 cd veejay-current
 cd veejay-server
 ./autogen.sh
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
+./configure --prefix=%{_prefix} --libdir=%{_libdir} 
+
 sed -i -e "s/libpng16/freetype/g" config.h
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
 %{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS=-I/usr/include/compat-ffmpeg28 LDFLAGS=-L/usr/lib64/compat-ffmpeg28/
 %{__make} DESTDIR=%{buildroot} install
+
 cd ../..
 
 %install
@@ -104,5 +113,8 @@ fi
 %{_includedir}/*
 
 %changelog
+* Sun Nov 17 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-2
+- fix illegal instruction pb
+
 * Sat Nov 16 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-1
 - Initial spec file

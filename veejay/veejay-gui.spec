@@ -5,9 +5,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:    veejay-other
+Name:    veejay-gui
 Version: 1.5.57
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A 'visual' instrument and realtime video sampler (for live video improvisation)
 URL:     https://github.com/c0ntrol/veejay
 Group:   Applications/Multimedia
@@ -69,22 +69,52 @@ cd veejay-current
 cd veejay-client
 ./autogen.sh
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+
 sed -i -e "s/libpng16/freetype/g" config.h
+
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
 %{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+
 cd ..
 
 cd veejay-utils
 ./autogen.sh
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+
 sed -i -e "s/libpng16/freetype/g" config.h
+
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
 %{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+
 cd ..
 
 cd plugin-packs/lvdgmic/
 ./autogen.sh
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+
 sed -i -e "s/libpng16/freetype/g" config.h
+
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
 %{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+
 cd ../..
 
 %install
@@ -124,5 +154,8 @@ fi
 %{_libdir}/*
 
 %changelog
+* Sun Nov 17 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-2
+- fix illegal instruction pb and rename to veejay-gui
+
 * Sat Nov 16 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-1
 - Initial spec file
