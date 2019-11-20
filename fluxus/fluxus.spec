@@ -40,8 +40,8 @@ BuildRequires: alsa-lib-devel >= 1.0.24
 BuildRequires: openal-soft-devel >= 1.12.854
 BuildRequires: gstreamer-devel >= 0.10.25
 BuildRequires: gstreamer-plugins-base-devel >= 0.10.25
-BuildRequires: gstreamer-plugins-good-devel >= 0.10.17
-BuildRequires: gstreamer-plugins-bad-free-devel >= 0.10.22
+#BuildRequires: gstreamer-plugins-good-devel >= 0.10.17
+#BuildRequires: gstreamer-plugins-bad-free-devel >= 0.10.22
 BuildRequires: libunicap-devel >= 0.9.12
 BuildRequires: ffmpeg-devel >= 0.7
 BuildRequires: openssl-devel
