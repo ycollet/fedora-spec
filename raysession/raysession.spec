@@ -2,12 +2,12 @@
 %global __python %{__python3}
 
 # Global variables for github repository
-%global commit0 cdce235fb7902f5dab161f90fcecc5faf423a021
-%global gittag0 0.8.1
+%global commit0 dfc9a4d5539609719193d6c1555cc96ddae0c485
+%global gittag0 0.8.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    RaySession
-Version: 0.8.1
+Version: 0.8.2
 Release: 1%{?dist}
 Summary: A JACK session manager
 
@@ -66,6 +66,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/raysession/*
 
 %changelog
+* Thu Nov 21 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.1-1
+- update to 0.8.2-1
+
 * Thu Oct 24 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.1-1
 - update to 0.8.1-1
 
