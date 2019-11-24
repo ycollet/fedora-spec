@@ -8,7 +8,7 @@
 
 Name:    fluxus
 Version: 0.17rc5.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A 3D game engine for livecoding worlds into existence
 URL:     http://pawfal.org/fluxus/
 Group:   Applications/Multimedia
@@ -40,8 +40,6 @@ BuildRequires: alsa-lib-devel >= 1.0.24
 BuildRequires: openal-soft-devel >= 1.12.854
 BuildRequires: gstreamer-devel >= 0.10.25
 BuildRequires: gstreamer-plugins-base-devel >= 0.10.25
-#BuildRequires: gstreamer-plugins-good-devel >= 0.10.17
-#BuildRequires: gstreamer-plugins-bad-free-devel >= 0.10.22
 BuildRequires: libunicap-devel >= 0.9.12
 BuildRequires: ffmpeg-devel >= 0.7
 BuildRequires: openssl-devel
@@ -86,9 +84,14 @@ sed -i -e "s/FluxusCollectsLocation = Prefix + \"\/lib\"/FluxusCollectsLocation 
 #./makehelpmap.scm
 
 %install
+
 scons-2 -Q install DESTDIR="%{buildroot}" Prefix=/usr RacketPrefix=/usr
+
 install -m 644 -D modules/material/textures/fluxus-icon.png %{buildroot}/usr/share/pixmaps/fluxus-icon.png
 install -m 644 -D debian/fluxus.desktop %{buildroot}/usr/share/applications/fluxus.desktop
+
+install -m 755 -d %{buildroot}/usr/share/fluxus-019/
+cp -r examples %{buildroot}/usr/share/fluxus-019/
 
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
@@ -99,9 +102,6 @@ desktop-file-install --vendor '' \
         %{buildroot}%{_datadir}/applications/fluxus.desktop
 
 %post
-chcon -t textrel_shlib_t '/usr/lib/fluxus-018/compiled/native/i386-linux/3m/fluxus-engine_ss.so'
-semanage fcontext -a -t textrel_shlib_t '/usr/lib/fluxus-018/compiled/native/i386-linux/3m/fluxus-engine_ss.so'
-
 touch --no-create %{_datadir}/mime/packages &>/dev/null || :
 update-desktop-database &> /dev/null || :
 
@@ -128,5 +128,8 @@ fi
 %{_datadir}/applications/fluxus.desktop
 
 %changelog
+* Sun Nov 24 2019 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-2
+- install examples in share + fixes
+
 * Tue Nov 19 2019 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-1
 - Initial release of the spec file
