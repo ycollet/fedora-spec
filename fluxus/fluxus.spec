@@ -8,7 +8,7 @@
 
 Name:    fluxus
 Version: 0.17rc5.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A 3D game engine for livecoding worlds into existence
 URL:     http://pawfal.org/fluxus/
 Group:   Applications/Multimedia
@@ -16,6 +16,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 
 Source0: https://gitlab.com/nebogeo/%{name}/-/archive/%{commit0}/fluxus-%{commit0}.tar.gz
+Source1: https://github.com/defaultxr/fluxus-mode/raw/master/fluxus-mode.el
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -44,6 +45,7 @@ BuildRequires: libunicap-devel >= 0.9.12
 BuildRequires: ffmpeg-devel >= 0.7
 BuildRequires: openssl-devel
 BuildRequires: desktop-file-utils
+Buildrequires: emacs w3m
 
 Requires: racket >= 5.1.1
 Requires: fftw >= 3.2.2
@@ -65,12 +67,21 @@ Requires: gstreamer-plugins-good >= 0.10.17
 Requires: gstreamer-plugins-bad-free >= 0.10.22
 Requires: libunicap >= 0.9.12
 Requires: ffmpeg >= 0.7
+Requires: emacs w3m-el
 
 %description
 A rapid prototyping, livecoding and playing/learning environment for 3D
 graphics, sound and games. Extends Racket with graphical commands
 and can be used within it’s own livecoding environment or from within
 the DrRacket IDE. Web Page: http://www.pawfal.org/fluxus/
+
+%package emacs
+Summary: Fluxus support for Emacs
+Group: Applications/Multimedia
+Requires: fluxus = %{version}-%{release}
+
+%description emacs
+Fluxus support for the Emacs text editor.
 
 %prep
 %setup -qn %{name}-%{commit0}
@@ -92,6 +103,11 @@ install -m 644 -D debian/fluxus.desktop %{buildroot}/usr/share/applications/flux
 
 install -m 755 -d %{buildroot}/usr/share/fluxus-019/
 cp -r examples %{buildroot}/usr/share/fluxus-019/
+
+install -m 755 -d %{buildroot}/usr/share/emacs/site-lisp/fluxus
+cp %{SOURCE1} %{buildroot}/usr/share/emacs/site-lisp/fluxus/
+
+cp -r docs %{buildroot}/usr/share/doc/fluxus-019/
 
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
@@ -126,6 +142,10 @@ fi
 %{_docdir}/fluxus-019/*
 %{_datadir}/pixmaps/fluxus-icon.png
 %{_datadir}/applications/fluxus.desktop
+
+%files emacs
+%defattr(-,root,root,-)
+%{_datadir}/emacs/site-lisp/fluxus
 
 %changelog
 * Sun Nov 24 2019 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-2
