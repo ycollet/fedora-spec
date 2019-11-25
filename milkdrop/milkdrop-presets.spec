@@ -1,7 +1,7 @@
 Summary: Additional presets for ProjectM
 Name:    projectM-extra-presets
 Version: 1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
 Group:   Applications/Multimedia
 URL:     http://projectm.sourceforge.net
@@ -123,7 +123,7 @@ rm -rf presets-2.0.0/CMakeFiles
 
 find . -name "amandio c*" -exec rm {} \;
 find . -name "*.bak" -exec rm {} \;
-find . -name "*.prjm" -exec rm {} \;
+#find . -name "*.prjm" -exec rm {} \;
 
 # Rename
 find . -name "*.MILK" -exec mv {} `basename {} .MILK`.milk \;
@@ -166,6 +166,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/projectM/presets/yin/*
 
 %changelog
+* Sun Nov 24 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- don't remove prjm files
+
 * Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - fix for Fedora 31
 
