@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 d14f4511b2235906ad66c375ed9d4ad34db0283c
-%global gittag0 v1.1.3
+%global commit0 dbf5f47149fbb7584bf48ce9e767b9e90ee2df7e
+%global gittag0 v1.2.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    lmms-mao
-Version: 1.1.3
+Version: 1.2.1
 Release: 8%{?dist}
 Summary: Linux MultiMedia Studio
 URL:     http://lmms.sourceforge.net/
@@ -37,25 +37,20 @@ License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+# git clone https://github.com/lmms/lmms
+# cd lmms
+# git checkout v1.2.1
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz lmms.tar.gz lmms/
+# rm -rf lmms
+
 # original tarfile can be found here:
-Source0: https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
-
-Patch0:  lmms-1.1.3-0001-fix-gcc-5.patch
-Patch1:  lmms-1.1.3-0002-fix-case-carla.patch
-Patch2:  lmms-1.1.3-0003-fix-lib64-carla.patch
-Patch3:  lmms-1.1.3-0004-fix-swh-compilation.patch
-Patch4:  lmms-1.1.3-0005-fix-carla-plugin-loading.patch
-Patch5:  lmms-1.1.3-0006-fix-indent.patch
-Patch6:  lmms-1.1.3-0007-fix-versioninfo.patch
-Patch7:  lmms-1.1.3-0008-fix-gcc-7-compilation.patch
-Patch8:  lmms-1.1.3-0009-jack-transport.patch
-Patch9:  lmms-1.1.3-0010-cmake-no-error.patch
-#Patch10: lmms-1.1.3-0011-add-missing-carla-switch-case.patch
-
-# according to upstream we should at least support oss, alsa, and
-# jack. output via pulseaudio has high latency, but we enable it
-# nevertheless as it is standard on fedora now. portaudio support is
-# beta (and causes crashes), sdl is rarely used (?).
+#Source0: https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
+Source0: lmms.tar.gz
+Source1: carla.cpp
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -67,20 +62,23 @@ BuildRequires: fftw3-devel
 BuildRequires: fluidsynth-devel
 BuildRequires: libvorbis-devel
 BuildRequires: libogg-devel
+BuildRequires: libgig-devel
 BuildRequires: ladspa-devel
 BuildRequires: stk-devel
-BuildRequires: qt4-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-linguist
 BuildRequires: fltk-devel
 BuildRequires: cmake
 BuildRequires: sed
+BuildRequires: git
 BuildRequires: desktop-file-utils
 BuildRequires: fltk-fluid
 BuildRequires: fltk-devel
-BuildRequires: Carla
+BuildRequires: Carla-devel
+BuildRequires: bash-completion
 
 %global __provides_exclude_from ^%{_libdir}/lmms/.*$
 %global __requires_exclude ^libvstbase\\.so.*$|^libZynAddSubFxCore\\.so.*$
-
 
 %description
 LMMS aims to be a free alternative to popular (but commercial and
@@ -102,43 +100,25 @@ Features
  * automation-editor
  * MIDI-support
 
-
 %package devel
 Summary:        Development files for lmms
 Group:          Development/Libraries
 Requires:       lmms-mao = %{version}-%{release}
-
 
 %description devel
 The lmms-devel package contains header files for
 developing addons for lmms.
 
 # rpath needed e.g. for /usr/libexec/RemoteZynAddSubFx
-%global _cmake_skip_rpath %{nil}
+# %global _cmake_skip_rpath %{nil}
 
 %prep
-%setup -qn lmms-%{commit0}
+%setup -qn lmms
 
-%patch0 -p1 
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-#%patch10 -p1
-
-# remove spurious x-bits
-find . -type f -exec chmod 0644 {} \;
+sed -i -e "s/-std=c11/-std=c11 -fPIC -DPIC/g" src/3rdparty/rpmalloc/CMakeLists.txt
+cp %{SOURCE1} plugins/carlabase/
 
 %build
-
-# Fix a problem in header
-sed -ie "s/GCC \"__VERSION__/GCC 6.1.1\"/g" include/versioninfo.h
-sed -ie "s/SET(WERROR_FLAGS/#SET(WERROR_FLAGS/g" CMakeLists.txt
 
 %cmake \
        -DWANT_SDL:BOOL=OFF \
@@ -148,17 +128,25 @@ sed -ie "s/SET(WERROR_FLAGS/#SET(WERROR_FLAGS/g" CMakeLists.txt
        -DWANT_SWH:BOOL=ON \
        -DWANT_CALF:BOOL=OFF \
        -DWANT_CARLA:BOOL=ON \
+       -DWANT_QT5:BOOL=ON \
        -DWANT_VST:BOOL=OFF \
        -DWANT_VST_NOWINE:BOOL=ON \
+       -DCMAKE_C_FLAGS="-fPIC -DPIC" \
+       -DCMAKE_EXE_LINKER_FLAGS:STRING="$LDFLAGS -pie" \
+       -DCMAKE_SKIP_RPATH=OFF \
        -DCMAKE_INSTALL_LIBDIR=%{_lib} \
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
        .
 
-make VERBOSE=1 %{?_smp_mflags}
+make DESTDIR=%{buildroot} VERBOSE=1 # %{?_smp_mflags}
 
 %install
 
 make DESTDIR=%{buildroot} install
+
+# workaround: copy bash completion manually into install dir because it fails during cmake install
+mkdir -p %{buildroot}/%{_datadir}/bash-completion/completions
+cp %{_builddir}/lmms*/doc/bash-completion/lmms %{buildroot}/%{_datadir}/bash-completion/completions/lmms
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -167,11 +155,9 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/lmms.desktop
 
-
 %post
 touch --no-create %{_datadir}/mime/packages &>/dev/null || :
 update-desktop-database &> /dev/null || :
-
 
 %postun
 update-desktop-database &> /dev/null || :
@@ -179,29 +165,28 @@ if [ $1 -eq 0 ] ; then
   update-mime-database %{_datadir}/mime &> /dev/null || :
 fi
 
-
 %posttrans
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
-
 %files
-#%doc AUTHORS COPYING README TODO
+%doc doc/AUTHORS README.md INSTALL.txt
+%license LICENSE.txt
 %{_bindir}/lmms
-%{_libdir}/lmms
-#%{_libexecdir}/RemoteZynAddSubFx
-%{_datadir}/lmms
+%{_mandir}/man1/*
+%{_libdir}/lmms/
+%{_datadir}/lmms/
 %{_datadir}/applications/lmms.desktop
+%{_datadir}/icons/hicolor/*
 %{_datadir}/mime/packages/lmms.xml
-%{_datadir}/pixmaps/lmms.png
-%{_mandir}/man*/lmms*
-%exclude %{_datadir}/menu/lmms
-
+%{_datadir}/bash-completion/completions/lmms
 
 %files devel
 %{_includedir}/lmms
 
-
 %changelog
+* Thu Nov 28 2019 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-8
+- update to 1.2.1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-8
 - update for Fedora 29
 
