@@ -1,33 +1,32 @@
+# Global variables for github repository
+%global commit0 64f54507dc6a84ae3d765fd946cf9a4689742a75
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Name:    libprojectM
-Version: 2.1.0
+Version: 2.2.1
 Release: 10%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 Group:   Applications/Multimedia
 License: LGPLv2+
-URL:     http://projectm.sourceforge.net/
-Source0: http://downloads.sourceforge.net/projectm/%{version}/projectM-complete-%{version}-Source.tar.gz
-Patch1:  libprojectM-2.1.0-paths.patch
-Patch2:  libprojectM-qt-2.1.0-paths.patch
-#Fix FTBFS with GCC6
-Patch3:  libprojectM-c++14.patch
+URL:     https://github.com/projectM-visualizer/projectm
+Source0: https://github.com/projectM-visualizer/projectm/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
-BuildRequires: ftgl-devel cmake glew-devel
+BuildRequires: automake autoconf libtool
+BuildRequires: ftgl-devel glew-devel
 BuildRequires: libgomp pulseaudio-libs-devel
-# libprojectM-qt
-BuildRequires: qt4-devel
-#projectM-jack
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtquickcontrols2-devel
+BuildRequires: SDL2-devel
 BuildRequires: jack-audio-connection-kit-devel desktop-file-utils
-%if !0%{?rhel}
-#projectM-libvisual
-BuildRequires: libvisual-devel = 1:0.4.0, SDL-devel
-%endif
-#projectM-pulseaudio
 BuildRequires: pulseaudio-libs-devel
-
 BuildRequires: dejavu-sans-mono-fonts, dejavu-sans-fonts
+BuildRequires: glm-devel
+BuildRequires: ftgl-devel
+BuildRequires: libQGLViewer-qt5-devel
 
 Requires: dejavu-sans-mono-fonts, dejavu-sans-fonts
 
@@ -85,58 +84,43 @@ License:    GPLv2+ and MIT
 This package allows the use of the projectM visualization plugin through any
 pulseaudio compatible applications.
 
-%package -n projectM-libvisual
-Summary:    The projectM visualization plugin for libvisual
+%package -n projectM-SDL
+Summary:    The projectM visualization plugin for SDL
 Group:      Applications/Multimedia
 License:    GPLv2+ and LGPLv2+ and MIT
 
-%description -n projectM-libvisual
+%description -n projectM-SDL
 This package allows the use of the projectM visualization plugin through any
-libvisual compatible applications.
+SDL compatible applications.
 
 %prep
-%setup -q -n projectM-complete-%{version}-Source
-
-sed -i 's/\r//' src/libprojectM/ChangeLog
-sed -i 's/\r//' src/libprojectM/fftsg.h
-sed -i 's/\r//' src/libprojectM/event.h
-find -name "*.?pp" -exec chmod -x {} ';'
-find -name "*.h" -exec chmod -x {} ';'
-
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%setup -qn projectm-%{commit0}
 
 %build
 
-export CXXFLAGS="%{optflags} -Wl,--as-needed"
+./autogen.sh
 
-mkdir build
-cd build
-
-%cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-       -DLIB_INSTALL_DIR=%{_libdir} \
-       -DprojectM_FONT_TITLE=/usr/share/fonts/dejavu/DejaVuSans.ttf \
-       -DprojectM_FONT_MENU=/usr/share/fonts/dejavu/DejaVuSansMono.ttf \
-%if 0%{?rhel}
-       -DINCLUDE-PROJECTM-LIBVISUAL=OFF \
-%endif
-       -DINCLUDE-PROJECTM-TEST=OFF \
-       -DINCLUDE-PROJECTM-JACK=ON ..
+export QT_SELECT=5
+%configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-sdl --enable-qt --enable-pulseaudio --enable-jack LDFLAGS=-lQGLViewer-qt5
 
 make %{?_smp_mflags} VERBOSE=1
 
-
 %install
-
-cd build
 
 make install DESTDIR=%{buildroot}
 
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
+cd presets
 
-desktop-file-install --dir=%{buildroot}%{_datadir}/applications ../src/projectM-jack/projectM-jack.desktop
-desktop-file-install --dir=%{buildroot}%{_datadir}/applications ../src/projectM-pulseaudio/projectM-pulseaudio.desktop
+for Files in `find . -name "presets_*"`
+do
+    cp $Files/* %{buildroot}%{_datadir}/projectM/presets/
+done
+chmod a-x %{buildroot}%{_datadir}/projectM/presets/*.milk
+
+cd ..
+
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications src/projectM-jack/projectM-jack.desktop
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications src/projectM-pulseaudio/projectM-pulseaudio.desktop
 
 %post -p /sbin/ldconfig
 
@@ -153,25 +137,20 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications ../src/projectM-
 %{_datadir}/projectM/
 
 %files devel
-%{_includedir}/%{name}
+%{_includedir}/*
 %{_libdir}/libprojectM.so
-%{_libdir}/pkgconfig/libprojectM.pc
+%exclude %{_libdir}/*.a
+%exclude %{_libdir}/*.la
 
 %files qt
 %license src/projectM-qt/COPYING
-%{_libdir}/libprojectM-qt*.so.*
-%{_datadir}/pixmaps/prjm16-transparent.svg
 
 %files qt-devel
 %doc src/projectM-qt/ReadMe
-%{_includedir}/%{name}-qt
-%{_libdir}/libprojectM-qt*.so
-%{_libdir}/pkgconfig/libprojectM-qt*.pc
 
 %files -n projectM-jack
 %doc src/projectM-jack/ChangeLog
 %license src/projectM-jack/COPYING
-%{_bindir}/projectM-jack
 %{_datadir}/applications/projectM-jack.desktop
 
 %files -n projectM-pulseaudio
@@ -179,15 +158,15 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications ../src/projectM-
 %license src/projectM-pulseaudio/COPYING
 %{_bindir}/projectM-pulseaudio
 %{_datadir}/applications/projectM-pulseaudio.desktop
+%{_mandir}/man1/projectM-pulseaudio.1.gz
 
-%if !0%{?rhel}
-%files -n projectM-libvisual
-%doc src/projectM-libvisual/AUTHORS src/projectM-libvisual/ChangeLog 
-%license src/projectM-libvisual/COPYING
-%{_libdir}/libvisual-0.4/
-%endif
+%files -n projectM-SDL
+%{_bindir}/projectMSDL
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 2.2.1-10
+- update to 3.1.1-rc7
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-10
 - update for Fedora 29
 
