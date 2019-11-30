@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 7c3a106b3920a2fd28fc9b49b99eec982ad2c6e1
-%global gittag0 v0.6.2
+%global commit0 4aab7f27b7411bf1edc3225c0834bf2880652a4c
+%global gittag0 v0.6.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-BaconPlugs
-Version: 0.6.2
+Version: 0.6.3
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -100,5 +100,8 @@ cp -r BaconPlugs_plugin/dist/BaconMusic/* %{buildroot}%{_libexecdir}/Rack/plugin
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
+- update to 0.6.3
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
 - initial specfile

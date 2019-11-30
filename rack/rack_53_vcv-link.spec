@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 56b816a817029f168ef2fa18c51b5a58caceeabe
-%global gittag0 v0.6.1
+%global commit0 b4af2fe70fcb1fa9e58977543c8b218dc8aa9d50
+%global gittag0 v0.6.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-StellareModular-Link
-Version: 0.6.1
+Version: 0.6.2
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -29,8 +29,18 @@ URL:     https://github.com/stellare-modular/vcv-link
 # cd ..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone https://github.com/stellare-modular/vcv-link
+# cd vcv-link
+# git checkout 0.6.2
+# git submodule init
+# git submodule update
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
+# tar cvfz vcv-link.tar.gz vcv-link/*
+# rm -rf vcv-link
+
 Source0: Rack.tar.gz
-Source1: https://github.com/stellare-modular/vcv-link/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: vcv-link.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -87,5 +97,8 @@ cp -r StellareModular-Link_plugin/dist/StellareModular-Link/* %{buildroot}%{_lib
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
+- update to 0.6.2
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.1
 - initial specfile

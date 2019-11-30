@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 dedce8b31f09d49171a27f8aeb0964ba7064ead9
-%global gittag0 v0.6.3
+%global commit0 6261dfaeaa4e9abb589f10e4178930140425bea2
+%global gittag0 v0.6.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-DHE
-Version: 0.6.3
+Version: 0.6.5
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -74,8 +74,8 @@ mkdir DHE-Modules_plugin
 tar xvfz %{SOURCE1} --directory=DHE-Modules_plugin --strip-components=1 
 
 # Fix a missing header
-sed -i '1s/^/#include <functional>\n /' DHE-Modules_plugin/src/module-widget.cpp
-sed -i '1s/^/#include <functional>\n /' DHE-Modules_plugin/include/module-widget.hpp
+#sed -i '1s/^/#include <functional>\n /' DHE-Modules_plugin/src/module-widget.cpp
+#sed -i '1s/^/#include <functional>\n /' DHE-Modules_plugin/include/module-widget.hpp
 
 %build
 
@@ -91,5 +91,8 @@ cp -r DHE-Modules_plugin/dist/DHE-Modules/* %{buildroot}%{_libexecdir}/Rack/plug
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.5
+- update to 0.6.5
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
 - initial specfile

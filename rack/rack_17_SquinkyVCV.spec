@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 8995248f59c4b855d3e76f5636082cba70891b86
-%global gittag0 v0.6.5b
+%global commit0 b2558eb2dbfd891d68431504a214acb89a7ea12f
+%global gittag0 v0.6.13
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-squinkyVCV
-Version: 0.6.5b
+Version: 0.6.13
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r squinkylabs-plug1_plugin/dist/squinkylabs-plug1/* %{buildroot}%{_libexecdi
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.13
+- update to 0.6.13
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.5b
 - initial specfile

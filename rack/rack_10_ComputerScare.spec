@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 d41bece8fcdd35441c3e45e3d906ee75d5fe75b7
-%global gittag0 v0.6.4
+%global commit0 6fb5c5dc0a35ed09a8af81ffe4e23dd6a542b6b2
+%global gittag0 v0.6.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-ComputerScare
-Version: 0.6.4
+Version: 0.6.6
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r computerscare_plugin/dist/computerscare/* %{buildroot}%{_libexecdir}/Rack/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.6
+- update to 0.6.6
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
 - initial specfile

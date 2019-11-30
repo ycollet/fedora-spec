@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 70a5bec5f69c458b17087b932be2ae12a902ac47
-%global gittag0 v0.6.0
+%global commit0 e3be2c2c420257c85de5c9f6ee88211610d3d4b4
+%global gittag0 v0.6.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-tnorris-BostonBrightonModules
-Version: 0.6.0
+Version: 0.6.1
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r tnorris-BostonBrightonModules_plugin/dist/tnorris-BostonBrightonModules/* 
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.1
+- update to 0.6.1
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0
 - initial specfile

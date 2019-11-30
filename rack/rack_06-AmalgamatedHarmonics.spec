@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 219b05037d27136b557214c0aec0c634bc7426e5
-%global gittag0 v0.6.3
+%global commit0 e6aeac2934d99b9ee7fcb357f74fa55c79fb056d
+%global gittag0 v0.6.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-AmalgamatedHarmonics
-Version: 0.6.3
+Version: 0.6.4
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r AmalgamatedHarmonics_plugin/dist/AmalgamatedHarmonics/* %{buildroot}%{_lib
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
+- update to 0.6.4
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
 - initial specfile

@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 e6ea0efad183c61406db951ee411b238818d9606
-%global gittag0 v0.6.3
+%global commit0 29ad56d4189d99060a6f7ef1256f5d43a7779854
+%global gittag0 v0.6.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-modular80
-Version: 0.6.3
+Version: 0.6.4
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -31,7 +31,7 @@ URL:     https://github.com/cschol/modular80
 
 # git clone https://github.com/cschol/modular80
 # cd modular80
-# git checkout 0.6.3
+# git checkout 0.6.4
 # git submodule init
 # git submodule update
 # find . -name ".git" -exec rm -rf {} \;
@@ -96,5 +96,8 @@ cp -r modular80_plugin/dist/modular80/* %{buildroot}%{_libexecdir}/Rack/plugins/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
+- update to 0.6.4
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
 - initial specfile

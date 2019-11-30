@@ -266,3 +266,6 @@ https://github.com/Aepelzen/AepelzensModules
 https://github.com/NikolajAndersson/RackPlugins
 https://github.com/hdavid/VCVRack-Holon.ist
 https://github.com/JerrySievert/FXKit
+
+rack-squinkyVCV-0.6.5b-2.fc30.x86_64 and rack-squinkylabs-plug1-0.6.15-2.fc30.x86_64 the same ?
+

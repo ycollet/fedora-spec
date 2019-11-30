@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 54e5cdb532f8edfa2154e9d35f1f09e625728b3b
-%global gittag0 v0.6.4
+%global commit0 1b6ad3124082bfea5b4c5fc29feba8e4d7521334
+%global gittag0 v0.6.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-LRTRack
-Version: 0.6.4
+Version: 0.6.5
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r LindenbergResearch_plugin/dist/LindenbergResearch/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.5
+- update to 0.6.5
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
 - initial specfile

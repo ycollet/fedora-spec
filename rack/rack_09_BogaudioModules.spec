@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 e056a905d8aea940f68f76d89e4a9af758db6aeb
-%global gittag0 v0.6.10
+%global commit0 f7fb7aed31bf98b7e1f0a496d5ef43b3d9488ac9
+%global gittag0 v0.6.16
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-Bogaudio
-Version: 0.6.10
+Version: 0.6.16
 Release: 2%{?dist}
 Summary: A plugin for Rack
 

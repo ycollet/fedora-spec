@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 1a7f83f36beb82a7c303975c0feebb0e4dcd84e3
-%global gittag0 v0.6.2
+%global commit0 0c32fa901bad694079e39af2469893560e8bfedb
+%global gittag0 v0.6.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-Alikin
-Version: 0.6.2
+Version: 0.6.6
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -103,5 +103,8 @@ cp -r alikins_plugin/dist/Alikins/* %{buildroot}%{_libexecdir}/Rack/plugins/Alik
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.6
+- update to 0.6.6
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
 - initial specfile

@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 b78f3c5a8e4ee522b0336eec0a6a6f34cc46ff49
-%global gittag0 v0.6.3
+%global commit0 6712caf1af520dfdce6c4aa3481b2796cdae6a9b
+%global gittag0 v0.6.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-ML_modules
-Version: 0.6.3
+Version: 0.6.4
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r ML_modules_plugin/dist/ML_modules/* %{buildroot}%{_libexecdir}/Rack/plugin
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
+- update to 0.6.4
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
 - initial specfile
