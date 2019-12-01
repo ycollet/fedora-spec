@@ -2,13 +2,13 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 9bfdeb253b4e6c97b88dac13aa6552c81d93531d
-%global gittag0 v0.3.0
+%global commit0 5e81e88cd2c16acbe4cffbc14145e1d24da7e593
+%global gittag0 v0.3.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: BambooTracker is a music tracker for the Yamaha YM2608 (OPNA) sound chip which was used in NEC PC-8801/9801 series computers.
 Name:    BambooTracker
-Version: 0.3.0
+Version: 0.3.1
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -91,6 +91,9 @@ fi
 %{_datadir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.1-1
+- Update to version 0.3.1
+
 * Fri Nov 1 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.0-1
 - Update to version 0.3.0
 
