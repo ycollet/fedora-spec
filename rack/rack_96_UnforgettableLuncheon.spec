@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 7808c8ac197f12d6643ccd034f7e9ef500c40410
-%global gittag0 v0.6.2
+%global commit0 d05f5a29cd8291738c6de44899f9c59f243e5ae8
+%global gittag0 v0.6.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-UnforgettableLuncheon
-Version: 0.6.2
+Version: 0.6.3
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r UnforgettableLuncheon_plugin/dist/UnforgettableLuncheon/* %{buildroot}%{_l
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
+- update to 0.6.3
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
 - initial specfile

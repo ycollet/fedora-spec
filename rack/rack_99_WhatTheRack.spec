@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 7e9cd68f828557e11c595181c173dfd8d941340e
-%global gittag0 v0.6.2
+%global commit0 657febdf795ccc661cf4c2a9dfe282756641ac19
+%global gittag0 v0.6.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-WhatTheRack
-Version: 0.6.2
+Version: 0.6.3
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r WhatTheRack_plugin/dist/WhatTheRack/* %{buildroot}%{_libexecdir}/Rack/plug
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
+- update to 0.6.3
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
 - initial specfile

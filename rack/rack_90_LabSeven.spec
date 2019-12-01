@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 5fcd5c9d90ec9958711f4bbcfd18b608af3027fa
-%global gittag0 v0.6.1
+%global commit0 c726c4d05f901be8a2c26a9c0b42c3dd66adf9ac
+%global gittag0 v0.6.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-LabSeven
-Version: 0.6.1
+Version: 0.6.2
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r LabSeven_plugin/dist/LabSeven/* %{buildroot}%{_libexecdir}/Rack/plugins/La
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
+- update to 0.6.2
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.1
 - initial specfile

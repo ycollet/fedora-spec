@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 b2f893feab64a41ac4240c3a28eaa8b512261b9d
-%global gittag0 v0.6.3
+%global commit0 a0914837650379c8767c101f4a45ee2ef6d8e5f3
+%global gittag0 v0.6.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-Edge
-Version: 0.6.3
+Version: 0.6.5
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r Edge_plugin/dist/Edge/* %{buildroot}%{_libexecdir}/Rack/plugins/Edge/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.5
+- update to 0.6.5
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
 - initial specfile

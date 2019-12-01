@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 1e55b52467b90ba538dba0c123d826220021f63b
-%global gittag0 v0.6.2
+%global gittag0 v0.6.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-Skylights
-Version: 0.6.2
+Version: 0.6.5
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r Skylights_plugin/dist/Skylights/* %{buildroot}%{_libexecdir}/Rack/plugins/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.5
+- update to 0.6.5
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
 - initial specfile

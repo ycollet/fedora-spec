@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 3ffc360f727b802038fd019ea34de3114842802b
-%global gittag0 v0.6.0.2
+%global gittag0 v0.6.0.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-STS
-Version: 0.6.0.2
+Version: 0.6.0.3
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r STS_plugin/dist/STS/* %{buildroot}%{_libexecdir}/Rack/plugins/STS/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.0.3
+- update to 0.6.0.3
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0.2
 - initial specfile

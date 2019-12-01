@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 828d2c45596a57df4b63a9d2f125f70938c30613
-%global gittag0 v0.6.6
+%global commit0 d16ddc5624086205743d9f4bc5243ac2067192cc
+%global gittag0 v0.6.8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-SkJack
-Version: 0.6.6
+Version: 0.6.8
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r SkJack_plugin/dist/SkJack/* %{buildroot}%{_libexecdir}/Rack/plugins/SkJack
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.8
+- update to 0.6.8
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.6
 - initial specfile

@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 3d36fbbaa21590389b41d07fae19a94a6ac4adb7
-%global gittag0 v0.6.9
+%global commit0 855219f0740965b4169cbe85fad6e9b5cb8b583a
+%global gittag0 v0.6.13
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-rcm
-Version: 0.6.9
+Version: 0.6.13
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -88,5 +88,8 @@ cp -r rcm_plugin/dist/rcm/* %{buildroot}%{_libexecdir}/Rack/plugins/rcm/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.13
+- update to 0.6.13
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.9
 - initial specfile

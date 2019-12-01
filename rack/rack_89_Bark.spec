@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 b6946e83a68668dd7c7fc975712968e166db1d08
-%global gittag0 v0.6.3
+%global commit0 6ba02ba175b99e693d34bbd8b942125c637316ac
+%global gittag0 v0.6.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-Bark
-Version: 0.6.3
+Version: 0.6.5
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r Bark_plugin/dist/Bark/* %{buildroot}%{_libexecdir}/Rack/plugins/Bark/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.5
+- update to 0.6.5
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.3
 - initial specfile

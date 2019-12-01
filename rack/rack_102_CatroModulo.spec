@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 f4b130717f0683204b85266f2e1843a02f1a8c0b
-%global gittag0 v0.6.4
+%global commit0 403cfe8ea6f2da4e3f4087b8228dd67434f4688d
+%global gittag0 v0.6.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-CatroModulo
-Version: 0.6.4
+Version: 0.6.6
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r CatroModulo_plugin/dist/CatroModulo/* %{buildroot}%{_libexecdir}/Rack/plug
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.6
+- update to 0.6.6
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
 - initial specfile

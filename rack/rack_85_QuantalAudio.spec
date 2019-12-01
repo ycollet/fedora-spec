@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 e40a9152e8a52896aabee8d99272641b4135d0d2
-%global gittag0 v0.6.2
+%global commit0 44351bb399a57f544aa3a062a274581e8ba6101f
+%global gittag0 v0.6.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-QuantalAudio
-Version: 0.6.2
+Version: 0.6.4
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r QuantalAudio_plugin/dist/QuantalAudio/* %{buildroot}%{_libexecdir}/Rack/pl
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.4
+- update to 0.6.4
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.2
 - initial specfile

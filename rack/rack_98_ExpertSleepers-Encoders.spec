@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 389aa88fbb686b6399ac892dbd1df7b395db9f01
-%global gittag0 v0.6.0
+%global commit0 75b44429f9f6313248c92780ddd05cb649a1a00f
+%global gittag0 v0.6.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-ExpertSleepers-Encoders
-Version: 0.6.0
+Version: 0.6.1
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r ExpertSleepers-Encoders_plugin/dist/ExpertSleepers-Encoders/* %{buildroot}
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.1
+- update to 0.6.1
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0
 - initial specfile

@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 34f4e3e0127ca2a40bdf2e41d95d086c34c06231
-%global gittag0 v0.6.12
+%global commit0 8845799a26c7e516633ba2f9d76995d554c30a57
+%global gittag0 v0.6.13
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-AS
-Version: 0.6.12
+Version: 0.6.13
 Release: 2%{?dist}
 Summary: A plugin for Rack
 
@@ -87,5 +87,8 @@ cp -r AS_plugin/dist/AS/* %{buildroot}%{_libexecdir}/Rack/plugins/AS/
 %{_libexecdir}/*
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.13
+- update to 0.6.13
+
 * Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.12
 - initial specfile
