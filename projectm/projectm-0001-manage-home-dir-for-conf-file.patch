@@ -1,6 +1,6 @@
-From ac9c6cf033c3776b054ac3e6a2c95d6786fd8cea Mon Sep 17 00:00:00 2001
-From: Yann Collette <yann.collette@artelys.com>
-Date: Mon, 2 Dec 2019 16:00:48 +0100
+From 8fadb3b5c7e93d286936cb41bf63f578a83a7101 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Mon, 2 Dec 2019 21:47:55 +0100
 Subject: [PATCH] manage home dir for conf file
 
 ---
@@ -8,7 +8,7 @@ Subject: [PATCH] manage home dir for conf file
  1 file changed, 43 insertions(+), 21 deletions(-)
 
 diff --git a/src/projectM-sdl/projectM_SDL_main.cpp b/src/projectM-sdl/projectM_SDL_main.cpp
-index 754bc14d..3b67894e 100644
+index 754bc14d..a4238fbb 100644
 --- a/src/projectM-sdl/projectM_SDL_main.cpp
 +++ b/src/projectM-sdl/projectM_SDL_main.cpp
 @@ -31,6 +31,10 @@
@@ -45,7 +45,7 @@ index 754bc14d..3b67894e 100644
 +  home=getenv("HOME");
 +  
 +  projectM_home = std::string(home);
-+  projectM_home += "/.projectM";
++  projectM_home += "/.projectM-mao";
 +  
 +  // Create the ~/.projectM directory. If it already exists, mkdir will do nothing
 +  mkdir(projectM_home.c_str(), 0755);
@@ -77,10 +77,10 @@ index 754bc14d..3b67894e 100644
 +    f_src.close();
 +    return std::string(projectM_home);
 +  } else if (f_home.good()) {
-+    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "created ~/.projectM/config.inp successfully\n");
++    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "created ~/.projectM-mao/config.inp successfully\n");
 +    return std::string(projectM_home);
 +  } else if (f_config.good()) {
-+    SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Cannot create ~/.projectM/config.inp, using default config file\n");
++    SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Cannot create ~/.projectM-mao/config.inp, using default config file\n");
 +    return std::string(projectM_config);
 +  } else {
 +    SDL_LogWarn(SDL_LOG_CATEGORY_ERROR, "Using implementation defaults, your system is really messed up, I'm suprised we even got this far\n");
@@ -93,5 +93,5 @@ index 754bc14d..3b67894e 100644
  #ifdef WASAPI_LOOPBACK
  
 -- 
-2.23.0
+2.21.0
 

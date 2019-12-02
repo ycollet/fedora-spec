@@ -86,8 +86,8 @@ SDL compatible applications.
 
 %patch0 -p1
 
-sed -i -e "s/\/usr\/local\/share/\/usr\/share/g" src/libprojectM/projectM.cpp
-sed -i -e "s/\/usr\/local\/share/\/usr\/share/g" src/projectM-sdl/pmSDL.hpp
+sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/libprojectM/projectM.cpp
+sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/projectM-sdl/pmSDL.hpp
 
 %build
 
@@ -98,6 +98,8 @@ export CFLAGS="%{build_cflags}"
 export CXXFLAGS="%{build_cxxflags}"
 
 %configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir} --enable-sdl --disable-qt --disable-pulseaudio --disable-jack
+
+sed -i -e "s/pkgdatadir = \$(datadir)\/projectM/pkgdatadir = \$(datadir)\/projectM-mao/g" Makefile
 
 make DESTDIR=%{buildroot} PREFIX=%{_prefix} %{?_smp_mflags}
 
@@ -192,20 +194,24 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-pul
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-sdl.desktop
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-alsa.desktop
 
-chmod a-x %{buildroot}%{_datadir}/projectM/presets/*.milk
+chmod a-x %{buildroot}%{_datadir}/projectM-mao/presets/*.milk
 
 # Install the documentation related to scripts
-cp %{SOURCE1} %{buildroot}%{_datadir}/projectM/
+cp %{SOURCE1} %{buildroot}%{_datadir}/projectM-mao/
 
 # Install fonts
-install -m 755 -d %{buildroot}%{_datadir}/projectM/fonts/
-install -m 644 fonts/VeraMono.ttf %{buildroot}%{_datadir}/projectM/fonts/
-install -m 644 fonts/Vera.ttf     %{buildroot}%{_datadir}/projectM/fonts/
+install -m 755 -d %{buildroot}%{_datadir}/projectM-mao/fonts/
+install -m 644 fonts/VeraMono.ttf %{buildroot}%{_datadir}/projectM-mao/fonts/
+install -m 644 fonts/Vera.ttf     %{buildroot}%{_datadir}/projectM-mao/fonts/
 
 # Cleanup install
 rm %{buildroot}%{_bindir}/projectM-unittest
 rm %{buildroot}%{_libdir}/pkgconfig/libprojectM.pc
-   
+
+# transfert binary presets
+mv %{buildroot}%{_datadir}/projectM/presets/* %{buildroot}%{_datadir}/projectM-mao/presets/
+rmdir %{buildroot}%{_datadir}/projectM/presets
+
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
@@ -214,7 +220,7 @@ rm %{buildroot}%{_libdir}/pkgconfig/libprojectM.pc
 %doc src/libprojectM/ChangeLog
 %license src/libprojectM/COPYING
 %{_libdir}/libprojectM.so.*
-%{_datadir}/projectM/
+%{_datadir}/projectM-mao/
 
 %files devel
 %{_includedir}/*
