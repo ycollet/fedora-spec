@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 64f54507dc6a84ae3d765fd946cf9a4689742a75
+%global commit0 9e62765eb18a5d581d19fe2f788d43949ef012c7
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -83,20 +83,24 @@ SDL compatible applications.
 %prep
 %setup -qn projectm-%{commit0}
 
-sed -i -e "s/\$(pm_presets_dir)/\$(DESTDIR)\$(pm_presets_dir)/g" Makefile.am
+sed -i -e "s/\/usr\/local\/share/\/usr\/share/g" src/libprojectM/projectM.cpp
+sed -i -e "s/\/usr\/local\/share/\/usr\/share/g" src/projectM-sdl/pmSDL.hpp
 
 %build
 
 ./autogen.sh
 
 export QT_SELECT=5
-%configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir} --enable-sdl
+export CFLAGS="%{build_cflags}"
+export CXXFLAGS="%{build_cxxflags}"
+
+%configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir} --enable-sdl --disable-qt --disable-pulseaudio --disable-jack
 
 make DESTDIR=%{buildroot} PREFIX=%{_prefix} %{?_smp_mflags}
 
 %install
 
-make install DESTDIR=%{buildroot} PREFIX=%{_prefix}
+make DESTDIR=%{buildroot} PREFIX=%{_prefix} install
 
 #
 # Write bash command to select the audio driver
@@ -190,6 +194,15 @@ chmod a-x %{buildroot}%{_datadir}/projectM/presets/*.milk
 # Install the documentation related to scripts
 cp %{SOURCE1} %{buildroot}%{_datadir}/projectM/
 
+# Install fonts
+install -m 755 -d %{buildroot}%{_datadir}/projectM/fonts/
+install -m 644 fonts/VeraMono.ttf %{buildroot}%{_datadir}/projectM/fonts/
+install -m 644 fonts/Vera.ttf     %{buildroot}%{_datadir}/projectM/fonts/
+
+# Cleanup install
+rm %{buildroot}%{_bindir}/projectM-unittest
+rm %{buildroot}%{_libdir}/pkgconfig/libprojectM.pc
+   
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
