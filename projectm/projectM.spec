@@ -12,6 +12,7 @@ License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
 Source0: https://github.com/projectM-visualizer/projectm/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: milkdrop-script.txt
+Patch0:  projectm-0001-manage-home-dir-for-conf-file.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -82,6 +83,8 @@ SDL compatible applications.
 
 %prep
 %setup -qn projectm-%{commit0}
+
+%patch0 -p1
 
 sed -i -e "s/\/usr\/local\/share/\/usr\/share/g" src/libprojectM/projectM.cpp
 sed -i -e "s/\/usr\/local\/share/\/usr\/share/g" src/projectM-sdl/pmSDL.hpp
