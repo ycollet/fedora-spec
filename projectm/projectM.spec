@@ -212,6 +212,10 @@ rm %{buildroot}%{_libdir}/pkgconfig/libprojectM.pc
 mv %{buildroot}%{_datadir}/projectM/presets/* %{buildroot}%{_datadir}/projectM-mao/presets/
 rmdir %{buildroot}%{_datadir}/projectM/presets
 
+# fix config.inp path and font path
+sed -i -e "s/usr\/share\/projectM\/presets/usr\/share\/projectM-mao\/presets/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
+sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
+
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
