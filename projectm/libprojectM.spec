@@ -3,14 +3,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:    libprojectM
-Version: 2.2.1
-Release: 10%{?dist}
+Name:    projectM-mao
+Version: 3.1.1rc7
+Release: 11%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 Group:   Applications/Multimedia
 License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
 Source0: https://github.com/projectM-visualizer/projectm/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: milkdrop-script.txt
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -18,15 +19,12 @@ BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool
 BuildRequires: ftgl-devel glew-devel
 BuildRequires: libgomp pulseaudio-libs-devel
-BuildRequires: qt5-qtbase-devel
-BuildRequires: qt5-qtquickcontrols2-devel
 BuildRequires: SDL2-devel
 BuildRequires: jack-audio-connection-kit-devel desktop-file-utils
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: dejavu-sans-mono-fonts, dejavu-sans-fonts
 BuildRequires: glm-devel
 BuildRequires: ftgl-devel
-BuildRequires: libQGLViewer-qt5-devel
 
 Requires: dejavu-sans-mono-fonts, dejavu-sans-fonts
 
@@ -46,89 +44,155 @@ Requires:   %{name}%{?_isa} = %{version}-%{release}, pkgconfig
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
-%package qt
-Summary:    The Qt frontend to the projectM visualization plugin
-Group:      Applications/Multimedia
-License:    GPLv2+
-
-%description qt
-projectM-qt is a GUI designed to enhance the projectM user and preset writer
-experience.  It provides a way to browse, search, rate presets and setup
-preset playlists for projectM-jack and projectM-pulseaudio.
-
-%package qt-devel
-Summary:    Development files for %{name}-qt
-Group:      Development/Libraries
-Requires:   %{name}-qt = %{version}-%{release} 
-Requires:   pkgconfig libprojectM-devel qt-devel
-
-%description qt-devel
-The %{name}-qt-devel package contains libraries and header files for
-developing applications that use %{name}-qt.
-
-%package -n projectM-jack
+%package -n projectM-mao-jack
 Summary:    The projectM visualization plugin for jack
 Group:      Applications/Multimedia
 License:    GPLv2+ and MIT
 
-%description -n projectM-jack
+%description -n projectM-mao-jack
 This package allows the use of the projectM visualization plugin through any
 JACK compatible applications.
 
-%package -n projectM-pulseaudio
+%package -n projectM-mao-pulseaudio
 Summary:    The projectM visualization plugin for pulseaudio
 Group:      Applications/Multimedia
 License:    GPLv2+ and MIT
 
-%description -n projectM-pulseaudio
+%description -n projectM-mao-pulseaudio
 This package allows the use of the projectM visualization plugin through any
 pulseaudio compatible applications.
 
-%package -n projectM-SDL
+%package -n projectM-mao-alsa
+Summary:    The projectM visualization plugin for ALSA
+Group:      Applications/Multimedia
+License:    GPLv2+ and MIT
+
+%description -n projectM-mao-alsa
+This package allows the use of the projectM visualization plugin through any
+ALSA compatible applications.
+
+%package -n projectM-mao-SDL
 Summary:    The projectM visualization plugin for SDL
 Group:      Applications/Multimedia
 License:    GPLv2+ and LGPLv2+ and MIT
 
-%description -n projectM-SDL
+%description -n projectM-mao-SDL
 This package allows the use of the projectM visualization plugin through any
 SDL compatible applications.
 
 %prep
 %setup -qn projectm-%{commit0}
 
+sed -i -e "s/\$(pm_presets_dir)/\$(DESTDIR)\$(pm_presets_dir)/g" Makefile.am
+
 %build
 
 ./autogen.sh
 
 export QT_SELECT=5
-%configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-sdl --enable-qt --enable-pulseaudio --enable-jack LDFLAGS=-lQGLViewer-qt5
+%configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir} --enable-sdl
 
-make %{?_smp_mflags} VERBOSE=1
+make DESTDIR=%{buildroot} PREFIX=%{_prefix} %{?_smp_mflags}
 
 %install
 
-make install DESTDIR=%{buildroot}
+make install DESTDIR=%{buildroot} PREFIX=%{_prefix}
 
-cd presets
+#
+# Write bash command to select the audio driver
+#
 
-for Files in `find . -name "presets_*"`
-do
-    cp $Files/* %{buildroot}%{_datadir}/projectM/presets/
-done
+# Jack
+cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=jack projectMSDL
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
+
+# PulseAudio
+cat > %{buildroot}/%{_bindir}/%{name}-pulse <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=pulse projectMSDL
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
+
+# ALSA
+cat > %{buildroot}/%{_bindir}/%{name}-alsa <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=alsa projectMSDL
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
+
+# SDL
+mv %{buildroot}/%{_bindir}/projectMSDL %{buildroot}/%{_bindir}/%{name}-sdl
+
+#
+# Write desktop files
+#
+cat > projectM-mao-jack.desktop <<EOF
+[Desktop Entry]
+Name=projectM Jack Audio Visualization
+GenericName=JACK Audio Stream Visualization
+Comment=A milkdrop based music visualizer visualizing JackAudio streams on a SDL GUI
+Exec=projectM-mao-jack
+Icon=projectM
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=false
+EOF
+
+cat > projectM-mao-pulse.desktop <<EOF
+[Desktop Entry]
+Name=projectM Pulse Audio Visualization
+GenericName=Pulse Audio Stream Visualization
+Comment=A milkdrop based music visualizer visualizing Pulse Audio streams on a SDL GUI
+Exec=projectM-mao-pulse
+Icon=projectM
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=false
+EOF
+
+cat > projectM-mao-sdl.desktop <<EOF
+[Desktop Entry]
+Name=projectM SDL Audio Visualization
+GenericName=SDL Audio Stream Visualization
+Comment=A milkdrop based music visualizer visualizing SDL Audio streams on a SDL GUI
+Exec=projectM-mao-sdl
+Icon=projectM
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=false
+EOF
+
+cat > projectM-mao-alsa.desktop <<EOF
+[Desktop Entry]
+Name=projectM ALSA Audio Visualization
+GenericName=ALSA Audio Stream Visualization
+Comment=A milkdrop based music visualizer visualizing ALSA Audio streams on a SDL GUI
+Exec=projectM-mao-alsa
+Icon=projectM
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=false
+EOF
+
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-jack.desktop
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-pulse.desktop
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-sdl.desktop
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-alsa.desktop
+
 chmod a-x %{buildroot}%{_datadir}/projectM/presets/*.milk
 
-cd ..
-
-desktop-file-install --dir=%{buildroot}%{_datadir}/applications src/projectM-jack/projectM-jack.desktop
-desktop-file-install --dir=%{buildroot}%{_datadir}/applications src/projectM-pulseaudio/projectM-pulseaudio.desktop
+# Install the documentation related to scripts
+cp %{SOURCE1} %{buildroot}%{_datadir}/projectM/
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
-
-%post qt -p /sbin/ldconfig
-
-%postun qt -p /sbin/ldconfig
 
 %files
 %doc src/libprojectM/ChangeLog
@@ -142,28 +206,26 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications src/projectM-pul
 %exclude %{_libdir}/*.a
 %exclude %{_libdir}/*.la
 
-%files qt
-%license src/projectM-qt/COPYING
+%files -n projectM-mao-jack
+%{_bindir}/projectM-mao-jack
+%{_datadir}/applications/projectM-mao-jack.desktop
 
-%files qt-devel
-%doc src/projectM-qt/ReadMe
+%files -n projectM-mao-pulseaudio
+%{_bindir}/projectM-mao-pulse
+%{_datadir}/applications/projectM-mao-pulse.desktop
 
-%files -n projectM-jack
-%doc src/projectM-jack/ChangeLog
-%license src/projectM-jack/COPYING
-%{_datadir}/applications/projectM-jack.desktop
+%files -n projectM-mao-SDL
+%{_bindir}/projectM-mao-sdl
+%{_datadir}/applications/projectM-mao-sdl.desktop
 
-%files -n projectM-pulseaudio
-%doc  src/projectM-pulseaudio/ChangeLog 
-%license src/projectM-pulseaudio/COPYING
-%{_bindir}/projectM-pulseaudio
-%{_datadir}/applications/projectM-pulseaudio.desktop
-%{_mandir}/man1/projectM-pulseaudio.1.gz
-
-%files -n projectM-SDL
-%{_bindir}/projectMSDL
+%files -n projectM-mao-alsa
+%{_bindir}/projectM-mao-alsa
+%{_datadir}/applications/projectM-mao-alsa.desktop
 
 %changelog
+* Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 3.1.1-rc7-11
+- install only sdl interface. The Qt one is too buggy. Add scripts to select audio drivers
+
 * Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 2.2.1-10
 - update to 3.1.1-rc7
 
