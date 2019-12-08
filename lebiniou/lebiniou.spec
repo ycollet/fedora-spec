@@ -3,7 +3,7 @@
 
 Name:    lebiniou
 Version: 3.32
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
 Group:   Applications/Multimedia
@@ -15,7 +15,8 @@ Source0: https://dl.biniou.net/biniou/tar/lebiniou-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: gcc gcc-c++ make
+BuildRequires: gcc gcc-c++ make sed
+BuildRequires: autoconf automake libtool
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libcaca-devel
@@ -40,6 +41,8 @@ As a listener, lebiniou allows you to watch an everlasting and totally unseen cr
 
 %prep
 %setup -qn %{name}-%{version}
+
+sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_lib}\"/g" configure.ac
 
 %build
 
@@ -74,6 +77,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/*
 
 %changelog
+* Fri Dec 6 2019 Yann Collette <ycollette.nospam@free.fr> - 3.32-2
+- fix path
+
 * Fri Dec 6 2019 Yann Collette <ycollette.nospam@free.fr> - 3.32-1
 - update to 3.32
 
