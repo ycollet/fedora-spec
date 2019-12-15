@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 
 Name:    zam-plugins
-Version: 3.11
+Version: 3.12
 Release: 2%{?dist}
 Summary: Zam LV2 set of plugins
 
@@ -15,7 +15,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/zamaudio/zam-plugins
 # in the zam repository -> make dist
-Source0: zam-plugins-3.11.tar.xz
+Source0: zam-plugins-3.12.tar.xz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -46,7 +46,7 @@ Group:          Applications/Multimedia
 Zam VST plugin
 
 %prep
-%setup -qn zam-plugins-3.11
+%setup -qn zam-plugins-3.12
 
 %build
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
@@ -68,6 +68,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 %{_libdir}/vst/* 
 
 %changelog
+* Sun Dec 15 2019 Yann Collette <ycollette.nospam@free.fr> - 3.12-2
+- update to zam-plugins-3.12
+
 * Tue Jun 4 2019 Yann Collette <ycollette.nospam@free.fr> - 3.11-2
 - update to zam-plugins-3.11
 
