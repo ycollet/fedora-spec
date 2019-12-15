@@ -1,12 +1,14 @@
+# version: dae177189b12f74ea01ac2389b76326c06d9be78
 Name:           non-ntk
 Version:        1.3.0
-Release:        0.17.20130730gitd006352%{?dist}
+Release:        0.17.20191215gitdae17718%{?dist}
 Summary:        A fork of FLTK for the non audio suite
 
 # themse are GPLv2+, FLTK derived code is LGPLv2+
 License:        LGPLv2+ with exceptions and GPLv2+
 URL:            http://non.tuxfamily.org/
-Source0:        non-ntk-20130730-gitd006352.tar.bz2
+# git clone git://git.tuxfamily.org/gitroot/non/fltk.git ntk
+Source0:        non-ntk-20191215-gitdae177189b12f74ea01ac2389b76326c06d9be78.tar.bz2
 # script to create source tarball from git
 # sh non-snapshot.sh $(rev)
 # no desktop file in tarball
@@ -46,7 +48,7 @@ Requires: %{name}-devel
 %{summary}, an interactive GUI designer for %{name}.
 
 %prep
-%setup -q -n non-ntk-20130730-gitd006352
+%setup -q -n non-ntk-20191215
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -92,6 +94,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/ntk-fluid.desktop
 %{_bindir}/ntk-*
 
 %changelog
+* Sun Dec 15 2019 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-0.17.20191215gitdae17718
+- Update to the last master version
+
 * Tue Nov 5 2019 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-0.17.20130730gitd006352
 - fixes for Fedora 31
 
