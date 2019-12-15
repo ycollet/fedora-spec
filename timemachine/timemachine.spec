@@ -40,13 +40,15 @@ graph.
 %prep
 %setup -qn %{name}-%{commit0}
 
+# Force wav as the default format
+sed -i -e "s/w64/wav/g" src/main.h
+
 %build
 ./autogen.sh
-%configure CFLAGS="%{build_cflags} -DDEFAULT_FORMAT=\"wav\""
-%{__make} %{_smp_mflags}
+./configure --prefix=%{_prefix}
+%{__make} DESTDIR=%{buildroot} %{_smp_mflags}
 
 %install
-%{__rm} -rf %{buildroot}
 %{__make} DESTDIR=%{buildroot} install
 
 mkdir -p %{buildroot}%{_datadir}/applications/
@@ -73,6 +75,9 @@ EOF
 %{_datadir}/applications/*
 
 %changelog
+* Sun Dec 15 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-3
+- Set default format to wav instead of w64 / remove fedora flags which make tm hangs 
+
 * Wed Aug 21 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-2
 - Set default format to wav instead of w64
 
