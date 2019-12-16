@@ -5,7 +5,7 @@
 # Kernel patch version
 %define kpat  21
 # RT patch version
-%define krt   14
+%define krt   15
 # package version
 %define krel  9
 
@@ -143,6 +143,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Mon Dec 16 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.21-rt15-9
+- update to 5.2.21-rt15-9
+
 * Wed Dec 4 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.21-rt14-9
 - update to 5.2.21-rt14-9
 
