@@ -32,6 +32,7 @@ BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: libsndfile-devel
 BuildRequires: cairo-devel
+BuildRequires: libffi-devel
 
 %description
 A simple Lv2 capture plugin
