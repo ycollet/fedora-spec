@@ -7,7 +7,7 @@
 # RT patch version
 %define krt   15
 # package version
-%define krel  9
+%define krel  10
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -102,9 +102,11 @@ dd if=/dev/zero of=$RPM_BUILD_ROOT/boot/initramfs-%{kver}-rt%{krt}%{fcver}.img b
 
 %ifarch ia64
   cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kver}-rt%{krt}%{fcver}
+  chmod a+x $RPM_BUILD_ROOT/boot/efi/vmlinuz-%{kver}-rt%{krt}%{fcver}
   ln -s efi/vmlinuz-%{kver}-%{krt}%{fcver} $RPM_BUILD_ROOT/boot/
 %else
   cp $KBUILD_IMAGE $RPM_BUILD_ROOT/boot/vmlinuz-%{kver}-rt%{krt}%{fcver}
+  chmod a+x $RPM_BUILD_ROOT/boot/vmlinuz-%{kver}-rt%{krt}%{fcver}
 %endif
 
 make %{?_smp_mflags} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_install
