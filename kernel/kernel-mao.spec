@@ -113,8 +113,43 @@ make %{?_smp_mflags} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_in
 cp System.map $RPM_BUILD_ROOT/boot/System.map-%{kver}-rt%{krt}%{fcver}
 cp .config    $RPM_BUILD_ROOT/boot/config-%{kver}-rt%{krt}%{fcver}
 
-rm -f    $RPM_BUILD_ROOT/lib/modules/%{kver}-rt%{krt}/{build,source}
+rm -f $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+rm -f $RPM_BUILD_ROOT/lib/modules/$KernelVer/source
+mkdir -p $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+(cd $RPM_BUILD_ROOT/lib/modules/$KernelVer ; ln -s build source)
+# dirs for additional modules per module-init-tools, kbuild/modules.txt
+mkdir -p $RPM_BUILD_ROOT/lib/modules/$KernelVer/extra
+mkdir -p $RPM_BUILD_ROOT/lib/modules/$KernelVer/internal
+mkdir -p $RPM_BUILD_ROOT/lib/modules/$KernelVer/updates
+# CONFIG_KERNEL_HEADER_TEST generates some extra files in the process of
+# testing so just delete
+find . -name *.h.s -delete
+# first copy everything
+cp --parents `find  -type f -name "Makefile*" -o -name "Kconfig*"` $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+cp Module.symvers $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+cp System.map $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+if [ -s Module.markers ]; then
+  cp Module.markers $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+fi
+
+# Move the devel headers out of the root file system
+
+DevelDir=/usr/src/kernels/%{kver}-rt%{krt}%{fcver}
+
 mkdir -p $RPM_BUILD_ROOT/usr/src/kernels/%{kver}-rt%{krt}%{fcver}
+mv $RPM_BUILD_ROOT/lib/modules/$KernelVer/build $RPM_BUILD_ROOT/$DevelDir
+
+# This is going to create a broken link during the build, but we don't use
+# it after this point.  We need the link to actually point to something
+# when kernel-devel is installed, and a relative link doesn't work across
+# the F17 UsrMove feature.
+
+ln -sf $DevelDir $RPM_BUILD_ROOT/lib/modules/$KernelVer/build
+
+# prune junk from kernel-devel
+
+find $RPM_BUILD_ROOT/usr/src/kernels -name ".*.cmd" -delete
+
 EXCLUDES="--exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS --exclude .pc --exclude .hg --exclude .git --exclude .tmp_versions --exclude=*vmlinux* --exclude=*.o --exclude=*.ko --exclude=*.ko.xz --exclude=*.cmd --exclude=Documentation --exclude=firmware --exclude .config.old --exclude .missing-syscalls.d"
 tar $EXCLUDES -cf- . | (cd $RPM_BUILD_ROOT/usr/src/kernels/%{kver}-rt%{krt}%{fcver}; tar xvf -)
 
