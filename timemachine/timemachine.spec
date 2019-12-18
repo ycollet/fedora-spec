@@ -6,7 +6,7 @@
 Summary: Audio recorder
 Name:    timemachine
 Version: 0.3.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/swh/timemachine
