@@ -2,21 +2,21 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 8b47a7bcd1f7cdce772297b6fa9bb4387c959127
+%global commit0 240d970c126d96472a91ccf3f2c3179ba2b15163
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    picoloop
 Version: 0.77e.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: An audio sequencer
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/yoyz/audio
 Source0: https://github.com/yoyz/audio/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-#Patch0: picoloop-0001-fix-makefile.patch
+Source1: picoloop-SYSTEMLINUX.cpp
+Source2: https://github.com/farvardin/picoloop-manual/files/500912/picoloop_manual_pc.pdf
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -40,30 +40,74 @@ There are four channels, playing simultaneously.
 %prep
 %setup -qn %{name}-%{commit0}
 
-#%patch0 -p1 
-
 sed -i -e "s/\"font.ttf\"/\"\/usr\/share\/picoloop\/font\/font.ttf\"/g" picoloop/SDL_GUI.cpp
 sed -i -e "s/\"font.bmp\"/\"\/usr\/share\/picoloop\/bmp\/font.bmp\"/g" picoloop/SDL_GUI.cpp
 
-sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" picoloop/Makefile.RtMidi_debian_sdl20
-sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" picoloop/Makefile.RtAudio_debian_sdl20
-sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" picoloop/Makefile.PatternPlayer_debian_RtAudio_sdl20
+cp %{SOURCE1} picoloop/SYSTEMLINUX.cpp
 
 %build
 
 cd picoloop
 
-%make_build -f Makefile.RtMidi_debian_sdl20 clean
-%make_build -f Makefile.RtAudio_debian_sdl20 clean
-%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 clean
+#
+# Build PulseAudio version
+#
+
+#sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" Makefile.RtMidi_debian_sdl20
+#sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" Makefile.RtAudio_debian_sdl20
+#sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_PULSE__ -D__UNIX_JACK__ -D__LINUX_ALSA__/g" Makefile.PatternPlayer_debian_RtAudio_sdl20
+
+make -f Makefile.RtMidi_debian_sdl20 clean
+make -f Makefile.RtAudio_debian_sdl20 clean
+make -f Makefile.PatternPlayer_debian_RtAudio_sdl20 clean
 
 mkdir -p debianrtaudio_sdl20/Machine/Lgptsampler
 
-# CFLAGS="-std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -D__SDL20__ -DSCREEN_MULT=2  -fpermissive -DHAVE_GETTIMEOFDAY -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__"
-%make_build -f Makefile.RtMidi_debian_sdl20  
-%make_build -f Makefile.RtAudio_debian_sdl20 
-#%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 DIRTOCREATE
-%make_build -f Makefile.PatternPlayer_debian_RtAudio_sdl20 #CFLAGS="-std=c++11 -O3 -D__LINUX__ -DLINUX -I. -LSDL/lib -D__RTAUDIO__ -D __RTMIDI__ -DPC_DESKTOP -D__SDL20__ -DSCREEN_MULT=2  -fpermissive" # -D__LINUX_ALSA__ -D__LINUX_JACK__ -D__LINUX_PULSE__  -DHAVE_GETTIMEOFDAY
+make -f Makefile.RtMidi_debian_sdl20  
+make -f Makefile.RtAudio_debian_sdl20 
+make -f Makefile.PatternPlayer_debian_RtAudio_sdl20
+
+mv PatternPlayer_debian_RtAudio_sdl20 picoloop-pulse
+
+#
+# Build Alsa version
+#
+
+sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_ALSA__/g" Makefile.RtMidi_debian_sdl20
+sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_ALSA__/g" Makefile.RtAudio_debian_sdl20
+sed -i -e "s/-D__LINUX_PULSE__/-D__LINUX_ALSA__/g" Makefile.PatternPlayer_debian_RtAudio_sdl20
+
+make -f Makefile.RtMidi_debian_sdl20 clean
+make -f Makefile.RtAudio_debian_sdl20 clean
+make -f Makefile.PatternPlayer_debian_RtAudio_sdl20 clean
+
+mkdir -p debianrtaudio_sdl20/Machine/Lgptsampler
+
+make -f Makefile.RtMidi_debian_sdl20  
+make -f Makefile.RtAudio_debian_sdl20 
+make -f Makefile.PatternPlayer_debian_RtAudio_sdl20
+
+mv PatternPlayer_debian_RtAudio_sdl20 picoloop-alsa
+
+#
+# Build Jack version
+#
+
+sed -i -e "s/-D__LINUX_ALSA__/-D__UNIX_JACK__/g" Makefile.RtMidi_debian_sdl20
+sed -i -e "s/-D__LINUX_ALSA__/-D__UNIX_JACK__/g" Makefile.RtAudio_debian_sdl20
+sed -i -e "s/-D__LINUX_ALSA__/-D__UNIX_JACK__/g" Makefile.PatternPlayer_debian_RtAudio_sdl20
+
+make -f Makefile.RtMidi_debian_sdl20 clean
+make -f Makefile.RtAudio_debian_sdl20 clean
+make -f Makefile.PatternPlayer_debian_RtAudio_sdl20 clean
+
+mkdir -p debianrtaudio_sdl20/Machine/Lgptsampler
+
+make -f Makefile.RtMidi_debian_sdl20  
+make -f Makefile.RtAudio_debian_sdl20 
+make -f Makefile.PatternPlayer_debian_RtAudio_sdl20
+
+mv PatternPlayer_debian_RtAudio_sdl20 picoloop-jack
 
 %install
 
@@ -81,7 +125,9 @@ Categories=Audio;
 EOF
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 picoloop/PatternPlayer_debian_RtAudio_sdl20 %{buildroot}%{_bindir}/%{name}
+%__install -m 755 picoloop/picoloop-pulse %{buildroot}%{_bindir}/
+%__install -m 755 picoloop/picoloop-alsa  %{buildroot}%{_bindir}/
+%__install -m 755 picoloop/picoloop-jack  %{buildroot}%{_bindir}/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/patch/MDADrum/
 %__install -m 644 picoloop/patch/MDADrum/create_patchlist.sh %{buildroot}%{_datadir}/%{name}/patch/MDADrum/
@@ -144,6 +190,7 @@ EOF
 
 %__install -m 644 picoloop/documentation/filter/* %{buildroot}%{_datadir}/%{name}/documentation/filter/
 %__install -m 644 picoloop/documentation/gp2x/*   %{buildroot}%{_datadir}/%{name}/documentation/gp2x/
+%__install -m 644 %{SOURCE2}                      %{buildroot}%{_datadir}/%{name}/documentation/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/font/
 %__install -m 644 picoloop/font.ttf %{buildroot}%{_datadir}/%{name}/font/
@@ -155,13 +202,17 @@ EOF
 %{_datadir}/*
 
 %changelog
-* Sun Sep 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.77e
-- update to 0.77e
+* Thu Dec 19 2019 Yann Collette <ycollette.nospam@free.fr> - 0.77e-3
+- update to 0.77e-3. Update to last master. This version builds ...
 
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d
+* Sun Sep 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.77e-2
+- update to 0.77e-2
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d-2
 - update for Fedora 29
 
-* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d
+* Sun May 13 2018 Yann Collette <ycollette.nospam@free.fr> - 0.70d-1
+- update to 0.70d-1
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.67
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 0.67-1
 - Initial build
