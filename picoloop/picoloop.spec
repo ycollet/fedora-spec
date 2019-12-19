@@ -28,6 +28,7 @@ BuildRequires: SDL2_image-devel
 BuildRequires: SDL2_gfx-devel
 BuildRequires: SDL2_ttf-devel
 BuildRequires: pulseaudio-libs-devel
+BuildRequires: desktop-file-utils
 
 Requires: SDL2_ttf
 
@@ -112,12 +113,37 @@ mv PatternPlayer_debian_RtAudio_sdl20 picoloop-jack
 %install
 
 install -m 755 -d %{buildroot}/%{_datadir}/applications/
-cat > %{buildroot}/%{_datadir}/applications/%{name}.desktop <<EOF
+
+cat > %{buildroot}/%{_datadir}/applications/picoloop-jack.desktop <<EOF
 [Desktop Entry]
 Version=1.0
-Name=picoloop
+Name=picoloop Jack
 Comment=Audio tracker
-Exec=picoloop
+Exec=picoloop-jack
+Icon=picoloop
+Terminal=false
+Type=Application
+Categories=Audio;
+EOF
+
+cat > %{buildroot}/%{_datadir}/applications/picoloop-alsa.desktop <<EOF
+[Desktop Entry]
+Version=1.0
+Name=picoloop ALSA
+Comment=Audio tracker
+Exec=picoloop-alsa
+Icon=picoloop
+Terminal=false
+Type=Application
+Categories=Audio;
+EOF
+
+cat > %{buildroot}/%{_datadir}/applications/picoloop-pulse.desktop <<EOF
+[Desktop Entry]
+Version=1.0
+Name=picoloop PulseAudio
+Comment=Audio tracker
+Exec=picoloop-pulse
 Icon=picoloop
 Terminal=false
 Type=Application
@@ -196,6 +222,23 @@ EOF
 %__install -m 644 picoloop/font.ttf %{buildroot}%{_datadir}/%{name}/font/
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/bmp/
 %__install -m 644 picoloop/font.bmp %{buildroot}%{_datadir}/%{name}/bmp/
+
+%__install -m 755 -d %{buildroot}/%{_datadir}/icons/
+%__install -m 644 picoloop/picoloop-logo.png %{buildroot}%{_datadir}/icons/picoloop.png
+
+%post 
+update-desktop-database -q
+touch --no-create %{_datadir}/icons/%{name} >&/dev/null || :
+
+%postun
+update-desktop-database -q
+if [ $1 -eq 0 ]; then
+  touch --no-create %{_datadir}/icons/%{name} >&/dev/null || :
+  gtk-update-icon-cache %{_datadir}/icons/%{name} >&/dev/null || :
+fi
+
+%posttrans 
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/%{name} &>/dev/null || :
 
 %files
 %{_bindir}/*
