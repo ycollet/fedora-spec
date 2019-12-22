@@ -101,22 +101,30 @@ $ ksflatten -c /usr/share/spin-kickstarts/fedora-live-xfce.ks -o xfce.ks
 $ meld fedora-30-live-jam-kde.ks xfce.ks &
 
 To test the ISO file:
+
+Install QEmu-KVM and the SDL interface.
+
+```
+$ dnf install qemu-system-x86-core
+$ dnf install qemu-ui-sdl qemu-audio-sdl
+```
+
 Without audio:
 ```
-$ qemu-kvm -m 2048 -vga qxl -cdrom fedora-30-LesCuizines.iso
+$ qemu-kvm -m 2048 -vga qxl -sdl -cdrom fedora-30-LesCuizines.iso
 ```
 With audio and usb:
 ```
-$ qemu-kvm -m 2048 -vga qxl -usb -soundhw hda -cdrom fedora-30-LesCuizines.iso
+$ qemu-kvm -m 2048 -vga qxl -usb -soundhw hda -sdl -cdrom fedora-30-LesCuizines.iso
 ```
 With audio, usb and with 2 cpus:
 ```
-$ qemu-kvm -m 2048 -vga qxl -usb -soundhw hda -smp cpus=2 -cdrom fedora-30-LesCuizines.iso
+$ qemu-kvm -m 2048 -vga qxl -usb -soundhw hda -smp cpus=2 -sdl -cdrom fedora-30-LesCuizines.iso
 ```
 
 To test the USB bootable file:
 ```
-$ qemu-kvm -m 2048 -vga qxl -smp cpus=2 -usb -soundhw hda -drive file=fedora-30-LesCuizines.iso -boot menu=on
+$ qemu-kvm -m 2048 -vga qxl -sdl -smp cpus=2 -usb -soundhw hda -drive file=fedora-30-LesCuizines.iso -boot menu=on
 ```
 
 To mount a usb device:
@@ -130,5 +138,5 @@ Bus 002 Device 003: ID 18d1:4e11 Google Inc. Nexus One
 Manually, using qemu-kvm command line
 
 ```
-$ qemu-kvm -m 2048 -name LeCuizines -cdrom fedora-30-LesCuizines.iso -usb -device usb-host,hostbus=2,hostaddr=3
+$ qemu-kvm -m 2048 -name LeCuizines -sdl -cdrom fedora-30-LesCuizines.iso -usb -device usb-host,hostbus=2,hostaddr=3
 ```
