@@ -360,7 +360,7 @@ touch /etc/machine-id
 %end
 
 %post --nochroot
-cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
+#YC: no such files in F31 - cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
 
 # only works on x86, x86_64
 if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
@@ -428,6 +428,9 @@ grub2-efi
 gnome-keyring-pam
 fedora-release
 
+# various system package (since F31)
+chkconfig
+
 # save some space
 -autofs
 -acpid
@@ -463,7 +466,7 @@ alsa-plugins-samplerate
 alsa-plugins-upmix
 alsa-plugins-vdownmix
 a2jmidid
-aj-snapshot
+#YC aj-snapshot
 
 # jack 
 jack-audio-connection-kit
@@ -498,7 +501,7 @@ swami
 synthv1
 samplv1
 drumkv1
-#YC 30 ams
+ams
 aeolus
 minicomputer
 phasex
@@ -518,7 +521,7 @@ ardour5
 ardour5-audiobackend-alsa
 ardour5-audiobackend-jack
 ardour5-audiobackend-dummy
-seq24
+#YC seq24
 qtractor
 non-daw
 non-mixer
@@ -532,7 +535,7 @@ milkytracker
 # audio-plugins
 calf
 dssi
-jack-rack
+#YC jack-rack
 ladspa
 helm
 DISTRHO-Ports
@@ -547,17 +550,17 @@ ladspa-cmt-plugins
 ladspa-fil-plugins
 ladspa-mcp-plugins
 ladspa-rev-plugins
-#ladspa-swh-plugins
+ladspa-swh-plugins
 ladspa-tap-plugins
 ladspa-vco-plugins
-# F26 - not available - ladspa-vocoder-plugins
+#YC ladspa-vocoder-plugins
 ladspa-wasp-plugins
 
 # lv2 plugins
 lv2
-lv2-avw-plugins
-#YC 30 lv2-fil-plugins
-#YC 30 lv2-invada-plugins
+#YC lv2-avw-plugins
+#YC pyliblo missing lv2-fil-plugins
+lv2-invada-plugins
 lv2-kn0ck0ut
 lv2-ll-plugins
 swh-lv2
@@ -569,17 +572,17 @@ lv2-c++-tools
 lv2-samplv1
 lv2-synthv1
 lv2-drumkv1
-lv2-triceratops
+#YC lv2-triceratops
 lv2-newtonator
 lv2-x42-plugins
-lv2-fomp-plugins
+#YC lv2-fomp-plugins
 lv2-sorcer
 lv2-fabla
 lv2-artyfx-plugins
 lv2-EQ10Q-plugins
 lv2-linuxsampler-plugins
 lv2-mdaEPiano
-lv2-mdala-plugins
+#YC lv2-mdala-plugins
 swh-lv2
 orbit.lv2
 midi_matrix.lv2
@@ -616,7 +619,7 @@ mscore
 lilypond
 
 # audio utilities
-#YC 30 jamin
+jamin
 lash
 jack_capture
 jaaa
@@ -625,10 +628,10 @@ qastools
 arpage
 realTimeConfigQuickScan
 rtirq
-ladish
+#YC ladish
 japa
 radium-compressor
-solfege
+#YC solfege
 linuxsampler
 qsampler
 projectM-jack
