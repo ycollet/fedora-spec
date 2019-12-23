@@ -21,7 +21,9 @@ BuildRequires: suil-devel
 BuildRequires: libyaml-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel
+BuildRequires: rubberband-devel
 BuildRequires: libsndfile-devel
+BuildRequires: libaudec-devel
 BuildRequires: gtk3-devel
 BuildRequires: portaudio-devel
 BuildRequires: qt5-qtbase-devel
