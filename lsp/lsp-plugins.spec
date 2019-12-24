@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 a6a8e9ca03429899e2514da9d56feaccc0a2ec7d
+%global commit0 6a598435b35e9faf10de621cc40c460021c4eccc
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +9,7 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.11
+Version: 1.1.13
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -65,6 +65,9 @@ chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.
 %{_datadir}/*
 
 %changelog
+* Tue Dec 24 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.13-1
+- update to 1.1.13
+
 * Sun Dec 22 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.11-1
 - update to 1.1.11
 
