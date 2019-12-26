@@ -35,6 +35,7 @@ BuildRequires: help2man
 BuildRequires: python3-sphinx
 BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
+BuildRequires: xdg-utils
 
 %description
 Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use. Zrythm sets itself apart from other DAWs by allowing extensive automation via built-in LFOs and envelopes and intuitive MIDI or audio editing and arranging via clips.
