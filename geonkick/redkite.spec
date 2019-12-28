@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 1c27dceb9dfa970978d92082072fc4749f219fb4
+%global commit0 485be02325a831972b116028c74305fa2ca7b877
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    redkite
-Version: 0.6.2
+Version: 0.6.3
 Release: 1%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://gitlab.com/geontime/redkite
@@ -29,7 +29,7 @@ sed -i -e "s/${CMAKE_INSTALL_PREFIX}\/lib/${CMAKE_INSTALL_PREFIX}\/%{_lib}/g" CM
 
 %build
 
-%cmake -DCMAKE_BUILD_BUILD_TYPE=RELEASE \
+%cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DCMAKE_INSTALL_LIBDIR=%{_lib} \
        .
 
@@ -46,13 +46,20 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Sat Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3-1
+- update to 0.6.3
+
 * Wed Oct 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.2-1
 - update to 0.6.2
+
 * Thu Aug 8 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-1
 - update to 0.6.1
+
 * Mon May 27 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.2-1
 - switch to 0.5.2
+
 * Tue May 21 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-1
 - switch to 0.5.1
+
 * Mon May 20 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5-1
 - initial version of the spec file
