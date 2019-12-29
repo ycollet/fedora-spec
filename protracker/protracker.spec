@@ -1,65 +1,76 @@
 %global debug_package %{nil}
 
-Summary: ProTracker is a chiptune tracker for making chiptune-like music on a modern computer.
-Name:    protracker
-Version: 2.3r191
+Summary: Chiptune tracker for making chiptune-like music on a modern computer.
+Name:    protracker2
+Version: 1.01
 Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://16-bits.org/pt.php
-Source0: protracker-r191.tar.gz
-
-# svn export -r 191 https://svn.code.sf.net/p/protracker/code/ protracker-r191
-# tar cvfz protracker-r191.tar.gz protracker-r191/*
+Source0: https://github.com/8bitbubsy/pt2-clone/archive/v%{version}.tar.gz#/pt2-clone-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make
+BuildRequires: cmake
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: SDL2-devel
 
 %description
-ProTracker is a chiptune tracker for making chiptune-like music on a modern computer.
+ProTracker2 is a chiptune tracker for making chiptune-like music on a modern computer.
+
+Obsoletes: protracker
 
 %prep
-%setup -qn %{name}-r191
+%setup -qn pt2-clone-%{version}
 
 %build
 
-cd trunk
-%{__make} DESTDIR=%{buildroot} PREFIX=/usr
+mkdir -p build
+cd build
+%cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+
+make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 
 %install
 
 %{__rm} -rf %{buildroot}
+
+cd build
+make DESTDIR=%{buildroot} PREFIX=/usr install
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 
 cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
 #!/bin/bash
 
-SDL_AUDIODRIVER=jack protracker
+SDL_AUDIODRIVER=jack protracker2
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
 
 cat > %{buildroot}/%{_bindir}/%{name}-pulse <<EOF
 #!/bin/bash
 
-SDL_AUDIODRIVER=pulse protracker
+SDL_AUDIODRIVER=pulse protracker2
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
 
-%__cp trunk/release/other/%{name} %{buildroot}/%{_bindir}/
+cat > %{buildroot}/%{_bindir}/%{name}-alsa <<EOF
+#!/bin/bash
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
+SDL_AUDIODRIVER=alsa protracker2
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
+
+mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/protracker2
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
-%__install -m 644 screenshot.png %{buildroot}/%{_datadir}/icons/%{name}/%{name}.png
+%__install -m 644 ../src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
 
 %__install -m 755 -d %{buildroot}%{_datadir}/%{name}
-%__cp COPYING.txt readme.txt trunk/release/help.txt trunk/release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
+%__cp ../release/effects.txt ../release/keyboard.txt ../release/LICENSES.txt ../release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
 
 %clean
 
@@ -86,6 +97,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Sun Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 1.01-2
+- update to 1.01-2. Rename protracker to protracker2
+
 * Sat Aug 17 2019 Yann Collette <ycollette dot nospam at free.fr> 2.3r191-2
 - update to revision 191
 
