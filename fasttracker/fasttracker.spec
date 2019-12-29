@@ -1,6 +1,6 @@
 Name:          fasttracker2
 Version:       1.05
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       Module tracker software for creating music
 Group:         Applications/Multimedia
 License:       GPLv3+
@@ -28,12 +28,37 @@ mkdir -p build
 cd build
 %cmake -DCMAKE_BUILD_TYPE=RELEASE ..
 
-make %{?_smp_mflags}
+make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 
 %install
 
-mkdir -p %{buildroot}%{_bindir}/
-cp release/other/ft2-clone %{buildroot}%{_bindir}/ft2
+%{__rm} -rf %{buildroot}
+
+cd build
+make DESTDIR=%{buildroot} PREFIX=/usr install
+
+mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/fasttracker2
+
+cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=jack fasttracker2
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
+
+cat > %{buildroot}/%{_bindir}/%{name}-pulse <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=pulse fasttracker2
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
+
+cat > %{buildroot}/%{_bindir}/%{name}-alsa <<EOF
+#!/bin/bash
+
+SDL_AUDIODRIVER=alsa fasttracker2
+EOF
+chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 
 %clean
 rm -rf %{buildroot}

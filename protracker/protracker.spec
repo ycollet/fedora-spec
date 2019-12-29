@@ -1,9 +1,7 @@
-%global debug_package %{nil}
-
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
 Version: 1.01
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://16-bits.org/pt.php
@@ -41,7 +39,7 @@ make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 cd build
 make DESTDIR=%{buildroot} PREFIX=/usr install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
+mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/protracker2
 
 cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
 #!/bin/bash
@@ -63,8 +61,6 @@ cat > %{buildroot}/%{_bindir}/%{name}-alsa <<EOF
 SDL_AUDIODRIVER=alsa protracker2
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
-
-mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/protracker2
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
 %__install -m 644 ../src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
