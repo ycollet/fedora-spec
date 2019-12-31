@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 4900e7f393c701125b04e183189966f26c4fb19a
+%global commit0 c1e168df0830a6b84295ebdd30cd48726a791103
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,6 +8,7 @@
 
 # git clone https://github.com/x42/avldrums.lv2.git
 # cd avldrums.lv2
+# git checkout v0.4.1
 # git submodule init
 # git submodule update
 # find . -name "*.git" -exec rm -rf {} \; -print
@@ -15,7 +16,7 @@
 # tar cvfz avldrums.lv2.tar.gz avldrums.lv2
 
 Name:    lv2-avldrums-x42-plugin
-Version: 0.4.0.%{shortcommit0}
+Version: 0.4.1.%{shortcommit0}
 Release: 1%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
 
@@ -52,6 +53,9 @@ make PREFIX=%{buildroot}%{_usr} LV2DIR=%{buildroot}%{_libdir}/lv2 install
 %{_libdir}/lv2/avldrums.lv2/*
 
 %changelog
+* Tue Dec 31 2019 Yann Collette <ycollette.nospam@free.fr> - 0.4.1
+- update to 0.4.1
+
 * Thu Oct 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.4.0
 - update to 0.4.0
 
