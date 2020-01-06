@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 3f704d7ce467c128e96555aa1bf24f13a1aff713
+%global commit0 87b4380eae2b69b09bba8a8b181f24153079100d
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    noise-repellent-lv2
-Version: 0.1.4.%{shortcommit0}
+Version: 0.1.5.%{shortcommit0}
 Release: 2%{?dist}
 Summary: A lv2 plug-in for broadband noise reduction.
 
@@ -64,6 +64,9 @@ DESTDIR=%{buildroot} ninja install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Jan 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.5-2
+- update to 0.1.5-2
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.4-2
 - update for Fedora 29
 
