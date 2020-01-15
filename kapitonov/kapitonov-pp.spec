@@ -22,23 +22,42 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: lv2-devel
 BuildRequires: ladspa-devel
 BuildRequires: libxcb-devel
+BuildRequires: xcb-util-devel
+BuildRequires: xcb-util-wm-devel
 BuildRequires: cairo-devel
 BuildRequires: zita-resampler-devel
 BuildRequires: zita-convolver-devel
+BuildRequires: boost-devel
 BuildRequires: faust
+BuildRequires: faust-osclib-devel
+BuildRequires: fftw-devel
 BuildRequires: meson
 
 %description
 A set of plugins for guitar sound processing
 
+%package -n lv2-kpp-plugins
+Summary: A set of plugins for guitar sound processing - LV2 version
+License:GPLv2+
+
+%description -n lv2-kpp-plugins
+Kapitonov plugins pack.
+A set of plugins for guitar sound processing - LV2 version
+
+%package -n ladspa-kpp-plugins
+Summary: A set of plugins for guitar sound processing - LADSPA version
+License:GPLv2+
+
+%description -n ladspa-kpp-plugins
+Kapitonov plugins pack.
+A set of plugins for guitar sound processing - LADSPA version
+
 %prep
 %setup -qn Kapitonov-Plugins-Pack-%{commit0}
 
-sed -i -e "s/-archdir//g" meson.build
-
 %build
 
-VERBOSE=1 meson --prefix=/usr build
+VERBOSE=1 meson --prefix=/usr -Dlv2dir=%{_lib}/lv2 -Dladspadir=%{_lib}/ladspa build
 cd build
 
 DESTDIR=%{buildroot} VERBOSE=1 ninja 
@@ -48,10 +67,12 @@ DESTDIR=%{buildroot} VERBOSE=1 ninja
 cd build
 DESTDIR=%{buildroot} ninja install
 
-%files
-%{_bindir}/*
-%{_datadir}/*
+%files -n ladspa-kpp-plugins
+%{_libdir}/ladspa/*
+
+%files -n lv2-kpp-plugins
+%{_libdir}/lv2/*
 
 %changelog
-* Mon Jan 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
-- inital release
+* Mon Jan 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
+- initial release
