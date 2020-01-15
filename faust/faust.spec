@@ -17,6 +17,10 @@ BuildRequires:	graphviz
 BuildRequires:	cmake
 BuildRequires:  unzip
 BuildRequires:  pandoc
+BuildRequires:  python2
+BuildRequires:  texlive-latex
+BuildRequires:  texlive-collection-basic
+BuildRequires:  texlive-collection-fontsrecommended
 
 %description
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -69,6 +73,7 @@ Summary:	3rd party tools written for %{name}
 License:	GPLv2+
 BuildArch:	noarch
 Requires:	%{name}-osclib-devel = %{version}-%{release}
+Requires:	python2
 
 %description tools
 Faust AUdio STreams is a functional programming language for real-time audio
