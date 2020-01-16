@@ -2,17 +2,25 @@
 
 Name:		faust
 Version:	2.14.4
-Release:	17%{?dist}
+Release:	18%{?dist}
 Summary:	Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
 License:	GPLv2+ and BSD
 URL:		http://faust.grame.fr/
 Source0:	http://downloads.sourceforge.net/project/faudiostream/faust/src/%{name}-%{version}.tar.gz
+Source1:        https://github.com/grame-cncm/faustlibraries/archive/master.zip
 
 BuildRequires:  gcc-c++
 BuildRequires:	doxygen
 BuildRequires:	graphviz
+BuildRequires:	cmake
+BuildRequires:  unzip
+BuildRequires:  pandoc
+BuildRequires:  python2
+BuildRequires:  texlive-latex
+BuildRequires:  texlive-collection-basic
+BuildRequires:  texlive-collection-fontsrecommended
 
 %description
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -65,6 +73,7 @@ Summary:	3rd party tools written for %{name}
 License:	GPLv2+
 BuildArch:	noarch
 Requires:	%{name}-osclib-devel = %{version}-%{release}
+Requires:	python2
 
 %description tools
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -81,6 +90,17 @@ Requires:	%{name} = %{version}-%{release}
 Faust AUdio STreams is a functional programming language for real-time audio
 signal processing. This package provides Faust code syntax highlighting support
 for KDE's Kate/Kwrite.
+
+%package stdlib
+Summary:	standard libraries for %{name}
+License:	GPLv2+
+BuildArch:	noarch
+Requires:	%{name} = %{version}-%{release}
+
+%description stdlib
+Faust AUdio STreams is a functional programming language for real-time audio
+signal processing. These libraries are part of the standard Faust libraries.
+
 
 %prep
 %setup -q
@@ -134,12 +154,24 @@ sed -i -e "s/\$(PREFIX)\/lib\//\$(PREFIX)\/%{_lib}\//g" architecture/osclib/faus
 %build
 # Build the main executable
 make PREFIX=%{_prefix} LIBDIR=%{_libdir} MODE=SHARED %{?_smp_mflags}
+cd architecture/osclib/oscpack
+make lib
 
 
 %install
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/%{name}
+mkdir -p %{buildroot}%{_libdir}
 make install PREFIX=%{_prefix} LIBDIR=%{_libdir} INCLUDEDIR=%{_includedir} DESTDIR=%{buildroot}
+
+# install liboscpack manually
+pushd .
+cd architecture/osclib/oscpack
+cp liboscpack.so.1.1.0 %{buildroot}%{_libdir}
+cd %{buildroot}%{_libdir}
+ln -s liboscpack.so.1.1.0 liboscpack.so.1
+ln -s liboscpack.so.1 liboscpack.so
+popd
 
 # Sort out the documentation
 mv documentation/faust-quick-reference-src/illustrations/ documentation
@@ -159,10 +191,27 @@ cp -a syntax-highlighting/%{name}.xml \
 
 # move the .a library
 %ifarch x86_64 amd64
-  mkdir %{buildroot}%{_libdir}/
+  mkdir -p %{buildroot}%{_libdir}/
   mv %{buildroot}/usr/lib/*.a %{buildroot}%{_libdir}/
 %endif
-  
+
+# copy faustlib
+unzip %{SOURCE1}
+cd faustlibraries-master
+sed -i -e "s/FAUST2MD=.*/FAUST2MD=faust2md/g" generateDoc
+export PATH=%{buildroot}%{_bindir}/:$PATH
+
+./generateDoc
+
+mkdir -p %{buildroot}%{_datadir}/faust/
+cp *.lib old/*.lib %{buildroot}%{_datadir}/faust/
+
+mkdir -p %{buildroot}%{_datadir}/faust/doc/
+cp doc/library.html %{buildroot}%{_datadir}/faust/doc/
+cp doc/library.pdf %{buildroot}%{_datadir}/faust/doc/
+
+mv README.md README-stdlib.md
+
 %ldconfig_scriptlets osclib
 
 %files
@@ -173,10 +222,12 @@ cp -a syntax-highlighting/%{name}.xml \
 
 %files osclib
 %doc architecture/osclib/README.md
-%{_libdir}/*
+%{_libdir}/*.so.*
 
 %files osclib-devel
 %{_includedir}/*
+%{_libdir}/*.so
+%{_libdir}/*.a
 
 %files doc
 %doc documentation/* 
@@ -193,7 +244,16 @@ cp -a syntax-highlighting/%{name}.xml \
 %doc syntax-highlighting/README.md
 %{_datadir}/kde4/apps/katepart/syntax/%{name}.xml
 
+%files stdlib
+%doc faustlibraries-master/README-stdlib.md
+%{_datadir}/faust/doc/library.html
+%{_datadir}/faust/doc/library.pdf
+%{_datadir}/faust/*.lib
+
 %changelog
+* Wed Jan 15 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-18
+- Update to 2.14.4-18. Add stdlib
+
 * Mon Jan 13 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-17
 - Update to 2.14.4-17
 
