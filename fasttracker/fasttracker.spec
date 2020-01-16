@@ -1,5 +1,5 @@
 Name:          fasttracker2
-Version:       1.05
+Version:       1.06
 Release:       2%{?dist}
 Summary:       Module tracker software for creating music
 Group:         Applications/Multimedia
@@ -37,7 +37,7 @@ make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 cd build
 make DESTDIR=%{buildroot} PREFIX=/usr install
 
-mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/fasttracker2
+mv %{buildroot}/%{_bindir}/ft2-clone %{buildroot}/%{_bindir}/fasttracker2
 
 cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
 #!/bin/bash
@@ -66,9 +66,12 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc LICENSES.txt
-%{_bindir}/ft2
+%{_bindir}/*
 
 %changelog
+* Thu Jan 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.06-1
+- update to 1.06
+
 * Sun Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 1.05-1
 - update to 1.05
 
