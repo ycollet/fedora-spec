@@ -11,7 +11,7 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
-Version: 3.10.3
+Version: 3.10.4
 Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -189,6 +189,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Fri Jan 17 2020 Yann Collette <ycollette.nospam@free.fr> 3.10.4-1
+- update to 3.10.4
+
 * Tue Sep 17 2019 Yann Collette <ycollette.nospam@free.fr> 3.10.3-1
 - update to 3.10.3
 
