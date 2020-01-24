@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.7.383
+Version: 0.7.425
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -97,6 +97,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %exclude %{_libdir}/pkgconfig/audec.pc
 
 %changelog
+* Fri Jan 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.425-2
+- update to 0.7.425
+
 * Sat Jan 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.383-2
 - update to 0.7.383
 
