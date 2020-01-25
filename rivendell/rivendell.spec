@@ -1,13 +1,13 @@
 %global __python %{__python3}
 
 # Global variables for github repository
-%global commit0 5da5bfc7a743e35a5d7c2f7a715b41ce2e5853c5
+%global commit0 421d073b3893bc78084db9a2672f9eac42ec9d9f
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: A radio automation system
 Name:    rivendell
-Version: 3.2.0
+Version: 3.2.1
 Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
@@ -163,6 +163,9 @@ fi
 %{_unitdir}/*
 
 %changelog
+* Sat Jan 25 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.1-1
+- update to 3.2.1
+
 * Sun Nov 3 2019 Yann Collette <ycollette.nospam@free.fr> - 3.2.0-1
 - update to 3.2.0 + some fixes from the rivendell spec file
 
