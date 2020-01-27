@@ -61,6 +61,7 @@ BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
 BuildRequires: python3-sphinx
 BuildRequires: python3-recommonmark
+BuildRequires: python3-sphinx_rtd_theme
 
 %description
 A modular synthetizer
