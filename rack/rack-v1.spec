@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 7390c4a8402779c2812cd247dad86d4904776f78
-%global gittag0 v1.1.5
+%global commit0 01e5e0301d6c1f6b3d52e717fa2ba7098dd4b49c
+%global gittag0 v1.1.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Rack
-Version: 1.1.5
+Version: 1.1.6
 Release: 6%{?dist}
 Summary: A modular synthetizer
 
@@ -17,7 +17,7 @@ URL:     https://github.com/VCVRack/Rack.git
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
-# git checkout v1.1.5
+# git checkout v1.1.6
 # git submodule init
 # git submodule update
 # find . -name ".git" -exec rm -rf {} \;
@@ -175,6 +175,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Mon Jan 27 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-6
+- update to 1.1.6
+
 * Fri Oct 11 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.5-6
 - update to 1.1.5
 
