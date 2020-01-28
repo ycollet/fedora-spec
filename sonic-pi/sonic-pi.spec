@@ -66,8 +66,7 @@ cd build
 cmake ..
 make
 cp m2o o2m ..
-
-%build
+cd ../../../..
 
 cd app/gui/qt
 
@@ -76,6 +75,10 @@ sed -i -e "s/rugged-0\.26\.0/rugged-0\.28\.0/g" ../../server/ruby/bin/compile-ex
 # For master exclusively
 #sed -i -e "454d" mainwindow.cpp # problem with MainWindow::initDocsWindow()
 sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\";/  return QCoreApplication::applicationDirPath() + \"\/..\/share\/sonic-pi\";/g" mainwindow.cpp
+
+%build
+
+cd app/gui/qt
 
 ruby ../../server/ruby/bin/compile-extensions.rb
 ruby ../../server/ruby/bin/i18n-tool.rb -t
