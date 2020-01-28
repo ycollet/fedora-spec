@@ -34,7 +34,6 @@ BuildRequires: mesa-libGL-devel
 BuildRequires: fftw-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: liblo-devel
-BuildRequires: mesa-libGL-devel
 
 %description
 A free hall-style reverb based on freeverb3 algorithms
