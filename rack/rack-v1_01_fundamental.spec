@@ -6,14 +6,17 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-Fundamental
+Name:    rack-v1-Fundamental
 Version: 1.3.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/Fundamental
+
+%define with_debug %{?_with_debug: 1} %{?!_with_debug: 0}
+%define with_glew  %{?_with_glew:  1} %{?!_with_glew:  0}
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -65,13 +68,37 @@ They are also a great reference for creating your own plugins in C++.
 CURRENT_PATH=`pwd`
 
 sed -i -e "s/-march=core2//g" compile.mk
+sed -i -e "s/-march=nocona//g" compile.mk
+sed -i -e "s/-ffast-math//g" compile.mk
+sed -i -e "s/-fno-finite-math-only//g" compile.mk
+sed -i -e "s/-O3/-O2/g" compile.mk
+%if !%{with_debug}
 sed -i -e "s/-g//g" compile.mk
-echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
+%endif
+
+echo "CXXFLAGS += %{build_cxxflags} -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
+%if %{with_glew}
+sed -i -e "s/-lGLEW/dep\/lib\/libGLEW.a/g" Makefile
+%endif
 
-sed -i -e "s/assetGlobalDir = \".\";/assetGlobalDir = \"\/usr\/libexec\/Rack\";/g" src/asset.cpp
+#sed -i -e "s/dep\/lib\/libGLEW.a/dep\/%{_lib}\/libGLEW.a/g" Makefile
+sed -i -e "s/dep\/lib\/libGLEW.a/-lGLEW/g" Makefile
+
+sed -i -e "s/dep\/lib\/libglfw3.a/dep\/%{_lib}\/libglfw3.a/g" Makefile
+
+sed -i -e "s/dep\/lib\/libjansson.a/-ljansson/g" Makefile
+sed -i -e "s/dep\/lib\/libcurl.a/-lcurl/g" Makefile
+sed -i -e "s/dep\/lib\/libssl.a/-lssl/g" Makefile
+sed -i -e "s/dep\/lib\/libcrypto.a/-lcrypto/g" Makefile
+sed -i -e "s/dep\/lib\/libzip.a/-lzip/g" Makefile
+sed -i -e "s/dep\/lib\/libz.a/-lz/g" Makefile
+sed -i -e "s/dep\/lib\/libspeexdsp.a/-lspeexdsp/g" Makefile
+sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
+sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
+sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
 mkdir fundamental_plugin
 tar xvfz %{SOURCE1} --directory=fundamental_plugin --strip-components=1 
@@ -81,23 +108,16 @@ cp %{SOURCE2} fundamental_plugin/plugin.json
 # Remove libsamplerate download and install
 sed -i -e "7,20d" fundamental_plugin/Makefile
 
-#sed -i -e "\$ainclude \$(RACK_DIR)/plugin.mk" fundamental_plugin/Makefile
-
 %build
 
 cd fundamental_plugin
-
-# Doesn't compile
-#rm src/Delay.cpp
-#sed -i -e "/modelDelay/d" src/Fundamental.hpp
-#sed -i -e "/modelDelay/d" src/Fundamental.cpp
 
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/Fundamental/
-cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack/plugins/Fundamental/
+mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Fundamental/
+cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Fundamental/
 
 %files
 %{_libexecdir}/*

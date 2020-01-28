@@ -3,9 +3,9 @@
 %global gittag0 v1.1.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:    Rack
+Name:    Rack-v1
 Version: 1.1.6
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: A modular synthetizer
 
 Group:   Applications/Multimedia
@@ -75,7 +75,7 @@ BuildArch: noarch
 Documentation files for Rack
 
 %prep
-%setup -qn %{name}
+%setup -qn Rack
 
 CURRENT_PATH=`pwd`
 
@@ -113,12 +113,14 @@ sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
 sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
 sed -i -e "s/systemDir = \".\";/systemDir = \"\/usr\/libexec\/Rack1\";/g" src/asset.cpp
+sed -i -e "s/pluginsPath = userDir + \"\/plugins-v\"/pluginsPath = systemDir + \"\/plugins-v\"/g" src/asset.cpp
 
 tar xvfz %{SOURCE1}
 
 sed -i -e "s/sphinx-build/sphinx-build-3/g" manual/Makefile
 
 %build
+
 cd dep
 cd glfw
 %if !%{with_debug}
@@ -148,13 +150,15 @@ mkdir -p %{buildroot}%{_datadir}/pixmaps/
 mkdir -p %{buildroot}%{_datadir}/man/man1/
 mkdir -p %{buildroot}%{_datadir}/applications/
 mkdir -p %{buildroot}%{_datadir}/Rack/html/
-mkdir -p %{buildroot}%{_libexecdir}/Rack/plugins/
+mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins/
 
 install -m 755 Rack         %{buildroot}%{_bindir}/
 install -m 644 res/icon.png %{buildroot}%{_datadir}/pixmaps/rack.png
-cp -r res %{buildroot}%{_libexecdir}/Rack/
+cp -r res %{buildroot}%{_libexecdir}/Rack1/
 
 cp -r manual/_build/html/* %{buildroot}%{_datadir}/Rack/html/
+
+cp LICENSE* CHANGELOG.md cacert.pem Core.json template.vcv %{buildroot}%{_libexecdir}/Rack1/
 
 cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
 [Desktop Entry]
