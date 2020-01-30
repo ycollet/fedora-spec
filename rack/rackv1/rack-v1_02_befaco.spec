@@ -6,9 +6,9 @@
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-Befaco
+Name:    rack-v1-Befaco
 Version: 0.6.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia
@@ -69,7 +69,8 @@ sed -i -e "s/-ffast-math//g" compile.mk
 sed -i -e "s/-fno-finite-math-only//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
 
-echo "CXXFLAGS += %{build_cxxflags} -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
+# %{build_cxxflags}
+echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
@@ -104,8 +105,8 @@ cp -r befaco_plugin/dist/Befaco/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Be
 %{_libexecdir}/*
 
 %changelog
-* Thu Jan 30 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0
+* Thu Jan 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
 - update to 1467acb4b4ba3257ffc93941b2bae61b42c0c6f5 to get plugin.json
 
-* Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0
+* Sun Nov 18 2018 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-2
 - initial specfile
