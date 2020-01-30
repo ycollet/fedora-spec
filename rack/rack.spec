@@ -5,14 +5,13 @@
 
 Name:    Rack
 Version: 0.6.2c
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: A modular synthetizer
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/Rack.git
 
-%define with_debug %{?_with_debug: 1} %{?!_with_debug: 0}
 %define with_glew  %{?_with_glew:  1} %{?!_with_glew:  0}
 
 # git clone https://github.com/VCVRack/Rack.git Rack
@@ -85,11 +84,9 @@ sed -i -e "s/-march=nocona//g" compile.mk
 sed -i -e "s/-ffast-math//g" compile.mk
 sed -i -e "s/-fno-finite-math-only//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
-%if !%{with_debug}
-sed -i -e "s/-g//g" compile.mk
-%endif
 
-echo "CXXFLAGS += %{build_cxxflags} -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
+# %{build_cxxflags}
+echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
@@ -105,11 +102,7 @@ tar xvfz %{SOURCE1}
 %build
 cd dep
 cd glfw
-%if !%{with_debug}
 cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=RELEASE .
-%else
-cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
-%endif
 make
 make install
 cd ..
