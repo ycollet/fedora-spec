@@ -1,5 +1,5 @@
 Name:          fasttracker2
-Version:       1.06
+Version:       1.07
 Release:       2%{?dist}
 Summary:       Module tracker software for creating music
 Group:         Applications/Multimedia
@@ -69,6 +69,9 @@ rm -rf %{buildroot}
 %{_bindir}/*
 
 %changelog
+* Fri Jan 31 2020 Yann Collette <ycollette.nospam@free.fr> - 1.07-1
+- update to 1.07
+
 * Thu Jan 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.06-1
 - update to 1.06
 
