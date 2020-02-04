@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 724ae27c71ef809b836df06713cf9e50bc14162b
-%global gittag0 5.4.5
+%global commit0 bcaa8cbdde40e47654e1a558659fe5ede5ffc7d8
+%global gittag0 5.4.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    JUCE
-Version: 5.4.5.%{shortcommit0}
+Version: 5.4.6.%{shortcommit0}
 Release: 3%{?dist}
 Summary: JUCE Framework
 URL:     https://github.com/WeAreROLI/JUCE.git
@@ -117,6 +117,9 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Tue Feb 4 2020 Yann Collette <ycollette.nospam@free.fr> - 5.4.6-3
+- update to 5.4.6
+
 * Fri Oct 18 2019 Yann Collette <ycollette.nospam@free.fr> - 5.4.5-3
 - update to 5.4.5
 
