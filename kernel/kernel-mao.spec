@@ -1,11 +1,11 @@
 # Kernel major version
 %define kmaj  5
 # Kernel minor version
-%define kmin  2
+%define kmin  4
 # Kernel patch version
-%define kpat  21
+%define kpat  17
 # RT patch version
-%define krt   15
+%define krt   9
 # package version
 %define krel  10
 
@@ -186,6 +186,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Fri Feb 7 2020 Yann Collette <ycollette.nospam@free.fr> - 5.4.17-rt9-10
+- update to 5.4.17-rt9-10
+
 * Mon Dec 16 2019 Yann Collette <ycollette.nospam@free.fr> - 5.2.21-rt15-9
 - update to 5.2.21-rt15-9
 
