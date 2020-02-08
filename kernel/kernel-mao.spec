@@ -36,7 +36,7 @@ BuildRequires: binutils, redhat-rpm-config, bison, flex
 BuildRequires: net-tools, hostname, bc, elfutils-devel
 BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
 BuildRequires: grub2-tools
-BuildRequires: sed
+BuildRequires: sed, rsync
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
