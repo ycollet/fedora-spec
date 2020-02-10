@@ -1,0 +1,26 @@
+--- a/source/frontend/carla_shared.py.orig	2018-12-19 12:57:21.251802286 +0100
++++ b/source/frontend/carla_shared.py	2018-12-19 12:59:24.154528863 +0100
+@@ -402,19 +402,19 @@
+     splitter = ":"
+ 
+     DEFAULT_LADSPA_PATH  = HOME + "/.ladspa"
+-    DEFAULT_LADSPA_PATH += ":/usr/lib/ladspa"
++    DEFAULT_LADSPA_PATH += ":/usr/lib64/ladspa"
+     DEFAULT_LADSPA_PATH += ":/usr/local/lib/ladspa"
+ 
+     DEFAULT_DSSI_PATH    = HOME + "/.dssi"
+-    DEFAULT_DSSI_PATH   += ":/usr/lib/dssi"
++    DEFAULT_DSSI_PATH   += ":/usr/lib64/dssi"
+     DEFAULT_DSSI_PATH   += ":/usr/local/lib/dssi"
+ 
+     DEFAULT_LV2_PATH     = HOME + "/.lv2"
+-    DEFAULT_LV2_PATH    += ":/usr/lib/lv2"
++    DEFAULT_LV2_PATH    += ":/usr/lib64/lv2"
+     DEFAULT_LV2_PATH    += ":/usr/local/lib/lv2"
+ 
+     DEFAULT_VST2_PATH    = HOME + "/.vst"
+-    DEFAULT_VST2_PATH   += ":/usr/lib/vst"
++    DEFAULT_VST2_PATH   += ":/usr/lib64/vst"
+     DEFAULT_VST2_PATH   += ":/usr/local/lib/vst"
+ 
+     DEFAULT_SF2_PATH     = HOME + "/.sounds/sf2"
