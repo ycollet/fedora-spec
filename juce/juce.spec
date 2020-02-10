@@ -2,8 +2,8 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 bcaa8cbdde40e47654e1a558659fe5ede5ffc7d8
-%global gittag0 5.4.6
+%global commit0 1e71c07a492f01022f9064560c95c2bcd938847c
+%global gittag0 5.4.7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    JUCE
@@ -117,6 +117,9 @@ cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Mon Feb 10 2020 Yann Collette <ycollette.nospam@free.fr> - 5.4.7-3
+- update to 5.4.7
+
 * Tue Feb 4 2020 Yann Collette <ycollette.nospam@free.fr> - 5.4.6-3
 - update to 5.4.6
 
