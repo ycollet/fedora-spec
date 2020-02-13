@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 c4194cd8a1db038c6236f4621e52d26ca82ed7f8
+%global commit0 eb41dd7cdf1112530c1a8059cfa3a99a402944ef
 %global gittag0 v1.3.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:    rack-v1-Fundamental
 Version: 1.3.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A plugin for Rack
 
 Group:   Applications/Multimedia
@@ -118,6 +118,9 @@ cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
+* Thu Feb 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1-4
+- update to 1.3.1-4. Update to last master to add Pulse plugin
+
 * Mon Jan 27 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1
 - update to 1.3.1
 

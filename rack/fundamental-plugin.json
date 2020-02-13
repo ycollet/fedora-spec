@@ -132,6 +132,14 @@
       ]
     },
     {
+      "slug": "Pulses",
+      "name": "Pulses",
+      "description": "Generates up to 10 trigger and gate signals",
+      "tags": [
+        "Switch"
+      ]
+    },
+    {
       "slug": "Scope",
       "name": "Scope",
       "description": "Inspect waveforms with an oscilloscope",
