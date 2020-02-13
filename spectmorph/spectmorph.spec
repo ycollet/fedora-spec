@@ -1,5 +1,5 @@
 Name:    spectmorph
-Version: 0.5.0
+Version: 0.5.1
 Release: 1%{?dist}
 Summary: SpectMorph is a free software project which allows to analyze samples of musical instruments, and to combine them (morphing)
 URL:     http://www.spectmorph.org
@@ -87,6 +87,9 @@ fi
 %{_includedir}/%{name}/*
 
 %changelog
+* Thu Feb 13 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-1
+- update to 0.5.1
+
 * Sat Aug 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-1
 - update to 0.5.0
 
