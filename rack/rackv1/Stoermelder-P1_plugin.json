@@ -1,0 +1,245 @@
+{
+  "slug": "Stoermelder-P1",
+  "version": "1.5.0",
+  "license": "GPL-3.0-only",
+  "author": "Benjamin Dill",
+  "name": "PackOne",
+  "brand": "stoermelder",
+  "authorEmail": "stoermelder@outlook.com",
+  "pluginUrl": "https://github.com/stoermelder/vcvrack-packone",
+  "authorUrl": "https://github.com/stoermelder",
+  "sourceUrl": "https://github.com/stoermelder/vcvrack-packone.git",
+  "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/README.md",
+  "changelogUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/CHANGELOG.md",
+  "donateUrl": "https://paypal.me/stoermelder",
+  "modules": [
+    {
+      "slug": "CVMap",
+      "name": "CV-MAP",
+      "description": "Add CV automation to 32 parameters of any module",
+      "tags": [
+        "Utility",
+        "Polyphonic",
+        "Controller"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/CVMap.md"
+    },
+    {
+      "slug": "CVMapMicro",
+      "name": "\u00b5MAP",
+      "description": "Add CV automation to one parameter of any module",
+      "tags": [
+        "Utility",
+        "Controller"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/CVMapMicro.md"
+    },
+    {
+      "slug": "CVPam",
+      "name": "CV-PAM",
+      "description": "Generate CV from any parameter change of any module",
+      "tags": [
+        "Utility",
+        "Polyphonic",
+        "Controller"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/CVPam.md"
+    },
+    {
+      "slug": "RotorA",
+      "name": "ROTOR Model A",
+      "description": "Rotates a signal across polyphonic channels",
+      "tags": [
+        "Utility",
+        "Polyphonic"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/RotorA.md"
+    },
+    {
+      "slug": "ReMoveLite",
+      "name": "ReMOVE Lite",
+      "description": "Recorder for parameter automation",
+      "tags": [
+        "Utility",
+        "Recording",
+        "Controller"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/ReMove.md"
+    },
+    {
+      "slug": "Bolt",
+      "name": "BOLT",
+      "description": "Polyphonic logic boolean functions with modulation and sample & hold",
+      "tags": [
+        "Utility",
+        "Logic",
+        "Polyphonic",
+        "Sample and hold"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Bolt.md"
+    },
+    {
+      "slug": "Infix",
+      "name": "INFIX",
+      "description": "Insert for polyphonic cables",
+      "tags": [
+        "Utility",
+        "Polyphonic"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Infix.md"
+    },
+    {
+      "slug": "InfixMicro",
+      "name": "\u00b5INFIX",
+      "description": "Insert for polyphonic cables",
+      "tags": [
+        "Utility",
+        "Polyphonic"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Infix.md"
+    },
+    {
+      "slug": "Strip",
+      "name": "STRIP",
+      "description": "Manage a group of modules by using the expander-mechanism, providing load, save, copy, paste, disable, enable and randomize",
+      "tags": [
+        "Utility",
+        "Controller",
+        "Random"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Strip.md"
+    },
+    {
+      "slug": "EightFace",
+      "name": "8FACE",
+      "description": "Universal expander for sequencing up to eight presets of any module",
+      "tags": [
+        "Utility",
+        "Sequencer"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/EightFace.md"
+    },
+    {
+      "slug": "EightFaceX2",
+      "name": "8FACEx2",
+      "description": "Universal expander for sequencing up to sixteen presets of any module",
+      "tags": [
+        "Utility",
+        "Sequencer"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/EightFace.md"
+    },
+    {
+      "slug": "MidiCat",
+      "name": "MIDI-CAT",
+      "description": "Mapping module for MIDI CCs and notes to parameters of any module, similar to VCV MIDI-MAP",
+      "tags": [
+        "Utility",
+        "MIDI"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/MidiCat.md"
+    },
+    {
+      "slug": "Sipo",
+      "name": "SIPO",
+      "description": "Serial-in parallel-out shift register with polyphonic output and CV controls for skipping and incrementing on sampled values",
+      "tags": [
+        "Utility",
+        "Sample and hold",
+        "Digital",
+        "Polyphonic"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Sipo.md"
+    },
+    {
+      "slug": "FourRounds",
+      "name": "4ROUNDS",
+      "description": "Randomizer for up to 16 input signals to create 15 output signals",
+      "tags": [
+        "Utility",
+        "Sample and hold",
+        "Random",
+        "Switch"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/FourRounds.md"
+    },
+    {
+      "slug": "Arena",
+      "name": "ARENA",
+      "description": "2-dimensional XY-Mixer for 8 sources with various modulation targets and fun graphical interface",
+      "tags": [
+        "Utility",
+        "Controller",
+        "Mixer"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Arena.md"
+    },
+    {
+      "slug": "Maze",
+      "name": "MAZE",
+      "description": "4 channel sequencer running on a 2-dimensional grid",
+      "tags": [
+        "Sequencer",
+        "Random"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Maze.md"
+    },
+    {
+      "slug": "Intermix",
+      "name": "INTERMIX",
+      "description": "Precision adder 8x8 switch matrix with scene-support",
+      "tags": [
+        "Mixer"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Intermix.md"
+    },
+    {
+      "slug": "Detour",
+      "name": "DETOUR",
+      "description": "Send/Return switch matrix with scene-support",
+      "tags": [
+        "Mixer",
+        "Switch",
+        "Utility"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Detour.md",
+      "disabled": true
+    },
+    {
+      "slug": "Sail",
+      "name": "SAIL",
+      "description": "Control any parameter currently hovered by mouse with CV, especially useful with MIDI-CC or MIDI-STEP",
+      "tags": [
+        "Utility"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Sail.md"
+    },
+    {
+      "slug": "Pile",
+      "name": "PILE",
+      "description": "Translate increment triggers or decrement triggers in an absolute voltage, especially useful with MIDI-STEP, with slew support",
+      "tags": [
+        "Utility"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/Pile.md"
+    },
+    {
+      "slug": "MidiStep",
+      "name": "MIDI-STEP",
+      "description": "Module for relative modes of endless knobs on your MIDI controller, such as Arturia Beatstep, Native Instruments Komplete Keyboards or Behringer X-TOUCH",
+      "tags": [
+        "Utility",
+        "MIDI"
+      ],
+      "manualUrl": "https://github.com/stoermelder/vcvrack-packone/blob/v1/docs/MidiStep.md"
+    },
+    {
+      "slug": "AudioInterface64",
+      "name": "AUDIO-64",
+      "description": "Sends CV and audio to/from an audio device",
+      "tags": [
+        "External"
+      ]
+    }
+  ]
+}

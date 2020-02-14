@@ -1,0 +1,50 @@
+{
+  "slug": "OrangeLine",
+  "name": "OrangeLine",
+  "version": "1.3.3",
+  "license": "GPL-3.0-only",
+  "brand": "",
+  "author": "Dieter Stubler",
+  "authorEmail": "dieter.stubler@googlemail.com",
+  "authorUrl": "https://github.com/Stubs42/OrangeLine",
+  "pluginUrl": "https://github.com/Stubs42/OrangeLine",
+  "manualUrl": "https://github.com/Stubs42/OrangeLine/blob/master/README.md",
+  "sourceUrl": "https://github.com/Stubs42/OrangeLine",
+  "donateUrl": "https://paypal.me/DieterStubler?locale.x=de_DE",
+  "modules": [
+    {
+      "slug": "Fence",
+      "name": "Fence",
+      "description": "Keep CVs in a defined pitch range",
+      "tags": [
+        "Quantizer",
+        "Tuner",
+        "Utility",
+        "Distortion",
+        "WaveShaper",
+        "Polyphonic",
+        "Poly"
+      ]
+    },
+    {
+      "slug": "Swing",
+      "name": "Swing",
+      "description": "Micro Timing Sequencer",
+      "tags": [
+        "Sequencer",
+        "Clock"
+      ]
+    },
+    {
+      "slug": "Mother",
+      "name": "Mother",
+      "description": "Mode aware probability driven quantizer",
+      "tags": [
+        "Quantizer",
+        "Sequencer",
+        "Polyphonic",
+        "Poly"
+      ]
+    }
+  ]
+}

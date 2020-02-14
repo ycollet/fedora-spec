@@ -1,0 +1,26 @@
+{
+  "slug": "Ahornberg",
+  "version": "1.0.2",
+  "license": "CC0-1.0",
+  "name": "Ahornberg",
+  "brand": "Ahornberg",
+  "author": "Ahornberg",
+  "authorEmail": "",
+  "authorUrl": "https://github.com/Ahornberg/Ahornberg-Microtonal",
+  "pluginUrl": "https://github.com/Ahornberg/Ahornberg-Microtonal",
+  "manualUrl": "https://github.com/Ahornberg/Ahornberg-Microtonal/blob/master/README.md",
+  "sourceUrl": "https://github.com/Ahornberg/Ahornberg-Microtonal",
+  "changelogUrl": "",
+  "donateUrl": "",
+  "modules": [
+    {
+      "slug": "EqualDivision",
+      "name": "Equal Division",
+      "description": "microtonal re-tuner",
+      "tags": [
+        "Tuner",
+        "Polyphonic"
+      ]
+    }
+  ]
+}

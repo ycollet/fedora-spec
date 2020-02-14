@@ -1,0 +1,361 @@
+{
+  "slug": "Bidoo",
+  "version": "1.1.11",
+  "license": "GPL-3.0-only",
+  "name": "Bidoo",
+  "brand": "Bidoo",
+  "author": "Bidoo",
+  "authorEmail": "sebastien.bouffier@gmail.com",
+  "pluginUrl": "https://github.com/sebastien-bouffier/Bidoo",
+  "authorUrl": "https://github.com/sebastien-bouffier/Bidoo",
+  "manualUrl": "https://github.com/sebastien-bouffier/Bidoo/wiki",
+  "sourceUrl": "https://github.com/sebastien-bouffier/Bidoo",
+  "changelogUrl": "https://github.com/sebastien-bouffier/Bidoo/blob/v1.0/changelog.md",
+  "donateUrl": "https://www.paypal.me/sebastienbouffier",
+  "modules": [
+    {
+      "slug": "vOId",
+      "name": "vOId",
+      "description": "The ultimate mastering tool for Rack.\nOnce plugged in your Rack, you gonna\n sound FAAAAT.\n\nPicture is taken from a very good LP\nTERA MELOS.\n",
+      "tags": [
+        "Physical modeling",
+        "Blank",
+        "Controller",
+        "Utility"
+      ]
+    },
+    {
+      "slug": "ChUTE",
+      "name": "ChUTE",
+      "description": "Space/Strange trigger based on the\nfree fall and bouncing an object.\nYou can change the drop altitude\nbetween 1cm and 3m\n",
+      "tags": [
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "antN",
+      "name": "antN",
+      "description": "mp3 m3u pls radio",
+      "tags": [
+        "Oscillator"
+      ]
+    },
+    {
+      "slug": "tOCAnTe",
+      "name": "tOCAnTe",
+      "description": "Clock",
+      "tags": [
+        "Clock"
+      ]
+    },
+    {
+      "slug": "cuRt",
+      "name": "cuRt",
+      "description": "Pitcher based on audio bins replication",
+      "tags": [
+        "Effect"
+      ]
+    },
+    {
+      "slug": "ACnE",
+      "name": "ACnE",
+      "description": "Mixer with snaphots",
+      "tags": [
+        "Mixer"
+      ]
+    },
+    {
+      "slug": "baR",
+      "name": "baR",
+      "description": "Compressor",
+      "tags": [
+        "Dynamics",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "mINIBar",
+      "name": "mINIBar",
+      "description": "Compressor",
+      "tags": [
+        "Dynamics",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "BISTROT",
+      "name": "BISTROT",
+      "description": "Bit toy",
+      "tags": [
+        "Effect",
+        "Distortion"
+      ]
+    },
+    {
+      "slug": "bordL",
+      "name": "bordL",
+      "description": "Sequencer",
+      "tags": [
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "cANARd",
+      "name": "cANARd",
+      "description": "Sampler with slice tools & transients detection",
+      "tags": [
+        "Sampler"
+      ]
+    },
+    {
+      "slug": "clACos",
+      "name": "clACos",
+      "description": "Phase distortion 4 segments oscillator",
+      "tags": [
+        "Oscillator"
+      ]
+    },
+    {
+      "slug": "dFUZE",
+      "name": "dFUZE",
+      "description": "Reverb",
+      "tags": [
+        "Reverb",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "dTrOY",
+      "name": "dTrOY",
+      "description": "Sequencer",
+      "tags": [
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "dUKe",
+      "name": "dUKe",
+      "description": "Controller",
+      "tags": [
+        "Controller"
+      ]
+    },
+    {
+      "slug": "EMILE",
+      "name": "EMILE",
+      "description": ".png to sound",
+      "tags": [
+        "Sampler"
+      ]
+    },
+    {
+      "slug": "FFilTr",
+      "name": "FFilTr",
+      "description": "LP Filter",
+      "tags": [
+        "VCF",
+        "filter",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "ForK",
+      "name": "ForK",
+      "description": "Formant oscillator",
+      "tags": [
+        "Oscillator"
+      ]
+    },
+    {
+      "slug": "Garcon",
+      "name": "Gar\u00e7on",
+      "description": "FFT display",
+      "tags": [
+        "Visual"
+      ]
+    },
+    {
+      "slug": "HCTIP",
+      "name": "HCTIP",
+      "description": "Pitch shifter",
+      "tags": [
+        "Effect"
+      ]
+    },
+    {
+      "slug": "lATe",
+      "name": "lATe",
+      "description": "Clock Modulator, Takes a clock input\nand applies a delay on even ticks to\ncreate swing. Reset sets the next tick\nfor the incoming clock to odd.",
+      "tags": [
+        "Logic",
+        "Sequencer",
+        "Clock modulator"
+      ]
+    },
+    {
+      "slug": "lIMbO",
+      "name": "lIMbO",
+      "description": "4th order stereo LP ladder filter.\nGain boosts the signal to compensate for\nglobal signal energy lose at high\nresonance. When non linear is selected gain is applied to each stage",
+      "tags": [
+        "VCF",
+        "filter",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "liMonADe",
+      "name": "liMonADe",
+      "description": "Wavetable oscillator station & additive synth",
+      "tags": [
+        "Oscillator"
+      ]
+    },
+    {
+      "slug": "LoURdE",
+      "name": "LoURdE",
+      "description": "Neural comparator & gate",
+      "tags": [
+        "Logic",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "MOiRE",
+      "name": "MOiRE",
+      "description": "Controller with snapshots and morphing",
+      "tags": [
+        "Controller"
+      ]
+    },
+    {
+      "slug": "MS",
+      "name": "MS",
+      "description": "Mid/Side Decoder/Encoder",
+      "tags": [
+        "Effect",
+        "Utility"
+      ]
+    },
+    {
+      "slug": "MU",
+      "name": "\u00b5",
+      "description": "Synced pulse generator",
+      "tags": [
+        "Logic",
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "OUAIve",
+      "name": "OUAIve",
+      "description": "Sample player with beat slicing grid",
+      "tags": [
+        "Sampler"
+      ]
+    },
+    {
+      "slug": "POUPRE",
+      "name": "p\u00f3UPr\u00e8",
+      "description": "Sample player",
+      "tags": [
+        "Sampler"
+      ]
+    },
+    {
+      "slug": "MAGMA",
+      "name": "maGma",
+      "description": "Sample player",
+      "tags": [
+        "Sampler"
+      ]
+    },
+    {
+      "slug": "OAI",
+      "name": "oA\u00ef",
+      "description": "Sample player",
+      "tags": [
+        "Sampler"
+      ]
+    },
+    {
+      "slug": "PeNEqUe",
+      "name": "PeNEqUe",
+      "description": "Additive osicllator",
+      "tags": [
+        "Oscillator"
+      ]
+    },
+    {
+      "slug": "pErCO",
+      "name": "pErCO",
+      "description": "3 bands filter",
+      "tags": [
+        "VCF",
+        "filter",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "rabBIT",
+      "name": "rabBIT",
+      "description": "Bit toy",
+      "tags": [
+        "Effect",
+        "Distortion"
+      ]
+    },
+    {
+      "slug": "REI",
+      "name": "REI",
+      "description": "Reverb",
+      "tags": [
+        "Reverb",
+        "Effect"
+      ]
+    },
+    {
+      "slug": "SIGMA",
+      "name": "\u03a3 multiprise :)",
+      "description": "Patch",
+      "tags": [
+        "Multiple"
+      ]
+    },
+    {
+      "slug": "TiARE",
+      "name": "TiARE",
+      "description": "Phase distortion oscillator",
+      "tags": [
+        "Oscillator",
+        "LFO"
+      ]
+    },
+    {
+      "slug": "ziNC",
+      "name": "ziNC",
+      "description": "Vocoder",
+      "tags": [
+        "Effect",
+        "Vocoder"
+      ]
+    },
+    {
+      "slug": "ZOUMAI",
+      "name": "zO\u00f9 MA\u00ef",
+      "description": "Sequencer",
+      "tags": [
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "BAFIS",
+      "name": "bAFIs",
+      "description": "Multiband distortion",
+      "tags": [
+        "Effect",
+        "VCF",
+        "Distortion"
+      ]
+    }
+  ]
+}
