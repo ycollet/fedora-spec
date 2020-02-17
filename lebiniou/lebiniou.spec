@@ -2,7 +2,7 @@
 # %global debug_package %{nil}
 
 Name:    lebiniou
-Version: 3.32
+Version: 3.40
 Release: 2%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -11,7 +11,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 
 # original tarfile can be found here:
-Source0: https://dl.biniou.net/biniou/tar/lebiniou-%{version}.tar.gz
+Source0: https://gitlab.com/lebiniou/lebiniou/-/archive/version-%{version}/lebiniou-version-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -40,11 +40,13 @@ As an artist, composer, VJ or just fan, lebiniou allows you to create live visua
 As a listener, lebiniou allows you to watch an everlasting and totally unseen creation reacting to the music.
 
 %prep
-%setup -qn %{name}-%{version}
+%setup -qn %{name}-version-%{version}
 
 sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_lib}\"/g" configure.ac
 
 %build
+
+autoreconf --install
 
 # report: --enable-jackaudio doesn't work ...
 %configure --prefix=%{_prefix} --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir} CFLAGS="%{build_cxxflags}"
@@ -77,6 +79,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/*
 
 %changelog
+* Mon Feb 17 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-2
+- update to 3.40
+
 * Fri Dec 6 2019 Yann Collette <ycollette.nospam@free.fr> - 3.32-2
 - fix path
 
