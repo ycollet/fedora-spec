@@ -16,6 +16,8 @@ Source0: https://gitlab.com/lebiniou/lebiniou-data/-/archive/version-%{version}/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: make
+BuildRequires: jansson-devel
+BuildRequires: autoconf automake libtool
 
 %description
 

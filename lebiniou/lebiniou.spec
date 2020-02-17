@@ -31,6 +31,7 @@ BuildRequires: ImageMagick-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: perl-podlators
 BuildRequires: gtk-update-icon-cache
+BuildRequires: jansson-devel
 
 Requires(pre): lebiniou-data
 
