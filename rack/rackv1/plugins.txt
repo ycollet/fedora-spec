@@ -78,31 +78,31 @@ rack-v1-library-mscHack.spec					OK
 rack-v1-library-MSM.spec					OK
 rack-v1-library-mtsch-plugins.spec				FAIL (BUILD)
 rack-v1-library-MyLittleTools.spec				OK
-rack-v1-library-NauModular.spec
-rack-v1-library-NEXSwitches.spec
-rack-v1-library-NocturnalEncoder.spec
-rack-v1-library-Nohmad.spec
-rack-v1-library-NonLinearInstruments.spec
-rack-v1-library-noobhour.spec
-rack-v1-library-Nozoid.spec
-rack-v1-library-Ohmer.spec
-rack-v1-library-OrangeLine.spec
-rack-v1-library-ParableInstruments.spec
-rack-v1-library-PdArray.spec
-rack-v1-library-pfzzz.spec
-rack-v1-library-PG-Instruments.spec
-rack-v1-library-Prism.spec
-rack-v1-library-PS-PurrSoftware.spec
-rack-v1-library-PvC.spec
-rack-v1-library-Quadraphonics.spec
-rack-v1-library-QuantalAudio.spec
-rack-v1-library-Qwelk.spec
-rack-v1-library-RacketScience.spec
-rack-v1-library-rcm.spec
-rack-v1-library-repelzen.spec
-rack-v1-library-ReTunesFree.spec
-rack-v1-library-RJModules.spec
-rack-v1-library-RODENTMODULES.spec
+rack-v1-library-NauModular.spec					FAIL (BUILD)
+rack-v1-library-NEXSwitches.spec				OK
+rack-v1-library-NocturnalEncoder.spec				FAIL (BUILD)
+rack-v1-library-Nohmad.spec					FAIL (BUILD)
+rack-v1-library-NonLinearInstruments.spec			FAIL (BUILD)
+rack-v1-library-noobhour.spec					OK
+rack-v1-library-Nozoid.spec					OK
+rack-v1-library-Ohmer.spec					FAIL (URL)
+rack-v1-library-OrangeLine.spec					OK
+rack-v1-library-ParableInstruments.spec				FAIL (URL)
+rack-v1-library-PdArray.spec					OK
+rack-v1-library-pfzzz.spec					OK
+rack-v1-library-PG-Instruments.spec				FAIL (BUILD)
+rack-v1-library-Prism.spec					OK
+rack-v1-library-PS-PurrSoftware.spec				OK
+rack-v1-library-PvC.spec					FAIL (BUILD)
+rack-v1-library-Quadraphonics.spec				FAIL (BUILD)
+rack-v1-library-QuantalAudio.spec				OK
+rack-v1-library-Qwelk.spec					FAIL (submodules)
+rack-v1-library-RacketScience.spec				OK
+rack-v1-library-rcm.spec					OK
+rack-v1-library-repelzen.spec					OK
+rack-v1-library-ReTunesFree.spec				OK
+rack-v1-library-RJModules.spec					OK
+rack-v1-library-RODENTMODULES.spec				FAIL (BUILD)
 rack-v1-library-SA-Seasons.spec
 rack-v1-library-sb-StochKit.spec
 rack-v1-library-scanner-darkly-collection-one.spec
