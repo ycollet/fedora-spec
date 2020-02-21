@@ -48,7 +48,7 @@ for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep +
         
         slug_name = conf_rack['slug']
         version   = conf_rack['version']
-        sourceurl = conf_rack['sourceUrl']
+        sourceurl = conf_rack['sourceUrl'].replace('.git','') # remove the trailing '.git'
 
         if not os.path.exists(path_to_library_git + os.sep + 'repos' + os.sep + slug_name):
             print('repos slug_name doesn\'t exists\n')
