@@ -32,7 +32,7 @@ URL:     https://github.com/DomiKamu/Ohmer.git
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/DomiKamu/Ohmer.git/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/DomiKamu/Ohmer/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: Ohmer_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

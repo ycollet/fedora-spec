@@ -32,7 +32,7 @@ URL:     https://gitlab.com/sonusdept/sonusmodular
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://gitlab.com/sonusdept/sonusmodular/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://gitlab.com/sonusdept/sonusmodular/-/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 Source2: SonusModular_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

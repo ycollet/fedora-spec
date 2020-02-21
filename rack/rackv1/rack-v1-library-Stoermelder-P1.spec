@@ -32,7 +32,7 @@ URL:     https://github.com/stoermelder/vcvrack-packone.git
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/stoermelder/vcvrack-packone.git/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/stoermelder/vcvrack-packone/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: Stoermelder-P1_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

@@ -32,7 +32,7 @@ URL:     https://github.com/alto777/LFSR.git
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/alto777/LFSR.git/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/alto777/LFSR/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: alto777_LFSR_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

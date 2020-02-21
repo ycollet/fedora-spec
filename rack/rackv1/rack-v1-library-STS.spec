@@ -14,7 +14,7 @@ Summary: STS plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/SmallTownSound/STS/blob/V1/README.md
+URL:     https://github.com/SmallTownSound/STS/
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -32,7 +32,7 @@ URL:     https://github.com/SmallTownSound/STS/blob/V1/README.md
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/SmallTownSound/STS/blob/V1/README.md/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/SmallTownSound/STS/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: STS_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

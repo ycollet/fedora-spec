@@ -32,7 +32,7 @@ URL:     https://github.com/dllmusic/moDllz/tree/master/src
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/dllmusic/moDllz/tree/master/src/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/dllmusic/moDllz/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: moDllz_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
