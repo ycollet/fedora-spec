@@ -8,12 +8,12 @@ rack-v1-library-alto777_LFSR.spec				OK
 rack-v1-library-AmalgamatedHarmonics.spec			OK
 rack-v1-library-AnimatedCircuits.spec				OK
 rack-v1-library-aP-Modules.spec					FAIL (BUILD)
-rack-v1-library-ArableInstruments.spec				FAIL (submodules)
+rack-v1-library-ArableInstruments.spec				OK
 rack-v1-library-AriaSalvatrice.spec				OK
 rack-v1-library-aridacity.spec					OK
 rack-v1-library-arjo_modules.spec				FAIL (BUILD)
 rack-v1-library-AS.spec						OK
-rack-v1-library-AudibleInstruments.spec				FAIL (submodules)
+rack-v1-library-AudibleInstruments.spec				OK
 rack-v1-library-AuntyLangtonsFree.spec				OK
 rack-v1-library-BaconMusic.spec					FAIL (BUILD)
 rack-v1-library-Bark.spec					OK
@@ -36,14 +36,14 @@ rack-v1-library-CountModula.spec				OK
 rack-v1-library-CYC.spec					OK
 rack-v1-library-dBiz.spec					OK
 rack-v1-library-DHE-Modules.spec				OK
-rack-v1-library-DrumKit.spec					FAIL (submodules)
+rack-v1-library-DrumKit.spec					OK
 rack-v1-library-Edge.spec					OK
 rack-v1-library-EH_modules.spec					FAIL (BUILD)
-rack-v1-library-ErraticInstruments.spec				FAIL (submodules)
+rack-v1-library-ErraticInstruments.spec				FAIL (BUILD)
 rack-v1-library-ESeries.spec					OK
 rack-v1-library-ExpertSleepers-Encoders.spec			OK
 rack-v1-library-FrankBuss.spec					OK
-rack-v1-library-FrozenWasteland.spec				FAIL (compiles libsamplerate and twolame) ... 
+rack-v1-library-FrozenWasteland.spec				OK 
 rack-v1-library-Geodesics.spec					OK
 rack-v1-library-GlueTheGiant.spec				OK
 rack-v1-library-GoodSheperd.spec				OK
@@ -52,7 +52,7 @@ rack-v1-library-HetrickCV.spec					FAIL (BUILD)
 rack-v1-library-HolonicSystems-Free.spec			OK
 rack-v1-library-huaba.spec					OK
 rack-v1-library-ImpromptuModular.spec				OK
-rack-v1-library-JE.spec						FAIL (submodules)
+rack-v1-library-JE.spec						OK
 rack-v1-library-JW-Modules.spec					OK
 rack-v1-library-KarateSnoopy.spec				OK
 rack-v1-library-kocmoc.spec					OK
@@ -70,7 +70,7 @@ rack-v1-library-MindMeldModular.spec				OK
 rack-v1-library-ML_modules.spec					OK
 rack-v1-library-MockbaModular.spec				OK
 rack-v1-library-moDllz.spec					OK
-rack-v1-library-modular80.spec					FAIL (submodules)
+rack-v1-library-modular80.spec					OK
 rack-v1-library-ModularFungi.spec				OK
 rack-v1-library-MosquitoLabs.spec				OK
 rack-v1-library-MrLumps.spec					FAIL (BUILD)
@@ -87,7 +87,7 @@ rack-v1-library-noobhour.spec					OK
 rack-v1-library-Nozoid.spec					OK
 rack-v1-library-Ohmer.spec					OK
 rack-v1-library-OrangeLine.spec					OK
-rack-v1-library-ParableInstruments.spec				FAIL (submodules)
+rack-v1-library-ParableInstruments.spec				OK
 rack-v1-library-PdArray.spec					OK
 rack-v1-library-pfzzz.spec					OK
 rack-v1-library-PG-Instruments.spec				FAIL (BUILD)
@@ -96,7 +96,7 @@ rack-v1-library-PS-PurrSoftware.spec				OK
 rack-v1-library-PvC.spec					FAIL (BUILD)
 rack-v1-library-Quadraphonics.spec				FAIL (BUILD)
 rack-v1-library-QuantalAudio.spec				OK
-rack-v1-library-Qwelk.spec					FAIL (submodules)
+rack-v1-library-Qwelk.spec					FAIL (BUILD)
 rack-v1-library-RacketScience.spec				OK
 rack-v1-library-rcm.spec					OK
 rack-v1-library-repelzen.spec					OK
@@ -107,7 +107,7 @@ rack-v1-library-SA-Seasons.spec					OK
 rack-v1-library-sb-StochKit.spec				OK
 rack-v1-library-scanner-darkly-collection-one.spec		OK
 rack-v1-library-Sckitam.spec					OK
-rack-v1-library-Sculpt-O-Sound.spec				FAIL (submodules)
+rack-v1-library-Sculpt-O-Sound.spec				FAIL (BUILD)
 rack-v1-library-SerialRacker.spec				FAIL (BUILD)
 rack-v1-library-SignalFlux.spec					OK
 rack-v1-library-SkJack.spec					OK
@@ -115,8 +115,8 @@ rack-v1-library-Skylights.spec					OK
 rack-v1-library-SLM.spec					OK
 rack-v1-library-s-ol.spec					FAIL (custom git server ...)
 rack-v1-library-SonusModular.spec				OK
-rack-v1-library-Southpole-parasites.spec			FAIL (submodules - samplerate)
-rack-v1-library-Southpole.spec					FAIL (submodules - samplerate)
+rack-v1-library-Southpole-parasites.spec			FAIL (submodules - samplerate) - check if flag wrt rack-v1-library-Southpole 
+rack-v1-library-Southpole.spec					OK
 rack-v1-library-squinkylabs-plug1.spec				OK
 rack-v1-library-Starling_Via.spec				FAIL (submodules)
 rack-v1-library-stocaudio.spec					FAIL (submodules - samplerate)
