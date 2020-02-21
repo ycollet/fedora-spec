@@ -103,7 +103,7 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 %install 
 
 mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/mental/
-cp -r mental_plugin/dist/mental/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/mental/
+cp -r mental_plugin/dist/Mental/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/mental/
 
 %files
 %{_libexecdir}/*

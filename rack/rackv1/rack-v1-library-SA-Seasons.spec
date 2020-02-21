@@ -14,7 +14,7 @@ Summary: SA-Seasons plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     
+URL:     https://github.com/SpektroAudio/Seasons
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -32,7 +32,7 @@ URL:
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: /archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/SpektroAudio/Seasons/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: SA-Seasons_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
