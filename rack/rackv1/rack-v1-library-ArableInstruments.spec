@@ -31,8 +31,13 @@ URL:     https://github.com/adbrant/ArableInstruments.git
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# use master for 1.0.0
+# git clone --recursive https://github.com/adbrant/ArableInstruments.git
+# find ArableInstruments -name ".git" -exec rm -rf {} \;
+# tar cvfz ArableInstruments.tar.gz ArableInstruments/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/adbrant/ArableInstruments/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: ArableInstruments.tar.gz
 Source2: ArableInstruments_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

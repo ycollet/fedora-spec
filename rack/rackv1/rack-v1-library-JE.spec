@@ -31,8 +31,12 @@ URL:     https://github.com/eres-j/VCVRack-plugin-JE
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone --branch v1.0.0 --recursive https://github.com/eres-j/VCVRack-plugin-JE.git
+# find VCVRack-plugin-JE -name ".git" -exec rm -rf {} \;
+# tar cvfz VCVRack-plugin-JE.tar.gz VCVRack-plugin-JE/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/eres-j/VCVRack-plugin-JE/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: VCVRack-plugin-JE.tar.gz
 Source2: JE_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

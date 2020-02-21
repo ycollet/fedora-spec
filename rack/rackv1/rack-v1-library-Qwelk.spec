@@ -95,6 +95,8 @@ tar xvfz %{SOURCE1} --directory=Qwelk_plugin --strip-components=1
 
 cp -n %{SOURCE2} Qwelk_plugin/plugin.json
 
+sed -i -e "s/util\/math.hpp/math.hpp/g" Qwelk_plugin/src/Chaos.cpp
+
 %build
 
 cd Qwelk_plugin

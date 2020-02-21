@@ -31,8 +31,13 @@ URL:     https://github.com/bafonso/Erratic
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# use master
+# git clone --recursive https://github.com/bafonso/Erratic.git
+# find Erratic -name ".git" -exec rm -rf {} \;
+# tar cvfz Erratic.tar.gz Erratic/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/bafonso/Erratic/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: Erratic.tar.gz
 Source2: ErraticInstruments_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

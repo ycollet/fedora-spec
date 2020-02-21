@@ -31,8 +31,12 @@ URL:     https://github.com/SVModular/DrumKit
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone --recursive --branch v1.1.6  https://github.com/SVModular/DrumKit.git
+# find DrumKit -name ".git" -exec rm -rf {} \;
+# tar cvfz DrumKit.tar.gz DrumKit/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/SVModular/DrumKit/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: DrumKit.tar.gz
 Source2: DrumKit_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

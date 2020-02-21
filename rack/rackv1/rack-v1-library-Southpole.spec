@@ -31,8 +31,12 @@ URL:     https://github.com/gbrandt1/southpole-vcvrack
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone --recursive --branch v1 https://github.com/gbrandt1/southpole-vcvrack.git
+# find southpole-vcvrack -name ".git" -exec rm -rf {} \;
+# tar cvfz southpole-vcvrack.tar.gz southpole-vcvrack/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/gbrandt1/southpole-vcvrack/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: southpole-vcvrack.tar.gz
 Source2: Southpole_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -103,7 +107,7 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 %install 
 
 mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Southpole/
-cp -r Southpole_plugin/dist/Southpole/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Southpole/
+cp -r Southpole_plugin/dist/southpole/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Southpole/
 
 %files
 %{_libexecdir}/*

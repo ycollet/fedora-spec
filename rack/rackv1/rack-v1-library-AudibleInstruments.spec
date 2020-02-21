@@ -31,8 +31,13 @@ URL:     https://github.com/VCVRack/AudibleInstruments
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# use master for 1.0.0
+# git clone --recursive https://github.com/VCVRack/AudibleInstruments.git
+# find AudibleInstruments -name ".git" -exec rm -rf {} \;
+# tar cvfz AudibleInstruments.tar.gz AudibleInstruments/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/VCVRack/AudibleInstruments/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: AudibleInstruments.tar.gz
 Source2: AudibleInstruments_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

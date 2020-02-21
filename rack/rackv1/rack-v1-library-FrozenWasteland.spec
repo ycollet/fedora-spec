@@ -95,6 +95,9 @@ tar xvfz %{SOURCE1} --directory=FrozenWasteland_plugin --strip-components=1
 
 cp -n %{SOURCE2} FrozenWasteland_plugin/plugin.json
 
+# remove samplerate part
+sed -i -e "18,31d" FrozenWasteland_plugin/Makefile
+
 %build
 
 cd FrozenWasteland_plugin

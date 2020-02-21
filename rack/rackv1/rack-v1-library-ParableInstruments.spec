@@ -31,8 +31,12 @@ URL:     https://github.com/adbrant/ArableInstruments.git
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone --recursive --branch v1 https://github.com/adbrant/ArableInstruments.git
+# find ArableInstruments -name ".git" -exec rm -rf {} \;
+# tar cvfz ArableInstruments.tar.gz ArableInstruments/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/adbrant/ArableInstruments/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: ArableInstruments.tar.gz
 Source2: ParableInstruments_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -103,7 +107,7 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 %install 
 
 mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/ParableInstruments/
-cp -r ParableInstruments_plugin/dist/ParableInstruments/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/ParableInstruments/
+cp -r ParableInstruments_plugin/dist/ArableInstruments/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/ParableInstruments/
 
 %files
 %{_libexecdir}/*
