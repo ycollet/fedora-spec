@@ -103,40 +103,40 @@ rack-v1-library-repelzen.spec					OK
 rack-v1-library-ReTunesFree.spec				OK
 rack-v1-library-RJModules.spec					OK
 rack-v1-library-RODENTMODULES.spec				FAIL (BUILD)
-rack-v1-library-SA-Seasons.spec
-rack-v1-library-sb-StochKit.spec
-rack-v1-library-scanner-darkly-collection-one.spec
-rack-v1-library-Sckitam.spec
-rack-v1-library-Sculpt-O-Sound.spec
-rack-v1-library-SerialRacker.spec
-rack-v1-library-SignalFlux.spec
-rack-v1-library-SkJack.spec
-rack-v1-library-Skylights.spec
-rack-v1-library-SLM.spec
-rack-v1-library-s-ol.spec
-rack-v1-library-SonusModular.spec
-rack-v1-library-Southpole-parasites.spec
-rack-v1-library-Southpole.spec
-rack-v1-library-squinkylabs-plug1.spec
-rack-v1-library-Starling_Via.spec
-rack-v1-library-stocaudio.spec
-rack-v1-library-Stoermelder-P1.spec
-rack-v1-library-STS.spec
-rack-v1-library-SubmarineFree.spec
-rack-v1-library-SubmarineUtility.spec
-rack-v1-library-SurgeRack.spec
-rack-v1-library-SynthKit.spec
-rack-v1-library-TercerBrazo.spec
-rack-v1-library-TheXOR.spec
-rack-v1-library-TinyTricks.spec
-rack-v1-library-TriggerFish-Elements.spec
-rack-v1-library-trowaSoft.spec
-rack-v1-library-UnforgettableLuncheon.spec
-rack-v1-library-unless_modules.spec
-rack-v1-library-Valley.spec
-rack-v1-library-vitamin.spec
-rack-v1-library-voxglitch.spec
-rack-v1-library-WhatTheRack.spec
-rack-v1-library-wiqid-anomalies.spec
-rack-v1-library-WrongPeople.spec
-rack-v1-library-ZZC.spec
+rack-v1-library-SA-Seasons.spec					FAIL (SPEC)
+rack-v1-library-sb-StochKit.spec				OK
+rack-v1-library-scanner-darkly-collection-one.spec		OK
+rack-v1-library-Sckitam.spec					OK
+rack-v1-library-Sculpt-O-Sound.spec				FAIL (submodules)
+rack-v1-library-SerialRacker.spec				FAIL (BUILD)
+rack-v1-library-SignalFlux.spec					OK
+rack-v1-library-SkJack.spec					OK
+rack-v1-library-Skylights.spec					OK
+rack-v1-library-SLM.spec					OK
+rack-v1-library-s-ol.spec					FAIL (URL)
+rack-v1-library-SonusModular.spec				FAIL (package not in gz)
+rack-v1-library-Southpole-parasites.spec			FAIL (submodules - samplerate)
+rack-v1-library-Southpole.spec					FAIL (submodules - samplerate)
+rack-v1-library-squinkylabs-plug1.spec				OK
+rack-v1-library-Starling_Via.spec				FAIL (URL)
+rack-v1-library-stocaudio.spec					FAIL (submodule - samplerate)
+rack-v1-library-Stoermelder-P1.spec				FAIL (URL)
+rack-v1-library-STS.spec					FAIL (URL)
+rack-v1-library-SubmarineFree.spec				OK
+rack-v1-library-SubmarineUtility.spec				FAIL (submodules)
+rack-v1-library-SurgeRack.spec					FAIL (submodules)
+rack-v1-library-SynthKit.spec					FAIL (BUILD)
+rack-v1-library-TercerBrazo.spec				OK
+rack-v1-library-TheXOR.spec					OK
+rack-v1-library-TinyTricks.spec					OK
+rack-v1-library-TriggerFish-Elements.spec			FAIL (URL)
+rack-v1-library-trowaSoft.spec					OK
+rack-v1-library-UnforgettableLuncheon.spec			FAIL (URL)
+rack-v1-library-unless_modules.spec				FAIL (package not in gz)
+rack-v1-library-Valley.spec					OK
+rack-v1-library-vitamin.spec					OK
+rack-v1-library-voxglitch.spec					OK
+rack-v1-library-WhatTheRack.spec				OK
+rack-v1-library-wiqid-anomalies.spec				OK
+rack-v1-library-WrongPeople.spec				FAIL (submodules)
+rack-v1-library-ZZC.spec					OK
