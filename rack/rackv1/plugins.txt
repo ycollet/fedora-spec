@@ -64,7 +64,7 @@ rack-v1-library-LittleUtils.spec				OK
 rack-v1-library-LOGinstruments.spec				OK
 rack-v1-library-LomasModules.spec				OK
 rack-v1-library-luckyxxl.spec					OK
-rack-v1-library-mental.spec					FAIL (BUILD mental -> Mental)
+rack-v1-library-mental.spec					OK
 rack-v1-library-MicMusic.spec					OK
 rack-v1-library-MindMeldModular.spec				OK
 rack-v1-library-ML_modules.spec					OK
@@ -103,7 +103,7 @@ rack-v1-library-repelzen.spec					OK
 rack-v1-library-ReTunesFree.spec				OK
 rack-v1-library-RJModules.spec					OK
 rack-v1-library-RODENTMODULES.spec				FAIL (BUILD)
-rack-v1-library-SA-Seasons.spec					FAIL (SPEC)
+rack-v1-library-SA-Seasons.spec					OK
 rack-v1-library-sb-StochKit.spec				OK
 rack-v1-library-scanner-darkly-collection-one.spec		OK
 rack-v1-library-Sckitam.spec					OK
