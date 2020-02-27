@@ -1,20 +1,20 @@
 # Global variables for github repository
-%global commit0 dcfe45792ede4d8b338e504304c42094078751da
+%global commit0 e241f019e728f03e738c1a5c335fdb541ce7cac0
 
-%global gittag0 0.6.1
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-21kHz
-Version: 0.6.1
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: 21kHz plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/21kHz/21kHz-rack-plugins
+URL:     https://github.com/netboy3/21kHz-rack-plugins
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -32,7 +32,7 @@ URL:     https://github.com/21kHz/21kHz-rack-plugins
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/21kHz/21kHz-rack-plugins/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/netboy3/21kHz-rack-plugins/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: 21kHz_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -109,5 +109,5 @@ cp -r 21kHz_plugin/dist/21kHz/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/21kH
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile

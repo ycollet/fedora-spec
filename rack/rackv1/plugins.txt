@@ -1,4 +1,4 @@
-rack-v1-library-21kHz.spec					FAIL (BUILD)
+rack-v1-library-21kHz.spec					OK
 rack-v1-library-23volts.spec					OK
 rack-v1-library-8Mode.spec					FAIL (BUILD)
 rack-v1-library-AaronStatic.spec				OK
@@ -51,6 +51,7 @@ rack-v1-library-Gratrix.spec					FAIL (BUILD)
 rack-v1-library-HetrickCV.spec					FAIL (BUILD)
 rack-v1-library-HolonicSystems-Free.spec			OK
 rack-v1-library-huaba.spec					OK
+rack-v1-library-ILovePerlin.spec				OK
 rack-v1-library-ImpromptuModular.spec				OK
 rack-v1-library-JE.spec						OK
 rack-v1-library-JW-Modules.spec					OK
@@ -72,6 +73,7 @@ rack-v1-library-MockbaModular.spec				OK
 rack-v1-library-moDllz.spec					OK
 rack-v1-library-modular80.spec					OK
 rack-v1-library-ModularFungi.spec				OK
+rack-v1-library-Mog.spec					OK
 rack-v1-library-MosquitoLabs.spec				OK
 rack-v1-library-MrLumps.spec					FAIL (BUILD)
 rack-v1-library-mscHack.spec					OK
@@ -82,6 +84,7 @@ rack-v1-library-NauModular.spec					FAIL (BUILD)
 rack-v1-library-NEXSwitches.spec				OK
 rack-v1-library-NocturnalEncoder.spec				FAIL (BUILD)
 rack-v1-library-Nohmad.spec					FAIL (BUILD)
+rack-v1-library-NonlinearCircuits.spec				OK
 rack-v1-library-NonLinearInstruments.spec			FAIL (BUILD)
 rack-v1-library-noobhour.spec					OK
 rack-v1-library-Nozoid.spec					OK

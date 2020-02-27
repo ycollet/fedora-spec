@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 0174c0b4a6b61d6091a5a735a1233e2c62c80cb9
+%global commit0 b229ca99c18b4c5e00b6429e3944c875995eb44a
 
-%global gittag0 1.11.0
+%global gittag0 1.12.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-FrozenWasteland
-Version: 1.11.0
+Version: 1.12.0
 Release: 3%{?dist}
 Summary: FrozenWasteland plugin for Rack
 
@@ -95,9 +95,6 @@ tar xvfz %{SOURCE1} --directory=FrozenWasteland_plugin --strip-components=1
 
 cp -n %{SOURCE2} FrozenWasteland_plugin/plugin.json
 
-# remove samplerate part
-sed -i -e "18,31d" FrozenWasteland_plugin/Makefile
-
 %build
 
 cd FrozenWasteland_plugin
@@ -112,5 +109,5 @@ cp -r FrozenWasteland_plugin/dist/FrozenWasteland/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.11.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.12.0-3
 - initial specfile

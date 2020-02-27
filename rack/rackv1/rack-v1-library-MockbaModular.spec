@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 31d4749d04fea9ad415f061efae2cc7a31b16529
+%global commit0 2b2e0c4d1f4295fc810e5ed239df79edc59de1af
 
-%global gittag0 1.2.0
+%global gittag0 1.2.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-MockbaModular
-Version: 1.2.0
+Version: 1.2.1
 Release: 3%{?dist}
 Summary: MockbaModular plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r MockbaModular_plugin/dist/MockbaModular/* %{buildroot}%{_libexecdir}/Rack1
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-3
 - initial specfile

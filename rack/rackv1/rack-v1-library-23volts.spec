@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 10bcd5b2162824a6ff5b44d4e5010439ed87e933
+%global commit0 bf1f1c2cd93216b0dfd0d2483391c4a9eff2c0c7
 
-%global gittag0 1.1.4
+%global gittag0 1.1.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-23volts
-Version: 1.1.4
+Version: 1.1.5
 Release: 3%{?dist}
 Summary: 23volts plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r 23volts_plugin/dist/23volts/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.4-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.5-3
 - initial specfile
