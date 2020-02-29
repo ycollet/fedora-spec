@@ -1,20 +1,20 @@
 # Global variables for github repository
-%global commit0 c7a05d1c46db7673be56863359285803f5df0d54
+%global commit0 574f6b5c8b23edc76edff5856e1352589aebc12b
 
-%global gittag0 1.3.0
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-v1-voxglitch
-Version: 1.3.0
+Name:    rack-v1-ILovePerlin
+Version: 1.0.0
 Release: 3%{?dist}
-Summary: voxglitch plugin for Rack
+Summary: ILovePerlin plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/clone45/voxglitch
+URL:     https://github.com/digitalhappens/ILovePerlin
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -32,8 +32,8 @@ URL:     https://github.com/clone45/voxglitch
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/clone45/voxglitch/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source2: voxglitch_plugin.json
+Source1: https://github.com/digitalhappens/ILovePerlin/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source2: ILovePerlin_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -58,7 +58,7 @@ BuildRequires: speexdsp-devel
 BuildRequires: jq
 
 %description
-voxglitch plugin for Rack.
+ILovePerlin plugin for Rack.
 
 %prep
 %setup -qn Rack
@@ -90,24 +90,24 @@ sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
 sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
-mkdir voxglitch_plugin
-tar xvfz %{SOURCE1} --directory=voxglitch_plugin --strip-components=1 
+mkdir ILovePerlin_plugin
+tar xvfz %{SOURCE1} --directory=ILovePerlin_plugin --strip-components=1 
 
-cp -n %{SOURCE2} voxglitch_plugin/plugin.json
+cp -n %{SOURCE2} ILovePerlin_plugin/plugin.json
 
 %build
 
-cd voxglitch_plugin
+cd ILovePerlin_plugin
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/voxglitch/
-cp -r voxglitch_plugin/dist/voxglitch/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/voxglitch/
+mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/ILovePerlin/
+cp -r ILovePerlin_plugin/dist/ILovePerlin/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/ILovePerlin/
 
 %files
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
