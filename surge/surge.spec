@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 9ea1cbe274e1ad6edef2b56adff6f879fb3ef24d
+%global commit0 da96f74b1cc96f936192282e300d93cf65d16c58
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    surge
-Version: 1.6.5.%{shortcommit0}
+Version: 1.6.6.%{shortcommit0}
 Release: 1%{?dist}
 Summary: A VST2 synthetizer
 
@@ -16,7 +16,7 @@ License: GPLv2+
 
 # git clone https://github.com/surge-synthesizer/surge
 # cd surge
-# git checkout origin/release/1.6.5
+# git checkout origin/release/1.6.6
 # git submodule init
 # git submodule update
 # cd vst3dsk
@@ -87,6 +87,9 @@ rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
 %{_datadir}/*
 
 %changelog
+* Sat Feb 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-1
+- update to 1.6.6-1
+
 * Tue Feb 4 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.5-1
 - update to 1.6.5-1
 
