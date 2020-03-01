@@ -72,7 +72,7 @@ cd app/gui/qt
 
 sed -i -e "/add_subdirectory(external\/QScintilla-2.11.4)/d" CMakeLists.txt
 sed -i -e "s/QScintilla/qscintilla2-qt5/g" CMakeLists.txt
-sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\";/  return QCoreApplication::applicationDirPath() + \"\/..\/share\/sonic-pi\";/g" mainwindow.cpp
+sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\/..\";/return QString(\"\/usr\/share\/sonic-pi\");/g" mainwindow.cpp
 
 cd ../../..
 sed -i -e "s/env python/env python3/g" app/server/ruby/vendor/ffi-1.11.3/ext/ffi_c/libffi/generate-darwin-source-and-headers.py
@@ -104,14 +104,11 @@ mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 mkdir -p %{buildroot}%{_datadir}/%{name}/etc/
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -Rip app/gui/qt/       %{buildroot}%{_datadir}/%{name}/app/gui/qt/
+cp -Rip app/gui/qt/*      %{buildroot}%{_datadir}/%{name}/app/gui/qt/
 cp -ra app/gui/qt/theme/* %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 cp app/gui/build/sonic-pi %{buildroot}%{_bindir}/%{name}
 cp -ra etc/*              %{buildroot}%{_datadir}/%{name}/etc/
 
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/wix
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/platform
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/build
 find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.o" -exec rm {} \;
 find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.cpp" -exec rm {} \;
 find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.h" -exec rm {} \;
@@ -168,9 +165,24 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugg
 
 find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
 
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-app-bin
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-build-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-fetch-deps
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/rp-app-bin
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/rp-build-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/rp-fetch-deps
+
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/wix
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/platform
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/build
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/old
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/cmake
+rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/external
+
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/mac-build-app
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/mac-release
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/CMakeLists.txt
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/README.md
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/SonicPi.pro
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/SonicPi.qrc
+rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/SonicPi.rc
 
 cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF
 [Desktop Entry]
