@@ -17,7 +17,7 @@ URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 # git clone https://github.com/michaelwillis/dragonfly-reverb/
 # cd dragonfly-reverb
-# git checkout 2.0.0
+# git checkout 3.0.0
 # git submodule init
 # git submodule update
 # rm -rf .git dpf/.git
