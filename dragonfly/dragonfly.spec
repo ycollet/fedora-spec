@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 b0832a377b9aaf3f3aabce57b9cbee03eac8c597
-%global gittag0 2.0.0
+%global commit0 a52e0c15545c13780ac2e47a8291d6260d28a024
+%global gittag0 3.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    dragonfly-reverb
-Version: 2.0.0
+Version: 3.0.0
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -64,6 +64,9 @@ cp bin/DragonflyRoomReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Sun Mar 1 2020 Yann Collette <ycollette.nospam@free.fr> - 3.0.0-1
+- update to 3.0.0
+
 * Mon Jun 24 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-1
 - update to 2.0.0
 
