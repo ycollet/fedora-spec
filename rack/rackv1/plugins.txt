@@ -48,6 +48,7 @@ rack-v1-library-Geodesics.spec					OK
 rack-v1-library-GlueTheGiant.spec				OK
 rack-v1-library-GoodSheperd.spec				OK
 rack-v1-library-Gratrix.spec					FAIL (BUILD)
+rack-v1-library-HamptonHarmonics.spec				OK
 rack-v1-library-HetrickCV.spec					FAIL (BUILD)
 rack-v1-library-HolonicSystems-Free.spec			OK
 rack-v1-library-huaba.spec					OK
