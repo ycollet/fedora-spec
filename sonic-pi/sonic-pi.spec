@@ -9,7 +9,7 @@
 Name:    sonic-pi
 Version: 3.2.0
 %global gittag0 v%{version}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -104,14 +104,12 @@ mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 mkdir -p %{buildroot}%{_datadir}/%{name}/etc/
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -Rip app/gui/qt/*      %{buildroot}%{_datadir}/%{name}/app/gui/qt/
 cp -ra app/gui/qt/theme/* %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 cp app/gui/build/sonic-pi %{buildroot}%{_bindir}/%{name}
 cp -ra etc/*              %{buildroot}%{_datadir}/%{name}/etc/
 
-find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.o" -exec rm {} \;
-find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.cpp" -exec rm {} \;
-find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.h" -exec rm {} \;
+mkdir -p %{buildroot}%{_datadir}/pixmaps/
+cp app/gui/qt/images/icon-smaller.png %{buildroot}%{_datadir}/pixmaps/
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 cp -ra app/server/native/osmid/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
@@ -165,31 +163,12 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugg
 
 find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
 
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/rp-app-bin
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/rp-build-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/rp-fetch-deps
-
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/wix
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/platform
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/build
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/old
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/cmake
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/external
-
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/mac-build-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/mac-release
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/CMakeLists.txt
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/README.md
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/SonicPi.pro
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/SonicPi.qrc
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/SonicPi.rc
-
-cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF
+cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Name=%name
 Exec=%{name}
-Icon=%{_datadir}/%{name}/app/gui/qt/images/icon-smaller.png
+Icon=/usr/share/pixmaps/icon-smaller.png
 Comment=Music live coding for everyone
 Comment[es]=Programación de música en vivo al alcance de cualquiera 
 Terminal=false
@@ -200,7 +179,7 @@ EOF
 
 desktop-file-install  --vendor "fedora" \
                       --dir=%{buildroot}%{_datadir}/applications/ \
-                      %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop 
+                      %{buildroot}%{_datadir}/applications/%{name}.desktop 
 
 
 %files
@@ -209,6 +188,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Mon Mar 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-4
+- update to 3.2.0-4
+
 * Sun Mar 1 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-3
 - update to 3.2.0
 
