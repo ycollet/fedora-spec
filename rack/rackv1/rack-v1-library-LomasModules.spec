@@ -14,7 +14,7 @@ Summary: LomasModules plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/LomasModules/LomasModules.git
+URL:     https://github.com/LomasModules/LomasModules
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

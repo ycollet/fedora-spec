@@ -14,7 +14,7 @@ Summary: modular80 plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/cschol/modular80.git
+URL:     https://github.com/cschol/modular80
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

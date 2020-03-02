@@ -14,7 +14,7 @@ Summary: Starling_Via plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/starlingcode/Via-for-Rack.git
+URL:     https://github.com/starlingcode/Via-for-Rack
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 32cd875953d120ad813847b71fa2c8a4fdefb877
+%global commit0 6e9fd6840367424aa4b62c58895ed1b0f42531f9
 
-%global gittag0 1.0.1
+%global gittag0 1.0.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-trowaSoft
-Version: 1.0.1
+Version: 1.0.2
 Release: 3%{?dist}
 Summary: trowaSoft plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r trowaSoft_plugin/dist/trowaSoft/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
 - initial specfile
