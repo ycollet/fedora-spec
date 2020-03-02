@@ -14,7 +14,7 @@ Summary: aP-Modules plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/aptrn/aP-Modules.git
+URL:     https://github.com/aptrn/aP-Modules
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

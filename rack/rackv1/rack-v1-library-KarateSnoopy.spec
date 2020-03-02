@@ -14,7 +14,7 @@ Summary: KarateSnoopy plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/KarateSnoopy/vcv-karatesnoopy.git
+URL:     https://github.com/KarateSnoopy/vcv-karatesnoopy
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

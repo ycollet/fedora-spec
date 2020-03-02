@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 60953023cd76f7d51162a0d6baa4204eacd9d6ae
+%global commit0 08b83af666645d7ffdaab200875ad3b6bd936f27
 
-%global gittag0 1.0.1
+%global gittag0 1.0.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-ESeries
-Version: 1.0.1
+Version: 1.0.2
 Release: 3%{?dist}
 Summary: ESeries plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r ESeries_plugin/dist/ESeries/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
 - initial specfile

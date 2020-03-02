@@ -14,7 +14,7 @@ Summary: 8Mode plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/8Mode/8Mode-VCV_Modules.git
+URL:     https://github.com/8Mode/8Mode-VCV_Modules
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

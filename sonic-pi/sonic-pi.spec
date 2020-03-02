@@ -2,20 +2,19 @@
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
 # Global variables for github repository
-%global commit0 91ac731bebd89d725ace46c6383dd1efff88f263
-%global gittag0 v3.1.0
+%global commit0 fb4b830697939a21c2ed6cf2690b06115ac92c34
+%global gittag0 v3.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    sonic-pi
-Version: 3.1.0
+Version: 3.2.0
 %global gittag0 v%{version}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
 Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
-Source1: rugged-0.28.0.tar.gz
-Source2: osmid.tar.gz
+Source1: osmid.tar.gz
 
 # Use source.sh to get source files
 
@@ -36,6 +35,8 @@ BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 BuildRequires: erlang-erts
 BuildRequires: ruby
+BuildRequires: rubygem-rake
+BuildRequires: rubygem-bundler
 BuildRequires: zlib-devel
 
 Requires(pre): pulseaudio-module-jack 
@@ -54,27 +55,27 @@ sonic ideas into reality.
 %prep
 %setup -qn %{name}-%{version} 
 
-cd app/server/ruby/vendor
-tar xvfz %{SOURCE1}
-cd ../../../..
-
 cd app/server/native/
-tar xvfz %{SOURCE2}
+tar xvfz %{SOURCE1}
 cd osmid
 mkdir build
 cd build
 cmake ..
 make
 cp m2o o2m ..
-cd ../../../..
+
+pwd
+
+cd ../../../../..
 
 cd app/gui/qt
 
-sed -i -e "s/-lqt5scintilla2/-lqscintilla2-qt5/g" SonicPi.pro
-sed -i -e "s/rugged-0\.26\.0/rugged-0\.28\.0/g" ../../server/ruby/bin/compile-extensions.rb
-# For master exclusively
-#sed -i -e "454d" mainwindow.cpp # problem with MainWindow::initDocsWindow()
-sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\";/  return QCoreApplication::applicationDirPath() + \"\/..\/share\/sonic-pi\";/g" mainwindow.cpp
+sed -i -e "/add_subdirectory(external\/QScintilla-2.11.4)/d" CMakeLists.txt
+sed -i -e "s/QScintilla/qscintilla2-qt5/g" CMakeLists.txt
+sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\/..\";/return QString(\"\/usr\/share\/sonic-pi\");/g" mainwindow.cpp
+
+cd ../../..
+sed -i -e "s/env python/env python3/g" app/server/ruby/vendor/ffi-1.11.3/ext/ffi_c/libffi/generate-darwin-source-and-headers.py
 
 %build
 
@@ -82,10 +83,15 @@ cd app/gui/qt
 
 ruby ../../server/ruby/bin/compile-extensions.rb
 ruby ../../server/ruby/bin/i18n-tool.rb -t
-cp -f ruby_help.tmpl ruby_help.h
-ruby ../../server/ruby/bin/qt-doc.rb -o ruby_help.h
+cp -f utils/ruby_help.tmpl utilsruby_help.h
+ruby ../../server/ruby/bin/qt-doc.rb -o utils/ruby_help.h
 lrelease-qt5 SonicPi.pro
-qmake-qt5 SonicPi.pro
+
+cd ..
+mkdir build
+cd build
+
+%cmake -DCMAKE_BUILD_TYPE=RELEASE ../qt
 make
 
 #Build Erlang files
@@ -98,17 +104,12 @@ mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 mkdir -p %{buildroot}%{_datadir}/%{name}/etc/
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -Rip app/gui/qt/       %{buildroot}%{_datadir}/%{name}/app/gui/qt/
 cp -ra app/gui/qt/theme/* %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
-mv app/gui/qt/sonic-pi    %{buildroot}%{_bindir}/%{name}
+cp app/gui/build/sonic-pi %{buildroot}%{_bindir}/%{name}
 cp -ra etc/*              %{buildroot}%{_datadir}/%{name}/etc/
 
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/wix
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/platform
-rm -rf %{buildroot}%{_datadir}/%{name}/app/gui/qt/build
-find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.o" -exec rm {} \;
-find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.cpp" -exec rm {} \;
-find %{buildroot}%{_datadir}/%{name}/app/gui/qt -name "*.h" -exec rm {} \;
+mkdir -p %{buildroot}%{_datadir}/pixmaps/
+cp app/gui/qt/images/icon-smaller.png %{buildroot}%{_datadir}/pixmaps/
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 cp -ra app/server/native/osmid/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
@@ -145,12 +146,8 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/atomic/ext/atomic_reference.so 
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/atomic_reference.so
 
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ffi_c.so
-ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ffi-1.9.17/ext/ffi_c/ffi_c.so \
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ffi-1.11.3/ext/ffi_c/ffi_c.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ffi_c.so
-
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/did_you_mean/method_receiver.so
-ln -s %{_datadir}/%{name}/app/server/ruby/vendor/did_you_mean-0.10.0/ext/did_you_mean/method_receiver.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/did_you_mean/method_receiver.so
 
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_prof.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ruby-prof-0.15.8/ext/ruby_prof/ruby_prof.so \
@@ -161,34 +158,17 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fa
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
 
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
-#ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.26.0/ext/rugged/rugged.so \
-#   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
-ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.0/ext/rugged/rugged.so \
+ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugged.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 
 find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
 
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-build-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-fetch-deps
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-ubuntu-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-rpi-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-osx-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/create-pdf
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/rp-app-bin
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/mac-release
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-ubuntu-zesty-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/wix/LICENSE.rtf
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/wix/gen_wix.bat
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/wix/gen_msi.bat
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/build-osx-sierra-app
-rm %{buildroot}%{_datadir}/%{name}/app/gui/qt/qt/mac-build-app
-
-cat > %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop <<EOF
+cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Name=%name
 Exec=%{name}
-Icon=%{_datadir}/%{name}/app/gui/qt/images/icon-smaller.png
+Icon=/usr/share/pixmaps/icon-smaller.png
 Comment=Music live coding for everyone
 Comment[es]=Programación de música en vivo al alcance de cualquiera 
 Terminal=false
@@ -199,7 +179,7 @@ EOF
 
 desktop-file-install  --vendor "fedora" \
                       --dir=%{buildroot}%{_datadir}/applications/ \
-                      %{buildroot}%{_datadir}/applications/fedora-%{name}.desktop 
+                      %{buildroot}%{_datadir}/applications/%{name}.desktop 
 
 
 %files
@@ -208,6 +188,12 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Mon Mar 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-4
+- update to 3.2.0-4
+
+* Sun Mar 1 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-3
+- update to 3.2.0
+
 * Thu Nov 7 2019 Yann Collette <ycollette.nospam@free.fr> 3.1.0-3
 - fix for Fedora 31
 

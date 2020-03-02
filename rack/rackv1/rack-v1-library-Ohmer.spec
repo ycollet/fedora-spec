@@ -14,7 +14,7 @@ Summary: Ohmer plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/DomiKamu/Ohmer.git
+URL:     https://github.com/DomiKamu/Ohmer
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

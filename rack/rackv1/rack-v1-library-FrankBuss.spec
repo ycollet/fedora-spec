@@ -14,7 +14,7 @@ Summary: FrankBuss plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/FrankBuss/FrankBussRackPlugin.git
+URL:     https://github.com/FrankBuss/FrankBussRackPlugin
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 7f62d0bae977d689fd77ae4f700c7e4aedb18145
+%global commit0 e7415744eaa20671041a49106f396d3c08ff30dc
 
-%global gittag0 1.0.3
+%global gittag0 1.0.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Sckitam
-Version: 1.0.3
+Version: 1.0.4
 Release: 3%{?dist}
 Summary: Sckitam plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r Sckitam_plugin/dist/Sckitam/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.4-3
 - initial specfile

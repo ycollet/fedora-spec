@@ -14,7 +14,7 @@ Summary: Stoermelder-P1 plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/stoermelder/vcvrack-packone.git
+URL:     https://github.com/stoermelder/vcvrack-packone
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

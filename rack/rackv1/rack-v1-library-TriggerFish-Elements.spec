@@ -14,7 +14,7 @@ Summary: TriggerFish-Elements plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/JTriggerFish/TriggerFish-VCV.git
+URL:     https://github.com/JTriggerFish/TriggerFish-VCV
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack

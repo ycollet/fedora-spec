@@ -1,20 +1,20 @@
 # Global variables for github repository
-%global commit0 6e9fd6840367424aa4b62c58895ed1b0f42531f9
+%global commit0 fe377c5d2bae414de09e78643a146c312ed14104
 
-%global gittag0 1.0.2
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-v1-trowaSoft
-Version: 1.0.2
+Name:    rack-v1-HamptonHarmonics
+Version: 1.0.0
 Release: 3%{?dist}
-Summary: trowaSoft plugin for Rack
+Summary: HamptonHarmonics plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/j4s0n-c/trowaSoft-VCV
+URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules.git
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -32,8 +32,8 @@ URL:     https://github.com/j4s0n-c/trowaSoft-VCV
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/j4s0n-c/trowaSoft-VCV/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source2: trowaSoft_plugin.json
+Source1: https://gitlab.com/hampton-harmonics/hampton-harmonics-modules/-/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
+Source2: HamptonHarmonics_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -58,7 +58,7 @@ BuildRequires: speexdsp-devel
 BuildRequires: jq
 
 %description
-trowaSoft plugin for Rack.
+HamptonHarmonics plugin for Rack.
 
 %prep
 %setup -qn Rack
@@ -90,24 +90,24 @@ sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
 sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
-mkdir trowaSoft_plugin
-tar xvfz %{SOURCE1} --directory=trowaSoft_plugin --strip-components=1 
+mkdir HamptonHarmonics_plugin
+tar xvfz %{SOURCE1} --directory=HamptonHarmonics_plugin --strip-components=1 
 
-cp -n %{SOURCE2} trowaSoft_plugin/plugin.json
+cp -n %{SOURCE2} HamptonHarmonics_plugin/plugin.json
 
 %build
 
-cd trowaSoft_plugin
+cd HamptonHarmonics_plugin
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/trowaSoft/
-cp -r trowaSoft_plugin/dist/trowaSoft/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/trowaSoft/
+mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/HamptonHarmonics/
+cp -r HamptonHarmonics_plugin/dist/HamptonHarmonics/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/HamptonHarmonics/
 
 %files
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
