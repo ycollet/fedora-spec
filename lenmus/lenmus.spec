@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 0e5819a01a916444f5cabd2be3c911cd084c6bc4
+%global commit0 8e7a86ddce844469a5d89f384c0641fda111b4a9
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    lenmus
-Version: 5.4.2.%{shortcommit0}
+Version: 5.6.0.%{shortcommit0}
 Release: 1%{?dist}
 Summary: An app to study music theory and train you ear
 Group:   Applications/Multimedia
@@ -91,6 +91,9 @@ fi
 %{_datadir}/man/*
 
 %changelog
+* Mon Mar 2 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.0-1
+- update 5.6.0-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 5.4.1-1
 - update for Fedora 29
 
