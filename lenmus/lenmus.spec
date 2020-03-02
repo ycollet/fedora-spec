@@ -12,6 +12,7 @@ License: GPLv2+
 
 URL:     https://github.com/lenmus/lenmus
 Source0: https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: FindPortMidi.cmake
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -27,7 +28,7 @@ BuildRequires: cmake
 BuildRequires: wxGTK3-devel
 BuildRequires: sqlite-devel
 BuildRequires: jack-audio-connection-kit-devel
-#BuildRequires: lomse-devel
+BuildRequires: fluidsynth-devel
 
 %description
 LenMus Phonascus, "the teacher of music", is a free program to help you in the study of music theory and ear training.
@@ -46,6 +47,8 @@ about the project or for further details about releases.
 %prep
 %setup -qn %{name}-%{commit0}
 
+cp %{SOURCE1} cmake-modules/
+
 %build
 
 sed -ie "s/target_link_libraries ( \${LENMUS}/target_link_libraries ( \${LENMUS} jack/g" CMakeLists.txt
@@ -53,6 +56,7 @@ sed -ie "s/target_link_libraries ( \${LENMUS}/target_link_libraries ( \${LENMUS}
 %cmake -D_filename:FILEPATH=/usr/include/wx-3.0/wx/version.h \
        -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/wx-config-3.0 \
        -DPortTime_LIBRARY:FILEPATH=/usr/%{_lib}/libportaudio.so \
+       -DLENMUS_DOWNLOAD_SOUNDFONT=OFF \
        .
 
 make VERBOSE=1 %{?_smp_mflags}
