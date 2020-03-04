@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 7ad510f36ac5c266a8df8fb1c6cf878f20d15532
 
-%global gittag0 1.2.0
+%global gittag0 1.2.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Bark
-Version: 1.2.0
+Version: 1.2.4
 Release: 3%{?dist}
 Summary: Bark plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r Bark_plugin/dist/Bark/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Bark/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.4-3
 - initial specfile

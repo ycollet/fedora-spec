@@ -1,20 +1,20 @@
 # Global variables for github repository
 %global commit0 dc1f19792fe62366b3c4a6b3ef48b7d73803d87c
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-HamptonHarmonics
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: HamptonHarmonics plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules.git
+URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -109,5 +109,5 @@ cp -r HamptonHarmonics_plugin/dist/HamptonHarmonics/* %{buildroot}%{_libexecdir}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile

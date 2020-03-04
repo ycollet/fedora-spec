@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 4b73bfb8692331177ba037e355e6c0bc6e41f185
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-modular80
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: modular80 plugin for Rack
 
@@ -113,5 +113,5 @@ cp -r modular80_plugin/dist/modular80/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile
