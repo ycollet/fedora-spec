@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 221d8516418403c05eb2d430c917db3b653d9727
 
-%global gittag0 1.2.5
+%global gittag0 1.2.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-kocmoc
-Version: 1.2.5
+Version: 1.2.1
 Release: 3%{?dist}
 Summary: kocmoc plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r kocmoc_plugin/dist/kocmoc/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/ko
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.5-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-3
 - initial specfile
