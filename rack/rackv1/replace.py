@@ -29,8 +29,6 @@ for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep +
         continue
     if 'VCV-Prototype.json' in json_file:
         continue
-    if 'Mental.json' in json_file:
-        json_file = path_to_library_git + os.sep + 'manifests' + os.sep + 'mental.json'
     
     print('Reading %s json library file\n' % json_file)
     
