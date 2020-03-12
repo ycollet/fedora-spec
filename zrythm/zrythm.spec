@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.038
+Version: 0.8.113
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -47,12 +47,12 @@ More info at https://www.zrythm.org
 %setup -qn zrythm-%{version}
 
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
-sed -i -e '/meson.add_install_script/,+3d' meson.build
+sed -i -e '/meson.add_install_script/,+4d' meson.build
 
 %build
 
 mkdir build
-DESTDIR=%{buildroot} VERBOSE=1 meson -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr build
+DESTDIR=%{buildroot} VERBOSE=1 meson --optimization 2 -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr build
 
 cd build
 DESTDIR=%{buildroot} VERBOSE=1 ninja 
@@ -90,9 +90,21 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %files
 %doc AUTHORS THANKS CHANGELOG.md CONTRIBUTING.md
 %{_bindir}/*
-%{_datadir}/*
+%{_datadir}/applications/*
+%{_datadir}/fonts/*
+%{_datadir}/glib-2.0/*
+%{_datadir}/icons/*
+%{_datadir}/locale/*
+%{_datadir}/man/*
+%{_datadir}/mime/*
+%{_datadir}/zrythm/*
+%{_datadir}/doc/*
+%{_sysconfdir}/bash_completion.d/zrythm
 
 %changelog
+* Thu Mar 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.113-2
+- update to 0.8.113
+
 * Thu Mar 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.038-2
 - update to 0.8.038
 
