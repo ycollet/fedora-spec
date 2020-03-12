@@ -107,7 +107,7 @@ make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
 %install 
 
 mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Southpole/
-cp -r Southpole_plugin/dist/southpole/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Southpole/
+cp -r Southpole_plugin/dist/Southpole/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Southpole/
 
 %files
 %{_libexecdir}/*

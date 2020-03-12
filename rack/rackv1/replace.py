@@ -29,8 +29,6 @@ for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep +
         continue
     if 'VCV-Prototype.json' in json_file:
         continue
-    if 'Mental.json' in json_file:
-        json_file = path_to_library_git + os.sep + 'manifests' + os.sep + 'mental.json'
     
     print('Reading %s json library file\n' % json_file)
     
@@ -50,6 +48,10 @@ for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep +
         version   = conf_rack['version']
         sourceurl = conf_rack['sourceUrl'].replace('.git','') # remove the trailing '.git'
 
+        if not os.path.exists(path_to_spec_files + os.sep + 'template.spec'):
+            print('template file not found in %s\n' % path_to_spec_files + os.sep)
+            sys.exit(-1)
+        
         if not os.path.exists(path_to_library_git + os.sep + 'repos' + os.sep + slug_name):
             print('repos slug_name doesn\'t exists\n')
             continue
