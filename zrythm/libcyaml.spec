@@ -1,5 +1,12 @@
+%global commit0 6ab793c1478c05ab1d9041bc347b76210719c8f4
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
+# Disable production of debug package.
+%global debug_package %{nil}
+
 Name: libcyaml
-Version: 0.1.0
+Version: 1.0.1
 Release: 1%{?dist}
 Summary: C library for reading and writing YAML
 
@@ -7,8 +14,8 @@ Group: Applications/Multimedia
 License: ISC
 Packager: Alexandros Theodotou
 
-URL:     https://git.zrythm.org/git/libcyaml
-Source0: https://git.zrythm.org/cgit/libcyaml/snapshot/libcyaml-%{version}.tar.gz
+URL:     https://git.zrythm.org/cgit/zrythm-cyaml/
+Source0: https://git.zrythm.org/cgit/zrythm-cyaml/snapshot/zrythm-cyaml-%{commit0}.tar.bz2
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -29,7 +36,7 @@ Requires: %{name} = %{version}-%{release}
 The %{name}-devel package contains header files for %{name}.
 
 %prep
-%setup -q
+%setup -qn zrythm-cyaml-%{commit0}
 
 %build
 %{__make} %{?_smp_mflags}
@@ -50,6 +57,9 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig %{buildroot}%{_includedir}
 %{_includedir}/*
 
 %changelog
+* Mon Dec 23 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1
+- Adjustment for Fedora
+
 * Mon Dec 23 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1
 - Adjustment for Fedora
 
