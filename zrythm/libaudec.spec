@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    libaudec-devel
-Version: 0.1
+Version: 0.2
 Release: 1%{?dist}
 Summary: libaudec (lib audio decoder) is a wrapper library over ffmpeg, sndfile and libsamplerate for reading and resampling audio files
 
@@ -45,5 +45,8 @@ DESTDIR=%{buildroot} VERBOSE=1 ninja install
 %{_includedir}/audec/*
 
 %changelog
+* Thu Mar 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2-1
+- update to 0.2
+
 * Mon Dec 23 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1-1
 - Initial build
