@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 b75e094829dce6d66c8692a3518a0f1d1163ec73
 
-%global gittag0 1.0.1
+%global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Sculpt-O-Sound
-Version: 1.0.1
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: Sculpt-O-Sound plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r Sculpt-O-Sound_plugin/dist/Sculpt-O-Sound/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - initial specfile

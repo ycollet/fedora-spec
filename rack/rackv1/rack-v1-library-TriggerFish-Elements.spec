@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 834ad2d7c094d94e51407fa874c6b8c82e26986e
+%global commit0 d2a9a2b6ed37fbbe7397f5688a02a62938b71306
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-TriggerFish-Elements
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: TriggerFish-Elements plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r TriggerFish-Elements_plugin/dist/TriggerFish-Elements/* %{buildroot}%{_lib
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile
