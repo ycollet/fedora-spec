@@ -1,25 +1,25 @@
 # Global variables for github repository
-%global commit0 a9d358d77400134bf0b4dd624d32930aaa78250e
-%global gittag0 v0.2.0
+%global commit0 8861e0e8dc30412e64a696f44f07b3b3ac87f4da
+%global gittag0 v0.3.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:      sfizz
-Version:   0.2.0
+Version:   0.3.1
 Release:   1%{?dist}
 License:   BSD-2-Clause
 Group:     Productivity/Multimedia/Sound/Players
 Summary:   Sampler plugin and library for SFZ instruments
 Url:       https://github.com/sfztools/sfizz
-Source:    sfizz-0.2.0.tar.gz
+Source:    sfizz-0.3.1.tar.gz
 
-# git clone https://github.com/sfztools/sfizz sfizz-0.2.0
-# cd sfizz-0.2.0
-# git checkout v0.2.0
+# git clone https://github.com/sfztools/sfizz sfizz-0.3.1
+# cd sfizz-0.3.1
+# git checkout v0.3.1
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
 # cd ..
-# tar cvfz sfizz-0.2.0.tar.gz sfizz-0.2.0/*
+# tar cvfz sfizz-0.3.1.tar.gz sfizz-0.3.1/*
 
 Requires:  libsndfile
 Requires:  jack-audio-connection-kit
@@ -73,8 +73,12 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/sfizz.hpp
 %dir %{_libdir}/pkgconfig
 %{_libdir}/pkgconfig/sfizz.pc
+%exclude %{_libdir}/libsfizz.a
 
 %changelog
+* Sun Mar 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
+- update to 0.3.1
+
 * Sun Feb 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-1
 - update for Fedora
 
