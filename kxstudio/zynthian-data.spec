@@ -8,7 +8,7 @@
 
 Name:    zynthian-data
 Version: 1.0.0.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A set of LV2 presets for DISTRHO
 
 Group:   Applications/Multimedia
@@ -40,6 +40,14 @@ Requires: synthv1
 %description synthv1
 Presets for synthv1 plugin
 
+%package padthv1
+Summary:  Presets for padthv1 plugin
+Group:    Applications/Multimedia
+Requires: padthv1
+
+%description padthv1
+Presets for padthv1 plugin
+
 %prep
 %setup -qn %{name}-%{commit0}
 
@@ -52,7 +60,7 @@ cp -r presets/lv2/[oO]bxd* %{buildroot}/usr/%{_lib}/lv2/
 cp -r presets/lv2/VEX*     %{buildroot}/usr/%{_lib}/lv2/
 cp -r presets/lv2/[vV]ex*  %{buildroot}/usr/%{_lib}/lv2/
 cp -r presets/lv2/synthv1* %{buildroot}/usr/%{_lib}/lv2/
-#cp -r presets/lv2/padthv1* %{buildroot}/usr/%{_lib}/lv2/
+cp -r presets/lv2/padthv1* %{buildroot}/usr/%{_lib}/lv2/
 
 %files distrho
 %{_libdir}/lv2/VEX*
@@ -62,6 +70,12 @@ cp -r presets/lv2/synthv1* %{buildroot}/usr/%{_lib}/lv2/
 %files synthv1
 %{_libdir}/lv2/synthv1*
 
+%files padthv1
+%{_libdir}/lv2/padthv1*
+
 %changelog
+* Mon Mar 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- Add padthv1 presets
+
 * Sun Mar 15 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial spec file
