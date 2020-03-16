@@ -8,7 +8,7 @@
 
 Name:    zynthian-data
 Version: 1.0.0.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A set of LV2 presets for DISTRHO
 
 Group:   Applications/Multimedia
@@ -35,18 +35,18 @@ Presets for DISTRHO plugins
 %package synthv1
 Summary:  Presets for synthv1 plugin
 Group:    Applications/Multimedia
-Requires: synthv1
+Requires: lv2-synthv1
 
 %description synthv1
-Presets for synthv1 plugin
+Presets for synthv1 LV2 plugin
 
 %package padthv1
 Summary:  Presets for padthv1 plugin
 Group:    Applications/Multimedia
-Requires: padthv1
+Requires: lv2-padthv1
 
 %description padthv1
-Presets for padthv1 plugin
+Presets for padthv1 LV2 plugin
 
 %prep
 %setup -qn %{name}-%{commit0}
@@ -74,6 +74,9 @@ cp -r presets/lv2/padthv1* %{buildroot}/usr/%{_lib}/lv2/
 %{_libdir}/lv2/padthv1*
 
 %changelog
+* Mon Mar 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+- fix requires
+
 * Mon Mar 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
 - Add padthv1 presets
 
