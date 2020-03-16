@@ -1,14 +1,13 @@
 # Global variables for github repository
-%global commit0 54428ab624fdc7e4165d9fc4e71113f015834ae2
-
-%global gittag0 1.0.0
+%global commit0 1058b0ce6ac5a6d36fb1d58b4f3fac0d390ab2cf
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Starling_Via
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: Starling_Via plugin for Rack
 
@@ -31,8 +30,17 @@ URL:     https://github.com/starlingcode/Via-for-Rack
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone https://github.com/starlingcode/Via-for-Rack
+# cd Via-for-Rack
+# git checkout 1058b0ce6ac5a6d36fb1d58b4f3fac0d390ab2cf
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz Via-for-Rack.tar.gz Via-for-Rack/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/starlingcode/Via-for-Rack/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: Via-for-Rack.tar.gz
 Source2: Starling_Via_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -109,5 +117,5 @@ cp -r Starling_Via_plugin/dist/Starling_Via/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile
