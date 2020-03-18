@@ -1,6 +1,6 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
-Version: 1.06
+Version: 1.07
 Release: 3%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -66,7 +66,7 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %__install -m 644 ../src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
 
 %__install -m 755 -d %{buildroot}%{_datadir}/%{name}
-%__cp ../release/effects.txt ../release/keyboard.txt ../release/LICENSES.txt ../release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
+%__cp ../release/effects.txt ../release/help.txt ../release/keybindings.txt ../release/LICENSES.txt ../release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
 
 %clean
 
@@ -93,6 +93,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Wed Mar 18 2020 Yann Collette <ycollette.nospam@free.fr> - 1.07-2
+- update to 1.07-2
+
 * Mon Feb 17 2020 Yann Collette <ycollette.nospam@free.fr> - 1.06-2
 - update to 1.06-2
 
