@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 9d6a6a853f10f82535f4c1fa2a5a53ad733b79ac
+%global commit0 5d9de9547ab87f175fabeb94c96ffcc07f7c3d6f
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:      FoxDot
-Version:   0.8.3
+Version:   0.8.5
 Release:   1%{?dist}
 Epoch:     1
 Summary:   FoxDot is a Python programming environment that provides a fast and user-friendly abstraction to SuperCollider.
@@ -54,6 +54,9 @@ cp -a . %{py3dir}
 %{python3_sitelib}/%{name}-*.egg-info
 
 %changelog
+* Wed Mar 18 2020 Yann Collette <ycollette dot nospam at free.fr> 0.8.5-1
+- update to 0.8.5
+
 * Thu Oct 10 2019 Yann Collette <ycollette dot nospam at free.fr> 0.8.3-1
 - update to 0.8.3
 
