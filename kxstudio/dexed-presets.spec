@@ -1,7 +1,7 @@
 Summary: Additional presets for Dexed
 Name:    dexed-extra-presets
 Version: 1.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
 Group:   Applications/Multimedia
 URL:     https://asb2m10.github.io/dexed/
@@ -43,6 +43,11 @@ cd $RPM_BUILD_ROOT%{_datadir}/dexed/presets/syntlib
 mv SynLib_DX_TX_Marc_Bareille/* .
 rmdir SynLib_DX_TX_Marc_Bareille
 
+# Change file / dir properties
+cd $RPM_BUILD_ROOT%{_datadir}/dexed/presets/
+find . -name "*.syx" -exec chmod a+rw {} \;
+find . -type d -exec chmod u+rwx,g+rx-w,o+rx-w {} \;
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -52,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dexed/presets/syntlib/*
 
 %changelog
+* Fri Mar 20 2020 Yann Collette <ycollette dot nospam at free.fr> 1.0.1-2
+- fix file / directories properties
+
 * Wed Jan 23 2019 Yann Collette <ycollette dot nospam at free.fr> 1.0.1-1
 - add SynLib_DX_TX_Marc_Bareille.zip
 
