@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 c66643914c7f6ffa235cf961277b1799bd5e0cb5
+%global commit0 84be73e8fa4f715a2f6334df897983ed1bbaa120
 
-%global gittag0 0.6.0
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Nohmad
-Version: 0.6.0
+Version: 1.0.0
 Release: 3%{?dist}
 Summary: Nohmad plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r Nohmad_plugin/dist/Nohmad/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/No
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
