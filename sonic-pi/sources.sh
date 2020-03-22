@@ -1,7 +1,7 @@
 spectool -g sonic-pi.spec
 
 #Install osmid (for MIDI support)
-OSMID_VERSION=391f35f789f18126003d2edf32902eb714726802
+OSMID_VERSION=v0.6.8
 git clone --recurse https://github.com/llloret/osmid.git
 cd osmid
 git checkout ${OSMID_VERSION}

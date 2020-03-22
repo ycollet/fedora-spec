@@ -3,13 +3,12 @@
 
 # Global variables for github repository
 %global commit0 fb4b830697939a21c2ed6cf2690b06115ac92c34
-%global gittag0 v3.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    sonic-pi
 Version: 3.2.0
 %global gittag0 v%{version}
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -44,6 +43,7 @@ Requires(pre): jack-audio-connection-kit-example-clients
 Requires(pre): supercollider-sc3-plugins
 Requires(pre): supercollider
 Requires(pre): ruby
+Requires(pre): aubio
 
 %description
 Sonic Pi is an open source programming environment designed to explore and
@@ -188,6 +188,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Sun Mar 22 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-5
+- fix spec file - update oscmid to v0.6.8
+
 * Mon Mar 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-4
 - update to 3.2.0-4
 
