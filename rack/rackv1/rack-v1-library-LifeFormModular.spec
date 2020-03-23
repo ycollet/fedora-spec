@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 d0cb4928b264d24727aabe42a75222ef09b61bf0
+%global commit0 e05ede491eb99914371e0b0c42664c460b35527d
 
-%global gittag0 1.0.2
+%global gittag0 1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-LifeFormModular
-Version: 1.0.2
+Version: 1.1
 Release: 3%{?dist}
 Summary: LifeFormModular plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r LifeFormModular_plugin/dist/LifeFormModular/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1-3
 - initial specfile
