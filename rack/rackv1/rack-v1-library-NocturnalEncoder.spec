@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 59c4d74b93b8201d51ad4970302031dc8945e128
+%global commit0 5421ff57c0170705440b3b8f542e2f676ff60dfe
 
-%global gittag0 0.6.1
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-NocturnalEncoder
-Version: 0.6.1
+Version: 1.0.0
 Release: 3%{?dist}
 Summary: NocturnalEncoder plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r NocturnalEncoder_plugin/dist/NocturnalEncoder/* %{buildroot}%{_libexecdir}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile

@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 90f4af7e9aef6955e57531f80994ed69caffe188
+%global commit0 9dbafd10ee747fe4f0122e8c4835509adb6d5a95
 
-%global gittag0 0.6.0
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-MrLumps
-Version: 0.6.0
+Version: 1.0.0
 Release: 3%{?dist}
 Summary: MrLumps plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r MrLumps_plugin/dist/MrLumps/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
