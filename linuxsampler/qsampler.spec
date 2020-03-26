@@ -2,7 +2,7 @@
 
 Summary: LinuxSampler GUI front-end
 Name: qsampler
-Version: 0.4.2
+Version: 0.6.2
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Multimedia
@@ -10,13 +10,14 @@ URL: http://qsampler.sourceforge.net/qsampler-index.html
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
-Source0: http://download.linuxsampler.org/packages/qsampler-%{version}.tar.gz
+Source0: https://download.sf.net/qsampler/qsampler-%{version}.tar.gz
 Source1: qsampler.desktop
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: linuxsampler
 Requires: hicolor-icon-theme
+
 BuildRequires: qt5-qtbase-devel qt5-linguist qt5-qtx11extras-devel
 BuildRequires: libgig-devel liblscp-devel desktop-file-utils
 BuildRequires: libtool automake autoconf
@@ -24,7 +25,7 @@ BuildRequires: gcc gcc-c++
 
 %description
 QSampler is a LinuxSampler GUI front-end application written in C++
-around the Qt3 toolkit using Qt Designer. At the moment it just wraps
+around the Qt5 toolkit using Qt Designer. At the moment it just wraps
 as a client reference interface for the LinuxSampler Control Protocol
 (LSCP).
 
@@ -87,12 +88,17 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/mime/packages/qsampler.xml
 %{_datadir}/applications/%{desktop_vendor}-qsampler.desktop
 %exclude %{_datadir}/applications/qsampler.desktop
-%{_datadir}/appdata/qsampler.appdata.xml
+%{_datadir}/metainfo/qsampler.appdata.xml
 %{_mandir}/man1/qsampler.1.gz
+%{_mandir}/man1/qsampler.fr.1.gz
 %{_datadir}/qsampler/translations/qsampler_cs.qm
 %{_datadir}/qsampler/translations/qsampler_ru.qm
+%{_datadir}/qsampler/translations/qsampler_fr.qm
 
 %changelog
+* Thu Mar 26 2020 Yann Collette <ycollette.nospam@free.fr> 0.6.2-1
+- update to 0.6.2
+
 * Mon Nov 5 2018 Yann Collette <ycollette.nospam@free.fr> 0.4.2-1
 - update to 0.4.2
 
