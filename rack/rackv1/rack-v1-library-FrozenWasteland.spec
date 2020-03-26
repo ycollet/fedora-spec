@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 b229ca99c18b4c5e00b6429e3944c875995eb44a
+%global commit0 e9b7fe6919238caa34e2592182e220f19df3f5a3
 
 %global gittag0 1.12.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-FrozenWasteland
 Version: 1.12.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: FrozenWasteland plugin for Rack
 
 Group:   Applications/Multimedia

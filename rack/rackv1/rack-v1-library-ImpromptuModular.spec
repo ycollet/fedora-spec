@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 78b090a77add86c22c1a20a43a1d69e62ae4a717
+%global commit0 6075be5ceae6e887826a03c06737602a6a2c63eb
 
 %global gittag0 1.1.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-ImpromptuModular
 Version: 1.1.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: ImpromptuModular plugin for Rack
 
 Group:   Applications/Multimedia

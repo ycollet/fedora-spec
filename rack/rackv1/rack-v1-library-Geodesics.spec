@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 8e678b8b6163dc8ed0995567570ff03e27ae57c8
+%global commit0 6b83833a7fa63f8ae58fad11f9394380e4c78036
 
 %global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-Geodesics
 Version: 1.1.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Geodesics plugin for Rack
 
 Group:   Applications/Multimedia

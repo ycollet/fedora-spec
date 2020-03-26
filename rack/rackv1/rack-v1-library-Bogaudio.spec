@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 6b0c8f426663c16391f3d4688895ffe9cf118771
+%global commit0 7b9781d54d2dbfa191ac4a226fb65794ffd0b170
 
 %global gittag0 1.1.27
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-Bogaudio
 Version: 1.1.27
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Bogaudio plugin for Rack
 
 Group:   Applications/Multimedia

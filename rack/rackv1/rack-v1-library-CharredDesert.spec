@@ -1,6 +1,5 @@
 # Global variables for github repository
-%global commit0 1c500f86fc64dd8b57c992c67ef5267635d8c142
-
+%global commit0 c8d43f7ef698b5c847764c07a446be65337c7d2e
 %global gittag0 1.3.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +8,7 @@
 
 Name:    rack-v1-CharredDesert
 Version: 1.3.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: CharredDesert plugin for Rack
 
 Group:   Applications/Multimedia
@@ -31,8 +30,17 @@ URL:     https://github.com/JerrySievert/CharredDesert
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone https://github.com/JerrySievert/CharredDesert
+# cd CharredDesert
+# git checkout c8d43f7ef698b5c847764c07a446be65337c7d2e
+# git submodule init
+# git submodule update
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
+# tar cvfz CharredDesert.tar.gz CharredDesert/*
+
 Source0: Rack.tar.gz
-Source1: https://github.com/JerrySievert/CharredDesert/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: CharredDesert.tar.gz
 Source2: CharredDesert_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
