@@ -3,7 +3,7 @@
 
 Summary:       padthv1 is an old-school all-digital 4-oscillator subtractive polyphonic synthesizer with stereo fx.
 Name:          padthv1
-Version:       0.9.12
+Version:       0.9.13
 Release:       1%{?dist}
 URL:           http://sourceforge.net/projects/%{name}
 Source0:       https://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -75,5 +75,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_libdir}/lv2/%{name}.lv2/
 
 %changelog
+* Fri Mar 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.13-1
+- update to 0.9.13-1
+
 * Sun Mar 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.12-1
 - Initial spec file
