@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 6a598435b35e9faf10de621cc40c460021c4eccc
+%global commit0 3f04d804912f6fa7fa978ba8e485d0718c49ffa1
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,13 +9,22 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.13
+Version: 1.1.15
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/sadko4u/lsp-plugins
 
-Source0: https://github.com/sadko4u/lsp-plugins/archive/%{commit0}.tar.gz#/lsp-plugins-%{shortcommit0}.tar.gz
+# git clone https://github.com/sadko4u/lsp-plugins
+# cd lsp-plugins
+# git checkout lsp-plugins-1.1.15
+# git submodule init
+# git submodule update
+# find . -name .git --exec rm -rf {} \;
+# cd ..
+# tar cvfz lsp-plugins.tar.gz lsp-plugins/*
+
+Source0: lsp-plugins.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -36,7 +45,7 @@ LSP (Linux Studio Plugins) is a collection of open-source plugins
 currently compatible with LADSPA, LV2 and LinuxVST formats.
 
 %prep
-%setup -qn lsp-plugins-%{commit0}
+%setup -qn lsp-plugins
 
 %build
 
@@ -63,22 +72,26 @@ chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*
+%{_sysconfdir}/xdg/menus/applications-merged/lsp-plugins.menu
 
 %changelog
+* Sun Mar 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.15-1
+- update to 1.1.15-1
+
 * Tue Dec 24 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.13-1
-- update to 1.1.13
+- update to 1.1.13-1
 
 * Sun Dec 22 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.11-1
-- update to 1.1.11
+- update to 1.1.11-1
 
 * Tue Jul 23 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.10-1
-- update to 1.1.10
+- update to 1.1.10-1
 
 * Mon Mar 18 2019 Yann Collette <ycollette dot nospam at free.fr> 1.1.7-1
-- update to 1.1.7
+- update to 1.1.7-1
 
 * Fri Dec 21 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.5-1
-- update to 1.1.5
+- update to 1.1.5-1
 
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.1.4-1
 - update for Fedora 29
