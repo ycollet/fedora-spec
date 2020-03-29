@@ -1,19 +1,20 @@
 # Global variables for github repository
 %global commit0 c8d43f7ef698b5c847764c07a446be65337c7d2e
-%global gittag0 1.3.0
+
+%global gittag0 1.3.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-CharredDesert
-Version: 1.3.0
-Release: 4%{?dist}
+Version: 1.3.1
+Release: 3%{?dist}
 Summary: CharredDesert plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/JerrySievert/CharredDesert
+URL:     https://github.com/SVModular/CharredDesert
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -30,7 +31,7 @@ URL:     https://github.com/JerrySievert/CharredDesert
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
-# git clone https://github.com/JerrySievert/CharredDesert
+# git clone https://github.com/SVModular/CharredDesert
 # cd CharredDesert
 # git checkout c8d43f7ef698b5c847764c07a446be65337c7d2e
 # git submodule init
@@ -117,5 +118,5 @@ cp -r CharredDesert_plugin/dist/CharredDesert/* %{buildroot}%{_libexecdir}/Rack1
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1-3
 - initial specfile

@@ -1,15 +1,15 @@
 # Global variables for github repository
 %global commit0 6b83833a7fa63f8ae58fad11f9394380e4c78036
 
-%global gittag0 1.1.0
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Geodesics
-Version: 1.1.0
-Release: 4%{?dist}
+Version: 1.1.1
+Release: 3%{?dist}
 Summary: Geodesics plugin for Rack
 
 Group:   Applications/Multimedia
@@ -109,5 +109,5 @@ cp -r Geodesics_plugin/dist/Geodesics/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile
