@@ -1,9 +1,9 @@
 #/bin/bash
 
-RELEASEVER=30
+RELEASEVER=31
 
-for Files in `dnf --releasever $RELEASEVER list --available | grep ycollet | grep -v debuginfo | grep -v debugsource | grep "\.x86_64" | sed -e "s/\(^.*\)\.x86_64.*/\1/"`
+for Files in `dnf --releasever $RELEASEVER list --available | grep ycollet | grep src | cut -d" " -f1 | sed -e "s/\.src//g"`
 do
     echo "Downloading $Files SRPMS file"
-    dnf --releasever $RELEASEVER download --source $Files
+    dnf --releasever $RELEASEVER download --source $Files > /dev/null
 done
