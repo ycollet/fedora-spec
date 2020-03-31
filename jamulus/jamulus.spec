@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:    Jamulus
-Version: 3.4.3
+Version: 3.4.4
 Release: 1%{?dist}
 Summary: Jamulus
 URL:     http://llcon.sourceforge.net/
@@ -11,7 +11,8 @@ Group:   Applications/Multimedia
 License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
 # original tarfile can be found here:
-Source0: http://downloads.sourceforge.net/project/llcon/Jamulus/3.4.3/Jamulus-3.4.3.tar.gz
+Source0: http://downloads.sourceforge.net/project/llcon/Jamulus/%{version}/Jamulus-%{version}.tar.gz
+Source1: jamulus.desktop
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -45,7 +46,7 @@ cd %{name}%{version}
 %__install -m 644 %{name} %{buildroot}%{_bindir}/jamulus
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 src/res/jamulus.desktop %{buildroot}%{_datadir}/applications/
+%__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/
 
 desktop-file-install --vendor '' \
         --add-category=Audio \
@@ -71,6 +72,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Tue Mar 31 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.4-1
+- update 3.4.4-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.4.3-1
 - update for Fedora 29
 
