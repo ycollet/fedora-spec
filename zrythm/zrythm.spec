@@ -30,6 +30,7 @@ BuildRequires: portaudio-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: fftw-devel
 BuildRequires: libgtop2-devel
+BuildRequires: guile22-devel
 BuildRequires: meson
 BuildRequires: help2man
 BuildRequires: python3-sphinx
@@ -47,7 +48,8 @@ More info at https://www.zrythm.org
 %setup -qn zrythm-%{version}
 
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
-sed -i -e '/meson.add_install_script/,+4d' meson.build
+sed -i -e '/meson.add_install_script/,+2d' meson.build
+cp doc/user/COPYING.CC0-1 doc/user/COPYING
 
 %build
 
