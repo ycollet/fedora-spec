@@ -1,20 +1,20 @@
 # Global variables for github repository
-%global commit0 ee4bb11908e70d7dd145d08f094dcd5dca4a8884
+%global commit0 f1d90829f0b5cca99b6c89d18f51b5d28a7f3b4d
 
-%global gittag0 1.1.0
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-v1-HamptonHarmonics
-Version: 1.1.0
+Name:    rack-v1-Interrobang
+Version: 1.0.0
 Release: 3%{?dist}
-Summary: HamptonHarmonics plugin for Rack
+Summary: Interrobang plugin for Rack
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules
+URL:     https://github.com/jimallman/interrobang-rack-modules/
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -32,8 +32,8 @@ URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://gitlab.com/hampton-harmonics/hampton-harmonics-modules/-/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
-Source2: HamptonHarmonics_plugin.json
+Source1: https://github.com/jimallman/interrobang-rack-modules//archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source2: Interrobang_plugin.json
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -58,7 +58,7 @@ BuildRequires: speexdsp-devel
 BuildRequires: jq
 
 %description
-HamptonHarmonics plugin for Rack.
+Interrobang plugin for Rack.
 
 %prep
 %setup -qn Rack
@@ -90,24 +90,24 @@ sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
 sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
-mkdir HamptonHarmonics_plugin
-tar xvfz %{SOURCE1} --directory=HamptonHarmonics_plugin --strip-components=1 
+mkdir Interrobang_plugin
+tar xvfz %{SOURCE1} --directory=Interrobang_plugin --strip-components=1 
 
-cp -n %{SOURCE2} HamptonHarmonics_plugin/plugin.json
+cp -n %{SOURCE2} Interrobang_plugin/plugin.json
 
 %build
 
-cd HamptonHarmonics_plugin
+cd Interrobang_plugin
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/HamptonHarmonics/
-cp -r HamptonHarmonics_plugin/dist/HamptonHarmonics/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/HamptonHarmonics/
+mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Interrobang/
+cp -r Interrobang_plugin/dist/Interrobang/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Interrobang/
 
 %files
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
