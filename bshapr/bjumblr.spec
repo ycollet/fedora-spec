@@ -20,6 +20,7 @@ BuildRequires: lv2-devel
 BuildRequires: libX11-devel
 BuildRequires: xcb-util-keysyms-devel
 BuildRequires: cairo-devel
+BuildRequires: libsndfile-devel
 
 %description
 BJumblr is a pattern-controlled audio stream / sample re-sequencer LV2 plugin
