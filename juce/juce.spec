@@ -7,10 +7,10 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    JUCE
-Version: 5.4.6.%{shortcommit0}
+Version: 5.4.7.%{shortcommit0}
 Release: 3%{?dist}
 Summary: JUCE Framework
-URL:     https://github.com/WeAreROLI/JUCE.git
+URL:     https://github.com/WeAreROLI/JUCE
 Group:   Applications/Multimedia
 
 License: GPLv2+
@@ -50,47 +50,47 @@ sed -i -e "s/python/python2/g" Makefile
 
 # Remove old compilation flags and use compilation flags from Fedora
 sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/-O3/-O0/g" Makefile
 
 mkdir build
-make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}" 
+make %{?_smp_mflags} CONFIG=Release # CXXFLAGS="%{build_cxxflags}" 
 cd ../extras
 
 cd AudioPluginHost/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/-O3/-O0/g" Makefile
 sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
 
-make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
+make %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 cd BinaryBuilder/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/-O3/-O0/g" Makefile
 sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
-make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
+make %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 cd Projucer/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/-O3/-O0/g" Makefile
 sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
-make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
+make  %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 cd UnitTestRunner/Builds/LinuxMakefile/
 
 sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3//g" Makefile
+sed -i -e "s/-O3/-O0/g" Makefile
 sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
 
-make  %{?_smp_mflags} CONFIG=Release CXXFLAGS="%{build_cxxflags}"
+make %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
 cd ../../..
 
 %install
