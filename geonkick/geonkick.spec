@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 e45f118572980ce1bfd6c11ee0b4c2db7b06f9f0
+%global commit0 64ccec61c0c37e9c507c34ff88481366807e7882
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 1.9.2
+Version: 1.10.0
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/geontime/geonkick
@@ -46,6 +46,7 @@ cd build
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DCMAKE_CXX_FLAGS="-I/usr/include/redkite" \
        -DCMAKE_C_FLAGS="-I/usr/include/redkite" \
+       -DREDKITE_LIBRARY_DIR="/usr/%{_lib}" \
        ..
 
 make DESTDIR=%{buildroot}
@@ -76,6 +77,9 @@ fi
 %{_datadir}/*
 
 %changelog
+* Sun Apr 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.10.0-1
+- update to 1.10.0
+
 * Sat Dec 28 2019 Yann Collette <ycollette.nospam@free.fr> - 1.9.2-1
 - update to 1.9.2
 
