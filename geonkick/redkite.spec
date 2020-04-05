@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 485be02325a831972b116028c74305fa2ca7b877
+%global commit0 68276b9b88491198c33b03c4188dfe7d6e5dbf2a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    redkite
-Version: 0.6.3
+Version: 0.8.0
 Release: 1%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://gitlab.com/geontime/redkite
@@ -46,6 +46,9 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Sat Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.0-1
+- update to 0.8.0
+
 * Sat Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3-1
 - update to 0.6.3
 
