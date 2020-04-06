@@ -153,10 +153,6 @@ rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ruby-prof-0.15.8/ext/ruby_prof/ruby_prof.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_prof.so
 
-#rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
-#ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fast_osc.so \
-#   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
-
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugged.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
