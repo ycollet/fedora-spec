@@ -2,11 +2,11 @@
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
 # Global variables for github repository
-%global commit0 fb4b830697939a21c2ed6cf2690b06115ac92c34
+%global commit0 69b6eee667fdd6c69c7fa7b1c87139d125c0573b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    sonic-pi
-Version: 3.2.0
+Version: 3.2.2
 %global gittag0 v%{version}
 Release: 5%{?dist}
 Summary: A musical programming environment 
@@ -83,7 +83,7 @@ cd app/gui/qt
 
 ruby ../../server/ruby/bin/compile-extensions.rb
 ruby ../../server/ruby/bin/i18n-tool.rb -t
-cp -f utils/ruby_help.tmpl utilsruby_help.h
+cp -f utils/ruby_help.tmpl utils/ruby_help.h
 ruby ../../server/ruby/bin/qt-doc.rb -o utils/ruby_help.h
 lrelease-qt5 SonicPi.pro
 
@@ -153,9 +153,9 @@ rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/ruby-prof-0.15.8/ext/ruby_prof/ruby_prof.so \
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/ruby_prof.so
 
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
-ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fast_osc.so \
-   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
+#rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
+#ln -s %{_datadir}/%{name}/app/server/ruby/vendor/fast_osc-0.0.12/ext/fast_osc/fast_osc.so \
+#   %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/fast_osc.so
 
 rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugged.so \
@@ -188,6 +188,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Mon Apr 6 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-5
+- update to 3.2.2-5
+
 * Sun Mar 22 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.0-5
 - fix spec file - update oscmid to v0.6.8
 
