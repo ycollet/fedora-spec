@@ -26,6 +26,7 @@ Obsoletes: protracker
 
 %build
 
+LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 mkdir -p build
 cd build
 %cmake -DCMAKE_BUILD_TYPE=RELEASE ..
@@ -93,10 +94,10 @@ fi
 %{_datadir}/icons/*
 
 %changelog
-* Mon Mar 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.08-2
+* Mon Apr 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.08-2
 - update to 1.08-2
 
-* Wed Mar 18 2020 Yann Collette <ycollette.nospam@free.fr> - 1.07-2
+* Wed Apr 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.07-2
 - update to 1.07-2
 
 * Mon Feb 17 2020 Yann Collette <ycollette.nospam@free.fr> - 1.06-2
