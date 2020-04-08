@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 bb01590dfc29f4c80e16c9fbf3cc6af868ddd9e4
+%global commit0 76ef163882294f2be86c348b0b1c3e4590e8cfe8
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Kosmodules-Free
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: Kosmodules-Free plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r Kosmodules-Free_plugin/dist/Kosmodules-Free/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile
