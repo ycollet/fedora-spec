@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.200
+Version: 0.8.252
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -31,6 +31,7 @@ BuildRequires: qt5-qtbase-devel
 BuildRequires: fftw-devel
 BuildRequires: libgtop2-devel
 BuildRequires: guile22-devel
+BuildRequires: gtksourceview3-devel
 BuildRequires: meson
 BuildRequires: help2man
 BuildRequires: python3-sphinx
@@ -49,12 +50,11 @@ More info at https://www.zrythm.org
 
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
 sed -i -e '/meson.add_install_script/,+2d' meson.build
-cp doc/user/COPYING.CC0-1 doc/user/COPYING
 
 %build
 
 mkdir build
-DESTDIR=%{buildroot} VERBOSE=1 meson --optimization 2 -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr build
+DESTDIR=%{buildroot} VERBOSE=1 meson -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr build
 
 cd build
 DESTDIR=%{buildroot} VERBOSE=1 ninja 
@@ -104,6 +104,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_sysconfdir}/bash_completion.d/zrythm
 
 %changelog
+* Sat Apr 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.252-2
+- update to 0.8.252-2
+
 * Tue Mar 31 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.200-2
 - update to 0.8.200-2
 
