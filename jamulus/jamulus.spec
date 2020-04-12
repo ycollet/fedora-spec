@@ -1,17 +1,22 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
+# Global variables for github repository
+%global commit0 5431e23fd333a1c2c6d2655ccd4c700e09d94cf1
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Name:    Jamulus
-Version: 3.4.4
+Version: 3.4.7
 Release: 1%{?dist}
 Summary: Jamulus
-URL:     http://llcon.sourceforge.net/
+URL:     https://github.com/corrados/jamulus/
 Group:   Applications/Multimedia
 
 License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
 # original tarfile can be found here:
-Source0: http://downloads.sourceforge.net/project/llcon/Jamulus/%{version}/Jamulus-%{version}.tar.gz
+Source0: https://github.com/corrados/jamulus/archive/%{commit0}.tar.gz#/jamulus-%{shortcommit0}.tar.gz
 Source1: jamulus.desktop
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -29,18 +34,15 @@ There is a Jamulus server which collects the audio data from each Jamulus client
 mixes the audio data and sends the mix back to each client.
 
 %prep
-%setup -q -c %{name}
+%setup -qn jamulus-%{commit0}
 
 %build
 
-cd %{name}%{version}
 %_qt4_qmake Jamulus.pro
 
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
-
-cd %{name}%{version}
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 %__install -m 644 %{name} %{buildroot}%{_bindir}/jamulus
@@ -72,6 +74,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Sun Apr 12 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.7-1
+- update 3.4.7-1
+
 * Tue Mar 31 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.4-1
 - update 3.4.4-1
 
