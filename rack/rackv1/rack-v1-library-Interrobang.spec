@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 f1d90829f0b5cca99b6c89d18f51b5d28a7f3b4d
+%global commit0 611c4ea2bf8ea27b4426ab55b4cf131ed375876c
 
-%global gittag0 1.0.0
+%global gittag0 1.0.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Interrobang
-Version: 1.0.0
+Version: 1.0.2
 Release: 3%{?dist}
 Summary: Interrobang plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r Interrobang_plugin/dist/Interrobang/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
 - initial specfile

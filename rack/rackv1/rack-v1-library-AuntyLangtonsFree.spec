@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 49465db849a79225527a152c9e8427bda83da177
+%global commit0 4a3c3433e1077b021849aff23f128d3587c00c60
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AuntyLangtonsFree
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: AuntyLangtonsFree plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r AuntyLangtonsFree_plugin/dist/AuntyLangtonsFree/* %{buildroot}%{_libexecdi
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile
