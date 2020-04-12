@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 ce7b91c8162fc73b157ba2cdd180f93b3a83429a
+%global commit0 c727284babf8d36b1f659f8a4178a44e209a1091
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: LV2 audio effect plugin for sequenced slicing of stereo audio input signals. Each slice can be levelled up or down to get a step sequencer-like effect.
 Name:    lv2-BSlizr
-Version: 1.2.4
+Version: 1.2.6
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -43,6 +43,9 @@ make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{b
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Apr 12 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.6-1
+- update to 1.2.6-1
+
 * Mon Jan 6 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.4-1
 - update to 1.2.4-1
 
