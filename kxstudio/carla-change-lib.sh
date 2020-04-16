@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILES="data/carla-jack-multi data/carla-rack data/carla-jack-single data/carla-single data/carla-single data/carla-patchbay data/carla-control data/carla-settings data/carla-database data/carla source/frontend/carla_skin.py source/frontend/carla_widgets.py source/frontend/carla_shared.py source/tests/CarlaUtils3.cpp source/tests/CarlaUtils2.cpp"
+FILES="data/carla-jack-multi data/carla-rack data/carla-jack-single data/carla-single data/carla-single data/carla-patchbay data/carla-control data/carla-settings data/carla-database data/carla source/frontend/carla_skin.py source/frontend/carla_widgets.py source/frontend/carla_shared.py"
 
 for Files in $FILES
 do

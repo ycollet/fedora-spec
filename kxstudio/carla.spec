@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 fd4e24fc4f5c3e234359a6a6c7a43a71167ebb30
+%global commit0 0657978769355f0238545c2db6f3eae5b6479dce
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Carla
-Version: 2.0.0
+Version: 2.1.0
 Release: 6%{?dist}
 Summary: A rack manager JACK
 
@@ -22,7 +22,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel
-BuildRequires: python-magic
 BuildRequires: liblo-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
@@ -39,7 +38,6 @@ BuildRequires: non-ntk-fluid
 BuildRequires: non-ntk-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: linuxsampler-devel
-BuildRequires: libprojectM-devel
 
 Requires(pre): python3-qt5
 
@@ -90,6 +88,9 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Thu Apr 16 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-6
+- update to 2.1.0-6
+
 * Sat Mar 30 2019 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-6
 - update to 2.0.0-6
 
