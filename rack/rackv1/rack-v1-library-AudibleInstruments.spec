@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 f141a237c539ee8795828cdd93bb4a7f13e38023
+%global commit0 7d1dc5ddcf69c939b69ff4973ccef17d472a49dc
 
-%global gittag0 1.0.2
+%global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AudibleInstruments
-Version: 1.0.2
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: AudibleInstruments plugin for Rack
 
@@ -31,9 +31,17 @@ URL:     https://github.com/VCVRack/AudibleInstruments
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
-# use master for 1.0.0
-# git clone --recursive https://github.com/VCVRack/AudibleInstruments.git
-# find AudibleInstruments -name ".git" -exec rm -rf {} \;
+# git clone https://github.com/VCVRack/AudibleInstruments.git
+# cd AudibleInstruments
+# git checkout v1.1.0
+# git submodule init
+# git submodule update
+# cd eurorack
+# git submodule init
+# git submodule update
+# cd ..
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
 # tar cvfz AudibleInstruments.tar.gz AudibleInstruments/*
 
 Source0: Rack.tar.gz
@@ -114,5 +122,5 @@ cp -r AudibleInstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - initial specfile
