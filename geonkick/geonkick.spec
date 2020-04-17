@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 64ccec61c0c37e9c507c34ff88481366807e7882
+%global commit0 18a570eaaa09490efe35951f5b12f0633bdfd394
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 1.10.0
+Version: 2.0.0
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/geontime/geonkick
@@ -77,6 +77,9 @@ fi
 %{_datadir}/*
 
 %changelog
+* Fri Apr 17 2020 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-1
+- update to 2.0.0
+
 * Sun Apr 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.10.0-1
 - update to 1.10.0
 
