@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.252
+Version: 0.8.298
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -9,7 +9,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://www.zrythm.org/releases//zrythm-%{version}.tar.xz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -50,6 +50,8 @@ More info at https://www.zrythm.org
 
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
 sed -i -e '/meson.add_install_script/,+2d' meson.build
+
+sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
 
 %build
 
@@ -101,9 +103,13 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/mime/*
 %{_datadir}/zrythm/*
 %{_datadir}/doc/*
+%{_datadir}/sourceview-styles/*
 %{_sysconfdir}/bash_completion.d/zrythm
 
 %changelog
+* Sun Apr 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.298-2
+- update to 0.8.298-2
+
 * Sat Apr 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.252-2
 - update to 0.8.252-2
 
