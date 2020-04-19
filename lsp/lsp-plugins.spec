@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 6321c2beaacdaf87c944a8a4dd3faf9e6d038d78
+%global commit0 e2950779c07e35a4f671832fa71642e8e1e0e14e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +9,7 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.17
+Version: 1.1.19
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -17,7 +17,7 @@ URL:     https://github.com/sadko4u/lsp-plugins
 
 # git clone https://github.com/sadko4u/lsp-plugins
 # cd lsp-plugins
-# git checkout lsp-plugins-1.1.17
+# git checkout lsp-plugins-1.1.19
 # git submodule init
 # git submodule update
 # find . -name .git --exec rm -rf {} \;
@@ -75,6 +75,9 @@ chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.
 %{_sysconfdir}/xdg/menus/applications-merged/lsp-plugins.menu
 
 %changelog
+* Sun Apr 19 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.19-1
+- update to 1.1.19-1
+
 * Sun Apr 5 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.17-1
 - update to 1.1.17-1
 
