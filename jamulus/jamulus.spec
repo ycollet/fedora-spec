@@ -2,12 +2,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 285f4e019b457116676f45d1a711147f66947075
+%global commit0 6615c97561eba547cb7445544394acbc0e81df8b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Jamulus
-Version: 3.5.0
+Version: 3.5.1
 Release: 1%{?dist}
 Summary: Jamulus
 URL:     https://github.com/corrados/jamulus/
@@ -74,6 +74,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Mon Apr 20 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.1-1
+- update 3.5.1-1
+
 * Fri Apr 17 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.0-1
 - update 3.5.0-1
 
