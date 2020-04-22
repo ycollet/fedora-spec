@@ -1,11 +1,9 @@
 # 
 # Pure Data vanilla build
 #
-# http://msp.ucsd.edu/Software/pd-0.47-1.src.tar.gz
-# replicate the package structure used by Debian
 
-%define pdver 0.50-0
-%define pkgver 0.50.0
+%define pdver 0.50-2
+%define pkgver 0.50.2
 
 Summary: Pure Data
 Name:    puredata
@@ -32,17 +30,22 @@ Source13: pd-gui.1
 # pd-gui plugin (needs python3)
 Source14: pd-gui-plugin
 # pd gui plugins readme
-Source15: README
+Source15: pd-README
 # mime stuff
 Source16: puredata-gui.sharedmimeinfo
 
 # add relevant debian patches
-Patch1: debian_pd2puredata.patch
-Patch2: debian_usrlibpd_path.patch
-Patch3: debian_helpbrowser_puredata-doc.patch
-Patch4: debian_remove_timestamp-macros.patch
-Patch5: debian_etc-gui-plugins.patch
-Patch6: debian_fixmanpage.patch
+Patch1: pd-patch-pd2puredata.patch
+%ifarch x86_64
+Patch2: pd-patch-usrlib64pd_path.patch
+%else
+Patch2: pd-patch-usrlibpd_path.patch
+%endif
+Patch3: pd-patch-helpbrowser_puredata-doc.patch
+Patch4: pd-patch-remove_timestamp-macros.patch
+Patch5: pd-patch-etc-gui-plugins.patch
+Patch6: pd-patch-fixmanpage.patch
+Patch7: pd-patch-privacy.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -56,7 +59,6 @@ Requires: puredata-core puredata-doc puredata-extra
 Requires: puredata-gui puredata-utils
 # for the gui plugin
 Requires: python3
-
 
 %description
 Pure Data (also known as Pd) is a real-time graphical programming
@@ -139,6 +141,7 @@ and pdreceive, for sending and receiving FUDI over the net.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 # fix hardwired lib dir in startup file (why the heck is this hardwired?)
@@ -271,6 +274,9 @@ fi
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.50.2-1
+- update to 0.50.2-1
+
 * Sat Oct 5 2019 Yann Collette <ycollette.nospam@free.fr> - 0.50.0-1
 - update to 0.50.0-1
 
