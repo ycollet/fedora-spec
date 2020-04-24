@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 8e7a86ddce844469a5d89f384c0641fda111b4a9
+%global commit0 96a9b03eaea865d2207c05a1ea0daba66f4cd94b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    lenmus
-Version: 5.6.0.%{shortcommit0}
+Version: 5.6.2.%{shortcommit0}
 Release: 1%{?dist}
 Summary: An app to study music theory and train you ear
 Group:   Applications/Multimedia
@@ -29,6 +29,7 @@ BuildRequires: wxGTK3-devel
 BuildRequires: sqlite-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: fluidsynth-devel
+BuildRequires: fluid-soundfont-gm
 
 %description
 LenMus Phonascus, "the teacher of music", is a free program to help you in the study of music theory and ear training.
@@ -65,7 +66,10 @@ make VERBOSE=1 %{?_smp_mflags}
 
 make DESTDIR=%{buildroot} install
 
-# install hydrogen.desktop properly.
+# install lenmus.desktop properly.
+mv %{buildroot}%{_datadir}/applications/org.lenmus.lenmus.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+mv %{buildroot}%{_datadir}/metainfo/org.lenmus.lenmus.appdata.xml %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml
+
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
         --add-category=Midi \
@@ -93,8 +97,12 @@ fi
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 %{_datadir}/man/*
+%{_datadir}/metainfo/%{name}.appdata.xml
 
 %changelog
+* Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.2-1
+- update 5.6.2-1
+
 * Mon Mar 2 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.0-1
 - update 5.6.0-1
 

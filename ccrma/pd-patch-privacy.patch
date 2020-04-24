@@ -1,0 +1,30 @@
+Description: Avoid privacy breach in HTML
+ Use html5shiv-printshiv from the Debian node-html5shive package
+Author: IOhannes
+Origin: Debian
+Forwarded: no
+Last-Update: 2020-02-24
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- puredata.orig/doc/8.topics/compander-limiter.htm
++++ puredata/doc/8.topics/compander-limiter.htm
+@@ -12,7 +12,7 @@
+       div.column{display: inline-block; vertical-align: top; width: 50%;}
+   </style>
+   <!--[if lt IE 9]>
+-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
++    <script src="file:///usr/share/nodejs/html5shiv/dist/html5shiv-printshiv.min.js"></script>
+   <![endif]-->
+ </head>
+ <body>
+--- puredata.orig/doc/8.topics/slop-tilde.htm
++++ puredata/doc/8.topics/slop-tilde.htm
+@@ -12,7 +12,7 @@
+       div.column{display: inline-block; vertical-align: top; width: 50%;}
+   </style>
+   <!--[if lt IE 9]>
+-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
++    <script src="file:///usr/share/nodejs/html5shiv/dist/html5shiv-printshiv.min.js"></script>
+   <![endif]-->
+ </head>
+ <body>

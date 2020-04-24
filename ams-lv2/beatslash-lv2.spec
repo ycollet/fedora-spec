@@ -7,7 +7,7 @@
 
 Name:    beatslash-lv2
 Version: 1.0.6.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats
 
 Group:   Applications/Multimedia
@@ -25,7 +25,7 @@ BuildRequires: gtk2-devel
 BuildRequires: cairo-devel
 BuildRequires: lvtk
 BuildRequires: sed
-BuildRequires: python
+BuildRequires: python2
 
 %description
 beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats. They are meant to be used live, but it is up to your imagination what to do!
@@ -61,6 +61,9 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-2
+- update to 1.0.6-2
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-1
 - update to 1.0.6-1
 

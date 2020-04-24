@@ -8,7 +8,7 @@
 
 Name:    lvtk
 Version: 2.0.0.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: LV2 Toolkit
 
 Group:   Applications/Multimedia
@@ -21,7 +21,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
-BuildRequires: python
+BuildRequires: python2
 BuildRequires: gtkmm24-devel
 
 %description
@@ -50,7 +50,10 @@ was mostly done by Lars Luthman in lv2-c++-tools.
 %{_includedir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-2
+- update for Fedora 32
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-1
 - update for Fedora 29
 
 * Mon Oct 23 2017 Yann Collette <ycollette.nospam@free.fr> - 2.0.0

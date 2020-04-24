@@ -3,7 +3,7 @@
 
 Name:    lebiniou-data
 Version: 3.40
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer - data package
 URL:     https://biniou.net/
 Group:   Applications/Multimedia
@@ -30,6 +30,7 @@ This package contains data files for use with lebiniou - https://gitlab.com/lebi
 
 autoreconf --install
 
+LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 %configure --prefix=%{_prefix} --libdir=%{_libdir}
 
 %install
@@ -42,6 +43,9 @@ make %{?_smp_mflags} DESTDIR=%{buildroot} install
 %{_datadir}/*
 
 %changelog
+* Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-3
+- fix for Fedora 32
+
 * Mon Feb 17 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-1
 - update to 3.40
 

@@ -49,6 +49,7 @@ sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_li
 
 autoreconf --install
 
+LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 # report: --enable-jackaudio doesn't work ...
 %configure --prefix=%{_prefix} --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir} CFLAGS="%{build_cxxflags}"
 
@@ -80,6 +81,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/*
 
 %changelog
+* Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-3
+- fix for Fedora 32
+
 * Mon Feb 17 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-2
 - update to 3.40
 

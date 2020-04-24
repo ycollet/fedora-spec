@@ -1,26 +1,27 @@
 %global debug_package %{nil}
 
-Name:		faust
-Version:	2.14.4
-Release:	18%{?dist}
-Summary:	Compiled language for real-time audio signal processing
+Name:	 faust
+Version: 2.14.4
+Release: 19%{?dist}
+Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
-License:	GPLv2+ and BSD
-URL:		http://faust.grame.fr/
-Source0:	http://downloads.sourceforge.net/project/faudiostream/faust/src/%{name}-%{version}.tar.gz
-Source1:        https://github.com/grame-cncm/faustlibraries/archive/master.zip
+License: GPLv2+ and BSD
+URL:     http://faust.grame.fr/
+Source0: http://downloads.sourceforge.net/project/faudiostream/faust/src/%{name}-%{version}.tar.gz
+Source1: https://github.com/grame-cncm/faustlibraries/archive/master.zip
 
-BuildRequires:  gcc-c++
-BuildRequires:	doxygen
-BuildRequires:	graphviz
-BuildRequires:	cmake
-BuildRequires:  unzip
-BuildRequires:  pandoc
-BuildRequires:  python2
-BuildRequires:  texlive-latex
-BuildRequires:  texlive-collection-basic
-BuildRequires:  texlive-collection-fontsrecommended
+BuildRequires: gcc-c++
+BuildRequires: doxygen
+BuildRequires: graphviz
+BuildRequires: cmake
+BuildRequires: unzip
+BuildRequires: pandoc
+BuildRequires: python2
+BuildRequires: texlive-latex
+BuildRequires: texlive-collection-basic
+BuildRequires: texlive-collection-fontsrecommended
+BuildRequires: texlive-mdwtools
 
 %description
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -198,16 +199,16 @@ cp -a syntax-highlighting/%{name}.xml \
 # copy faustlib
 unzip %{SOURCE1}
 cd faustlibraries-master
-sed -i -e "s/FAUST2MD=.*/FAUST2MD=faust2md/g" generateDoc
-export PATH=%{buildroot}%{_bindir}/:$PATH
-
-./generateDoc
+#sed -i -e "s/FAUST2MD=.*/FAUST2MD=faust2md/g" generateDoc
+#export PATH=%{buildroot}%{_bindir}/:$PATH
+#
+#./generateDoc
 
 mkdir -p %{buildroot}%{_datadir}/faust/
 cp *.lib old/*.lib %{buildroot}%{_datadir}/faust/
 
 mkdir -p %{buildroot}%{_datadir}/faust/doc/
-cp doc/library.html %{buildroot}%{_datadir}/faust/doc/
+#cp doc/library.html %{buildroot}%{_datadir}/faust/doc/
 cp doc/library.pdf %{buildroot}%{_datadir}/faust/doc/
 
 mv README.md README-stdlib.md
@@ -246,11 +247,14 @@ mv README.md README-stdlib.md
 
 %files stdlib
 %doc faustlibraries-master/README-stdlib.md
-%{_datadir}/faust/doc/library.html
+#%{_datadir}/faust/doc/library.html
 %{_datadir}/faust/doc/library.pdf
 %{_datadir}/faust/*.lib
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-10
+- Update to 2.14.4-19. Fix for Fedora 32
+
 * Wed Jan 15 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-18
 - Update to 2.14.4-18. Add stdlib
 

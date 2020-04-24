@@ -2,7 +2,7 @@
 
 Name:    lv2lint
 Version: 0.2.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Check whether a given LV2 plugin is up to the specification
 
 License: GPLv2+
@@ -31,6 +31,9 @@ in order to prevent unsatisfied users.
 
 %build
 
+LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
+CFLAGS="${CFLAGS:-%{build_cflags}} -fPIC" ; export CFLAGS
+
 mkdir build
 DESTDIR=%{buildroot} VERBOSE=1 meson --buildtype release --prefix=/usr build
 
@@ -48,5 +51,8 @@ DESTDIR=%{buildroot} VERBOSE=1 ninja install
 %{_mandir}/*
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-3
+- update for Fedora 32
+
 * Sat Dec 28 2019 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-1
 - Initial build

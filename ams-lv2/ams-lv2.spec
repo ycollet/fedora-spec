@@ -7,7 +7,7 @@
 
 Name:    ams-lv2
 Version: 1.2.2.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: AMS LV2 set of plugins (from Alsa Modular Synth)
 
 Group:   Applications/Multimedia
@@ -20,7 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
-BuildRequires: python
+BuildRequires: python2
 BuildRequires: gtkmm24-devel
 BuildRequires: gtk2-devel
 BuildRequires: cairo-devel
@@ -57,6 +57,9 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Apr 22 2022 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-2
+- update for Fedora 32
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-1
 - update 1.2.2-1
 

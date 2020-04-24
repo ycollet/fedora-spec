@@ -5,7 +5,7 @@
 
 Name:    lmms-mao
 Version: 1.2.1
-Release: 8%{?dist}
+Release: 9%{?dist}
 Summary: Linux MultiMedia Studio
 URL:     http://lmms.sourceforge.net/
 Group:   Applications/Multimedia
@@ -50,7 +50,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # original tarfile can be found here:
 #Source0: https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
 Source0: lmms.tar.gz
-Source1: carla.cpp
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -116,7 +115,6 @@ developing addons for lmms.
 %setup -qn lmms
 
 sed -i -e "s/-std=c11/-std=c11 -fPIC -DPIC/g" src/3rdparty/rpmalloc/CMakeLists.txt
-cp %{SOURCE1} plugins/carlabase/
 
 %build
 
@@ -184,6 +182,9 @@ fi
 %{_includedir}/lmms
 
 %changelog
+* Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-9
+- fix for Fedora 32
+
 * Thu Nov 28 2019 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-8
 - update to 1.2.1
 

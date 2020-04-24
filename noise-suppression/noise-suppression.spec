@@ -5,12 +5,14 @@
 
 Name:    noise-suppression-for-voice
 Version: 0.2.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Real-time Noise Suppression LADSPA / LV2 Plugin
 License: GPLv2+
 
 URL:     https://github.com/werman/noise-suppression-for-voice
 Source0: https://github.com/werman/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  noise-0001-add-missing-stdinh.h.patch
+Patch1:  noise-0002-add-stddef-header.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -56,6 +58,9 @@ sed -i -e "s/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}/LIBRARY DESTINATION \$
 sed -i -e "s/ARCHIVE DESTINATION \${CMAKE_INSTALL_LIBDIR}/ARCHIVE DESTINATION \${CMAKE_INSTALL_LIBDIR}\/lv2\/rnnoise\.lv2/g" src/lv2_plugin/CMakeLists.txt
 sed -i -e "s/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}\/lv2\/rnnoise\.lv2/g" src/lv2_plugin/CMakeLists.txt
 
+%patch0 -p1
+%patch1 -p1
+
 %build
 
 %cmake -DLIBINSTDIR=lib64 \
@@ -77,6 +82,9 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-3
+- fix for Fedora 32
+
 * Mon Apr 15 2019 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-2
 - build ladspa and lv2 packages
 

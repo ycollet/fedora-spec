@@ -1,11 +1,11 @@
-Name:          fasttracker2
-Version:       1.17
-Release:       2%{?dist}
-Summary:       Module tracker software for creating music
-Group:         Applications/Multimedia
-License:       GPLv3+
-URL:           https://16-bits.org/ft2.php
-Source0:       https://github.com/8bitbubsy/ft2-clone/archive/v%{version}.tar.gz#/ft2-clone-%{version}.tar.gz
+Name:    fasttracker2
+Version: 1.17
+Release: 3%{?dist}
+Summary: Module tracker software for creating music
+Group:   Applications/Multimedia
+License: GPLv3+
+URL:     https://16-bits.org/ft2.php
+Source0: https://github.com/8bitbubsy/ft2-clone/archive/v%{version}.tar.gz#/ft2-clone-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -23,6 +23,8 @@ The source code of FastTracker 2 is written in Pascal using Borland Pascal 7 and
 %setup -qn ft2-clone-%{version}
 
 %build
+
+LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 
 mkdir -p build
 cd build
@@ -69,6 +71,9 @@ rm -rf %{buildroot}
 %{_bindir}/*
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.17-3
+- update to 1.17-3
+
 * Sun Apr 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.17-1
 - update to 1.17
 

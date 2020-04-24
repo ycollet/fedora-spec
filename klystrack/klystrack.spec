@@ -8,7 +8,7 @@
 Summary: Klystrack is a chiptune tracker for making chiptune-like music on a modern computer.
 Name:    klystrack
 Version: 1.7.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://kometbomb.github.io/klystrack/
@@ -40,9 +40,11 @@ Klystrack is a chiptune tracker for making chiptune-like music on a modern compu
 %prep
 %setup -qn %{name}
 
+sed -i -e "s/-Werror//g" Makefile
+sed -i -e "s/LDFLAGS :=/LDFLAGS := -z muldefs/g" Makefile
+
 %build
 
-sed -i -e "s/-Werror//g" Makefile
 %{__make} DESTDIR=%{buildroot} PREFIX=/usr RES_PATH=/usr/share/%{name}/ CFG=release
 
 %install
@@ -111,6 +113,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Thu Apr 23 2020 Yann Collette <ycollette dot nospam at free.fr> 1.7.6-2
+- update to 1.7.6-2 - fix for Fedora 32
+
 * Wed Jul 17 2019 Yann Collette <ycollette dot nospam at free.fr> 1.7.6-1
 - update to 1.7.6-1
 

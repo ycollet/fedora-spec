@@ -8,7 +8,7 @@
 Summary: Jack Video Monitor
 Name:    xjadeo
 Version: 0.8.9
-Release: 1%{?dist}
+Release: 3%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://xjadeo.sourceforge.net/
@@ -46,6 +46,7 @@ or visit http://xjadeo.sf.net/
 
 %build
 
+LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 ./autogen.sh
 %configure --without-portmidi --libdir=%{_libdir}
 
@@ -100,6 +101,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette dot nospam at free.fr> 0.8.9-3
+- update for Fedora 32
+
 * Fri May 3 2019 Yann Collette <ycollette dot nospam at free.fr> 0.8.9-1
 - update to 0.8.9-1
 

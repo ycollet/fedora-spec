@@ -1,0 +1,85 @@
+From a5c14443736ea097f3269de20e744ba6f697d41b Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Thu, 23 Apr 2020 15:06:19 +0200
+Subject: [PATCH] add stddef header
+
+---
+ src/common/src/RnNoiseCommonPlugin.cpp | 1 +
+ src/ladspa_plugin/ladspa++.h           | 1 +
+ src/rnnoise/include/rnnoise/common.h   | 5 +++--
+ src/rnnoise/include/rnnoise/kiss_fft.h | 2 +-
+ src/rnnoise/src/kiss_fft.c             | 2 ++
+ 5 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/src/common/src/RnNoiseCommonPlugin.cpp b/src/common/src/RnNoiseCommonPlugin.cpp
+index b28c3d3..f0d7d94 100644
+--- a/src/common/src/RnNoiseCommonPlugin.cpp
++++ b/src/common/src/RnNoiseCommonPlugin.cpp
+@@ -4,6 +4,7 @@
+ #include <ios>
+ #include <limits>
+ #include <algorithm>
++#include <cstddef>
+ 
+ #include <stdint.h>
+ 
+diff --git a/src/ladspa_plugin/ladspa++.h b/src/ladspa_plugin/ladspa++.h
+index 51b1fb6..0015838 100644
+--- a/src/ladspa_plugin/ladspa++.h
++++ b/src/ladspa_plugin/ladspa++.h
+@@ -21,6 +21,7 @@
+ #include <tuple>
+ #include <array>
+ #include <cassert>
++#include <cstddef>
+ 
+ #include <stdint.h>
+ 
+diff --git a/src/rnnoise/include/rnnoise/common.h b/src/rnnoise/include/rnnoise/common.h
+index 5005bff..6827083 100644
+--- a/src/rnnoise/include/rnnoise/common.h
++++ b/src/rnnoise/include/rnnoise/common.h
+@@ -3,8 +3,9 @@
+ #ifndef COMMON_H
+ #define COMMON_H
+ 
+-#include "stdlib.h"
+-#include "string.h"
++#include <stddef.h>
++#include <stdlib.h>
++#include <string.h>
+ 
+ #define RNN_INLINE inline
+ #define OPUS_INLINE inline
+diff --git a/src/rnnoise/include/rnnoise/kiss_fft.h b/src/rnnoise/include/rnnoise/kiss_fft.h
+index b2fe9a4..0222ea1 100644
+--- a/src/rnnoise/include/rnnoise/kiss_fft.h
++++ b/src/rnnoise/include/rnnoise/kiss_fft.h
+@@ -30,10 +30,10 @@
+ #define KISS_FFT_H
+ 
+ #include <stdlib.h>
++#include <stddef.h>
+ #include <math.h>
+ #include "arch.h"
+ 
+-#include <stdlib.h>
+ #define opus_alloc(x) malloc(x)
+ #define opus_free(x) free(x)
+ 
+diff --git a/src/rnnoise/src/kiss_fft.c b/src/rnnoise/src/kiss_fft.c
+index 88d3de3..d6b40b9 100644
+--- a/src/rnnoise/src/kiss_fft.c
++++ b/src/rnnoise/src/kiss_fft.c
+@@ -35,6 +35,8 @@
+ #  endif
+ #endif
+ 
++#include <stddef.h>
++
+ #include "rnnoise/_kiss_fft_guts.h"
+ #define CUSTOM_MODES
+ 
+-- 
+2.25.3
+

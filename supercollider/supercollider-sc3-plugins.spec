@@ -23,7 +23,7 @@
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
 Version: %{gitver}
-Release: 2%{?gitrev:.%{gitrev}}%{?gittag:.%{gittag}}%{?dist}
+Release: 3%{?gitrev:.%{gitrev}}%{?gittag:.%{gittag}}%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://sc3-plugins.sourceforge.net/
@@ -68,6 +68,8 @@ Collection of SuperCollider plugins
 sed -i -e "s/lib\/SuperCollider/lib64\/SuperCollider/g" source/CMakeLists.txt
 %endif
 
+sed -i -e "1i\#include <cstdio>" source/NHUGens/NHHall.cpp
+
 %build
 # remove all git directories
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
@@ -99,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6-3
+- fix for Fedora 32
+
 * Wed Mar 27 2019 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6-2
 - fix build
 
