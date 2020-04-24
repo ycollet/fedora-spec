@@ -6,7 +6,7 @@
 Summary: Pattern-controlled audio stream / sample re-sequencer LV2 plugin
 Name:    lv2-BJumblr
 Version: 0.2.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     https://github.com/sjaehn/BJumblr
@@ -30,11 +30,11 @@ BJumblr is a pattern-controlled audio stream / sample re-sequencer LV2 plugin
 
 %build
 
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
+make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -include stdexcept -std=c++11 -fvisibility=hidden -fPIC"
 
 %install
 %{__rm} -rf %{buildroot}
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC" install
+make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -include stdexcept -std=c++11 -fvisibility=hidden -fPIC" install
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -44,5 +44,8 @@ make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{b
 %{_libdir}/lv2/*
 
 %changelog
+* Fri Apr 24 2020 Yann Collette <ycollette dot nospam at free.fr> 0.2.0-2
+- fix for Fedora 32
+
 * Thu Apr 2 2020 Yann Collette <ycollette dot nospam at free.fr> 0.2.0-1
 - initial release 

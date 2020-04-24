@@ -94,6 +94,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Fri Apr 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.08-3
+- fix for Fedora 32
+
 * Mon Apr 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.08-2
 - update to 1.08-2
 
