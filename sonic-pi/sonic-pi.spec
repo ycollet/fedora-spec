@@ -8,7 +8,7 @@
 Name:    sonic-pi
 Version: 3.2.2
 %global gittag0 v%{version}
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -36,6 +36,7 @@ BuildRequires: erlang-erts
 BuildRequires: ruby
 BuildRequires: rubygem-rake
 BuildRequires: rubygem-bundler
+BuildRequires: rubygem-racc
 BuildRequires: zlib-devel
 
 Requires(pre): pulseaudio-module-jack 
@@ -129,6 +130,9 @@ cp -ra  app/server/ruby/bin/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/bi
 %if 0%{?fedora} >= 30
 %define rb_version "2.6.0"
 %endif
+%if 0%{?fedora} >= 32
+%define rb_version "2.7.0"
+%endif
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
 
@@ -184,6 +188,9 @@ desktop-file-install  --vendor "fedora" \
 %doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
 
 %changelog
+* Fri Apr 24  2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-6
+- fix for Fedora a32
+
 * Mon Apr 6 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-5
 - update to 3.2.2-5
 
