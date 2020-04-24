@@ -17,11 +17,12 @@ License: GPLv2+
 
 Source0: https://gitlab.com/nebogeo/%{name}/-/archive/%{commit0}/fluxus-%{commit0}.tar.gz
 Source1: https://github.com/defaultxr/fluxus-mode/raw/master/fluxus-mode.el
+Source2: fluxus-SConstruct
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
-BuildRequires: python2-scons
+BuildRequires: python3-scons
 BuildRequires: ode-devel >= 0.9
 BuildRequires: racket-devel >= 5.1.1
 BuildRequires: racket >= 5.1.1
@@ -31,7 +32,6 @@ BuildRequires: libsndfile-devel >= 1.0.25
 BuildRequires: liblo-devel >= 0.26
 BuildRequires: glew-devel >= 1.5.8
 BuildRequires: freetype-devel >= 2.2.4
-BuildRequires: python2-scons
 BuildRequires: libjpeg-turbo-devel >= 1.1.1
 BuildRequires: libpng-devel >= 1.2.46
 BuildRequires: libtiff-devel >= 3.9.5
@@ -39,8 +39,10 @@ BuildRequires: zlib-devel >= 1.2.3
 BuildRequires: freeglut-devel >= 2.6.0
 BuildRequires: alsa-lib-devel >= 1.0.24
 BuildRequires: openal-soft-devel >= 1.12.854
-BuildRequires: gstreamer-devel >= 0.10.25
-BuildRequires: gstreamer-plugins-base-devel >= 0.10.25
+#BuildRequires: gstreamer-devel >= 0.10.25
+#BuildRequires: gstreamer-plugins-base-devel >= 0.10.25
+BuildRequires: gstreamer1-devel
+BuildRequires: gstreamer1-plugins-base-devel
 BuildRequires: libunicap-devel >= 0.9.12
 BuildRequires: ffmpeg-devel >= 0.7
 BuildRequires: openssl-devel
@@ -86,6 +88,8 @@ Fluxus support for the Emacs text editor.
 %prep
 %setup -qn %{name}-%{commit0}
 
+cp %{SOURCE2} SConstruct
+
 sed -i -e "s/\/lib\/racket/\/%{_lib}\/racket/g" SConstruct
 sed -i -e "s/FluxusCollectsLocation = Prefix + \"\/lib\"/FluxusCollectsLocation = Prefix + \"\/%{_lib}\"/g" SConstruct
 
@@ -96,7 +100,7 @@ sed -i -e "s/FluxusCollectsLocation = Prefix + \"\/lib\"/FluxusCollectsLocation 
 
 %install
 
-scons-2 -Q install DESTDIR="%{buildroot}" Prefix=/usr RacketPrefix=/usr
+scons -Q install DESTDIR="%{buildroot}" Prefix=/usr RacketPrefix=/usr
 
 install -m 644 -D modules/material/textures/fluxus-icon.png %{buildroot}/usr/share/pixmaps/fluxus-icon.png
 install -m 644 -D debian/fluxus.desktop %{buildroot}/usr/share/applications/fluxus.desktop
