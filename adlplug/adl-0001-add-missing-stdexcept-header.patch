@@ -1,0 +1,25 @@
+From 98ef0522c12d68ba066202eef56f67054652ee6f Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Fri, 24 Apr 2020 14:29:42 +0200
+Subject: [PATCH] add missing stdexcept header
+
+---
+ sources/opl3/adl/player.cc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/sources/opl3/adl/player.cc b/sources/opl3/adl/player.cc
+index 15f9b08..eefb1d4 100644
+--- a/sources/opl3/adl/player.cc
++++ b/sources/opl3/adl/player.cc
+@@ -3,6 +3,8 @@
+ //    (See accompanying file LICENSE or copy at
+ //          http://www.boost.org/LICENSE_1_0.txt)
+ 
++#include <stdexcept>
++	
+ #include "player.h"
+ 
+ void Player::init(unsigned sample_rate)
+-- 
+2.25.3
+

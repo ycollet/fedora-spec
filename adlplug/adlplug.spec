@@ -5,7 +5,7 @@
 
 Name:    adlplug
 Version: 1.0.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
 Group:   Applications/Multimedia
@@ -21,6 +21,7 @@ License: BSL-1.0
 # rm -rf ADLplug
 
 Source0: ADLplug.tar.gz
+Patch0: adl-0001-add-missing-stdexcept-header.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -51,6 +52,8 @@ Synthesizer plugin for OPNMIDI (VST/LV2)
 %if 0%{?fedora} >= 29
   sed -i -e "114,125d" thirdparty/JUCE/modules/juce_graphics/colour/juce_PixelFormats.h
 %endif
+
+%patch0 -p1
 
 %build
 
@@ -135,6 +138,9 @@ fi
 %{_datadir}/icons/hicolor/96x96/apps/OPNplug.png
 
 %changelog
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-4
+- update for Fedora 32
+
 * Mon Apr 15 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.1
 - update to 1.0.1
 
