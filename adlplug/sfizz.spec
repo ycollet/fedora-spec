@@ -8,7 +8,7 @@
 
 Name:      sfizz
 Version:   0.3.2
-Release:   1%{?dist}
+Release:   2%{?dist}
 License:   BSD-2-Clause
 Group:     Productivity/Multimedia/Sound/Players
 Summary:   Sampler plugin and library for SFZ instruments
@@ -66,6 +66,7 @@ cd build
        -DSFIZZ_LV2=ON \
        -DSFIZZ_VST=ON \
        -DENABLE_LTO=OFF \
+       -DCMAKE_CXX_FLAGS="-include cstdio" \
        -DBUILD_SHARED_LIBS=OFF \
        ..
 
