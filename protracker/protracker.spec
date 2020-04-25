@@ -1,6 +1,6 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
-Version: 1.08
+Version: 1.10
 Release: 3%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -94,6 +94,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Sat Apr 25 2020 Yann Collette <ycollette.nospam@free.fr> - 1.10-3
+- update to 1.10-3
+
 * Fri Apr 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.08-3
 - fix for Fedora 32
 
