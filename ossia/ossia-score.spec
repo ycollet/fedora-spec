@@ -71,6 +71,8 @@ cd build
 
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DSCORE_CONFIGURATION=static-release \
+       -DCMAKE_AR=/usr/bin/gcc-ar \
+       -DCMAKE_RANLIB=/usr/bin/gcc-ranlib \
        -DPORTAUDIO_ONLY_DYNAMIC=1 ..
 
 make DESTDIR=%{buildroot} %{?_smp_mflags}
