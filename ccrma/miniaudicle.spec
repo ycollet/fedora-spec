@@ -13,7 +13,13 @@ Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 BuildRequires: gcc gcc-c++ perl
-BuildRequires: bison flex qt-devel qscintilla-devel
+BuildRequires: bison flex
+%if 0%{?fedora} >= 32
+BuildRequires: qt4-devel
+%else
+BuildRequires: qt-devel
+%endif
+BuildRequires: qscintilla-devel
 BuildRequires: jack-audio-connection-kit-devel alsa-lib-devel
 BuildRequires: libsndfile-devel pulseaudio-libs-devel
 
