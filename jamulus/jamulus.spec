@@ -73,7 +73,7 @@ fi
 %{_datadir}/applications/*
 
 %changelog
-* Sat Mar 25 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.2-1
+* Sat Apr 25 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.2-1
 - update 3.5.2-1
 
 * Mon Apr 20 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.1-1
