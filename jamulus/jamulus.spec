@@ -1,13 +1,12 @@
-# Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 6615c97561eba547cb7445544394acbc0e81df8b
+%global commit0 2941f63acfb7ad31e63c69feb76b314872cadc1a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Jamulus
-Version: 3.5.1
+Version: 3.5.2
 Release: 1%{?dist}
 Summary: Jamulus
 URL:     https://github.com/corrados/jamulus/
@@ -74,6 +73,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Sat Mar 25 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.2-1
+- update 3.5.2-1
+
 * Mon Apr 20 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.1-1
 - update 3.5.1-1
 
