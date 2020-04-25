@@ -1,0 +1,20 @@
+diff -up QScintilla_gpl-2.10.7/Python/configure.py.sip-check QScintilla_gpl-2.10.7/Python/configure.py
+--- QScintilla_gpl-2.10.7/Python/configure.py.sip-check	2018-06-29 06:57:42.000000000 -0500
++++ QScintilla_gpl-2.10.7/Python/configure.py	2018-07-22 11:48:43.271510206 -0500
+@@ -875,14 +875,14 @@ class _TargetConfiguration:
+             try:
+                 from PyQt5 import QtCore
+             except ImportError:
+-                error(
++                inform(
+                         "Unable to import PyQt5.QtCore. Make sure PyQt5 is "
+                         "installed.")
+         else:
+             try:
+                 from PyQt4 import QtCore
+             except ImportError:
+-                error(
++                inform(
+                         "Unable to import PyQt4.QtCore. Make sure PyQt4 is "
+                         "installed.")
+ 
