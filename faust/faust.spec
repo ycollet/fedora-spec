@@ -1,14 +1,14 @@
 %global debug_package %{nil}
 
 Name:	 faust
-Version: 2.14.4
+Version: 2.20.2
 Release: 19%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
 License: GPLv2+ and BSD
 URL:     http://faust.grame.fr/
-Source0: http://downloads.sourceforge.net/project/faudiostream/faust/src/%{name}-%{version}.tar.gz
+Source0: https://github.com/grame-cncm/faust/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: https://github.com/grame-cncm/faustlibraries/archive/master.zip
 
 BuildRequires: gcc-c++
@@ -116,11 +116,9 @@ sed -i	-e 's|/lib/|/share/|g'			\
 	-e 's| -m | -pm |'			\
 	Makefile
 sed -i 's|/lib|/share|g' compiler/parser/enrobage.cpp
-sed -i 's|install |install -pm 755 |' tools/faust2appls/Makefile
 
 # Fix optflags
 sed -i 's|-O3|%{optflags} -fPIC	|' compiler/parser/Makefile \
-			architecture/osclib/faust/Makefile \
 			architecture/osclib/oscpack/Makefile
 
 # Fix permissions
@@ -138,7 +136,6 @@ done
 # To distinguish doc files
 mv architecture/osclib/faust/changelog.txt architecture/osclib/faust/changelog.faustOSC.txt
 mv architecture/osclib/faust/license.txt   architecture/osclib/faust/license.faustOSC.txt
-mv architecture/osclib/faust/README.md     architecture/osclib/faust/README.faustOSC.md
 
 for i in CHANGES LICENSE README TODO; do
     mv architecture/osclib/oscpack/$i architecture/osclib/oscpack/$i.osscpack.txt
@@ -149,8 +146,6 @@ sed -i -e "s/env python/env python2/g" tools/faust2appls/faust2atomsnippets
 
 # install lib in the good directory
 sed -i -e "s/\$(BUILDLOCATION)\/lib/\$(BUILDLOCATION)\/%{_lib}/g" Makefile
-sed -i -e "s/\$(PREFIX)\/lib\//\$(PREFIX)\/%{_lib}\//g" architecture/osclib/faust/Makefile
-
 
 %build
 # Build the main executable
@@ -183,7 +178,6 @@ cp -a tools/%{name}2sc-*/%{name}2sc %{buildroot}%{_bindir}
 mv tools/%{name}2sc-*/README README.supercollider
 
 cp -a tools/%{name}2appls/%{name}2* %{buildroot}%{_bindir}
-mv tools/%{name}2appls/README README.appls
 
 # Install the kate plugin
 mkdir -p %{buildroot}%{_datadir}/kde4/apps/katepart/syntax/
@@ -213,10 +207,12 @@ cp doc/library.pdf %{buildroot}%{_datadir}/faust/doc/
 
 mv README.md README-stdlib.md
 
+rm %{buildroot}%{_libdir}/ios-libsndfile.a
+
 %ldconfig_scriptlets osclib
 
 %files
-%doc README.md examples WHATSNEW
+%doc README.md examples
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
 %{_mandir}/*
@@ -234,13 +230,14 @@ mv README.md README-stdlib.md
 %doc documentation/* 
 
 %files tools
-%doc tools/README.md README.supercollider README.appls tools/%{name}2pd
+%doc tools/README.md README.supercollider tools/%{name}2pd
 %{_bindir}/%{name}2*
 %{_bindir}/encoderunitypackage
 %{_bindir}/faustoptflags
 %{_bindir}/faustpath
 %{_bindir}/sound2reader
-   
+%{_bindir}/filename2ident
+
 %files kate
 %doc syntax-highlighting/README.md
 %{_datadir}/kde4/apps/katepart/syntax/%{name}.xml
@@ -252,7 +249,10 @@ mv README.md README-stdlib.md
 %{_datadir}/faust/*.lib
 
 %changelog
-* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-10
+* Sat Apr 25 2020 Yann Collette <ycollette.nospam@free.fr> - 2.20.2-19
+- Update to 2.20.2-19. 
+
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-19
 - Update to 2.14.4-19. Fix for Fedora 32
 
 * Wed Jan 15 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.4-18
