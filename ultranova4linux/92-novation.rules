@@ -1,0 +1,4 @@
+# Novation Ultranova
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1235", ATTRS{idProduct}=="0011", MODE="0664", GROUP="audio"
+# Novation Mininova
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1235", ATTRS{idProduct}=="001e", MODE="0664", GROUP="audio"
