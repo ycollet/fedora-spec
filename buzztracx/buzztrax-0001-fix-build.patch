@@ -1,0 +1,24 @@
+From c83c17a8c64f5a3efa954d27b5667fd230b80b46 Mon Sep 17 00:00:00 2001
+From: Yann Collette <yann.collette@artelys.com>
+Date: Thu, 30 Apr 2020 17:54:23 +0200
+Subject: [PATCH] fix build
+
+---
+ src/gst/dec/bt-dec.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gst/dec/bt-dec.c b/src/gst/dec/bt-dec.c
+index 439f979..0e9c353 100644
+--- a/src/gst/dec/bt-dec.c
++++ b/src/gst/dec/bt-dec.c
+@@ -953,6 +953,6 @@ plugin_init (GstPlugin * plugin)
+ 
+ GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
+     GST_VERSION_MINOR,
+-    buzztrax - dec,
++    bt_dec,
+     "Buzztrax song renderer",
+     plugin_init, VERSION, "LGPL", PACKAGE_NAME, "http://www.buzztrax.org");
+-- 
+2.25.4
+
