@@ -7,7 +7,7 @@ Summary: libaudec (lib audio decoder) is a wrapper library over ffmpeg, sndfile 
 
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://git.zrythm.org/git/libaudec
+URL:     https://git.zrythm.org/cgit/libaudec
 
 Source0: https://git.zrythm.org/cgit/libaudec/snapshot/libaudec-%{version}.tar.gz
 
