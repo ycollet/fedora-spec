@@ -8,6 +8,7 @@ URL:            http://www.buzztrax.org
 Source0:        http://files.buzztrax.org/releases/%{name}-%{version}.tar.gz
 Patch0:         buzztrax-0001-fix-build.patch
 
+BuildRequires:  gcc gcc-c++ autoconf automake libtool pkgconfig
 BuildRequires:  gstreamer1-devel gstreamer1-plugins-base-devel libxml2-devel
 BuildRequires:  clutter-gtk-devel gtk+-devel gettext-devel gtk-doc
 BuildRequires:  intltool libtool gstreamer1-plugins-good desktop-file-utils orc-compiler
@@ -29,9 +30,12 @@ The %{name}-devel package contains libraries and header files for
 
 %patch0 -p1
 
+#sed -i -e "7/#include \$(top_srcdir)\/Makefile.tests.am/d" Makefile.am
+sed -i -e "71d" Makefile.am
+
 %build
 
-export QA_SKIP_RPATHS=1
+autoreconf
 
 %configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-dllwrapper=no
 
