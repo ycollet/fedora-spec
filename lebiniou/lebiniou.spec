@@ -2,7 +2,7 @@
 # %global debug_package %{nil}
 
 Name:    lebiniou
-Version: 3.40
+Version: 3.41
 Release: 2%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -81,6 +81,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/*
 
 %changelog
+* Thu Apr 30 2020 Yann Collette <ycollette.nospam@free.fr> - 3.41-3
+- update to 3.41
+
 * Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-3
 - fix for Fedora 32
 
