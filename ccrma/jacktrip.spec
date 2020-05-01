@@ -1,14 +1,16 @@
+# Global variables for github repository
+%global commit0 49c3dff7f286df007129eb7db029423559b35ef3
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Summary: Multimachine jam sessions over the internet
 Name:    jacktrip
-Version: 1.0.5
+Version: 1.1.0
 Release: 2%{?dist}
 License: STK
 Group:   Applications/Multimedia
-URL:     http://ccrma.stanford.edu/groups/soundwire/donwloads/jacktrip/jacktrip-0.27.tar.gz
-Source0: http://jacktrip.googlecode.com/files/jacktrip-%{version}.tar.gz
-Patch0:  jacktrip-1.0.5-gcc44.patch
-Patch1:  jacktrip-1.0.5-startprocess.patch
-Patch2:  jacktrip-1.0.5-gcc47.patch
+URL:     https://ccrma.stanford.edu/software/jacktrip/
+Source0: https://github.com//jacktrip/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -16,11 +18,7 @@ Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 BuildRequires: gcc gcc-c++
-%if 0%{?fedora} >= 9
-BuildRequires: qt-devel
-%else
 BuildRequires: qt4-devel
-%endif
 BuildRequires: jack-audio-connection-kit-devel alsa-lib-devel
 
 %description
@@ -35,19 +33,16 @@ It is currently being developed and actively tested at CCRMA by the
 SoundWIRE group.
 
 %prep
-%setup -q -n jacktrip-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%setup -qn %{name}-%{commit0}
 
 %build
-cd src
+cd jacktrip/src
 ./build
 %{__make}
 
 %install
 %{__rm} -rf %{buildroot}
-cd src
+cd jacktrip/src
 %{__mkdir} -p %{buildroot}%{_bindir}
 %{__make} INSTALL_ROOT=%{buildroot} release-install
 
@@ -57,13 +52,16 @@ cd src
 
 %files
 %defattr(-,root,root,-)
-%doc CHANGESLOG.txt TODO.txt INSTALL.txt
+%doc jacktrip/CHANGESLOG.txt jacktrip/TODO.txt jacktrip/INSTALL.txt
 %{_bindir}/jacktrip
 
-
 %changelog
+* Fri May 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
+- update 1.1.0
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
+
 * Thu Sep 13 2012 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 1.0.5-2
 - add patch to fix build on Fedora 17 (gcc4.7)
 
