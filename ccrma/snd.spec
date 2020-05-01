@@ -1,6 +1,5 @@
-%define pkgver 17.8
-%define dirver 17
-%define tarname snd-%{dirver}
+%define pkgver 20.3
+%define tarname snd-%{pkgver}
 %define snd_date "11/01/2017"
 
 %define	desktop_vendor planetccrma
@@ -27,13 +26,12 @@ Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
 
-Source:	 ftp://ccrma-ftp.stanford.edu/pub/Lisp/%{tarname}.tar.bz2
+Source:	 https://ccrma.stanford.edu/software/snd/snd-%{pkgver}.tar.gz
 Source1: snd.png
 Source2: snd.desktop
-Source100: snd-specs.tar.gz
-Patch0: snd-13-docdir.patch
-Patch1: snd-14-lpthread.patch
-URL:    http://www-ccrma.stanford.edu/software/snd/
+Patch0:  snd-13-docdir.patch
+Patch1:  snd-14-lpthread.patch
+URL:     https://ccrma.stanford.edu/software/snd/
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -45,20 +43,20 @@ Requires: hicolor-icon-theme
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel vorbis-tools speex-tools
-BuildRequires: flac-devel 
 BuildRequires: gsl-devel fftw-devel ladspa-devel liblrdf-devel
 BuildRequires: gamin-devel gettext-devel desktop-file-utils
 BuildRequires: libXpm-devel
+BuildRequires: libtimidity-devel timidity++
+BuildRequires: flac flac-devel
+BuildRequires: mpg123 mpg123-devel
 %if "%{build_motif}" == "1"
 BuildRequires:  openmotif-devel
 %endif
 %if "%{build_gtk}" == "1"
-%if 0%{?fedora} >= 15
 BuildRequires: gtk3-devel gtkglext-devel
-%else
-BuildRequires: gtk2-devel gtkglext-devel
 %endif
-%endif
+
+Requires: mpg123 flac timidity++
 
 %description
 Snd is a sound editor modelled loosely after Emacs and an old,
@@ -112,7 +110,7 @@ access to many sound file headers and data types, and most of the
 features of the audio hardware.
 
 %prep
-%setup -q -n snd-%{dirver}
+%setup -q -n snd-%{pkgver}
 %patch0 -p1
 %patch1 -p1
 
@@ -257,6 +255,9 @@ fi
 %endif
 
 %changelog
+* Fri May 1 2020 Yann Collette <ycollette.nospam@free.fr> -
+- update to 20.3
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
 
