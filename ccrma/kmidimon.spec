@@ -2,14 +2,15 @@
 
 Summary: ALSA MIDI monitor
 Name:    kmidimon
-Version: 0.7.1
+Version: 0.7.5
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
 URL:     http://kmetronome.sourceforge.net/kmidimon/
-Source0: http://dl.sf.net/sourceforge/kmidimon/kmidimon-%{version}.tar.bz2
+Source0: https://sourceforge.net/projects/kmidimon/files/%{version}/kmidimon-%{version}.tar.bz2
 Source1: kmidimon.desktop
-Patch0:  kmidimon-0.7.1-dtd.patch
+#Patch0:  kmidimon-0.7.1-dtd.patch
+Patch0:  kmidimon-0001-remove-uninstall-target.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -21,10 +22,8 @@ Requires: hicolor-icon-theme
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils alsa-lib-devel 
 BuildRequires: cmake gettext-devel
-%if 0%{?fedora} <= 1 && 0%{?rhel} != 5
-BuildRequires: XFree86-devel zlib-devel libjpeg-devel libpng-devel libart_lgpl-devel arts-devel
-%endif
 BuildRequires: kdelibs-devel
+BuildRequires: drumstick-devel
 
 %description
 MIDI monitor for Linux using ALSA sequencer and KDE user interface.
@@ -34,12 +33,24 @@ MIDI monitor for Linux using ALSA sequencer and KDE user interface.
 %patch0 -p1
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
+
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_CXX_FLAGS="-I/usr/include/drumstick" ..
+
 %{__make} %{?_smp_mflags}
 
 %install
 %{__rm} -rf %{buildroot}
+
+cd build
 %{__make} DESTDIR=%{buildroot} install
+
+# absolute symlink: /usr/share/doc/HTML/en/kmidimon/common -> /usr/share/doc/HTML/en/common
+# absolute symlink: /usr/share/doc/HTML/ja/kmidimon/common -> /usr/share/doc/HTML/ja/common
+
+rm %{buildroot}%{_datadir}/doc/HTML/en/kmidimon/common
+rm %{buildroot}%{_datadir}/doc/HTML/ja/kmidimon/common
 
 # desktop file categories
 BASE="Application AudioVideo Audio"
@@ -70,19 +81,24 @@ update-desktop-database &> /dev/null
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
-%files -f kmidimon.lang
+%files -f build/kmidimon.lang
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README TODO
 %license COPYING
 %{_bindir}/kmidimon
 %{_datadir}/doc/HTML/en/kmidimon
+%{_datadir}/doc/HTML/ja/kmidimon
 %{_datadir}/icons/hicolor/*/apps/kmidimon*
 %{_datadir}/applications/%{desktop_vendor}-kmidimon.desktop
 %{_datadir}/applications/kde4/kmidimon.desktop
 %{_datadir}/kde4/apps/kmidimon
 %{_mandir}/man1/kmidimon.1.gz
+%{_mandir}/ja/man1/kmidimon.1.gz
 
 %changelog
+* Fri May 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.5-1
+- update to 0.7.5-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
 
