@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.333
+Version: 0.8.378
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -35,6 +35,9 @@ BuildRequires: gtksourceview3-devel
 BuildRequires: graphviz-devel
 BuildRequires: meson
 BuildRequires: help2man
+BuildRequires: pandoc
+BuildRequires: texi2html
+BuildRequires: libchromaprint-devel
 BuildRequires: python3-sphinx
 BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
@@ -108,6 +111,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_sysconfdir}/bash_completion.d/zrythm
 
 %changelog
+* Sun May 3 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.378-2
+- update to 0.8.378-2
+
 * Thu Apr 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.333-2
 - update to 0.8.333-2
 
