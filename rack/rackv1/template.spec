@@ -92,7 +92,7 @@ sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 mkdir SLUGNAME_plugin
 tar xvfz %{SOURCE1} --directory=SLUGNAME_plugin --strip-components=1 
 
-cp -n %{SOURCE2} SLUGNAME_plugin/plugin.json
+cp %{SOURCE2} SLUGNAME_plugin/plugin.json
 
 %build
 
