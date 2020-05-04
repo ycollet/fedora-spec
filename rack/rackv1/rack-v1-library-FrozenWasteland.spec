@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 e9b7fe6919238caa34e2592182e220f19df3f5a3
+%global commit0 9299ffdc6c2ce4130743ad5424177efeeedf9a05
 
-%global gittag0 1.12.1
+%global gittag0 1.13.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-FrozenWasteland
-Version: 1.12.1
+Version: 1.13.1
 Release: 3%{?dist}
 Summary: FrozenWasteland plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r FrozenWasteland_plugin/dist/FrozenWasteland/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.12.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.13.1-3
 - initial specfile
