@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 5f4b349aff49be0a5f6895631a93c47fcafcff93
+%global commit0 c0bb55ff08faf2f89af947090d1c9bc412927d9f
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    midimonster
-Version: 0.4.0
+Version: 0.5.0
 Release: 1%{?dist}
 Summary: Multi-protocol translation software (ArtNet, MIDI, OSC, JACK MIDI/CV ...)
 
@@ -47,5 +47,8 @@ make DESTDIR=%{buildroot} PREFIX=/usr PLUGINS=%{_libdir}/midimonster install
 %{_datadir}/%{name}/*
 
 %changelog
+* Mon May 4 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-1
+- update to version 0.5.0-1
+
 * Thu Mar 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1
 - initial spec file -  version 0.4.0-1
