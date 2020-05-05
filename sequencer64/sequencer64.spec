@@ -48,7 +48,7 @@ The %{name}-devel package contains header files for %{name}.
 sh autogen.sh
 
 %configure
-%make_build
+make  DESTDIR=%{buildroot} CFLAGS="%{build_cflags}" CXXFLAGS="-include string %{build_cxxflags}" 
 
 %install
 
