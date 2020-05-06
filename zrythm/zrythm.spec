@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.378
+Version: 0.8.397
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -52,10 +52,15 @@ More info at https://www.zrythm.org
 %prep
 %setup -qn zrythm-%{version}
 
+# Use sphinx for Python 3
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
 sed -i -e '/meson.add_install_script/,+2d' meson.build
 
+# Compile using -O0 because of jack xruns
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
+# Remove summary which is only available on meson 0.53 and stick to version 0.52
+sed -i -e "s/meson_version: '>= 0.53.0'/meson_version: '>= 0.52.0'/g" meson.build
+sed -i -e "714,745d" meson.build
 
 %build
 
@@ -103,14 +108,14 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/glib-2.0/*
 %{_datadir}/icons/*
 %{_datadir}/locale/*
-%{_datadir}/man/*
 %{_datadir}/mime/*
 %{_datadir}/zrythm/*
-%{_datadir}/doc/*
-%{_datadir}/sourceview-styles/*
 %{_sysconfdir}/bash_completion.d/zrythm
 
 %changelog
+* Wed May 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.397-2
+- update to 0.8.397-2
+
 * Sun May 3 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.378-2
 - update to 0.8.378-2
 
