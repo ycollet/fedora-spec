@@ -35,8 +35,13 @@ BuildRequires: libsndfile-devel
 BuildRequires: taglib-devel
 BuildRequires: mpg123-devel
 BuildRequires: libmpcdec-devel
+%if 0%{?fedora} >= 32
+BuildRequires: gstreamer1-devel
+BuildRequires: gstreamer1-plugins-base-devel
+%else
 BuildRequires: gstreamer-devel
 BuildRequires: gstreamer-plugins-base-devel
+%endif
 BuildRequires: ffmpeg-devel
 BuildRequires: librsvg2-devel
 BuildRequires: gtk2-devel
@@ -52,6 +57,10 @@ compatible tags to the files.
 %prep
 %setup -qn %{name}
 
+%ifarch x86_64
+sed -i -e "s/DESTINATION lib/DESTINATION lib64/g" ebur128//ebur128/CMakeLists.txt
+%endif
+
 %build
 
 mkdir build
@@ -65,9 +74,9 @@ cd build
 make DESTDIR=%{buildroot} install
 
 install -d -m 755 $RPM_BUILD_ROOT%{_bindir}
-install -pm 644 loudness $RPM_BUILD_ROOT/%{_bindir}/
+install -pm 644 loudness          $RPM_BUILD_ROOT/%{_bindir}/
 install -pm 644 loudness-drop-gtk $RPM_BUILD_ROOT/%{_bindir}/
-install -pm 644 loudness-drop-qt5 $RPM_BUILD_ROOT/%{_bindir}/
+install -pm 644 loudness-drop-qt  $RPM_BUILD_ROOT/%{_bindir}/
 
 chrpath --delete $RPM_BUILD_ROOT/usr/bin/*
 
