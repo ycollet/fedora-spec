@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 4e6ce4ed0fee42510678228edc53608649f84ae0
+%global commit0 8a7542aaa9eccf4e56d2445fc332e3acfde749d2
 
 %global gittag0 1.5.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-Stoermelder-P1
 Version: 1.5.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Stoermelder-P1 plugin for Rack
 
 Group:   Applications/Multimedia

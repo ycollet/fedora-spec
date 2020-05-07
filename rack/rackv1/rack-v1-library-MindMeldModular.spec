@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 0e7360a837d095b0c19793b813cb6fe780d7825e
+%global commit0 d827349125a87259f9c64f744a63b7542c449dc7
 
 %global gittag0 1.1.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-MindMeldModular
 Version: 1.1.5
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: MindMeldModular plugin for Rack
 
 Group:   Applications/Multimedia

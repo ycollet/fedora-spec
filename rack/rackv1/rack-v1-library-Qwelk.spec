@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 f62ec1e88e6630540b9fbdcbc018653c4a7bc5a5
+%global commit0 f3a359c71719d0fbf80e2c95925fb4555756dfe2
 
 %global gittag0 0.6.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-Qwelk
 Version: 0.6.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Qwelk plugin for Rack
 
 Group:   Applications/Multimedia
@@ -94,8 +94,6 @@ mkdir Qwelk_plugin
 tar xvfz %{SOURCE1} --directory=Qwelk_plugin --strip-components=1 
 
 cp -n %{SOURCE2} Qwelk_plugin/plugin.json
-
-sed -i -e "s/util\/math.hpp/math.hpp/g" Qwelk_plugin/src/Chaos.cpp
 
 %build
 

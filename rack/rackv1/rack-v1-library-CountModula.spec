@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 f2ce6c2dbb4e43195d720bb4e01756ac4251c865
+%global commit0 e42b5dae8a2b4e997a73a63a0fc7640a4c60768c
 
 %global gittag0 1.9.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-CountModula
 Version: 1.9.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: CountModula plugin for Rack
 
 Group:   Applications/Multimedia

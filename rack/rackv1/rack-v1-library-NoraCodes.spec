@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 f9463eaa184091af081894095766a0e799691cc9
+%global commit0 d7c4bf9d480910784ff6a726ab27adf41d2f0b6e
 
 %global gittag0 1.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:    rack-v1-NoraCodes
 Version: 1.2.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: NoraCodes plugin for Rack
 
 Group:   Applications/Multimedia
