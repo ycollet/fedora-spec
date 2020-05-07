@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 eb5c3a6a577886766ea785d25ba6ae8561012e1f
+%global commit0 03cee1d80bf4022d4df65a9cfcb54fdb01d5025b
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Multi channel MIDI step sequencer LV2 plugin with a variable matrix
 Name:    lv2-BSEQuencer
-Version: 1.2.0
+Version: 1.4.0
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -43,5 +43,8 @@ make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{b
 %{_libdir}/lv2/*
 
 %changelog
+* Thu May 7 2020 Yann Collette <ycollette dot nospam at free.fr> 1.4.0-1
+- update to 1.4.0-1
+
 * Sat Dec 29 2019 Yann Collette <ycollette dot nospam at free.fr> 1.2.0-1
 - initial release 
