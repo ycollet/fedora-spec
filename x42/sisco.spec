@@ -1,16 +1,19 @@
 # Global variables for github repository
-%global commit0 428b66f49c81e72dfc7dd64f628b879467fe04c1
-%global gittag0 v0.8.5
+%global commit0 91142a3f16d4593310ae86ea477f8610c0cd956b
+%global gittag0 v0.8.6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+%global debug_package %{nil}
+
 Name:    sisco.lv2
-Version: 0.8.5
+Version: 0.8.6
 Release: 1%{?dist}
 Summary: A LV2 oscilloscope
 
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/x42/sisco.lv2
+Source0: sisco.lv2.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -28,17 +31,14 @@ BuildRequires: mesa-libGLU-devel
 A LV2 oscilloscope
 
 %prep
-
-[ ! -d build-sisco.lv2 ] && git clone https://github.com/x42/sisco.lv2.git build-sisco.lv2
+%setup -qn %{name}
 
 %build
-cd build-sisco.lv2
-git checkout %{gittag0}
-make submodules
+
 make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
 
 %install 
-cd build-sisco.lv2
+
 make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 sisco_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags} install
 
 %files
@@ -47,6 +47,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 sisco_VERSION=%{vers
 %{_datadir}/*
 
 %changelog
+* Fri May 8 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.6-1
+- updat eto 0.8.6-1
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.5
 - update to 0.8.5
 
