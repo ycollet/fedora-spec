@@ -1,15 +1,15 @@
 # Global variables for github repository
 %global commit0 f3a359c71719d0fbf80e2c95925fb4555756dfe2
 
-%global gittag0 0.6.1
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Qwelk
-Version: 0.6.1
-Release: 4%{?dist}
+Version: 1.0.0
+Release: 3%{?dist}
 Summary: Qwelk plugin for Rack
 
 Group:   Applications/Multimedia
@@ -109,5 +109,5 @@ cp -r Qwelk_plugin/dist/Qwelk/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Qwel
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile

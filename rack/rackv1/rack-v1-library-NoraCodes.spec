@@ -1,15 +1,15 @@
 # Global variables for github repository
 %global commit0 d7c4bf9d480910784ff6a726ab27adf41d2f0b6e
 
-%global gittag0 1.2.0
+%global gittag0 1.2.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-NoraCodes
-Version: 1.2.0
-Release: 4%{?dist}
+Version: 1.2.2
+Release: 3%{?dist}
 Summary: NoraCodes plugin for Rack
 
 Group:   Applications/Multimedia
@@ -109,5 +109,5 @@ cp -r NoraCodes_plugin/dist/NoraCodes/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-3
 - initial specfile

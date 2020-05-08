@@ -1,15 +1,15 @@
 # Global variables for github repository
 %global commit0 e42b5dae8a2b4e997a73a63a0fc7640a4c60768c
 
-%global gittag0 1.9.0
+%global gittag0 1.10.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-CountModula
-Version: 1.9.0
-Release: 4%{?dist}
+Version: 1.10.0
+Release: 3%{?dist}
 Summary: CountModula plugin for Rack
 
 Group:   Applications/Multimedia
@@ -109,5 +109,5 @@ cp -r CountModula_plugin/dist/CountModula/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.9.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.10.0-3
 - initial specfile
