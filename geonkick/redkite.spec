@@ -5,19 +5,19 @@
 
 Name:    redkite
 Version: 0.8.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
-URL:     https://gitlab.com/geontime/redkite
+URL:     https://gitlab.com/iurie-sw/redkite
 Group:   Applications/Multimedia
-License: GPLv2+
+License: GPLv3
 
-Source0: https://gitlab.com/geontime/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
+Source0: https://gitlab.com/iurie-sw/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cairo-devel
-BuildRequires: cmake
+BuildRequires: cmake make
 
 %description
 Redkite is a small free software and cross-platform GUI toolkit. It is developed in C++11&14 and inspired from other well known GUI toolkits.
@@ -46,6 +46,9 @@ make DESTDIR=%{buildroot} install
 %{_includedir}/*
 
 %changelog
+* Sat May 09 2020 Bruno Vernay <brunovern.a@gmail.com> - 0.8.1-2
+- Update the URL, add make dependency, change licence to GPLv3
+
 * Fri Apr 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.1-1
 - update to 0.8.1-1
 
