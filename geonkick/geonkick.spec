@@ -11,7 +11,7 @@ Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
 Group:   Applications/Multimedia
-License: GPLv2+
+License: GPLv3
 
 Source0: https://gitlab.com/iurie-sw/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
 
