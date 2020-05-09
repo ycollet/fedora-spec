@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 71544e4991f494f9871e13a50d6cf9217bb86986
+%global commit0 3994bc3edfd606b5965f0bacdf128a664a78b86a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Software Synthesizer
 Name:    amsynth
-Version: 1.9.0.%{shortcommit0}
+Version: 1.10.0.%{shortcommit0}
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -103,17 +103,20 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_libdir}/vst/*
 
 %changelog
+* Sat May 9 2020 Yann Collette <ycollette dot nospam at free.fr> 1.10.0-1
+- update to 1.10.0-1
+
 * Sun Apr 14 2019 Yann Collette <ycollette dot nospam at free.fr> 1.9.0-1
-- update to 1.9.0
+- update to 1.9.0-1
 
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-1
 - update for Fedora 29
 
 * Tue Oct 24 2017 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-1
-- update to 1.8.0
+- update to 1.8.0-1
 
 * Thu Jun 04 2015 Yann Collette <ycollette dot nospam at free.fr> 1.5.1-1
-- updated to 1.5.1
+- updated to 1.5.1-1
 - added a DSSI package
 - added a LV2 package
 
