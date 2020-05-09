@@ -52,10 +52,10 @@ make DESTDIR=%{buildroot} install
 * Fri Apr 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.1-1
 - update to 0.8.1-1
 
-* Sat Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.0-1
+* Sun Apr 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.0-1
 - update to 0.8.0
 
-* Sat Dec 29 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3-1
+* Sat Dec 28 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.3-1
 - update to 0.6.3
 
 * Wed Oct 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.6.2-1
