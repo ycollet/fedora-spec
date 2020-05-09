@@ -6,14 +6,14 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 2.0.0
+Version: 2.1.0
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
-URL:     https://gitlab.com/geontime/geonkick
+URL:     https://gitlab.com/iurie-sw/geonkick
 Group:   Applications/Multimedia
 License: GPLv2+
 
-Source0: https://gitlab.com/geontime/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
+Source0: https://gitlab.com/iurie-sw/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -23,7 +23,7 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: lv2-devel
 BuildRequires: libsndfile-devel
 BuildRequires: rapidjson-devel
-BuildRequires: cmake
+BuildRequires: cmake make
 BuildRequires: desktop-file-utils
 BuildRequires: redkite
 BuildRequires: libX11-devel
@@ -71,12 +71,15 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc LICENSE README.md
+%doc LICENSE README.md doc/Documentation.md
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*
 
 %changelog
+* Sat May 09 2020 Bruno Vernay <brunovern.a@gmail.com> - 2.1.0-1
+- Update to 2.1.0, update the URL, add make dependency, add doc
+
 * Fri Apr 17 2020 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-1
 - update to 2.0.0
 
