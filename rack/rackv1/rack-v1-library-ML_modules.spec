@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 1317ece68ce5f7a2fe3bd7bf826545830011a703
+%global commit0 cc6fc409a9c2bc530227ad42d090ebe6ec1da33f
 
-%global gittag0 1.1.0
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-ML_modules
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: ML_modules plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r ML_modules_plugin/dist/ML_modules/* %{buildroot}%{_libexecdir}/Rack1/plugi
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile
