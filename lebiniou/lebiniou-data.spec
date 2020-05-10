@@ -1,8 +1,8 @@
-# Disable production of debug package. Problem with fedora 23
-# %global debug_package %{nil}
+# Disable production of debug package.
+%global debug_package %{nil}
 
 Name:    lebiniou-data
-Version: 3.40
+Version: 3.42
 Release: 2%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer - data package
 URL:     https://biniou.net/
@@ -40,9 +40,13 @@ make %{?_smp_mflags} DESTDIR=%{buildroot} install
 %files
 %doc README.md AUTHORS ChangeLog THANKS
 %license COPYING
-%{_datadir}/*
+%{_datadir}/lebiniou/*
+%{_datadir}/doc/lebiniou-data/examples/sequences.tar.gz
 
 %changelog
+* Sun May 10 2020 Yann Collette <ycollette.nospam@free.fr> - 3.42-3
+- update to 3.42
+
 * Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 3.40-3
 - fix for Fedora 32
 
