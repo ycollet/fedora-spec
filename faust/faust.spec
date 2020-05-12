@@ -2,14 +2,22 @@
 
 Name:	 faust
 Version: 2.20.2
-Release: 19%{?dist}
+Release: 20%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
 License: GPLv2+ and BSD
 URL:     http://faust.grame.fr/
-Source0: https://github.com/grame-cncm/faust/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1: https://github.com/grame-cncm/faustlibraries/archive/master.zip
+
+# git clone https://github.com/grame-cncm/faust
+# git checkout 2.20.2
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz faust.tar.gz faust/*
+
+Source0: faust.tar.gz
 
 BuildRequires: gcc-c++
 BuildRequires: doxygen
@@ -104,7 +112,7 @@ signal processing. These libraries are part of the standard Faust libraries.
 
 
 %prep
-%setup -q
+%setup -qn faust
 
 # For installation in the correct location and for preserving timestamps:
 # The Makefile normally puts noarch files in $prefix/lib. We change
@@ -181,8 +189,7 @@ cp -a tools/%{name}2appls/%{name}2* %{buildroot}%{_bindir}
 
 # Install the kate plugin
 mkdir -p %{buildroot}%{_datadir}/kde4/apps/katepart/syntax/
-cp -a syntax-highlighting/%{name}.xml \
-	%{buildroot}%{_datadir}/kde4/apps/katepart/syntax/
+cp -a syntax-highlighting/%{name}.xml %{buildroot}%{_datadir}/kde4/apps/katepart/syntax/
 
 # move the .a library
 %ifarch x86_64 amd64
@@ -190,26 +197,24 @@ cp -a syntax-highlighting/%{name}.xml \
   mv %{buildroot}/usr/lib/*.a %{buildroot}%{_libdir}/
 %endif
 
-# copy faustlib
-unzip %{SOURCE1}
-cd faustlibraries-master
-#sed -i -e "s/FAUST2MD=.*/FAUST2MD=faust2md/g" generateDoc
-#export PATH=%{buildroot}%{_bindir}/:$PATH
-#
-#./generateDoc
+# install library
+cd libraries
+export PATH=../tools/faust2appls/:$PATH
+./generateDoc
 
 mkdir -p %{buildroot}%{_datadir}/faust/
 cp *.lib old/*.lib %{buildroot}%{_datadir}/faust/
 
 mkdir -p %{buildroot}%{_datadir}/faust/doc/
-#cp doc/library.html %{buildroot}%{_datadir}/faust/doc/
 cp doc/library.pdf %{buildroot}%{_datadir}/faust/doc/
+cp -r doc/md %{buildroot}%{_datadir}/faust/doc/md
 
 mv README.md README-stdlib.md
 
 rm %{buildroot}%{_libdir}/ios-libsndfile.a
 
 %ldconfig_scriptlets osclib
+
 
 %files
 %doc README.md examples
@@ -243,12 +248,14 @@ rm %{buildroot}%{_libdir}/ios-libsndfile.a
 %{_datadir}/kde4/apps/katepart/syntax/%{name}.xml
 
 %files stdlib
-%doc faustlibraries-master/README-stdlib.md
-#%{_datadir}/faust/doc/library.html
+%doc libraries/README-stdlib.md
 %{_datadir}/faust/doc/library.pdf
 %{_datadir}/faust/*.lib
 
 %changelog
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.20.2-20
+- Update to 2.20.2-20. Fix libraries installation
+
 * Sat Apr 25 2020 Yann Collette <ycollette.nospam@free.fr> - 2.20.2-19
 - Update to 2.20.2-19. 
 
