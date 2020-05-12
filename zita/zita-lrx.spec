@@ -1,6 +1,6 @@
 Summary: 4th order crossover filters
 Name:    zita-lrx
-Version: 0.1.0
+Version: 0.1.2
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -50,7 +50,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/zita-lrx
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.2-1
+- update to 0.1.2
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1
 - update for Fedora 29
 
 * Thu Aug  8 2013 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> - 0.1.0-1

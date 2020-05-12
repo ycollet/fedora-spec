@@ -1,6 +1,6 @@
 Summary: Full quality multichannel audio over a local IP network
 Name:    zita-njbridge
-Version: 0.4.2
+Version: 0.4.4
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.4-1
+- update to 0.4.4
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.2-1
 - update for Fedora 29
 

@@ -1,4 +1,4 @@
-%define aeolus_ver 0.9.7
+%define aeolus_ver 0.9.8
 %define stops_ver  0.3.0
 
 %define desktop_vendor planetccrma
@@ -110,6 +110,9 @@ desktop-file-install --vendor %{desktop_vendor} \
 %{_datadir}/applications/%{desktop_vendor}-aeolus.desktop
 
 %changelog
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.8-1
+- update to 0.9.8
+
 * Wed Feb 20 2019 Yann Collette <ycollette.nospam@free.fr> - 0.9.7-1
 - update to 0.9.7
 

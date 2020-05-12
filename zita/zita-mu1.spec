@@ -1,6 +1,6 @@
 Summary: MU1 is a simple Jack app used to organise stereo monitoring.
 Name:    zita-mu1
-Version: 0.2.2
+Version: 0.3.3
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/zita-mu1/*
 
 %changelog
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.3-1
+- update 0.3.3
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.2.2-1
 - update for Fedora 29
 

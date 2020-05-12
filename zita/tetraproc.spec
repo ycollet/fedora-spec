@@ -2,7 +2,7 @@
 
 Summary: An A/B convertor and the metering and monitoring. 
 Name:    tetraproc
-Version: 0.8.2
+Version: 0.8.6
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/tetraproc/*
 
 %changelog
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.6-1
+- update to 0.8.6
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.8.2-1
 - update for Fedora 29
 

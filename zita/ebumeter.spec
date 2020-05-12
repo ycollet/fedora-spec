@@ -1,6 +1,6 @@
 Summary: Loudness measurement according to EBU-R128.
 Name:    ebumeter
-Version: 0.4.0
+Version: 0.4.2
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/ebumeter/*
 
 %changelog
+* Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.2-1
+- update to 0.4.2
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-1
 - update for Fedora 29
 
