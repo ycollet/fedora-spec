@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 3a9b1c1c949052902b7057977bee32802232be2a
+%global commit0 7a240470926e7929048121f0b67938851d712b6c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Pattern-controlled audio stream / sample re-sequencer LV2 plugin
 Name:    lv2-BJumblr
-Version: 0.2.0
+Version: 1.2.0
 Release: 2%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -44,6 +44,9 @@ make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{b
 %{_libdir}/lv2/*
 
 %changelog
+* Sat May 16 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.0-2
+- update to 1.2.0
+
 * Fri Apr 24 2020 Yann Collette <ycollette dot nospam at free.fr> 0.2.0-2
 - fix for Fedora 32
 
