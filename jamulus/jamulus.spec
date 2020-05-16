@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 2941f63acfb7ad31e63c69feb76b314872cadc1a
+%global commit0 5385f4f113884537c18109e01791149754fe96d5
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    Jamulus
-Version: 3.5.2
+Version: 3.5.3
 Release: 1%{?dist}
 Summary: Jamulus
 URL:     https://github.com/corrados/jamulus/
@@ -24,7 +24,8 @@ BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
-BuildRequires: qt4-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-linguist
 BuildRequires: desktop-file-utils
 
 %description
@@ -37,7 +38,7 @@ mixes the audio data and sends the mix back to each client.
 
 %build
 
-%_qt4_qmake Jamulus.pro
+%_qt5_qmake Jamulus.pro
 
 make VERBOSE=1 %{?_smp_mflags}
 
@@ -73,6 +74,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Sat May 16 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.3-1
+- update 3.5.3-1
+
 * Sat Apr 25 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.2-1
 - update 3.5.2-1
 
