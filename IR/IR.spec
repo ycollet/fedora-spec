@@ -1,5 +1,5 @@
 Summary: Impulse responses for various cabinet
-Name:    hydrogen-drumkits
+Name:    impulse-response
 Version: 1.0.0
 Release: 1%{?dist}
 License: GPLv2+ and GPLv3
@@ -22,7 +22,8 @@ Impulse responses for various cabinet
 %install
 rm -rf %{buildroot}
 
-mkdir IR_files
+rm -rf IR_files
+mkdir -p IR_files
 cd IR_files
 unzip %{SOURCE0}
 
