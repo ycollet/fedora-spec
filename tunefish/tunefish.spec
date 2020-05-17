@@ -8,11 +8,11 @@
 Name:    tunefish
 Version: 4.1.0.%{shortcommit0}
 Release: 1%{?dist}
-Summary: Tunefish virtual analog synthesizer as a VST plugin
+Summary: Tunefish virtual analog synthesizer - additive wavetable-based synthesizer VST plugin (git version)
 
 Group:   Applications/Multimedia
-License: GPLv2+
-URL:     https://github.com/paynebc/tunefish
+License: GPLv3
+URL:     https://www.tunefish-synth.com/
 
 Source0: https://github.com/paynebc/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  tunefish_juce-pixel.patch
@@ -50,7 +50,12 @@ cd src/tunefish4/Builds/LinuxMakefile
 %__install -m 755 -d %{buildroot}%{_libdir}/vst/
 %__install -m 644 build/*.so %{buildroot}/%{_libdir}/vst/
 
+%__install -m 755 -d %{buildroot}%{_libdir}/vst/tf4programs
+%__install -m644 ../../../../patches/tf4programs/* %{buildroot}/%{_libdir}/vst/tf4programs
+
 %files
+%doc README.md
+%license COPYING
 %{_libdir}/*
 
 %changelog
