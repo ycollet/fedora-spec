@@ -93,7 +93,7 @@ sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 mkdir AuraAudio_plugin
 tar xvfz %{SOURCE1} --directory=AuraAudio_plugin --strip-components=1 
 
-cp %{SOURCE2} AuraAudio_plugin/plugin.json
+cp -n %{SOURCE2} AuraAudio_plugin/plugin.json
 
 %build
 
