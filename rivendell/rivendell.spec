@@ -1,13 +1,13 @@
 %global __python %{__python3}
 
 # Global variables for github repository
-%global commit0 421d073b3893bc78084db9a2672f9eac42ec9d9f
+%global commit0 0ba49d3e2823eb2bf58e25b86a46495dca4e373c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: A radio automation system
 Name:    rivendell
-Version: 3.2.1
+Version: 3.4.0
 Release: 1%{?dist}
 License: LGPL
 Group:   Applications/Multimedia
@@ -40,6 +40,12 @@ BuildRequires: libmad-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libsndfile-devel
 BuildRequires: flac-devel
+BuildRequires: libmusicbrainz5-devel
+BuildRequires: libdiscid-devel
+BuildRequires: libcoverart-devel
+BuildRequires: libmp4v2-devel
+BuildRequires: twolame-devel
+#BuildRequires: faad2-devel
 
 Requires: madplay, autofs
 Requires: python3, python3-pycurl, python3-requests, python3-pyserial, python3-mysql
@@ -81,6 +87,11 @@ export LDFLAGS
 
 %__install -m 755 -d %{buildroot}/usr/lib/systemd/system/
 mv %{buildroot}/lib/systemd/system/rivendell.service %{buildroot}/usr/lib/systemd/system/rivendell.service
+
+for Files in %{buildroot}/%{_libdir}/rivendell/pypad/*.py
+do
+    sed -i -e "s/bin\/python/bin\/python2/g" $Files
+done
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -163,6 +174,9 @@ fi
 %{_unitdir}/*
 
 %changelog
+* Sat May 23 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.0-1
+- update to 3.4.0
+
 * Sat Jan 25 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.1-1
 - update to 3.2.1
 
