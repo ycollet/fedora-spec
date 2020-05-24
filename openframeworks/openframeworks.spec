@@ -27,10 +27,8 @@ License: GPLv2+
 # tar cvf openFrameworks.tar.gz openFrameworks/*
 # rm -rf openFrameworks
 
-# Source0: https://github.com/openframeworks/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source0: openFrameworks.tar.gz
 Source1: of-make-workspace
-# Patch0: openal_fix.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -39,15 +37,49 @@ BuildRequires: freeimage-devel
 BuildRequires: uriparser-devel
 BuildRequires: pugixml-devel
 BuildRequires: poco-devel
+BuildRequires: openal-soft-devel
+BuildRequires: cairo-devel
+%if 0%{?fedora} >= 32
+BuildRequires: gstreamer1-devel
+BuildRequires: gstreamer1-plugins-base-devel
+%else
+BuildRequires: gstreamer-devel
+BuildRequires: gstreamer-plugins-base-devel
+%endif
+BuildRequires: systemd-devel
+BuildRequires: freetype-devel
+BuildRequires: fontconfig-devel
+BuildRequires: libsndfile-devel
+BuildRequires: libcurl-devel
+BuildRequires: pulseaudio-libs-devel
+BuildRequires: alsa-lib-devel
+BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
+BuildRequires: glew-devel
+BuildRequires: freeglut-devel
+BuildRequires: glfw-devel
+BuildRequires: boost-devel
+BuildRequires: opencv-devel
+BuildRequires: rtaudio-devel
+BuildRequires: mpg123-devel
+BuildRequires: libXcursor-devel
+BuildRequires: libXxf86vm-devel
+BuildRequires: libXrandr-devel
+#BuildRequires: python2-lxml
+#BuildRequires: assimp-devel
 
 %description
 openFrameworks is a C++ toolkit for creative coding. If you are new to OF, welcome!
 
-%prep
-# %setup -qn %{name}-%{commit0}
-%setup -qn %{name}
+The Project Generator is in /opt/openFrameworks/apps/projectGenerator/projectGeneratorSimple.
+To initialize the workspace needed for openFrameworks launch the command: '/opt/openFrameworks/scripts/of-make-workspace'
+this command will initialize a workspace folder, with no path given the default folder is: ~/of-workspace.
 
-# %patch0 -p0
+Remeber to regenerate your local workspace using: '/opt/openFrameworks/scripts/of-make-workspace'
+If you already have a local workspace, BACKUP YOUR PROJECTS BEFORE generating a new local workspace.
+
+%prep
+%setup -qn %{name}
 
 %build
 
