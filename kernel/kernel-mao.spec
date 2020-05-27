@@ -3,9 +3,9 @@
 # Kernel minor version
 %define kmin  6
 # Kernel patch version
-%define kpat  10
+%define kpat  14
 # RT patch version
-%define krt   5
+%define krt   7
 # package version
 %define krel  10
 
@@ -186,6 +186,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.14-rt7-10
+- update to 5.6.14-rt7-10
+
 * Thu May 14 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.10-rt5-10
 - update to 5.6.10-rt5-10
 
