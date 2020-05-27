@@ -3,15 +3,13 @@ Version: 0.2.0
 Release: 4%{?dist}
 Summary: Check whether a given LV2 plugin is up to the specification
 
-License: Artistic License 2.0
+License: Artistic 2.0
 URL:     https://gitlab.com/drobilla/lv2lint
 
-Source0: https://gitlab.com/drobilla/lv2lint/-/archive/%{version}/lv2lint-%{version}.tar.gz
+Source0: %{url}/-/archive/%{version}/lv2lint-%{version}.tar.gz
 Patch0:  lv2lint-0001-fix-multiple-symbol.patch
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc
 BuildRequires: meson
 BuildRequires: lv2-devel
 BuildRequires: lilv-devel
@@ -26,28 +24,22 @@ lv2/sord_validate to reduce the likelihood of shipping plugins with major flaws
 in order to prevent unsatisfied users.
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 
-%set_build_flags
-
-mkdir build
-VERBOSE=1 meson --buildtype release --prefix=/usr build
-
-cd build
-VERBOSE=1 %ninja_build 
+%meson
+%meson_build
 
 %install 
 
-cd build
-VERBOSE=1 %ninja_install
+%meson_install
 
 %files
 %doc README.md ChangeLog VERSION
 %license COPYING
-%{_bindir}/*
-%{_mandir}/*
+%{_bindir}/%{name}
+%{_mandir}/man1/%{name}.1*
 
 %changelog
 * Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-4
