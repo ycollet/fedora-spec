@@ -1,15 +1,13 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
-Version: 1.12
+Version: 1.16
 Release: 3%{?dist}
-License: GPL
+License: BSD
 Group:   Applications/Multimedia
 URL:     https://16-bits.org/pt.php
 Source0: https://github.com/8bitbubsy/pt2-clone/archive/v%{version}.tar.gz#/pt2-clone-%{version}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc
 BuildRequires: make
 BuildRequires: cmake
 BuildRequires: alsa-lib-devel
@@ -26,6 +24,8 @@ Obsoletes: protracker
 
 %build
 
+%{set_build_flags}
+
 LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 mkdir -p build
 cd build
@@ -34,8 +34,6 @@ cd build
 make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 
 %install
-
-%{__rm} -rf %{buildroot}
 
 cd build
 make DESTDIR=%{buildroot} PREFIX=/usr install
@@ -89,11 +87,17 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
+%{_bindir}/protracker2
+%{_bindir}/protracker2-jack
+%{_bindir}/protracker2-pulse
+%{_bindir}/protracker2-alsa
 %{_datadir}/%{name}/*
 %{_datadir}/icons/*
 
 %changelog
+* Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 1.16-3
+- update to 1.16-3
+
 * Mon May 4 2020 Yann Collette <ycollette.nospam@free.fr> - 1.12-3
 - update to 1.12-3
 
