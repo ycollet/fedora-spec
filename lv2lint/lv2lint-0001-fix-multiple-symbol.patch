@@ -1,0 +1,25 @@
+From 599c7ed3ae3941c8d32e505c2ab6e4aa9725da9f Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Wed, 27 May 2020 20:54:34 +0200
+Subject: [PATCH] fix multiple symbol
+
+---
+ lv2lint.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lv2lint.h b/lv2lint.h
+index 4592aae..ed2f970 100644
+--- a/lv2lint.h
++++ b/lv2lint.h
+@@ -55,7 +55,7 @@ typedef enum _ansi_color_t {
+ 	ANSI_COLOR_MAX
+ } ansi_color_t;
+ 
+-const char *colors [2][ANSI_COLOR_MAX];
++extern const char *colors [2][ANSI_COLOR_MAX];
+ 
+ typedef union _var_t var_t;
+ typedef struct _urid_t urid_t;
+-- 
+2.21.3
+

@@ -1,14 +1,13 @@
-%global debug_package %{nil}
-
 Name:    lv2lint
 Version: 0.2.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Check whether a given LV2 plugin is up to the specification
 
-License: GPLv2+
+License: Artistic License 2.0
 URL:     https://gitlab.com/drobilla/lv2lint
 
 Source0: https://gitlab.com/drobilla/lv2lint/-/archive/%{version}/lv2lint-%{version}.tar.gz
+Patch0:  lv2lint-0001-fix-multiple-symbol.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -27,30 +26,33 @@ lv2/sord_validate to reduce the likelihood of shipping plugins with major flaws
 in order to prevent unsatisfied users.
 
 %prep
-%setup -qn lv2lint-%{version}
+%autosetup
 
 %build
 
-LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
-CFLAGS="${CFLAGS:-%{build_cflags}} -fPIC" ; export CFLAGS
+%set_build_flags
 
 mkdir build
-DESTDIR=%{buildroot} VERBOSE=1 meson --buildtype release --prefix=/usr build
+VERBOSE=1 meson --buildtype release --prefix=/usr build
 
 cd build
-DESTDIR=%{buildroot} VERBOSE=1 ninja 
+VERBOSE=1 %ninja_build 
 
 %install 
 
 cd build
-DESTDIR=%{buildroot} VERBOSE=1 ninja install
+VERBOSE=1 %ninja_install
 
 %files
-%doc README.md COPYING ChangeLog VERSION
+%doc README.md ChangeLog VERSION
+%license COPYING
 %{_bindir}/*
 %{_mandir}/*
 
 %changelog
+* Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-4
+- fix spec file
+
 * Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-3
 - update for Fedora 32
 
