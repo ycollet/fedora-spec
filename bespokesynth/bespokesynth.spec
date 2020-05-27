@@ -52,7 +52,7 @@ cp %{SOURCE2} Builds/LinuxMakefile/Makefile
 
 export CURRENTDIR=`pwd`
 cd Builds/LinuxMakefile
-make V=1 DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} CONFIG=Release CXXFLAGS="-I$CURRENTDIR/vst/vstsdk2.4/ -I/usr/include/freetype2" %{?_smp_mflags}
+%{make_build} V=1 DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} CONFIG=Release CPPFLAGS="%{build_cxxflags}" CXXFLAGS="-I$CURRENTDIR/vst/vstsdk2.4/ -I/usr/include/freetype2" %{?_smp_mflags}
 
 %install 
 

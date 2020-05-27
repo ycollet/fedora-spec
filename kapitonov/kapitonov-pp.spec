@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 ae4ed89f3adb54b0b665e2778c81c73ee03827c1
+%global commit0 828dcf7ede9260da6d65ab6896d99d694f7f12af
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    kpp
-Version: 1.1.0
+Version: 1.2.1
 Release: 1%{?dist}
 Summary: A set of plugins for guitar sound processing
 URL:     https://github.com/olegkapitonov/Kapitonov-Plugins-Pack
@@ -57,7 +57,7 @@ A set of plugins for guitar sound processing - LADSPA version
 
 %build
 
-VERBOSE=1 meson --prefix=/usr -Dlv2dir=%{_lib}/lv2 -Dladspadir=%{_lib}/ladspa build
+CFLAGS="%{build_cflags}" CXXFLAGS="%{build_cxxflags}" VERBOSE=1 meson --prefix=/usr -Dlv2dir=%{_lib}/lv2 -Dladspadir=%{_lib}/ladspa build
 cd build
 
 DESTDIR=%{buildroot} VERBOSE=1 ninja 
@@ -74,5 +74,8 @@ DESTDIR=%{buildroot} ninja install
 %{_libdir}/lv2/*
 
 %changelog
+* Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-1
+- update to 1.2.1-1
+
 * Mon Jan 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
 - initial release
