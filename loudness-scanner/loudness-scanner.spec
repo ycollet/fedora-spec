@@ -79,7 +79,9 @@ install -pm 755 loudness-drop-gtk %{buildroot}/%{_bindir}/
 install -pm 755 loudness-drop-qt  %{buildroot}/%{_bindir}/
 
 install -d -m 755 %{buildroot}/%{_libdir}
+%if 0%{?fedora} < 32
 install -pm 755 libinput_gstreamer.so %{buildroot}/%{_libdir}/
+%endif
 install -pm 755 libinput_mpg123.so    %{buildroot}/%{_libdir}/
 install -pm 755 libinput_sndfile.so   %{buildroot}/%{_libdir}/
 
