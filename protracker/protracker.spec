@@ -7,7 +7,7 @@ Group:   Applications/Multimedia
 URL:     https://16-bits.org/pt.php
 Source0: https://github.com/8bitbubsy/pt2-clone/archive/v%{version}.tar.gz#/pt2-clone-%{version}.tar.gz
 
-BuildRequires: gcc
+BuildRequires: gcc gcc-c++
 BuildRequires: make
 BuildRequires: cmake
 BuildRequires: alsa-lib-devel
