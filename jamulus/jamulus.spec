@@ -7,7 +7,7 @@
 
 Name:    Jamulus
 Version: 3.5.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Jamulus
 URL:     https://github.com/corrados/jamulus/
 Group:   Applications/Multimedia
@@ -45,7 +45,7 @@ make VERBOSE=1 %{?_smp_mflags}
 %install
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 %{name} %{buildroot}%{_bindir}/jamulus
+%__install -m 755 %{name} %{buildroot}%{_bindir}/jamulus
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
 %__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/
@@ -74,6 +74,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-2
+- fix an executable right problem
+
 * Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-1
 - update 3.5.5-1
 
