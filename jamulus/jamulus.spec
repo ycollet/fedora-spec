@@ -5,20 +5,19 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-Name:    Jamulus
+Name:    jamulus
 Version: 3.5.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Jamulus
 URL:     https://github.com/corrados/jamulus/
 Group:   Applications/Multimedia
 
-License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
+Obsoletes: Jamulus
+
+License: GPLv2
 
 # original tarfile can be found here:
 Source0: https://github.com/corrados/jamulus/archive/%{commit0}.tar.gz#/jamulus-%{shortcommit0}.tar.gz
-Source1: jamulus.desktop
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -26,6 +25,7 @@ BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-linguist
+BuildRequires: opus-devel
 BuildRequires: desktop-file-utils
 
 %description
@@ -38,17 +38,22 @@ mixes the audio data and sends the mix back to each client.
 
 %build
 
-%_qt5_qmake Jamulus.pro
+%{set_build_flags}
+
+%_qt5_qmake Jamulus.pro CONFIG+=opus_shared_lib
 
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 %{name} %{buildroot}%{_bindir}/jamulus
+%__install -m 755 Jamulus %{buildroot}%{_bindir}/jamulus
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/
+%__install -m 644 distributions/jamulus.desktop %{buildroot}%{_datadir}/applications/
+
+%__install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
+%__install -m 644 distributions/jamulus.png %{buildroot}%{_datadir}/pixmaps/
 
 desktop-file-install --vendor '' \
         --add-category=Audio \
@@ -70,10 +75,15 @@ fi
 /usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%{_bindir}/*
-%{_datadir}/applications/*
+%{_bindir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-3
+- compile with fedora opus package
+- fix install
+
 * Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-2
 - fix an executable right problem
 
