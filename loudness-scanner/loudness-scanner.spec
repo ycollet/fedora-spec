@@ -2,7 +2,7 @@
 
 Name:    loudness-scanner
 Version: 0.5.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A loudness scanner (according to the EBU R128 standard)
 URL:     https://github.com/jiixyj/loudness-scanner
 Group:   Applications/Multimedia
@@ -65,7 +65,7 @@ sed -i -e "s/add_subdirectory(ebur128\/ebur128)/#add_subdirectory(ebur128\/ebur1
 
 mkdir build
 cd build
-%__cmake ..
+%__cmake -DEBUR128_INCLUDE_DIR=/usr/include ..
 %make_build
 
 %install
@@ -74,9 +74,14 @@ cd build
 #make DESTDIR=%{buildroot} install
 
 install -d -m 755 %{buildroot}/%{_bindir}
-install -pm 644 loudness          %{buildroot}/%{_bindir}/
-install -pm 644 loudness-drop-gtk %{buildroot}/%{_bindir}/
-install -pm 644 loudness-drop-qt  %{buildroot}/%{_bindir}/
+install -pm 755 loudness          %{buildroot}/%{_bindir}/
+install -pm 755 loudness-drop-gtk %{buildroot}/%{_bindir}/
+install -pm 755 loudness-drop-qt  %{buildroot}/%{_bindir}/
+
+install -d -m 755 %{buildroot}/%{_libdir}
+install -pm 755 libinput_gstreamer.so %{buildroot}/%{_libdir}/
+install -pm 755 libinput_mpg123.so    %{buildroot}/%{_libdir}/
+install -pm 755 libinput_sndfile.so   %{buildroot}/%{_libdir}/
 
 chrpath --delete $RPM_BUILD_ROOT/usr/bin/*
 
@@ -84,8 +89,12 @@ chrpath --delete $RPM_BUILD_ROOT/usr/bin/*
 %doc README.md
 %license COPYING
 %{_bindir}/*
+%{_libdir}/*
 
 %changelog
+* Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-3
+- fix install
+
 * Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-2
 - disable the build of libebur128
 
