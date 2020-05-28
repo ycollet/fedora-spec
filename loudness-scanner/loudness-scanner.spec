@@ -1,9 +1,8 @@
-# Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 Name:    loudness-scanner
 Version: 0.5.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A loudness scanner (according to the EBU R128 standard)
 URL:     https://github.com/jiixyj/loudness-scanner
 Group:   Applications/Multimedia
@@ -22,15 +21,11 @@ Source0: loudness-scanner.tar.gz
 
 License: MIT
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
-BuildRequires: qt5-qtbase-devel
-BuildRequires: qt5-qtbase-gui
-BuildRequires: qt5-qtsvg-devel
+BuildRequires: cmake
+BuildRequires: chrpath
 BuildRequires: qt-devel
 BuildRequires: glib2-devel
-BuildRequires: cmake
 BuildRequires: libsndfile-devel
 BuildRequires: taglib-devel
 BuildRequires: mpg123-devel
@@ -45,9 +40,9 @@ BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: librsvg2-devel
 BuildRequires: gtk2-devel
-BuildRequires: chrpath
 BuildRequires: harfbuzz-devel
 BuildRequires: speexdsp-devel
+BuildRequires: libebur128-devel
 
 %description
 loudness-scanner is a tool that scans your music files according to the EBU
@@ -55,38 +50,45 @@ R128 standard for loudness normalisation. It optionally adds ReplayGain
 compatible tags to the files.
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %ifarch x86_64
-sed -i -e "s/DESTINATION lib/DESTINATION lib64/g" ebur128//ebur128/CMakeLists.txt
+sed -i -e "s/DESTINATION lib/DESTINATION lib64/g" ebur128/ebur128/CMakeLists.txt
 %endif
+
+# Remove the build of ebur128, it's a Fedora package
+sed -i -e "s/add_subdirectory(ebur128\/ebur128)/#add_subdirectory(ebur128\/ebur128)/g" CMakeLists.txt
 
 %build
 
+%{set_build_flags}
+
 mkdir build
 cd build
-%cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS="-fPIC -I/usr/include/harfbuzz/" ..
-make VERBOSE=1 %{?_smp_mflags}
+%__cmake ..
+%make_build
 
 %install
 
 cd build
-make DESTDIR=%{buildroot} install
+#make DESTDIR=%{buildroot} install
 
-install -d -m 755 $RPM_BUILD_ROOT%{_bindir}
-install -pm 644 loudness          $RPM_BUILD_ROOT/%{_bindir}/
-install -pm 644 loudness-drop-gtk $RPM_BUILD_ROOT/%{_bindir}/
-install -pm 644 loudness-drop-qt  $RPM_BUILD_ROOT/%{_bindir}/
+install -d -m 755 %{buildroot}/%{_bindir}
+install -pm 644 loudness          %{buildroot}/%{_bindir}/
+install -pm 644 loudness-drop-gtk %{buildroot}/%{_bindir}/
+install -pm 644 loudness-drop-qt  %{buildroot}/%{_bindir}/
 
 chrpath --delete $RPM_BUILD_ROOT/usr/bin/*
 
 %files
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/*
-%{_libdir}/*
-%{_includedir}/*
 
 %changelog
+* Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-2
+- disable the build of libebur128
+
 * Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-1
 - fix for Fedora 31
 
