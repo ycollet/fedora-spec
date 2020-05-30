@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 c6b6e3ab02d7ec1e93edeeb8042a89a561924826
 %global gittag0 master
@@ -7,12 +5,12 @@
 
 Name:    jamulus
 Version: 3.5.5
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Jamulus
 URL:     https://github.com/corrados/jamulus/
 Group:   Applications/Multimedia
 
-Obsoletes: Jamulus
+Obsoletes: Jamulus <= 3.5.3-3
 
 License: GPLv2
 
@@ -38,11 +36,9 @@ mixes the audio data and sends the mix back to each client.
 
 %build
 
-%{set_build_flags}
+%{qmake_qt5} Jamulus.pro CONFIG+=opus_shared_lib
 
-%_qt5_qmake Jamulus.pro CONFIG+=opus_shared_lib
-
-make VERBOSE=1 %{?_smp_mflags}
+%make_build VERBOSE=1
 
 %install
 
@@ -80,6 +76,9 @@ fi
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sat May 230 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-4
+- fix debug package
+
 * Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-3
 - compile with fedora opus package
 - fix install
