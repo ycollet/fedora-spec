@@ -36,7 +36,15 @@ mixes the audio data and sends the mix back to each client.
 
 %build
 
-%{qmake_qt5} Jamulus.pro CONFIG+=opus_shared_lib
+# optflags   %{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection
+#  -fcf-protection produce an error in an object generatoin ...
+
+qmake-qt5 Jamulus.pro \
+	  QMAKE_CFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
+	  QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
+	  QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
+	  QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
+	  CONFIG+=opus_shared_lib 
 
 %make_build VERBOSE=1
 
@@ -76,7 +84,7 @@ fi
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
-* Sat May 230 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-4
+* Sat May 30 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-4
 - fix debug package
 
 * Thu May 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-3
