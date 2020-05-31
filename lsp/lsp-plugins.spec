@@ -9,7 +9,7 @@
 
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.21
+Version: 1.1.22
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -17,7 +17,7 @@ URL:     https://github.com/sadko4u/lsp-plugins
 
 # git clone https://github.com/sadko4u/lsp-plugins
 # cd lsp-plugins
-# git checkout lsp-plugins-1.1.21
+# git checkout lsp-plugins-1.1.22
 # git submodule init
 # git submodule update
 # find . -name .git --exec rm -rf {} \;
@@ -75,6 +75,9 @@ chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.
 %{_sysconfdir}/xdg/menus/applications-merged/lsp-plugins.menu
 
 %changelog
+* Sun May 31 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.22-1
+- update to 1.1.22-1
+
 * Sun May 17 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.21-1
 - update to 1.1.21-1
 
