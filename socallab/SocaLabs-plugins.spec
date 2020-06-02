@@ -49,7 +49,8 @@ BuildRequires: ladspa-devel
 BuildRequires: JUCE
 BuildRequires: xorg-x11-server-Xvfb
 BuildRequires: lv2-devel
-BuildRequires: python2-devel
+BuildRequires: python3-devel
+BuildRequires: python-unversioned-command
 
 Requires: alsa
 
