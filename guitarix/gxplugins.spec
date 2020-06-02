@@ -1,23 +1,10 @@
 # Global variables for github repository
-%global commit0 2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
-%global gittag0 v0.7
+%global commit0 e40b34f3fd5dc4c6523dc826062d0ddb2578f573
+%global gittag0 v0.8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
-# git clone https://github.com/brummer10/GxPlugins.lv2.git
-# mv GxPlugins.lv2 GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
-# cd GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
-# git checkout 2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8.tar.gz GxPlugins.lv2.2625ee0d80c7a24b5afabd5e1b91cf7898fabdd8
-
 Name:    GxPlugins
-Version: 0.7.%{shortcommit0}
+Version: 0.8.%{shortcommit0}
 Release: 1%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
 
@@ -25,9 +12,17 @@ Group:   Applications/Multimedia
 License: GPLv2+
 
 URL:     https://github.com/brummer10/GxPlugins.lv2
-SOURCE0: GxPlugins.lv2.%{commit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# git clone https://github.com/brummer10/GxPlugins.lv2.git
+# cd GxPlugins.lv2
+# git checkout v0.8
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz GxPlugins.lv2.tar.gz GxPlugins.lv2
+
+Source0: GxPlugins.lv2.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -304,16 +299,28 @@ Group:   Applications/Multimedia
 %description -n lv2-GxUltraCab-plugin
 Cabinet simulator Lv2 stereo plugin
 
+%package -n lv2-GxFz1b-plugin
+Summary: Vintage Fuzz Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxFz1b-plugin
+Vintage Fuzz Pedal simulation
+
+%package -n lv2-GxFz1s-plugin
+Summary: Vintage Fuzz Pedal simulation
+Group:   Applications/Multimedia
+%description -n lv2-GxFz1s-plugin
+Vintage Fuzz Pedal simulation
+
 %prep
-%setup -qn GxPlugins.lv2.%{commit0}
+%setup -qn GxPlugins.lv2
 
 %build
 
-%make_build INSTALL_DIR=%{buildroot}%{_libdir}/lv2
+%make_build INSTALL_DIR=%{buildroot}%{_libdir}/lv2 SSE_CFLAGS="%{optflags}" STRIP=true
 
 %install 
 
-make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
+make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 SSE_CFLAGS="%{optflags}" STRIP=true install
 
 %files -n lv2-AxisFace-plugin
 %{_libdir}/lv2/gx_AxisFace.lv2/*
@@ -447,7 +454,16 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
 %files -n lv2-GxUltraCab-plugin
 %{_libdir}/lv2/gx_ultracab.lv2/*
 
+%files -n lv2-GxFz1b-plugin
+%{_libdir}/lv2/gx_maestro_fz1b.lv2/*
+
+%files -n lv2-GxFz1s-plugin
+%{_libdir}/lv2/gx_maestro_fz1s.lv2/*
+
 %changelog
+* Tue Jun 02 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8
+- Update to v0.8
+
 * Wed Jul 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7
 - Update to v0.7
 
