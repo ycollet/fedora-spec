@@ -40,10 +40,10 @@ mixes the audio data and sends the mix back to each client.
 #  -fcf-protection produce an error in an object generatoin ...
 
 qmake-qt5 Jamulus.pro \
-	  QMAKE_CFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
-	  QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
-	  QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
-	  QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection" \
+	  QMAKE_CFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+	  QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+	  QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+	  QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
 	  CONFIG+=opus_shared_lib 
 
 %make_build VERBOSE=1
