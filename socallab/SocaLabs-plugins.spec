@@ -20,6 +20,8 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+%global debug_package %{nil}
+
 Name:    SocaLabs-plugins
 Version: 20200512
 Release: 4%{?dist}
