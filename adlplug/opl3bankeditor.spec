@@ -1,10 +1,10 @@
 # Global variables for github repository
 %global commit0 a8c9a70a81cc076abea2ed6c60437edb7aadca59
-%global gittag0 v1.5.0
+%global gittag0 v1.5.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    opl3bankeditor
-Version: 1.5.0
+Version: 1.5.1
 Release: 1%{?dist}
 Summary: A small cross-platform editor of the OPL3 FM banks of different formats
 URL:     https://github.com/Wohlstand/OPL3BankEditor
@@ -13,7 +13,7 @@ Group:   Applications/Multimedia
 License: GPLv3
 
 # git clone https://github.com/Wohlstand/OPL3BankEditor
-# git checkout v1.5.0
+# git checkout v1.5.1
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -22,8 +22,6 @@ License: GPLv3
 # rm -rf OPL3BankEditor
 
 Source0: OPL3BankEditor.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -52,13 +50,13 @@ cd build
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
        ..
 
-make VERBOSE=1 %{?_smp_mflags}
+%make_build VERBOSE=1
 
 %install
 
 cd build
 
-make DESTDIR=%{buildroot} install
+%make_install
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -91,5 +89,8 @@ fi
 %{_datadir}/opl3_bank_editor/*
 
 %changelog
+* Tue Jun 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.1-1
+- update to 1.5.1
+
 * Fri Mar 22 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-1
 - initial release of the spec file
