@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 1b9e021b63a73a4bf86a6e4fb73200511391c691
 %global gittag0 master
@@ -63,11 +61,11 @@ A LV2 reverberation plugin
 
 %build
 
-%make_build PREFIX=%{_prefix} LIBDIR=%{_libdir} CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" VERBOSE=true
+%make_build PREFIX=%{_prefix} LIBDIR=%{_libdir} CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" SKIP_STRIPPING=true VERBOSE=true
 
 %install
 
-%make_install PREFIX=%{_prefix} LIBDIR=%{_libdir} CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" VERBOSE=true
+%make_install PREFIX=%{_prefix} LIBDIR=%{_libdir} CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" SKIP_STRIPPING=true VERBOSE=true
 
 %files
 %doc README.md
