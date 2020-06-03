@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 e19753267cd6010b7cd734733e1ee5058d8ebda7
+%global commit0 c882920ef9470cef21504911d1f103033e8fa327
 
-%global gittag0 1.0.3
+%global gittag0 1.0.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-CaptainsSounds
-Version: 1.0.3
+Version: 1.0.4
 Release: 3%{?dist}
 Summary: CaptainsSounds plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r CaptainsSounds_plugin/dist/CaptainsSounds/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.4-3
 - initial specfile

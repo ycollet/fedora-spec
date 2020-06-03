@@ -1,6 +1,5 @@
 # Global variables for github repository
-%global commit0 4056917d94fe821fa7789d2df44f82799ba87045
-
+%global commit0 8d37c0aed01af098e9532205bba6e756809f4247
 %global gittag0 1.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -33,7 +32,7 @@ URL:     https://github.com/VCVRack/AudibleInstruments
 
 # git clone https://github.com/VCVRack/AudibleInstruments.git
 # cd AudibleInstruments
-# git checkout v1.1.0
+# git checkout v1.2.0
 # git submodule init
 # git submodule update
 # cd eurorack
@@ -122,5 +121,5 @@ cp -r AudibleInstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
 - initial specfile
