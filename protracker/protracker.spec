@@ -1,10 +1,10 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
-Version: 1.17
+Version: 1.18
 Release: 3%{?dist}
 License: BSD
-Group:   Applications/Multimedia
 URL:     https://16-bits.org/pt.php
+
 Source0: https://github.com/8bitbubsy/pt2-clone/archive/v%{version}.tar.gz#/pt2-clone-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
@@ -20,7 +20,7 @@ ProTracker2 is a chiptune tracker for making chiptune-like music on a modern com
 Obsoletes: protracker
 
 %prep
-%setup -qn pt2-clone-%{version}
+%autosetup -n pt2-clone-%{version}
 
 %build
 
@@ -95,6 +95,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 1.18-3
+- update to 1.18-3
+
 * Wed Jun 3 2020 Yann Collette <ycollette.nospam@free.fr> - 1.17-3
 - update to 1.17-3
 
