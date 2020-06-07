@@ -1,21 +1,13 @@
-# Global variables for github repository
-%global commit0 c6b6e3ab02d7ec1e93edeeb8042a89a561924826
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    jamulus
 Version: 3.5.5
-Release: 4%{?dist}
-Summary: Jamulus
+Release: 5%{?dist}
+Summary: Internet jam session software
 URL:     https://github.com/corrados/jamulus/
-Group:   Applications/Multimedia
-
-Obsoletes: Jamulus <= 3.5.3-3
 
 License: GPLv2
 
 # original tarfile can be found here:
-Source0: https://github.com/corrados/jamulus/archive/%{commit0}.tar.gz#/jamulus-%{shortcommit0}.tar.gz
+Source0: https://github.com/corrados/jamulus/archive/r3_5_5.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -27,63 +19,57 @@ BuildRequires: opus-devel
 BuildRequires: desktop-file-utils
 
 %description
-The Jamulus software enables musicians to perform real-time jam sessions over the internet.
-There is a Jamulus server which collects the audio data from each Jamulus client,
-mixes the audio data and sends the mix back to each client.
+Jamulus is a client / server software which allow to perform
+real-time rehearsal over the internet. It uses Jack Audio Connection Kit
+and Opus audio codec to manage the audio session. 
 
 %prep
-%setup -qn jamulus-%{commit0}
+%autosetup -n %{name}-r3_5_5
 
 %build
 
-# optflags   %{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection
-#  -fcf-protection produce an error in an object generatoin ...
-
-qmake-qt5 Jamulus.pro \
-	  QMAKE_CFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
-	  QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
-	  QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
-	  QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
-	  CONFIG+=opus_shared_lib 
+%if 0%{?fedora} >= 32
+  %qmake_qt5 Jamulus.pro CONFIG+=opus_shared_lib
+%else
+  # -fcf-protection produce an error in an object generatoin ...
+  qmake-qt5 Jamulus.pro \
+            QMAKE_CFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+            QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+            QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+            QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
+            CONFIG+=opus_shared_lib 
+%endif
 
 %make_build VERBOSE=1
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 Jamulus %{buildroot}%{_bindir}/jamulus
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 Jamulus %{buildroot}%{_bindir}/jamulus
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 distributions/jamulus.desktop %{buildroot}%{_datadir}/applications/
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 644 distributions/jamulus.desktop %{buildroot}%{_datadir}/applications/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
-%__install -m 644 distributions/jamulus.png %{buildroot}%{_datadir}/pixmaps/
+install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
+install -m 644 distributions/jamulus.png %{buildroot}%{_datadir}/pixmaps/
 
-desktop-file-install --vendor '' \
-        --add-category=Audio \
-        --add-category=X-Jack \
-        --dir %{buildroot}%{_datadir}/applications \
-        %{buildroot}%{_datadir}/applications/jamulus.desktop
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/jamulus.desktop
 
 %files
+%doc README.md INSTALL.md ChangeLog
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-5
+- fix spec file
+
 * Sat May 30 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-4
 - fix debug package
 
