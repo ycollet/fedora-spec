@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.459
+Version: 0.8.535
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -61,7 +61,7 @@ sed -i -e '/meson.add_install_script/,+2d' meson.build
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
 # Remove summary which is only available on meson 0.53 and stick to version 0.52
 sed -i -e "s/meson_version: '>= 0.53.0'/meson_version: '>= 0.52.0'/g" meson.build
-sed -i -e "713,745d" meson.build
+sed -i -e "733,764d" meson.build
 
 %build
 
@@ -103,8 +103,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %doc AUTHORS THANKS CHANGELOG.md CONTRIBUTING.md
+%license COPYING
 %{_bindir}/*
 %{_datadir}/applications/*
+%{_datadir}/doc/%{name}/*
 %{_datadir}/fonts/*
 %{_datadir}/glib-2.0/*
 %{_datadir}/icons/*
@@ -115,6 +117,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_mandir}/*
 
 %changelog
+* Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.535-2
+- update to 0.8.535-2
+
 * Sat May 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.459-2
 - update to 0.8.459-2
 
