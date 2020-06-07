@@ -6,7 +6,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    abNinjam
-Version: 0.0.5
+Version: 0.0.7
 Release: 1%{?dist}
 Summary: Ninjam LV2 / VST plugin
 URL:     https://github.com/antanasbruzas/abNinjam
@@ -15,7 +15,7 @@ License: GPLv3
 
 # git clone https://github.com/antanasbruzas/abNinjam
 # cd abNinjam
-# git checkout v0.0.5
+# git checkout v0.0.7
 # git submodule init
 # git submodule update --recursive
 # find . -name .git -exec rm -rf {} \;
@@ -24,8 +24,6 @@ License: GPLv3
 # rm -rf abNinjam
 
 Source0: abNinjam.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -45,7 +43,7 @@ BuildRequires: cmake make
 Ninjam LV2 / VST plugin.
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 # Don't try to create /usr/lib64/{vst,lv2} directories
 sed -i -e "/MAKE_DIRECTORY/d" cmake/VSTConfig.cmake
@@ -75,6 +73,9 @@ cd build
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.7-1
+- update to 0.0.7-1
+
 * Sun May 31 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.5-1
 - update to 0.0.5-1
 
