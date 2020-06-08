@@ -1,6 +1,6 @@
 Name:    jamulus
 Version: 3.5.5
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Internet jam session software
 URL:     https://github.com/corrados/jamulus/
 
@@ -25,6 +25,9 @@ and Opus audio codec to manage the audio session.
 
 %prep
 %autosetup -n %{name}-r3_5_5
+
+# Remove Opus source code, we use Opus library from Fedora
+rm -rf libs/opus
 
 %build
 
@@ -60,13 +63,16 @@ desktop-file-install                         \
   %{buildroot}/%{_datadir}/applications/jamulus.desktop
 
 %files
-%doc README.md INSTALL.md ChangeLog
+%doc README.md ChangeLog
 %license COPYING
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Mon Jun 8 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-6
+- fix spec file
+
 * Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-5
 - fix spec file
 
