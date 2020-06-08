@@ -19,7 +19,7 @@ BuildRequires: opus-devel
 BuildRequires: desktop-file-utils
 
 %description
-Jamulus is a client / server software which allow to perform
+jamulus is a client / server software which allow to perform
 real-time rehearsal over the internet. It uses Jack Audio Connection Kit
 and Opus audio codec to manage the audio session. 
 
@@ -31,8 +31,13 @@ rm -rf libs/opus
 
 %build
 
+pushd .
+cd src/res/translation
+lrelease-qt5 *.ts
+popd
+
 %if 0%{?fedora} >= 32
-  %qmake_qt5 Jamulus.pro CONFIG+=opus_shared_lib
+  %qmake_qt5 Jamulus.pro CONFIG+="noupcasename opus_shared_lib"
 %else
   # -fcf-protection produce an error in an object generatoin ...
   qmake-qt5 Jamulus.pro \
@@ -40,7 +45,7 @@ rm -rf libs/opus
             QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
             QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
             QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
-            CONFIG+=opus_shared_lib 
+            CONFIG+="noupcasename opus_shared_lib" 
 %endif
 
 %make_build VERBOSE=1
@@ -48,19 +53,19 @@ rm -rf libs/opus
 %install
 
 install -m 755 -d %{buildroot}/%{_bindir}/
-install -m 755 Jamulus %{buildroot}%{_bindir}/jamulus
+install -m 755 %{name} %{buildroot}%{_bindir}/%{name}
 
 install -m 755 -d %{buildroot}/%{_datadir}/applications/
-install -m 644 distributions/jamulus.desktop %{buildroot}%{_datadir}/applications/
+install -m 644 distributions/%{name}.desktop %{buildroot}%{_datadir}/applications/
 
 install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
-install -m 644 distributions/jamulus.png %{buildroot}%{_datadir}/pixmaps/
+install -m 644 distributions/%{name}.png %{buildroot}%{_datadir}/pixmaps/
 
 desktop-file-install                         \
   --add-category="Audio"                     \
   --delete-original                          \
   --dir=%{buildroot}%{_datadir}/applications \
-  %{buildroot}/%{_datadir}/applications/jamulus.desktop
+  %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
 %doc README.md ChangeLog
