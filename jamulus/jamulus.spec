@@ -1,5 +1,5 @@
 Name:    jamulus
-Version: 3.5.5
+Version: 3.5.6
 Release: 6%{?dist}
 Summary: Internet jam session software
 URL:     https://github.com/corrados/jamulus/
@@ -7,7 +7,7 @@ URL:     https://github.com/corrados/jamulus/
 License: GPLv2
 
 # original tarfile can be found here:
-Source0: https://github.com/corrados/jamulus/archive/r3_5_5.tar.gz#/%{name}-%{version}.tar.gz
+Source0: https://github.com/corrados/jamulus/archive/r3_5_6.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -24,7 +24,7 @@ real-time rehearsal over the internet. It uses Jack Audio Connection Kit
 and Opus audio codec to manage the audio session. 
 
 %prep
-%autosetup -n %{name}-r3_5_5
+%autosetup -n %{name}-r3_5_6
 
 # Remove Opus source code, we use Opus library from Fedora
 rm -rf libs/opus
@@ -53,13 +53,13 @@ popd
 %install
 
 install -m 755 -d %{buildroot}/%{_bindir}/
-install -m 755 %{name} %{buildroot}%{_bindir}/%{name}
+install -m 755 -p %{name} %{buildroot}%{_bindir}/%{name}
 
 install -m 755 -d %{buildroot}/%{_datadir}/applications/
-install -m 644 distributions/%{name}.desktop %{buildroot}%{_datadir}/applications/
+install -m 644 -p distributions/%{name}.desktop %{buildroot}%{_datadir}/applications/
 
 install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
-install -m 644 distributions/%{name}.png %{buildroot}%{_datadir}/pixmaps/
+install -m 644 -p distributions/%{name}.png %{buildroot}%{_datadir}/pixmaps/
 
 desktop-file-install                         \
   --add-category="Audio"                     \
@@ -75,6 +75,9 @@ desktop-file-install                         \
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue Jun 9 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.6-6
+- update to 3.5.6-6
+
 * Mon Jun 8 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.5-6
 - fix spec file
 
