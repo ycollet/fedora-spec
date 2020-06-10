@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 16b418c1171123941ce3bcde05c9e58b84940d73
+%global commit0 4c779b9d30b2ff3d753049ae69b4c31f505b380d
 
-%global gittag0 1.0.0
+%global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-LunettaModula
-Version: 1.0.0
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: LunettaModula plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r LunettaModula_plugin/dist/LunettaModula/* %{buildroot}%{_libexecdir}/Rack1
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - initial specfile

@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 dda5029d988707796deb39f7a19345dfbbcc316c
+%global commit0 589e2176178a785dd0859c42cadc78b7e3b9a028
 
-%global gittag0 1.0.1
+%global gittag0 1.0.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-EH_modules
-Version: 1.0.1
+Version: 1.0.2
 Release: 3%{?dist}
 Summary: EH_modules plugin for Rack
 
@@ -109,5 +109,5 @@ cp -r EH_modules_plugin/dist/EH_modules/* %{buildroot}%{_libexecdir}/Rack1/plugi
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
 - initial specfile
