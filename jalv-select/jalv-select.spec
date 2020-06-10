@@ -27,6 +27,8 @@ BuildRequires: gtkmm24-devel
 BuildRequires: lv2-devel
 BuildRequires: lilv-devel
 
+Requires: jalv jalv-qt jalv-gtk jal-gtkmm
+
 %description
 A little GUI to select lv2 plugs from a list
 
