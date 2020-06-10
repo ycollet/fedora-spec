@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 a52e0c15545c13780ac2e47a8291d6260d28a024
-%global gittag0 3.0.0
+%global commit0 d2f68cebc74445f8f758b422afdb440c9bcc1f7f
+%global gittag0 3.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    dragonfly-reverb
-Version: 3.0.0
+Version: 3.1.1
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -15,18 +15,16 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
-# git clone https://github.com/michaelwillis/dragonfly-reverb/
+# git clone https://github.com/michaelwillis/dragonfly-reverb
 # cd dragonfly-reverb
-# git checkout 3.0.0
+# git checkout 3.1.1
 # git submodule init
 # git submodule update
-# rm -rf .git dpf/.git
+# find . -name .git -exec rm -rf {} \;
 # cd ..
 # tar cvfz dragonfly-reverb.tar.gz dragonfly-reverb/*
 
 Source0: dragonfly-reverb.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -39,7 +37,7 @@ BuildRequires: liblo-devel
 A free hall-style reverb based on freeverb3 algorithms
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %build
 make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
@@ -64,6 +62,9 @@ cp bin/DragonflyRoomReverb-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Wed Jun 10 2020 Yann Collette <ycollette.nospam@free.fr> - 3.11-1
+- update to 3.1.1-1
+
 * Sun Mar 1 2020 Yann Collette <ycollette.nospam@free.fr> - 3.0.0-1
 - update to 3.0.0
 
