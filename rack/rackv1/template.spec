@@ -11,7 +11,6 @@ Version: VERSION
 Release: 3%{?dist}
 Summary: SLUGNAME plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     SOURCEURL
 
@@ -33,8 +32,6 @@ URL:     SOURCEURL
 Source0: Rack.tar.gz
 Source1: SOURCEURL/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: JSONFILE
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -60,7 +57,7 @@ BuildRequires: jq
 SLUGNAME plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -92,7 +89,7 @@ sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 mkdir SLUGNAME_plugin
 tar xvfz %{SOURCE1} --directory=SLUGNAME_plugin --strip-components=1 
 
-cp %{SOURCE2} SLUGNAME_plugin/plugin.json
+cp -n %{SOURCE2} SLUGNAME_plugin/plugin.json
 
 %build
 
