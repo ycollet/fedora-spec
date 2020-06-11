@@ -1,21 +1,18 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 4e428f197a2b59fc89718052d07015bda89de3ad
+%global commit0 4b6947e3cd2550fa64180de9ad4326eb18d0a141
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 2.1.1
+Version: 2.2.1
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
-Group:   Applications/Multimedia
 License: GPLv3
 
 Source0: https://gitlab.com/iurie-sw/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -34,7 +31,7 @@ Geonkick is a synthesizer that can synthesize elements of percussion.
 The most basic examples are: kick drums, snares, hit-hats, shakers, claps, steaks.
 
 %prep
-%setup -qn %{name}-v%{version}
+%autosetup -n %{name}-v%{version}
 
 sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" plugin/lv2/CMakeLists.txt
 
@@ -49,26 +46,13 @@ cd build
        -DREDKITE_LIBRARY_DIR="/usr/%{_lib}" \
        ..
 
-make DESTDIR=%{buildroot}
+%make_build
 
 %install
 
 cd build
 
-make DESTDIR=%{buildroot} install
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
+%make_install
 
 %files
 %doc LICENSE README.md doc/Documentation.md
@@ -77,6 +61,9 @@ fi
 %{_datadir}/*
 
 %changelog
+* Thu Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.1-1
+- Update to 2.2.1
+
 * Wed May 13 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-1
 - Update to 2.1.1
 
