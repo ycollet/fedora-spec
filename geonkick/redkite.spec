@@ -1,19 +1,16 @@
 # Global variables for github repository
-%global commit0 f11e5f9eb057c9e92300a73c1c49e6fedcacfe2c
+%global commit0 7e15627dfd54c748129fe1cff9a4f83f034b1d9a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    redkite
-Version: 0.8.1
+Version: 1.0.0
 Release: 2%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://gitlab.com/iurie-sw/redkite
-Group:   Applications/Multimedia
 License: GPLv3
 
 Source0: https://gitlab.com/iurie-sw/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cairo-devel
@@ -23,7 +20,7 @@ BuildRequires: cmake make
 Redkite is a small free software and cross-platform GUI toolkit. It is developed in C++11&14 and inspired from other well known GUI toolkits.
 
 %prep
-%setup -qn %{name}-v%{version}
+%autosetup -n %{name}-v%{version}
 
 sed -i -e "s/${CMAKE_INSTALL_PREFIX}\/lib/${CMAKE_INSTALL_PREFIX}\/%{_lib}/g" CMakeLists.txt
 
@@ -44,8 +41,12 @@ make DESTDIR=%{buildroot} install
 %{_bindir}/*
 %{_libdir}/*
 %{_includedir}/*
+%{_mandir}/*
 
 %changelog
+* Thu Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
+- update to 1.0.0-1
+
 * Sat May 09 2020 Bruno Vernay <brunovern.a@gmail.com> - 0.8.1-2
 - Update the URL, add make dependency, change licence to GPLv3
 
