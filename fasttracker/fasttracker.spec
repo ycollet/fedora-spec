@@ -34,8 +34,6 @@ make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 
 %install
 
-%{__rm} -rf %{buildroot}
-
 cd build
 make DESTDIR=%{buildroot} PREFIX=/usr install
 
@@ -61,9 +59,6 @@ cat > %{buildroot}/%{_bindir}/%{name}-alsa <<EOF
 SDL_AUDIODRIVER=alsa fasttracker2
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
