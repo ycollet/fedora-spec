@@ -1,6 +1,6 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
-Version: 1.18
+Version: 1.19
 Release: 3%{?dist}
 License: BSD
 URL:     https://16-bits.org/pt.php
@@ -31,12 +31,13 @@ mkdir -p build
 cd build
 %cmake -DCMAKE_BUILD_TYPE=RELEASE ..
 
-make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
+%make_build
 
 %install
 
 cd build
-make DESTDIR=%{buildroot} PREFIX=/usr install
+
+%make_install
 
 mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/protracker2
 
@@ -62,31 +63,15 @@ EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
-%__install -m 644 ../src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
+%__install -m 644 -p ../src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
 
 %__install -m 755 -d %{buildroot}%{_datadir}/%{name}
 %__cp ../release/effects.txt ../release/help.txt ../release/keybindings.txt ../release/LICENSES.txt ../release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
 
-%clean
-
-%{__rm} -rf %{buildroot}
-
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/%{name} >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/%{name} >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/%{name} >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/%{name} &>/dev/null || :
-
 %files
 %defattr(-,root,root,-)
+%doc README.md
+%license LICENSE LICENSES.txt
 %{_bindir}/protracker2
 %{_bindir}/protracker2-jack
 %{_bindir}/protracker2-pulse
@@ -95,6 +80,9 @@ fi
 %{_datadir}/icons/*
 
 %changelog
+* Fri Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.19-3
+- update to 1.19-3
+
 * Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 1.18-3
 - update to 1.18-3
 
