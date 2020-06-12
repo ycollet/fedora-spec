@@ -1,12 +1,10 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
-%global commit0 4b6947e3cd2550fa64180de9ad4326eb18d0a141
+%global commit0 4c56cfeb78e832b9a6dd9157ed3e541f88734d2c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 2.2.1
+Version: 2.2.3
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
@@ -37,12 +35,14 @@ sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" pl
 
 %build
 
+%set_build_flags
+
 mkdir build
 cd build
 
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
-       -DCMAKE_CXX_FLAGS="-I/usr/include/redkite" \
-       -DCMAKE_C_FLAGS="-I/usr/include/redkite" \
+       -DCMAKE_CXX_FLAGS="$CXXFLAGS -I/usr/include/redkite" \
+       -DCMAKE_C_FLAGS="$CFLAGS -I/usr/include/redkite" \
        -DREDKITE_LIBRARY_DIR="/usr/%{_lib}" \
        ..
 
@@ -55,13 +55,17 @@ cd build
 %make_install
 
 %files
-%doc LICENSE README.md doc/Documentation.md
+%doc README.md doc/Documentation.md
+%license LICENSE
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*
 
 %changelog
-* Thu Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.1-1
+* Fri Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.3-1
+- Update to 2.2.3-1
+
+* Thu Jun 11 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.1-1
 - Update to 2.2.1
 
 * Wed May 13 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-1
