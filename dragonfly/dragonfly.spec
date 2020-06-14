@@ -11,7 +11,6 @@ Version: 3.1.1
 Release: 1%{?dist}
 Summary: DragonFly reverberation plugin
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
@@ -40,29 +39,52 @@ A free hall-style reverb based on freeverb3 algorithms
 %autosetup -n %{name}
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
+
+%make_build
 
 %install
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 %__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyHallReverb.lv2
 %__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyRoomReverb.lv2
+%__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyEarlyReflections.lv2
+%__install -m 755 -d %{buildroot}/%{_libdir}/lv2/DragonflyPlateReverb.lv2
 %__install -m 755 -d %{buildroot}/%{_libdir}/vst
+%__install -m 755 -d %{buildroot}/%{_datadir}/pixmaps
 
-cp bin/DragonflyHallReverb %{buildroot}/%{_bindir}/
-cp bin/DragonflyRoomReverb %{buildroot}/%{_bindir}/
-cp -r bin/DragonflyHallReverb.lv2/* %{buildroot}/%{_libdir}/lv2/DragonflyHallReverb.lv2/
-cp -r bin/DragonflyRoomReverb.lv2/* %{buildroot}/%{_libdir}/lv2/DragonflyRoomReverb.lv2/
-cp bin/DragonflyHallReverb-vst.so %{buildroot}/%{_libdir}/vst/
-cp bin/DragonflyRoomReverb-vst.so %{buildroot}/%{_libdir}/vst/
+cp bin/DragonflyHallReverb       %{buildroot}/%{_bindir}/
+cp bin/DragonflyRoomReverb       %{buildroot}/%{_bindir}/
+cp bin/DragonflyEarlyReflections %{buildroot}/%{_bindir}/
+cp bin/DragonflyPlateReverb      %{buildroot}/%{_bindir}/
+
+cp -r bin/DragonflyHallReverb.lv2/*       %{buildroot}/%{_libdir}/lv2/DragonflyHallReverb.lv2/
+cp -r bin/DragonflyRoomReverb.lv2/*       %{buildroot}/%{_libdir}/lv2/DragonflyRoomReverb.lv2/
+cp -r bin/DragonflyEarlyReflections.lv2/* %{buildroot}/%{_libdir}/lv2/DragonflyEarlyReflections.lv2/
+cp -r bin/DragonflyPlateReverb.lv2/*      %{buildroot}/%{_libdir}/lv2/DragonflyPlateReverb.lv2/
+
+cp bin/DragonflyHallReverb-vst.so       %{buildroot}/%{_libdir}/vst/
+cp bin/DragonflyRoomReverb-vst.so       %{buildroot}/%{_libdir}/vst/
+cp bin/DragonflyEarlyReflections-vst.so %{buildroot}/%{_libdir}/vst/
+cp bin/DragonflyPlateReverb-vst.so      %{buildroot}/%{_libdir}/vst/
+
+cp dragonfly-early-screenshot.png %{buildroot}/%{_datadir}/pixmaps/
+cp dragonfly-hall-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
+cp dragonfly-plate-screenshot.png %{buildroot}/%{_datadir}/pixmaps/
+cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 
 %files
+%doc README.md
+%license LICENSE
 %{_bindir}/*
 %{_libdir}/lv2/*
 %{_libdir}/vst/*
+%{_datadir}/pixmaps/*
 
 %changelog
-* Wed Jun 10 2020 Yann Collette <ycollette.nospam@free.fr> - 3.11-1
+* Sun Jun 14 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.1-2
+- update to 3.1.1-2 - fix missing presets
+
+* Wed Jun 10 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.1-1
 - update to 3.1.1-1
 
 * Sun Mar 1 2020 Yann Collette <ycollette.nospam@free.fr> - 3.0.0-1
