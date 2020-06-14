@@ -8,7 +8,7 @@
 
 Name:    dragonfly-reverb
 Version: 3.1.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: DragonFly reverberation plugin
 
 License: GPLv2+
