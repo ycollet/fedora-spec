@@ -5,7 +5,7 @@
 # Kernel patch version
 %define kpat  17
 # RT patch version
-%define krt   9
+%define krt   10
 # package version
 %define krel  10
 
@@ -186,6 +186,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Tue Jun 16 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.17-rt10-10
+- update to 5.6.17-rt10-10
+
 * Wed Jun 10 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.17-rt9-10
 - update to 5.6.17-rt9-10
 
