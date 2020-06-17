@@ -2,7 +2,7 @@
 
 Summary: A crossplatform music editor for creating Commodore 64 music. Uses reSID library by Dag Lem and supports alternatively HardSID & CatWeasel devices.
 Name:    goatracker
-Version: 2.75
+Version: 2.76
 Release: 1%{?dist}
 License: GPL
 Group:   Applications/Multimedia
@@ -19,31 +19,31 @@ BuildRequires: desktop-file-utils
 BuildRequires: SDL-devel
 
 %description
-A crossplatform music editor for creating Commodore 64 music. Uses reSID library by Dag Lem and supports alternatively HardSID & CatWeasel devices.
+A crossplatform music editor for creating Commodore 64 music.
+Uses reSID library by Dag Lem and supports alternatively
+HardSID & CatWeasel devices.
 
 %prep
-mkdir -p goatracker-%{version}
-cd goatracker-%{version}
-unzip %SOURCE0
+%autosetup -n gt2stereo
+
+sed -i -e "/CFLAGS/c\CFLAGS=%{build_cflags} -Ibme -Iasm" trunk/src/makefile.common
+sed -i -e "/CXXFLAGS/c\CXXFLAGS=%{build_cflags} -Ibme -Iasm" trunk/src/makefile.common
 
 %build
 
-cd goatracker-%{version}/src
-sed -i -e "/CFLAGS/c\CFLAGS=%{build_cflags} -Ibme -Iasm" makefile.common
-sed -i -e "/CXXFLAGS/c\CXXFLAGS=%{build_cflags} -Ibme -Iasm" makefile.common
-%{__make} DESTDIR=%{buildroot} %{?_smp_mflags}
+cd trunk/src
+make clean
+%make_build
 
 %install
 
-cd goatracker-%{version}
-
-%{__rm} -rf %{buildroot}
+cd trunk
 
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 %__cp -a linux/* %{buildroot}/%{_bindir}/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/pixmaps
-install -m 644 src/goattrk2.bmp %{buildroot}%{_datadir}/pixmaps/
+install -m 644 -p src/goattrk2.bmp %{buildroot}%{_datadir}/pixmaps/
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/applications/
 cat > %{buildroot}%{_datadir}/applications/goatracker.desktop << EOF
@@ -64,39 +64,23 @@ EOF
 %__cp -a goat_tracker_commands.pdf %{buildroot}%{_datadir}/%{name}/doc/
 
 desktop-file-install --vendor '' \
-        --add-category=X-Sound \
+        --add-category=Audio \
         --add-category=Midi \
         --add-category=Sequencer \
-        --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/goatracker.desktop
 
-%clean
-
-%{__rm} -rf %{buildroot}
-
-%post 
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans 
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%defattr(-,root,root,-)
-%doc goatracker-%{version}/authors goatracker-%{version}/copying goatracker-%{version}/readme_resid.txt goatracker-%{version}/readme_sdl.txt goatracker-%{version}/readme.txt
-
+%doc trunk/authors trunk/readme_resid.txt trunk/readme_sdl.txt trunk/readme.txt
+%license trunk/copying
 %{_bindir}/*
 %{_datadir}/%{name}/*
 %{_datadir}/pixmaps/*
 %{_datadir}/applications/*
 
 %changelog
+* Wed Jun 17 2020 Yann Collette <ycollette dot nospam at free.fr> 2.76-1
+- update to 2.76
+
 * Thu Jan 3 2019 Yann Collette <ycollette dot nospam at free.fr> 2.75-1
 - Initial release of spec file
