@@ -1,23 +1,16 @@
-%global debug_package %{nil}
 %global __python %{__python3}
 
-# Global variables for github repository
-%global commit0 dfc9a4d5539609719193d6c1555cc96ddae0c485
-%global gittag0 0.8.2
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
-Name:    RaySession
-Version: 0.8.2
+Name:    raysession
+Version: 0.8.3
 Release: 1%{?dist}
 Summary: A JACK session manager
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/Houston4444/RaySession
 
-Source0: https://github.com/Houston4444/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/Houston4444/RaySession/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:     noarch
 
 BuildRequires: python3-qt5-devel
 BuildRequires: python3
@@ -27,46 +20,57 @@ BuildRequires: alsa-lib-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-linguist
 BuildRequires: gtk-update-icon-cache
+BuildRequires: desktop-file-utils
 
 Requires(pre): python3-qt5
 Requires(pre): python3-pyliblo
 
+Obsoletes: RaySession
+
 %description
-Ray Session is a GNU/Linux session manager for audio programs as Ardour, Carla, QTractor, Non-Timeline, etc...
-It uses the same API as Non Session Manager, so programs compatible with NSM are also compatible with Ray Session.
-As Non Session Manager, the principle is to load together audio programs, then be able to save or close all documents together.
+Ray Session is a GNU/Linux session manager for audio programs as Ardour, Carla,
+QTractor, Non-Timeline, etc... It uses the same API as Non Session Manager, so
+programs compatible with NSM are also compatible with Ray Session.
+As Non Session Manager, the principle is to load together audio programs, then
+be able to save or close all documents together.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n RaySession-%{version}
+
+# Fix desktop categories
+sed -i -e "s/AudioVideo;AudioEditing/Audio;Video/g" data/raysession.desktop
+# Fix permission on executable python script
+chmod a+x src/shared/jacklib.py
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
 
-%install 
-make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags} install
+%set_build_flags
 
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
+%make_build PREFIX=/usr
 
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
+%install
 
-%posttrans 
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+%make_install PREFIX=/usr
+
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
+%doc README.md
+%license COPYING
 %{_bindir}/*
 %{_datadir}/applications/*
 %{_datadir}/icons/*
 %{_datadir}/raysession/*
 
 %changelog
-* Thu Nov 21 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.1-1
+* Wed Jun 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.3-1
+- update to 0.8.3-1
+
+* Thu Nov 21 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.2-1
 - update to 0.8.2-1
 
 * Thu Oct 24 2019 Yann Collette <ycollette.nospam@free.fr> - 0.8.1-1
