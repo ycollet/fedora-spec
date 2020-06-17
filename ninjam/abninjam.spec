@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 604a950d9e7c8970d2a5c78fb963bc51fe194bde
+%global commit0 fc50af9e2603c2184f24f3a3483203d69d4b2c2a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    abNinjam
-Version: 0.0.7
+Version: 0.0.8
 Release: 1%{?dist}
 Summary: Ninjam LV2 / VST plugin
 URL:     https://github.com/antanasbruzas/abNinjam
@@ -15,7 +15,7 @@ License: GPLv3
 
 # git clone https://github.com/antanasbruzas/abNinjam
 # cd abNinjam
-# git checkout v0.0.7
+# git checkout v0.0.8
 # git submodule init
 # git submodule update --recursive
 # find . -name .git -exec rm -rf {} \;
@@ -73,6 +73,9 @@ cd build
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Jun 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-1
+- update to 0.0.8-1
+
 * Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.7-1
 - update to 0.0.7-1
 
