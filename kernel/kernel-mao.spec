@@ -7,7 +7,7 @@
 # RT patch version
 %define krt   10
 # package version
-%define krel  10
+%define krel  11
 
 %define kver  %{kmaj}.%{kmin}.%{kpat}
 %define fcver %{dist}.%{_arch}
@@ -186,6 +186,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Fri Jun 19 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.17-rt10-11
+- update to 5.6.17-rt10-11 - fix preempt option ...
+
 * Tue Jun 16 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.17-rt10-10
 - update to 5.6.17-rt10-10
 
