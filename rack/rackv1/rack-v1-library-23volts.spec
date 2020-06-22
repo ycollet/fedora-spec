@@ -12,7 +12,6 @@ Version: 1.1.5
 Release: 3%{?dist}
 Summary: 23volts plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/23volts/23volts-vcv
 
@@ -34,8 +33,6 @@ URL:     https://github.com/23volts/23volts-vcv
 Source0: Rack.tar.gz
 Source1: https://github.com/23volts/23volts-vcv/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: 23volts_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 23volts plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

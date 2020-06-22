@@ -12,7 +12,6 @@ Version: 1.0.1
 Release: 3%{?dist}
 Summary: SynthKit plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/jerrysievert/synthkit/
 
@@ -34,8 +33,6 @@ URL:     https://github.com/jerrysievert/synthkit/
 Source0: Rack.tar.gz
 Source1: https://github.com/jerrysievert/synthkit//archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: SynthKit_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 SynthKit plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

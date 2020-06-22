@@ -12,7 +12,6 @@ Version: 1.7.2
 Release: 3%{?dist}
 Summary: RJModules plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     http://github.com/Miserlou/RJModules
 
@@ -34,8 +33,6 @@ URL:     http://github.com/Miserlou/RJModules
 Source0: Rack.tar.gz
 Source1: http://github.com/Miserlou/RJModules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: RJModules_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 RJModules plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

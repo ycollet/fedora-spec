@@ -1,18 +1,17 @@
 # Global variables for github repository
-%global commit0 f88c8ebba9e80716bcc5c3e5b4a63fd7b5f78db8
+%global commit0 52c7a2e54583d5df5d60ceba3375c524b5b6ee6f
 
-%global gittag0 1.4.0
+%global gittag0 1.4.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AriaSalvatrice
-Version: 1.4.0
+Version: 1.4.2
 Release: 3%{?dist}
 Summary: AriaSalvatrice plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/AriaSalvatrice/AriaVCVModules
 
@@ -34,8 +33,6 @@ URL:     https://github.com/AriaSalvatrice/AriaVCVModules
 Source0: Rack.tar.gz
 Source1: https://github.com/AriaSalvatrice/AriaVCVModules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: AriaSalvatrice_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 AriaSalvatrice plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -109,5 +106,5 @@ cp -r AriaSalvatrice_plugin/dist/AriaSalvatrice/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.2-3
 - initial specfile

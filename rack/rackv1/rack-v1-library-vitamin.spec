@@ -1,18 +1,17 @@
 # Global variables for github repository
-%global commit0 0b8886bff2c45ca43f83856addf6f3aff1943207
+%global commit0 ee5ec5634403ea8d752968dafe404111366faa9f
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-vitamin
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: vitamin plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/xaviershay/vitamin-vcv-modules
 
@@ -34,8 +33,6 @@ URL:     https://github.com/xaviershay/vitamin-vcv-modules
 Source0: Rack.tar.gz
 Source1: https://github.com/xaviershay/vitamin-vcv-modules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: vitamin_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 vitamin plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -109,5 +106,5 @@ cp -r vitamin_plugin/dist/vitamin/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile

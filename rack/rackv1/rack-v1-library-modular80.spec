@@ -12,7 +12,6 @@ Version: 1.0.1
 Release: 3%{?dist}
 Summary: modular80 plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/cschol/modular80
 
@@ -39,8 +38,6 @@ Source0: Rack.tar.gz
 Source1: modular80.tar.gz
 Source2: modular80_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -65,7 +62,7 @@ BuildRequires: jq
 modular80 plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

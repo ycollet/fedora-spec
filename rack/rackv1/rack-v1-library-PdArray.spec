@@ -1,18 +1,17 @@
 # Global variables for github repository
-%global commit0 042559b672becdc369722fb465bb0c3fea09516b
+%global commit0 da36d4bab7d0027d50890c7fb1a44de47b02d30c
 
-%global gittag0 1.0.3
+%global gittag0 1.0.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-PdArray
-Version: 1.0.3
+Version: 1.0.5
 Release: 3%{?dist}
 Summary: PdArray plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/mgunyho/PdArray
 
@@ -34,8 +33,6 @@ URL:     https://github.com/mgunyho/PdArray
 Source0: Rack.tar.gz
 Source1: https://github.com/mgunyho/PdArray/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: PdArray_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 PdArray plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -109,5 +106,5 @@ cp -r PdArray_plugin/dist/PdArray/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.5-3
 - initial specfile

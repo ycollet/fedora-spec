@@ -12,7 +12,6 @@ Version: 1.1.6
 Release: 3%{?dist}
 Summary: ImpromptuModular plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/MarcBoule/ImpromptuModular/
 
@@ -34,8 +33,6 @@ URL:     https://github.com/MarcBoule/ImpromptuModular/
 Source0: Rack.tar.gz
 Source1: https://github.com/MarcBoule/ImpromptuModular//archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: ImpromptuModular_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 ImpromptuModular plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

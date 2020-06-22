@@ -11,7 +11,6 @@ Version: 1.0.1
 Release: 3%{?dist}
 Summary: Starling_Via plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/starlingcode/Via-for-Rack
 
@@ -43,8 +42,6 @@ Source0: Rack.tar.gz
 Source1: Via-for-Rack.tar.gz
 Source2: Starling_Via_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -69,7 +66,7 @@ BuildRequires: jq
 Starling_Via plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

@@ -12,7 +12,6 @@ Version: 0.6.1
 Release: 3%{?dist}
 Summary: 8Mode plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/8Mode/8Mode-VCV_Modules
 
@@ -34,8 +33,6 @@ URL:     https://github.com/8Mode/8Mode-VCV_Modules
 Source0: Rack.tar.gz
 Source1: https://github.com/8Mode/8Mode-VCV_Modules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: 8Mode_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 8Mode plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

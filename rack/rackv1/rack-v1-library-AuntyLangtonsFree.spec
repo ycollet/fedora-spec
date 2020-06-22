@@ -12,7 +12,6 @@ Version: 1.0.1
 Release: 3%{?dist}
 Summary: AuntyLangtonsFree plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/64MM4-KN1F3/AuntyLangtons-FREE
 
@@ -34,8 +33,6 @@ URL:     https://github.com/64MM4-KN1F3/AuntyLangtons-FREE
 Source0: Rack.tar.gz
 Source1: https://github.com/64MM4-KN1F3/AuntyLangtons-FREE/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: AuntyLangtonsFree_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 AuntyLangtonsFree plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

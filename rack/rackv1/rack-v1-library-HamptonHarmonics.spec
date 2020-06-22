@@ -12,7 +12,6 @@ Version: 1.1.0
 Release: 3%{?dist}
 Summary: HamptonHarmonics plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules
 
@@ -34,8 +33,6 @@ URL:     https://gitlab.com/hampton-harmonics/hampton-harmonics-modules
 Source0: Rack.tar.gz
 Source1: https://gitlab.com/hampton-harmonics/hampton-harmonics-modules/-/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 Source2: HamptonHarmonics_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 HamptonHarmonics plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

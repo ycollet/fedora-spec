@@ -12,7 +12,6 @@ Version: 1.2.1
 Release: 3%{?dist}
 Summary: MockbaModular plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/MockbaTheBorg/MockbaModular
 
@@ -34,8 +33,6 @@ URL:     https://github.com/MockbaTheBorg/MockbaModular
 Source0: Rack.tar.gz
 Source1: https://github.com/MockbaTheBorg/MockbaModular/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: MockbaModular_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 MockbaModular plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

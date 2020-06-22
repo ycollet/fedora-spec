@@ -12,7 +12,6 @@ Version: 1.3.0
 Release: 3%{?dist}
 Summary: SonusModular plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://gitlab.com/sonusdept/sonusmodular
 
@@ -34,8 +33,6 @@ URL:     https://gitlab.com/sonusdept/sonusmodular
 Source0: Rack.tar.gz
 Source1: https://gitlab.com/sonusdept/sonusmodular/-/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 Source2: SonusModular_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 SonusModular plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

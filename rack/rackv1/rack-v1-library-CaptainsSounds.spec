@@ -1,18 +1,17 @@
 # Global variables for github repository
-%global commit0 c882920ef9470cef21504911d1f103033e8fa327
+%global commit0 a34513686b1c4565d404d9cd02a5f4275cebe26a
 
-%global gittag0 1.0.4
+%global gittag0 1.0.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-CaptainsSounds
-Version: 1.0.4
+Version: 1.0.5
 Release: 3%{?dist}
 Summary: CaptainsSounds plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/mikeallisonJS/vcv-CaptainsSounds
 
@@ -34,8 +33,6 @@ URL:     https://github.com/mikeallisonJS/vcv-CaptainsSounds
 Source0: Rack.tar.gz
 Source1: https://github.com/mikeallisonJS/vcv-CaptainsSounds/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: CaptainsSounds_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 CaptainsSounds plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -109,5 +106,5 @@ cp -r CaptainsSounds_plugin/dist/CaptainsSounds/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.4-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.5-3
 - initial specfile

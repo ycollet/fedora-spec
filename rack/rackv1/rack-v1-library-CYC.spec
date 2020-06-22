@@ -12,7 +12,6 @@ Version: 1.0.0
 Release: 3%{?dist}
 Summary: CYC plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/mrletourneau/strong_kar
 
@@ -34,8 +33,6 @@ URL:     https://github.com/mrletourneau/strong_kar
 Source0: Rack.tar.gz
 Source1: https://github.com/mrletourneau/strong_kar/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: CYC_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 CYC plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

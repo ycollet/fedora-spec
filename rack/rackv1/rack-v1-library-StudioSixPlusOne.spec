@@ -1,18 +1,17 @@
 # Global variables for github repository
-%global commit0 65c04af0ba44abfe6448cc508a0051022d2c24dc
+%global commit0 9250daad0cae1e577835cb24dbee674d5271bd08
 
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-StudioSixPlusOne
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: StudioSixPlusOne plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/StudioSixPlusOne/rack-modules
 
@@ -34,8 +33,6 @@ URL:     https://github.com/StudioSixPlusOne/rack-modules
 Source0: Rack.tar.gz
 Source1: https://github.com/StudioSixPlusOne/rack-modules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: StudioSixPlusOne_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 StudioSixPlusOne plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -109,5 +106,5 @@ cp -r StudioSixPlusOne_plugin/dist/StudioSixPlusOne/* %{buildroot}%{_libexecdir}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile

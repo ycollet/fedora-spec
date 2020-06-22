@@ -12,7 +12,6 @@ Version: 1.2.2
 Release: 3%{?dist}
 Summary: NoraCodes plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/NoraCodes/fives
 
@@ -34,8 +33,6 @@ URL:     https://github.com/NoraCodes/fives
 Source0: Rack.tar.gz
 Source1: https://github.com/NoraCodes/fives/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: NoraCodes_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 NoraCodes plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

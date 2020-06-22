@@ -12,7 +12,6 @@ Version: 0.6.4
 Release: 3%{?dist}
 Summary: PG-Instruments plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/imekon/PG-Instruments
 
@@ -34,8 +33,6 @@ URL:     https://github.com/imekon/PG-Instruments
 Source0: Rack.tar.gz
 Source1: https://github.com/imekon/PG-Instruments/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: PG-Instruments_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 PG-Instruments plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

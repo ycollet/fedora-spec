@@ -12,7 +12,6 @@ Version: 0.6.0
 Release: 3%{?dist}
 Summary: BeckstromResearch plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/chrisbeckstrom/Beckstrom_Research_Rack
 
@@ -34,8 +33,6 @@ URL:     https://github.com/chrisbeckstrom/Beckstrom_Research_Rack
 Source0: Rack.tar.gz
 Source1: https://github.com/chrisbeckstrom/Beckstrom_Research_Rack/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: BeckstromResearch_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 BeckstromResearch plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

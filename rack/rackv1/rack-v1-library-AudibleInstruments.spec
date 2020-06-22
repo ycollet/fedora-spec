@@ -11,7 +11,6 @@ Version: 1.3.0
 Release: 3%{?dist}
 Summary: AudibleInstruments plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/AudibleInstruments
 
@@ -47,8 +46,6 @@ Source0: Rack.tar.gz
 Source1: AudibleInstruments.tar.gz
 Source2: AudibleInstruments_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -73,7 +70,7 @@ BuildRequires: jq
 AudibleInstruments plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

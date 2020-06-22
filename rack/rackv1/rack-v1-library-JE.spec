@@ -12,7 +12,6 @@ Version: 1.0.0
 Release: 3%{?dist}
 Summary: JE plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/eres-j/VCVRack-plugin-JE
 
@@ -39,8 +38,6 @@ Source0: Rack.tar.gz
 Source1: VCVRack-plugin-JE.tar.gz
 Source2: JE_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -65,7 +62,7 @@ BuildRequires: jq
 JE plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

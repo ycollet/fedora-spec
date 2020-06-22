@@ -12,7 +12,6 @@ Version: 0.6.2
 Release: 3%{?dist}
 Summary: ErraticInstruments plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/bafonso/Erratic
 
@@ -40,8 +39,6 @@ Source0: Rack.tar.gz
 Source1: Erratic.tar.gz
 Source2: ErraticInstruments_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -66,7 +63,7 @@ BuildRequires: jq
 ErraticInstruments plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

@@ -12,7 +12,6 @@ Version: 1.1.4
 Release: 3%{?dist}
 Summary: DrumKit plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/SVModular/DrumKit
 
@@ -39,8 +38,6 @@ Source0: Rack.tar.gz
 Source1: DrumKit.tar.gz
 Source2: DrumKit_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -65,7 +62,7 @@ BuildRequires: jq
 DrumKit plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

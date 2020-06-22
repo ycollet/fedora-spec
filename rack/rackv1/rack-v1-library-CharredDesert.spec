@@ -12,7 +12,6 @@ Version: 1.3.1
 Release: 3%{?dist}
 Summary: CharredDesert plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/SVModular/CharredDesert
 
@@ -44,8 +43,6 @@ Source0: Rack.tar.gz
 Source1: CharredDesert.tar.gz
 Source2: CharredDesert_plugin.json
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
 BuildRequires: alsa-lib-devel
@@ -70,7 +67,7 @@ BuildRequires: jq
 CharredDesert plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 

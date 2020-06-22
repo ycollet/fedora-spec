@@ -1,18 +1,17 @@
 # Global variables for github repository
-%global commit0 b5133ee0c6b884f09d5725b2f1494f05ba9e2471
+%global commit0 7c28c9d72c25696aec3689e3ceeac6bd9f011b2c
 
-%global gittag0 1.15.0
+%global gittag0 1.16.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-voxglitch
-Version: 1.15.0
+Version: 1.16.0
 Release: 3%{?dist}
 Summary: voxglitch plugin for Rack
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/clone45/voxglitch
 
@@ -34,8 +33,6 @@ URL:     https://github.com/clone45/voxglitch
 Source0: Rack.tar.gz
 Source1: https://github.com/clone45/voxglitch/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: voxglitch_plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -61,7 +58,7 @@ BuildRequires: jq
 voxglitch plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -109,5 +106,5 @@ cp -r voxglitch_plugin/dist/voxglitch/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.15.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.16.0-3
 - initial specfile
