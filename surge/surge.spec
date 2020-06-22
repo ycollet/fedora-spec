@@ -1,17 +1,9 @@
-# Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-# Global variables for github repository
-%global commit0 da96f74b1cc96f936192282e300d93cf65d16c58
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    surge
-Version: 1.6.6.%{shortcommit0}
-Release: 1%{?dist}
+Version: 1.6.6
+Release: 2%{?dist}
 Summary: A VST2 synthetizer
-
-Group:   Applications/Multimedia
 License: GPLv2+
 
 # git clone https://github.com/surge-synthesizer/surge
@@ -31,8 +23,6 @@ URL:     https://github.com/surge-synthesizer/surge
 Source0: surge.tar.gz
 Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: libX11-devel
 BuildRequires: premake5
@@ -49,44 +39,89 @@ BuildRequires: xcb-util-devel
 %description
 A VST2 synthetizer
 
+%package -n lv2-%{name}
+Summary: LV2 version of %{name}
+
+%description -n lv2-%{name}
+LV2 version of %{name}
+
+%package -n vst-%{name}
+Summary: VST version of %{name}
+
+%description -n vst-%{name}
+VST version of %{name}
+
+%package -n vst3-%{name}
+Summary: VST3 version of %{name}
+
+%description -n vst3-%{name}
+VST3 version of %{name}
+
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %ifarch x86_64
   sed -i -e "s/lib\/vst/lib64\/vst/g" build-linux.sh
 %endif
 
 sed -i -e "s/python/python2/g" premake5.lua
-
-%build
+sed -i -e "/-Wl,--strip-all/d" premake5.lua
 
 tar xvfj %{SOURCE1}
 
+%build
+
 export VST2SDK_DIR=vst/vstsdk2.4/
+
+%set_build_flags
+
+export ALL_CPPFLAGS="$CXXFLAGS"
 
 ./build-linux.sh clean-all
 ./build-linux.sh -p vst2 build
+./build-linux.sh -p vst3 build
+./build-linux.sh -p lv2 build
 
 %install 
 
 export HOME=.
 mkdir .vst
-mkdir .local/
-mkdir .local/share
+mkdir .vst3
+mkdir .lv2
+mkdir -p .local/share
 
-./build-linux.sh -p vst2 -l install
+./build-linux.sh -v -p vst2 -l install
+./build-linux.sh -v -p vst3 -l install
+./build-linux.sh -v -p lv2 -l install
 
 %__install -m 755 -d %{buildroot}%{_libdir}/vst/
-%__install -m 644 .vst/*.so %{buildroot}/%{_libdir}/vst/
+%__install -m 644 -p .vst/*.so %{buildroot}/%{_libdir}/vst/
+
+%__install -m 755 -d %{buildroot}%{_libdir}/vst3/
+%__install -m 644 -p .vst3/Surge.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/
+
+%__install -m 755 -d %{buildroot}%{_libdir}/lv2/
+cp -r .lv2/* %{buildroot}/%{_libdir}/lv2/
 
 %__install -m 755 -d %{buildroot}%{_datadir}/Surge/
 rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
 
 %files
-%{_libdir}/*
 %{_datadir}/*
 
+%files -n lv2-%{name}
+%{_libdir}/lv2/*
+
+%files -n vst-%{name}
+%{_libdir}/vst/*
+
+%files -n vst3-%{name}
+%{_libdir}/vst3/*
+
 %changelog
+* Mon Jun 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-2
+- update to 1.6.6-2
+
 * Sat Feb 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-1
 - update to 1.6.6-1
 
