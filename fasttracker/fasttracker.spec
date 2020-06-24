@@ -1,13 +1,12 @@
 Name:    fasttracker2
-Version: 1.25
+Version: 1.26
 Release: 3%{?dist}
 Summary: Module tracker software for creating music
 Group:   Applications/Multimedia
 License: GPLv3+
 URL:     https://16-bits.org/ft2.php
-Source0: https://github.com/8bitbubsy/ft2-clone/archive/v%{version}.tar.gz#/ft2-clone-%{version}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/8bitbubsy/ft2-clone/archive/v%{version}.tar.gz#/ft2-clone-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: SDL2-devel
@@ -20,22 +19,22 @@ FastTracker 2 is a music tracker created by Fredrik "Mr. H" Huss and Magnus "Vog
 The source code of FastTracker 2 is written in Pascal using Borland Pascal 7 and TASM. The program works natively under MS-DOS.
 
 %prep
-%setup -qn ft2-clone-%{version}
+%autosetup -n ft2-clone-%{version}
 
 %build
 
-LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
+%set_build_flags
 
 mkdir -p build
 cd build
 %cmake -DCMAKE_BUILD_TYPE=RELEASE ..
 
-make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags}
+%make_build
 
 %install
 
 cd build
-make DESTDIR=%{buildroot} PREFIX=/usr install
+%make_install
 
 mv %{buildroot}/%{_bindir}/ft2-clone %{buildroot}/%{_bindir}/fasttracker2
 
@@ -61,11 +60,14 @@ EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 
 %files
-%defattr(-,root,root,-)
-%license LICENSES.txt
+%doc README.md
+%license LICENSE LICENSES.txt
 %{_bindir}/*
 
 %changelog
+* Wed Jun 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.26-3
+- update to 1.26-3
+
 * Fri Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.25-3
 - update to 1.25-3
 
