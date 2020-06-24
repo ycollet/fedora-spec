@@ -2,7 +2,7 @@
 
 Name:    surge
 Version: 1.6.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A VST2 synthetizer
 License: GPLv2+
 
@@ -40,19 +40,25 @@ BuildRequires: xcb-util-devel
 A VST2 synthetizer
 
 %package -n lv2-%{name}
-Summary: LV2 version of %{name}
+Summary:  LV2 version of %{name}
+License:  GPLv2+
+Requires: %{name} = %{version}-%{release}
 
 %description -n lv2-%{name}
 LV2 version of %{name}
 
 %package -n vst-%{name}
-Summary: VST version of %{name}
+Summary:  VST version of %{name}
+License:  GPLv2+
+Requires: %{name} = %{version}-%{release}
 
 %description -n vst-%{name}
 VST version of %{name}
 
 %package -n vst3-%{name}
-Summary: VST3 version of %{name}
+Summary:  VST3 version of %{name}
+License:  GPLv2+
+Requires: %{name} = %{version}-%{release}
 
 %description -n vst3-%{name}
 VST3 version of %{name}
@@ -119,6 +125,9 @@ rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
 %{_libdir}/vst3/*
 
 %changelog
+* Wed Jun 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-3
+- update to 1.6.6-3 - fix requires for subpackage
+
 * Mon Jun 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-2
 - update to 1.6.6-2
 
