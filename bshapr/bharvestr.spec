@@ -1,19 +1,16 @@
 # Global variables for github repository
-%global commit0 ffd310a794e899eb863ab3a1d9ce672c540503f7
+%global commit0 67c9a32a86de5b67586b91117d49c4d63680283e
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: B.Harvestr is an experimental granular synthesizer LV2 plugin
 Name:    lv2-BHarvestr
 Version: 0.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     https://github.com/sjaehn/BHarvestr
 
 Source0: https://github.com/sjaehn/BHarvestr/archive/%{commit0}.tar.gz#/BHarvestr-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -31,23 +28,24 @@ Major changes in the plugin definition need to be expected.
 Therefore, future versions of this plugin may be completely incompatible to this version.
 
 %prep
-%setup -qn BHarvestr-%{commit0}
+%autosetup -n BHarvestr-%{commit0}
 
 %build
 
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
+%make_build PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
 
 %install
-%{__rm} -rf %{buildroot}
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC" install
 
-%clean
-%{__rm} -rf %{buildroot}
+%make_install PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
 
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_libdir}/lv2/*
 
 %changelog
+* Fri Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1.0-2
+- updata to 0.1.0-2 - last master version
+
 * Wed May 13 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1.0-1
 - initial release of the spec file

@@ -8,12 +8,9 @@ Name:    lv2-BShapr
 Version: 0.9.0
 Release: 1%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     https://github.com/sjaehn/BShapr
 
 Source0: https://github.com/sjaehn/BShapr/archive/%{commit0}.tar.gz#/BShapr-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -25,21 +22,19 @@ BuildRequires: cairo-devel
 Beat / envelope shaper LV2 plugin
 
 %prep
-%setup -qn BShapr-%{commit0}
+%autosetup -n BShapr-%{commit0}
 
 %build
 
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
+%make_build PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
 
 %install
-%{__rm} -rf %{buildroot}
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC" install
 
-%clean
-%{__rm} -rf %{buildroot}
+%make_install PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -std=c++11 -fvisibility=hidden -fPIC"
 
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_libdir}/lv2/*
 
 %changelog

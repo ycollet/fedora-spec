@@ -26,17 +26,15 @@ LV2 audio effect plugin for sequenced slicing of stereo audio input signals. Eac
 
 %build
 
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -include stdexcept -std=c++11 -fvisibility=hidden -fPIC"
+%make_build PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -include stdexcept -std=c++11 -fvisibility=hidden -fPIC"
 
 %install
-%{__rm} -rf %{buildroot}
-make PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -include stdexcept -std=c++11 -fvisibility=hidden -fPIC" install
 
-%clean
-%{__rm} -rf %{buildroot}
+%make_install PREFIX=%{_prefix}r LV2DIR=%{_libdir}/lv2 DESTDIR=%{buildroot} CXXFLAGS="%{build_cxxflags} -include stdexcept -std=c++11 -fvisibility=hidden -fPIC"
 
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_libdir}/lv2/*
 
 %changelog
