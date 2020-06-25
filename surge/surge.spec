@@ -1,8 +1,6 @@
-%global debug_package %{nil}
-
 Name:    surge
 Version: 1.6.6
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A VST2 synthetizer
 License: GPLv2+
 
@@ -81,9 +79,23 @@ export VST2SDK_DIR=vst/vstsdk2.4/
 
 %set_build_flags
 
-export ALL_CPPFLAGS="$CXXFLAGS"
-
 ./build-linux.sh clean-all
+./build-linux.sh -p vst2 premake
+./build-linux.sh -p vst3 premake
+./build-linux.sh -p lv2 premake
+
+# Inject optflags into CFLAGS
+sed -i "s|^\s*ALL_CFLAGS\s*+=.*|ALL_CFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|"     surge-lv2.make
+sed -i "s|^\s*ALL_CXXFLAGS\s*+=.*|ALL_CXXFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|" surge-lv2.make
+sed -i "s|^\s*ALL_CFLAGS\s*+=.*|ALL_CFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|"     surge-vst2.make
+sed -i "s|^\s*ALL_CXXFLAGS\s*+=.*|ALL_CXXFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|" surge-vst2.make
+sed -i "s|^\s*ALL_CFLAGS\s*+=.*|ALL_CFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|"     surge-vst3.make
+sed -i "s|^\s*ALL_CXXFLAGS\s*+=.*|ALL_CXXFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|" surge-vst3.make
+# Disable stripping the executable
+sed -i "s| -s | |" surge-lv2.make
+sed -i "s| -s | |" surge-vst2.make
+sed -i "s| -s | |" surge-vst3.make
+
 ./build-linux.sh -p vst2 build
 ./build-linux.sh -p vst3 build
 ./build-linux.sh -p lv2 build
@@ -125,6 +137,9 @@ rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
 %{_libdir}/vst3/*
 
 %changelog
+* Wed Jun 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-4
+- update to 1.6.6-4 - fix debug build
+
 * Wed Jun 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-3
 - update to 1.6.6-3 - fix requires for subpackage
 
