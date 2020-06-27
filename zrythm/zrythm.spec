@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.535
+Version: 0.8.604
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -10,8 +10,6 @@ License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
 Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -51,7 +49,7 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%setup -qn zrythm-%{version}
+%autosetup -n zrythm-%{version}
 
 # Use sphinx for Python 3
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
@@ -61,7 +59,7 @@ sed -i -e '/meson.add_install_script/,+2d' meson.build
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
 # Remove summary which is only available on meson 0.53 and stick to version 0.52
 sed -i -e "s/meson_version: '>= 0.53.0'/meson_version: '>= 0.52.0'/g" meson.build
-sed -i -e "733,764d" meson.build
+sed -i -e "734,768d" meson.build
 
 %build
 
@@ -69,12 +67,12 @@ mkdir build
 DESTDIR=%{buildroot} VERBOSE=1 meson -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr build
 
 cd build
-DESTDIR=%{buildroot} VERBOSE=1 ninja 
+DESTDIR=%{buildroot} VERBOSE=1 %ninja_build 
 
 %install 
 
 cd build
-DESTDIR=%{buildroot} VERBOSE=1 ninja install
+DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
 
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
@@ -83,23 +81,6 @@ desktop-file-install --vendor '' \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/zrythm.desktop
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-update-desktop-database -q
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans
-update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %doc AUTHORS THANKS CHANGELOG.md CONTRIBUTING.md
@@ -117,6 +98,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_mandir}/*
 
 %changelog
+* Sat Jun 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.604-2
+- update to 0.8.604-2
+
 * Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.535-2
 - update to 0.8.535-2
 
