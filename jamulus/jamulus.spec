@@ -1,6 +1,6 @@
 Name:    jamulus
 Version: 3.5.6
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: Internet jam session software
 URL:     https://github.com/corrados/jamulus/
 
@@ -27,7 +27,7 @@ and Opus audio codec to manage the audio session.
 %autosetup -n %{name}-r3_5_6
 
 # Remove Opus source code, we use Opus library from Fedora
-rm -rf libs/opus
+#rm -rf libs/opus
 
 %build
 
@@ -36,8 +36,11 @@ cd src/res/translation
 lrelease-qt5 *.ts
 popd
 
+# On fedora, opus is compiled with enable-hardening and this makes jamulus hangs
+# add 'opus_shared_lib' to CONFIG to reenable compilation of jamulus without include opus lib
 %if 0%{?fedora} >= 32
-  %qmake_qt5 Jamulus.pro CONFIG+="noupcasename opus_shared_lib"
+  # On fedora, opus is compiled with enable-hardening and this makes jamulus hangs
+  %qmake_qt5 Jamulus.pro CONFIG+="noupcasename"
 %else
   # -fcf-protection produce an error in an object generatoin ...
   qmake-qt5 Jamulus.pro \
@@ -45,7 +48,7 @@ popd
             QMAKE_CFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
             QMAKE_CXXFLAGS_DEBUG="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
             QMAKE_CXXFLAGS_RELEASE="%{__global_compiler_flags} -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection" \
-            CONFIG+="noupcasename opus_shared_lib" 
+            CONFIG+="noupcasename" 
 %endif
 
 %make_build VERBOSE=1
@@ -75,6 +78,9 @@ desktop-file-install                         \
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sat Jun 27 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.6-7
+- update to 3.5.6-7 - fix opus enable-hardening problem
+
 * Tue Jun 9 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.6-6
 - update to 3.5.6-6
 
