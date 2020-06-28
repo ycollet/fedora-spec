@@ -1,27 +1,18 @@
 # Global variables for github repository
 %global commit0 d2f68cebc74445f8f758b422afdb440c9bcc1f7f
-%global gittag0 3.1.1
+%global gittag0 3.1.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    dragonfly-reverb
-Version: 3.1.1
+Version: 3.1.2
 Release: 2%{?dist}
 Summary: DragonFly reverberation plugin
 
 License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
-# git clone https://github.com/michaelwillis/dragonfly-reverb
-# cd dragonfly-reverb
-# git checkout 3.1.1
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz dragonfly-reverb.tar.gz dragonfly-reverb/*
+# To get the sources:
+# ./source.sh 3.1.2
 
 Source0: dragonfly-reverb.tar.gz
 
@@ -40,7 +31,7 @@ A free hall-style reverb based on freeverb3 algorithms
 
 %build
 
-%make_build
+%make_build SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags"
 
 %install
 
@@ -81,6 +72,9 @@ cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 %{_datadir}/pixmaps/*
 
 %changelog
+* Sun Jun 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.2-2
+- update to 3.1.2-2
+
 * Sun Jun 14 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.1-2
 - update to 3.1.1-2 - fix missing presets
 
