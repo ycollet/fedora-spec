@@ -1,10 +1,10 @@
 # Global variables for github repository
 %global commit0 d2f68cebc74445f8f758b422afdb440c9bcc1f7f
-%global gittag0 3.1.2
+%global gittag0 3.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    dragonfly-reverb
-Version: 3.1.2
+Version: 3.2.0
 Release: 2%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -12,7 +12,7 @@ License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 # To get the sources:
-# ./source.sh 3.1.2
+# ./source.sh 3.2.0
 
 Source0: dragonfly-reverb.tar.gz
 
@@ -72,6 +72,9 @@ cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 %{_datadir}/pixmaps/*
 
 %changelog
+* Tue Jun 30 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.0-2
+- update to 3.2.0-2
+
 * Sun Jun 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.2-2
 - update to 3.1.2-2
 
