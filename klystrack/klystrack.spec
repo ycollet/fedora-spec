@@ -10,14 +10,8 @@ Release: 3%{?dist}
 License: GPL
 URL:     https://kometbomb.github.io/klystrack/
 
-# git clone https://github.com/kometbomb/klystrack.git
-# cd klystrack
-# git checkout 1.7.6
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz klystrack.tar.gz klystrack/*
+# To get the source archive:
+# ./source/sh 1.7.6
 
 Source0: klystrack.tar.gz
 
@@ -43,6 +37,9 @@ sed -i -e "s/LDFLAGS :=/LDFLAGS := -z muldefs/g" Makefile
 sed -i -e "s/CFLAGS :=/CFLAGS := \$(MYCFLAGS)/g" Makefile
 # Remove stripping for debug package generation
 sed -i -e "s/CFLAGS += -O3 -Wall -s/CFLAGS += -O3 -Wall/g"  Makefile
+# Clean desktop file
+sed -i -e "s/AudioVideo;AudioVideoEditing/Audio/g" linux/klystrack.desktop
+
 %build
 
 %set_build_flags
