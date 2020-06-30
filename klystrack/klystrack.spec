@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 1a0c8afc1187a0e7aa98074a63a6a360eec04b87
 %global gittag0 v1.7.6
@@ -8,23 +6,14 @@
 Summary: Klystrack is a chiptune tracker for making chiptune-like music on a modern computer.
 Name:    klystrack
 Version: 1.7.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPL
-Group:   Applications/Multimedia
-URL:     http://kometbomb.github.io/klystrack/
+URL:     https://kometbomb.github.io/klystrack/
 
-# git clone https://github.com/kometbomb/klystrack.git
-# cd klystrack
-# git checkout 1.7.6
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz klystrack.tar.gz klystrack/*
+# To get the source archive:
+# ./source/sh 1.7.6
 
 Source0: klystrack.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make
@@ -33,26 +22,34 @@ BuildRequires: desktop-file-utils
 BuildRequires: SDL2-devel
 BuildRequires: SDL2_gfx-devel
 BuildRequires: SDL2_image-devel
+BuildRequires: desktop-file-utils
 
 %description
 Klystrack is a chiptune tracker for making chiptune-like music on a modern computer.
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 sed -i -e "s/-Werror//g" Makefile
+# Allow multiple definition of symbols
 sed -i -e "s/LDFLAGS :=/LDFLAGS := -z muldefs/g" Makefile
+# Add Fedora compile flags
+sed -i -e "s/CFLAGS :=/CFLAGS := \$(MYCFLAGS)/g" Makefile
+# Remove stripping for debug package generation
+sed -i -e "s/CFLAGS += -O3 -Wall -s/CFLAGS += -O3 -Wall/g"  Makefile
+# Clean desktop file
+sed -i -e "s/AudioVideo;AudioVideoEditing/Audio/g" linux/klystrack.desktop
 
 %build
 
-%{__make} DESTDIR=%{buildroot} PREFIX=/usr RES_PATH=/usr/share/%{name}/ CFG=release
+%set_build_flags
+
+%make_build MYCFLAGS="$CFLAGS" DESTDIR=%{buildroot} PREFIX=/usr RES_PATH=/usr/share/%{name}/ CFG=release
 
 %install
 
-%{__rm} -rf %{buildroot}
-
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__cp bin.release/%{name} %{buildroot}/%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
+cp bin.release/%{name} %{buildroot}/%{_bindir}/
 
 cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
 #!/bin/bash
@@ -68,51 +65,52 @@ SDL_AUDIODRIVER=pulse klystrack
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
-%__install -m 644 icon/256x256.png %{buildroot}/%{_datadir}/icons/%{name}/
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 linux/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
+install -m 644 -p icon/256x256.png %{buildroot}/%{_datadir}/icons/%{name}/
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 644 -p linux/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}-jack.desktop
+install -m 644 -p linux/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}-pulse.desktop
 
-%__install -m 755 -d %{buildroot}%{_datadir}/%{name}/res
-%__cp -r res/* %{buildroot}%{_datadir}/%{name}/res/
-%__install -m 755 -d %{buildroot}%{_datadir}/%{name}/doc
-%__cp -r doc/* %{buildroot}%{_datadir}/%{name}/doc/
-%__install -m 755 -d %{buildroot}%{_datadir}/%{name}/examples/instruments/n00bstar-instruments/
-%__install -m 755 -d %{buildroot}%{_datadir}/%{name}/examples/songs/
-%__cp -r examples/instruments/* %{buildroot}%{_datadir}/%{name}/examples/instruments/
-%__cp -r examples/songs/*       %{buildroot}%{_datadir}/%{name}/examples/songs/
-%__install -m 755 -d %{buildroot}%{_datadir}/%{name}/themes
-%__cp -r themes/* %{buildroot}%{_datadir}/%{name}/themes/
-%__install -m 755 -d %{buildroot}%{_datadir}/%{name}/key
-%__cp -r key/* %{buildroot}%{_datadir}/%{name}/key/
+sed -i -e "s/Exec=klystrack/Exec=klystrack-jack/g"  %{buildroot}%{_datadir}/applications/%{name}-jack.desktop
+sed -i -e "s/Exec=klystrack/Exec=klystrack-pulse/g" %{buildroot}%{_datadir}/applications/%{name}-pulse.desktop
 
-%clean
+install -m 755 -d %{buildroot}%{_datadir}/%{name}/res
+cp -r res/* %{buildroot}%{_datadir}/%{name}/res/
+install -m 755 -d %{buildroot}%{_datadir}/%{name}/doc
+cp -r doc/* %{buildroot}%{_datadir}/%{name}/doc/
+install -m 755 -d %{buildroot}%{_datadir}/%{name}/examples/instruments/n00bstar-instruments/
+install -m 755 -d %{buildroot}%{_datadir}/%{name}/examples/songs/
+cp -r examples/instruments/* %{buildroot}%{_datadir}/%{name}/examples/instruments/
+cp -r examples/songs/*       %{buildroot}%{_datadir}/%{name}/examples/songs/
+install -m 755 -d %{buildroot}%{_datadir}/%{name}/themes
+cp -r themes/* %{buildroot}%{_datadir}/%{name}/themes/
+install -m 755 -d %{buildroot}%{_datadir}/%{name}/key
+cp -r key/* %{buildroot}%{_datadir}/%{name}/key/
 
-%{__rm} -rf %{buildroot}
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/%{name}-jack.desktop
 
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/%{name} >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/%{name} >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/%{name} >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/%{name} &>/dev/null || :
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/%{name}-pulse.desktop
 
 %files
-%defattr(-,root,root,-)
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_bindir}/*
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*
 %{_datadir}/icons/*
 
 %changelog
+* Thu Jun 30 2020 Yann Collette <ycollette dot nospam at free.fr> 1.7.6-3
+- update to 1.7.6-3 - fix spec file
+
 * Thu Apr 23 2020 Yann Collette <ycollette dot nospam at free.fr> 1.7.6-2
 - update to 1.7.6-2 - fix for Fedora 32
 
