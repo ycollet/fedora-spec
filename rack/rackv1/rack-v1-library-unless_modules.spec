@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 c2fed35ae8d09edb7ab6ca8dfaeae9acf3458914
+%global commit0 6be2c748a4acb0cf38392824410d67090d76611b
 
-%global gittag0 1.0.0
+%global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-unless_modules
-Version: 1.0.0
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: unless_modules plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r unless_modules_plugin/dist/unless_modules/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - initial specfile
