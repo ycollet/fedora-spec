@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 73dda97e27bd6113bdd525bcdaa92278ae98bce0
+%global commit0 e0873f073af03ac69d48dfe91c98fb4baf4b04c8
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    sequencer64
-Version: 0.96.7
+Version: 0.96.8
 Release: 2%{?dist}
 Summary: MIDI sequencer
 
@@ -14,8 +14,6 @@ License: GPL
 URL:     https://github.com/ahlstromcj/sequencer64
 Source0: https://github.com/ahlstromcj/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/ahlstromcj/sequencer64-doc/archive/0.95.2.tar.gz#/%{name}-doc-0.95.2.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -35,7 +33,6 @@ The heart of seq24 remains intact.
 
 %package devel
 Summary:  Development files for %{name}
-Group:    Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -43,14 +40,13 @@ The %{name}-devel package contains header files for %{name}.
 
 %package doc
 Summary:  Documentation for %{name}
-Group:    MIDI sequencer
 Requires: %{name} = %{version}-%{release}
 
 %description doc
 The %{name}-doc package contains documentation for %{name}.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 tar xvfz %{SOURCE1}
 
@@ -59,11 +55,10 @@ tar xvfz %{SOURCE1}
 sh autogen.sh
 
 %configure
-make  DESTDIR=%{buildroot} CFLAGS="%{build_cflags}" CXXFLAGS="-include string %{build_cxxflags}" 
+%make_build CXXFLAGS="-include string %{build_cxxflags}" 
 
 %install
 
-rm -rf $RPM_BUILD_ROOT
 %make_install
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/doc/
@@ -83,6 +78,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/doc/**
 
 %changelog
+* Mon Jul 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.96.8-2
+- update to 0.96.8-2
+
 * Tue May 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.96.7-2
 - update to 0.96.7-2 - add documentation
 
