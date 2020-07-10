@@ -6,14 +6,11 @@
 Summary: Audio recorder
 Name:    timemachine
 Version: 0.3.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     https://github.com/swh/timemachine
 
 Source0: https://github.com/swh/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -38,18 +35,20 @@ has the advantage that it never clips and can be wired to any part of the jack
 graph.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 # Force wav as the default format
 sed -i -e "s/w64/wav/g" src/main.h
 
 %build
+
 ./autogen.sh
-./configure --prefix=%{_prefix}
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags}
+%configure
+%make_build
 
 %install
-%{__make} DESTDIR=%{buildroot} install
+
+%make_install
 
 mkdir -p %{buildroot}%{_datadir}/applications/
 cat > %{buildroot}%{_datadir}/applications/timemachine.desktop << EOF
@@ -63,11 +62,7 @@ Icon=/usr/share/timemachine/pixmaps/timemachine-icon.png
 Categories=AudioVideo;
 EOF
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README
 %license COPYING
 %{_bindir}/%{name}
@@ -75,6 +70,9 @@ EOF
 %{_datadir}/applications/*
 
 %changelog
+* Fri Jul 10 2020 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-4
+- fix spec file 
+
 * Sun Dec 15 2019 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-3
 - Set default format to wav instead of w64 / remove fedora flags which make tm hangs 
 
