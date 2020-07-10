@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 ac21d64cfc181014dee1cd5bb8b1212dc5cd390f
+%global commit0 d279d39292d42f4afe13a175f950e62bf7a675ed
 
-%global gittag0 1.17.0
+%global gittag0 1.18.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-voxglitch
-Version: 1.17.0
+Version: 1.18.0
 Release: 3%{?dist}
 Summary: voxglitch plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r voxglitch_plugin/dist/voxglitch/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.17.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.18.0-3
 - initial specfile

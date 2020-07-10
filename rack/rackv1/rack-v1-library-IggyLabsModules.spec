@@ -1,19 +1,19 @@
 # Global variables for github repository
-%global commit0 0300ce7b679a516ba38a5a835949ce7ad6cf3219
+%global commit0 7029199b91cc377237cfac97d37c4e2ce901842a
 
-%global gittag0 1.15.0
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
-Name:    rack-v1-FrozenWasteland
-Version: 1.15.0
+Name:    rack-v1-IggyLabsModules
+Version: 1.0.0
 Release: 3%{?dist}
-Summary: FrozenWasteland plugin for Rack
+Summary: IggyLabsModules plugin for Rack
 
 License: GPLv2+
-URL:     https://github.com/almostEric/FrozenWasteland
+URL:     https://github.com/IggyLabs/IggyLabsModules
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -31,8 +31,8 @@ URL:     https://github.com/almostEric/FrozenWasteland
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/almostEric/FrozenWasteland/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source2: FrozenWasteland_plugin.json
+Source1: https://github.com/IggyLabs/IggyLabsModules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source2: IggyLabsModules_plugin.json
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -55,7 +55,7 @@ BuildRequires: speexdsp-devel
 BuildRequires: jq
 
 %description
-FrozenWasteland plugin for Rack.
+IggyLabsModules plugin for Rack.
 
 %prep
 %autosetup -n Rack
@@ -87,24 +87,24 @@ sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
 sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
-mkdir FrozenWasteland_plugin
-tar xvfz %{SOURCE1} --directory=FrozenWasteland_plugin --strip-components=1 
+mkdir IggyLabsModules_plugin
+tar xvfz %{SOURCE1} --directory=IggyLabsModules_plugin --strip-components=1 
 
-cp -n %{SOURCE2} FrozenWasteland_plugin/plugin.json
+cp -n %{SOURCE2} IggyLabsModules_plugin/plugin.json
 
 %build
 
-cd FrozenWasteland_plugin
+cd IggyLabsModules_plugin
 make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
 
 %install 
 
-mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/FrozenWasteland/
-cp -r FrozenWasteland_plugin/dist/FrozenWasteland/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/FrozenWasteland/
+mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins-v1/IggyLabsModules/
+cp -r IggyLabsModules_plugin/dist/IggyLabsModules/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/IggyLabsModules/
 
 %files
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.15.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
