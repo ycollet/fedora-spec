@@ -6,7 +6,7 @@
 Summary: Audio recorder
 Name:    timemachine
 Version: 0.3.4
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPL
 URL:     https://github.com/swh/timemachine
 
@@ -43,7 +43,7 @@ sed -i -e "s/w64/wav/g" src/main.h
 %build
 
 ./autogen.sh
-%configure
+./configure --prefix=%{_prefix}
 %make_build
 
 %install
@@ -70,6 +70,9 @@ EOF
 %{_datadir}/applications/*
 
 %changelog
+* Sat Jul 11 2020 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-5
+- remove fedora flags which make tm hangs. Still hangs under F32 
+
 * Fri Jul 10 2020 Yann Collette <ycollette dot nospam at free.fr> 0.3.4-4
 - fix spec file 
 
