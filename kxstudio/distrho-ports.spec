@@ -1,23 +1,19 @@
 # Global variables for github repository
-%global commit0 7e62235e809e59770d0d91d2c48c3f50ce7c027a
-%global gittag0 master
+%global commit0 a953bed05844d4a0ba349f75c75b56a430c8b11a
+%global gittag0 2020-07-14
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 Name:    DISTRHO-Ports
-Version: 1.0.0.%{shortcommit0}
+Version: 1.0.1.%{shortcommit0}
 Release: 4%{?dist}
 Summary: A set of LV2 plugins
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/DISTRHO/DISTRHO-Ports
 
 Source0: https://github.com/DISTRHO/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: ladspa-devel
@@ -28,47 +24,37 @@ BuildRequires: freetype-devel
 BuildRequires: libXrandr-devel
 BuildRequires: libXinerama-devel
 BuildRequires: libXcursor-devel
-BuildRequires: premake3
+BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
+BuildRequires: meson
 
 %description
 A set of LV2 plugins
 
 %prep
-%setup -qn %{name}-%{commit0}
-
-# Bug on Fedora 31 with gcc -> switch to -O2
-find . -name "*.lua" -exec sed -i -e "s/-O3/-O2/g" {} \;
+%autosetup -n %{name}-%{commit0}
 
 %build
 
-sed -i -e "s/premake --os/premake3 --os/g" scripts/premake-update.sh
+mkdir build
+DESTDIR=%{buildroot} VERBOSE=1 meson build --buildtype release --prefix=/usr -Dbuild-lv2=true -Dbuild-vst3=true
 
-./scripts/premake-update.sh linux
-make PREFIX=/usr LIBDIR=/usr/lib64 DESTDIR=%{buildroot} lv2 %{?_smp_mflags}
+cd build
+DESTDIR=%{buildroot} VERBOSE=1 %ninja_build 
 
 %install 
-make PREFIX=/usr LIBDIR=/usr/lib64 DESTDIR=%{buildroot} lv2 %{?_smp_mflags} install
 
-rm -rf %{buildroot}/usr/src
-
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+cd build
+DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
 
 %files
 %{_libdir}/lv2/*
+%{_libdir}/vst/*
 
 %changelog
+* Tue Jul 14 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-4
+- update to 2020-07-14 (1.0.1)
+
 * Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-4
 - update to 7e62235e809e59770d0d91d2c48c3f50ce7c027a
 
