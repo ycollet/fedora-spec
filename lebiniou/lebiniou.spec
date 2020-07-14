@@ -1,19 +1,13 @@
-# Disable production of debug package. Problem with fedora 23
-# %global debug_package %{nil}
-
 Name:    lebiniou
-Version: 3.42.1
-Release: 2%{?dist}
+Version: 3.43
+Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
-Group:   Applications/Multimedia
 
 License: GPLv2+
 
 # original tarfile can be found here:
 Source0: https://gitlab.com/lebiniou/lebiniou/-/archive/version-%{version}/lebiniou-version-%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ make sed
 BuildRequires: autoconf automake libtool
@@ -32,16 +26,16 @@ BuildRequires: ffmpeg-devel
 BuildRequires: perl-podlators
 BuildRequires: gtk-update-icon-cache
 BuildRequires: jansson-devel
+BuildRequires: desktop-file-utils
 
 Requires(pre): lebiniou-data
 
 %description
-
 As an artist, composer, VJ or just fan, lebiniou allows you to create live visuals based on your audio performances or existing tracks.
 As a listener, lebiniou allows you to watch an everlasting and totally unseen creation reacting to the music.
 
 %prep
-%setup -qn %{name}-version-%{version}
+%autosetup -n %{name}-version-%{version}
 
 sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_lib}\"/g" configure.ac
 
@@ -53,25 +47,17 @@ LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 # report: --enable-jackaudio doesn't work ...
 %configure --prefix=%{_prefix} --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir} CFLAGS="%{build_cxxflags}"
 
-make %{?_smp_mflags} 
+%make_build 
 
 %install
 
-make %{?_smp_mflags} DESTDIR=%{buildroot} install
+%make_install
 
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans 
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
 %doc README.md AUTHORS ChangeLog THANKS
@@ -81,6 +67,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/*
 
 %changelog
+* Mon Jul 13 2020 Yann Collette <ycollette.nospam@free.fr> - 3.43-3
+- update to 3.43
+
 * Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 3.42.1-3
 - update to 3.42.1
 
