@@ -1,21 +1,10 @@
 Name:    surge
 Version: 1.6.6
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A VST2 synthetizer
 License: GPLv2+
 
-# git clone https://github.com/surge-synthesizer/surge
-# cd surge
-# git checkout origin/release/1.6.6
-# git submodule init
-# git submodule update
-# cd vst3dsk
-# git submodule init
-# git submodule update
-# cd ..
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz surge.tar.gz surge/*
+# Use ./source.sh 1.6.6 to get the sources
 
 URL:     https://github.com/surge-synthesizer/surge
 Source0: surge.tar.gz
@@ -40,7 +29,7 @@ A VST2 synthetizer
 %package -n lv2-%{name}
 Summary:  LV2 version of %{name}
 License:  GPLv2+
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}
 
 %description -n lv2-%{name}
 LV2 version of %{name}
@@ -48,7 +37,7 @@ LV2 version of %{name}
 %package -n vst-%{name}
 Summary:  VST version of %{name}
 License:  GPLv2+
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}
 
 %description -n vst-%{name}
 VST version of %{name}
@@ -56,7 +45,7 @@ VST version of %{name}
 %package -n vst3-%{name}
 Summary:  VST3 version of %{name}
 License:  GPLv2+
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}
 
 %description -n vst3-%{name}
 VST3 version of %{name}
@@ -137,6 +126,9 @@ rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
 %{_libdir}/vst3/*
 
 %changelog
+* Thu Jul 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-5
+- update to 1.6.6-5 - fix package
+
 * Wed Jun 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-4
 - update to 1.6.6-4 - fix debug build
 
