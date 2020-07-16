@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=1.1.22
+VERSION="$1"
 
 git clone https://github.com/sadko4u/lsp-plugins
 cd lsp-plugins
