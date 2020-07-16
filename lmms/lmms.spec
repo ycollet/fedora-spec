@@ -1,14 +1,8 @@
-# Global variables for github repository
-%global commit0 dbf5f47149fbb7584bf48ce9e767b9e90ee2df7e
-%global gittag0 v1.2.1
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    lmms-mao
-Version: 1.2.1
+Version: 1.2.2
 Release: 9%{?dist}
 Summary: Linux MultiMedia Studio
 URL:     http://lmms.sourceforge.net/
-Group:   Applications/Multimedia
 
 # Because dnf does not find a carla so file
 AutoReqProv: no
@@ -35,11 +29,9 @@ AutoReqProv: no
 #       system's fltk)
 License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 # git clone https://github.com/lmms/lmms
 # cd lmms
-# git checkout v1.2.1
+# git checkout v1.2.2
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -47,8 +39,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # tar cvfz lmms.tar.gz lmms/
 # rm -rf lmms
 
-# original tarfile can be found here:
-#Source0: https://github.com/lmms/lmms/archive/%{commit0}.tar.gz#/lmms-%{shortcommit0}.tar.gz
 Source0: lmms.tar.gz
 
 BuildRequires: gcc gcc-c++
@@ -100,23 +90,22 @@ Features
  * MIDI-support
 
 %package devel
-Summary:        Development files for lmms
-Group:          Development/Libraries
-Requires:       lmms-mao = %{version}-%{release}
+Summary:  Development files for lmms
+Requires: lmms-mao = %{version}-%{release}
 
 %description devel
 The lmms-devel package contains header files for
 developing addons for lmms.
 
-# rpath needed e.g. for /usr/libexec/RemoteZynAddSubFx
-# %global _cmake_skip_rpath %{nil}
-
 %prep
-%setup -qn lmms
+%autosetup -n lmms
 
 sed -i -e "s/-std=c11/-std=c11 -fPIC -DPIC/g" src/3rdparty/rpmalloc/CMakeLists.txt
 
 %build
+
+mkdir -p build
+cd build
 
 %cmake \
        -DWANT_SDL:BOOL=OFF \
@@ -134,13 +123,14 @@ sed -i -e "s/-std=c11/-std=c11 -fPIC -DPIC/g" src/3rdparty/rpmalloc/CMakeLists.t
        -DCMAKE_SKIP_RPATH=OFF \
        -DCMAKE_INSTALL_LIBDIR=%{_lib} \
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       .
+       ..
 
-make DESTDIR=%{buildroot} VERBOSE=1 # %{?_smp_mflags}
+%make_build DESTDIR=%{buildroot} VERBOSE=1 # %{?_smp_mflags}
 
 %install
 
-make DESTDIR=%{buildroot} install
+cd build
+%make_install DESTDIR=%{buildroot} install
 
 # workaround: copy bash completion manually into install dir because it fails during cmake install
 mkdir -p %{buildroot}/%{_datadir}/bash-completion/completions
@@ -152,19 +142,6 @@ desktop-file-install --vendor '' \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/lmms.desktop
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
 %doc doc/AUTHORS README.md INSTALL.txt
@@ -182,6 +159,9 @@ fi
 %{_includedir}/lmms
 
 %changelog
+* Thu Jul 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-8
+- update to 1.2.2-8
+
 * Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-9
 - fix for Fedora 32
 
