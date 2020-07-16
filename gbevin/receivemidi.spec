@@ -18,6 +18,8 @@ BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 BuildRequires: xcb-util-keysyms-devel
 BuildRequires: xcb-util-devel
+BuildRequires: libcurl-devel
+BuildRequires: alsa-lib-devel
 
 %description
 ReceiveMIDI is a multi-platform command-line tool makes it very easy to quickly
