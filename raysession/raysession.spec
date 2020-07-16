@@ -1,7 +1,7 @@
 %global __python %{__python3}
 
 Name:    raysession
-Version: 0.8.3
+Version: 0.9.0
 Release: 1%{?dist}
 Summary: A JACK session manager
 
@@ -10,7 +10,7 @@ URL:     https://github.com/Houston4444/RaySession
 
 Source0: https://github.com/Houston4444/RaySession/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildArch:     noarch
+BuildArch: noarch
 
 BuildRequires: python3-qt5-devel
 BuildRequires: python3
@@ -25,8 +25,6 @@ BuildRequires: desktop-file-utils
 Requires(pre): python3-qt5
 Requires(pre): python3-pyliblo
 
-Obsoletes: RaySession
-
 %description
 Ray Session is a GNU/Linux session manager for audio programs as Ardour, Carla,
 QTractor, Non-Timeline, etc... It uses the same API as Non Session Manager, so
@@ -38,25 +36,54 @@ be able to save or close all documents together.
 %autosetup -n RaySession-%{version}
 
 # Fix desktop categories
-sed -i -e "s/AudioVideo;AudioEditing/Audio;Video/g" data/raysession.desktop
+sed -i -e "s/AudioVideo;//g" data/share/applications/raysession.desktop
 # Fix permission on executable python script
 chmod a+x src/shared/jacklib.py
 
 %build
 
-%set_build_flags
-
-%make_build PREFIX=/usr
+%make_build PREFIX=/usr LRELEASE=lrelease-qt5
 
 %install
 
-%make_install PREFIX=/usr
+%make_install PREFIX=/usr LRELEASE=lrelease-qt5
+
+# Cleanup and redo symbolic links
+rm %{buildroot}/usr/share/raysession/src/control/ray_control.bin
+
+rm %{buildroot}/usr/bin/ray_git
+rm %{buildroot}/usr/bin/ray-jack_checker_daemon
+rm %{buildroot}/usr/bin/ray-jack_config_script
+rm %{buildroot}/usr/bin/ray-pulse2jack
+
+ln -s /usr/share/raysession/src/bin/ray_git                 %{buildroot}/usr/bin/ray_git
+ln -s /usr/share/raysession/src/bin/ray-jack_checker_daemon %{buildroot}/usr/bin/ray-jack_checker_daemon
+ln -s /usr/share/raysession/src/bin/ray-jack_config_script  %{buildroot}/usr/bin/ray-jack_config_script  
+ln -s /usr/share/raysession/src/bin/ray-pulse2jack          %{buildroot}/usr/bin/ray-pulse2jack
 
 desktop-file-install                         \
   --add-category="Audio"                     \
   --delete-original                          \
   --dir=%{buildroot}%{_datadir}/applications \
   %{buildroot}/%{_datadir}/applications/%{name}.desktop
+
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/ray-jack_checker.desktop
+
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/ray-jackpatch.desktop
+
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/ray-network.desktop
 
 %files
 %doc README.md
@@ -65,8 +92,12 @@ desktop-file-install                         \
 %{_datadir}/applications/*
 %{_datadir}/icons/*
 %{_datadir}/raysession/*
+%{_sysconfdir}/xdg/raysession/client_templates/*
 
 %changelog
+* Thu Jul 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.0-1
+- update to 0.9.0-1
+
 * Wed Jun 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.3-1
 - update to 0.8.3-1
 
