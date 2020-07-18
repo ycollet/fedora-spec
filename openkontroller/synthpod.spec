@@ -26,6 +26,7 @@ BuildRequires: zita-alsa-pcmi-devel
 BuildRequires: xcb-util-wm-devel
 BuildRequires: xcb-util-xrm-devel
 BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
 BuildRequires: libuv-devel
 BuildRequires: meson
 BuildRequires: cairo-devel

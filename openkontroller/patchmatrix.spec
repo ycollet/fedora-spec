@@ -18,6 +18,7 @@ BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
 BuildRequires: libX11-devel
 BuildRequires: libXext-devel
 BuildRequires: meson

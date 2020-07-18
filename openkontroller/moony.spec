@@ -20,6 +20,7 @@ BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: sratom-devel
 BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
 BuildRequires: libX11-devel
 BuildRequires: libXext-devel
 BuildRequires: flex

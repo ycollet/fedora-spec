@@ -17,6 +17,7 @@ Source0: https://github.com/OpenMusicKontrollers/midi_matrix.lv2/archive/%{commi
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
 BuildRequires: libX11-devel
 BuildRequires: libXext-devel
 BuildRequires: meson
