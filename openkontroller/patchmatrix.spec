@@ -1,21 +1,18 @@
 # Global variables for github repository
-%global commit0 69e616772ab45a77baf58ae1202e16c19649826c
+%global commit0 85ad5c0a760d4df07271afa7b9b7b75973bdca1f
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    patchmatrix
-Version: 0.16.0
+Version: 0.20.0
 Release: 2%{?dist}
 Summary: A JACK patchbay in flow matrix style
 URL:     https://github.com/OpenMusicKontrollers/patchmatrix
-Group:   Applications/Multimedia
 License: GPLv2+
 
 Source0: https://github.com/OpenMusicKontrollers/patchmatrix/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -29,25 +26,28 @@ BuildRequires: meson
 A JACK patchbay in flow matrix style
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
 VERBOSE=1 meson --prefix=/usr build
 cd build
 
-DESTDIR=%{buildroot} VERBOSE=1 ninja 
+VERBOSE=1 %ninja_build 
 
 %install
 
 cd build
-DESTDIR=%{buildroot} ninja install
+VERBOSE=1 %ninja_install
 
 %files
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
+* Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
+- update to 0.26.0-2
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
 - update to 0.16.0-2
 

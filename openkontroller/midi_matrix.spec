@@ -1,21 +1,18 @@
 # Global variables for github repository
-%global commit0 d847c51287a4dd66d946acaac7222ec752dfb43a
+%global commit0 dd41ddc749b2082f75b06ff8cd8b82a75dcf8c60
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    midi_matrix.lv2
-Version: 0.22.0
+Version: 0.26.0
 Release: 3%{?dist}
 Summary: A LV2 Plugin Bundle
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/OpenMusicKontrollers/midi_matrix.lv2
 
 Source0: https://github.com/OpenMusicKontrollers/midi_matrix.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -28,25 +25,28 @@ BuildRequires: meson
 A LV2 Plugin Bundle
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
 LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
-VERBOSE=1 meson --prefix=/usr build
+VERBOSE=1 meson --prefix=/usr -Dlv2libdir=%{_lib}/lv2 build
 cd build
 
-DESTDIR=%{buildroot} VERBOSE=1 ninja
+VERBOSE=1 %ninja_build
 
 %install
 
 cd build
-DESTDIR=%{buildroot} ninja install
+VERBOSE=1 %ninja_install
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
+* Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.26.0-3
+- update to 0.26.0-3
+
 * Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.22.0-3
 - fix for Fedora 32
 

@@ -1,21 +1,18 @@
 # Global variables for github repository
-%global commit0 7452282d077a0ca685bee07b9f1a967d5b35bdaa
+%global commit0 c6cd3720b987f73ed5f412db9607433b3769f1db
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 
 Name:    synthpod
-Version: 0.1.0
+Version: 0.1.1
 Release: 3%{?dist}
 Summary: Lightweight Nonlinear LV2 Plugin Container
 URL:     https://github.com/OpenMusicKontrollers/synthpod
-Group:   Applications/Multimedia
 License: GPLv2+
 
 Source0: https://github.com/OpenMusicKontrollers/synthpod/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: lv2-devel
@@ -27,6 +24,7 @@ BuildRequires: elementary-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: zita-alsa-pcmi-devel
 BuildRequires: xcb-util-wm-devel
+BuildRequires: xcb-util-xrm-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libuv-devel
 BuildRequires: meson
@@ -44,15 +42,14 @@ Lightweight Nonlinear LV2 Plugin Container
 
 %build
 
-VERBOSE=1 meson --prefix=/usr build
+VERBOSE=1 meson --prefix=/usr -Dlv2libdir=%{_lib}/lv2 build
 cd build
-
-DESTDIR=%{buildroot} VERBOSE=1 ninja 
+VERBOSE=1 %ninja_build 
 
 %install 
 
 cd build
-DESTDIR=%{buildroot} ninja install
+VERBOSE=1 %ninja_install
 
 %files
 %{_bindir}/*
@@ -60,6 +57,9 @@ DESTDIR=%{buildroot} ninja install
 %{_datarootdir}/*
 
 %changelog
+* Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.1-3
+- update to last master version - c6cd3720b987f73ed5f412db9607433b3769f1db
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-3
 - update to 0.1.0-3
 
