@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.604
+Version: 0.8.694
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -43,8 +43,11 @@ BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
 
 %description
-Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use. Zrythm sets itself apart from other DAWs by allowing extensive automation via built-in LFOs and envelopes and intuitive MIDI or audio editing and arranging via clips.
-In the usual Composing -> Mixing -> Mastering workflow, Zrythm puts the most focus on the Composing part. It allows musicians to quickly lay down and process their musical ideas without taking too much time for unnecessary work.
+Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
+Zrythm sets itself apart from other DAWs by allowing extensive automation via built-in LFOs and envelopes
+and intuitive MIDI or audio editing and arranging via clips.
+In the usual Composing -> Mixing -> Mastering workflow, Zrythm puts the most focus on the Composing part.
+It allows musicians to quickly lay down and process their musical ideas without taking too much time for unnecessary work.
 It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from other programs like Ardour and Jalv.
 More info at https://www.zrythm.org
 
@@ -59,7 +62,7 @@ sed -i -e '/meson.add_install_script/,+2d' meson.build
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
 # Remove summary which is only available on meson 0.53 and stick to version 0.52
 sed -i -e "s/meson_version: '>= 0.53.0'/meson_version: '>= 0.52.0'/g" meson.build
-sed -i -e "734,768d" meson.build
+sed -i -e "839,848d" meson.build
 
 %build
 
@@ -98,6 +101,9 @@ desktop-file-install --vendor '' \
 %{_mandir}/*
 
 %changelog
+* Sat Jul 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.694-2
+- update to 0.8.694-2
+
 * Sat Jun 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.604-2
 - update to 0.8.604-2
 
