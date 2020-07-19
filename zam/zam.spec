@@ -1,9 +1,6 @@
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    zam-plugins
 Version: 3.13
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Zam LV2 set of plugins
 License: GPLv2+
 URL:     https://github.com/zamaudio/zam-plugins
@@ -39,10 +36,10 @@ Zam VST plugin
 %autosetup -n zam-plugins-3.13
 
 %build
-%make_build PREFIX=/usr LIBDIR=%{_lib} all
+%make_build PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags" all
 
 %install 
-%make_install PREFIX=/usr LIBDIR=%{_lib} install
+%make_install PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags" install
 
 %files
 %doc changelog NOTICE.DPF NOTICE.SFZero README.md
@@ -57,6 +54,9 @@ Zam VST plugin
 %{_libdir}/vst/* 
 
 %changelog
+* Sun Jul 19 2020 Yann Collette <ycollette.nospam@free.fr> - 3.13-3
+- fix debug build
+
 * Sun Jul 19 2020 Yann Collette <ycollette.nospam@free.fr> - 3.13-2
 - update to zam-plugins-3.13
 
