@@ -1,23 +1,15 @@
-# Global variables for github repository
-%global commit0 7232969a1d02eea926ab5592d2a0bc0c54003d05
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    zam-plugins
-Version: 3.12
+Version: 3.13
 Release: 2%{?dist}
 Summary: Zam LV2 set of plugins
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/zamaudio/zam-plugins
-# in the zam repository -> make dist
-Source0: zam-plugins-3.12.tar.xz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# in the zam repository -> make dist
+Source0: zam-plugins-3.13.tar.xz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -32,30 +24,27 @@ BuildRequires: libsamplerate-devel
 Zam LV2 set of plugins
 
 %package -n ladspa-zam
-Summary:        Zam LADSPA plugin
-Group:          Applications/Multimedia
+Summary: Zam LADSPA plugin
 
 %description -n ladspa-zam
 Zam LADSPA plugin
 
 %package -n vst-zam
-Summary:        Zam VST plugin
-Group:          Applications/Multimedia
+Summary: Zam VST plugin
 
 %description -n vst-zam
 Zam VST plugin
 
 %prep
-%setup -qn zam-plugins-3.12
+%autosetup -n zam-plugins-3.13
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
+%make_build PREFIX=/usr LIBDIR=%{_lib} all
 
 %install 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
+%make_install PREFIX=/usr LIBDIR=%{_lib} install
 
 %files
-%defattr(-,root,root,-)
 %doc changelog NOTICE.DPF NOTICE.SFZero README.md
 %license COPYING
 %{_bindir}/*
@@ -68,6 +57,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
 %{_libdir}/vst/* 
 
 %changelog
+* Sun Jul 19 2020 Yann Collette <ycollette.nospam@free.fr> - 3.13-2
+- update to zam-plugins-3.13
+
 * Sun Dec 15 2019 Yann Collette <ycollette.nospam@free.fr> - 3.12-2
 - update to zam-plugins-3.12
 
