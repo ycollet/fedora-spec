@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:	 faust
-Version: 2.20.2
+Version: 2.27.1
 Release: 20%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
@@ -10,7 +10,7 @@ License: GPLv2+ and BSD
 URL:     http://faust.grame.fr/
 
 # git clone https://github.com/grame-cncm/faust
-# git checkout 2.20.2
+# git checkout 2.27.1
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -49,10 +49,10 @@ processor block-diagram : a piece of code that produces output signals
 according to its input signals (and maybe some user interface parameters)
 
 %package doc
-Summary:	Documentation for %{name}
-License:	GPLv2+
-BuildArch:	noarch
-Requires:	%{name} = %{version}-%{release}
+Summary:   Documentation for %{name}
+License:   GPLv2+
+BuildArch: noarch
+Requires:  %{name} = %{version}-%{release}
 
 %description doc
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -60,29 +60,29 @@ signal processing. This package provides documentation files to help with
 writing programs with faust.
 
 %package osclib
-Summary:	OSCLib Library
-License:	GPLv2+ and MIT
-Requires:	%{name} = %{version}-%{release}
+Summary:  OSCLib Library
+License:  GPLv2+ and MIT
+Requires: %{name} = %{version}-%{release}
 
 %description osclib
 Faust AUdio STreams is a functional programming language for real-time audio
 signal processing. This package provides osclib.
 
 %package osclib-devel
-Summary:	Headers for the OSCLib Library
-License:	GPLv2+ and MIT
-Requires:	%{name}-osclib = %{version}-%{release}
+Summary:  Headers for the OSCLib Library
+License:  GPLv2+ and MIT
+Requires: %{name}-osclib = %{version}-%{release}
 
 %description osclib-devel
 Faust AUdio STreams is a functional programming language for real-time audio
 signal processing. This package provides the development files for osclib.
 
 %package tools
-Summary:	3rd party tools written for %{name}
-License:	GPLv2+
-BuildArch:	noarch
-Requires:	%{name}-osclib-devel = %{version}-%{release}
-Requires:	python2
+Summary:   3rd party tools written for %{name}
+License:   GPLv2+
+BuildArch: noarch
+Requires:  %{name}-osclib-devel = %{version}-%{release}
+Requires:  python2
 
 %description tools
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -90,10 +90,10 @@ signal processing. These additional tools are provided by various contributors
 to help the building process of applications and plugins with Faust.
 
 %package kate
-Summary:	Kate/Kwrite plugin for %{name}
-License:	GPLv2+
-BuildArch:	noarch
-Requires:	%{name} = %{version}-%{release}
+Summary:   Kate/Kwrite plugin for %{name}
+License:   GPLv2+
+BuildArch: noarch
+Requires:  %{name} = %{version}-%{release}
 
 %description kate
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -101,10 +101,10 @@ signal processing. This package provides Faust code syntax highlighting support
 for KDE's Kate/Kwrite.
 
 %package stdlib
-Summary:	standard libraries for %{name}
-License:	GPLv2+
-BuildArch:	noarch
-Requires:	%{name} = %{version}-%{release}
+Summary:   standard libraries for %{name}
+License:   GPLv2+
+BuildArch: noarch
+Requires:  %{name} = %{version}-%{release}
 
 %description stdlib
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -134,6 +134,12 @@ chmod -x compiler/draw/device/SVGDev.* architecture/VST/PkgInfo
 chmod +x tools/faust2appls/faust2*
 chmod -x tools/faust2pd/faust2*
 
+# fix usage.sh
+for Files in `grep -l usage.sh tools/faust2appls/*`
+do
+  sed -i -e "s/usage.sh/\/usr\/share\/faust\/usage.sh/g" $Files
+done
+
 # Fix encoding
 for i in examples syntax-highlighting; do
     iconv -f iso8859-1 -t utf8 $i/README.md -o tmpfile
@@ -154,6 +160,7 @@ sed -i -e "s/env python/env python2/g" tools/faust2appls/faust2atomsnippets
 
 # install lib in the good directory
 sed -i -e "s/\$(BUILDLOCATION)\/lib/\$(BUILDLOCATION)\/%{_lib}/g" Makefile
+
 
 %build
 # Build the main executable
@@ -200,21 +207,20 @@ cp -a syntax-highlighting/%{name}.xml %{buildroot}%{_datadir}/kde4/apps/katepart
 # install library
 cd libraries
 export PATH=../tools/faust2appls/:$PATH
-./generateDoc
 
 mkdir -p %{buildroot}%{_datadir}/faust/
 cp *.lib old/*.lib %{buildroot}%{_datadir}/faust/
 
 mkdir -p %{buildroot}%{_datadir}/faust/doc/
 cp doc/library.pdf %{buildroot}%{_datadir}/faust/doc/
-cp -r doc/md %{buildroot}%{_datadir}/faust/doc/md
 
 mv README.md README-stdlib.md
 
 rm %{buildroot}%{_libdir}/ios-libsndfile.a
 
-%ldconfig_scriptlets osclib
+mv %{buildroot}%{_bindir}/usage.sh %{buildroot}%{_datadir}/faust/
 
+%ldconfig_scriptlets osclib
 
 %files
 %doc README.md examples
@@ -253,6 +259,9 @@ rm %{buildroot}%{_libdir}/ios-libsndfile.a
 %{_datadir}/faust/*.lib
 
 %changelog
+* Tue Jul 21 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.1-20
+- Update to 2.27.1-20
+
 * Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.20.2-20
 - Update to 2.20.2-20. Fix libraries installation
 
