@@ -1,21 +1,18 @@
 %global __python %{__python3}
 
 # Global variables for github repository
-%global commit0 0ba49d3e2823eb2bf58e25b86a46495dca4e373c
+%global commit0 e80533c0ecc86989766079109f6f2f8b60a6f664
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: A radio automation system
 Name:    rivendell
-Version: 3.4.0
+Version: 3.4.1
 Release: 1%{?dist}
 License: LGPL
-Group:   Applications/Multimedia
 URL:     https://github.com/ElvishArtisan/rivendell
 
 Source0: https://github.com/ElvishArtisan//%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel
@@ -57,7 +54,7 @@ audio content.  Modules for the production and management of podcast
 audio are also included.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 sed -i -e "s/instdir = @LOCAL_PREFIX@\/lib/instdir = @LOCAL_PREFIX@\/%{_lib}/g" lib/Makefile.am
 
@@ -79,11 +76,11 @@ LDFLAGS='-Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld'
 export LDFLAGS
 
 %configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-docbook
-%{__make} DESTDIR=%{buildroot} #%{?_smp_mflags}
+%make_build
 
 %install
 
-%{__make} DESTDIR=%{buildroot} install
+%make_install
 
 %__install -m 755 -d %{buildroot}/usr/lib/systemd/system/
 mv %{buildroot}/lib/systemd/system/rivendell.service %{buildroot}/usr/lib/systemd/system/rivendell.service
@@ -92,9 +89,6 @@ for Files in %{buildroot}/%{_libdir}/rivendell/pypad/*.py
 do
     sed -i -e "s/bin\/python/bin\/python2/g" $Files
 done
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %post
 update-desktop-database -q
@@ -161,7 +155,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files
-%defattr(-, root, root)
 %doc AUTHORS INSTALL NEWS README ChangeLog UPGRADING
 %license COPYING
 %{_datadir}/*
@@ -174,6 +167,9 @@ fi
 %{_unitdir}/*
 
 %changelog
+* Wed Jul 22 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.1-1
+- update to 3.4.1
+
 * Sat May 23 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.0-1
 - update to 3.4.0
 
