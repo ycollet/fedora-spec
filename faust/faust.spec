@@ -2,7 +2,7 @@
 
 Name:	 faust
 Version: 2.27.1
-Release: 20%{?dist}
+Release: 21%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
@@ -170,16 +170,16 @@ make lib
 
 
 %install
-mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_datadir}/%{name}
-mkdir -p %{buildroot}%{_libdir}
+mkdir -p %{buildroot}/%{_bindir}
+mkdir -p %{buildroot}/%{_datadir}/%{name}
+mkdir -p %{buildroot}/%{_libdir}
 make install PREFIX=%{_prefix} LIBDIR=%{_libdir} INCLUDEDIR=%{_includedir} DESTDIR=%{buildroot}
 
 # install liboscpack manually
 pushd .
 cd architecture/osclib/oscpack
-cp liboscpack.so.1.1.0 %{buildroot}%{_libdir}
-cd %{buildroot}%{_libdir}
+cp liboscpack.so.1.1.0 %{buildroot}/%{_libdir}
+cd %{buildroot}/%{_libdir}
 ln -s liboscpack.so.1.1.0 liboscpack.so.1
 ln -s liboscpack.so.1 liboscpack.so
 popd
@@ -189,36 +189,36 @@ mv documentation/faust-quick-reference-src/illustrations/ documentation
 rm -fr documentation/faust-quick-reference-src
 
 # Install tools
-cp -a tools/%{name}2sc-*/%{name}2sc %{buildroot}%{_bindir}
+cp -a tools/%{name}2sc-*/%{name}2sc %{buildroot}/%{_bindir}
 mv tools/%{name}2sc-*/README README.supercollider
 
-cp -a tools/%{name}2appls/%{name}2* %{buildroot}%{_bindir}
+cp -a tools/%{name}2appls/%{name}2* %{buildroot}/%{_bindir}
 
 # Install the kate plugin
-mkdir -p %{buildroot}%{_datadir}/kde4/apps/katepart/syntax/
-cp -a syntax-highlighting/%{name}.xml %{buildroot}%{_datadir}/kde4/apps/katepart/syntax/
+mkdir -p %{buildroot}/%{_datadir}/kde4/apps/katepart/syntax/
+cp -a syntax-highlighting/%{name}.xml %{buildroot}/%{_datadir}/kde4/apps/katepart/syntax/
 
 # move the .a library
 %ifarch x86_64 amd64
-  mkdir -p %{buildroot}%{_libdir}/
-  mv %{buildroot}/usr/lib/*.a %{buildroot}%{_libdir}/
+  mkdir -p %{buildroot}/%{_libdir}/
+  mv %{buildroot}/usr/lib/*.a %{buildroot}/%{_libdir}/
 %endif
 
 # install library
 cd libraries
 export PATH=../tools/faust2appls/:$PATH
 
-mkdir -p %{buildroot}%{_datadir}/faust/
-cp *.lib old/*.lib %{buildroot}%{_datadir}/faust/
+mkdir -p %{buildroot}/%{_datadir}/faust/
+cp *.lib old/*.lib %{buildroot}/%{_datadir}/faust/
 
-mkdir -p %{buildroot}%{_datadir}/faust/doc/
-cp doc/library.pdf %{buildroot}%{_datadir}/faust/doc/
+mkdir -p %{buildroot}/%{_datadir}/faust/doc/
+cp doc/library.pdf %{buildroot}/%{_datadir}/faust/doc/
 
 mv README.md README-stdlib.md
 
-rm %{buildroot}%{_libdir}/ios-libsndfile.a
+rm %{buildroot}/%{_libdir}/ios-libsndfile.a
 
-mv %{buildroot}%{_bindir}/usage.sh %{buildroot}%{_datadir}/faust/
+mv %{buildroot}/%{_bindir}/usage.sh %{buildroot}/%{_datadir}/faust/
 
 %ldconfig_scriptlets osclib
 
@@ -259,6 +259,9 @@ mv %{buildroot}%{_bindir}/usage.sh %{buildroot}%{_datadir}/faust/
 %{_datadir}/faust/*.lib
 
 %changelog
+* Wed Jul 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.1-21
+- Update to 2.27.1-21. Fix install
+
 * Tue Jul 21 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.1-20
 - Update to 2.27.1-20
 
