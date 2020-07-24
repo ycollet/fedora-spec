@@ -1,33 +1,22 @@
-# disable LTO to work around static library problems
-%define _lto_cflags %{nil}
-
-# Global variables for github repository
-%global commit0 8861e0e8dc30412e64a696f44f07b3b3ac87f4da
-%global gittag0 v0.3.2
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:      sfizz
-Version:   0.3.2
+Version:   0.4.0
 Release:   2%{?dist}
 License:   BSD-2-Clause
-Group:     Productivity/Multimedia/Sound/Players
 Summary:   Sampler plugin and library for SFZ instruments
 Url:       https://github.com/sfztools/sfizz
-Source:    sfizz-0.3.2.tar.gz
+Source:    sfizz-0.4.0.tar.gz
 
-# git clone https://github.com/sfztools/sfizz sfizz-0.3.2
-# cd sfizz-0.3.2
-# git checkout v0.3.2
+# git clone https://github.com/sfztools/sfizz sfizz-0.4.0
+# cd sfizz-0.4.0
+# git checkout 0.4.0
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
 # cd ..
-# tar cvfz sfizz-0.3.2.tar.gz sfizz-0.3.2/*
+# tar cvfz sfizz-0.4.0.tar.gz sfizz-0.4.0/*
 
 Requires:  libsndfile
 Requires:  jack-audio-connection-kit
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
@@ -54,7 +43,7 @@ Requires:  %{name} = %{version}-%{release}
 Header files for the Sfizz library.
 
 %prep
-%setup -qn %{name}-%{version}
+%autosetup -n %{name}-%{version}
 
 %build
 
@@ -70,16 +59,18 @@ cd build
        -DBUILD_SHARED_LIBS=OFF \
        ..
 
-make VERBOSE=1 %{?_smp_mflags}
+%make_build VERBOSE=1
 
 %install
 
 cd build
-make DESTDIR=%{buildroot} install
+%make_install
 
 %files
-%doc README.md
+%doc README.md GOVERNANCE.md CONTRIBUTING.md AUTHORS.md
+%license LICENSE.md
 %{_bindir}/sfizz_jack
+%{_bindir}/sfizz_render
 %{_libdir}/libsfizz.so.*
 %dir %{_libdir}/lv2
 %dir %{_libdir}/lv2/sfizz.lv2
@@ -95,8 +86,11 @@ make DESTDIR=%{buildroot} install
 %exclude %{_libdir}/libsfizz.a
 
 %changelog
-* Sun Apr 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.2-1
-- update to 0.3.2
+* Fri Jul 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-2
+- update to 0.4.0-2
+
+* Sun Apr 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.2-2
+- update to 0.3.2-2
 
 * Sun Mar 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
 - update to 0.3.1
