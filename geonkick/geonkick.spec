@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 4c56cfeb78e832b9a6dd9157ed3e541f88734d2c
+%global commit0 7aaeb92d1492af9895ff2994b7279224c0f3bfc1
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    geonkick
-Version: 2.2.3
+Version: 2.3.1
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
@@ -62,6 +62,9 @@ cd build
 %{_datadir}/*
 
 %changelog
+* Fri Jul 24 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.1-1
+- Update to 2.3.1-1
+
 * Fri Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.3-1
 - Update to 2.2.3-1
 
