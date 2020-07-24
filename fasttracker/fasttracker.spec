@@ -1,8 +1,7 @@
 Name:    fasttracker2
-Version: 1.26
+Version: 1.27
 Release: 3%{?dist}
 Summary: Module tracker software for creating music
-Group:   Applications/Multimedia
 License: GPLv3+
 URL:     https://16-bits.org/ft2.php
 
@@ -65,6 +64,9 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %{_bindir}/*
 
 %changelog
+* Fri Jul 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.27-3
+- update to 1.27-3
+
 * Wed Jun 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.26-3
 - update to 1.26-3
 
