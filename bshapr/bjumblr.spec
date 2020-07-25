@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 4f906ea47467637a6e115435784dc34f6bf63ca7
+%global commit0 af32cc761feb79d929d006306ded975a01e4f4ac
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: Pattern-controlled audio stream / sample re-sequencer LV2 plugin
 Name:    lv2-BJumblr
-Version: 1.2.2
+Version: 1.4.0
 Release: 2%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BJumblr
@@ -39,6 +39,9 @@ BJumblr is a pattern-controlled audio stream / sample re-sequencer LV2 plugin
 %{_libdir}/lv2/*
 
 %changelog
+* Fri Jul 24 2020 Yann Collette <ycollette dot nospam at free.fr> 1.4.0-2
+- updata to 1.4.0-2
+
 * Fri Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.2-2
 - updata to 1.2.2-2
 
