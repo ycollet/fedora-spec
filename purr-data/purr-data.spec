@@ -157,50 +157,78 @@ make DESTDIR=%{buildroot} prefix=/opt/purr-data install
 cd ../..
 
 # Create a link to the executable.
-mkdir -p "%{buildroot}/usr/bin"
-ln -sf %{buildroot}/opt/purr-data/bin/pd-l2ork "%{buildroot}/usr/bin/purr-data"
+mkdir -p %{buildroot}/usr/bin
+ln -sf %{buildroot}/opt/purr-data/bin/pd-l2ork %{buildroot}/usr/bin/purr-data
+
 # Create links to the include and lib directories.
-mkdir -p "%{buildroot}/usr/include"
-ln -sf %{buildroot}/opt/purr-data/include/pd-l2ork "%{buildroot}/usr/include/purr-data"
-mkdir -p "%{buildroot}/usr/%{_lib}"
-ln -sf %{buildroot}/opt/purr-data/lib/pd-l2ork "%{buildroot}/usr/%{_lib}/purr-data"
+mkdir -p %{buildroot}/usr/include
+ln -sf %{buildroot}/opt/purr-data/include/pd-l2ork %{buildroot}/usr/include/purr-data
+
+mkdir -p %{buildroot}/usr/%{_lib}
+ln -sf %{buildroot}/opt/purr-data/lib/pd-l2ork %{buildroot}/usr/%{_lib}/purr-data
+
 # Edit bash completion file.
-sed -e 's/pd-l2ork/purr-data/g' < "%{buildroot}/etc/bash_completion.d/pd-l2ork" > "%{buildroot}/etc/bash_completion.d/purr-data"
-rm -f "%{buildroot}/etc/bash_completion.d/pd-l2ork"
+mkdir -p %{buildroot}/etc/bash_completion.d/
+cp scripts/bash_completion/pd-l2ork %{buildroot}/etc/bash_completion.d/
+sed -e 's/pd-l2ork/purr-data/g' < %{buildroot}/etc/bash_completion.d/pd-l2ork > %{buildroot}/etc/bash_completion.d/purr-data
+rm -f %{buildroot}/etc/bash_completion.d/pd-l2ork
+
 # For now we just remove the Emacs mode as it will conflict with the
 # pd-l2ork package.
-rm -rf "%{buildroot}/usr/share/emacs"
+rm -rf %{buildroot}/usr/share/emacs
+
 # Edit the library paths in the default user.settings file so that it
 # matches our install prefix.
-cd "%{buildroot}%{buildroot}/opt/purr-data/lib/pd-l2ork"
+cp packages/linux_make/default.settings %{buildroot}/opt/purr-data/lib/pd-l2ork
+cd %{buildroot}/opt/purr-data/lib/pd-l2ork
 sed -e "s!/usr/lib/pd-l2ork!%{buildroot}/opt/purr-data/lib/pd-l2ork!g" -i default.settings
+
 # Replace the pd-l2ork desktop/mime files and icons with purr-data ones, so
 # that pd-l2ork can be installed alongside purr-data. Also fix up some
 # glitches in the desktop files to make brp-suse.d/brp-30-desktop happy, which
 # is *very* picky about categories. We also remove the K12 desktop files which
 # aren't needed since K12 mode is not supported by purr-data (yet).
-cd "%{buildroot}/usr/share/applications"
+mkdir -p %{buildroot}/usr/share/applications
+cp packages/linux_make/pd-l2ork.desktop       %{buildroot}/usr/share/applications
+cp packages/linux_make/pd-l2ork-debug.desktop %{buildroot}/usr/share/applications
+
+cd %{buildroot}/usr/share/applications
 sed -e 's/pd-l2ork/purr-data/g' -e 's/Pd-L2Ork/Purr-Data/g' -e 's/[.]xpm//g' -e 's/AudioVideo;Audio;/AudioVideo;Audio;Midi;/g' < pd-l2ork.desktop > purr-data.desktop
 sed -e 's/pd-l2ork/purr-data/g' -e 's/Pd-L2Ork/Purr-Data/g' -e 's/[.]xpm//g' -e 's/AudioVideo;Audio;/AudioVideo;Audio;Midi;/g' < pd-l2ork-debug.desktop > purr-data-debug.desktop
 rm -f pd-l2ork*.desktop
-cd "%{buildroot}/usr/share/mime/packages"
+
+mkdir -p %{buildroot}/usr/share/mime/packages
+cp packages/linux_make/pd-l2ork.xml %{buildroot}/usr/share/mime/packages
+
+cd %{buildroot}/usr/share/mime/packages
 sed -e 's/pd-l2ork/purr-data/g' < pd-l2ork.xml > purr-data.xml
 rm -f pd-l2ork.xml
-cd "%{buildroot}/usr/share/icons/hicolor/128x128/apps/"
+
+mkdir -p %{buildroot}/usr/share/icons/hicolor/128x128/apps/
+cp packages/linux_make/pd-l2ork.png     %{buildroot}/usr/share/icons/hicolor/128x128/apps/
+cp packages/linux_make/pd-l2ork-red.png %{buildroot}/usr/share/icons/hicolor/128x128/apps/
+
+cd %{buildroot}/usr/share/icons/hicolor/128x128/apps/
 rm -f pd-l2ork-k12*.png
 mv pd-l2ork.png purr-data.png
 mv pd-l2ork-red.png purr-data-red.png
-cd "%{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/"
+
+mkdir -p %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/
+cp packages/linux_make/text-x-pd-l2ork.png %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/
+
+cd %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/
 mv text-x-pd-l2ork.png text-x-purr-data.png
+
 # Remove libtool archives and extra object files.
-cd "%{buildroot}/opt/purr-data"
+cd %{buildroot}/opt/purr-data
 rm -f lib/pd-l2ork/extra/*/*.la lib/pd-l2ork/extra/*/*.pd_linux_o
+
 # Sanitize permissions.
-cd "%{buildroot}"
+cd %{buildroot}
 chmod -R go-w *
 chmod -R a+r *
-chmod a-x .%{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
-find .%{buildroot}/opt/purr-data/lib/pd-l2ork/bin/nw -executable -not -type d -exec chmod a+x {} +
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
+find %{buildroot}/opt/purr-data/lib/pd-l2ork/bin/nw -executable -not -type d -exec chmod a+x {} +
 #find . -executable -name '*.pd_linux' -exec chmod a-x {} +
 find . -executable -name '*.pd' -exec chmod a-x {} +
 find . -executable -name '*.txt' -exec chmod a-x {} +
