@@ -46,7 +46,6 @@ License: GPL
 
 Source0: purr-data.tar.gz
 Source1: https://dl.nwjs.io/v%{nwjs_version}/nwjs-sdk-v%{nwjs_version}-linux-%{nwjs_arch}.tar.gz
-Source2: Makefile
 
 BuildRequires: gcc-c++
 BuildRequires: autoconf automake libtool bison flex rsync
@@ -124,27 +123,47 @@ on Miller Puckette's Pure Data (Pd).
 rm -rf pd/nw/nw
 mkdir -p pd/nw/nw
 tar xvfz %{SOURCE1} -C pd/nw/nw --strip-components 1
-cp %{SOURCE2} .
+
+sed -i -e "s/disis earplug ekext/earplug ekext/g" externals/Makefile
+#sed -i -e "s/mrpeach oscx pan/mrpeach pan/g" externals/Makefile
+#sed -i -e "s/windowing zexy/windowing/g" externals/Makefile
 
 %build
 
-%set_build_flags
+AUTOGEN_LIST="./pd/src/ ./Gem/ ./externals/moocow/gfsm/gfsm/ ./externals/moocow/gfsm/ ./externals/moocow/pdstring/ ./externals/moocow/locale/ ./externals/moocow/deque/ ./externals/moocow/weightmap/ ./externals/moocow/readdir/ ./externals/moocow/sprinkler/ ./externals/moocow/hello/ ./externals/io/hidio/ ./externals/hardware/wiimote/ ./externals/iem/iemmatrix/src/ ./externals/zexy/ ./Gem/extra/pix_artoolkit/"
 
-# %make_build prefix=%{prefix}  %{buildopt}
-make prefix=%{prefix}  %{buildopt}
+for Files in $AUTOGEN_LIST
+do
+  pushd .
+  cd $Files
+  ./autogen.sh
+  popd
+done
+
+cd packages/linux_make
+rm -rf build
+
+# -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection
+
+export CFLAGS=""
+export CXXFLAGS=""
+
+make DESTDIR=%{buildroot} prefix=/opt/purr-data all
 
 %install
 
-make prefix=%{prefix}
+cd packages/linux_make
+make DESTDIR=%{buildroot} prefix=/opt/purr-data install
+cd ../..
 
 # Create a link to the executable.
 mkdir -p "%{buildroot}/usr/bin"
-ln -sf %{prefix}/bin/pd-l2ork "%{buildroot}/usr/bin/purr-data"
+ln -sf %{buildroot}/opt/purr-data/bin/pd-l2ork "%{buildroot}/usr/bin/purr-data"
 # Create links to the include and lib directories.
 mkdir -p "%{buildroot}/usr/include"
-ln -sf %{prefix}/include/pd-l2ork "%{buildroot}/usr/include/purr-data"
+ln -sf %{buildroot}/opt/purr-data/include/pd-l2ork "%{buildroot}/usr/include/purr-data"
 mkdir -p "%{buildroot}/usr/%{_lib}"
-ln -sf %{prefix}/lib/pd-l2ork "%{buildroot}/usr/%{_lib}/purr-data"
+ln -sf %{buildroot}/opt/purr-data/lib/pd-l2ork "%{buildroot}/usr/%{_lib}/purr-data"
 # Edit bash completion file.
 sed -e 's/pd-l2ork/purr-data/g' < "%{buildroot}/etc/bash_completion.d/pd-l2ork" > "%{buildroot}/etc/bash_completion.d/purr-data"
 rm -f "%{buildroot}/etc/bash_completion.d/pd-l2ork"
@@ -153,8 +172,8 @@ rm -f "%{buildroot}/etc/bash_completion.d/pd-l2ork"
 rm -rf "%{buildroot}/usr/share/emacs"
 # Edit the library paths in the default user.settings file so that it
 # matches our install prefix.
-cd "%{buildroot}%{prefix}/lib/pd-l2ork"
-sed -e "s!/usr/lib/pd-l2ork!%{prefix}/lib/pd-l2ork!g" -i default.settings
+cd "%{buildroot}%{buildroot}/opt/purr-data/lib/pd-l2ork"
+sed -e "s!/usr/lib/pd-l2ork!%{buildroot}/opt/purr-data/lib/pd-l2ork!g" -i default.settings
 # Replace the pd-l2ork desktop/mime files and icons with purr-data ones, so
 # that pd-l2ork can be installed alongside purr-data. Also fix up some
 # glitches in the desktop files to make brp-suse.d/brp-30-desktop happy, which
@@ -174,14 +193,14 @@ mv pd-l2ork-red.png purr-data-red.png
 cd "%{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/"
 mv text-x-pd-l2ork.png text-x-purr-data.png
 # Remove libtool archives and extra object files.
-cd "%{buildroot}%{prefix}"
+cd "%{buildroot}/opt/purr-data"
 rm -f lib/pd-l2ork/extra/*/*.la lib/pd-l2ork/extra/*/*.pd_linux_o
 # Sanitize permissions.
 cd "%{buildroot}"
 chmod -R go-w *
 chmod -R a+r *
-chmod a-x .%{prefix}/lib/pd-l2ork/default.settings
-find .%{prefix}/lib/pd-l2ork/bin/nw -executable -not -type d -exec chmod a+x {} +
+chmod a-x .%{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
+find .%{buildroot}/opt/purr-data/lib/pd-l2ork/bin/nw -executable -not -type d -exec chmod a+x {} +
 #find . -executable -name '*.pd_linux' -exec chmod a-x {} +
 find . -executable -name '*.pd' -exec chmod a-x {} +
 find . -executable -name '*.txt' -exec chmod a-x {} +
