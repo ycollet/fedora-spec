@@ -3,9 +3,9 @@
 # Kernel minor version
 %define kmin  6
 # Kernel patch version
-%define kpat  17
+%define kpat  19
 # RT patch version
-%define krt   10
+%define krt   11
 # package version
 %define krel  11
 
@@ -186,6 +186,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Sun Jul 26 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.19-rt11-11
+- update to 5.6.19-rt11-11 - vanilla RT kernel
+
 * Fri Jun 19 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.17-rt10-11
 - update to 5.6.17-rt10-11 - fix preempt option ...
 
