@@ -1,5 +1,5 @@
 Name:    geonkick
-Version: 2.3.2
+Version: 2.3.3
 Release: 1%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
@@ -57,6 +57,9 @@ cd build
 %{_datadir}/*
 
 %changelog
+* Mon Jul 27 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.3-1
+- Update to 2.3.3-1
+
 * Sat Jul 25 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.2-1
 - Update to 2.3.2-1
 
