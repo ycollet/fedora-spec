@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 cf94894775a894be0a4da49196976b80406b412e
+%global commit0 627a40aa0375c9ba3c75a11f6f4abe16caa4701a
 
-%global gittag0 1.1.8
+%global gittag0 1.1.9
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-MindMeldModular
-Version: 1.1.8
+Version: 1.1.9
 Release: 3%{?dist}
 Summary: MindMeldModular plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r MindMeldModular_plugin/dist/MindMeldModular/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.8-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.9-3
 - initial specfile

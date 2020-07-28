@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 e34f89984bd63e513d453c1d2cb58e6a67303f8c
+%global commit0 0a5b43b5cc8bf9840cd3662a12b1b356a00941bf
 
-%global gittag0 1.2.1
+%global gittag0 1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-KautenjaDSP-PotatoChips
-Version: 1.2.1
+Version: 1.4.0
 Release: 3%{?dist}
 Summary: KautenjaDSP-PotatoChips plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r KautenjaDSP-PotatoChips_plugin/dist/KautenjaDSP-PotatoChips/* %{buildroot}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
 - initial specfile

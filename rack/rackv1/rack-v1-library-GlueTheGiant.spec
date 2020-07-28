@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 1734a4c904bb79b1a4f2939388eef1d718a32b2f
 
-%global gittag0 1.1.1
+%global gittag0 1.1.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-GlueTheGiant
-Version: 1.1.1
+Version: 1.1.2
 Release: 3%{?dist}
 Summary: GlueTheGiant plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r GlueTheGiant_plugin/dist/GlueTheGiant/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.2-3
 - initial specfile

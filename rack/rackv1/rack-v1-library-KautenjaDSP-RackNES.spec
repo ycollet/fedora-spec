@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 d91cc8653eaefbfce656f5800c7c4fcf14712b30
 
-%global gittag0 1.1.6
+%global gittag0 1.4.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-KautenjaDSP-RackNES
-Version: 1.1.6
+Version: 1.4.2
 Release: 3%{?dist}
 Summary: KautenjaDSP-RackNES plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r KautenjaDSP-RackNES_plugin/dist/KautenjaDSP-RackNES/* %{buildroot}%{_libex
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.2-3
 - initial specfile
