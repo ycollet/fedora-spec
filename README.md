@@ -32,15 +32,15 @@ $ dnf install filename.rpm
 
 To test the rebuild of the package using mock:
 ```
-$ mock -r fedora-30-x86_64 --rebuild polyphone-2.0.1-1.fc30.src.rpm
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --rebuild polyphone-2.0.1-1.fc30.src.rpm
 ```
 
 To enable a thirdparty repository, you must add it to /etc/mock/templates/fedora-30.tpl for example and then, enable it via the command line. For example:
 ```
-$ mock -r fedora-30-x86_64 --enablerepo=ycollet-linuxmao --rebuild dgedit-0.1-2.fc30.src.rpm
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --enablerepo=ycollet-linuxmao --rebuild dgedit-0.1-2.fc30.src.rpm
 ```
 
-The portion added to /etc/mock/templates/fedora-{29,30,31}.tpl is:
+The portion added to /etc/mock/templates/fedora-{30,31,32}.tpl is:
 
 ```
 [ycollet-linuxmao]
