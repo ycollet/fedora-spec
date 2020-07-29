@@ -1,7 +1,7 @@
 %global __python %{__python3}
 
 Name:    raysession
-Version: 0.9.0
+Version: 0.9.1
 Release: 1%{?dist}
 Summary: A JACK session manager
 
@@ -49,8 +49,6 @@ chmod a+x src/shared/jacklib.py
 %make_install PREFIX=/usr LRELEASE=lrelease-qt5
 
 # Cleanup and redo symbolic links
-rm %{buildroot}/usr/share/raysession/src/control/ray_control.bin
-
 rm %{buildroot}/usr/bin/ray_git
 rm %{buildroot}/usr/bin/ray-jack_checker_daemon
 rm %{buildroot}/usr/bin/ray-jack_config_script
@@ -95,6 +93,9 @@ desktop-file-install                         \
 %{_sysconfdir}/xdg/raysession/client_templates/*
 
 %changelog
+* Wed Jul 29 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.1-1
+- update to 0.9.1-1
+
 * Thu Jul 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.0-1
 - update to 0.9.0-1
 
