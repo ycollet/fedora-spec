@@ -2,7 +2,7 @@ The repo related to these packages can be found here:
 
 https://copr.fedorainfracloud.org/coprs/ycollet/linuxmao/
 
-This repo has old packages for Fedora 25, 26, 27 and 28 and up to date packages for Fedora 29, 30 and 31.
+This repo has old packages for Fedora 25, 26, 27, 28 and 29 and up to date packages for Fedora 30, 31 and 32.
 
 To build the spec file:
 - copy it into your rpmbuild/SPEC directory
@@ -32,12 +32,12 @@ $ dnf install filename.rpm
 
 To test the rebuild of the package using mock:
 ```
-$ mock -r /etc/mock/fedora-32-x86_64.cfg --rebuild polyphone-2.0.1-1.fc30.src.rpm
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --rebuild polyphone-2.0.1-1.fc32.src.rpm
 ```
 
-To enable a thirdparty repository, you must add it to /etc/mock/templates/fedora-30.tpl for example and then, enable it via the command line. For example:
+To enable a thirdparty repository, you must add it to /etc/mock/templates/fedora-32.tpl for example and then, enable it via the command line. For example:
 ```
-$ mock -r /etc/mock/fedora-32-x86_64.cfg --enablerepo=ycollet-linuxmao --rebuild dgedit-0.1-2.fc30.src.rpm
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --enablerepo=ycollet-linuxmao --rebuild dgedit-0.1-2.fc32.src.rpm
 ```
 
 The portion added to /etc/mock/templates/fedora-{30,31,32}.tpl is:
