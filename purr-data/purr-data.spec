@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 # Maintainer: <aggraef at gmail.com>
 
 # This is Jonathan Wilkes' nw.js variant of Pd-L2Ork nick-named "Purr-Data".
@@ -180,8 +182,7 @@ rm -rf %{buildroot}/usr/share/emacs
 # Edit the library paths in the default user.settings file so that it
 # matches our install prefix.
 cp packages/linux_make/default.settings %{buildroot}/opt/purr-data/lib/pd-l2ork
-cd %{buildroot}/opt/purr-data/lib/pd-l2ork
-sed -e "s!/usr/lib/pd-l2ork!%{buildroot}/opt/purr-data/lib/pd-l2ork!g" -i default.settings
+#sed -i -e "s!/usr/lib/pd-l2ork!%{buildroot}/opt/purr-data/lib/pd-l2ork!g" %{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
 
 # Replace the pd-l2ork desktop/mime files and icons with purr-data ones, so
 # that pd-l2ork can be installed alongside purr-data. Also fix up some
@@ -192,48 +193,87 @@ mkdir -p %{buildroot}/usr/share/applications
 cp packages/linux_make/pd-l2ork.desktop       %{buildroot}/usr/share/applications
 cp packages/linux_make/pd-l2ork-debug.desktop %{buildroot}/usr/share/applications
 
-cd %{buildroot}/usr/share/applications
-sed -e 's/pd-l2ork/purr-data/g' -e 's/Pd-L2Ork/Purr-Data/g' -e 's/[.]xpm//g' -e 's/AudioVideo;Audio;/AudioVideo;Audio;Midi;/g' < pd-l2ork.desktop > purr-data.desktop
-sed -e 's/pd-l2ork/purr-data/g' -e 's/Pd-L2Ork/Purr-Data/g' -e 's/[.]xpm//g' -e 's/AudioVideo;Audio;/AudioVideo;Audio;Midi;/g' < pd-l2ork-debug.desktop > purr-data-debug.desktop
+sed -e 's/pd-l2ork/purr-data/g' -e 's/Pd-L2Ork/Purr-Data/g' -e 's/[.]xpm//g' -e 's/AudioVideo;Audio;/AudioVideo;Audio;Midi;/g' < %{buildroot}/usr/share/applications/pd-l2ork.desktop > %{buildroot}/usr/share/applications/purr-data.desktop
+sed -e 's/pd-l2ork/purr-data/g' -e 's/Pd-L2Ork/Purr-Data/g' -e 's/[.]xpm//g' -e 's/AudioVideo;Audio;/AudioVideo;Audio;Midi;/g' < %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop > %{buildroot}/usr/share/applications/purr-data-debug.desktop
 rm -f pd-l2ork*.desktop
 
 mkdir -p %{buildroot}/usr/share/mime/packages
 cp packages/linux_make/pd-l2ork.xml %{buildroot}/usr/share/mime/packages
 
-cd %{buildroot}/usr/share/mime/packages
-sed -e 's/pd-l2ork/purr-data/g' < pd-l2ork.xml > purr-data.xml
+sed -e 's/pd-l2ork/purr-data/g' < %{buildroot}/usr/share/mime/packages/pd-l2ork.xml > %{buildroot}/usr/share/mime/packages/purr-data.xml
 rm -f pd-l2ork.xml
 
 mkdir -p %{buildroot}/usr/share/icons/hicolor/128x128/apps/
 cp packages/linux_make/pd-l2ork.png     %{buildroot}/usr/share/icons/hicolor/128x128/apps/
 cp packages/linux_make/pd-l2ork-red.png %{buildroot}/usr/share/icons/hicolor/128x128/apps/
 
-cd %{buildroot}/usr/share/icons/hicolor/128x128/apps/
-rm -f pd-l2ork-k12*.png
-mv pd-l2ork.png purr-data.png
-mv pd-l2ork-red.png purr-data-red.png
+rm -f %{buildroot}/usr/share/icons/hicolor/128x128/apps/pd-l2ork-k12*.png
+mv %{buildroot}/usr/share/icons/hicolor/128x128/apps/pd-l2ork.png     %{buildroot}/usr/share/icons/hicolor/128x128/apps/purr-data.png
+mv %{buildroot}/usr/share/icons/hicolor/128x128/apps/pd-l2ork-red.png %{buildroot}/usr/share/icons/hicolor/128x128/apps/purr-data-red.png
 
 mkdir -p %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/
 cp packages/linux_make/text-x-pd-l2ork.png %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/
 
-cd %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/
-mv text-x-pd-l2ork.png text-x-purr-data.png
+mv %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/text-x-pd-l2ork.png %{buildroot}/usr/share/icons/hicolor/128x128/mimetypes/text-x-purr-data.png
 
 # Remove libtool archives and extra object files.
-cd %{buildroot}/opt/purr-data
-rm -f lib/pd-l2ork/extra/*/*.la lib/pd-l2ork/extra/*/*.pd_linux_o
+rm -f %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/*/*.la %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/*/*.pd_linux_o
+
+# Manage python name
+sed -i -e "s/bin\/python/bin\/python2/g" %{buildroot}/opt/purr-data/lib/pd-l2ork/doc/manuals/StartHere/po/generate-pot.py
 
 # Sanitize permissions.
 cd %{buildroot}
 chmod -R go-w *
 chmod -R a+r *
-chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
 find %{buildroot}/opt/purr-data/lib/pd-l2ork/bin/nw -executable -not -type d -exec chmod a+x {} +
 #find . -executable -name '*.pd_linux' -exec chmod a-x {} +
 find . -executable -name '*.pd' -exec chmod a-x {} +
 find . -executable -name '*.txt' -exec chmod a-x {} +
 find . -executable -name '*.aif*' -exec chmod a-x {} +
 find . -type d -exec chmod a+x {} +
+
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/doc/examples/rradical/rrad.mono
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/doc/examples/memento/bla.dat
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/doc/examples/memento/bla.xml
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/doc/examples/adaptive/coef.dat
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/doc/examples/iemxmlrpc/xmlrpc-test.py
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/rradical/qwertz2midi.xml
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/rradical/evo33_2.osc
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/rradical/evo33.osc
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/rradical/qwerty2midi.xml
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/memento/examples/bla.dat
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/memento/examples/bla.xml
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/iemlib/xx_xx.wav
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/adaptive/readme
+chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/adaptive/examples/coef.dat
+chmod a-x %{buildroot}/usr/share/applications/pd-l2ork.desktop
+chmod a-x %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop
+
+# Erreurs:
+
+# Workaround: %global _missing_build_ids_terminate_build 0
+
+# otherwise, we need to compile nodejs
+
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/lib/libnode.so
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/lib/libffmpeg.so
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/lib/libnw.so
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/chromedriver
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/payload
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/nw
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/minidump_stackwalk
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/nacl_helper
+#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/nwjc
+#    absolute symlink: /opt/purr-data/lib/pd-l2ork/bin/pd-l2ork -> /opt/purr-data/bin/pd-l2ork
+#    absolute symlink: /opt/purr-data/lib/pd-l2ork/pd-l2ork -> /opt/purr-data/bin/pd-l2ork
+#    absolute symlink: /usr/bin/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/bin/pd-l2ork
+#    Lien symbolique pointant sur BuildRoot : /usr/bin/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/bin/pd-l2ork
+#    absolute symlink: /usr/include/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/include/pd-l2ork
+#    Lien symbolique pointant sur BuildRoot : /usr/include/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/include/pd-l2ork
+#    absolute symlink: /usr/lib64/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork
+#    Lien symbolique pointant sur BuildRoot : /usr/lib64/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork
 
 %files
 %doc README.md
@@ -243,7 +283,7 @@ find . -type d -exec chmod a+x {} +
 %{_bindir}/*
 %{_includedir}/*
 %{_libdir}/*
-%{_data_dir}/
+%{_datadir}/*
 
 %changelog
 * Tue Jul 21 2020 Yann Collette <ycollette.nospam@free.fr> - 2.12.0-1
