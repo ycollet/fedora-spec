@@ -1,4 +1,5 @@
 %global debug_package %{nil}
+%undefine _missing_build_ids_terminate_build
 
 # Maintainer: <aggraef at gmail.com>
 
@@ -39,7 +40,7 @@ License: GPL
 
 # git clone https://github.com/agraef/purr-data
 # cd purr-data
-# git ckeckout 2.12.0
+# git checkout 2.12.0
 # git submodule init
 # git submodule update
 ## find . -name .git -exec rm -rf {} \;
@@ -127,8 +128,6 @@ mkdir -p pd/nw/nw
 tar xvfz %{SOURCE1} -C pd/nw/nw --strip-components 1
 
 sed -i -e "s/disis earplug ekext/earplug ekext/g" externals/Makefile
-#sed -i -e "s/mrpeach oscx pan/mrpeach pan/g" externals/Makefile
-#sed -i -e "s/windowing zexy/windowing/g" externals/Makefile
 
 %build
 
@@ -145,8 +144,6 @@ done
 cd packages/linux_make
 rm -rf build
 
-# -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection
-
 export CFLAGS=""
 export CXXFLAGS=""
 
@@ -160,14 +157,14 @@ cd ../..
 
 # Create a link to the executable.
 mkdir -p %{buildroot}/usr/bin
-ln -sf %{buildroot}/opt/purr-data/bin/pd-l2ork %{buildroot}/usr/bin/purr-data
+ln -sf /opt/purr-data/bin/pd-l2ork %{buildroot}/usr/bin/purr-data
 
 # Create links to the include and lib directories.
 mkdir -p %{buildroot}/usr/include
-ln -sf %{buildroot}/opt/purr-data/include/pd-l2ork %{buildroot}/usr/include/purr-data
+ln -sf /opt/purr-data/include/pd-l2ork %{buildroot}/usr/include/purr-data
 
 mkdir -p %{buildroot}/usr/%{_lib}
-ln -sf %{buildroot}/opt/purr-data/lib/pd-l2ork %{buildroot}/usr/%{_lib}/purr-data
+ln -sf /opt/purr-data/lib/pd-l2ork %{buildroot}/usr/%{_lib}/purr-data
 
 # Edit bash completion file.
 mkdir -p %{buildroot}/etc/bash_completion.d/
@@ -182,7 +179,6 @@ rm -rf %{buildroot}/usr/share/emacs
 # Edit the library paths in the default user.settings file so that it
 # matches our install prefix.
 cp packages/linux_make/default.settings %{buildroot}/opt/purr-data/lib/pd-l2ork
-#sed -i -e "s!/usr/lib/pd-l2ork!%{buildroot}/opt/purr-data/lib/pd-l2ork!g" %{buildroot}/opt/purr-data/lib/pd-l2ork/default.settings
 
 # Replace the pd-l2ork desktop/mime files and icons with purr-data ones, so
 # that pd-l2ork can be installed alongside purr-data. Also fix up some
@@ -250,30 +246,6 @@ chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/adaptive/readme
 chmod a-x %{buildroot}/opt/purr-data/lib/pd-l2ork/extra/adaptive/examples/coef.dat
 chmod a-x %{buildroot}/usr/share/applications/pd-l2ork.desktop
 chmod a-x %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop
-
-# Erreurs:
-
-# Workaround: %global _missing_build_ids_terminate_build 0
-
-# otherwise, we need to compile nodejs
-
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/lib/libnode.so
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/lib/libffmpeg.so
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/lib/libnw.so
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/chromedriver
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/payload
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/nw
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/minidump_stackwalk
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/nacl_helper
-#    Missing build-id in /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork/bin/nw/nwjc
-#    absolute symlink: /opt/purr-data/lib/pd-l2ork/bin/pd-l2ork -> /opt/purr-data/bin/pd-l2ork
-#    absolute symlink: /opt/purr-data/lib/pd-l2ork/pd-l2ork -> /opt/purr-data/bin/pd-l2ork
-#    absolute symlink: /usr/bin/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/bin/pd-l2ork
-#    Lien symbolique pointant sur BuildRoot : /usr/bin/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/bin/pd-l2ork
-#    absolute symlink: /usr/include/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/include/pd-l2ork
-#    Lien symbolique pointant sur BuildRoot : /usr/include/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/include/pd-l2ork
-#    absolute symlink: /usr/lib64/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork
-#    Lien symbolique pointant sur BuildRoot : /usr/lib64/purr-data -> /home/collette/rpmbuild/BUILDROOT/purr-data-2.12.0-1.fc32.x86_64/opt/purr-data/lib/pd-l2ork
 
 %files
 %doc README.md
