@@ -1,18 +1,17 @@
 Name:    surge
-Version: 1.6.6
+Version: 1.7.1
 Release: 5%{?dist}
-Summary: A VST2 synthetizer
+Summary: A VST3 / LV2 synthetizer
 License: GPLv2+
 
-# Use ./source.sh 1.6.6 to get the sources
+# Use ./source.sh 1.7.1 to get the sources
 
 URL:     https://github.com/surge-synthesizer/surge
 Source0: surge.tar.gz
-Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
 
 BuildRequires: gcc gcc-c++
 BuildRequires: libX11-devel
-BuildRequires: premake5
+BuildRequires: cmake
 BuildRequires: xcb-util-cursor-devel
 BuildRequires: libxkbcommon-x11-devel
 BuildRequires: rsync
@@ -24,7 +23,7 @@ BuildRequires: xcb-util-keysyms-devel
 BuildRequires: xcb-util-devel
 
 %description
-A VST2 synthetizer
+A VST3 / LV2 synthetizer
 
 %package -n lv2-%{name}
 Summary:  LV2 version of %{name}
@@ -33,14 +32,6 @@ Requires: %{name}
 
 %description -n lv2-%{name}
 LV2 version of %{name}
-
-%package -n vst-%{name}
-Summary:  VST version of %{name}
-License:  GPLv2+
-Requires: %{name}
-
-%description -n vst-%{name}
-VST version of %{name}
 
 %package -n vst3-%{name}
 Summary:  VST3 version of %{name}
@@ -57,52 +48,34 @@ VST3 version of %{name}
   sed -i -e "s/lib\/vst/lib64\/vst/g" build-linux.sh
 %endif
 
-sed -i -e "s/python/python2/g" premake5.lua
-sed -i -e "/-Wl,--strip-all/d" premake5.lua
+sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
-tar xvfj %{SOURCE1}
+sed -i -e "s/COMMAND python /COMMAND python2 /g" CMakeLists.txt
+for Files in `find . -name "*.py" -exec grep -l "bin/python" {} \;`
+do
+  sed -i -e "s/env python$/env python2/g" $Files
+done
 
 %build
 
-export VST2SDK_DIR=vst/vstsdk2.4/
-
 %set_build_flags
 
-./build-linux.sh clean-all
-./build-linux.sh -p vst2 premake
-./build-linux.sh -p vst3 premake
-./build-linux.sh -p lv2 premake
+./build-linux.sh cmake
 
-# Inject optflags into CFLAGS
-sed -i "s|^\s*ALL_CFLAGS\s*+=.*|ALL_CFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|"     surge-lv2.make
-sed -i "s|^\s*ALL_CXXFLAGS\s*+=.*|ALL_CXXFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|" surge-lv2.make
-sed -i "s|^\s*ALL_CFLAGS\s*+=.*|ALL_CFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|"     surge-vst2.make
-sed -i "s|^\s*ALL_CXXFLAGS\s*+=.*|ALL_CXXFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|" surge-vst2.make
-sed -i "s|^\s*ALL_CFLAGS\s*+=.*|ALL_CFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|"     surge-vst3.make
-sed -i "s|^\s*ALL_CXXFLAGS\s*+=.*|ALL_CXXFLAGS += \$(ALL_CPPFLAGS) %{optflags} -I/usr/include/freetype2/ -fPIC|" surge-vst3.make
-# Disable stripping the executable
-sed -i "s| -s | |" surge-lv2.make
-sed -i "s| -s | |" surge-vst2.make
-sed -i "s| -s | |" surge-vst3.make
+cd buildlin
+cmake -DCMAKE_C_FLAGS="-Wno-error -O2 -g -fPIC" -DCMAKE_CXX_FLAGS="-Wno-error -O2 -g -fPIC" .
+cd ..
 
-./build-linux.sh -p vst2 build
-./build-linux.sh -p vst3 build
-./build-linux.sh -p lv2 build
+./build-linux.sh build
 
 %install 
 
-export HOME=.
-mkdir .vst
+export HOME=`pwd`
 mkdir .vst3
 mkdir .lv2
-mkdir -p .local/share
+mkdir -p .local/share/Surge
 
-./build-linux.sh -v -p vst2 -l install
-./build-linux.sh -v -p vst3 -l install
-./build-linux.sh -v -p lv2 -l install
-
-%__install -m 755 -d %{buildroot}%{_libdir}/vst/
-%__install -m 644 -p .vst/*.so %{buildroot}/%{_libdir}/vst/
+./build-linux.sh -l install
 
 %__install -m 755 -d %{buildroot}%{_libdir}/vst3/
 %__install -m 644 -p .vst3/Surge.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/
@@ -111,7 +84,7 @@ mkdir -p .local/share
 cp -r .lv2/* %{buildroot}/%{_libdir}/lv2/
 
 %__install -m 755 -d %{buildroot}%{_datadir}/Surge/
-rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
+rsync -rav .local/share/surge/* %{buildroot}/%{_datadir}/Surge/
 
 %files
 %{_datadir}/*
@@ -119,13 +92,13 @@ rsync -rav .local/share/Surge/* %{buildroot}/%{_datadir}/Surge/
 %files -n lv2-%{name}
 %{_libdir}/lv2/*
 
-%files -n vst-%{name}
-%{_libdir}/vst/*
-
 %files -n vst3-%{name}
 %{_libdir}/vst3/*
 
 %changelog
+* Sun Aug 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.1-5
+- update to 1.7.1-5
+
 * Thu Jul 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.6-5
 - update to 1.6.6-5 - fix package
 
