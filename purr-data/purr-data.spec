@@ -89,6 +89,7 @@ BuildRequires: GConf2-devel
 BuildRequires: nss-devel
 BuildRequires: libXtst-devel
 BuildRequires: flite-devel
+BuildRequires: gettext-devel
 
 Requires: xdg-utils
 Requires: pulseaudio-utils
