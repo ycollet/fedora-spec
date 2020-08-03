@@ -2,26 +2,22 @@
 
 Summary: LinuxSampler GUI front-end
 Name: qsampler
-Version: 0.6.2
+Version: 0.6.3
 Release: 1%{?dist}
 License: GPL
-Group: Applications/Multimedia
 URL: http://qsampler.sourceforge.net/qsampler-index.html
 Distribution: Planet CCRMA
 Vendor: Planet CCRMA
 
 Source0: https://download.sf.net/qsampler/qsampler-%{version}.tar.gz
-Source1: qsampler.desktop
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Requires: linuxsampler
-Requires: hicolor-icon-theme
 
 BuildRequires: qt5-qtbase-devel qt5-linguist qt5-qtx11extras-devel
 BuildRequires: libgig-devel liblscp-devel desktop-file-utils
 BuildRequires: libtool automake autoconf
 BuildRequires: gcc gcc-c++
+
+Requires: linuxsampler
+Requires: hicolor-icon-theme
 
 %description
 QSampler is a LinuxSampler GUI front-end application written in C++
@@ -30,11 +26,12 @@ as a client reference interface for the LinuxSampler Control Protocol
 (LSCP).
 
 %prep
-%setup -q
+%autosetup
 
 if [ -f Makefile.svn ]; then make -f Makefile.svn; fi
 
 %build
+
 ./autogen.sh
 %configure --enable-debug
 
@@ -44,50 +41,28 @@ find . -type f -exec grep '<gig.h>' {} \; \
 find . -type f -exec grep '\"gig.h\"' {} \; \
                -exec perl -p -i -e "s|\"gig.h\"|\"libgig/gig.h\"|g" {} \;
 
-%{__make} %{?_smp_mflags}
+%make_build
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} install
 
-# desktop file categories
-BASE="Application AudioVideo Audio"
-XTRA="X-Jack X-MIDI X-Synthesis Midi"
+%make_install
 
-%{__mkdir} -p %{buildroot}%{_datadir}/applications
-desktop-file-install --vendor %{desktop_vendor} \
-  --dir %{buildroot}%{_datadir}/applications    \
-  `for c in ${BASE} ${XTRA} ; do echo "--add-category $c " ; done` \
-  %{SOURCE1}
-
-%clean
-%{__rm} -rf %{buildroot}
-
-%post
-touch --no-create %{_datadir}/icons/hicolor &> /dev/null
-update-desktop-database &> /dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null
-fi
-update-desktop-database &> /dev/null || :
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
-%defattr(-,root,root,-)
-%doc
+%doc AUTHORS ChangeLog README README.cmake TRANSLATORS
+%license COPYING
 %{_bindir}/qsampler
 %{_datadir}/icons/hicolor/32x32/apps/qsampler.png
 %{_datadir}/icons/hicolor/scalable/apps/qsampler.svg
 %{_datadir}/icons/hicolor/32x32/mimetypes/application-x-qsampler-session.png
 %{_datadir}/icons/hicolor/scalable/mimetypes/application-x-qsampler-session.svg
 %{_datadir}/mime/packages/qsampler.xml
-%{_datadir}/applications/%{desktop_vendor}-qsampler.desktop
-%exclude %{_datadir}/applications/qsampler.desktop
+%{_datadir}/applications/qsampler.desktop
 %{_datadir}/metainfo/qsampler.appdata.xml
 %{_mandir}/man1/qsampler.1.gz
 %{_mandir}/man1/qsampler.fr.1.gz
@@ -96,8 +71,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/qsampler/translations/qsampler_fr.qm
 
 %changelog
-* Thu Mar 26 2020 Yann Collette <ycollette.nospam@free.fr> 0.6.2-1
-- update to 0.6.2
+* Mon Aug 3 2020 Yann Collette <ycollette.nospam@free.fr> 0.6.3-1
+- update to 0.6.3
 
 * Mon Nov 5 2018 Yann Collette <ycollette.nospam@free.fr> 0.4.2-1
 - update to 0.4.2
