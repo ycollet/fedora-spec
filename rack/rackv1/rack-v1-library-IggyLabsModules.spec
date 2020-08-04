@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 2d041382de2626ca6a4622ec3a1f8cbbdbed2c42
+%global commit0 8893217eade91be21c4bf1375319398032a228be
 
-%global gittag0 1.0.2
+%global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-IggyLabsModules
-Version: 1.0.2
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: IggyLabsModules plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r IggyLabsModules_plugin/dist/IggyLabsModules/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - initial specfile

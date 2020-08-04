@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 7730fe0451683d2c9c897211619934e24ce12833
+%global commit0 cd3f1b5310785a8b7c31ede3e70281eb82f14d66
 
-%global gittag0 1.1.0
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-rackwindows
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: rackwindows plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r rackwindows_plugin/dist/rackwindows/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile

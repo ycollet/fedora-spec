@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 64dba45569e58464e51312017ccf02f3b3c35599
+%global commit0 33db4615a5922b174dd1fe1aca7893ea9d441b90
 
-%global gittag0 1.beta1.4
+%global gittag0 1.7.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-SurgeRack
-Version: 1.beta1.4
+Version: 1.7.0
 Release: 3%{?dist}
 Summary: SurgeRack plugin for Rack
 
@@ -30,8 +30,28 @@ URL:     https://github.com/surge-synthesizer/surge-rack/
 # cd ../..
 # tar cvfz Rack.tar.gz Rack/*
 
+# git clone https://github.com/surge-synthesizer/surge-rack
+# cd surge-rack
+# git checkout 33db4615a5922b174dd1fe1aca7893ea9d441b90
+# git submodule init
+# git submodule update
+# cd surge
+# git submodule init
+# git submodule update
+# cd libs/simde
+# git submodule init
+# git submodule update
+# cd ../../vst3sdk
+# git submodule init
+# git submodule update
+# cd ../..
+# find . -name ".git" -exec rm -rf {} \;
+# cd ..
+# tar cvfz surge-rack.tar.gz surge-rack/*
+# rm -rf surge-rack
+
 Source0: Rack.tar.gz
-Source1: https://github.com/surge-synthesizer/surge-rack//archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: surge-rack.tar.gz
 Source2: SurgeRack_plugin.json
 
 BuildRequires: gcc gcc-c++
@@ -106,5 +126,5 @@ cp -r SurgeRack_plugin/dist/SurgeRack/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.beta1.4-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.0-3
 - initial specfile

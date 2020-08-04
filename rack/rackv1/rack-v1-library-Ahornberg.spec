@@ -1,19 +1,19 @@
 # Global variables for github repository
 %global commit0 2e0f1775c412f8a6c4ac15f79e1945cbf6e66c06
 
-%global gittag0 1.1.0
+%global gittag0 1.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Ahornberg
-Version: 1.1.0
+Version: 1.2.0
 Release: 3%{?dist}
 Summary: Ahornberg plugin for Rack
 
 License: GPLv2+
-URL:     https://github.com/Ahornberg/Ahornberg-Microtonal
+URL:     https://github.com/Ahornberg/Ahornberg-VCV-Modules
 
 # git clone https://github.com/VCVRack/Rack.git Rack
 # cd Rack
@@ -31,7 +31,7 @@ URL:     https://github.com/Ahornberg/Ahornberg-Microtonal
 # tar cvfz Rack.tar.gz Rack/*
 
 Source0: Rack.tar.gz
-Source1: https://github.com/Ahornberg/Ahornberg-Microtonal/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/Ahornberg/Ahornberg-VCV-Modules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: Ahornberg_plugin.json
 
 BuildRequires: gcc gcc-c++
@@ -106,5 +106,5 @@ cp -r Ahornberg_plugin/dist/Ahornberg/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
 - initial specfile
