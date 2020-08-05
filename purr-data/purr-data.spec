@@ -98,7 +98,7 @@ Requires: ladspa-swh-plugins
 Requires: ladspa-mcp-plugins
 Requires: ladspa-cmt-plugins
 Requires: ladspa-blop-plugins
-Requires: ladspa-VCO-plugins
+Requires: ladspa-vco-plugins
 Requires: ladspa-fil-plugins
 Requires: mda-lv2
 Requires: dssi
