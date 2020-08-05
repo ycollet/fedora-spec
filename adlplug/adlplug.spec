@@ -1,29 +1,13 @@
-# Global variables for github repository
-%global commit0 17f7fc5c810e1188eee494f1190e47f599479c30
-%global gittag0 v1.0.1
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    adlplug
-Version: 1.0.1
+Version: 1.0.2
 Release: 4%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
-Group:   Applications/Multimedia
 License: BSL-1.0
 
-# git clone https://github.com/jpcima/ADLplug
-# git checkout v1.0.1
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz ADLplug.tar.gz ADLplug/*
-# rm -rf ADLplug
+# ./adlplug-source.sh v1.0.2
 
 Source0: ADLplug.tar.gz
-Patch0: adl-0001-add-missing-stdexcept-header.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -38,7 +22,6 @@ Synthesizer plugin for ADLMIDI (VST/LV2)
 
 %package -n opnplug
 Summary:    Synthesizer plugin for OPNMIDI (VST/LV2)
-Group:      Applications/Multimedia
 Requires:   %{name}%{?_isa} = %{version}-%{release}, pkgconfig
 
 %description -n opnplug
@@ -53,8 +36,6 @@ Synthesizer plugin for OPNMIDI (VST/LV2)
   sed -i -e "114,125d" thirdparty/JUCE/modules/juce_graphics/colour/juce_PixelFormats.h
 %endif
 
-%patch0 -p1
-
 %build
 
 mkdir -p build_adl
@@ -64,7 +45,7 @@ cd build_adl
        -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
        ..
 
-make VERBOSE=1 %{?_smp_mflags}
+%make_build
 
 cd ..
 
@@ -76,13 +57,13 @@ cd build_opn
        -DADLplug_CHIP=OPN2 \
        ..
 
-make VERBOSE=1 %{?_smp_mflags}
+%make_build
 
 %install
 
 cd build_adl
 
-make DESTDIR=%{buildroot} install
+%make_install
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -93,7 +74,7 @@ desktop-file-install --vendor '' \
 cd ..
 cd build_opn
 
-make DESTDIR=%{buildroot} install
+%make_install
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -101,24 +82,9 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/OPNplug.desktop
 
-%post
-
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_bindir}/ADLplug
 %{_libdir}/lv2/ADLplug.lv2/*
 %{_libdir}/vst/ADLplug.so
@@ -128,7 +94,8 @@ fi
 %{_datadir}/icons/hicolor/96x96/apps/ADLplug.png
 
 %files -n opnplug
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_bindir}/OPNplug
 %{_libdir}/lv2/OPNplug.lv2/*
 %{_libdir}/vst/OPNplug.so
@@ -138,6 +105,9 @@ fi
 %{_datadir}/icons/hicolor/96x96/apps/OPNplug.png
 
 %changelog
+* Wed Aug 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-4
+- update to 1.0.2-4
+
 * Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-4
 - update for Fedora 32
 
