@@ -33,7 +33,7 @@
 # there a versioning scheme for git packages in RPM land that we should use?
 Name:    purr-data
 Version: 2.13.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Interactive multimedia programming environment (nw.js variant)
 URL:     https://agraef.github.io/purr-data/
 License: GPL
@@ -258,6 +258,9 @@ chmod a-x %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop
 %{_datadir}/*
 
 %changelog
+* Wed Aug 5 2020 Yann Collette <ycollette.nospam@free.fr> - 2.13.0-2
+- fix a dependency - thanks baumgartnerniels
+
 * Mon Aug 3 2020 Yann Collette <ycollette.nospam@free.fr> - 2.13.0-1
 - update to 2.13.0
 
