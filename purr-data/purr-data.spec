@@ -43,7 +43,6 @@ License: GPL
 # git checkout 2.13.0
 # git submodule init
 # git submodule update
-## find . -name .git -exec rm -rf {} \;
 # cd ..
 # tar cvfz purr-data.tar.gz purr-data
 
