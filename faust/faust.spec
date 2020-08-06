@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:	 faust
-Version: 2.27.1
+Version: 2.27.2
 Release: 21%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
@@ -9,13 +9,7 @@ Summary: Compiled language for real-time audio signal processing
 License: GPLv2+ and BSD
 URL:     http://faust.grame.fr/
 
-# git clone https://github.com/grame-cncm/faust
-# git checkout 2.27.1
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz faust.tar.gz faust/*
+# To get source from 2.27.2 tag: ./source.sh 2.27.2
 
 Source0: faust.tar.gz
 
@@ -112,7 +106,7 @@ signal processing. These libraries are part of the standard Faust libraries.
 
 
 %prep
-%setup -qn faust
+%autosetup -n faust
 
 # For installation in the correct location and for preserving timestamps:
 # The Makefile normally puts noarch files in $prefix/lib. We change
@@ -224,6 +218,7 @@ mv %{buildroot}/%{_bindir}/usage.sh %{buildroot}/%{_datadir}/faust/
 
 %files
 %doc README.md examples
+%license COPYING.txt
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
 %{_mandir}/*
@@ -259,6 +254,9 @@ mv %{buildroot}/%{_bindir}/usage.sh %{buildroot}/%{_datadir}/faust/
 %{_datadir}/faust/*.lib
 
 %changelog
+* Thu Aug 6 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.2-21
+- Update to 2.27.2-21.
+
 * Wed Jul 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.1-21
 - Update to 2.27.1-21. Fix install
 
