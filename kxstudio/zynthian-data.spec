@@ -1,23 +1,17 @@
 # Global variables for github repository
-%global commit0 9cccef501c7897465c7baa3ebb2315d653af5971
+%global commit0 20e7da0382ea456cc80ff8e600b61d1ef3031773
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    zynthian-data
-Version: 1.0.0.%{shortcommit0}
-Release: 3%{?dist}
+Version: 1.0.0
+Release: 4%{?dist}
 Summary: A set of LV2 presets for DISTRHO
 
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/zynthian/zynthian-data.git
 
 Source0: https://github.com/zynthian/zynthian-data/archive/%{commit0}.tar.gz#/zynthian-data-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
 
@@ -49,7 +43,7 @@ Requires: lv2-padthv1
 Presets for padthv1 LV2 plugin
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
@@ -74,6 +68,9 @@ cp -r presets/lv2/padthv1* %{buildroot}/usr/%{_lib}/lv2/
 %{_libdir}/lv2/padthv1*
 
 %changelog
+* Sun Aug 9 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-4
+- update to 1.0.0-4
+
 * Mon Mar 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - fix requires
 
