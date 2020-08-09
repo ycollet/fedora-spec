@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 8c8241b464d0adc3db56d7c69247211eec2bc076
+%global commit0 cfc9d6784b5d3a3fb665a287ebf9427587d92986
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    redkite
-Version: 1.0.1
+Version: 1.0.2
 Release: 2%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://gitlab.com/iurie-sw/redkite
@@ -44,6 +44,9 @@ make DESTDIR=%{buildroot} install
 %{_mandir}/*
 
 %changelog
+* Sun Aug 9 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-1
+- update to 1.0.2-1
+
 * Fri Jul 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1
 - update to 1.0.1-1
 
