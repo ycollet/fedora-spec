@@ -45,9 +45,9 @@ AC_MSG_CHECKING(for headers required to compile python extensions)
 dnl deduce PYTHON_INCLUDES
 py_prefix=`$PYTHON -c "import sys; print(sys.prefix)"`
 py_exec_prefix=`$PYTHON -c "import sys; print(sys.exec_prefix)"`
-PYTHON_INCLUDES="-I${py_prefix}/include/python${PYTHON_VERSION}"
+PYTHON_INCLUDES="-I${py_prefix}/include/python${PYTHON_VERSION} -I${py_prefix}/include/python${PYTHON_VERSION}m"
 if test "$py_prefix" != "$py_exec_prefix"; then
-  PYTHON_INCLUDES="$PYTHON_INCLUDES -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
+  PYTHON_INCLUDES="$PYTHON_INCLUDES -I${py_exec_prefix}/include/python${PYTHON_VERSION} -I${py_exec_prefix}/include/python${PYTHON_VERSION}m"
 fi
 AC_SUBST(PYTHON_INCLUDES)
 dnl check if the headers exist:
