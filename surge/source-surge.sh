@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Usage: ./source.sh <tag>
-#        ./source.sh 1.6.6
+# Usage: ./source-surge.sh <tag>
+#        ./source-surge.sh 1.6.6
 
 git clone https://github.com/surge-synthesizer/surge
 cd surge
