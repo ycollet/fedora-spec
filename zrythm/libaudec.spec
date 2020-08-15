@@ -1,17 +1,13 @@
 %global debug_package %{nil}
 
 Name:    libaudec-devel
-Version: 0.2.2
+Version: 0.2.3
 Release: 1%{?dist}
 Summary: libaudec (lib audio decoder) is a wrapper library over ffmpeg, sndfile and libsamplerate for reading and resampling audio files
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/cgit/libaudec
 
 Source0: https://git.zrythm.org/cgit/libaudec/snapshot/libaudec-%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: libsndfile-devel
@@ -24,7 +20,7 @@ libaudec (lib audio decoder) is a wrapper library over ffmpeg, sndfile and libsa
 and resampling audio files, based on Robin Gareus' 'audio_decoder' code
 
 %prep
-%setup -qn libaudec-%{version}
+%autosetup -n libaudec-%{version}
 
 %build
 
@@ -32,20 +28,24 @@ mkdir build
 DESTDIR=%{buildroot} VERBOSE=1 meson --prefix=/usr build
 
 cd build
-DESTDIR=%{buildroot} VERBOSE=1 ninja 
+DESTDIR=%{buildroot} VERBOSE=1 %ninja_build 
 
 %install 
 
 cd build
-DESTDIR=%{buildroot} VERBOSE=1 ninja install
+DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
 
 %files
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_includedir}/audec/*
 
 %changelog
+* Sat Aug 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.3-1
+- update to 0.2.3-1
+
 * Sun May 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.2-1
 - update to 0.2.2-1
 
