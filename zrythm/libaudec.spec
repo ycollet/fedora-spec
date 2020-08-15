@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Name:    libaudec-devel
 Version: 0.2.3
 Release: 1%{?dist}
