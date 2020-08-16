@@ -10,11 +10,11 @@
 
 # flags
 # * --user: act on per-user configuration  (install into / list only plugins
-#                                           enabled in "~/pd-externals")
+#                                           enabled in "~/.local/lib/pd/extra/")
 # * --system: act on site-wide configuration (install into / list only plugins
 #                                           enabled in "/usr/lib/pd/extra")
 # if no flag is given, we try to install into /usr/lib/pd/extra and if that
-#                      fails into ~/pd-externals we list all enabled plugins
+#                      fails into ~/.local/lib/pd/extra/ we list all enabled plugins
 #
 # commands
 # * enable <plugin>: enable given plugin
@@ -33,7 +33,7 @@ availablepaths = ['/usr/share/pd-gui/plugins-available',
 #             '/usr/lib/pd/extra',
 #             '/usr/lib/puredata/extra']
 sitepath = ['/etc/pd/plugins-enabled', ]
-userpath = ['~/pd-externals', ]
+userpath = ['~/.local/lib/pd/extra/', '~/pd-externals', ]
 additionalpaths = []
 
 
@@ -160,7 +160,7 @@ def parseCmdlineArgs():
                                      )
     parser.add_argument('-u', '--user', action='store_true',
                         help="""per-user operation
-                        (e.g. install to ~/pd-externals/)""")
+                        (e.g. install to ~/.local/lib/pd/extra/)""")
     parser.add_argument('-s', '--system', action='store_true',
                         help="""site-wide operation
                         (requires supercow powers)""")

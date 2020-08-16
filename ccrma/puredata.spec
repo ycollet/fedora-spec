@@ -2,15 +2,14 @@
 # Pure Data vanilla build
 #
 
-%define pdver 0.50-2
-%define pkgver 0.50.2
+%define pdver 0.51-1
+%define pkgver 0.51.1
 
 Summary: Pure Data
 Name:    puredata
 Version: %{pkgver}
 Release: 1%{?dist}
 License: BSD
-Group:   Applications/Multimedia
 URL:     http://msp.ucsd.edu/software.html
 Source0: http://msp.ucsd.edu/Software/pd-%{pdver}.src.tar.gz
 
@@ -42,12 +41,9 @@ Patch2: pd-patch-usrlib64pd_path.patch
 Patch2: pd-patch-usrlibpd_path.patch
 %endif
 Patch3: pd-patch-helpbrowser_puredata-doc.patch
-Patch4: pd-patch-remove_timestamp-macros.patch
-Patch5: pd-patch-etc-gui-plugins.patch
-Patch6: pd-patch-fixmanpage.patch
-Patch7: pd-patch-privacy.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch4: pd-patch-etc-gui-plugins.patch
+Patch5: pd-patch-fixmanpage.patch
+Patch6: pd-patch-privacy.patch
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: autoconf automake libtool
@@ -134,29 +130,24 @@ This package provides utility applications for puredata, namely pdsend
 and pdreceive, for sending and receiving FUDI over the net.
 
 %prep
-%setup -q -n pd-%{pdver}
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%autosetup -p1 -n pd-%{pdver}
 
-%build
 # fix hardwired lib dir in startup file (why the heck is this hardwired?)
 perl -p -i -e "s|\"/lib|\"/%{_lib}|g" src/s_main.c
 # fix path of pd-externals
 perl -p -i -e "s|/usr/local/lib|%{_libdir}|g" src/s_path.c
 
+%build
+
 # now do the build, use "puredata" as the program name
 ./autogen.sh
 %configure --enable-alsa --enable-jack --program-transform-name 's/pd$$/puredata/'
-make
+
+%make_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT install
+
+%make_install
 
 # add additional stuff needed by the gui package
 # create plugins enabled directory
@@ -197,33 +188,15 @@ ln -s %{_libdir}/puredata/bin/pd-watchdog $RPM_BUILD_ROOT%{_bindir}/pd-watchdog
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/puredata/doc/Makefile.am
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%post
-/bin/touch --no-create /usr/share/icons/hicolor &> /dev/null || :
-/bin/touch --no-create /usr/share/mime/packages &> /dev/null || :
-/usr/bin/update-desktop-database &> /dev/null || :
-
-%postun
-/usr/bin/update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create /usr/share/icons/hicolor &>/dev/null
-    /bin/touch --no-create /usr/share/mime/packages &>/dev/null
-    /usr/bin/gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
-    /usr/bin/update-mime-database -n /usr/share/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache /usr/share/icons/hicolor &>/dev/null || :
-/usr/bin/update-mime-database -n /usr/share/mime &> /dev/null || :
+%ifarch x86_64
+sed -i -e "s/lib/lib64/g" $RPM_BUILD_ROOT%{_bindir}/pd-gui
+%endif
 
 %files
-%defattr(-,root,root,-)
-%doc README.txt INSTALL.txt LICENSE.txt
+%doc README.txt INSTALL.txt
+%license LICENSE.txt
 
 %files core
-%defattr(-,root,root,-)
 %{_bindir}/pd
 %{_bindir}/pd-watchdog
 %{_libdir}/puredata/bin/pd
@@ -235,7 +208,6 @@ fi
 %{_datadir}/pixmaps/puredata.xpm
 
 %files doc
-%defattr(-,root,root,-)
 %{_libdir}/puredata/doc/1.manual/
 %{_libdir}/puredata/doc/2.control.examples/
 %{_libdir}/puredata/doc/3.audio.examples/
@@ -245,17 +217,14 @@ fi
 %{_libdir}/puredata/doc/sound/
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/m_pd.h
 %{_includedir}/puredata/
 %{_libdir}/pkgconfig/pd.pc
 
 %files extra
-%defattr(-,root,root,-)
 %{_libdir}/puredata/extra/
 
 %files gui
-%defattr(-,root,root,-)
 %{_bindir}/pd-gui
 %{_bindir}/pd-gui-plugin
 %{_libdir}/puredata/tcl/
@@ -267,13 +236,15 @@ fi
 %{_datadir}/mime/packages/puredata.xml
 
 %files utils
-%defattr(-,root,root,-)
 %{_bindir}/pdreceive
 %{_bindir}/pdsend
 %{_mandir}/man1/pdreceive.1.gz
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Sun Aug 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.51.1-1
+- update to 0.51.1-1
+
 * Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.50.2-1
 - update to 0.50.2-1
 
