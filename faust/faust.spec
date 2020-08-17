@@ -2,7 +2,7 @@
 
 Name:	 faust
 Version: 2.27.2
-Release: 21%{?dist}
+Release: 22%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
@@ -149,9 +149,6 @@ for i in CHANGES LICENSE README TODO; do
     mv architecture/osclib/oscpack/$i architecture/osclib/oscpack/$i.osscpack.txt
 done
 
-# fix python2 shebang
-sed -i -e "s/env python/env python2/g" tools/faust2appls/faust2atomsnippets
-
 # install lib in the good directory
 sed -i -e "s/\$(BUILDLOCATION)\/lib/\$(BUILDLOCATION)\/%{_lib}/g" Makefile
 
@@ -254,6 +251,9 @@ mv %{buildroot}/%{_bindir}/usage.sh %{buildroot}/%{_datadir}/faust/
 %{_datadir}/faust/*.lib
 
 %changelog
+* Mon Aug 17 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.2-22
+- Update to 2.27.2-22. Fix python in faust2appl tools
+
 * Thu Aug 6 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.2-21
 - Update to 2.27.2-21.
 
