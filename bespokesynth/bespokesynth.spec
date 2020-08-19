@@ -1,14 +1,12 @@
 # Global variables for github repository
-%global commit0 f636fa4cfcf5f589e3413c115599c92db6daf71e
+%global commit0 dc51a8783f71fc5a8f019beb0783d35d9ec5474c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    BespokeSynth
 Version: 0.0.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A software modular synth
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/awwbees/BespokeSynth
 
@@ -16,10 +14,7 @@ Source0: https://github.com/awwbees/%{name}/archive/%{commit0}.tar.gz#/%{name}-%
 Source1: vst.tar.bz2
 # Replace python-config by python2-config
 Source2: Makefile.bespokesynth
-Source3: data.tar.gz
-Source4: Bespoke-GLSLfix.sh
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source3: Bespoke-GLSLfix.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -45,11 +40,10 @@ BuildRequires: libpng-devel
 A software modular synth
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 tar xvfj %{SOURCE1}
 cp %{SOURCE2} Builds/LinuxMakefile/Makefile
-tar xvfz %{SOURCE3}
 
 sed -i -e "s/\.\.\/\.\.\/MacOSX\/build\/Release\/data/\/usr\/share\/BespokeSynth\/data/g" Source/OpenFrameworksPort.cpp
 
@@ -64,18 +58,23 @@ cd Builds/LinuxMakefile
 cd Builds/LinuxMakefile
 %__install -m 755 -d %{buildroot}/%{_bindir}/
 %__install -m 755 build/BespokeSynth %{buildroot}/%{_bindir}/
-%__install -m 755 %{SOURCE4} %{buildroot}/%{_bindir}/Bespoke-GLSLfix
+%__install -m 755 %{SOURCE3} %{buildroot}/%{_bindir}/Bespoke-GLSLfix
 chmod a+x %{buildroot}/%{_bindir}/Bespoke-GLSLfix
 
 cd ../..
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/data
-cp -r data/* %{buildroot}/%{_datadir}/%{name}/data
+cp -r Builds/MacOSX/build/Release/data/* %{buildroot}/%{_datadir}/%{name}/data
 
 %files
+%doc README.md
+%license LICENSE
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
+* Wed Aug 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-3
+- update to v0.0004-pre - dc51a8783f71fc5a8f019beb0783d35d9ec5474c
+
 * Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
 - Fix install
 

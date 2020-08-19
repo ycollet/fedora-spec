@@ -60,7 +60,7 @@ ifeq ($(CONFIG),Release)
   JUCE_CPPFLAGS_APP := -DJucePlugin_Build_VST=0 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_TARGET_APP := BespokeSynth
 
-  JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -O3 `python2-config --cflags` $(CFLAGS)
+  JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -O2 `python2-config --cflags` $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++11 $(CXXFLAGS)
   JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/usr/lib/x86_64-linux-gnu/ $(shell pkg-config --libs alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -fvisibility=hidden `python2-config --ldflags` -lrt -ldl -lpthread -lGL -lusb-1.0 $(LDFLAGS)
 
@@ -68,6 +68,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS_APP := \
+  $(JUCE_OBJDIR)/PerlinNoise_bc586287.o \
   $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_9a62e852.o \
   $(JUCE_OBJDIR)/libusb_platform_wrapper_64dffcb7.o \
   $(JUCE_OBJDIR)/Push2-Usb-Communicator_2ebfaa0a.o \
@@ -101,6 +102,9 @@ OBJECTS_APP := \
   $(JUCE_OBJDIR)/Pumper_df274e1e.o \
   $(JUCE_OBJDIR)/Stutter_18c3b742.o \
   $(JUCE_OBJDIR)/TremoloEffect_db6065e.o \
+  $(JUCE_OBJDIR)/FubbleModule_85c58a1d.o \
+  $(JUCE_OBJDIR)/GridModule_614aaddb.o \
+  $(JUCE_OBJDIR)/PulseButton_62ee50c.o \
   $(JUCE_OBJDIR)/NoteStreamDisplay_120eebb1.o \
   $(JUCE_OBJDIR)/ModulatorGravity_4f7b8c68.o \
   $(JUCE_OBJDIR)/ScriptStatus_670522a6.o \
@@ -398,6 +402,11 @@ $(JUCE_OUTDIR)/$(JUCE_TARGET_APP) : $(OBJECTS_APP) $(RESOURCES)
 	-$(V_AT)mkdir -p $(JUCE_OUTDIR)
 	$(V_AT)$(CXX) -o $(JUCE_OUTDIR)/$(JUCE_TARGET_APP) $(OBJECTS_APP) $(JUCE_LDFLAGS) $(JUCE_LDFLAGS_APP) $(RESOURCES) $(TARGET_ARCH)
 
+$(JUCE_OBJDIR)/PerlinNoise_bc586287.o: ../../Source/PerlinNoise.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling PerlinNoise.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
 $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_9a62e852.o: ../../Source/push2/push2/JuceToPush2DisplayBridge.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling JuceToPush2DisplayBridge.cpp"
@@ -561,6 +570,21 @@ $(JUCE_OBJDIR)/Stutter_18c3b742.o: ../../Source/Stutter.cpp
 $(JUCE_OBJDIR)/TremoloEffect_db6065e.o: ../../Source/TremoloEffect.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling TremoloEffect.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/FubbleModule_85c58a1d.o: ../../Source/FubbleModule.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling FubbleModule.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/GridModule_614aaddb.o: ../../Source/GridModule.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling GridModule.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/PulseButton_62ee50c.o: ../../Source/PulseButton.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling PulseButton.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/NoteStreamDisplay_120eebb1.o: ../../Source/NoteStreamDisplay.cpp
