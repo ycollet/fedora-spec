@@ -4,7 +4,7 @@ Release: 5%{?dist}
 Summary: A VST3 / LV2 synthetizer
 License: GPLv2+
 
-# Use ./source.sh 1.7.1 to get the sources
+# Use ./source-surge.sh 1.7.1 to get the sources
 
 URL:     https://github.com/surge-synthesizer/surge
 Source0: surge.tar.gz
