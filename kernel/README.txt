@@ -1,11 +1,11 @@
 Use build_config.sh from fedora kernel spec repo:
 
 $ wget https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.6.19.tar.gz
-$ wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.6/older/patch-5.6.19-rt111.patch.gz
+$ wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.6/older/patch-5.6.19-rt12.patch.gz
 $ tar xvfz linux-5.6.19.tar.gz
-$ gunzip patch-5.6.19-rt11.patch.gz
+$ gunzip patch-5.6.19-rt12.patch.gz
 $ cd linux-5.6.19
-$ patch -p1 < ../patch-5.6.19-rt11.patch
+$ patch -p1 < ../patch-5.6.19-rt12.patch
 
 $ git clone https://src.fedoraproject.org/rpms/kernel.git
 $ cd kernel

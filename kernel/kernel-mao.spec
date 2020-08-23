@@ -5,7 +5,7 @@
 # Kernel patch version
 %define kpat  19
 # RT patch version
-%define krt   11
+%define krt   12
 # package version
 %define krel  11
 
@@ -186,6 +186,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Sun Aug 23 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.19-rt12-11
+- update to 5.6.19-rt12-11 - vanilla RT kernel
+
 * Sun Jul 26 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.19-rt11-11
 - update to 5.6.19-rt11-11 - vanilla RT kernel
 
