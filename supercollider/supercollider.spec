@@ -1,8 +1,7 @@
 #
-# https://github.com/supercollider/supercollider/releases/tag/Version-3.10.3
+# https://github.com/supercollider/supercollider/releases/tag/Version-3.11.1
 
 # build options
-%define cmakeopts -DCMAKE_C_FLAGS="%{optflags} -fext-numeric-literals" -DCMAKE_CXX_FLAGS="%{optflags} -fext-numeric-literals"
 %ifarch %{arm}
 %define cmakearch -DSUPERNOVA=OFF -DSSE=OFF -DSSE2=OFF -DNOVA_SIMD=ON -DSC_WII=OFF
 %else
@@ -11,15 +10,12 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
-Version: 3.10.4
+Version: 3.11.1
 Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     http://supercollider.sourceforge.net/
 
-Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source-linux.tar.bz2
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source.tar.bz2
 
 Requires: emacs w3m-el
 
@@ -57,8 +53,7 @@ creating music applications of all kinds, such as complete
 compositions, interactive performances, installations etc.
 
 %package devel
-Summary: Development files for SuperCollider
-Group: Development/Libraries
+Summary:  Development files for SuperCollider
 Requires: supercollider = %{version}-%{release} pkgconfig 
 Requires: jack-audio-connection-kit-devel alsa-lib-devel
 Requires: libsndfile-devel
@@ -69,34 +64,36 @@ This package includes include files and libraries neede to develop
 SuperCollider applications
 
 %package emacs
-Summary: SuperCollider support for Emacs
-Group: Applications/Multimedia
+Summary:  SuperCollider support for Emacs
 Requires: supercollider = %{version}-%{release}
 
 %description emacs
 SuperCollider support for the Emacs text editor.
 
 %package gedit
-Summary: SuperCollider support for GEdit
-Group: Applications/Multimedia
+Summary:  SuperCollider support for GEdit
 Requires: supercollider = %{version}-%{release}
 
 %description gedit
 SuperCollider support for the GEdit text editor.
 
 %package vim
-Summary: SuperCollider support for Vim
-Group: Applications/Multimedia
+Summary:  SuperCollider support for Vim
 Requires: supercollider = %{version}-%{release}
 
 %description vim
 SuperCollider support for the Vim text editor.
 
 %prep
-%setup -qn SuperCollider-Source
+%autosetup -n SuperCollider-%{version}-Source
 
 sed -i -e "s/SET(CMAKE_INSTALL_RPATH/#SET(CMAKE_INSTALL_RPATH/g" editors/sc-ide/CMakeLists.txt
 sed -i -e "s/SET(CMAKE_INSTALL_RPATH/#SET(CMAKE_INSTALL_RPATH/g" lang/CMakeLists.txt
+
+# Remove boost / test_exec_monitor. With fedora flags, cmake fails to detect test_exec_monitor
+sed -i -e "/add_library(boost_test_exec_monitor_lib SHARED IMPORTED)/d" CMakeLists.txt
+sed -i -e "s/test_exec_monitor//g" CMakeLists.txt
+sed -i -e "280,281d" CMakeLists.txt
 
 %build
 # remove all git directories
@@ -106,39 +103,30 @@ mkdir build
 pushd build
 
 %ifarch x86_64
-cmake -DSYSTEM_BOOST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE -DCMAKE_INSTALL_PREFIX=%{_prefix} -DLIB_SUFFIX="64" \
-      %{cmakeopts} %{cmakearch} %{?geditver}  ..
+%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix} ..
 %else
-cmake -DSYSTEM_BOOST=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-      %{cmakeopts} %{cmakearch} %{?geditver}  ..
+%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix} ..
 %endif
 
-make clean
-make %{?_smp_mflags}
+%make_build
 popd
 
 %install
-rm -rf $RPM_BUILD_ROOT
 
 pushd build
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
+
 # install external libraries needed to build external ugens
 mkdir -p $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries
 cd ../external_libraries/
-tar cf - boost* nova* | (cd $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries; tar xpf -)
+# We use boost system, so, don't decompress supercollider boost ...
+#tar cf - boost* nova* | (cd $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries; tar xpf -)
+tar cf - nova* | (cd $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries; tar xpf -)
 popd
 # install the version file
 install -m0644 SCVersion.txt $RPM_BUILD_ROOT%{_includedir}/SuperCollider/
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
 %files
-%defattr(-,root,root,-)
 %doc README*
 %license COPYING
 %{_bindir}/sclang
@@ -170,25 +158,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/sc_ide.svg
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/SuperCollider
 
 %files emacs
-%defattr(-,root,root,-)
 %{_datadir}/emacs/site-lisp/SuperCollider
 %{_datadir}/SuperCollider/Extensions/scide_scel
 
 %files vim
-%defattr(-,root,root,-)
 %{_datadir}/SuperCollider/Extensions/scide_scvim/SCVim.sc
 
 %files gedit
-%defattr(-,root,root,-)
 %{_libdir}/gedit*/plugins/*
 %{_datadir}/gtksourceview*/language-specs/supercollider.lang
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Sun Aug 23 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.1-1
+- update to 3.11.1
+
 * Fri Jan 17 2020 Yann Collette <ycollette.nospam@free.fr> 3.10.4-1
 - update to 3.10.4
 
