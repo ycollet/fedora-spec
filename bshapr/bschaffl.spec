@@ -1,16 +1,11 @@
-# Global variables for github repository
-%global commit0 ba1e35c9307e71d24bc1c71241f97ff8c01c20a8
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: Pattern-controlled MIDI amp & time stretch LV2 plugin to produce shuffle / swing effects
 Name:    lv2-BSchaffl
-Version: 0.2.0
+Version: 1.2.0
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BSchaffl
 
-Source0: https://github.com/sjaehn/BSchaffl/archive/%{commit0}.tar.gz#/BSchaffl-%{shortcommit0}.tar.gz
+Source0: https://github.com/sjaehn/BSchaffl/archive/%{version}.tar.gz#/BSchaffl-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -22,7 +17,7 @@ BuildRequires: cairo-devel
 Pattern-controlled MIDI amp & time stretch LV2 plugin to produce shuffle / swing effects
 
 %prep
-%autosetup -n BSchaffl-%{commit0}
+%autosetup -n BSchaffl-%{version}
 
 %build
 
@@ -38,6 +33,9 @@ Pattern-controlled MIDI amp & time stretch LV2 plugin to produce shuffle / swing
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Aug 23 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.0-1
+- update to 1.2.0-1
+
 * Fri Jul 24 2020 Yann Collette <ycollette dot nospam at free.fr> 0.2.0-1
 - update to 0.2.0-1
 
