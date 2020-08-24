@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 dff1e54d27e01e133f93ba71931dae53105d77e2
+%global commit0 45cf5ebdbe6ec0efc300f25c5dd2c1b8063789b1
 
-%global gittag0 1.6.3
+%global gittag0 1.7.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Stoermelder-P1
-Version: 1.6.3
+Version: 1.7.0
 Release: 3%{?dist}
 Summary: Stoermelder-P1 plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r Stoermelder-P1_plugin/dist/Stoermelder-P1/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.3-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.0-3
 - initial specfile

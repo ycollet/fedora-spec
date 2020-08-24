@@ -1,14 +1,13 @@
 # Global variables for github repository
-%global commit0 33db4615a5922b174dd1fe1aca7893ea9d441b90
-
-%global gittag0 1.7.0
+%global commit0 a6bc1cb1aedaa904ba1b0b40325c14a575cfa23e
+%global gittag0 1.7.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-SurgeRack
-Version: 1.7.0
+Version: 1.7.1
 Release: 3%{?dist}
 Summary: SurgeRack plugin for Rack
 
@@ -126,5 +125,5 @@ cp -r SurgeRack_plugin/dist/SurgeRack/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.1-3
 - initial specfile

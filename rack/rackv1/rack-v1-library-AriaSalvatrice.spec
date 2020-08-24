@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 02741337c9d41ea36a1fded23fc7783918fec7df
+%global commit0 f286f3915e374e8445ea7e68e4045c3db31af72d
 
-%global gittag0 1.6.1
+%global gittag0 1.7.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AriaSalvatrice
-Version: 1.6.1
+Version: 1.7.0
 Release: 3%{?dist}
 Summary: AriaSalvatrice plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r AriaSalvatrice_plugin/dist/AriaSalvatrice/* %{buildroot}%{_libexecdir}/Rac
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.0-3
 - initial specfile
