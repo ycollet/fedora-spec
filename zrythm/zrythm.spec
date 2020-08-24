@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.797
+Version: 0.8.868
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -61,9 +61,9 @@ sed -i -e '/meson.add_install_script/,+2d' meson.build
 # Compile using -O0 because of jack xruns
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
 # Remove summary which is only available on meson 0.53 and stick to version 0.52
-sed -i -e "s/meson_version: '>= 0.53.0'/meson_version: '>= 0.52.0'/g" meson.build
+sed -i -e "s/meson_version: '>= 0.55.0'/meson_version: '>= 0.52.0'/g" meson.build
 
-sed -i -e "841,894d" meson.build
+sed -i -e "837,888d" meson.build
 
 %build
 
@@ -103,13 +103,16 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Mon Aug 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.868-2
+- update to 0.8.868-2
+
 * Wed Aug 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.797-2
 - update to 0.8.797-2
 
 * Thu Jul 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.757-2
 - update to 0.8.757-2
 
-* Sat Jul 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.694-2
+* Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.694-2
 - update to 0.8.694-2
 
 * Sat Jun 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.604-2
