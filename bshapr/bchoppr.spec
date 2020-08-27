@@ -34,6 +34,9 @@ Each chop can be leveled up or down (gating). BChoppr is the successor of BSlizr
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Aug 27 2020 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-2
+- updata to 1.8.0-2
+
 * Fri Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 1.6.4-2
 - updata to 1.6.4
 
