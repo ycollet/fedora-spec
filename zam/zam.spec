@@ -5,7 +5,7 @@ Summary: Zam LV2 set of plugins
 License: GPLv2+
 URL:     https://github.com/zamaudio/zam-plugins
 
-# in the zam repository -> make dist
+# ./source.sh 3.13
 Source0: zam-plugins-3.13.tar.xz
 
 BuildRequires: gcc gcc-c++
