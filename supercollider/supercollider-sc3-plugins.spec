@@ -1,47 +1,21 @@
-# how to prepare the source...
-#
-# git clone --recursive git://github.com/supercollider/sc3-plugins.git
-# git describe
-#
-# mv sc3-plugins sc3-plugins-src-gXXXXXXX
-# cd sc3-plugins-src-gXXXXXXX
-# find . -name ".git" -exec rm -rf {} \;
-# cd ..
-# tar cvzf sc3-plugins-src-gXXXXXXX.tar.gz sc3-plugins-src-gXXXXXXX
-#
-# 2016.11.25: Version-3.7.1-102-gf1200cd
-# 2017.10.25: Version-3.7.1-141-g5342a4a
-# 2017.11.02: Version-3.7.1-147-g04a3dca
-# 2018.05.12: Version-3.7.1-185-g6983e2d
-# 2018.10.15: Version-3.7.1-270-g5e83bd9
-# 2019.03.25: Version-3.7.1-296-g42a1bc6
-
-%define gitver 3.7.1
-%define gittag g42a1bc6
-%define gitrev 296
-
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
-Version: %{gitver}
-Release: 3%{?gitrev:.%{gitrev}}%{?gittag:.%{gittag}}%{?dist}
+Version: 3.11.0
+Release: 3%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     http://sc3-plugins.sourceforge.net/
 
 # git clone https://github.com/supercollider/sc3-plugins
 # cd sc3-plugins
-# git checkout Version-3.10.0
+# git checkout Version-3.11.0
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
 # cd ..
-# mv sc3-plugins sc3-plugins-src-g42a1bc6
-# tar cvfz sc3-plugins-src-g42a1bc6.tar.gz sc3-plugins-src-g42a1bc6
-# rm -rf sc3-plugins-src-g42a1bc6
+# tar cvfz sc3-plugins.tar.gz
+# rm -rf sc3-plugins
 
-Source0: sc3-plugins-src-%{gittag}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: sc3-plugins.tar.gz
 
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
@@ -62,13 +36,13 @@ Provides:  supercollider-bbcut2 = %{version}-%{release}
 Collection of SuperCollider plugins
 
 %prep
-%setup -q -n sc3-plugins-src-%{gittag}
+%autosetup -n sc3-plugins
 
 %ifarch x86_64
 sed -i -e "s/lib\/SuperCollider/lib64\/SuperCollider/g" source/CMakeLists.txt
 %endif
 
-sed -i -e "1i\#include <cstdio>" source/NHUGens/NHHall.cpp
+# sed -i -e "1i\#include <cstdio>" source/NHUGens/NHHall.cpp
 
 %build
 # remove all git directories
@@ -82,25 +56,21 @@ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE \
       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DSUPERNOVA=ON ..
 
-make clean
-make %{?_smp_mflags}
+%make_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT
 
 cd build
-make install DESTDIR=$RPM_BUILD_ROOT
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+%make_install
 
 %files
-%defattr(-,root,root,-)
 %{_datadir}/SuperCollider/Extensions/SC3plugins
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* Mon Aug 31 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.0-3
+- update to 3.11.9-3
+
 * Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> 3.7.1-296-g42a1bc6-3
 - fix for Fedora 32
 
