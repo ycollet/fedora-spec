@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 d3848da008b7d6efd7469023c24e698db7d22f08
+%global commit0 712bd2d879dacdae4b6d617b9e886cb0cae73d2b
 
-%global gittag0 1.0.11
+%global gittag0 1.0.12
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-squinkylabs-plug1
-Version: 1.0.11
+Version: 1.0.12
 Release: 3%{?dist}
 Summary: squinkylabs-plug1 plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r squinkylabs-plug1_plugin/dist/squinkylabs-plug1/* %{buildroot}%{_libexecdi
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.11-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.12-3
 - initial specfile

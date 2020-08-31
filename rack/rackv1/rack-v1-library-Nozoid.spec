@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 d2f1872e6ad6feade50d6bf49403bbaec0d63ed8
+%global commit0 a0578a44cff73c61cfb92d1e14c2673a422b817d
 
-%global gittag0 1.1.5
+%global gittag0 1.1.7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Nozoid
-Version: 1.1.5
+Version: 1.1.7
 Release: 3%{?dist}
 Summary: Nozoid plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r Nozoid_plugin/dist/Nozoid/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/No
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.5-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.7-3
 - initial specfile
