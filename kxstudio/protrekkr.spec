@@ -1,24 +1,19 @@
-# Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 474637b9e1afbcc87cd4c73b1a0e74c1baf061ab
+%global commit0 0b96ba56379eb179423e9dcbec31a08bf0326c9f
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    protrekkr
 Version: 1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A jack tracker
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/falkTX/protrekkr
 
 Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:  protrekkr-0001-fix-system-libraries.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source1: protrekkr-makefile.linux
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -31,12 +26,21 @@ BuildRequires: tinyxml-devel
 A jack tracker
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
-%patch0 -p1 
+cp %SOURCE1 makefile.linux
+sed -i -e "12,14d" src/extralibs/sdl_draw/makefile.linux
 
 %build
-make DESTDIR=%{buildroot} -f makefile.linux %{?_smp_mflags}
+%set_build_flags
+
+cd src/extralibs/sdl_draw
+make -f makefile.linux
+cd ../../..
+	
+# -Werror=format-security -Wall
+export CXXFLAGS="-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection"
+%make_build -f makefile.linux
 
 %install
 
@@ -70,27 +74,18 @@ EOF
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
 %__install -m 644 protrekkr.jpg %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.jpg
 
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
 %files
+%doc README
+%license release/distrib/license.txt
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Mon Aug 31 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- update to master - remove internal zlib dependency + cleanup
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - update for Fedora 29
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
