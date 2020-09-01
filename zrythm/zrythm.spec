@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.868
+Version: 0.8.911
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -103,6 +103,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Tue Sep 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.911-2
+- update to 0.8.911-2
+
 * Mon Aug 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.868-2
 - update to 0.8.868-2
 
