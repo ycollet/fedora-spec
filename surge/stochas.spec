@@ -1,12 +1,13 @@
 %global debug_package %{nil}
 
 Name:    stochas
-Version: 0.0.1
+Version: 1.3.3
 Release: 1%{?dist}
 Summary: A VST3 MIDI sequencer
-License: GPLv2+
+License: GPLv3
 
 # Use ./source-stochas.sh to get the sources (latest master for now)
+# ./source-stochas.sh v1.3.3
 
 URL:     https://github.com/surge-synthesizer/stochas
 Source0: stochas.tar.gz
@@ -21,12 +22,6 @@ BuildRequires: rsync
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 BuildRequires: jack-audio-connection-kit-devel
-#BuildRequires: cairo-devel
-#BuildRequires: libX11-devel
-#BuildRequires: libxkbcommon-x11-devel
-#BuildRequires: xcb-util-cursor-devel
-#BuildRequires: xcb-util-keysyms-devel
-#BuildRequires: xcb-util-devel
 
 %description
 A VST3 MIDI sequencer
@@ -66,11 +61,16 @@ cd build
 %__install -m 644 -p stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
 
 %files
+%doc README.md
+%license COPYING
 %{_bindir}/*
 
 %files -n vst3-%{name}
 %{_libdir}/vst3/*
 
 %changelog
+* Sun Sep 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.3-1
+- update to 1.3.3
+
 * Thu Aug 13 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - Initial spec file
