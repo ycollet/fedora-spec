@@ -1,6 +1,3 @@
-#
-# https://github.com/supercollider/supercollider/releases/tag/Version-3.11.1
-
 # build options
 %ifarch %{arm}
 %define cmakearch -DSUPERNOVA=OFF -DSSE=OFF -DSSE2=OFF -DNOVA_SIMD=ON -DSC_WII=OFF
