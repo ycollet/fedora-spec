@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Seq24
+Comment=Real-time midi sequencer
+Icon=seq24
+Type=Application
+Exec=seq24
+Terminal=false
+StartupWMClass=seq24
+Categories=Application;AudioVideo;X-Sequencers;X-Midi;
+Encoding=UTF-8
