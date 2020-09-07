@@ -27,6 +27,7 @@ BuildRequires: cairo-devel
 BuildRequires: liblo-devel
 BuildRequires: libsigc++20-devel
 BuildRequires: libsmf-devel
+BuildRequires: fluidsynth-devel
 
 %description
 Virtual Midi Keyboard for Jack Audio Connection Kit
@@ -38,7 +39,7 @@ Virtual Midi Keyboard for Jack Audio Connection Kit
 
 %set_build_flags
 
-%make_build CXXFLAGS="%build_cxxflags -I/usr/include/cairo -I/usr/include/sigc++-2.0/" 
+%make_build CXXFLAGS="%build_cxxflags -I/usr/include/cairo -I/usr/include/sigc++-2.0/ -I/usr/%{_lib}/sigc++-2.0/include" 
 
 %install 
 
