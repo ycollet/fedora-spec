@@ -1,17 +1,15 @@
 # Global variables for github repository
-%global commit0 c676e4af57bdb6cff695d2440459161ab47fb0ad
-%global gittag0 v1.0.1
+%global commit0 d803816bd4960d279c234fafd6b3ebb13be886c1
+%global gittag0 v1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-VCV-Recorder
-Version: 1.0.1
+Version: 1.1.0
 Release: 1%{?dist}
 Summary: A plugin for Rack
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/VCV-Recorder.git
 
@@ -33,8 +31,6 @@ URL:     https://github.com/VCVRack/VCV-Recorder.git
 Source0: Rack.tar.gz
 Source1: https://github.com/VCVRack/VCV-Recorder/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: VCVRecorder-Makefile
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -63,7 +59,7 @@ BuildRequires: lame-devel
 VCV Rack plugin dedicated to recording
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -111,5 +107,8 @@ cp -r vcv_recorder_plugin/dist/VCV-Recorder/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
+* Tue Sep 8 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
+- update to 1.1.0
+
 * Wed Feb 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1
 - initial specfile
