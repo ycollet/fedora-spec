@@ -1,17 +1,15 @@
 # Global variables for github repository
 %global commit0 eb41dd7cdf1112530c1a8059cfa3a99a402944ef
-%global gittag0 v1.3.1
+%global gittag0 v1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Fundamental
-Version: 1.3.1
+Version: 1.4.0
 Release: 4%{?dist}
 Summary: A plugin for Rack
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/Fundamental
 
@@ -33,9 +31,7 @@ URL:     https://github.com/VCVRack/Fundamental
 
 Source0: Rack.tar.gz
 Source1: https://github.com/VCVRack/Fundamental/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source2: fundamental-plugin.json
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source2: Fundamental_plugin.json
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -62,7 +58,7 @@ The Fundamental plugin pack gives you a basic foundation to create simple synthe
 They are also a great reference for creating your own plugins in C++.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -118,6 +114,9 @@ cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
+* Tue Sep 8 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-4
+- update to 1.4.0-4.
+
 * Thu Feb 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1-4
 - update to 1.3.1-4. Update to last master to add Pulse plugin
 
