@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 65155b1435c75956618b1a660543996d8ec04588
+%global commit0 f64ab899a7fe3b192fdcb8e359244187be7eb880
 
-%global gittag0 1.1.3
+%global gittag0 1.1.4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-ModularFungi
-Version: 1.1.3
+Version: 1.1.4
 Release: 3%{?dist}
 Summary: ModularFungi plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r ModularFungi_plugin/dist/ModularFungi/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.3-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.4-3
 - initial specfile

@@ -1,14 +1,14 @@
 # Global variables for github repository
 %global commit0 c5bef088538611cf2c43f6b3404c2455cd824e2c
 
-%global gittag0 1.0.2
+%global gittag0 1.0.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Atelier
-Version: 1.0.2
+Version: 1.0.3
 Release: 3%{?dist}
 Summary: Atelier plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r Atelier_plugin/dist/Atelier/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-3
 - initial specfile

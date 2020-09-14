@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 ed0119856672ed60d2b93d0d7fcab929dc9c35f1
+%global commit0 490526193f74fa7cb2852f85315aee38ca389045
 
-%global gittag0 1.0.7
+%global gittag0 1.0.8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-PS-PurrSoftware
-Version: 1.0.7
+Version: 1.0.8
 Release: 3%{?dist}
 Summary: PS-PurrSoftware plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r PS-PurrSoftware_plugin/dist/PS-PurrSoftware/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.7-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.8-3
 - initial specfile
