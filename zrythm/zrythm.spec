@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.911
+Version: 0.8.982
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -63,8 +63,6 @@ sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, languag
 # Remove summary which is only available on meson 0.53 and stick to version 0.52
 sed -i -e "s/meson_version: '>= 0.55.0'/meson_version: '>= 0.52.0'/g" meson.build
 
-sed -i -e "837,888d" meson.build
-
 %build
 
 mkdir build
@@ -103,6 +101,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Tue Sep 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.982-2
+- update to 0.8.982-2
+
 * Tue Sep 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.911-2
 - update to 0.8.911-2
 
