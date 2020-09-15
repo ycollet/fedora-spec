@@ -1,6 +1,6 @@
 Summary: Multi channel MIDI step sequencer LV2 plugin with a variable matrix
 Name:    lv2-BSEQuencer
-Version: 1.8.0
+Version: 1.8.2
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BSEQuencer
@@ -33,6 +33,9 @@ Multi channel MIDI step sequencer LV2 plugin with a variable matrix
 %{_libdir}/lv2/*
 
 %changelog
+* Tue Sep 15 2020 Yann Collette <ycollette dot nospam at free.fr> 1.8.2-1
+- update to 1.8.2-1
+
 * Tue Sep 15 2020 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-1
 - update to 1.8.0-1
 
