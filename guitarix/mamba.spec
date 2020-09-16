@@ -2,8 +2,6 @@ Name:    mamba
 Version: 1.4.0
 Release: 1%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
-
-Group:   Applications/Multimedia
 License: GPLv2+
 
 URL:     https://github.com/brummer10/Mamba
