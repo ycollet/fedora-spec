@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 dc51a8783f71fc5a8f019beb0783d35d9ec5474c
+%global commit0 ecb84aaf0016bfd2f2c1b7b3934fda857141cf95
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    BespokeSynth
 Version: 0.0.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A software modular synth
 License: GPLv2+
 URL:     https://github.com/awwbees/BespokeSynth
@@ -72,6 +72,9 @@ cp -r Builds/MacOSX/build/Release/data/* %{buildroot}/%{_datadir}/%{name}/data
 %{_datadir}/*
 
 %changelog
+* Wed Sep 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-4
+- update to v0.0005-pre
+
 * Wed Aug 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-3
 - update to v0.0004-pre - dc51a8783f71fc5a8f019beb0783d35d9ec5474c
 
