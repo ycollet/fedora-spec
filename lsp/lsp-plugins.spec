@@ -1,13 +1,11 @@
-%global debug_package %{nil}
-
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.24
+Version: 1.1.26
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sadko4u/lsp-plugins
 
-# ./lsp-sources.sh 1.1.24
+# ./lsp-sources.sh 1.1.26
 
 Source0: lsp-plugins.tar.gz
 
@@ -32,6 +30,7 @@ currently compatible with LADSPA, LV2 and LinuxVST formats.
 
 # Disable strip for debug package
 sed -i -e "s/+= -s/+=/g" Makefile
+sed -i -e "/MAKE_OPTS/d" scripts/make/tools.mk
 
 %build
 
@@ -56,6 +55,9 @@ chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.
 %{_sysconfdir}/xdg/menus/applications-merged/lsp-plugins.menu
 
 %changelog
+* Wed Sep 16 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.26-1
+- update to 1.1.26-1
+
 * Thu Jul 16 2020 Yann Collette <ycollette dot nospam at free.fr> 1.1.24-1
 - update to 1.1.24-1
 
