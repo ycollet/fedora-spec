@@ -19,7 +19,7 @@ xconfig --startxonboot
 # Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 16384 --fstype="ext4"
+part / --size 32000 --fstype="ext4"
 services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 # Shutdown after installation
@@ -493,7 +493,7 @@ vmpk
 
 # synthesis
 hydrogen
-hydrogen-drumkits
+#YC hydrogen-drumkit-AVL-BlackPearl
 bristol
 yoshimi
 zynaddsubfx
@@ -505,10 +505,10 @@ ams
 aeolus
 minicomputer
 phasex
-Rack
-rack-Befaco
-rack-ESeries
-rack-AudibleInstruments
+Rack-v1
+rack-v1-Befaco
+rack-v1-ESeries
+rack-v1-AudibleInstruments
 
 # guitar
 guitarix
@@ -561,7 +561,7 @@ lv2
 #YC lv2-avw-plugins
 #YC pyliblo missing lv2-fil-plugins
 lv2-invada-plugins
-lv2-kn0ck0ut
+#YC lv2-kn0ck0ut
 lv2-ll-plugins
 swh-lv2
 lv2-vocoder-plugins
