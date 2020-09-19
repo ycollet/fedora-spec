@@ -1,20 +1,12 @@
-# Global variables for github repository
-%global commit0 9e62765eb18a5d581d19fe2f788d43949ef012c7
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    projectM-mao
-Version: 3.1.1rc7
+Version: 3.1.7
 Release: 11%{?dist}
 Summary: The libraries for the projectM music visualization plugin
-Group:   Applications/Multimedia
 License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
-Source0: https://github.com/projectM-visualizer/projectm/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/projectM-visualizer/projectm/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: milkdrop-script.txt
-Patch0:  projectm-0001-manage-home-dir-for-conf-file.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# Patch0:  projectm-0001-manage-home-dir-for-conf-file.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool
@@ -36,55 +28,48 @@ like you can create presets that connect music with incredible visuals.
 projectM is an LGPL'ed reimplementation of Milkdrop under OpenGL. All projectM
 requires is a video card with 3D acceleration and your favorite music.
 
-%package    devel
-Summary:    Development files for %{name}
-Group:      Development/Libraries
-Requires:   %{name}%{?_isa} = %{version}-%{release}, pkgconfig
+%package  devel
+Summary:  Development files for %{name}
+Requires: %{name}%{?_isa} = %{version}-%{release}, pkgconfig
 
-%description    devel
+%description devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %package -n projectM-mao-jack
-Summary:    The projectM visualization plugin for jack
-Group:      Applications/Multimedia
-License:    GPLv2+ and MIT
+Summary: The projectM visualization plugin for jack
+License: GPLv2+ and MIT
 
 %description -n projectM-mao-jack
 This package allows the use of the projectM visualization plugin through any
 JACK compatible applications.
 
 %package -n projectM-mao-pulseaudio
-Summary:    The projectM visualization plugin for pulseaudio
-Group:      Applications/Multimedia
-License:    GPLv2+ and MIT
+Summary: The projectM visualization plugin for pulseaudio
+License: GPLv2+ and MIT
 
 %description -n projectM-mao-pulseaudio
 This package allows the use of the projectM visualization plugin through any
 pulseaudio compatible applications.
 
 %package -n projectM-mao-alsa
-Summary:    The projectM visualization plugin for ALSA
-Group:      Applications/Multimedia
-License:    GPLv2+ and MIT
+Summary: The projectM visualization plugin for ALSA
+License: GPLv2+ and MIT
 
 %description -n projectM-mao-alsa
 This package allows the use of the projectM visualization plugin through any
 ALSA compatible applications.
 
 %package -n projectM-mao-SDL
-Summary:    The projectM visualization plugin for SDL
-Group:      Applications/Multimedia
-License:    GPLv2+ and LGPLv2+ and MIT
+Summary: The projectM visualization plugin for SDL
+License: GPLv2+ and LGPLv2+ and MIT
 
 %description -n projectM-mao-SDL
 This package allows the use of the projectM visualization plugin through any
 SDL compatible applications.
 
 %prep
-%setup -qn projectm-%{commit0}
-
-%patch0 -p1
+%autosetup -n projectm-%{version}
 
 sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/libprojectM/projectM.cpp
 sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/projectM-sdl/pmSDL.hpp
@@ -94,18 +79,16 @@ sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/pro
 ./autogen.sh
 
 export QT_SELECT=5
-export CFLAGS="%{build_cflags}"
-export CXXFLAGS="%{build_cxxflags}"
 
 %configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir} --enable-sdl --disable-qt --disable-pulseaudio --disable-jack
 
 sed -i -e "s/pkgdatadir = \$(datadir)\/projectM/pkgdatadir = \$(datadir)\/projectM-mao/g" Makefile
 
-make DESTDIR=%{buildroot} PREFIX=%{_prefix} %{?_smp_mflags}
+%make_build PREFIX=%{_prefix} %{?_smp_mflags}
 
 %install
 
-make DESTDIR=%{buildroot} PREFIX=%{_prefix} install
+%make_install PREFIX=%{_prefix} install
 
 #
 # Write bash command to select the audio driver
@@ -194,7 +177,7 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-pul
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-sdl.desktop
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-alsa.desktop
 
-chmod a-x %{buildroot}%{_datadir}/projectM-mao/presets/*.milk
+find %{buildroot}%{_datadir}/projectM-mao/presets/ -name "*.milk" -exec chmod a-x {} \;
 
 # Install the documentation related to scripts
 cp %{SOURCE1} %{buildroot}%{_datadir}/projectM-mao/
@@ -215,10 +198,6 @@ rmdir %{buildroot}%{_datadir}/projectM/presets
 # fix config.inp path and font path
 sed -i -e "s/usr\/share\/projectM\/presets/usr\/share\/projectM-mao\/presets/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
 sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
 
 %files
 %doc src/libprojectM/ChangeLog
@@ -249,6 +228,9 @@ sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_data
 %{_datadir}/applications/projectM-mao-alsa.desktop
 
 %changelog
+* Sat Sep 19 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.7-11
+- update to 3.1.7-11
+
 * Sat Nov 30 2019 Yann Collette <ycollette.nospam@free.fr> - 3.1.1-rc7-11
 - install only sdl interface. The Qt one is too buggy. Add scripts to select audio drivers
 
