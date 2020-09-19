@@ -1,5 +1,5 @@
 Name:    mamba
-Version: 1.4.0
+Version: 1.5.0
 Release: 1%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: GPLv2+
@@ -8,7 +8,7 @@ URL:     https://github.com/brummer10/Mamba
 
 # git clone https://github.com/brummer10/Mamba
 # cd Mamba
-# git checkout v1.4
+# git checkout v1.5
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -50,6 +50,9 @@ Virtual Midi Keyboard for Jack Audio Connection Kit
 %{_datadir}/*
 
 %changelog
+* Sat Sep 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-1
+- update to 1.5.0-1
+
 * Sun Sep 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-1
 - update to 1.4.0-1
 
