@@ -1,19 +1,11 @@
-# Global variables for github repository
-%global commit0 3994bc3edfd606b5965f0bacdf128a664a78b86a
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: Software Synthesizer
 Name:    amsynth
-Version: 1.10.0.%{shortcommit0}
-Release: 1%{?dist}
+Version: 1.11.0
+Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     https://github.com/amsynth/amsynth
 
-Source0: https://github.com/amsynth/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/amsynth/amsynth/archive/release-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -38,49 +30,40 @@ original synths and latest digital ones, while keeping an intuitive
 interface.
 
 %package -n lv2-amsynth
-Summary:        amsynth lv2 plugin
-Group:          Applications/Multimedia
+Summary: amsynth lv2 plugin
 
 %description -n lv2-amsynth
 Amsynth LV2 plugin
 
 %package -n vst-amsynth
-Summary:        amsynth vst plugin
-Group:          Applications/Multimedia
+Summary: amsynth vst plugin
 
 %description -n vst-amsynth
 Amsynth VST plugin
 
 %package -n dssi-amsynth
-Summary:        amsynth DSSI plugin
-Group:          Applications/Multimedia
+Summary: amsynth DSSI plugin
 
 %description -n dssi-amsynth
 Amsynth DSSI plugin
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-release-%{version}
+
+sed -i -e "s/AX_CXX_COMPILE_STDCXX_11/#AX_CXX_COMPILE_STDCXX_11/g" configure.ac
 
 %build
+
 ./autogen.sh
 export CXXFLAGS="-fPIC -std=c++11"
 %configure
-%{__make} %{_smp_mflags}
+%make_build
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} install
 
-# desktop file categories
-BASE="X-PlanetCCRMA X-Fedora Application AudioVideo"
-XTRA="X-Synthesis X-MIDI X-Jack"
-%{__mkdir} -p %{buildroot}%{_datadir}/applications
-
-%clean
-%{__rm} -rf %{buildroot}
+%make_install
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README
 %license COPYING
 %{_bindir}/amsynth
@@ -103,6 +86,9 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_libdir}/vst/*
 
 %changelog
+* Sun Sep 20 2020 Yann Collette <ycollette dot nospam at free.fr> 1.11.0-2
+- update to 1.11.0-2
+
 * Sat May 9 2020 Yann Collette <ycollette dot nospam at free.fr> 1.10.0-1
 - update to 1.10.0-1
 
