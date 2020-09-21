@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 9c107d3ea51cbffc586fdff806629bfb22a0e2b6
+%global commit0 1aa4e0d3a1044f2817301094e6913f76ae465ceb
 
-%global gittag0 1.1.8
+%global gittag0 1.1.9
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-ImpromptuModular
-Version: 1.1.8
+Version: 1.1.9
 Release: 3%{?dist}
 Summary: ImpromptuModular plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r ImpromptuModular_plugin/dist/ImpromptuModular/* %{buildroot}%{_libexecdir}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.8-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.9-3
 - initial specfile
