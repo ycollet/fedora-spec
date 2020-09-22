@@ -140,3 +140,28 @@ Manually, using qemu-kvm command line
 ```
 $ qemu-kvm -m 2048 -name LeCuizines -sdl -cdrom fedora-30-LesCuizines.iso -usb -device usb-host,hostbus=2,hostaddr=3
 ```
+
+How to use a spec file:
+
+If you use a red hat derivative, you can rebuild the rpm packages from the spec file.
+Most of the time, you can copy the .spec file in your rpmbuild/SPEC directory.
+Some times, there are some sources package to copy in rpmbuild/SOURCE directory. You have to check is the spec file, there are some indications on how to get the source code.
+
+After that, if there are no indications on how to get the source code:
+```
+$ spectool -g <package_name>.spec
+```
+in rpmbuild/SPEC.
+This command will download the some required source files.
+You must then move the downloaded files from rpmbuild/SPEC to rpmbuild/SOURCE.
+Otherwise, have a look in the spec file for instructions on how to get the source code.
+
+And now, it's time to build the package:
+```
+$ rpmbuild -ba .spec
+```
+The package to be manually installed via dnf / yum or rpm are located in rpmbuild/RPMS
+The source package is located in rpmbuild/SRPMS.
+
+You can also check the following link:
+https://docs.fedoraproject.org/en-US/quick-docs/creating-rpm-packages/
