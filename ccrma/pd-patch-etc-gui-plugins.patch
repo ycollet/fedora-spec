@@ -12,9 +12,11 @@ Last-Update: 2016-02-17
  tcl/pd-gui.tcl | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- puredata.orig/tcl/pd-gui.tcl
-+++ puredata/tcl/pd-gui.tcl
-@@ -776,7 +776,7 @@
+diff --git a/tcl/pd-gui.tcl b/tcl/pd-gui.tcl
+index 3033698..6cfcc73 100755
+--- a/tcl/pd-gui.tcl
++++ b/tcl/pd-gui.tcl
+@@ -786,7 +786,7 @@ proc load_startup_plugins {} {
      load_plugin_script [file join $::sys_guidir pd_docsdir.tcl]
  
      # load other installed plugins

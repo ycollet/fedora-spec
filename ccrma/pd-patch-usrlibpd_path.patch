@@ -10,7 +10,7 @@ add it manually
  1 file changed, 4 insertions(+)
 
 diff --git a/src/s_path.c b/src/s_path.c
-index 6cb589d..90f622c 100644
+index d6c85c5..1b5defe 100644
 --- a/src/s_path.c
 +++ b/src/s_path.c
 @@ -261,6 +261,10 @@ void sys_setextrapath(const char *p)
