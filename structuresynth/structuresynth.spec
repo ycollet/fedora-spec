@@ -47,14 +47,14 @@ Structure Synth offers a graphical environment with multiple tabs, syntax highli
 %install
 
 mkdir -p %{buildroot}/%{_bindir}/
-mkdir -p %{buildroot}/%{_datadir}/structure-synth/examples
-mkdir -p %{buildroot}/%{_datadir}/structure-synth/misc
+mkdir -p %{buildroot}/%{_datadir}/structure-synth/Examples
+mkdir -p %{buildroot}/%{_datadir}/structure-synth/Misc
 mkdir -p %{buildroot}/%{_datadir}/applications/
 mkdir -p %{buildroot}/%{_datadir}/pixmaps/
 mkdir -p %{buildroot}/%{_mandir}/man1/
 
-cp -r Examples/* %{buildroot}/%{_datadir}/structure-synth/examples/
-cp -r Misc/* %{buildroot}/%{_datadir}/structure-synth/misc/
+cp -r Examples/* %{buildroot}/%{_datadir}/structure-synth/Examples/
+cp -r Misc/* %{buildroot}/%{_datadir}/structure-synth/Misc/
 cp StructureSynthBin %{buildroot}/%{_bindir}/structure-synth
 cp structure-synth.desktop %{buildroot}/%{_datadir}/applications/
 cp images/structuresynth.png %{buildroot}/%{_datadir}/pixmaps/structure-synth.png
@@ -74,7 +74,7 @@ desktop-file-install                         \
 
 %changelog
 * Fri Sep 25 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-2
-- apply debian patches + man page + naming
+- apply debian patches + man page + naming + install
 
 * Fri Sep 25 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-1
 - initial-version
