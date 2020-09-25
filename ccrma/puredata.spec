@@ -2,8 +2,8 @@
 # Pure Data vanilla build
 #
 
-%define pdver 0.51-1
-%define pkgver 0.51.1
+%define pdver 0.51-2
+%define pkgver 0.51.2
 
 Summary: Pure Data
 Name:    puredata
@@ -44,6 +44,8 @@ Patch3: pd-patch-helpbrowser_puredata-doc.patch
 Patch4: pd-patch-etc-gui-plugins.patch
 Patch5: pd-patch-fixmanpage.patch
 Patch6: pd-patch-privacy.patch
+Patch7: pd-patch-fix-for-filenames-with-spaces-as-arguments-to-pd-start-me.patch
+Patch8: pd-patch-remove-debugging-msg-from-pd.patch
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: autoconf automake libtool
@@ -242,6 +244,9 @@ sed -i -e "s/lib/lib64/g" $RPM_BUILD_ROOT%{_bindir}/pd-gui
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Thu Sep 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.51.2-1
+- update to 0.51.2-1
+
 * Sun Aug 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.51.1-1
 - update to 0.51.1-1
 

@@ -32,7 +32,7 @@
 # we actually use the Debian snapshot (.orig tarball) to build the package. Is
 # there a versioning scheme for git packages in RPM land that we should use?
 Name:    purr-data
-Version: 2.14.1
+Version: 2.14.2
 Release: 2%{?dist}
 Summary: Interactive multimedia programming environment (nw.js variant)
 URL:     https://agraef.github.io/purr-data/
@@ -40,7 +40,7 @@ License: GPL
 
 # git clone https://github.com/agraef/purr-data
 # cd purr-data
-# git checkout 2.14.1
+# git checkout 2.14.2
 # git submodule init
 # git submodule update
 # cd ..
@@ -258,11 +258,14 @@ chmod a-x %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop
 %{_datadir}/*
 
 %changelog
+* Thu Sep 24 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.2-2
+- update to 2.14.2-2
+
 * Tue Sep 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.1-2
-- update to 2.14.1
+- update to 2.14.1-2
 
 * Tue Sep 15 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.0-2
-- update to 2.14.0
+- update to 2.14.0-2
 
 * Wed Aug 5 2020 Yann Collette <ycollette.nospam@free.fr> - 2.13.0-2
 - fix a dependency - thanks baumgartnerniels

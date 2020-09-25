@@ -13,7 +13,7 @@ Last-Update: 2015-05-20
  1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/src/s_main.c b/src/s_main.c
-index 8411f02..4355ef0 100644
+index bf6cb8d..a00dedd 100644
 --- a/src/s_main.c
 +++ b/src/s_main.c
 @@ -32,8 +32,12 @@ char *pd_version = "Pd-" stringify(PD_MAJOR_VERSION) "." \
@@ -31,7 +31,7 @@ index 8411f02..4355ef0 100644
  
  void pd_init(void);
  int sys_argparse(int argc, char **argv);
-@@ -378,8 +382,8 @@ int sys_main(int argc, char **argv)
+@@ -375,8 +379,8 @@ int sys_main(int argc, char **argv)
      if (sys_argparse(argc-1, argv+1))           /* parse cmd line args */
          return (1);
      sys_afterargparse();                    /* post-argparse settings */
@@ -39,6 +39,6 @@ index 8411f02..4355ef0 100644
 -        pd_version, pd_compiletime, pd_compiledate);
 +    if (sys_verbose || sys_version) fprintf(stderr, "%s %s\n",
 +        pd_version, pd_compiletimestamp);
+     if (sys_verbose)
+         fprintf(stderr, "float precision = %lu bits\n", sizeof(t_float)*8);
      if (sys_version)    /* if we were just asked our version, exit here. */
-         return (0);
-     sys_setsignalhandlers();
