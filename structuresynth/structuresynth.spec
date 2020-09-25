@@ -1,6 +1,6 @@
-Name:    structuresynth
+Name:    structure-synth
 Version: 1.5.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Structure Synth generates 3D structures by specifying a design grammar
 
 License: GPLv2
@@ -13,9 +13,12 @@ URL:     https://sourceforge.net/projects/structuresynth/
 # tar cvfz structuresynth.tar.gz structuresynth
 # rm -rf structuresynth
 
-Source: structuresynth.tar.gz
+Source0: structuresynth.tar.gz
+Source1: structure-synth.1
 Patch0: structuresynth-nullptr.patch
 Patch1: structuresynth-qmake.patch
+Patch2: structuresynth-abs_data_path.patch
+Patch3: structuresynth-sunflow.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -29,7 +32,12 @@ Even simple systems may generate surprising and complex structures.
 Structure Synth offers a graphical environment with multiple tabs, syntax highlighting, and OpenGL preview.
 
 %prep
-%autosetup -p0 -n structuresynth
+%setup -qn structuresynth
+
+%patch0 -p0
+%patch1 -p0
+%patch2 -p1
+%patch3 -p1
 
 %build
 
@@ -39,15 +47,18 @@ Structure Synth offers a graphical environment with multiple tabs, syntax highli
 %install
 
 mkdir -p %{buildroot}/%{_bindir}/
-mkdir -p %{buildroot}/%{_datadir}/structuresynth/examples
-mkdir -p %{buildroot}/%{_datadir}/structuresynth/misc
+mkdir -p %{buildroot}/%{_datadir}/structure-synth/examples
+mkdir -p %{buildroot}/%{_datadir}/structure-synth/misc
 mkdir -p %{buildroot}/%{_datadir}/applications/
 mkdir -p %{buildroot}/%{_datadir}/pixmaps/
-cp -r Examples/* %{buildroot}/%{_datadir}/structuresynth/examples/
-cp -r Misc/* %{buildroot}/%{_datadir}/structuresynth/misc/
-cp StructureSynthBin %{buildroot}/%{_bindir}/structuresynth
+mkdir -p %{buildroot}/%{_mandir}/man1/
+
+cp -r Examples/* %{buildroot}/%{_datadir}/structure-synth/examples/
+cp -r Misc/* %{buildroot}/%{_datadir}/structure-synth/misc/
+cp StructureSynthBin %{buildroot}/%{_bindir}/structure-synth
 cp structure-synth.desktop %{buildroot}/%{_datadir}/applications/
-cp images/structuresynth.png %{buildroot}/%{_datadir}/pixmaps/
+cp images/structuresynth.png %{buildroot}/%{_datadir}/pixmaps/structure-synth.png
+cp %{SOURCE1} %{buildroot}/%{_mandir}/man1/
 
 desktop-file-install                         \
   --add-category="Graphics"                  \
@@ -62,6 +73,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Fri Sep 25 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-2
+- apply debian patches + man page + naming
+
 * Fri Sep 25 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-1
 - initial-version
 
