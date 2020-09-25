@@ -1,0 +1,29 @@
+Index: StructureSynth.pro
+===================================================================
+--- StructureSynth.pro	(révision 312)
++++ StructureSynth.pro	(copie de travail)
+@@ -3,9 +3,9 @@
+ ######################################################################
+ 
+ TEMPLATE = app
+-TARGET = StructureSynth
++TARGET = StructureSynthBin
+ INCLUDEPATH += .
+-INCLUDEPATH += .
++INCLUDEPATH += /usr/include/GL
+ 
+ # Input
+ HEADERS += resource.h \
+@@ -130,11 +130,5 @@
+         QMAKE_CXXFLAGS += -wd4127 -wd4512 -wd4189 -wd4996
+ }
+ 
++unix|win32: LIBS += -lGL -lGLU -lglut
+ 
+-unix|win32: LIBS += -L$$PWD/../../freeglut-MSVC-2.8.1-1.mp/freeglut/lib/ -lfreeglut
+-
+-INCLUDEPATH += $$PWD/../../freeglut-MSVC-2.8.1-1.mp/freeglut/include/GL
+-DEPENDPATH += $$PWD/../../freeglut-MSVC-2.8.1-1.mp/freeglut/include/GL
+-
+-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../freeglut-MSVC-2.8.1-1.mp/freeglut/lib/freeglut.lib
+-else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../freeglut-MSVC-2.8.1-1.mp/freeglut/lib/libfreeglut.a
