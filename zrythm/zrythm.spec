@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:    zrythm
-Version: 0.8.982
+Version: 1.0.0.a201
 Release: 2%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 
@@ -9,7 +9,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-%{version}.tar.gz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.2.0.1.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -38,6 +38,7 @@ BuildRequires: pandoc
 BuildRequires: texi2html
 BuildRequires: libchromaprint-devel
 BuildRequires: python3-sphinx
+BuildRequires: python3-sphinx-intl
 BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
@@ -52,7 +53,7 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%autosetup -n zrythm-%{version}
+%autosetup -n zrythm-1.0.0-alpha.2.0.1
 
 # Use sphinx for Python 3
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
@@ -101,6 +102,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Sat Sep 26 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.2.0.1-2
+- update to 1.0.0-alpha.2.0.1-2
+
 * Tue Sep 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.982-2
 - update to 0.8.982-2
 
