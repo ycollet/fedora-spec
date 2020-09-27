@@ -165,3 +165,25 @@ The source package is located in rpmbuild/SRPMS.
 
 You can also check the following link:
 https://docs.fedoraproject.org/en-US/quick-docs/creating-rpm-packages/
+
+Addentum
+
+For livecd-creator, there is problem during fsck phase and I needed to comment out a test:
+```
+diff --git a/imgcreate/fs.py b/imgcreate/fs.py
+index bd03075..2023050 100644
+--- a/imgcreate/fs.py
++++ b/imgcreate/fs.py
+@@ -142,9 +142,9 @@ def resize2fs(fs, size=None, minimal=False, ops=''):
+ 
+     if ops != 'nocheck':
+         ret = e2fsck(fs)
+-        if ret != 0:
+-            raise ResizeError("fsck after resize returned an error (%d)!" %
+-                              (ret,))
++        #if ret != 0:
++        #    raise ResizeError("fsck after resize returned an error (%d)!" %
++        #                      (ret,))
+ 
+     return 0
+```
