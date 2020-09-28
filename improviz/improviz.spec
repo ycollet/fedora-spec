@@ -37,7 +37,7 @@ sed -i -e "s/-threaded/-threaded -fPIC/g" improviz.cabal
 
 %build
 
-%set_build_flags
+# %set_build_flags
 
 stack build
 
