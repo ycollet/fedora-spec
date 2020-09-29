@@ -37,11 +37,13 @@ sed -i -e "/-fwarn-unused-binds/a \ \ cpp-options:         -fPIC\n\ \ cc-options
 
 %build
 
+%set_build_flags
+
 stack build
 
 %install
 
-IMPROVIZ=`find .stack-work/install -name improviz`
+IMPROVIZ=`stack path --local-install-root`/bin/improviz
 
 install -m 755 -d %{buildroot}/%{_bindir}/
 cp $IMPROVIZ %{buildroot}/%{_bindir}/
