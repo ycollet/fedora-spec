@@ -33,11 +33,9 @@ It's very much a work in progress but is definitely stable enough to use for per
 %prep
 %autosetup -n %{name}-%{version}
 
-sed -i -e "s/-threaded/-threaded -fPIC/g" improviz.cabal
+sed -i -e "/-fwarn-unused-binds/a \ \ cpp-options:         -fPIC\n\ \ cc-options:          -fPIC" improviz.cabal
 
 %build
-
-# %set_build_flags
 
 stack build
 
