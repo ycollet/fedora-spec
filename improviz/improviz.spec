@@ -3,11 +3,12 @@
 Name:    improviz
 Summary: A live-coded visual performance tool
 Version: 0.8.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 URL:     https://github.com/rumblesan/improviz
 
 Source0: https://github.com/rumblesan/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1: improviz.yaml
 
 BuildRequires: ghc
 BuildRequires: ghc-network-devel
@@ -33,11 +34,20 @@ It's very much a work in progress but is definitely stable enough to use for per
 %prep
 %autosetup -n %{name}-%{version}
 
-sed -i -e "/-fwarn-unused-binds/a \ \ cpp-options:         -fPIC\n\ \ cc-options:          -fPIC" improviz.cabal
+sed -i -e "/-fwarn-unused-binds/a \ \ cxx-options:         -fPIC\n\ \ cc-options:          -fPIC" improviz.cabal
+sed -i -e "s/-threaded/-threaded -fPIC/g" improviz.cabal
 
 %build
 
 %set_build_flags
+
+#export CFLAGS="-fPIC $CFLAGS"
+#export CXXFLAGS="-fPIC $CXXFLAGS"
+#export LDFLAGS="-fPIC $LDFLAGS"
+
+export CFLAGS="-fPIC"
+export CXXFLAGS="-fPIC"
+export LDFLAGS="-fPIC"
 
 stack build
 
@@ -60,7 +70,7 @@ cp -ra stdlib       %{buildroot}/%{_datadir}/%{name}/
 cp -ra test         %{buildroot}/%{_datadir}/%{name}/
 cp -ra textures     %{buildroot}/%{_datadir}/%{name}/
 cp -ra usercode     %{buildroot}/%{_datadir}/%{name}/
-cp -a improviz.yaml %{buildroot}/%{_datadir}/%{name}/config/
+cp -a %{SOURCE1}    %{buildroot}/%{_datadir}/%{name}/config/
 
 %files
 %doc README.md
@@ -69,5 +79,8 @@ cp -a improviz.yaml %{buildroot}/%{_datadir}/%{name}/config/
 %{_datadir}/%{name}/*
 
 %changelog
+* Wed Sep 30 2020 Yann Collette <ycollette dot nospam at free.fr> 0.8.2-2
+- fix build + install
+
 * Mon Sep 28 2020 Yann Collette <ycollette dot nospam at free.fr> 0.8.2-1
 - Initial release of spec file
