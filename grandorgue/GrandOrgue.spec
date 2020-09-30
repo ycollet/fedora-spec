@@ -4,9 +4,8 @@
 
 Name:    GrandOrgue
 Version: 0.3.1.%{revision}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: GrandOrgue is a sample based pipe organ simulator.
-Group:   Applications/Multimedia
 License: GPLv2+
 
 URL:     http://sourceforge.net/projects/ourorgan
@@ -15,8 +14,6 @@ URL:     http://sourceforge.net/projects/ourorgan
 #  svn export -r 2330 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2330
 #  tar cvfz ourorgan-2330.tar.gz ourorgan-2330
 Source0:      ourorgan-%{revision}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
@@ -32,19 +29,18 @@ BuildRequires: fftw-devel
 GrandOrgue is a sample based pipe organ simulator.
 
 %prep
-%setup -qn ourorgan-%{revision}
+%autosetup -n ourorgan-%{revision}
 
 %build
 
 %cmake -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/wx-config-3.0 \
-       -DLIBINSTDIR=lib64 \
-       .
+       -DLIBINSTDIR=lib64
 
-make VERBOSE=1 %{?_smp_mflags}
+%cmake_build
 
 %install
 
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
@@ -54,27 +50,19 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
-%doc README license.txt AUTHORS
+%doc README AUTHORS
+%license license.txt
 %{_bindir}/%{name}
 %{_bindir}/GrandOrgueTool
 %{_datadir}/*
 %{_libdir}/*
 
 %changelog
+* Wed Sep 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
+- fix for fedora 33
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
 - update to release 2330
 
