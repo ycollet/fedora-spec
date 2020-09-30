@@ -1,6 +1,6 @@
 Name:    geonkick
 Version: 2.3.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
 License: GPLv3
@@ -30,24 +30,16 @@ sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" pl
 
 %build
 
-%set_build_flags
-
-mkdir build
-cd build
-
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DCMAKE_CXX_FLAGS="$CXXFLAGS -I/usr/include/redkite" \
        -DCMAKE_C_FLAGS="$CFLAGS -I/usr/include/redkite" \
-       -DREDKITE_LIBRARY_DIR="/usr/%{_lib}" \
-       ..
+       -DREDKITE_LIBRARY_DIR="/usr/%{_lib}"
 
-%make_build
+%cmake_build
 
 %install
 
-cd build
-
-%make_install
+%cmake_install
 
 %files
 %doc README.md doc/Documentation.md
@@ -57,6 +49,9 @@ cd build
 %{_datadir}/*
 
 %changelog
+* Wed Sep 30 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.8-2
+- Update to 2.3.8-2 - fix for fedora 33
+
 * Tue Sep 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.8-1
 - Update to 2.3.8-1
 
