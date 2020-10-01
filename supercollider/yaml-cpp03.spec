@@ -2,15 +2,13 @@
 
 Name:           yaml-cpp03
 Version:        0.3.0
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        A YAML parser and emitter for C++
 License:        MIT 
 URL:            http://code.google.com/p/yaml-cpp/
+
 Source0:        http://yaml-cpp.googlecode.com/files/%{realname}-%{version}.tar.gz
-
 Patch0:         yaml-cpp03-pkgconf.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  cmake
 BuildRequires:  gcc gcc-c++
@@ -42,21 +40,20 @@ This is a compatibility package for version 3.
 
 
 %prep
-%setup -q -n %{realname}
-%patch0 -p1 -b .pkgconf
+%autosetup -p1 -n %{realname}
 
 # Fix eol 
 sed -i 's/\r//' license.txt
 
-
 %build
-# ask cmake to not strip binaries
-%cmake . -DYAML_CPP_BUILD_TOOLS=0
-make VERBOSE=1 %{?_smp_mflags}
 
+# ask cmake to not strip binaries
+%cmake -DYAML_CPP_BUILD_TOOLS=0
+%cmake_build
 
 %install
-%make_install
+
+%cmake_install
 #find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 # Move things as to not conflict with the main package
@@ -70,12 +67,6 @@ for header in %{buildroot}%{_includedir}/%{name}/*.h; do
     sed -i "s|#include \"yaml-cpp|#include \"%{name}|g" $header
 done
 
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-
 %files
 %doc license.txt
 %{_libdir}/*.so.*
@@ -85,9 +76,11 @@ done
 %{_libdir}/lib%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 
-
 %changelog
-* Tue Apr 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-1
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-15
+- update for Fedora 33
+
+* Tue Apr 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.7.0-14
 - update for Fedora 30
 
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.0-14
