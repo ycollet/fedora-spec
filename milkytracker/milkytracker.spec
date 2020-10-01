@@ -1,20 +1,12 @@
-# Global variables for github repository
-%global commit0 69bd7f0e360db370bf982b4c8e16b371cc8aabfe
-%global gittag0 v1.02.00
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:          milkytracker
 Version:       1.02.00
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       Module tracker software for creating music
-Group:         Applications/Multimedia
 License:       GPLv3+
 URL:           https://github.com/milkytracker/MilkyTracker
 
-Source0:       https://github.com/milkytracker/MilkyTracker/archive/%{commit0}.tar.gz#/MilkyTracker-%{shortcommit0}.tar.gz
+Source0:       https://github.com/milkytracker/MilkyTracker/archive/v%{version}.tar.gz#/MilkyTracker-%{version}.tar.gz
 Source1:       %{name}.desktop
-
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: SDL2-devel
@@ -33,17 +25,17 @@ MilkyTracker is an application for creating music in the .MOD and .XM formats.
 Its goal is to be free replacement for the popular Fasttracker II software.
 
 %prep
-%setup -qn MilkyTracker-%{commit0}
+%autosetup -n MilkyTracker-%{version}
 
 %build
 
-%cmake -DCMAKE_BUILD_TYPE=RELEASE .
+%cmake -DCMAKE_BUILD_TYPE=RELEASE
 
-make %{?_smp_mflags}
+%cmake_build
 
 %install
 
-make install DESTDIR=%{buildroot}
+%cmake_install
 
 # copy the icon
 mkdir -p %{buildroot}%{_datadir}/pixmaps
@@ -51,15 +43,7 @@ cp -p resources/pictures/carton.png %{buildroot}%{_datadir}/pixmaps/milkytracker
 
 # copy the desktop file
 desktop-file-install \
-%if 0%{?fedora} && 0%{?fedora} < 19
-  --vendor fedora \
-%endif
   --dir=%{buildroot}%{_datadir}/applications/ %{SOURCE1}
-
-
-%clean
-rm -rf %{buildroot}
-
 
 %files
 %defattr(-,root,root,-)
@@ -72,6 +56,9 @@ rm -rf %{buildroot}
 %{_datadir}/doc/MilkyTracker/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette dot nospam at free dot fr> 1.02.00-2
+- Update for Fedora 33
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> 1.02.00
 - Update for Fedora 29
 
