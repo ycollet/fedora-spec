@@ -22,7 +22,9 @@ BuildRequires: libsndfile-devel
 BuildRequires: libtar-devel
 BuildRequires: portaudio-devel
 BuildRequires: portmidi-devel
-BuildRequires: qt4-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtxmlpatterns-devel
+BuildRequires: qt5-linguist
 BuildRequires: libarchive-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: rubberband-devel
