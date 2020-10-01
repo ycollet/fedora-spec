@@ -1,16 +1,10 @@
 %global debug_package %{nil}
 
-# Global variables for github repository
-%global commit0 fc50af9e2603c2184f24f3a3483203d69d4b2c2a
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    abNinjam
 Version: 0.0.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Ninjam LV2 / VST plugin
 URL:     https://github.com/antanasbruzas/abNinjam
-Group:   Applications/Multimedia
 License: GPLv3
 
 # git clone https://github.com/antanasbruzas/abNinjam
@@ -50,21 +44,15 @@ sed -i -e "/MAKE_DIRECTORY/d" cmake/VSTConfig.cmake
 
 %build
 
-mkdir build
-cd build
-
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DVSTPLUGIN_INSTALL_DIR=%{_libdir}/vst \
-       -DLV2PLUGIN_INSTALL_DIR=%{_libdir}/lv2 \
-       ..
+       -DLV2PLUGIN_INSTALL_DIR=%{_libdir}/lv2
 
-%make_build
+%cmake_build
 
 %install
 
-cd build
-
-%make_install
+%cmake_install
 
 %files
 %doc README.md
@@ -73,6 +61,9 @@ cd build
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-2
+- update to 0.0.8-2 - fix for fedora 33
+
 * Wed Jun 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-1
 - update to 0.0.8-1
 

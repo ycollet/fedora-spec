@@ -22,18 +22,13 @@ The source code of FastTracker 2 is written in Pascal using Borland Pascal 7 and
 
 %build
 
-%set_build_flags
+%cmake -DCMAKE_BUILD_TYPE=RELEASE
 
-mkdir -p build
-cd build
-%cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-
-%make_build
+%cmake_build
 
 %install
 
-cd build
-%make_install
+%cmake_install
 
 mv %{buildroot}/%{_bindir}/ft2-clone %{buildroot}/%{_bindir}/fasttracker2
 

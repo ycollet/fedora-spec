@@ -1,17 +1,11 @@
-# Global variables for github repository
-%global commit0 4ff361ada2afdc3a58092aba4e99b1cf347bf1e0
-%global gittag0 v0.7.2b
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:           pianobooster
 Version:        0.7.2b
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A MIDI file player that teaches you how to play the piano
-Group:          Applications/Sound
 License:        GPL-3.0-or-later
 
 Url:            https://github.com/captnfab/PianoBooster
-Source0:        https://github.com/captnfab/PianoBooster/archive/%{commit0}.tar.gz#/PianoBooster-%{shortcommit0}.tar.gz
+Source0:        https://github.com/captnfab/PianoBooster/archive/v%{version}.tar.gz#/PianoBooster-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(alsa)
@@ -52,10 +46,8 @@ for the PC. If you don't have a MIDI keyboard you can still try out
 PianoBooster, using the PC keyboard ('x' is middle C), but a MIDI piano
 is really recommended.
 
-#----------------------------------------------------------------------------
-
 %prep
-%setup -qn PianoBooster-%{commit0}
+%autosetup -n PianoBooster-%{version}
 
 %build
 
@@ -63,12 +55,13 @@ is really recommended.
        -DNO_DOCS=ON \
        -DNO_LICENSE=ON \
        -DNO_CHANGELOG=ON \
-       -DWITH_MAN=ON \
-       .
-%make_build
+       -DWITH_MAN=ON
+
+%cmake_build
 
 %install
-%make_install -C build
+
+%cmake_install
 
 %files
 %doc README.md Changelog.txt doc/faq.md
@@ -86,6 +79,9 @@ is really recommended.
 %{_mandir}/man6/%{name}.6*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.2b-2
+- fix for Fedora 33
+
 * Tue Mar 17 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.2b-1
 - initial specfile
 

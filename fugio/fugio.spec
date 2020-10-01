@@ -1,19 +1,13 @@
-# Global variables for github repository
-%global commit0 0ecd7bef72942ae65858743b223bdc6916d240dd
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    fugio
 Version: 3.1.0
-Release: 1%{?dist}
+Release: 3%{?dist}
 Summary: Fugio is an open visual programming system for building digital art and creative projects quickly, with no programming experience required
 URL:     https://www.bigfug.com/software/fugio/
-Group:   Applications/Multimedia
 License: LGPL-3.0
 
 # git clone https://github.com/bigfug/Fugio
 # cd Fugio
-# git checkout v3.1.0
+# git checkout v3.0.0
 # git submodule init
 # git submodule update
 # find . -name .git -exec rm -rf {} \;
@@ -21,8 +15,6 @@ License: LGPL-3.0
 # tar cvfz Fugio.tar.gz Fugio/*
 
 Source0: Fugio.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: alsa-lib-devel
@@ -49,7 +41,7 @@ BuildRequires: eigen3-devel
 Fugio is an open visual programming system for building digital art and creative projects quickly, with no programming experience required
 
 %prep
-%setup -qn Fugio
+%autosetup -n Fugio
 
 %ifarch x86_64 amd64
 sed -i -e "s/lib\/fugio/lib64\/fugio/g" CMakeLists.txt
@@ -59,18 +51,13 @@ sed -i -e "s/Fugio;//g" FugioApp/fugio.desktop
 
 %build
 
-mkdir -p build-tmp
-cd build-tmp
+%cmake -DCMAKE_BUILD_TYPE=RELEASE
 
-%cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-
-make DESTDIR=%{buildroot} %{?_smp_mflags}
+%cmake_build
 
 %install
 
-cd build-tmp
-
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 rm %{buildroot}%{_includedir}/.gitignore
 
@@ -79,17 +66,17 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/fugio.desktop
 
-%clean
-
-rm -rf %{buildroot}
-
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_bindir}/*
 %{_includedir}/*
 %{_libdir}/fugio/*
 %{_datadir}/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.0-3
+- fix for Fedora 33
+
 * Tue Jan 21 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.0-1
 - initial version of the spec file

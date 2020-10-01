@@ -5,7 +5,7 @@
 
 Name:    jm2cv
 Version: 0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Jack Midi to Control Voltage
 URL:     https://github.com/harryhaaren/jm2cv
 Group:   Applications/Multimedia
@@ -14,26 +14,27 @@ License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and
 # original tarfile can be found here:
 Source0: https://github.com/harryhaaren/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: cmake
 
 %description
 This tool allows converting JACK MIDI signals into JACK audio signals.
-
-This tool was created for use with non-mixer, to allow MIDI controller mapping to non-mixer controls. The non-mixer manual has the details, specifically the section on control voltages.
+This tool was created for use with non-mixer, to allow MIDI controller
+mapping to non-mixer controls. The non-mixer manual has the details,
+specifically the section on control voltages.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
-%cmake .
-make VERBOSE=1 %{?_smp_mflags}
+
+%cmake
+%cmake_build
 
 %install
-make DESTDIR=%{buildroot} install
+
+%cmake_install
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/config/
 %__install -m 644 example.cfg %{buildroot}%{_datadir}/%{name}/config/
@@ -45,6 +46,9 @@ make DESTDIR=%{buildroot} install
 %{_datadir}/%{name}
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1-2
+- update for Fedora 33
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.1-1
 - update for Fedora 29
 

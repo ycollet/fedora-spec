@@ -1,7 +1,7 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
 Version: 1.23
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 URL:     https://16-bits.org/pt.php
 
@@ -24,19 +24,13 @@ Obsoletes: protracker
 
 %build
 
-%{set_build_flags}
+%cmake -DCMAKE_BUILD_TYPE=RELEASE
 
-mkdir -p build
-cd build
-%cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-
-%make_build
+%cmake_build
 
 %install
 
-cd build
-
-%make_install
+%cmake_install
 
 mv %{buildroot}/%{_bindir}/pt2-clone %{buildroot}/%{_bindir}/protracker2
 
@@ -62,13 +56,12 @@ EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 
 %__install -m 755 -d %{buildroot}/%{_datadir}/icons/%{name}/
-%__install -m 644 -p ../src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
+%__install -m 644 -p src/gfx/pt2-clone.ico %{buildroot}/%{_datadir}/icons/%{name}/%{name}.ico
 
 %__install -m 755 -d %{buildroot}%{_datadir}/%{name}
-%__cp ../release/effects.txt ../release/help.txt ../release/keybindings.txt ../release/LICENSES.txt ../release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
+%__cp release/effects.txt release/help.txt release/keybindings.txt release/LICENSES.txt release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
 
 %files
-%defattr(-,root,root,-)
 %doc README.md
 %license LICENSE LICENSES.txt
 %{_bindir}/protracker2
@@ -79,6 +72,9 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %{_datadir}/icons/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.23-4
+- fix for fedora 33
+
 * Sat Sep 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.23-3
 - update to 1.23-3
 

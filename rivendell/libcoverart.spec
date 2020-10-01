@@ -1,19 +1,11 @@
-# Global variables for github repository
-%global commit0 86c3d8ce8c706ea6184e792459b55a57839c34e8
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: A library for accessing the MusicBrainz Cover Art Archive
 Name:    libcoverart
 Version: 1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
-Group:   Applications/Multimedia
 URL:     https://github.com/metabrainz/libcoverart
 
-Source0: https://github.com/metabrainz//%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/metabrainz/libcoverart/archive/release-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
@@ -33,26 +25,19 @@ Requires:       %{name} = %{version}-%{release}
 The %{name}-devel package contains header files for %{name}.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-release-%{version}
 
 sed -i -e "s/\*\.inc//g" src/CMakeLists.txt
 
 %build
 
-mkdir build
-cd build
+%cmake -DCMAKE_BUILD_TYPE=RELEASE
 
-%cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-
-%{__make} DESTDIR=%{buildroot} %{?_smp_mflags}
+%cmake_build 
 
 %install
 
-cd build
-%{__make} DESTDIR=%{buildroot} install
-
-%clean
-%{__rm} -rf %{buildroot}
+%cmake_install
 
 %files
 %defattr(-, root, root)
@@ -64,5 +49,8 @@ cd build
 %{_includedir}/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- fix for fedora 33
+
 * Sat May 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - initial release of the spec file

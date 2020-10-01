@@ -1,21 +1,13 @@
-# Global variables for github repository
-%global commit0 59ce476dc03d494bf6aa33f6443f625e7be098c3
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 %global debug_package %{nil}
 
 Name:    performer
 Version: 1.0.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Live performance audio session manager using Carla
 URL:     https://github.com/progwolff/performer
-Group:   Applications/Multimedia
 License: GPLv2+
 
-Source0: https://github.com/progwolff/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/progwolff/performer/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtdeclarative-devel
@@ -40,7 +32,7 @@ BuildRequires: sed
 Live performance audio session manager using Carla
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 sed -i -e "s/AudioVideo/X-AudioVideo/g" performer.desktop
 
@@ -49,14 +41,13 @@ sed -i -e "s/AudioVideo/X-AudioVideo/g" performer.desktop
 %cmake -DCMAKE_C_FLAGS:STRING=-fPIC \
        -DCMAKE_CXX_FLAGS:STRING=-fPIC \
        -DCMAKE_EXE_LINKER_FLAGS:STRING=-fPIC \
-       -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       .
+       -DCMAKE_INSTALL_LIBDIR=%{_lib}
 
-%make_build VERBOSE=1
+%cmake_build
 
 %install
 
-%make_install DESTDIR=%{buildroot}
+%cmake_install
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
@@ -66,27 +57,16 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
-
 %files
-%doc CONTRIBUTORS README.md LICENSE
+%doc CONTRIBUTORS README.md
+%license LICENSE
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
+- update for Fedora 33
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-2
 - update for Fedora 29
 - update to 59ce476dc03d494bf6aa33f6443f625e7be098c3

@@ -5,10 +5,9 @@
 
 Name:    opn2bankeditor
 Version: 1.3.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A small cross-platform editor of the OPN2 FM banks of different formats
 URL:     https://github.com/Wohlstand/OPN2BankEditor
-Group:   Applications/Multimedia
 
 License: GPLv3
 
@@ -43,20 +42,14 @@ sed -i -e "/Categories/d" src/resources/opn2_bank_editor.desktop
 
 %build
 
-mkdir -p build
-cd build
-
 %cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       ..
+       -DLIBEXEC_INSTALL_DIR=%{_libexecdir}
 
-%make_build VERBOSE=1
+%cmake_build
 
 %install
 
-cd build
-
-%make_install
+%cmake_install
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -64,29 +57,17 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/opn2_bank_editor.desktop
 
-%post
-
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc LICENSE license.txt README.md changelog.txt
+%doc README.md changelog.txt
+%license LICENSE license.txt
 %{_bindir}/opn2_bank_editor
 %{_datadir}/applications/*
 %{_datadir}/icons/*
 %{_datadir}/opn2_bank_editor/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-2
+- fix for Fedora 33
+
 * Tue Jun 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-1
 - initial release of the spec file

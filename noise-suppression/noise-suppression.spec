@@ -4,17 +4,14 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    noise-suppression-for-voice
-Version: 0.2.0
+Version: 0.9
 Release: 3%{?dist}
 Summary: Real-time Noise Suppression LADSPA / LV2 Plugin
 License: GPLv2+
 
 URL:     https://github.com/werman/noise-suppression-for-voice
-Source0: https://github.com/werman/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Patch0:  noise-0001-add-missing-stdinh.h.patch
-Patch1:  noise-0002-add-stddef-header.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/werman/noise-suppression-for-voice/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:  noise-0001-add-missing-header.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
@@ -50,7 +47,7 @@ More info about the base library - https://people.xiph.org/~jm/demo/rnnoise/.
 Documentation related to the real-time noise suppression plugin for voice based on Xiph's RNNoise.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -p1 -n %{name}-%{version}
 
 sed -i -e "s/ARCHIVE DESTINATION \${CMAKE_INSTALL_LIBDIR}/ARCHIVE DESTINATION \${CMAKE_INSTALL_LIBDIR}\/ladspa/g" src/ladspa_plugin/CMakeLists.txt
 sed -i -e "s/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}\/ladspa/g" src/ladspa_plugin/CMakeLists.txt
@@ -58,22 +55,19 @@ sed -i -e "s/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}/LIBRARY DESTINATION \$
 sed -i -e "s/ARCHIVE DESTINATION \${CMAKE_INSTALL_LIBDIR}/ARCHIVE DESTINATION \${CMAKE_INSTALL_LIBDIR}\/lv2\/rnnoise\.lv2/g" src/lv2_plugin/CMakeLists.txt
 sed -i -e "s/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}/LIBRARY DESTINATION \${CMAKE_INSTALL_LIBDIR}\/lv2\/rnnoise\.lv2/g" src/lv2_plugin/CMakeLists.txt
 
-%patch0 -p1
-%patch1 -p1
-
 %build
 
-%cmake -DLIBINSTDIR=lib64 \
-       .
+%cmake -DLIBINSTDIR=%{_lib}
 
-make VERBOSE=1 %{?_smp_mflags}
+%cmake_build
 
 %install
 
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 %files -n %{name}-doc
-%doc README.md LICENSE
+%doc README.md
+%license LICENSE
 
 %files -n ladspa-%{name}
 %{_libdir}/ladspa/*
@@ -82,6 +76,9 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.0-3
+- update to 0.9 - fix for Fedora 33
+
 * Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.0-3
 - fix for Fedora 32
 
