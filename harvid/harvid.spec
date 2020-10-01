@@ -1,11 +1,6 @@
-# Global variables for github repository
-%global commit0 d71921ba52efd1362973df850213eebe97a7ecc6
-%global gittag0 0.8.3
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    harvid
-Version: 0.8.3.%{shortcommit0}
-Release: 1%{?dist}
+Version: 0.8.3
+Release: 2%{?dist}
 Summary: harvid -- HTTP Ardour Video Daemon
 URL:     https://github.com/x42/harvid.git
 Group:   Applications/Multimedia
@@ -13,9 +8,7 @@ Group:   Applications/Multimedia
 License: GPLv2+
 
 # original tarfile can be found here:
-Source0: https://github.com/x42/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/x42/harvid/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: libXrender-devel
@@ -34,15 +27,17 @@ Its intended use-case is to efficiently provide frame-accurate data and
 act as second level cache for rendering the video-timeline in Ardour - http://ardour.org.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
+
+sed -i -e "19,21d" src/Makefile
 
 %build
 
-make CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} PREFIX=/usr
+%make_build PREFIX=/usr -j1
 
 %install
 
-make CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} PREFIX=/usr install
+%make_install PREFIX=/usr
 
 mkdir -p %{buildroot}/usr/bin
 ln -s /usr/bin/ffmpeg %{buildroot}/usr/bin/ffmpeg_harvid 
@@ -56,5 +51,8 @@ ln -s /usr/bin/ffprobe%{buildroot}/usr/bin/ffprobe_harvid
 %{_datadir}/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8.3-2
+- fix for Fedora 33
+
 * Sun Dec 2 2018 Yann Collette <ycollette.nospam@free.fr> - 0.8.3-1
 - initial spec file
