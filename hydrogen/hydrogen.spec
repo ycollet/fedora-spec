@@ -1,21 +1,14 @@
 %global debug_package %{nil}
 
 Name:    hydrogen
-Version: 0.9.7
+Version: 1.0.1
 Release: 11%{?dist}
 Summary: Advanced drum machine for GNU/Linux
 URL:     http://www.hydrogen-music.org/
-Group:   Applications/Multimedia
 
 License: GPLv2+
 
-Source0: %{name}-%{version}.tar.gz
-# Remove the "you are using the development version" warning
-# http://sourceforge.net/mailarchive/forum.php?forum_name=hydrogen-devel
-# See the "0.9.5 is out" thread
-#Patch1:       hydrogen-devel-warning.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/hydrogen-music/hydrogen/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -41,31 +34,10 @@ BuildRequires: filesystem
 Hydrogen is an advanced drum machine for GNU/Linux. The main goal is to bring 
 professional yet simple and intuitive pattern-based drum programming.
 
-%package -n ladspa-wasp-booster
-Summary:        WASP Booster LADSPA plugin
-Group:          Applications/Multimedia
-
-%description -n ladspa-wasp-booster
-WASP Booster LADSPA plugin
-
-%package -n ladspa-wasp-noisifier
-Summary:        WASP Noisifier LADSPA plugin
-Group:          Applications/Multimedia
-
-%description -n ladspa-wasp-noisifier
-WASP Noisifier LADSPA plugin
-
-%package -n ladspa-wasp-xshaper
-Summary:        WASP XShaper LADSPA plugin
-Group:          Applications/Multimedia
-
-%description -n ladspa-wasp-xshaper
-WASP XShaper LADSPA plugin
-
 %prep
-%setup0 -q
-sed -i -e "s/Sound/X-Sound/g" linux/hydrogen.desktop
-#%patch1 -p1 -b .nodevver
+%autosetup -n %{name}-%{version}
+
+sed -i -e "s/Sound/X-Sound/g" linux/org.hydrogenmusic.Hydrogen.desktop
 
 %build
 
@@ -88,22 +60,13 @@ sed -i -e "s/Sound/X-Sound/g" linux/hydrogen.desktop
        -DWANT_PULSEAUDIO:BOOL=ON \
        -DWANT_RUBBERBAND:BOOL=ON \
        -DWANT_SHARED:BOOL=ON \
-       -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       .
+       -DCMAKE_INSTALL_LIBDIR=%{_lib}
 
-make VERBOSE=1 %{?_smp_mflags}
-
-#qmake-qt4 src/plugins/plugins.pro "CONFIG+=debug" "CFLAGS+=-ggdb"
-qmake-qt4 src/plugins/plugins.pro
-make -f src/plugins/Makefile
+%cmake_build
 
 %install
 
-make DESTDIR=%{buildroot} install
-
-#Install the wasp plugins
-%__install -m 755 -d %{buildroot}%{_libdir}/ladspa/
-%__install -m 644 libwasp*.so %{buildroot}%{_libdir}/ladspa/
+%cmake_install
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
@@ -113,22 +76,7 @@ desktop-file-install --vendor '' \
         --add-category=Sequencer \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
-        %{buildroot}%{_datadir}/applications/%{name}.desktop
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
+        %{buildroot}%{_datadir}/applications/org.hydrogenmusic.Hydrogen.desktop
 
 %files
 %doc AUTHORS ChangeLog README.txt
@@ -136,24 +84,18 @@ fi
 %{_bindir}/hydrogen
 %{_bindir}/h2cli
 %{_bindir}/h2player
-%{_bindir}/h2synth
-%{_datadir}/hydrogen/
-%{_datadir}/applications/hydrogen.desktop
-%{_datadir}/appdata/hydrogen.appdata.xml
+%{_datadir}/hydrogen/*
+%{_datadir}/icons/*
+%{_datadir}/applications/*.desktop
+%{_datadir}/appdata/*.appdata.xml
 %{_libdir}/*.so
-%exclude %{_usr}/man/*
+%{_datadir}/man/*
 %exclude %{_includedir}/%{name}
 
-%files -n ladspa-wasp-booster
-%{_libdir}/ladspa/libwasp_booster.so 
-
-%files -n ladspa-wasp-noisifier
-%{_libdir}/ladspa/libwasp_noisifier.so 
-
-%files -n ladspa-wasp-xshaper
-%{_libdir}/ladspa/libwasp_xshaper.so 
-
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-11
+- update for Fedora 33
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.7-11
 - update for Fedora 29
 
