@@ -26,7 +26,7 @@ BuildRequires: cmake
 A set of VST plugins
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 unzip %{SOURCE1}
 
