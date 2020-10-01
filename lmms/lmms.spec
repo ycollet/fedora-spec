@@ -104,11 +104,7 @@ sed -i -e "s/-std=c11/-std=c11 -fPIC -DPIC/g" src/3rdparty/rpmalloc/CMakeLists.t
 
 %build
 
-mkdir -p build
-cd build
-
-%cmake \
-       -DWANT_SDL:BOOL=OFF \
+%cmake -DWANT_SDL:BOOL=OFF \
        -DWANT_PORTAUDIO:BOOL=OFF \
        -DWANT_CAPS:BOOL=OFF \
        -DWANT_TAP:BOOL=OFF \
@@ -122,15 +118,13 @@ cd build
        -DCMAKE_EXE_LINKER_FLAGS:STRING="$LDFLAGS -pie" \
        -DCMAKE_SKIP_RPATH=OFF \
        -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       ..
+       -DLIBEXEC_INSTALL_DIR=%{_libexecdir}
 
-%make_build DESTDIR=%{buildroot} VERBOSE=1 # %{?_smp_mflags}
+%cmake_build
 
 %install
 
-cd build
-%make_install DESTDIR=%{buildroot} install
+%cmake_install
 
 # workaround: copy bash completion manually into install dir because it fails during cmake install
 mkdir -p %{buildroot}/%{_datadir}/bash-completion/completions
@@ -159,6 +153,9 @@ desktop-file-install --vendor '' \
 %{_includedir}/lmms
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-9
+- update to 1.2.2-9 - fix for fedora 33
+
 * Thu Jul 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-8
 - update to 1.2.2-8
 
