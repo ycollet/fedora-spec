@@ -4,17 +4,13 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    midimonster
-Version: 0.5.0
-Release: 1%{?dist}
+Version: 0.5
+Release: 2%{?dist}
 Summary: Multi-protocol translation software (ArtNet, MIDI, OSC, JACK MIDI/CV ...)
-
-Group:   Applications/Multimedia
 License: BSD
 URL:     https://github.com/cbdevnet/midimonster
 
-Source0: https://github.com/cbdevnet/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/cbdevnet/midimonster/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -29,17 +25,17 @@ Named for its scary math, the MIDIMonster is a universal control and translation
 tool for multi-channel absolute-value-based control and/or bus protocols.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn %{name}-%{version}
 
 sed -i -e "s/lua53/lua/g" backends/Makefile
 
 %build
-make clean
-make DESTDIR=%{buildroot} PREFIX=/usr PLUGINS=%{_libdir}/midimonster
+
+%make_build PREFIX=/usr PLUGINS=%{_libdir}/midimonster
 
 %install
 
-make DESTDIR=%{buildroot} PREFIX=/usr PLUGINS=%{_libdir}/midimonster install
+%make_install PREFIX=/usr PLUGINS=%{_libdir}/midimonster
 
 %files
 %{_bindir}/*
@@ -47,6 +43,9 @@ make DESTDIR=%{buildroot} PREFIX=/usr PLUGINS=%{_libdir}/midimonster install
 %{_datadir}/%{name}/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-2
+- update to version 0.5.0-2 - fix for fedora 33
+
 * Mon May 4 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-1
 - update to version 0.5.0-1
 
