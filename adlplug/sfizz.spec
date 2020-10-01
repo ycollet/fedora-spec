@@ -4,6 +4,7 @@ Release:   2%{?dist}
 License:   BSD-2-Clause
 Summary:   Sampler plugin and library for SFZ instruments
 Url:       https://github.com/sfztools/sfizz
+
 Source:    sfizz-0.4.0.tar.gz
 
 # git clone https://github.com/sfztools/sfizz sfizz-0.4.0
@@ -47,8 +48,6 @@ Header files for the Sfizz library.
 
 %build
 
-mkdir build
-cd build
 %cmake -DLV2PLUGIN_INSTALL_DIR=%{_libdir}/lv2 \
        -DVSTPLUGIN_INSTALL_DIR=%{_libdir}/vst \
        -DSFIZZ_JACK=ON \
@@ -56,15 +55,13 @@ cd build
        -DSFIZZ_VST=ON \
        -DENABLE_LTO=OFF \
        -DCMAKE_CXX_FLAGS="-include cstdio" \
-       -DBUILD_SHARED_LIBS=OFF \
-       ..
+       -DBUILD_SHARED_LIBS=OFF
 
-%make_build VERBOSE=1
+%cmake_build
 
 %install
 
-cd build
-%make_install
+%cmake_install
 
 %files
 %doc README.md GOVERNANCE.md CONTRIBUTING.md AUTHORS.md
@@ -86,6 +83,9 @@ cd build
 %exclude %{_libdir}/libsfizz.a
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-3
+- update to 0.4.0-3 - fix for fedora 33
+
 * Fri Jul 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-2
 - update to 0.4.0-2
 
