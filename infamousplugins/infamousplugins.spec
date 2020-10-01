@@ -35,11 +35,7 @@ Infamous Plugins is a collection of open-source LV2 plugins. It hopefully helps 
 
 %build
 
-%ifarch x86_64
-%cmake -DLIBDIR=lib64
-%else
-%cmake
-%endif
+%cmake -DLIBDIR=%{_lib}
 
 %cmake_build
 

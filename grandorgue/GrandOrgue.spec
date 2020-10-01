@@ -34,7 +34,7 @@ GrandOrgue is a sample based pipe organ simulator.
 %build
 
 %cmake -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/wx-config-3.0 \
-       -DLIBINSTDIR=lib64
+       -DLIBINSTDIR=%{_lib}
 
 %cmake_build
 
