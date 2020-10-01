@@ -62,7 +62,6 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %__cp release/effects.txt release/help.txt release/keybindings.txt release/LICENSES.txt release/other/protracker.ini %{buildroot}%{_datadir}/%{name}
 
 %files
-%defattr(-,root,root,-)
 %doc README.md
 %license LICENSE LICENSES.txt
 %{_bindir}/protracker2
