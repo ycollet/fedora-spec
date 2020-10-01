@@ -1,20 +1,12 @@
-# Global variables for github repository
-%global commit0 96a9b03eaea865d2207c05a1ea0daba66f4cd94b
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    lenmus
-Version: 5.6.2.%{shortcommit0}
-Release: 1%{?dist}
+Version: 5.6.2
+Release: 2%{?dist}
 Summary: An app to study music theory and train you ear
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/lenmus/lenmus
-Source0: https://github.com/lenmus/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: FindPortMidi.cmake
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/lenmus/lenmus/archive/Release_%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1: FindPortMidi.cmake
 
 BuildRequires: gcc gcc-c++
 BuildRequires: boost-devel
@@ -46,25 +38,24 @@ Please visit the LenMus website (http://www.lenmus.org) for the latest news
 about the project or for further details about releases.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-Release_%{version}
 
 cp %{SOURCE1} cmake-modules/
 
-%build
-
 sed -ie "s/target_link_libraries ( \${LENMUS}/target_link_libraries ( \${LENMUS} jack/g" CMakeLists.txt
+
+%build
 
 %cmake -D_filename:FILEPATH=/usr/include/wx-3.0/wx/version.h \
        -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/wx-config-3.0 \
        -DPortTime_LIBRARY:FILEPATH=/usr/%{_lib}/libportaudio.so \
-       -DLENMUS_DOWNLOAD_SOUNDFONT=OFF \
-       .
+       -DLENMUS_DOWNLOAD_SOUNDFONT=OFF
 
-make VERBOSE=1 %{?_smp_mflags}
+%cmake_build
 
 %install
 
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 # install lenmus.desktop properly.
 mv %{buildroot}%{_datadir}/applications/org.lenmus.lenmus.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
@@ -77,21 +68,9 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc AUTHORS CHANGELOG.md INSTALL README.md NEWS THANKS LICENSE
+%doc AUTHORS CHANGELOG.md INSTALL README.md NEWS THANKS
+%license LICENSE
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/%{name}.desktop
@@ -100,6 +79,9 @@ fi
 %{_datadir}/metainfo/%{name}.appdata.xml
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.2-2
+- update 5.6.2-2 - fix for fedora 33
+
 * Thu Apr 23 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.2-1
 - update 5.6.2-1
 
