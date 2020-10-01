@@ -5,7 +5,7 @@
 
 Name:    opl3bankeditor
 Version: 1.5.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A small cross-platform editor of the OPL3 FM banks of different formats
 URL:     https://github.com/Wohlstand/OPL3BankEditor
 Group:   Applications/Multimedia
@@ -37,26 +37,20 @@ A small cross-platform editor of the OPL3 FM banks of different formats
 
 %prep
 
-%setup -qn OPL3BankEditor
+%autosetup -n OPL3BankEditor
 
 sed -i -e "/Categories/d" src/resources/opl3_bank_editor.desktop
 
 %build
 
-mkdir -p build
-cd build
-
 %cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       ..
+       -DLIBEXEC_INSTALL_DIR=%{_libexecdir}
 
-%make_build VERBOSE=1
+%cmake_build
 
 %install
 
-cd build
-
-%make_install
+%cmake_install
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -64,24 +58,9 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/opl3_bank_editor.desktop
 
-%post
-
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc LICENSE license.txt README.md changelog.txt
+%doc README.md changelog.txt
+%license LICENSE license.txt
 %{_bindir}/opl3_bank_editor
 %{_datadir}/mime/*
 %{_datadir}/applications/*
@@ -89,6 +68,9 @@ fi
 %{_datadir}/opl3_bank_editor/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.1-2
+- update to 1.5.2 - fix for fedora 33
+
 * Tue Jun 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.1-1
 - update to 1.5.1
 
