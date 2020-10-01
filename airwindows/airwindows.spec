@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 # Global variables for github repository
-%global commit0 e9c834e51f407fd33d7175c0dad421cdad44e154
+%global commit0 fa61072ea31a876ab28d80bf5edcae717ab6ddf3
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -43,19 +43,13 @@ sed -i -e "s/add_compile_options/#add_compile_options/g" plugins/LinuxVST/CMakeL
 
 cd plugins/LinuxVST
 
-rm -rf build
-mkdir build
-cd build
+%cmake -DCMAKE_BUILD_TYPE=RELEASE
 
-%cmake ..
-
-%make_build 
+%cmake_build 
 
 %install 
 
 cd plugins/LinuxVST/
-
-cd build
 
 %__install -m 755 -d %{buildroot}%{_libdir}/vst/
 %__install -m 644 *.so %{buildroot}/%{_libdir}/vst/
@@ -66,5 +60,8 @@ cd build
 %{_libdir}/*
 
 %changelog
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- update to fa61072ea31a876ab28d80bf5edcae717ab6ddf3 - fix for fedora 33
+
 * Wed Jul 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial spec file
