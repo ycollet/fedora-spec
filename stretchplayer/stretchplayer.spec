@@ -8,16 +8,12 @@ Version: 0.0.1.%{shortcommit0}
 Release: 1%{?dist}
 Summary: Variable speed audio plater
 URL:     https://github.com/smbolton/stretchplayer
-Group:   Applications/Multimedia
 License: GPLv2+
-
 
 Source0: https://github.com/smbolton/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  stretchplayer-fix-cast.patch
 Patch1:  stretchplayer-remove-inline.patch
 Patch2:  stretchplayer-disable-mpg123.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -41,21 +37,17 @@ pre-recorded song.  You can:
  * A/B repeat
 
 %prep
-%setup -qn %{name}-%{commit0}
-
-%patch0 -p1 
-%patch1 -p1 
-%patch2 -p1 
+%autosetup -p1 -n %{name}-%{commit0}
 
 %build
 
-%cmake .
+%cmake 
 
-make VERBOSE=1 %{?_smp_mflags}
+%cmake_build
 
 %install
 
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 # install hydrogen.desktop properly.
 desktop-file-install --vendor '' \
@@ -63,19 +55,6 @@ desktop-file-install --vendor '' \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
 %doc AUTHORS ChangeLog README.txt INSTALL.txt BUGS.txt
@@ -88,6 +67,9 @@ fi
 %exclude %{_datadir}/%{name}/%{name}.desktop
 
 %changelog
+* Fri OCt 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
+- update for Fedora 33
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - update for Fedora 29
 
