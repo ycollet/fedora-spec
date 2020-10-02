@@ -19,6 +19,7 @@ Patch0: structuresynth-nullptr.patch
 Patch1: structuresynth-qmake.patch
 Patch2: structuresynth-abs_data_path.patch
 Patch3: structuresynth-sunflow.patch
+Patch4: structuresynth-0001-add-missing-header.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -38,6 +39,7 @@ Structure Synth offers a graphical environment with multiple tabs, syntax highli
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 
