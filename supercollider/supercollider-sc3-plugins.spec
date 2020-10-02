@@ -1,7 +1,7 @@
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
 Version: 3.11.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
 URL:     http://sc3-plugins.sourceforge.net/
 
@@ -48,26 +48,25 @@ sed -i -e "s/lib\/SuperCollider/lib64\/SuperCollider/g" source/CMakeLists.txt
 # remove all git directories
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
 
-mkdir build
-pushd build
+%cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE \
+       -DSC_PATH=/usr/include/SuperCollider \
+       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+       -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DSUPERNOVA=ON
 
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-      -DSC_PATH=/usr/include/SuperCollider \
-      -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-      -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DSUPERNOVA=ON ..
-
-%make_build
+%cmake_build
 
 %install
 
-cd build
-%make_install
+%cmake_install
 
 %files
 %{_datadir}/SuperCollider/Extensions/SC3plugins
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.0-4
+- fix for fedora 33
+
 * Mon Aug 31 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.0-3
 - update to 3.11.9-3
 
