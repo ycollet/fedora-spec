@@ -48,6 +48,7 @@
 # veejay-server-1.5.57-2.fc32.src.rpm
 # veejay-gui-1.5.57-2.fc32.src.rpm
 # qscintilla-2.11.2-10.fc32.src.rpm
+# JUCE
 
 # In Fedora now:
 # Carla

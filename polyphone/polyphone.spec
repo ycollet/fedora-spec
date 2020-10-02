@@ -8,16 +8,13 @@
 
 Name:    polyphone
 Version: 2.2.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 Source0: https://github.com/davy7125/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  polyphone-0001-add-missing-header.patch
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: qt5-qtbase-devel
@@ -38,15 +35,23 @@ BuildRequires: openssl-devel
 BuildRequires: flac-devel
 
 %description
-Polyphone is a free software for editing soundfonts in format sf2. These files contain a multitude of audio samples put together and configured so as to form musical instruments that can be used by synthesizers such as fluidsynth and played using a MIDI keyboard.
+Polyphone is a free software for editing soundfonts in format sf2.
+These files contain a multitude of audio samples put together and configured so
+as to form musical instruments that can be used by synthesizers such
+as fluidsynth and played using a MIDI keyboard.
 The goal of Polyphone is to provide:
 
-* a simple and efficient interface for creating and editing .sf2 files, available on Windows, Mac OS X and Linux, tools to facilitate and automate the editing of different parameters, making it possible to handle a large amount of data.
+* a simple and efficient interface for creating and editing .sf2 files,
+  available on Windows, Mac OS X and Linux, tools to facilitate and automate
+  the editing of different parameters, making it possible to handle a
+  large amount of data.
 
-* Polyphone is licensed under GNU General Public License. Anyone may thus access the source code, and is welcome to help in the development of the program.
+* Polyphone is licensed under GNU General Public License.
+  Anyone may thus access the source code, and is welcome to help
+  in the development of the program.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -p1 -n %{name}-%{commit0}
 
 sed -i -e "s/usr\/local/usr\//g" sources/polyphone.pro
 
@@ -55,7 +60,7 @@ sed -i -e "s/usr\/local/usr\//g" sources/polyphone.pro
 cd sources
 
 qmake-qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
-make VERBOSE=1 %{?_smp_mflags}
+%make_build
 
 %install
 
@@ -85,27 +90,18 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc sources/changelog README.md sources/README LICENSE.txt
+%doc sources/changelog README.md sources/README
+%license LICENSE.txt
 %{_bindir}/polyphone
 %{_datadir}/applications/polyphone.desktop
 %{_datadir}/mime/packages/polyphone.xml
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-2
+- fix for fedora 33
+
 * Sat Nov 16 2019 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-1
 - update to 2.2.0
 

@@ -2,14 +2,12 @@ To be fixed:
 
 libcoverart			 -> cmake + Werror pb
 adlplug				 -> cmake + juce
-BespokeSynth			 -> JUCE was missing
+BespokeSynth			 -> JUCE was missing + lto
 buzztrax			 -> fluidsynth pb
 dragonfly-revert   		 -> DGL link pb
 ensemble-chorus	   		 -> cmake + juce
 fugio		   		 -> cmake + build pb
-iannix		   		 -> QPainterPath pb
 konfyt		   		 -> Carla build pb
-lmms-mao	   		 -> cmake
 midimonster	   		 -> lua pb
 miniaudicle	   		 -> qscintilla was missing
 openFrameworks			 -> mk file pb
@@ -17,6 +15,12 @@ polyphone			 -> QPainterPath pb
 performer			 -> cmake + ui_setlist.h missing
 psi-plugins-doc			 -> fltk-devel missing - #include <Fl/Fl_Menu_Button.h>
 qscintilla			 -> fail to build
+zrythm				 -> doc fails to build
+zam				 -> DGL link pb
+rivendell			 -> libcoverart
+structuresynth			 -> ULONG_MAX missing (in limits.h normally)
+stochas				 -> lto
+sonic-pi			 -> cmake - check ruby version
 
 Fugio:
 /home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:65:42: error: 'CV_RGB2GRAY' was not declared in this scope

@@ -10,18 +10,16 @@
 
 Name:    IanniX
 Version: 0.9.20.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A graphic / MIDI / OSC player
 URL:     https://github.com/iannix/Iannix
-Group:   Applications/Multimedia
 
 License: GPLv2+
 
 Source0: https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: iannix.xml
 Patch0:  iannix-0001-fix-missing-glew.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+PAtch1:  iannix-0002-add-missing-header.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -31,16 +29,17 @@ BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 
 %description
-IanniX is a graphical open source sequencer, based on Iannis Xenakis works, for digital art. IanniX syncs via Open Sound Control (OSC) events and curves to your real-time environment.
+IanniX is a graphical open source sequencer, based on Iannis Xenakis works,
+for digital art. IanniX syncs via Open Sound Control (OSC) events and curves
+to your real-time environment.
 
 %prep
-%setup -qn %{name}-%{commit0}
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{commit0}
 
 %build
 
 qmake-qt5 IanniX.pro
-%{__make} VERBOSE=1 %{?_smp_mflags}
+%make_build
 
 %install
 
@@ -65,30 +64,18 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
-
 %files
+%doc Readme.md
 %license COPYING.txt
 %{_bindir}/iannix
 %{_datadir}/applications/IanniX.desktop
 %{_datadir}/mime/packages/IanniX.xml
 %{_datadir}/icons/hicolor/*
 
-
 %changelog
+* Fri OCt 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-3
+- update for Fedora 33
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-2
 - update for Fedora 29
 

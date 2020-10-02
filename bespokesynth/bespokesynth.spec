@@ -3,9 +3,11 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+%define _lto_cflags %{nil}
+
 Name:    BespokeSynth
 Version: 0.0.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A software modular synth
 License: GPLv2+
 URL:     https://github.com/awwbees/BespokeSynth
@@ -72,6 +74,9 @@ cp -r Builds/MacOSX/build/Release/data/* %{buildroot}/%{_datadir}/%{name}/data
 %{_datadir}/*
 
 %changelog
+* Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-5
+- update for fedora 33
+
 * Wed Sep 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-4
 - update to v0.0005-pre
 
