@@ -1,70 +1,36 @@
-Not fixable:
+To be fixed:
 
-kpp              -> [1/53] Generating 'LV2/87d5cba@@kpp_deadgate_dsp@sta/kpp_deadgate_dsp.cpp'.
-                    FAILED: LV2/87d5cba@@kpp_deadgate_dsp@sta/kpp_deadgate_dsp.cpp 
-		    /usr/bin/faust -i -a /usr/share/faust/lv2.cpp -cn kpp_deadgate -o LV2/87d5cba@@kpp_deadgate_dsp@sta/kpp_deadgate_dsp.cpp ../LV2/kpp_deadgate/kpp_deadgate.dsp
-		    maths.lib : 107 : ERROR : syntax error, unexpected IDENT, expecting LPAR or DEF
-		    Mauvaise version de faust ...
+libcoverart			 -> cmake + Werror pb
+adlplug				 -> cmake + juce
+BespokeSynth			 -> JUCE was missing
+buzztrax			 -> fluidsynth pb
+dragonfly-revert   		 -> DGL link pb
+ensemble-chorus	   		 -> cmake + juce
+fugio		   		 -> cmake + build pb
+iannix		   		 -> QPainterPath pb
+konfyt		   		 -> Carla build pb
+lmms-mao	   		 -> cmake
+midimonster	   		 -> lua pb
+miniaudicle	   		 -> qscintilla was missing
+openFrameworks			 -> mk file pb
+polyphone			 -> QPainterPath pb
+performer			 -> cmake + ui_setlist.h missing
+psi-plugins-doc			 -> fltk-devel missing - #include <Fl/Fl_Menu_Button.h>
+qscintilla			 -> fail to build
 
-miniaudicle        -> No matching package to install: 'qscintilla-devel' -> qscintilla-qt5-devel uniquement ... Pas de support Qt5 ...
-
-Done:
-
-adplug           -> /builddir/build/BUILD/ADLplug/sources/opl3/adl/player.cc:12:20: error: 'runtime_error' is not a member of 'std'
-                     12 |         throw std::runtime_error("cannot initialize player");
-
-protracker         -> -z muldefs
-
-protracker2        -> -z muldefs
-
-BChopr            -> Build BChoppr.lv2 DSP...src/BChoppr.cpp: In constructor 'BChoppr::BChoppr(double, const LV2_Feature* const*)':
-                     src/BChoppr.cpp:55:21: error: 'invalid_argument' is not a member of 'std'
-		        55 |  if (!m) throw std::invalid_argument ("Host does not support urid:map");
-			   |                     ^~~~~~~~~~~~~~~~
-
-BJumblr           -> Build BJumblr.lv2 DSP...src/BJumblr.cpp: In constructor 'BJumblr::BJumblr(double, const LV2_Feature* const*)':
-                     src/BJumblr.cpp:70:21: error: 'invalid_argument' is not a member of 'std'
-		        70 |  if (!m) throw std::invalid_argument ("BJumblr.lv2: Host does not support urid:map.");
-			   |                     ^~~~~~~~~~~~~~~~
-
-BSlizr            -> Build BSlizr.lv2 DSP...src/BSlizr.cpp: In constructor 'BSlizr::BSlizr(double, const LV2_Feature* const*)':
-		     src/BSlizr.cpp:52:21: error: 'invalid_argument' is not a member of 'std'
-		        52 |  if (!m) throw std::invalid_argument ("Host does not support urid:map");
-			   |                     ^~~~~~~~~~~~~~~~
-
-sfizz -> /builddir/build/BUILD/sfizz-0.3.2/vst/external/VST_SDK/VST3_SDK/public.sdk/source/common/threadchecker_linux.cpp:56:4: error: 'fprintf' was not declared in this scope; did you mean 'wprintf'?
-         56 |    fprintf (stderr, "%s", failmessage);
-            |    ^~~~~~~
-            |    wprintf
-
-rack-v1-squinkylabs-plug1 -> dsp/utils/AsymWaveShaper.cpp: In static member function 'static void AsymWaveShaper::genTableValues(const Spline&, int)':
-                             dsp/utils/AsymWaveShaper.cpp:67:9: error: 'printf' was not declared in this scope
-                                67 |         printf("%ff", y);
-                                   |         ^~~~~~
-                             dsp/utils/AsymWaveShaper.cpp:3:1: note: 'printf' is defined in header '<cstdio>'; did you forget to '#include <cstdio>'?
-                                 2 | #include "AsymWaveShaper.h"
-                               +++ |+#include <cstdio>
-
-
-rack-v1-HolonicSystems-Free -> src/MdnsServer.cpp
-                               src/MdnsServer.cpp: In member function 'void MdnsServer::stop()':
-                               src/MdnsServer.cpp:23:10: error: 'stdout' was not declared in this scope
-                                  23 |   fflush(stdout);
-                                     |          ^~~~~~
-                               src/MdnsServer.cpp:9:1: note: 'stdout' is defined in header '<cstdio>'; did you forget to '#include <cstdio>'?
-
-To rebuild:
-
-fluxus           -> No matching package to install: 'gstreamer-devel >= 0.10.25' -> 'gstreamer1-devel
-                    No matching package to install: 'gstreamer-plugins-base-devel >= 0.10.25' -> gstreamer-plugins-base-devel
-                    No matching package to install: 'python2-scons' -> python3-scons
-
-ossiascore         -> erreur boost ...
-
-sonic-pi -> + ruby ../../server/ruby/bin/i18n-tool.rb -t
-              /usr/share/rubygems/rubygems/core_ext/kernel_require.rb:92:in `require': cannot load such file -- racc/parser.rb (LoadError)
-              	from /usr/share/rubygems/rubygems/core_ext/kernel_require.rb:92:in `require'
-              	from /builddir/build/BUILD/sonic-pi-3.2.2/app/server/ruby/vendor/gettext-3.2.2/lib/gettext/po_parser.rb:17:in `<top (required)>'
-              	from /usr/share/rubygems/rubygems/core_ext/kernel_require.rb:92:in `require'
-              	from /usr/share/rubygems/rubygems/core_ext/kernel_require.rb:92:in `require'
-              	from ../../server/ruby/bin/i18n-tool.rb:21:in `<main>'
+Fugio:
+/home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:65:42: error: 'CV_RGB2GRAY' was not declared in this scope
+   65 |    cv::cvtColor( MatSrc, pNode->mMatImg, CV_RGB2GRAY );
+      |                                          ^~~~~~~~~~~
+/home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:69:42: error: 'CV_BGR2GRAY' was not declared in this scope
+   69 |    cv::cvtColor( MatSrc, pNode->mMatImg, CV_BGR2GRAY );
+      |                                          ^~~~~~~~~~~
+/home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:73:42: error: 'CV_RGBA2GRAY' was not declared in this scope
+   73 |    cv::cvtColor( MatSrc, pNode->mMatImg, CV_RGBA2GRAY );
+      |                                          ^~~~~~~~~~~~
+/home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:77:42: error: 'CV_BGRA2GRAY' was not declared in this scope
+   77 |    cv::cvtColor( MatSrc, pNode->mMatImg, CV_BGRA2GRAY );
+      |                                          ^~~~~~~~~~~~
+/home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:60:22: warning: unused variable 'DstFmt' [-Wunused-variable]
+   60 |  fugio::ImageFormat  DstFmt = fugio::ImageFormat::GRAY8;
+      |                      ^~~~~~
