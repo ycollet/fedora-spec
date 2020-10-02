@@ -1,23 +1,16 @@
-# Global variables for github repository
-%global commit0 c61b6690a892c503f3341db767a7d74b56970e29
-%global gittag0 1.1.4
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    wolf-shaper
-Version: 0.1.7
+Version: 0.1.8
 Release: 1%{?dist}
 Summary: Wolf-shaper is a waveshaper plugin with a graph editor.
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/pdesaulniers/wolf-shaper
 
 # git clone https://github.com/pdesaulniers/wolf-shaper
 # cd wolf-shaper
-# git checkout v0.1.7
+# git checkout v0.1.8
 # git submodule init
 # git submodule update
 # rm -rf .git dpf/.git
@@ -25,8 +18,6 @@ URL:     https://github.com/pdesaulniers/wolf-shaper
 # tar cvfz wolf-shaper.tar.gz wolf-shaper/*
 
 Source0: wolf-shaper.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -41,15 +32,12 @@ Wolf Shaper is a waveshaper plugin with a graph editor.
 
 %package -n dssi-%{name}
 Summary: DSSI version of the Wolf Shaper plugin.
-Group:   Applications/Multimedia
 
 %package -n lv2-%{name}
 Summary: LV2 version of the Wolf Shaper plugin.
-Group:   Applications/Multimedia
 
 %package -n vst-%{name}
 Summary: VST version of the Wolf Shaper plugin.
-Group:   Applications/Multimedia
 
 %description -n dssi-%{name}
 DSSI version of the Wolf Shaper plugin.
@@ -64,17 +52,24 @@ VST version of the Wolf Shaper plugin.
 Wolf Shaper is a waveshaper plugin with a graph editor.
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %ifarch x86_64
 sed -i -e "s/\$(PREFIX)\/lib/\$(PREFIX)\/lib64/g" Makefile
 %endif
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr %{?_smp_mflags} all
+
+%make_build PREFIX=/usr all
 
 %install
-make DESTDIR=%{buildroot} PREFIX=/usr install
+
+%make_install PREFIX=/usr
+
+%files
+%doc README.md
+%license LICENSE
+%{_bindir}/*
 
 %files -n lv2-%{name}
 %{_libdir}/lv2/*
@@ -86,5 +81,8 @@ make DESTDIR=%{buildroot} PREFIX=/usr install
 %{_libdir}/vst/*
 
 %changelog
+* Fri Oct 2 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.8-1
+- update to 0.1.8-1
+
 * Tue Apr 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.7-1
 - Initial version of the spec file

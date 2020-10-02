@@ -8,7 +8,7 @@
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
 Version: 3.11.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPL
 URL:     http://supercollider.sourceforge.net/
 
@@ -96,30 +96,25 @@ sed -i -e "280,281d" CMakeLists.txt
 # remove all git directories
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
 
-mkdir build
-pushd build
-
 %ifarch x86_64
-%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix} ..
+%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %else
-%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix} ..
+%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %endif
 
-%make_build
-popd
+%cmake_build
 
 %install
 
-pushd build
-%make_install
+%cmake_install
 
 # install external libraries needed to build external ugens
 mkdir -p $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries
-cd ../external_libraries/
+cd external_libraries/
 # We use boost system, so, don't decompress supercollider boost ...
 #tar cf - boost* nova* | (cd $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries; tar xpf -)
 tar cf - nova* | (cd $RPM_BUILD_ROOT%{_includedir}/SuperCollider/external_libraries; tar xpf -)
-popd
+cd ..
 # install the version file
 install -m0644 SCVersion.txt $RPM_BUILD_ROOT%{_includedir}/SuperCollider/
 
@@ -170,6 +165,9 @@ install -m0644 SCVersion.txt $RPM_BUILD_ROOT%{_includedir}/SuperCollider/
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.1-3
+- fix for Fedora 33
+
 * Sun Aug 23 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.1-1
 - update to 3.11.1
 
