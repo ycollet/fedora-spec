@@ -81,5 +81,8 @@ sed -i -e "s/\$(PREFIX)\/lib/\$(PREFIX)\/lib64/g" Makefile
 %{_libdir}/vst/*
 
 %changelog
+* Fri Oct 2 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.8-1
+- update to 0.1.8-1
+
 * Tue Apr 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.7-1
 - Initial version of the spec file
