@@ -3,14 +3,18 @@
 
 Name:    traverso
 Version: 0.49.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Traverso: A Multitrack Audio Recorder and Editor
 URL:     https://savannah.nongnu.org/projects/traverso/
-Source0: traverso-0.49.6.tar.gz
-Group:   Applications/Multimedia
 License: GPLv2+
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# git clone https://git.savannah.nongnu.org/git/traverso.git
+# cd traverso
+# find . -name .git -exec rm -rf {} \;
+# cd ..
+# tar cvfz traverso.tar.gz traverso
+
+Source0: traverso.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -34,25 +38,25 @@ BuildRequires: lilv-devel
 Traverso: A Multitrack Audio Recorder and Editor
 
 %prep
-%setup -qn %{name}-%{version}
+%autosetup -n %{name}
 
 %build
 
-mkdir build
-cd build
-%cmake ..
+%cmake
 
-make VERBOSE=1 %{?_smp_mflags}
+%cmake_build
 
 %install
 
-cd build
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 %files
 %{_bindir}/*
 
 %changelog
+* Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.49.6-2
+- fix for fedora 22
+
 * Fri May 3 2019 Yann Collette <ycollette.nospam@free.fr> - 0.49.6-1
 - update to 0.49.6
 
