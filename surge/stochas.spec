@@ -2,7 +2,7 @@
 
 Name:    stochas
 Version: 1.3.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A VST3 MIDI sequencer
 License: GPLv3
 
@@ -41,24 +41,25 @@ sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
 %build
 
-%set_build_flags
+%cmake -DCMAKE_STRIP="true" 
 
-mkdir build
-cd build
-
-%cmake cmake -DCMAKE_STRIP="true" -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_CXX_FLAGS="$CXXFLAGS" ..
-
-%make_build
+%cmake_build
 
 %install 
 
-cd build
-
 %__install -m 755 -d %{buildroot}%{_libdir}/vst3/
+%if 0%{?fedora} < 33
 %__install -m 644 -p stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
+%else
+%__install -m 644 -p %{_host}/stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
+%endif
 
 %__install -m 755 -d %{buildroot}%{_bindir}/
+%if 0%{?fedora} < 33
 %__install -m 644 -p stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
+%else
+%__install -m 644 -p %{_host}/stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
+%endif
 
 %files
 %doc README.md
@@ -69,6 +70,9 @@ cd build
 %{_libdir}/vst3/*
 
 %changelog
+* Sat Oct 3 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.3-2
+- fix for fedora 33
+
 * Sun Sep 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.3-1
 - update to 1.3.3
 

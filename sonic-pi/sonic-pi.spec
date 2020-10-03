@@ -12,12 +12,11 @@ Release: 6%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
+
 Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
 Source1: osmid.tar.gz
 
 # Use source.sh to get source files
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -54,7 +53,7 @@ creativity in the learning process and gives users the control to turn their
 sonic ideas into reality.
 
 %prep
-%setup -qn %{name}-%{version} 
+%autosetup -n %{name}-%{version} 
 
 cd app/server/native/
 tar xvfz %{SOURCE1}
