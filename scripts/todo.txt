@@ -1,14 +1,11 @@
 To be fixed:
 
-libcoverart		 -> cmake + Werror pb
 rivendell		 -> libcoverart
 adlplug			 -> cmake + juce
 ensemble-chorus	   	 -> cmake + juce
-BespokeSynth		 -> JUCE was missing + lto
+BespokeSynth		 -> JUCE was missing + lto -> to fix directly on fedora 33 ...
 stochas			 -> lto
 buzztrax		 -> fluidsynth pb
-dragonfly-revert   	 -> DGL link pb
-zam			 -> DGL link pb
 fugio		   	 -> cmake + build pb
 konfyt		   	 -> Carla build pb
 midimonster	   	 -> lua pb

@@ -3,8 +3,6 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%define _lto_cflags %{nil}
-
 Name:    BespokeSynth
 Version: 0.0.1
 Release: 5%{?dist}
@@ -19,6 +17,7 @@ Source2: Makefile.bespokesynth
 Source3: Bespoke-GLSLfix.sh
 
 BuildRequires: gcc gcc-c++
+BuildRequires: make
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: mesa-libGL-devel
