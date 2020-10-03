@@ -36,9 +36,13 @@ Zam VST plugin
 %autosetup -n zam-plugins-3.13
 
 %build
+
+%define _lto_cflags %{nil}
+
 %make_build PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags" all
 
 %install 
+
 %make_install PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags" install
 
 %files

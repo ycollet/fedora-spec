@@ -1,6 +1,6 @@
 Name:    dragonfly-reverb
 Version: 3.2.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: DragonFly reverberation plugin
 
 License: GPLv2+
@@ -25,6 +25,8 @@ A free hall-style reverb based on freeverb3 algorithms
 %autosetup -n %{name}
 
 %build
+
+%define _lto_cflags %{nil}
 
 %make_build SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags"
 
@@ -67,6 +69,9 @@ cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 %{_datadir}/pixmaps/*
 
 %changelog
+* Sat Oct 3 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.1-3
+- update to 3.2.1-3 - fix for fedora 33
+
 * Fri Aug 28 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.1-2
 - update to 3.2.1-2
 
