@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 afc66be1441d0119b5c8ff6e612b0e83e87610d2
+%global commit0 83f318d3c43892af7627e25ef12dc656d6f478a0
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -60,11 +60,6 @@ Roland JP8000/JP8080 but has since widened is scope.
 
 %prep
 %autosetup -n psi-plugins-%{commit0}
-
-# For Fedora 29
-%if 0%{?fedora} >= 29
-  find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
-%endif
 
 %build
 
