@@ -2,9 +2,10 @@ To be fixed:
 
 adlplug			 -> cmake + juce
 ensemble-chorus	   	 -> cmake + juce
-BespokeSynth		 -> JUCE was missing + lto -> to fix directly on fedora 33 ...
+BespokeSynth		 -> JUCE was missing + lto-wrapper -> to fix directly on fedora 33 ...
+stochas			 -> lto-wrapper pb -> to fix directly on fedora 33 ...
 buzztrax		 -> fluidsynth pb
-fugio		   	 -> cmake + build pb
+fugio		   	 -> cmake + build pb -> opencv const pb
 konfyt		   	 -> Carla build pb
 midimonster	   	 -> lua pb
 miniaudicle	   	 -> qscintilla was missing
@@ -16,6 +17,12 @@ zrythm			 -> doc fails to build
 sonic-pi		 -> cmake - check ruby version
 
 Fugio:
+
+You can change the code in image_aug_default.cc.
+CV_RGB2GRAY -------> cv::COLOR_RGB2GRAY
+CV_GRAY2BGR -------> cv::COLOR_GRAY2BGR
+CV_BGR2HLS -------> cv::COLOR_BGR2HLS
+
 /home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:65:42: error: 'CV_RGB2GRAY' was not declared in this scope
    65 |    cv::cvtColor( MatSrc, pNode->mMatImg, CV_RGB2GRAY );
       |                                          ^~~~~~~~~~~
