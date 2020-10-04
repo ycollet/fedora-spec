@@ -1,5 +1,5 @@
 Name:    jamulus
-Version: 3.5.11
+Version: 3.5.12
 Release: 7%{?dist}
 Summary: Internet jam session software
 URL:     https://github.com/corrados/jamulus/
@@ -78,6 +78,9 @@ desktop-file-install                         \
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sun Oct 4 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.12-7
+- update to 3.5.12-7
+
 * Sun Sep 20 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.11-7
 - update to 3.5.11-7
 
