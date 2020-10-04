@@ -16,7 +16,6 @@ License: LGPL-3.0
 
 Source0: Fugio.tar.gz
 Patch0:  fugio-0001-fix-opencv.patch
-Patch1:  fugio-0002-fix-opencv-2.patch
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: alsa-lib-devel
@@ -60,8 +59,6 @@ sed -i -e "s/Fugio;//g" FugioApp/fugio.desktop
 %install
 
 %cmake_install
-
-rm %{buildroot}%{_includedir}/.gitignore
 
 desktop-file-install --vendor '' \
         --add-category=Audio \

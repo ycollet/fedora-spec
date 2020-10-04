@@ -1,17 +1,4 @@
-From 2a48eb99323631a8790eb8dfe199b40814ce7222 Mon Sep 17 00:00:00 2001
-From: Yann Collette <ycollette.nospam@free.fr>
-Date: Sun, 4 Oct 2020 14:15:41 +0200
-Subject: [PATCH] fix opencv
-
----
- FugioApp/contextwidgetprivate.cpp   |  1 +
- plugins/OpenCV/grayscalenode.cpp    |  8 ++++----
- plugins/OpenCV/imageconvertnode.cpp | 32 ++++++++++++++---------------
- plugins/OpenCV/inpaintnode.cpp      |  2 +-
- 4 files changed, 22 insertions(+), 21 deletions(-)
-
-diff --git a/FugioApp/contextwidgetprivate.cpp b/FugioApp/contextwidgetprivate.cpp
-index f4544e8..311462b 100644
+unchanged:
 --- a/FugioApp/contextwidgetprivate.cpp
 +++ b/FugioApp/contextwidgetprivate.cpp
 @@ -4,6 +4,7 @@
@@ -22,11 +9,15 @@ index f4544e8..311462b 100644
  
  #include "app.h"
  #include "contextview.h"
-diff --git a/plugins/OpenCV/grayscalenode.cpp b/plugins/OpenCV/grayscalenode.cpp
-index fc11acc..7a36606 100644
---- a/plugins/OpenCV/grayscalenode.cpp
+diff -u b/plugins/OpenCV/grayscalenode.cpp b/plugins/OpenCV/grayscalenode.cpp
+--- b/plugins/OpenCV/grayscalenode.cpp
 +++ b/plugins/OpenCV/grayscalenode.cpp
-@@ -66,22 +66,22 @@ void GrayscaleNode::conversion( GrayscaleNode *pNode )
+@@ -62,26 +62,26 @@
+ 	switch( SrcImg.format() )
+ 	{
+ 		case fugio::ImageFormat::RGB8:
+-			cv::cvtColor( MatSrc, pNode->mMatImg, CV_RGB2GRAY );
++			cv::cvtColor( MatSrc, pNode->mMatImg, cv::COLOR_RGB2GRAY );
  			break;
  
  		case fugio::ImageFormat::BGR8:
@@ -53,8 +44,7 @@ index fc11acc..7a36606 100644
  //			break;
  
  		default:
-diff --git a/plugins/OpenCV/imageconvertnode.cpp b/plugins/OpenCV/imageconvertnode.cpp
-index 6505d21..1209b77 100644
+unchanged:
 --- a/plugins/OpenCV/imageconvertnode.cpp
 +++ b/plugins/OpenCV/imageconvertnode.cpp
 @@ -128,11 +128,11 @@ void ImageConvertNode::inputsUpdated( qint64 pTimeStamp )
@@ -165,8 +155,7 @@ index 6505d21..1209b77 100644
  					break;
  
  				default:
-diff --git a/plugins/OpenCV/inpaintnode.cpp b/plugins/OpenCV/inpaintnode.cpp
-index 3ca585e..676150c 100644
+unchanged:
 --- a/plugins/OpenCV/inpaintnode.cpp
 +++ b/plugins/OpenCV/inpaintnode.cpp
 @@ -72,7 +72,7 @@ void InPaintNode::inputsUpdated( qint64 pTimeStamp )
@@ -178,6 +167,3 @@ index 3ca585e..676150c 100644
  
  	cv::inpaint( MatTmp, MatMsk, mMatImg, mPinInputRadius->value().toDouble(), cv::INPAINT_NS );
  
--- 
-2.26.2
-
