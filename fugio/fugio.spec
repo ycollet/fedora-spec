@@ -15,6 +15,8 @@ License: LGPL-3.0
 # tar cvfz Fugio.tar.gz Fugio/*
 
 Source0: Fugio.tar.gz
+Patch0:  fugio-0001-fix-opencv.patch
+Patch1:  fugio-0002-fix-opencv-2.patch
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: alsa-lib-devel
@@ -41,7 +43,7 @@ BuildRequires: eigen3-devel
 Fugio is an open visual programming system for building digital art and creative projects quickly, with no programming experience required
 
 %prep
-%autosetup -n Fugio
+%autosetup -p1 -n Fugio
 
 %ifarch x86_64 amd64
 sed -i -e "s/lib\/fugio/lib64\/fugio/g" CMakeLists.txt

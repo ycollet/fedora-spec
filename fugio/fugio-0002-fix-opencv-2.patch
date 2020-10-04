@@ -1,0 +1,25 @@
+From c0ecbaa2514f7d93f8e6ea0cf755d572f1eaa4bd Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sun, 4 Oct 2020 14:27:38 +0200
+Subject: [PATCH] fix opencv 2
+
+---
+ plugins/OpenCV/grayscalenode.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/OpenCV/grayscalenode.cpp b/plugins/OpenCV/grayscalenode.cpp
+index 027cff8..7a36606 100644
+--- a/plugins/OpenCV/grayscalenode.cpp
++++ b/plugins/OpenCV/grayscalenode.cpp
+@@ -62,7 +62,7 @@ void GrayscaleNode::conversion( GrayscaleNode *pNode )
+ 	switch( SrcImg.format() )
+ 	{
+ 		case fugio::ImageFormat::RGB8:
+-			cv::cvtColor( MatSrc, pNode->mMatImg, CV_RGB2GRAY );
++			cv::cvtColor( MatSrc, pNode->mMatImg, cv::COLOR_RGB2GRAY );
+ 			break;
+ 
+ 		case fugio::ImageFormat::BGR8:
+-- 
+2.26.2
+
