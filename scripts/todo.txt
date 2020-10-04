@@ -1,27 +1,29 @@
 To be fixed:
 
-adlplug			 -> cmake + juce
-ensemble-chorus	   	 -> cmake + juce
-BespokeSynth		 -> JUCE was missing + lto-wrapper -> to fix directly on fedora 33 ...
-stochas			 -> lto-wrapper pb -> to fix directly on fedora 33 ...
-buzztrax		 -> fluidsynth pb
-fugio		   	 -> cmake + build pb -> opencv const pb
-konfyt		   	 -> Carla build pb
-midimonster	   	 -> lua pb
-miniaudicle	   	 -> qscintilla was missing
-openFrameworks		 -> mk file pb
-performer		 -> cmake + ui_setlist.h missing
-psi-plugins-doc		 -> fltk-devel missing - #include <Fl/Fl_Menu_Button.h>
-qscintilla		 -> fail to build
-zrythm			 -> doc fails to build
-sonic-pi		 -> cmake - check ruby version
+adlplug		 -> cmake + juce
+ensemble-chorus	 -> cmake + juce
+BespokeSynth	 -> JUCE was missing + lto-wrapper -> to fix directly on fedora 33 ...
+stochas		 -> lto-wrapper pb -> to fix directly on fedora 33 ...
+buzztrax	 -> fluidsynth pb
+fugio		 -> cmake + build pb -> opencv const pb
+konfyt		 -> Carla build pb
+midimonster	 -> lua pb
+miniaudicle	 -> qscintilla was missing
+openFrameworks	 -> mk file pb
+performer	 -> cmake + ui_setlist.h missing
+psi-plugins-doc	 -> fltk-devel missing - #include <Fl/Fl_Menu_Button.h>
+qscintilla	 -> fail to build
+sonic-pi	 -> cmake - check ruby version
+
+psi-plugins:
+Fl/Fl_Menu_Button.h -> FL/Fl_Menu_Button.H
 
 Fugio:
 
 You can change the code in image_aug_default.cc.
 CV_RGB2GRAY -------> cv::COLOR_RGB2GRAY
 CV_GRAY2BGR -------> cv::COLOR_GRAY2BGR
-CV_BGR2HLS -------> cv::COLOR_BGR2HLS
+CV_BGR2HLS  -------> cv::COLOR_BGR2HLS
 
 /home/artelys/rpmbuild/BUILD/Fugio/plugins/OpenCV/grayscalenode.cpp:65:42: error: 'CV_RGB2GRAY' was not declared in this scope
    65 |    cv::cvtColor( MatSrc, pNode->mMatImg, CV_RGB2GRAY );
