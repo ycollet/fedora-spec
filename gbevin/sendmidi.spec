@@ -1,8 +1,6 @@
-%global debug_package %{nil}
-
 Name:    sendmidi
 Version: 1.0.14
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A command line tool to send MIDI event
 License: GPLv3
 
@@ -32,8 +30,7 @@ send MIDI messages to MIDI devices from your computer.
 
 cd Builds/LinuxMakefile
 
-# %make_build STRIP=true CPPFLAGS="%{optflags}"
-%make_build CPPFLAGS="%{optflags}"
+%make_build STRIP=true CPPFLAGS="%{optflags}"
 
 %install 
 
@@ -43,9 +40,14 @@ cd Builds/LinuxMakefile
 %__install -m 755 -p build/sendmidi %{buildroot}/%{_bindir}/
 
 %files
+%doc README.md
+%license COPYING.md
 %{_bindir}/*
 
 %changelog
+* Sun Oct 4 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.14-3
+- fix debug + install
+
 * Thu Jul 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.14-2
 - fix permission
 

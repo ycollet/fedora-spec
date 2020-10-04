@@ -1,8 +1,6 @@
-%global debug_package %{nil}
-
 Name:    receivemidi
 Version: 1.0.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A command line tool to receive MIDI event
 License: GPLv3
 
@@ -32,8 +30,7 @@ receive and monitor MIDI messages from MIDI devices on your computer.
 
 cd Builds/LinuxMakefile
 
-# %make_build STRIP=true CPPFLAGS="%{optflags}"
-%make_build CPPFLAGS="%{optflags}"
+%make_build STRIP=true CPPFLAGS="%{optflags}"
 
 %install 
 
@@ -43,9 +40,14 @@ cd Builds/LinuxMakefile
 %__install -m 755 -p build/receivemidi %{buildroot}/%{_bindir}/
 
 %files
+%doc README.md
+%license COPYING.md
 %{_bindir}/*
 
 %changelog
+* Sun Oct 4 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-3
+- fix debug + install
+
 * Thu Jul 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-2
 - fix permission
 
