@@ -39,23 +39,25 @@ Synthesizer plugin for OPNMIDI (VST/LV2)
 mkdir -p build_adl
 cd build_adl
 
-cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=%{_lib} \
       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
       ..
 
-%make_build PREFIX=/usr
+%make_build
 
 cd ..
 
 mkdir -p build_opn
 cd build_opn
 
-cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=%{_lib} \
       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
       -DADLplug_CHIP=OPN2 \
       ..
 
-%make_build PREFIX=/usr
+%make_build
 
 %install
 
