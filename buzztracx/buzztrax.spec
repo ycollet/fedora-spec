@@ -1,12 +1,13 @@
 Name:           buzztrax
 Version:        0.10.2
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Buzztrax is a music composer similar to tracker applications.
 
 License:        LGPL2.1
 URL:            http://www.buzztrax.org 
 Source0:        http://files.buzztrax.org/releases/%{name}-%{version}.tar.gz
 Patch0:         buzztrax-0001-fix-build.patch
+Patch1:         buzztrax-0002-support-fluidsynth-2.patch
 
 BuildRequires:  gcc gcc-c++ autoconf automake libtool pkgconfig
 BuildRequires:  gstreamer1-devel gstreamer1-plugins-base-devel libxml2-devel
@@ -26,9 +27,7 @@ The %{name}-devel package contains libraries and header files for
 
 %prep
 
-%setup -qn %{name}-%{version}
-
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{version}
 
 #sed -i -e "7/#include \$(top_srcdir)\/Makefile.tests.am/d" Makefile.am
 sed -i -e "71d" Makefile.am
@@ -37,47 +36,36 @@ sed -i -e "71d" Makefile.am
 
 autoreconf
 
-%configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-dllwrapper=no
+%configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-dllwrapper=no --disable-rpath
 
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="%{optflags} -Wno-error"
+%make_build CFLAGS="%{optflags} -Wno-error"
 
 %install
 
-rm -rf $RPM_BUILD_ROOT
-
-%{__make} DESTDIR=%{buildroot} install
-
+%make_install
+%ifarch x86_64
+mv $RPM_BUILD_ROOT/usr/lib/buzztrax-songio $RPM_BUILD_ROOT/usr/lib64/
+%endif
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/libbuzztrax-core.so.1.1.0
-chrpath --delete $RPM_BUILD_ROOT/usr/lib/buzztrax-songio/libbtbsl.so
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/buzztrax-songio/libbtbsl.so
 chrpath --delete $RPM_BUILD_ROOT%{_bindir}/buzztrax-cmd
 chrpath --delete $RPM_BUILD_ROOT%{_bindir}/buzztrax-edit
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libbuzztraxaudio.so
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstfluidsynth.so
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libbuzztraxdec.so
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstbml.so
+chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstsidsyn.so
 
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}-edit.desktop
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}-songio-buzz.desktop
 
-%post
-/bin/touch --no-create %{_datadir}/icons/gnome &>/dev/null || :
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /bin/touch --no-create %{_datadir}/icons/gnome &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/gnome &>/dev/null || :
-fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/gnome &>/dev/null || :
-
 %files
-%license COPYING
 %doc README.md
+%license COPYING
 %{_datadir}/gtk-doc/html/buzztrax-*
 %{_bindir}/buzztrax-cmd
 %{_bindir}/buzztrax-edit
-/usr/lib/buzztrax-songio/*
+%{_libdir}/buzztrax-songio/*
 %{_libdir}/buzztrax
 %{_libdir}/gstreamer-1.0/libbuzztrax*
 %{_libdir}/gstreamer-1.0/libgstbml.*
@@ -113,6 +101,9 @@ fi
 %{_libdir}/pkgconfig/libbuzztrax-ic.pc
 
 %changelog
+* Mon Oct 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.10.2-6
+- Fix for Fedora 33 
+
 * Thu Apr 30 2020 L.L.Robinson <baggypants@fedoraproject.org> - 0.10.2-5
 - Fix for Fedora 
 
