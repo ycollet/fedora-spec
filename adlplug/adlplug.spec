@@ -1,6 +1,6 @@
 Name:    adlplug
 Version: 1.0.2
-Release: 4%{?dist}
+Release: 6%{?dist}
 Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
 License: BSL-1.0
@@ -8,6 +8,7 @@ License: BSL-1.0
 # ./adlplug-source.sh v1.0.2
 
 Source0: ADLplug.tar.gz
+Patch0:  adlplug-0001-fix-JUCE-compilation.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -29,35 +30,32 @@ Synthesizer plugin for OPNMIDI (VST/LV2)
 
 %prep
 
-%setup -qn ADLplug
-
-# For Fedora 29
-%if 0%{?fedora} >= 29
-  sed -i -e "114,125d" thirdparty/JUCE/modules/juce_graphics/colour/juce_PixelFormats.h
-%endif
+%autosetup -p1 -n ADLplug
 
 %build
+
+%set_build_flags
 
 mkdir -p build_adl
 cd build_adl
 
-%cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       ..
+cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
+      -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
+      ..
 
-%make_build
+%make_build PREFIX=/usr
 
 cd ..
 
 mkdir -p build_opn
 cd build_opn
 
-%cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       -DADLplug_CHIP=OPN2 \
-       ..
+cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
+      -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
+      -DADLplug_CHIP=OPN2 \
+      ..
 
-%make_build
+%make_build PREFIX=/usr
 
 %install
 
@@ -105,6 +103,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/icons/hicolor/96x96/apps/OPNplug.png
 
 %changelog
+* Mon Oct 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-5
+- fix for fedora 33
+
 * Wed Aug 5 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-4
 - update to 1.0.2-4
 

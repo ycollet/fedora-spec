@@ -1,29 +1,14 @@
-# Global variables for github repository
-%global commit0 59baeb86b8851f521bc8162e22e3f15061662cc3
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    ensemble-chorus
 Version: 0.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Effect plugin for ensemble-chorus (VST/LV2)
 URL:     https://github.com/jpcima/ensemble-chorus
-Group:   Applications/Multimedia
-
 License: BSL-1.0
 
-# git clone https://github.com/jpcima/ensemble-chorus
-# #git checkout v1.0.1
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz ensemble-chorus.tar.gz ensemble-chorus/*
-# rm -rf ensemble-chorus
+# ./ensemble-chorus-source.sh master
 
 Source0: ensemble-chorus.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch0:  ensemble-chorus-0001-fix-JUCE-compilation.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -39,12 +24,8 @@ Effect plugin for ensemble-chorus (VST/LV2)
 
 %prep
 
-%setup -qn ensemble-chorus
+%autosetup -p1 -n ensemble-chorus
 
-# For Fedora 29
-%if 0%{?fedora} >= 29
-  sed -i -e "114,125d" thirdparty/JUCE/modules/juce_graphics/colour/juce_PixelFormats.h
-%endif
 %ifarch x86_64
   sed -i -e "s/lib\/lv2/lib64\/lv2/g" CMakeLists.txt
   sed -i -e "s/lib\/vst/lib64\/vst/g" CMakeLists.txt
@@ -54,45 +35,22 @@ sed -i -e "s/AudioMidi;//g" resources/desktop/ensemble_chorus.desktop
 
 %build
 
-mkdir -p build
-cd build
-
 %cmake -DCMAKE_INSTALL_LIBDIR=%{_lib} \
-       -DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-       ..
+       -DLIBEXEC_INSTALL_DIR=%{_libexecdir}
 
-make VERBOSE=1 %{?_smp_mflags}
-
-cd ..
+%cmake_build
 
 %install
 
-cd build
-
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/ensemble_chorus.desktop
 
-%post
-
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
 %{_bindir}/*
 %{_libdir}/lv2/*
 %{_libdir}/vst/*
@@ -101,6 +59,8 @@ fi
 %{_datadir}/pixmaps/ensemble_chorus.xpm
 
 %changelog
+* Mon Oct 5 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
+- fix for Fedora 33
 
 * Thu May 30 2019 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - Initial spec file
