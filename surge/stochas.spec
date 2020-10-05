@@ -41,6 +41,8 @@ sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
 %build
 
+%define _lto_cflags %{nil}
+
 %cmake -DCMAKE_STRIP="true" 
 
 %cmake_build
