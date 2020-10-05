@@ -1,8 +1,3 @@
-# Global variables for github repository
-%global commit0 c0bb55ff08faf2f89af947090d1c9bc412927d9f
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    midimonster
 Version: 0.5
 Release: 2%{?dist}
@@ -11,6 +6,7 @@ License: BSD
 URL:     https://github.com/cbdevnet/midimonster
 
 Source0: https://github.com/cbdevnet/midimonster/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:  midimonster-0001-fix-for-lua-54.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -25,7 +21,7 @@ Named for its scary math, the MIDIMonster is a universal control and translation
 tool for multi-channel absolute-value-based control and/or bus protocols.
 
 %prep
-%setup -qn %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 sed -i -e "s/lua53/lua/g" backends/Makefile
 
@@ -38,6 +34,8 @@ sed -i -e "s/lua53/lua/g" backends/Makefile
 %make_install PREFIX=/usr PLUGINS=%{_libdir}/midimonster
 
 %files
+%doc README.md
+%license LICENSE.txt
 %{_bindir}/*
 %{_libdir}/%{name}/*
 %{_datadir}/%{name}/*
