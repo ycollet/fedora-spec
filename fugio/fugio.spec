@@ -16,6 +16,7 @@ License: LGPL-3.0
 
 Source0: Fugio.tar.gz
 Patch0:  fugio-0001-fix-opencv.patch
+Patch1:  fugio-0002-fix-for-lua-5.4.patch
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: alsa-lib-devel
@@ -52,6 +53,8 @@ sed -i -e "s/Fugio;//g" FugioApp/fugio.desktop
 
 %build
 
+%define _lto_cflags %{nil}
+
 %cmake -DCMAKE_BUILD_TYPE=RELEASE
 
 %cmake_build
@@ -59,6 +62,11 @@ sed -i -e "s/Fugio;//g" FugioApp/fugio.desktop
 %install
 
 %cmake_install
+
+# Warning: to be fixed
+# value item "Audio" in key "Categories" in group "Desktop Entry"
+# requires another category to be present among the following categories:
+# AudioVideo
 
 desktop-file-install --vendor '' \
         --add-category=Audio \

@@ -1,0 +1,29 @@
+From a33e5151fa053b6b5d95839331be3c8c454279ac Mon Sep 17 00:00:00 2001
+From: artelys <artelys@localhost.localdomain>
+Date: Mon, 5 Oct 2020 09:39:04 +0200
+Subject: [PATCH] fix for lua 5.4
+
+---
+ plugins/Lua/luanode.cpp | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/plugins/Lua/luanode.cpp b/plugins/Lua/luanode.cpp
+index aee15c2..305ad4d 100644
+--- a/plugins/Lua/luanode.cpp
++++ b/plugins/Lua/luanode.cpp
+@@ -262,12 +262,6 @@ void LuaNode::inputsUpdated( qint64 pTimeStamp )
+ 			mNode->setStatusMessage( "LUA_ERRMEM" );
+ 		}
+ 
+-		if( mCompileStatus == LUA_ERRGCMM )
+-		{
+-			mNode->setStatus( fugio::NodeInterface::Error );
+-			mNode->setStatusMessage( "LUA_ERRGCMM" );
+-		}
+-
+ 		//---------------------------------------------------------------------
+ 		// call the compiled code
+ 
+-- 
+2.28.0
+
