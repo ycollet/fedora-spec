@@ -11,7 +11,7 @@ License: GPLv2+
 URL:     https://github.com/awwbees/BespokeSynth
 
 Source0: https://github.com/awwbees/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: vst.tar.bz2
+Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
 # Replace python-config by python2-config
 Source2: Makefile.bespokesynth
 Source3: Bespoke-GLSLfix.sh
@@ -49,6 +49,8 @@ cp %{SOURCE2} Builds/LinuxMakefile/Makefile
 sed -i -e "s/\.\.\/\.\.\/MacOSX\/build\/Release\/data/\/usr\/share\/BespokeSynth\/data/g" Source/OpenFrameworksPort.cpp
 
 %build
+
+%define _lto_cflags %{nil}
 
 export CURRENTDIR=`pwd`
 cd Builds/LinuxMakefile
