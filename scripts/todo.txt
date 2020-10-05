@@ -1,17 +1,11 @@
 Fedora 33 - To be fixed:
 
-adlplug		-> cmake + juce
-ensemble-chorus	-> cmake + juce
-BespokeSynth	-> JUCE was missing + lto-wrapper -> to fix directly on fedora 33 ...
-stochas		-> lto-wrapper pb -> to fix directly on fedora 33 ...
-fugio           -> /usr/bin/ld: error: lto-wrapper failed -> to fix directly on fedora 33 ...
-buzztrax	-> fluidsynth pb
-konfyt		-> Carla build pb
-midimonster	-> lua pb
-miniaudicle	-> qscintilla was missing
-openFrameworks	-> mk file pb
-performer	-> cmake + ui_setlist.h missing
+BespokeSynth	-> JUCE was missing + lto-wrapper -> to fix directly on fedora 33 ... wait until gcc update
+performer	-> cmake + ui_setlist.h missing - pb cmake 3.18 ...
 qscintilla	-> fail to build for qt4
+miniaudicle	-> qscintilla was missing
+konfyt		-> Carla build pb
+openFrameworks	-> mk file pb
 sonic-pi	-> cmake - check ruby version
 
 Fix debug generation:
