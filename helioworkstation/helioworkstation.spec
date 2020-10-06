@@ -23,8 +23,8 @@ BuildRequires: alsa-lib-devel
 BuildRequires: make
 BuildRequires: desktop-file-utils
 BuildRequires: libcurl-devel
-BuildRequires: freetype-deve
-BuildRequires: libglvnd-devell
+BuildRequires: freetype-devel
+BuildRequires: libglvnd-devel
 BuildRequires: libX11-devel libXft-devel libXrandr-devel libXinerama-devel libXcursor-devel
 
 %description
