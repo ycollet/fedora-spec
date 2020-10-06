@@ -1,23 +1,14 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-# Global variables for github repository
-%global commit0 e9090061125b6ebc587230ac4d88721434e00a73
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    konfyt
 Version: 1.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A patch manager
 URL:     https://github.com/noedigcode/konfyt
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Source0: https://github.com/noedigcode/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/noedigcode/konfyt/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: qt5-qtbase-devel
@@ -39,7 +30,7 @@ which scans the filesystem for and allows quick access to soundfont programs and
 SFZs.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 %ifarch x86_64
 sed -i -e "s/usr\/lib/usr\/lib64/g" konfyt.pro
@@ -50,8 +41,8 @@ sed -i -e "s/\/home\/gideon\/bin\///g" desktopentry/konfyt.desktop
 
 %build
 
-qmake-qt5 konfyt.pro
-make VERBOSE=1 %{?_smp_mflags}
+%qmake-qt5 konfyt.pro
+%make_build
 
 %install
 
@@ -79,18 +70,16 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-update-desktop-database &> /dev/null
-
-%postun
-update-desktop-database &> /dev/null
-
 %files
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 %{_bindir}/*
 %{_datadir}/applications/*
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
+- update for Fedora 33
+
 * Fri Dec 27 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
 - Initial spec file 1.1.0
