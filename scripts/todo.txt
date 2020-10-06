@@ -6,9 +6,6 @@ qscintilla	-> fail to build for qt4
 miniaudicle	-> qscintilla was missing
 sonic-pi	-> cmake - check ruby version
 
-konfyt		-> Carla build pb - bug report submitted - disable the carla plugin for now
-openFrameworks	-> mk file pb -> compiile the patch-release branch
-
 Fix debug generation:
 
 jalv-select/jalv-select.spec
@@ -94,7 +91,6 @@ portalmod/mod-pitchshifter.spec
 portalmod/swh-lv2.spec
 zita/tetraproc.spec
 zita/aeolus.spec
-konfyt/konfyt.spec
 qutecsound/qutecsound.spec
 cm/cm.spec
 din/din.spec
