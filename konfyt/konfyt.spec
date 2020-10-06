@@ -8,6 +8,8 @@ Summary: A patch manager
 URL:     https://github.com/noedigcode/konfyt
 License: GPLv2+
 
+# ./source.sh patch-release
+
 Source0: https://github.com/noedigcode/konfyt/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++ sed
@@ -41,7 +43,7 @@ sed -i -e "s/\/home\/gideon\/bin\///g" desktopentry/konfyt.desktop
 
 %build
 
-%qmake-qt5 konfyt.pro
+%qmake_qt5 CONFIG+=KONFYT_NO_CARLA konfyt.pro 
 %make_build
 
 %install
@@ -79,7 +81,7 @@ desktop-file-install --vendor '' \
 
 %changelog
 * Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
-- update for Fedora 33
+- update for Fedora 33 - disable carla for now ...
 
 * Fri Dec 27 2019 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
 - Initial spec file 1.1.0
