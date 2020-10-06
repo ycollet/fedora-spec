@@ -1,36 +1,19 @@
 # Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
-# Global variables for github repository
-%global commit0 b674f7ec1f41d8f0fcfea86e3d3d3df3e9bdcf36
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    openFrameworks
-Version: 0.11.0.%{shortcommit0}
-Release: 1%{?dist}
+Version: 0.11.0
+Release: 2%{?dist}
 Summary: openFrameworks library / code
 URL:     https://github.com/openframeworks/openFrameworks
-Group:   Applications/Multimedia
 
 License: GPLv2+
 
-# original tarfile can be found here:
-# git clone https://github.com/openframeworks/openFrameworks
-# cd openFrameworks
-# git checkout 0.11.0
-# git submodule init
-# git submodule update
-# ./script/linux/download_libs.sh
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvf openFrameworks.tar.gz openFrameworks/*
-# rm -rf openFrameworks
+# to get the sources:
+# ./source.sh 0.11.0
 
 Source0: openFrameworks.tar.gz
 Source1: of-make-workspace
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: freeimage-devel
@@ -79,7 +62,7 @@ Remeber to regenerate your local workspace using: '/opt/openFrameworks/scripts/o
 If you already have a local workspace, BACKUP YOUR PROJECTS BEFORE generating a new local workspace.
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %build
 
@@ -95,16 +78,16 @@ else
 fi
 
 cd libs/openFrameworksCompiled/project
-%{__make} %{?_smp_mflags} Release
+%make_build Release
 
 cd ../../..
 
 cd apps/projectGenerator/commandLine
-%{__make} %{?_smp_mflags} Release
+%make_build -j1 Release
 
 cd ../../..
 cd libs/openFrameworksCompiled/project
-%{__make} %{?_smp_mflags} Release
+%make_build Release
 
 %install
 
@@ -125,10 +108,14 @@ rm -rf %{buildroot}/opt/openFrameworks/.gitmodules
 rm -rf %{buildroot}/opt/openFrameworks/.travis.yml
 
 %files
-%doc README.md LICENSE.md 
+%doc README.md
+%license LICENSE.md 
 %{_bindir}/*
 /opt/%{name}/*
 
 %changelog
+* Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.11.0-2
+- fix for fedora 33
+
 * Sat May 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.11.0-1
 - initial specfile
