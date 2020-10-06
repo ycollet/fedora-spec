@@ -1,16 +1,11 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 Name:    konfyt
 Version: 1.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A patch manager
 URL:     https://github.com/noedigcode/konfyt
 License: GPLv2+
 
-# ./source.sh patch-release
-
-Source0: https://github.com/noedigcode/konfyt/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: konfyt.tar.gz
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: qt5-qtbase-devel
@@ -32,7 +27,7 @@ which scans the filesystem for and allows quick access to soundfont programs and
 SFZs.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}
 
 %ifarch x86_64
 sed -i -e "s/usr\/lib/usr\/lib64/g" konfyt.pro
@@ -43,7 +38,7 @@ sed -i -e "s/\/home\/gideon\/bin\///g" desktopentry/konfyt.desktop
 
 %build
 
-%qmake_qt5 CONFIG+=KONFYT_NO_CARLA konfyt.pro 
+%qmake_qt5 konfyt.pro 
 %make_build
 
 %install
@@ -80,6 +75,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+- update for Fedora 33 - activate carla  ...
+
 * Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
 - update for Fedora 33 - disable carla for now ...
 
