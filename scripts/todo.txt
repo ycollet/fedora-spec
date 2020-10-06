@@ -4,9 +4,10 @@ BespokeSynth	-> JUCE was missing + lto-wrapper -> to fix directly on fedora 33 .
 performer	-> cmake + ui_setlist.h missing - pb cmake 3.18 ...
 qscintilla	-> fail to build for qt4
 miniaudicle	-> qscintilla was missing
-konfyt		-> Carla build pb
-openFrameworks	-> mk file pb
 sonic-pi	-> cmake - check ruby version
+
+konfyt		-> Carla build pb - bug report submitted - disable the carla plugin for now
+openFrameworks	-> mk file pb -> compiile the patch-release branch
 
 Fix debug generation:
 
