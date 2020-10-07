@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 e636f79ef8994cc080572160fbc757822cce433b
+%global commit0 0d0e01105312713d3ed512d4ab5d342716647f83
 
-%global gittag0 1.1.0
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Valley
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: Valley plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r Valley_plugin/dist/Valley/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Va
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile

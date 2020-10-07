@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 33820a7176d79348a154b027e4e77bcceb9f76f4
+%global commit0 9b5565e06a0f5d7578296686dd804f9adaa84646
 
 %global gittag0 1.0.14
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
