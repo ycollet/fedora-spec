@@ -16,7 +16,11 @@ BuildRequires: make
 BuildRequires: desktop-file-utils
 BuildRequires: libcurl-devel
 BuildRequires: freetype-devel
+%if 0%{?fedora} > 31
 BuildRequires: libglvnd-devel
+%else
+BuildRequires: mesa-libGL-devel
+%endif
 BuildRequires: libX11-devel libXft-devel libXrandr-devel libXinerama-devel libXcursor-devel
 
 %description
