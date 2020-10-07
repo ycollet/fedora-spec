@@ -5,15 +5,7 @@ Summary: An audio sequencer
 URL:     https://github.com/helio-fm/helio-workstation
 License: GPLv2+
 
-# git clone https://github.com/helio-fm/helio-workstation
-# cd helio-workstation
-# git checkout 3.1
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz helio-workstation.tar.gz helio-workstation/
-# rm -rf helio-workstation
+# ./source.sh 3.1
 
 Source0: helio-workstation.tar.gz
 
