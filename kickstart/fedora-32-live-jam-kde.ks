@@ -543,6 +543,8 @@ DISTRHO-Ports
 synthpod
 
 # ladpsa plugins
+ladspa-calf-plugins
+ladspa-caps-plugins
 ladspa-amb-plugins
 ladspa-autotalent-plugins
 ladspa-blop-plugins
@@ -601,6 +603,9 @@ nekobee-dssi
 whysynth-dssi
 xsynth-dssi
 hexter-dssi
+
+# VST3
+vst3-surge
 
 # Zita tools
 zita-at1
