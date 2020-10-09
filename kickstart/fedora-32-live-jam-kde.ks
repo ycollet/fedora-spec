@@ -384,7 +384,8 @@ kernel
 kernel-modules
 kernel-modules-extra
 kernel-tools
-#kernel-rt-mao # YC: livecd-creator doesn't manage kernel-rt-* naming, only kernel-*
+kernel-rt-mao
+# YC: livecd-creator doesn't manage kernel-rt-* naming, only kernel-*
 
 # This was added a while ago, I think it falls into the category of
 # "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
