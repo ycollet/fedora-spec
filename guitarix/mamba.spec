@@ -1,20 +1,12 @@
 Name:    mamba
-Version: 1.5.0
+Version: 1.6.0
 Release: 1%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: GPLv2+
 
 URL:     https://github.com/brummer10/Mamba
 
-# git clone https://github.com/brummer10/Mamba
-# cd Mamba
-# git checkout v1.5
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz Mamba.tar.gz Mamba/*
-# rm -rf Mamba
+# ./mamba_source.sh v1.6
 
 Source0: Mamba.tar.gz
 
@@ -26,6 +18,7 @@ BuildRequires: liblo-devel
 BuildRequires: libsigc++20-devel
 BuildRequires: libsmf-devel
 BuildRequires: fluidsynth-devel
+BuildRequires: alsa-lib-devel
 
 %description
 Virtual Midi Keyboard for Jack Audio Connection Kit
@@ -50,6 +43,9 @@ Virtual Midi Keyboard for Jack Audio Connection Kit
 %{_datadir}/*
 
 %changelog
+* Sat Oct 10 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-1
+- update to 1.6.0-1
+
 * Sat Sep 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-1
 - update to 1.5.0-1
 
