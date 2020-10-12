@@ -5,6 +5,8 @@
 %global commit0 69b6eee667fdd6c69c7fa7b1c87139d125c0573b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
+%global debug_package %{nil}
+
 Name:    sonic-pi
 Version: 3.2.2
 %global gittag0 v%{version}
@@ -55,11 +57,18 @@ sonic ideas into reality.
 %prep
 %autosetup -n %{name}-%{version} 
 
+# Managing shebang
+find . -type f -exec sed -i -e "s|!/usr/bin/env ruby|!/usr/bin/ruby|g" {} \;
+find . -type f -exec sed -i -e "s|!/usr/bin/env bash|!/usr/bin/bash|g" {} \;
+find . -type f -exec sed -i -e "s|!/bin/sh|!/usr/bin/sh|g" {} \;
+find . -type f -exec sed -i -e "s|!/bin/bash|!/usr/bin/bash|g" {} \;
+
 cd app/server/native/
 tar xvfz %{SOURCE1}
 cd osmid
 mkdir build
 cd build
+%set_build_flags
 cmake ..
 make
 cp m2o o2m ..
@@ -90,8 +99,8 @@ lrelease-qt5 SonicPi.pro
 cd ..
 mkdir build
 cd build
-
-%cmake -DCMAKE_BUILD_TYPE=RELEASE ../qt
+%set_build_flags
+cmake -DCMAKE_BUILD_TYPE=RELEASE ../qt
 make
 
 #Build Erlang files
@@ -161,6 +170,9 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugg
    %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/rugged.so
 
 find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
+
+# cleanup
+rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/vendor/parslet/example/email_parser.rb
 
 cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 [Desktop Entry]
