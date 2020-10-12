@@ -32,19 +32,14 @@
 # we actually use the Debian snapshot (.orig tarball) to build the package. Is
 # there a versioning scheme for git packages in RPM land that we should use?
 Name:    purr-data
-Version: 2.14.2
+Version: 2.15.1
 Release: 2%{?dist}
 Summary: Interactive multimedia programming environment (nw.js variant)
 URL:     https://agraef.github.io/purr-data/
 License: GPL
 
-# git clone https://github.com/agraef/purr-data
-# cd purr-data
-# git checkout 2.14.2
-# git submodule init
-# git submodule update
-# cd ..
-# tar cvfz purr-data.tar.gz purr-data
+# ./source.sh <tag>
+# ./source.sh 2.15.1
 
 Source0: purr-data.tar.gz
 Source1: https://dl.nwjs.io/v%{nwjs_version}/nwjs-sdk-v%{nwjs_version}-linux-%{nwjs_arch}.tar.gz
@@ -131,7 +126,8 @@ sed -i -e "s/disis earplug ekext/earplug ekext/g" externals/Makefile
 
 %build
 
-AUTOGEN_LIST="./pd/src/ ./Gem/ ./externals/moocow/gfsm/gfsm/ ./externals/moocow/gfsm/ ./externals/moocow/pdstring/ ./externals/moocow/locale/ ./externals/moocow/deque/ ./externals/moocow/weightmap/ ./externals/moocow/readdir/ ./externals/moocow/sprinkler/ ./externals/moocow/hello/ ./externals/io/hidio/ ./externals/hardware/wiimote/ ./externals/iem/iemmatrix/src/ ./externals/zexy/ ./Gem/extra/pix_artoolkit/"
+AUTOGEN_LIST="./pd/src/ ./Gem/ ./externals/moocow/gfsm/gfsm/ ./externals/moocow/gfsm/ ./externals/moocow/pdstring/ ./externals/moocow/locale/ ./externals/moocow/deque/ ./externals/moocow/weightmap/ ./externals/moocow/readdir/ ./externals/moocow/sprinkler/ ./externals/moocow/hello/ ./externals/io/hidio/ ./externals/hardware/wiimote/ ./externals/iem/iemmatrix/src/ ./Gem/extra/pix_artoolkit/"
+# ./externals/zexy/ has no configure script
 
 for Files in $AUTOGEN_LIST
 do
@@ -258,6 +254,9 @@ chmod a-x %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop
 %{_datadir}/*
 
 %changelog
+* Mon Oct 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.15.1-2
+- update to 2.15.1-2
+
 * Thu Sep 24 2020 Yann Collette <ycollette.nospam@free.fr> - 2.14.2-2
 - update to 2.14.2-2
 
