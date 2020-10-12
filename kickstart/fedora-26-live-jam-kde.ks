@@ -17,7 +17,7 @@ firewall --enabled --service=mdns
 xconfig --startxonboot
 zerombr
 clearpart --all --initlabel
-part / --size 10240 --fstype ext4
+part / --size 8192 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 network --bootproto=dhcp --device=link --activate
 shutdown

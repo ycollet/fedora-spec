@@ -19,7 +19,7 @@ xconfig --startxonboot
 # Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 8192 --fstype="ext4"
+part / --size 8192 --fstype ext4
 services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 shutdown

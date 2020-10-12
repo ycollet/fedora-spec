@@ -1,11 +1,11 @@
 Name:    konfyt
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: A patch manager
 URL:     https://github.com/noedigcode/konfyt
 License: GPLv2+
 
-Source0: konfyt.tar.gz
+Source0: https://github.com/noedigcode/konfyt/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: qt5-qtbase-devel
@@ -27,7 +27,7 @@ which scans the filesystem for and allows quick access to soundfont programs and
 SFZs.
 
 %prep
-%autosetup -n %{name}
+%autosetup -n %{name}-%{version}
 
 %ifarch x86_64
 sed -i -e "s/usr\/lib/usr\/lib64/g" konfyt.pro
@@ -75,6 +75,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Sat Oct 10 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
+- update 1.1.1-3  ...
+
 * Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - update for Fedora 33 - activate carla  ...
 

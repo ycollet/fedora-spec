@@ -19,7 +19,7 @@ xconfig --startxonboot
 # Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 4096 --fstype="ext4"
+part / --size 8192 --fstype ext4
 services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 # Shutdown after installation
@@ -384,7 +384,8 @@ kernel
 kernel-modules
 kernel-modules-extra
 kernel-tools
-#kernel-rt-mao # YC: livecd-creator doesn't manage kernel-rt-* naming, only kernel-*
+kernel-rt-mao
+# YC: livecd-creator doesn't manage kernel-rt-* naming, only kernel-*
 
 # This was added a while ago, I think it falls into the category of
 # "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
@@ -543,6 +544,8 @@ DISTRHO-Ports
 synthpod
 
 # ladpsa plugins
+ladspa-calf-plugins
+ladspa-caps-plugins
 ladspa-amb-plugins
 ladspa-autotalent-plugins
 ladspa-blop-plugins
@@ -601,6 +604,9 @@ nekobee-dssi
 whysynth-dssi
 xsynth-dssi
 hexter-dssi
+
+# VST3
+vst3-surge
 
 # Zita tools
 zita-at1
