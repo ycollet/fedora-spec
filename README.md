@@ -82,6 +82,12 @@ This is the content of the repo conf file found in /etc/yum.repo.d.
 
 To create the LiveCD using livecd-creator:
 
+First: prepare the thirdparty files (GuitarPro files, soundfonts, images):
+```
+$ ./prepare.sh
+```
+This script will download a zip a put everything in /tmp/prepare/ directory.
+
 As a root user:
 ```
 $ livecd-creator --verbose --config=fedora-32-live-jam-kde.ks --fslabel=Audinux --releasever 32
