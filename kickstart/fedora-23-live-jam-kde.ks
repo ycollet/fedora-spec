@@ -159,7 +159,7 @@ mountPersistentHome() {
   # we should make that the real /home.  useful for mtd device on olpc
   if [ -d /home/home ]; then mount --bind /home/home /home ; fi
   [ -x /sbin/restorecon ] && /sbin/restorecon /home
-  if [ -d /home/lescuizines ]; then USERADDARGS="-M" ; fi
+  if [ -d /home/audinux ]; then USERADDARGS="-M" ; fi
 }
 
 findPersistentHome() {
@@ -187,10 +187,10 @@ if [ -n "\$configdone" ]; then
 fi
 
 # add fedora user with no passwd
-action "Adding live user" useradd \$USERADDARGS -c "Live System User" lescuizines
-passwd -d lescuizines > /dev/null
-usermod -aG wheel lescuizines > /dev/null
-usermod -aG jackuser lescuizines > /dev/null
+action "Adding live user" useradd \$USERADDARGS -c "Live System User" audinux
+passwd -d audinux > /dev/null
+usermod -aG wheel audinux > /dev/null
+usermod -aG jackuser audinux > /dev/null
 
 # Remove root password lock
 passwd -d root > /dev/null
@@ -701,23 +701,19 @@ thunderbird
 
 %post --nochroot
 
-mkdir -p $INSTALL_ROOT/home/lescuizines/SoundFonts
-mkdir -p $INSTALL_ROOT/home/lescuizines/GuitarPro
+mkdir -p $INSTALL_ROOT/home/audinux/SoundFonts
+mkdir -p $INSTALL_ROOT/home/audinux/GuitarPro
 
-cp /home/collette/SoundFonts/63mg\ The\ Xioad\ Bank.sf2        $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/SF2/Bass/336-Squierbass.sf2       $INSTALL_ROOT/home/lescuizines/SoundFonts
-cp /home/collette/SoundFonts/SF2/Guitar/Guitar\ Distortion.SF2 $INSTALL_ROOT/home/lescuizines/SoundFonts
-
-cp -r /home/collette/TuxGuitar/GuitarPro/Cake            $INSTALL_ROOT/home/lescuizines/GuitarPro/Cake
-cp -r /home/collette/TuxGuitar/GuitarPro/ChuckBerry      $INSTALL_ROOT/home/lescuizines/GuitarPro/ChuckBerry
-cp /home/collette/SoundFonts/Logo-Bloc-Cuizines-Noir.png $INSTALL_ROOT/usr/share/backgrounds/images/
+cp -r /tmp/prepare/audinux/SoundFonts/*          $INSTALL_ROOT/home/audinux/SoundFonts/
+cp -r /tmp/prepare/audinux/TuxGuitar/GuitarPro/* $INSTALL_ROOT/home/audinux/GuitarPro/
+cp /tmp/prepare/audinux/Images/skulls.jpg        $INSTALL_ROOT/usr/share/backgrounds/images/
 
 %end
 
 %post
 
-if [ ! -d /home/lescuizines/Desktop ]; then
-  mkdir -p /home/lescuizines/Desktop
+if [ ! -d /home/audinux/Desktop ]; then
+  mkdir -p /home/audinux/Desktop
 fi
 
 # Rewrite limits.conf for jack use
@@ -743,16 +739,16 @@ EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-mkdir -p /home/lescuizines/.config/xfce4
+mkdir -p /home/audinux/.config/xfce4
 
-cat > /home/lescuizines/.config/xfce4/helpers.rc << FOE
+cat > /home/audinux/.config/xfce4/helpers.rc << FOE
 MailReader=thunderbird
 FileManager=Thunar
 WebBrowser=firefox
 FOE
 
 # disable screensaver locking (#674410)
-cat >> /home/lescuizines/.xscreensaver << FOE
+cat >> /home/audinux/.xscreensaver << FOE
 mode:           off
 lock:           False
 dpmsEnabled:    False
@@ -762,36 +758,36 @@ FOE
 rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
 
 # deactivate xfce4-panel first-run dialog (#693569)
-mkdir -p /home/lescuizines/.config/xfce4/xfconf/xfce-perchannel-xml
-cp /etc/xdg/xfce4/panel/default.xml /home/lescuizines/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+mkdir -p /home/audinux/.config/xfce4/xfconf/xfce-perchannel-xml
+cp /etc/xdg/xfce4/panel/default.xml /home/audinux/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 
 # Set french keyboard for xfce
-cat >> /home/lescuizines/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml << FOE
+cat >> /home/audinux/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml << FOE
 <?xml version="1.0" encoding="UTF-8"?>
 
 <channel name="keyboard-layout" version="1.0">
   <property name="Default" type="empty">
-    <property name="XkbDisable" type="bool" value="false"/>
-    <property name="XkbLayout" type="string" value="fr"/>
+    <property name="XkbDisable" type="bool"   value="false"/>
+    <property name="XkbLayout"  type="string" value="fr"/>
     <property name="XkbVariant" type="string" value=""/>
   </property>
 </channel>
 FOE
 
 # Set the background image for the main desktop
-# <property name="image-path" type="string" value="/usr/share/backgrounds/xfce/xfce-blue.jpg"/>
+# <property name="image-path"        type="string" value="/usr/share/backgrounds/xfce/xfce-blue.jpg"/>
 # <property name="last-single-image" type="string" value="/usr/share/backgrounds/xfce/xfce-blue.jpg"/>
 
-cat >> /home/lescuizines/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml << FOE
+cat >> /home/audinux/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml << FOE
 <?xml version="1.0" encoding="UTF-8"?>
 
 <channel name="xfce4-desktop" version="1.0">
   <property name="backdrop" type="empty">
     <property name="screen0" type="empty">
-      <property name="monitor0" type="empty">Logo-Bloc-Cuizines-Noir.png
-        <property name="image-path" type="string" value="/usr/share/backgrounds/images/Logo-Bloc-Cuizines-Noir.png"/>
-        <property name="last-image" type="string" value="/usr/share/backgrounds/images/default.png"/>
-        <property name="last-single-image" type="string" value="/usr/share/backgrounds/images/Logo-Bloc-Cuizines-Noir.png"/>
+      <property name="monitor0" type="empty">skulls.jpg
+        <property name="image-path"        type="string" value="/usr/share/backgrounds/images/skulls.jpg"/>
+        <property name="last-image"        type="string" value="/usr/share/backgrounds/images/default.png"/>
+        <property name="last-single-image" type="string" value="/usr/share/backgrounds/images/skulls.jpg"/>
       </property>
     </property>
   </property>
@@ -799,7 +795,7 @@ cat >> /home/lescuizines/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.
 FOE
 
 # set up lightdm autologin
-sed -i 's/^#autologin-user=.*/autologin-user=lescuizines/' /etc/lightdm/lightdm.conf
+sed -i 's/^#autologin-user=.*/autologin-user=audinux/' /etc/lightdm/lightdm.conf
 sed -i 's/^#autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
 #sed -i 's/^#show-language-selector=.*/show-language-selector=true/' /etc/lightdm/lightdm-gtk-greeter.conf
 
@@ -809,18 +805,18 @@ sed -i 's/^#user-session=.*/user-session=xfce/' /etc/lightdm/lightdm.conf
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 
-if [ ! -d /home/lescuizines/Desktop ]; then
-  mkdir /home/lescuizines/Desktop
+if [ ! -d /home/audinux/Desktop ]; then
+  mkdir /home/audinux/Desktop
 fi
 
-cp /usr/share/applications/liveinst.desktop /home/lescuizines/Desktop
+cp /usr/share/applications/liveinst.desktop /home/audinux/Desktop
 
 # and mark it as executable (new Xfce security feature)
-chmod +x /home/lescuizines/Desktop/liveinst.desktop
+chmod +x /home/audinux/Desktop/liveinst.desktop
 
 # this goes at the end after all other changes. 
-chown -R lescuizines:lescuizines /home/lescuizines
-restorecon -R /home/lescuizines
+chown -R audinux:audinux /home/audinux
+restorecon -R /home/audinux
 
 EOF
 
@@ -829,27 +825,27 @@ EOF
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 # Copy some applications on desktop
-cp /usr/share/applications/qjackctl.desktop       /home/lescuizines/Desktop
-cp /usr/share/applications/guitarix.desktop       /home/lescuizines/Desktop
-cp /usr/share/applications/qsynth.desktop         /home/lescuizines/Desktop
-cp /usr/share/applications/yoshimi.desktop        /home/lescuizines/Desktop
-cp /usr/share/applications/sooperlooper.desktop   /home/lescuizines/Desktop
-cp /usr/share/applications/lmms.desktop           /home/lescuizines/Desktop
-cp /usr/share/applications/mscore.desktop         /home/lescuizines/Desktop
-cp /usr/share/applications/qtractor.desktop       /home/lescuizines/Desktop
-cp /usr/share/applications/audacity.desktop       /home/lescuizines/Desktop
-cp /usr/share/applications/tuxguitar.desktop      /home/lescuizines/Desktop
-cp /usr/share/applications/tuxguitar3.desktop     /home/lescuizines/Desktop
-cp /usr/share/applications/xfce4-terminal.desktop /home/lescuizines/Desktop
-cp /usr/share/applications/carla.desktop          /home/lescuizines/Desktop
-cp /usr/share/applications/cadence.desktop        /home/lescuizines/Desktop
-cp /usr/share/applications/ardour4.desktop        /home/lescuizines/Desktop
+cp /usr/share/applications/qjackctl.desktop       /home/audinux/Desktop
+cp /usr/share/applications/guitarix.desktop       /home/audinux/Desktop
+cp /usr/share/applications/qsynth.desktop         /home/audinux/Desktop
+cp /usr/share/applications/yoshimi.desktop        /home/audinux/Desktop
+cp /usr/share/applications/sooperlooper.desktop   /home/audinux/Desktop
+cp /usr/share/applications/lmms.desktop           /home/audinux/Desktop
+cp /usr/share/applications/mscore.desktop         /home/audinux/Desktop
+cp /usr/share/applications/qtractor.desktop       /home/audinux/Desktop
+cp /usr/share/applications/audacity.desktop       /home/audinux/Desktop
+cp /usr/share/applications/tuxguitar.desktop      /home/audinux/Desktop
+cp /usr/share/applications/tuxguitar3.desktop     /home/audinux/Desktop
+cp /usr/share/applications/xfce4-terminal.desktop /home/audinux/Desktop
+cp /usr/share/applications/carla.desktop          /home/audinux/Desktop
+cp /usr/share/applications/cadence.desktop        /home/audinux/Desktop
+cp /usr/share/applications/ardour4.desktop        /home/audinux/Desktop
 
-chmod +x /home/lescuizines/Desktop/*.desktop
+chmod +x /home/audinux/Desktop/*.desktop
 
 # make sure to set the right permissions and selinux contexts
-chown -R lescuizines:lescuizines /home/lescuizines/
-restorecon -R /home/lescuizines/
+chown -R audinux:audinux /home/audinux/
+restorecon -R /home/audinux/
 
 EOF
 
