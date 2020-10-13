@@ -6,6 +6,9 @@ qscintilla	-> fail to build for qt4
 miniaudicle	-> qscintilla was missing
 sonic-pi	-> cmake - check ruby version
 
+Add source.sh file in spec file:
+Source1: source.sh
+
 Fix debug generation:
 
 jalv-select/jalv-select.spec
@@ -53,7 +56,6 @@ openkontroller/eteroj.spec
 zytrax/zytrax.spec
 fluxus/fluxus.spec
 grandorgue/GrandOrgue.spec
-polyphone/polyphone.spec
 iannix/iannix.spec
 veejay/veejay-server.spec
 veejay/veejay-gui.spec
