@@ -1,6 +1,3 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 5f5953d6205c8bba820e8693b380952933574359
 %global gittag0 master
@@ -8,7 +5,7 @@
 
 Name:    polyphone
 Version: 2.2.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A SF2 sound font editor
 URL:     https://polyphone-soundfonts.com/
 License: GPLv2+
@@ -59,7 +56,7 @@ sed -i -e "s/usr\/local/usr\//g" sources/polyphone.pro
 
 cd sources
 
-qmake-qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
+%qmake_qt5 "DEFINES+=USE_LOCAL_RTMIDI USE_LOCAL_QCUSTOMPLOT" polyphone.pro
 %make_build
 
 %install
@@ -99,6 +96,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Tue Oct 13 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-3
+- fix debug build
+
 * Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-2
 - fix for fedora 33
 
