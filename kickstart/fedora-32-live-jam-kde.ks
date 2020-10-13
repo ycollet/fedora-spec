@@ -512,6 +512,7 @@ Rack-v1
 rack-v1-Befaco
 rack-v1-ESeries
 rack-v1-AudibleInstruments
+rack-v1-Fundamental
 
 # guitar
 guitarix
@@ -538,7 +539,6 @@ milkytracker
 # audio-plugins
 calf
 dssi
-#YC jack-rack
 ladspa
 helm
 DISTRHO-Ports
@@ -636,7 +636,6 @@ qastools
 arpage
 realTimeConfigQuickScan
 rtirq
-#YC ladish
 japa
 radium-compressor
 #YC solfege
@@ -724,10 +723,6 @@ thunderbird
 -libfprint                   ## We don't want printer support out of the box.
 -python3-cups                ## We don't want printer support out of the box.
 -system-config-printer-libs  ## We don't want printer support out of the box.
-# -gnu-free-fonts-common       ## Fonts take up space
-# -gnu-free-mono-fonts         ## Fonts take up space
-# -gnu-free-sans-fonts         ## Fonts take up space
-# -gnu-free-serif-fonts        ## Fonts take up space
 -ibus-typing-booster         ## Tab completion in libreoffice and the likes Unneeded
 -libtranslit                 ## Tab
 -libtranslit-m17n            ## Tab
@@ -748,9 +743,9 @@ thunderbird
 mkdir -p $INSTALL_ROOT/home/audinux/SoundFonts
 mkdir -p $INSTALL_ROOT/home/audinux/GuitarPro
 
-cp -r /tmp/prepare/audinux/SoundFont/*           $INSTALL_ROOT/home/audinux/SoundFonts/
-cp -r /tmp/prepare/audinux/TuxGuitar/GuitarPro/* $INSTALL_ROOT/home/audinux/GuitarPro/
-cp /tmp/prepare/audinux/Images/skulls.jpg        $INSTALL_ROOT/usr/share/backgrounds/images/
+cp -r /tmp/prepare/audinux/SoundFonts/*   $INSTALL_ROOT/home/audinux/SoundFonts/
+cp -r /tmp/prepare/audinux/GuitarPro/*    $INSTALL_ROOT/home/audinux/GuitarPro/
+cp /tmp/prepare/audinux/Images/skulls.jpg $INSTALL_ROOT/usr/share/backgrounds/images/
 
 %end
 

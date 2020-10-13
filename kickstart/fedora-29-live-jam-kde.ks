@@ -736,9 +736,9 @@ thunderbird
 mkdir -p $INSTALL_ROOT/home/audinux/SoundFonts
 mkdir -p $INSTALL_ROOT/home/audinux/GuitarPro
 
-cp -r /tmp/preprare/audinux/SoundFont/*           $INSTALL_ROOT/home/audinux/SoundFonts/
-cp -r /tmp/preprare/audinux/TuxGuitar/GuitarPro/* $INSTALL_ROOT/home/audinux/GuitarPro/
-cp /tmp/preprare/audinux/Images/skulls.jpg        $INSTALL_ROOT/usr/share/backgrounds/images/
+cp -r /tmp/prepare/audinux/SoundFonts/*   $INSTALL_ROOT/home/audinux/SoundFonts/
+cp -r /tmp/prepare/audinux/GuitarPro/*    $INSTALL_ROOT/home/audinux/GuitarPro/
+cp /tmp/prepare/audinux/Images/skulls.jpg $INSTALL_ROOT/usr/share/backgrounds/images/
 
 %end
 
