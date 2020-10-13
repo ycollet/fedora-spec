@@ -1,14 +1,15 @@
 Name:    mamba
 Version: 1.6.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
-License: GPLv2+
+License: BSD
 
 URL:     https://github.com/brummer10/Mamba
 
-# ./mamba_source.sh v1.6
+# To get the source code: ./mamba_source.sh v1.6
 
 Source0: Mamba.tar.gz
+Source1: mamba_source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -21,7 +22,27 @@ BuildRequires: fluidsynth-devel
 BuildRequires: alsa-lib-devel
 
 %description
-Virtual Midi Keyboard for Jack Audio Connection Kit
+Mamba is not only a Virtual MIDI keyboard, it's also a MIDI looper.
+It allow you to record, for example a bass loop on one channel and
+then play along on a other channel with a piano or whatever.
+
+You could save your loops to MIDI files if you wish, in any case,
+Mamba save your last record and load it on the next start on default.
+
+Mamba is also a MIDI visualizer, it shows not only what you play,
+it shows as well incoming events. It also allow you to load MIDI files,
+play them in loop and show the output on the keyboard. You could select
+which channel you would monitor on the keyboard.
+You could as well monitor all channels at once.
+
+Mamba includes also support by fluidsynth,
+you could load a soundfont and directly play along.
+
+Mamba will keep it's settings, so once a soundfont is loaded,
+on the next start you could just play along with the keyboard.
+You could load a new soundfont at any time. You could as well
+exit fluidsynth to use Mamba as plain Virtual MIDI keyboard
+with the synth of your choice.
 
 %prep
 %autosetup -n Mamba
@@ -43,6 +64,9 @@ Virtual Midi Keyboard for Jack Audio Connection Kit
 %{_datadir}/*
 
 %changelog
+* Tue Oct 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-2
+- fix description, license and missing file
+
 * Sat Oct 10 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-1
 - update to 1.6.0-1
 
