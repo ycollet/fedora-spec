@@ -32,17 +32,18 @@
 # we actually use the Debian snapshot (.orig tarball) to build the package. Is
 # there a versioning scheme for git packages in RPM land that we should use?
 Name:    purr-data
-Version: 2.15.1
+Version: 2.15.2
 Release: 2%{?dist}
 Summary: Interactive multimedia programming environment (nw.js variant)
 URL:     https://agraef.github.io/purr-data/
 License: GPL
 
-# ./source.sh <tag>
-# ./source.sh 2.15.1
+# ./purr-data-source.sh <tag>
+# ./purr-data-source.sh 2.15.2
 
 Source0: purr-data.tar.gz
 Source1: https://dl.nwjs.io/v%{nwjs_version}/nwjs-sdk-v%{nwjs_version}-linux-%{nwjs_arch}.tar.gz
+Source2: purr-data-source.sh
 
 BuildRequires: gcc-c++
 BuildRequires: autoconf automake libtool bison flex rsync
@@ -254,6 +255,9 @@ chmod a-x %{buildroot}/usr/share/applications/pd-l2ork-debug.desktop
 %{_datadir}/*
 
 %changelog
+* Wed Oct 14 2020 Yann Collette <ycollette.nospam@free.fr> - 2.15.2-2
+- update to 2.15.2-2
+
 * Mon Oct 12 2020 Yann Collette <ycollette.nospam@free.fr> - 2.15.1-2
 - update to 2.15.1-2
 
