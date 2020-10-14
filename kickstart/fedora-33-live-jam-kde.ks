@@ -29,10 +29,10 @@ rootpw --plaintext audinux
 #enable threaded irqs
 bootloader --location=none --append="threadirqs nopti"
 
-repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
-repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
-repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/updates/testing/$releasever/$basearch/
-repo --name=rpmfusion-free-update    --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
+repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/development/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/development/$releasever/Everything/$basearch/os/
+# repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/release/testing/$releasever/$basearch/
+# repo --name=rpmfusion-free-update    --baseurl=http://download1.rpmfusion.org/free/fedora/release/$releasever/$basearch/
 
 repo --name=fedora  --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
@@ -583,7 +583,7 @@ lv2-x42-plugins
 #YC lv2-fomp-plugins
 lv2-sorcer
 lv2-fabla
-lv2-artyfx-plugins
+#FC33 lv2-artyfx-plugins
 lv2-EQ10Q-plugins
 lv2-linuxsampler-plugins
 lv2-mdaEPiano
@@ -602,7 +602,7 @@ rkrlv2
 ams-lv2
 
 # dssi
-nekobee-dssi
+#FC33 nekobee-dssi
 whysynth-dssi
 xsynth-dssi
 hexter-dssi
@@ -627,7 +627,7 @@ mscore
 lilypond
 
 # audio utilities
-jamin
+#FC33 jamin
 lash
 jack_capture
 jaaa
@@ -656,11 +656,11 @@ rakarrack
 
 #language
 chuck
-miniaudicle
+#FC33 miniaudicle
 supercollider
 supercollider-sc3-plugins
 supercollider-vim
-sonic-pi
+#FC33 sonic-pi
 lmms-mao
 faust
 faust-tools
