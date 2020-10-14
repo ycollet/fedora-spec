@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 f28619c9cab82cc1550f3eba55239d8517f60f5a
+%global commit0 fa33bb451f5c6816f3663e7dbde416d7ef5f56e1
 
-%global gittag0 1.1.0
+%global gittag0 1.2.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-GrandeModular
-Version: 1.1.0
+Version: 1.2.0
 Release: 3%{?dist}
 Summary: GrandeModular plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r GrandeModular_plugin/dist/GrandeModular/* %{buildroot}%{_libexecdir}/Rack1
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
 - initial specfile

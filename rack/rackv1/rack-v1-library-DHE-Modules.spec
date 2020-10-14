@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 76590d4fa0f6522d5524a476b59c8de603d4b602
+%global commit0 e1e9b226601917cba0d21e792fc9f5e4e9baa022
 
-%global gittag0 1.2.0
+%global gittag0 1.3.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-DHE-Modules
-Version: 1.2.0
+Version: 1.3.0
 Release: 3%{?dist}
 Summary: DHE-Modules plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r DHE-Modules_plugin/dist/DHE-Modules/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
 - initial specfile
