@@ -288,8 +288,8 @@ FOE
 if [ -n "\$xdriver" ]; then
    cat > /etc/X11/xorg.conf.d/00-xdriver.conf <<FOE
 Section "Device"
-	Identifier	"Videocard0"
-	Driver	"\$xdriver"
+    Identifier "Videocard0"
+    Driver "\$xdriver"
 EndSection
 FOE
 fi
