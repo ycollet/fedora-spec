@@ -1,5 +1,5 @@
 Name:    konfyt
-Version: 1.1.1
+Version: 1.1.2
 Release: 3%{?dist}
 Summary: A patch manager
 URL:     https://github.com/noedigcode/konfyt
@@ -75,6 +75,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Wed Oct 14 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.2-3
+- update to 1.1.2-3 
+
 * Sat Oct 10 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - update 1.1.1-3  ...
 
