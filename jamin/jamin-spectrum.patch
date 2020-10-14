@@ -1,0 +1,397 @@
+diff -rupN jamin-0.95.0.old/jam-ui.glade jamin-0.95.0/jam-ui.glade
+--- jamin-0.95.0.old/jam-ui.glade	2008-12-02 22:22:03.000000000 -0500
++++ jamin-0.95.0/jam-ui.glade	2010-02-10 01:39:40.000000000 -0500
+@@ -1695,7 +1695,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label132">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">31</property>
++						      <property name="label" translatable="yes">31.5</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -1763,7 +1763,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label133">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">39</property>
++						      <property name="label" translatable="yes">40</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -1899,7 +1899,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label135">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">62</property>
++						      <property name="label" translatable="yes">63</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -1967,7 +1967,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label136">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">79</property>
++						      <property name="label" translatable="yes">80</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2171,7 +2171,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label139">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">158</property>
++						      <property name="label" translatable="yes">160</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2307,7 +2307,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label141">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">251</property>
++						      <property name="label" translatable="yes">250</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2375,7 +2375,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label142">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">317</property>
++						      <property name="label" translatable="yes">315</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2511,7 +2511,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label144">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">503</property>
++						      <property name="label" translatable="yes">500</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2579,7 +2579,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label145">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">634</property>
++						      <property name="label" translatable="yes">630</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2783,7 +2783,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label148">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">1k2</property>
++						      <property name="label" translatable="yes">1k25</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -2851,7 +2851,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label149">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">1k5</property>
++						      <property name="label" translatable="yes">1k6</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -3055,7 +3055,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label151">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">3k2</property>
++						      <property name="label" translatable="yes">3k15</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -3259,7 +3259,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label154">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">6k</property>
++						      <property name="label" translatable="yes">6k3</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -3463,7 +3463,7 @@
+ 						  <child>
+ 						    <widget class="GtkLabel" id="label157">
+ 						      <property name="visible">True</property>
+-						      <property name="label" translatable="yes">12k</property>
++						      <property name="label" translatable="yes">12k5</property>
+ 						      <property name="use_underline">False</property>
+ 						      <property name="use_markup">False</property>
+ 						      <property name="justify">GTK_JUSTIFY_LEFT</property>
+diff -rupN jamin-0.95.0.old/src/callbacks.c jamin-0.95.0/src/callbacks.c
+--- jamin-0.95.0.old/src/callbacks.c	2008-12-02 22:22:03.000000000 -0500
++++ jamin-0.95.0/src/callbacks.c	2010-02-10 01:39:40.000000000 -0500
+@@ -28,6 +28,7 @@
+ #include <string.h>
+ #include <gtk/gtk.h>
+ #include <gdk/gdkkeysyms.h>
++#include <locale.h>
+ 
+ 
+ #include "main.h"
+@@ -2758,14 +2759,21 @@ on_eqb_value_changed                   (
+   char *freq = NULL;
+   char *amp = NULL;
+   int th, hu, val;
++  char buffer[5];
++  struct lconv *ptr;
++  char *decimal;
+ 
+   th = 0;
+   hu = 0;
+   val = 0;
++  ptr = localeconv();
++  decimal = ptr->decimal_point;
++
+   if (strchr (gtk_label_get_text (GTK_LABEL (range)), 'k'))
+     {
+       sscanf (gtk_label_get_text (GTK_LABEL (range)), "%dk%d", &th, &hu);
+-      val = th * 1000 + hu * 100;
++      sprintf(buffer,"%d%s%d", th, decimal, hu);
++      val = (int) (atof(buffer) * 1000);
+     }
+   else
+     {
+@@ -2813,14 +2821,21 @@ on_eqbl_enter_notify_event             (
+ {
+   char *freq = NULL;
+   int th, hu, val;
++  char buffer[5];
++  struct lconv *ptr;
++  char *decimal;
+ 
+   th = 0;
+   hu = 0;
+   val = 0;
++  ptr = localeconv();
++  decimal = ptr->decimal_point;
++
+   if (strchr (gtk_label_get_text (GTK_LABEL (widget)), 'k'))
+     {
+       sscanf (gtk_label_get_text (GTK_LABEL (widget)), "%dk%d", &th, &hu);
+-      val = th * 1000 + hu * 100;
++      sprintf(buffer,"%d%s%d", th, decimal, hu);
++      val = (int) (atof(buffer) * 1000);
+     }
+   else
+     {
+diff -rupN jamin-0.95.0.old/src/hdeq.c jamin-0.95.0/src/hdeq.c
+--- jamin-0.95.0.old/src/hdeq.c	2007-07-01 11:33:18.000000000 -0400
++++ jamin-0.95.0/src/hdeq.c	2010-02-10 01:39:40.000000000 -0500
+@@ -1423,7 +1423,7 @@ void hdeq_curve_motion (GdkEventMotion *
+             (double) EQ_curve_height) * EQ_curve_range_y) + 
+             EQ_gain_lower;
+ 
+-        s_gain = -(EQ_SPECTRUM_RANGE - (((((double) EQ_curve_height - 
++        s_gain = 8 -(EQ_SPECTRUM_RANGE - (((((double) EQ_curve_height - 
+             (double) y) / (double) EQ_curve_height) * EQ_SPECTRUM_RANGE)));
+ 
+ 	coords = g_strdup_printf(_("%dHz , EQ : %.1fdb , Spectrum : %ddb"), NINT
+diff -rupN jamin-0.95.0.old/src/interface.c jamin-0.95.0/src/interface.c
+--- jamin-0.95.0.old/src/interface.c	2008-12-02 22:22:03.000000000 -0500
++++ jamin-0.95.0/src/interface.c	2010-02-10 01:39:40.000000000 -0500
+@@ -1311,7 +1311,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb2), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb2), TRUE);
+ 
+-  label132 = gtk_label_new (_("31"));
++  label132 = gtk_label_new (_("31.5"));
+   gtk_widget_set_name (label132, "label132");
+   gtk_widget_show (label132);
+   gtk_box_pack_start (GTK_BOX (vbox52), label132, FALSE, FALSE, 0);
+@@ -1333,7 +1333,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb3), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb3), TRUE);
+ 
+-  label133 = gtk_label_new (_("39"));
++  label133 = gtk_label_new (_("40"));
+   gtk_widget_set_name (label133, "label133");
+   gtk_widget_show (label133);
+   gtk_box_pack_start (GTK_BOX (vbox53), label133, FALSE, FALSE, 0);
+@@ -1377,7 +1377,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb5), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb5), TRUE);
+ 
+-  label135 = gtk_label_new (_("62"));
++  label135 = gtk_label_new (_("63"));
+   gtk_widget_set_name (label135, "label135");
+   gtk_widget_show (label135);
+   gtk_box_pack_start (GTK_BOX (vbox55), label135, FALSE, FALSE, 0);
+@@ -1399,7 +1399,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb6), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb6), TRUE);
+ 
+-  label136 = gtk_label_new (_("79"));
++  label136 = gtk_label_new (_("80"));
+   gtk_widget_set_name (label136, "label136");
+   gtk_widget_show (label136);
+   gtk_box_pack_start (GTK_BOX (vbox56), label136, FALSE, FALSE, 0);
+@@ -1465,7 +1465,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb9), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb9), TRUE);
+ 
+-  label139 = gtk_label_new (_("158"));
++  label139 = gtk_label_new (_("160"));
+   gtk_widget_set_name (label139, "label139");
+   gtk_widget_show (label139);
+   gtk_box_pack_start (GTK_BOX (vbox59), label139, FALSE, FALSE, 0);
+@@ -1509,7 +1509,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb11), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb11), TRUE);
+ 
+-  label141 = gtk_label_new (_("251"));
++  label141 = gtk_label_new (_("250"));
+   gtk_widget_set_name (label141, "label141");
+   gtk_widget_show (label141);
+   gtk_box_pack_start (GTK_BOX (vbox61), label141, FALSE, FALSE, 0);
+@@ -1531,7 +1531,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb12), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb12), TRUE);
+ 
+-  label142 = gtk_label_new (_("317"));
++  label142 = gtk_label_new (_("315"));
+   gtk_widget_set_name (label142, "label142");
+   gtk_widget_show (label142);
+   gtk_box_pack_start (GTK_BOX (vbox62), label142, FALSE, FALSE, 0);
+@@ -1575,7 +1575,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb14), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb14), TRUE);
+ 
+-  label144 = gtk_label_new (_("503"));
++  label144 = gtk_label_new (_("500"));
+   gtk_widget_set_name (label144, "label144");
+   gtk_widget_show (label144);
+   gtk_box_pack_start (GTK_BOX (vbox64), label144, FALSE, FALSE, 0);
+@@ -1597,7 +1597,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb15), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb15), TRUE);
+ 
+-  label145 = gtk_label_new (_("634"));
++  label145 = gtk_label_new (_("630"));
+   gtk_widget_set_name (label145, "label145");
+   gtk_widget_show (label145);
+   gtk_box_pack_start (GTK_BOX (vbox65), label145, FALSE, FALSE, 0);
+@@ -1663,7 +1663,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb18), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb18), TRUE);
+ 
+-  label148 = gtk_label_new (_("1k2"));
++  label148 = gtk_label_new (_("1k25"));
+   gtk_widget_set_name (label148, "label148");
+   gtk_widget_show (label148);
+   gtk_box_pack_start (GTK_BOX (vbox68), label148, FALSE, FALSE, 0);
+@@ -1685,7 +1685,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb19), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb19), TRUE);
+ 
+-  label149 = gtk_label_new (_("1k5"));
++  label149 = gtk_label_new (_("1k6"));
+   gtk_widget_set_name (label149, "label149");
+   gtk_widget_show (label149);
+   gtk_box_pack_start (GTK_BOX (vbox69), label149, FALSE, FALSE, 0);
+@@ -1751,7 +1751,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb22), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb22), TRUE);
+ 
+-  label151 = gtk_label_new (_("3k2"));
++  label151 = gtk_label_new (_("3k15"));
+   gtk_widget_set_name (label151, "label151");
+   gtk_widget_show (label151);
+   gtk_box_pack_start (GTK_BOX (vbox71), label151, FALSE, FALSE, 0);
+@@ -1817,7 +1817,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb25), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb25), TRUE);
+ 
+-  label154 = gtk_label_new (_("6k"));
++  label154 = gtk_label_new (_("6k3"));
+   gtk_widget_set_name (label154, "label154");
+   gtk_widget_show (label154);
+   gtk_box_pack_start (GTK_BOX (vbox74), label154, FALSE, FALSE, 0);
+@@ -1883,7 +1883,7 @@ create_window1 (void)
+   gtk_scale_set_draw_value (GTK_SCALE (eqb28), FALSE);
+   gtk_range_set_inverted (GTK_RANGE (eqb28), TRUE);
+ 
+-  label157 = gtk_label_new (_("12k"));
++  label157 = gtk_label_new (_("12k5"));
+   gtk_widget_set_name (label157, "label157");
+   gtk_widget_show (label157);
+   gtk_box_pack_start (GTK_BOX (vbox77), label157, FALSE, FALSE, 0);
+diff -rupN jamin-0.95.0.old/src/interface.c.rej jamin-0.95.0/src/interface.c.rej
+--- jamin-0.95.0.old/src/interface.c.rej	1969-12-31 19:00:00.000000000 -0500
++++ jamin-0.95.0/src/interface.c.rej	2010-02-10 01:39:40.000000000 -0500
+@@ -0,0 +1,11 @@
++--- src/interface.c	2008-02-25 20:38:44.000000000 +0100
+++++ src/interface.c	2008-02-25 19:47:49.000000000 +0100
++@@ -6223,7 +6223,7 @@
++   gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (developers), FALSE);
++   gtk_text_view_set_left_margin (GTK_TEXT_VIEW (developers), 5);
++   gtk_text_view_set_right_margin (GTK_TEXT_VIEW (developers), 5);
++-  gtk_text_buffer_set_text (gtk_text_view_get_buffer (GTK_TEXT_VIEW (developers)), _("\nSteve Harris is the JAMin principle author and team leader.\n\nSourceForge CVS developers, in alphabetical order:\n\nJan Depner\nSteve Harris\nJack O'Quin\nRon Parker\nEmmanuel Saracco\nPatrick Shirkey\n\nTranslators:\n\nAlexandre Prokoudine (Russian)\nEmmanuel Saracco (French)\nRaphaël Doursenaud (French)"), -1);
+++  gtk_text_buffer_set_text (gtk_text_view_get_buffer (GTK_TEXT_VIEW (developers)), _("\nSteve Harris is the JAMin principle author and team leader.\n\nSourceForge CVS developers, in alphabetical order:\n\nJan Depner\nSteve Harris\nJack O'Quin\nRon Parker\nEmmanuel Saracco\nPatrick Shirkey\n\nTranslators:\n\nAlexandre Prokoudine (Russian)\nEmmanuel Saracco (French)\nRapha\303\253l Doursenaud (French)\n"), -1);
++ 
++   label328 = gtk_label_new_with_mnemonic (_("_Developers"));
++   gtk_widget_set_name (label328, "label328");
+diff -rupN jamin-0.95.0.old/src/process.c jamin-0.95.0/src/process.c
+--- jamin-0.95.0.old/src/process.c	2008-12-02 22:22:03.000000000 -0500
++++ jamin-0.95.0/src/process.c	2010-02-10 01:46:55.000000000 -0500
+@@ -394,7 +394,7 @@ void run_eq(unsigned int port, unsigned 
+ 
+ void run_eq_iir(unsigned int port, unsigned int in_ptr)
+ {
+-    const float fix = 2.5f / ((float) BINS * (float) OVER_SAMP);
++    const float fix = 30.0f / ((float) BINS * (float) OVER_SAMP);
+     float peak;
+     unsigned int i, j;
+     int targ_bin;
+diff -rupN jamin-0.95.0.old/src/spectrum.c jamin-0.95.0/src/spectrum.c
+--- jamin-0.95.0.old/src/spectrum.c	2006-07-10 19:05:32.000000000 -0400
++++ jamin-0.95.0/src/spectrum.c	2010-02-10 01:39:40.000000000 -0500
+@@ -26,9 +26,9 @@
+ #include "db.h"
+ 
+ static char *band_lbls[BANDS] = {
+-    "25.0", "31.5", "40.0", "50.0", "63.0", "80.0", "100", "125", "160", "200",
+-    "250",  "315",  "400",  "500",  "630",  "800",  "1k",  "1k25", "1k6", "2k",
+-    "2k5",  "3k1",  "4k",   "5k",   "6k3",  "8k",   "10k", "10k2", "16k", "20k"
++    "25", "31.5", "40", "50", "63", "80", "100", "125", "160", "200",
++    "250",  "315",  "400",  "500",  "630",  "800", "1k",  "1k25", "1k6", "2k",
++    "2k5",  "3k15",  "4k",   "5k",   "6k3",  "8k",   "10k", "12k5", "16k", "20k"
+ };
+ 
+ GtkWidget *make_mini_label(const char *text);
+@@ -140,8 +140,6 @@ gboolean spectrum_update(gpointer data)
+     void draw_EQ_spectrum_curve (float *);
+     int get_current_notebook1_page ();
+ 
+-    float decay_rate = 0.2f;
+-
+     page = get_current_notebook1_page ();
+     count = BINS / 2;
+ 
+@@ -166,8 +164,17 @@ gboolean spectrum_update(gpointer data)
+         levels[i] = 0.0f;
+       }
+       for (i=0; i<count; i++) {
++
++/* TODO : Add rise and release times
++          Compute display
++          Eventually expose these on the GUI
++    Old decay code :
++    float decay_rate = 0.2f;
+         single_levels[i] *= 1.0f - decay_rate;
+         single_levels[i] += bin_peak_read_and_clear(i) * decay_rate;
++*/
++
++        single_levels[i] = bin_peak_read_and_clear(i);
+       }
+       draw_EQ_spectrum_curve (single_levels);
+     }
