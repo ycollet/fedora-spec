@@ -20,7 +20,7 @@ xconfig --startxonboot
 zerombr
 clearpart --all --initlabel
 part / --size 8192 --fstype ext4
-services --disabled="sshd" --enabled="NetworkManager"
+services --disabled="sshd" --enabled="NetworkManager,zram-swap"
 network --bootproto=dhcp --device=link --activate
 # Shutdown after installation
 shutdown
@@ -364,8 +364,19 @@ touch /etc/machine-id
 
 # only works on x86, x86_64
 if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
-  if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
-  cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
+    # For livecd-creator builds
+    if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
+    cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
+
+    # For lorax/livemedia-creator builds
+    sed -i '
+    /## make boot.iso/ i\
+    # Add livecd-iso-to-disk script to .iso filesystem at /LiveOS/\
+    <% f = "usr/bin/livecd-iso-to-disk" %>\
+    %if exists(f):\
+        install ${f} ${LIVEDIR}/${f|basename}\
+    %endif\
+    ' /usr/share/lorax/templates.d/99-generic/live/x86.tmpl
 fi
 
 %end
@@ -854,6 +865,8 @@ cp /usr/share/applications/liveinst.desktop /home/audinux/Desktop
 # and mark it as executable (new Xfce security feature)
 chmod +x /home/audinux/Desktop/liveinst.desktop
 
+# no updater applet in live environment
+rm -f /etc/xdg/autostart/org.mageia.dnfdragora-updater.desktop
 # this goes at the end after all other changes. 
 chown -R audinux:audinux /home/audinux
 restorecon -R /home/audinux
