@@ -95,9 +95,13 @@ $ livecd-creator --verbose --config=fedora-32-live-jam-kde.ks --fslabel=Audinux 
 
 To create the LiceCD using livemedia-creator:
 
-As a root user:
+As a root user (---old-chroot == --old-chroot):
 ```
-$ setenforce Permissive
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --isolation=simple --init --install lorax-lmc-novirt wget unzip libblockdev-lvm libblockdev-btrfs libblockdev-swap libblockdev-loop libblockdev-crypto libblockdev-mpath libblockdev-dm libblockdev-mdraid libblockdev-nvdimm
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --copyin fedora-32-live-jam-kde.ks --copyin prepare.sh /builddir
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --enable-network --shell
+$ cd /builddir
+$ ./prepare.sh
 $ livemedia-creator --make-iso --ks fedora-32-live-jam-kde.ks --project Audinux --iso-name livecd-fedora-32-mao.iso --iso-only --releasever 32 --volid Audinux --image-name Audinux --resultdir /var/lmc --no-virt --tmp /var/tmp
 ```
 
