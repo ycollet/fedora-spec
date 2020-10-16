@@ -1,23 +1,18 @@
-Name:      sfizz
-Version:   0.4.0
-Release:   2%{?dist}
-License:   BSD-2-Clause
-Summary:   Sampler plugin and library for SFZ instruments
-Url:       https://github.com/sfztools/sfizz
+Name:    sfizz
+Version: 0.5.0
+Release: 3%{?dist}
+License: BSD-2-Clause
+Summary: Sampler plugin and library for SFZ instruments
+Url:     https://github.com/sfztools/sfizz
 
-Source:    sfizz-0.4.0.tar.gz
+Source0: sfizz-%{version}.tar.gz
+Source1: sfizz_source.sh
 
-# git clone https://github.com/sfztools/sfizz sfizz-0.4.0
-# cd sfizz-0.4.0
-# git checkout 0.4.0
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz sfizz-0.4.0.tar.gz sfizz-0.4.0/*
+# ./sfizz_source.sh <tag>
+# ./sfizz_source.sh 0.4.0
 
-Requires:  libsndfile
-Requires:  jack-audio-connection-kit
+Requires: libsndfile
+Requires: jack-audio-connection-kit
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
@@ -37,8 +32,8 @@ Sfizz is a musical sampler, available as a LV2 plugin for musicians, and
 a library for developers.
 
 %package devel
-Summary:   Header files for Sfizz
-Requires:  %{name} = %{version}-%{release}
+Summary:  Header files for Sfizz
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 Header files for the Sfizz library.
@@ -83,6 +78,9 @@ Header files for the Sfizz library.
 %exclude %{_libdir}/libsfizz.a
 
 %changelog
+* Fri Oct 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-3
+- update to 0.5.0-3 - fix for fedora 33
+
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.0-3
 - update to 0.4.0-3 - fix for fedora 33
 
