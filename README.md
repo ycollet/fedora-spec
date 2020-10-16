@@ -151,6 +151,36 @@ Manually, using qemu-kvm command line
 $ qemu-kvm -m 2048 -name Audinux -sdl -cdrom fedora-32-Audinux.iso -usb -device usb-host,hostbus=2,hostaddr=3
 ```
 
+Write ISO to USB:
+
+You can use dd:
+```
+$ dd if=Audinux.iso of=/dev/sdc bs=1024
+```
+Or mediawriter:
+```
+$ dnf install mediawriter
+$ mediawriter
+```
+Or livecd-iso-to-disk:
+```
+$ dnf install livecd-tools
+$ livecd-iso-to-disk --reset-mbr Audinux.iso /dev/sdc
+```
+
+To add a persistent home directory of size 2Go:
+```
+$ livecd-iso-to-disk --reset-mbr --home-size-mb 2048 Audinux.iso /dev/sdc
+```
+
+To add a data persistency on your USB key:
+```
+$ livecd-iso-to-disk --reset-mbr --overlay-size-mb 2048 Audinux.iso /dev/sdc
+```
+
+You can find a lot of informations related to USB stick and tools to generate these sticks here:
+https://docs.pagure.org/docs-fedora/create-and-use-live-image.html
+
 How to use a spec file:
 
 If you use a red hat derivative, you can rebuild the rpm packages from the spec file.
