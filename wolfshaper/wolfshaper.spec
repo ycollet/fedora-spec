@@ -1,23 +1,15 @@
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    wolf-shaper
 Version: 0.1.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Wolf-shaper is a waveshaper plugin with a graph editor.
 License: GPLv2+
 URL:     https://github.com/pdesaulniers/wolf-shaper
 
-# git clone https://github.com/pdesaulniers/wolf-shaper
-# cd wolf-shaper
-# git checkout v0.1.8
-# git submodule init
-# git submodule update
-# rm -rf .git dpf/.git
-# cd ..
-# tar cvfz wolf-shaper.tar.gz wolf-shaper/*
+# ./wolfshapper-source.sh <tag>
+# ./wolfshapper-source.sh v0.1.8
 
 Source0: wolf-shaper.tar.gz
+Source1: wolfshaper-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -60,11 +52,13 @@ sed -i -e "s/\$(PREFIX)\/lib/\$(PREFIX)\/lib64/g" Makefile
 
 %build
 
-%make_build PREFIX=/usr all
+%set_build_flags
+
+%make_build PREFIX=/usr SKIP_STRIPPING=true
 
 %install
 
-%make_install PREFIX=/usr
+%make_install PREFIX=/usr SKIP_STRIPPING=true
 
 %files
 %doc README.md
@@ -81,7 +75,10 @@ sed -i -e "s/\$(PREFIX)\/lib/\$(PREFIX)\/lib64/g" Makefile
 %{_libdir}/vst/*
 
 %changelog
-* Fri Oct 2 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.8-1
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.8-2
+- update to 0.1.8-2 - fix debug buid
+
+* Wed Oct 2 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.8-1
 - update to 0.1.8-1
 
 * Tue Apr 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.7-1
