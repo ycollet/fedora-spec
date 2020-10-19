@@ -15,11 +15,16 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 Fix debug generation:
 
-plebtracker/plebtracker.spec (??)
-improviz/improviz.spec (Cabal ...)
-airwindows/airwindows.spec (???)
-amuc/amuc.spec (???)
-ams-lv2/lvtk.spec (???)
+plebtracker/plebtracker.spec	(???)
+improviz/improviz.spec 		(Cabal ...)
+airwindows/airwindows.spec 	(???)
+amuc/amuc.spec 			(???)
+ams-lv2/lvtk.spec 		(???)
+psi-plugins 			error with fedora 33 + lv2-devel
+ninjam/ninjam-client.spec 	(???)
+ninjam/abninjam.spec 		(???)
+ninjam/ninjam-server.spec 	(???)
+purr-data/purr-data.spec	has a pure binary dependency
 
 x42/sisco.spec
 x42/avldrums.spec
@@ -41,13 +46,6 @@ traverso/traverso.spec
 vl1/vl1.spec
 goatracker/goatracker.spec
 postfish/postfish.spec
-openkontroller/midi_matrix.spec
-openkontroller/synthpod.spec
-openkontroller/patchmatrix.spec
-openkontroller/sherlock.spec
-openkontroller/orbit.spec
-openkontroller/moony.spec
-openkontroller/eteroj.spec
 zytrax/zytrax.spec
 fluxus/fluxus.spec
 grandorgue/GrandOrgue.spec
@@ -91,16 +89,10 @@ qutecsound/qutecsound.spec
 cm/cm.spec
 din/din.spec
 drc/drc.spec
-ninjam/ninjam-client.spec
-ninjam/abninjam.spec
-ninjam/ninjam-server.spec
 ryukau/ryukau.spec
-purr-data/purr-data.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
 ossia/ossia-score.spec
 sfark/libsfark.spec
 sfark/sfark.spec
 openframeworks/openframeworks.spec
-enscribe/enscribe.spec
-psi-plugins/psi-plugins.spec
