@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 8ae2fc7544259525027ee4496e7fa0c7527f71e7
 %global gittag0 master
@@ -7,25 +5,16 @@
 
 Name:    stone-phaser
 Version: 0.1.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A classic analog phaser effect
 URL:     https://github.com/jpcima/stone-phaser
-Group:   Applications/Multimedia
-
 License: BSL-1.0
 
-# git clone https://github.com/jpcima/stone-phaser
-# git checkout v0.1.2
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz stone-phaser.tar.gz stone-phaser/*
-# rm -rf stone-phaser
+# ./stone-phaser-source.sh <tag>
+# ./stone-phaser-source.sh v0.1.2
 
 Source0: stone-phaser.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source1: stone-phaser-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -41,8 +30,7 @@ This is an analog phaser with similarity to the Small Stone. It has a color swit
 This effect is supported on MOD devices.
 
 %package -n ladspa-stone-phaser
-Summary:        stone-phaser LADSPA plugin
-Group:          Applications/Multimedia
+Summary: stone-phaser LADSPA plugin
 
 %description -n ladspa-stone-phaser
 A classic analog phaser effect
@@ -51,8 +39,7 @@ This effect is supported on MOD devices.
 stone-phaser LADSPA plugin
 
 %package -n vst-stone-phaser
-Summary:        stone-phaser VST plugin
-Group:          Applications/Multimedia
+Summary: stone-phaser VST plugin
 
 %description -n vst-stone-phaser
 A classic analog phaser effect
@@ -61,8 +48,7 @@ This effect is supported on MOD devices.
 stone-phaser VST plugin
 
 %package -n lv2-stone-phaser
-Summary:        stone-phaser LV2 plugin
-Group:          Applications/Multimedia
+Summary: stone-phaser LV2 plugin
 
 %description -n lv2-stone-phaser
 A classic analog phaser effect
@@ -72,25 +58,34 @@ stone-phaser LV2 plugin
 
 %prep
 
-%setup -qn stone-phaser
+%autosetup -n stone-phaser
 
 %build
 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} %{?_smp_mflags}
+%set_build_flags
+
+%make_build PREFIX=/usr LIBDIR=%{_libdir} SKIP_STRIPPING=true
 
 %install
 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} install
+%make_install PREFIX=/usr LIBDIR=%{_libdir} SKIP_STRIPPING=true
 
 %files
-%doc LICENSE README.md
+%doc README.md
+%license LICENSE
+
 %files -n lv2-stone-phaser
 %{_libdir}/lv2/*
+
 %files -n vst-stone-phaser
 %{_libdir}/vst/*
+
 %files -n ladspa-stone-phaser
 %{_libdir}/ladspa/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.2-2
+- fix debug build
+
 * Fri Oct 11 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.2-1
 - Initial spec file
