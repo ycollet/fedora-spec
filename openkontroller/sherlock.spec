@@ -3,11 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    sherlock.lv2
 Version: 0.24.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: An investigative LV2 plugin bundle
 URL:     https://github.com/OpenMusicKontrollers/sherlock.lv2
 License: GPLv2+
@@ -32,6 +30,8 @@ An investigative LV2 plugin bundle
 
 %build
 
+%set_build_flags
+
 VERBOSE=1 meson --prefix=/usr -Dlv2libdir=%{_lib}/lv2 build
 cd build
 VERBOSE=1 %ninja_build 
@@ -41,9 +41,14 @@ cd build
 VERBOSE=1 %ninja_install
 
 %files
+%doc README.md ChangeLog
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.24.0-3
+- update to 0.24.0-3
+
 * Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.24.0-2
 - update to 0.24.0-2
 

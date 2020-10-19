@@ -3,11 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    midi_matrix.lv2
 Version: 0.26.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A LV2 Plugin Bundle
 License: GPLv2+
 URL:     https://github.com/OpenMusicKontrollers/midi_matrix.lv2
@@ -30,6 +28,8 @@ A LV2 Plugin Bundle
 
 %build
 
+%set_build_flags
+
 LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 VERBOSE=1 meson --prefix=/usr -Dlv2libdir=%{_lib}/lv2 build
 cd build
@@ -42,9 +42,14 @@ cd build
 VERBOSE=1 %ninja_install
 
 %files
+%doc README.md
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.26.0-4
+- fix debug build 
+
 * Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.26.0-3
 - update to 0.26.0-3
 

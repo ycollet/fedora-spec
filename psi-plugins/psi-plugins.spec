@@ -3,12 +3,10 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Summary: PSI LV2 Plugins
 Name:    psi-plugins-doc
 Version: 0.0.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
 URL:     https://github.com/ycollet/psi-plugins
 
@@ -63,6 +61,8 @@ Roland JP8000/JP8080 but has since widened is scope.
 
 %build
 
+%set_build_flags
+
 ./waf configure --prefix=%{_prefix} --libdir=%{_libdir}
 ./waf build
 
@@ -70,10 +70,14 @@ Roland JP8000/JP8080 but has since widened is scope.
 
 ./waf -j1 install --destdir=%{buildroot}
 
+cp midi_gate-psi.lv2/README.md      README.midi_gate.md
+cp midi_rnd-psi.lv2/README.md       README.midi_rnd.md
+cp sidechain_gate-psi.lv2/README.md README.sidechain_gate.md
+cp super_welle.lv2/README.md        README.super_welle.md
+
 %files
-%doc README.md
+%doc README.md README.midi_gate.md README.midi_rnd.md README.sidechain_gate.md README.super_welle.md
 %license LICENSE
-#midi_gate-psi.lv2/README.md midi_rnd-psi.lv2/README.md sidechain_gate-psi.lv2/README.md super_welle.lv2/README.md
 
 %files -n lv2-midi_gate-psi
 %{_libdir}/lv2/midi_gate-psi.lv2/*
@@ -88,6 +92,9 @@ Roland JP8000/JP8080 but has since widened is scope.
 %{_libdir}/lv2/super_welle-psi.lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-4
+- fix debug build
+
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-3
 - fix for Fedora 33
 

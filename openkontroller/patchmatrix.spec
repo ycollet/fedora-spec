@@ -3,11 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    patchmatrix
 Version: 0.20.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A JACK patchbay in flow matrix style
 URL:     https://github.com/OpenMusicKontrollers/patchmatrix
 License: GPLv2+
@@ -31,6 +29,8 @@ A JACK patchbay in flow matrix style
 
 %build
 
+%set_build_flags
+
 VERBOSE=1 meson --prefix=/usr build
 cd build
 
@@ -42,10 +42,15 @@ cd build
 VERBOSE=1 %ninja_install
 
 %files
+%doc README.md ChangeLog
+%license COPYING
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
+* Mon OCt 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-3
+- fix debug build
+
 * Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
 - update to 0.26.0-2
 

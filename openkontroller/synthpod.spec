@@ -3,11 +3,9 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    synthpod
 Version: 0.1.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Lightweight Nonlinear LV2 Plugin Container
 URL:     https://github.com/OpenMusicKontrollers/synthpod
 License: GPLv2+
@@ -43,6 +41,8 @@ Lightweight Nonlinear LV2 Plugin Container
 
 %build
 
+%set_build_flags
+
 VERBOSE=1 meson --prefix=/usr -Dlv2libdir=%{_lib}/lv2 build
 cd build
 VERBOSE=1 %ninja_build 
@@ -53,11 +53,16 @@ cd build
 VERBOSE=1 %ninja_install
 
 %files
+%doc README.md API.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/*
 %{_datarootdir}/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.1-4
+- fix debug build
+
 * Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.1-3
 - update to last master version - c6cd3720b987f73ed5f412db9607433b3769f1db
 

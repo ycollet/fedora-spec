@@ -2,20 +2,13 @@
 
 Name:    abNinjam
 Version: 0.0.8
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Ninjam LV2 / VST plugin
 URL:     https://github.com/antanasbruzas/abNinjam
-License: GPLv3
+License: MIT
 
-# git clone https://github.com/antanasbruzas/abNinjam
-# cd abNinjam
-# git checkout v0.0.8
-# git submodule init
-# git submodule update --recursive
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar xvfz abNinjam.tar.gz abNinjam/*
-# rm -rf abNinjam
+#./abninjam-source.sh <tag>
+#./abninjam-source.sh v0.0.8
 
 Source0: abNinjam.tar.gz
 
@@ -44,6 +37,8 @@ sed -i -e "/MAKE_DIRECTORY/d" cmake/VSTConfig.cmake
 
 %build
 
+%set_build_flags
+
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DVSTPLUGIN_INSTALL_DIR=%{_libdir}/vst \
        -DLV2PLUGIN_INSTALL_DIR=%{_libdir}/lv2
@@ -61,6 +56,9 @@ sed -i -e "/MAKE_DIRECTORY/d" cmake/VSTConfig.cmake
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-3
+- fix debug build
+
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-2
 - update to 0.0.8-2 - fix for fedora 33
 

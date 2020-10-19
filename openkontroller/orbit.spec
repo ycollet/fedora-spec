@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 5517c496a7a540a5cf170af3c957e1bb9a0247b2
 %global gittag0 master
@@ -7,15 +5,12 @@
 
 Name:    orbit.lv2
 Version: 0.1.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: LV2 Event Looper
 URL:     https://github.com/OpenMusicKontrollers/orbit.lv2
-Group:   Applications/Multimedia
 License: GPLv2+
 
 Source0: https://github.com/OpenMusicKontrollers/orbit.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -30,6 +25,9 @@ LV2 Event Looper
 
 %build
 
+%set_build_flags
+export CFLAGS=`echo $CFLAGS | sed -e "s/-Werror=format-security//g"`
+
 VERBOSE=1 meson --prefix=/usr build
 cd build
 
@@ -41,9 +39,14 @@ cd build
 DESTDIR=%{buildroot} ninja install
 
 %files
+%doc README.md
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-4
+- update to 0.1.0-4
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-3
 - update to 0.1.0-3
 

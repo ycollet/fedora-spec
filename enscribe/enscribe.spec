@@ -5,14 +5,12 @@ Name:    enscribe
 Version: 0.1.0
 Release: 1%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     http://www.coppercloudmusic.com/enscribe/
+
 Source0: http://coppercloudmusic.com/enscribe/enscribe-%{version}.tgz
 Patch0: enscribe_01-makefile.patch
 Patch1: enscribe_02-FFTblocksizenorm.patch
 Patch2: enscribe_03-fix-typo.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: gd-devel
@@ -42,25 +40,24 @@ sections, but they can also ruin an otherwise good song too.
 sed -i 's|gcc |gcc %{optflags} |' makefile
 
 %build
-rm -rf $RPM_BUILD_ROOT
 
-make DESTDIR=%{buildroot} PREFIX=%{_prefix}
+%make_build PREFIX=%{_prefix}
 
 %install
 
-make DESTDIR=%{buildroot} PREFIX=%{_prefix} install
+%make_install PREFIX=%{_prefix}
 
 # mkdir -p $RPM_BUILD_ROOT%{_bindir}/
 # %__install -m 644 enscribe %{buildroot}%{_bindir}/enscribe
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,-)
-%doc LICENSE README
+%doc README
+%license LICENSE
 %{_bindir}/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-2
+- fix debug build
+
 * Tue Sep 24 2019 Yann Collette <ycollette.nospam@free.fr> - 0.1.0-1
 - initial release

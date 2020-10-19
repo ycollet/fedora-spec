@@ -3,18 +3,14 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    moony.lv2
 Version: 0.34.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Realtime Lua as programmable glue in LV2
 URL:     https://github.com/OpenMusicKontrollers/moony.lv2
 License: GPLv2+
 
 Source0: https://github.com/OpenMusicKontrollers/moony.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -34,6 +30,8 @@ An investigative LV2 plugin bundle
 
 %build
 
+%set_build_flags
+
 VERBOSE=1 meson --prefix=/usr -Dlv2libdir=%{_lib}/lv2 build
 cd build
 VERBOSE=1 %ninja_build 
@@ -43,8 +41,13 @@ cd build
 VERBOSE=1 %ninja_install
 
 %files
+%doc README.md ChangeLog
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.34.0-2
+- fix debug build
+
 * Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.34.0-1
 - Initial spec file
