@@ -1,6 +1,3 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 c8f53207b0feb110d35b2bf5b6fd89dc148f27e7
 %global gittag0 master
@@ -8,16 +5,13 @@
 
 Name:    jalv_select
 Version: 1.3.0.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A LV2 synthetizer launcher for Jack audio
 URL:     https://github.com/brummer10/jalv_select
-Group:   Applications/Multimedia
 
 License: GPLv2+
 
 Source0: https://github.com/brummer10/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -33,15 +27,17 @@ Requires: jalv jalv-qt jalv-gtk jal-gtkmm
 A little GUI to select lv2 plugs from a list
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
-make DESTDIR=%{buildroot} PREFIX=%{_usr} %{?_smp_mflags}
+%set_build_flags
+
+%make_build PREFIX=%{_usr}
 
 %install
 
-make DESTDIR=%{buildroot} PREFIX=%{_usr} %{?_smp_mflags} install
+%make_install PREFIX=%{_usr}
 
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
@@ -50,19 +46,6 @@ desktop-file-install --vendor '' \
         --add-category=X-Jack \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/jalv.select.desktop
-
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files
 %doc README.md
@@ -73,6 +56,9 @@ fi
 %{_mandir}/man1/jalv.select.*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
+- fix debug build
+
 * Wed Jul 17 2019 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-2
 - update to 1.3.0
 
