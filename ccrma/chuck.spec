@@ -3,15 +3,13 @@
 Summary: Real-time audio synthesis and graphics/multimedia language
 Name:    chuck
 Version: 1.4.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     http://chuck.cs.princeton.edu/
+
 Source0: http://chuck.cs.princeton.edu/release/files/chuck-%{version}.tgz
 # emacs mode from: http://wiki.cs.princeton.edu/index.php/Recent_chuck-mode.el
 Source1: chuck-mode.el
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
@@ -28,9 +26,12 @@ directly in the program flow.  Other potentially useful features include
 the ability to write/change programs on-the-fly.
 
 %prep
-%setup -q -n chuck-%{version}
+%autosetup -n chuck-%{version}
 
 %build
+
+%set_build_flags
+
 cd src
 
 # insert rpm optflags in makefiles
@@ -39,23 +40,22 @@ perl -p -i -e "s|-O3|-O3 %{optflags}|g" makefile.jack
 perl -p -i -e "s|-O3|-O3 %{optflags}|g" makefile.pulse
 
 # build alsa version
-%{__make} linux-alsa
-%{__mv} chuck chuck-alsa
+%make_build linux-alsa
+mv chuck chuck-alsa
 
 # build pulse version
-%{__make} clean
-%{__make} linux-pulse
-%{__mv} chuck chuck-pulse
+%make_build clean
+%make_build linux-pulse
+mv chuck chuck-pulse
 
 # build jack version
-%{__make} clean
-%{__make} linux-jack
-%{__mv} chuck chuck-jack
+%make_build clean
+%make_build linux-jack
+mv chuck chuck-jack
 
 %install
 
-%{__rm} -rf %{buildroot}
-%{__mkdir} -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_bindir}
 
 # install alsa version
 install -m 755 src/chuck-alsa %{buildroot}%{_bindir}/chuck-alsa
@@ -72,12 +72,7 @@ cp -a %{SOURCE1} %{buildroot}%{_datadir}/emacs/site-lisp/chuck.el
 mkdir -p %{buildroot}%{_libdir}/xemacs/site-packages/lisp/chuck/
 cp -a %{SOURCE1} %{buildroot}%{_libdir}/xemacs/site-packages/lisp/chuck/chuck.el
 
-%clean
-%{__rm} -rf %{buildroot}
-
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS DEVELOPER PROGRAMMER QUICKSTART README 
 %doc THANKS TODO VERSIONS examples
 %license COPYING
@@ -86,6 +81,9 @@ cp -a %{SOURCE1} %{buildroot}%{_libdir}/xemacs/site-packages/lisp/chuck/chuck.el
 %{_libdir}/xemacs/site-packages/lisp/chuck/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0.0-2
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.4.0.0-1
 - update for Fedora 29
 - update to 1.4.0.0
