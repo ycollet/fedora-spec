@@ -1,23 +1,18 @@
+%global debug_package %{nil}
+
 # Global variables for github repository
 %global commit0 6bfe981dfb5b27ea199dd4f6801b5305ca0355f9
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 Name:    lvtk
 Version: 2.0.0.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: LV2 Toolkit
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/lvtk/lvtk
-Source0: https://github.com/lvtk/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/lvtk/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -30,7 +25,7 @@ extensions into easy to use C++ classes. The original work for this
 was mostly done by Lars Luthman in lv2-c++-tools.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
@@ -39,17 +34,27 @@ was mostly done by Lars Luthman in lv2-c++-tools.
   find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
 %endif
 
+%set_build_flags
+
 ./waf configure --destdir=%{buildroot} --prefix=%{_prefix} --libdir=%{_libdir}
-./waf %{?_smp_mflags} -v
+./waf
 
 %install 
-./waf install --destdir=%{buildroot} -v
+./waf -j1 install --destdir=%{buildroot} -v
 
 %files
+%doc README AUTHORS ChangeLog
+%license COPYING
 %{_libdir}/*
 %{_includedir}/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-3
+- fix debug build
+
+* Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-2
+- update for Fedora 32
+
 * Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.0.0-2
 - update for Fedora 32
 

@@ -9,31 +9,26 @@ sonic-pi	-> cmake - check ruby version
 Add source.sh file in spec file:
 Source1: source.sh
 
+Add check section:
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+
 Fix debug generation:
 
-jalv-select/jalv-select.spec
-nanoinvaders/nanoinvaders.spec
-plebtracker/plebtracker.spec
-adlplug/stone-phaser.spec
+plebtracker/plebtracker.spec (??)
+improviz/improviz.spec (Cabal ...)
+airwindows/airwindows.spec (???)
+amuc/amuc.spec (???)
+ams-lv2/lvtk.spec (???)
+
 x42/sisco.spec
 x42/avldrums.spec
 x42/matrixmixer.spec
 r128gain/r128gain.spec
-ccrma/chuck.spec
 ccrma/puredata.spec
-improviz/improviz.spec
-wolfshaper/wolfshaper.spec
 
 rack
 
-noise-repellent/noise-repellent.spec
-amuc/amuc.spec
-ams-lv2/beatslash-lv2.spec
-ams-lv2/lvtk.spec
-ams-lv2/midimsg-lv2.spec
-ams-lv2/deteriorate-lv2.spec
-ams-lv2/ams-lv2.spec
-plujain-ramp/plujain-ramp.spec
 juce/juce.spec
 guitarix/gxmatcheq.spec
 guitarix/screcord.spec
@@ -72,7 +67,7 @@ foxdot/FoxDotQuark.spec
 foxdot/foxdot.spec
 foxdot/BatLib.spec
 surge/stochas.spec
-glava/glava.spec# 
+glava/glava.spec
 xjadeo/xjadeo.spec
 vopa/vopa.spec
 kapitonov/kapitonov-pp.spec
@@ -85,7 +80,6 @@ kxstudio/premake4.spec
 kxstudio/helm.spec
 kxstudio/protrekkr.spec
 performer/performer.spec
-airwindows/airwindows.spec
 orca/orca.spec
 portalmod/tap-lv2.spec
 portalmod/mda-lv2.spec
@@ -104,11 +98,9 @@ ryukau/ryukau.spec
 purr-data/purr-data.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
-tuxguitar/tuxguitar-1.3.spec
 ossia/ossia-score.spec
 sfark/libsfark.spec
 sfark/sfark.spec
 openframeworks/openframeworks.spec
 enscribe/enscribe.spec
-kernel/kernel-mao.spec
 psi-plugins/psi-plugins.spec

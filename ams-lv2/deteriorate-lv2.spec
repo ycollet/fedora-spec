@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 93ea1762755d57dd44a45adee55822bacd2c0a3b
 %global gittag0 master
@@ -9,14 +7,10 @@ Name:    deteriorate-lv2
 Version: 1.0.7.%{shortcommit0}
 Release: 2%{?dist}
 Summary: deteriorate-lv2 is a set of plugins to destroy and deteriorate the sound quality of a live input
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/blablack/deteriorate-lv2
-Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -49,6 +43,8 @@ sed -i -e "s/lvtk-gtkui-1/lvtk-gtkui-2/g" wscript
 for Files in src/*.cpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 
+%set_build_flags
+
 ./waf configure --destdir=%{buildroot} --libdir=%{_libdir}
 ./waf
 
@@ -56,9 +52,14 @@ for Files in src/*.hpp ; do sed -i -e "s/lvtk-1/lvtk-2/g" $Files; done
 ./waf -j1 install --destdir=%{buildroot}
 
 %files
+%doc README.md THANKS
+%license LICENSE
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.7-3
+- fix debug build
+
 * Wed Apr 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.7-2
 - update to 1.0.7-2
 

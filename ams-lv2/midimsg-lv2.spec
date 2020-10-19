@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 46beb4891ac6f223b33b298b96764535d8f80e18
 %global gittag0 master
@@ -7,16 +5,12 @@
 
 Name:    midimsg-lv2
 Version: 0.0.5.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A collection of basic LV2 plugins to translate midi messages to usable values
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/blablack/midimsg-lv2
-Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -26,7 +20,7 @@ BuildRequires: python2
 A collection of basic LV2 plugins to translate midi messages to usable values
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 # For Fedora 29
 %if 0%{?fedora} >= 29
@@ -35,6 +29,8 @@ A collection of basic LV2 plugins to translate midi messages to usable values
 
 %build
 
+%set_build_flags
+
 ./waf configure --destdir=%{buildroot} --libdir=%{_libdir}
 ./waf
 
@@ -42,9 +38,14 @@ A collection of basic LV2 plugins to translate midi messages to usable values
 ./waf -j1 install --destdir=%{buildroot}
 
 %files
+%doc README.md THANKS
+%license LICENSE
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.5-2
+- fix debug build
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.0.5-1
 - update 0.0.5-1
 

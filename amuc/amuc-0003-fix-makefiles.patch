@@ -1,0 +1,75 @@
+unchanged:
+--- a/src-abcm2ps/Makefile
++++ b/src-abcm2ps/Makefile
+@@ -8,14 +8,14 @@ abc2ps.a: abcm2ps.o $(OBJECTS)
+ 	ar rs abc2ps.a abcm2ps.o $(OBJECTS)
+ 
+ abcm2ps: main.o $(OBJECTS)
+-	$(CC) -o abcm2ps main.o $(OBJECTS)
++	$(CC) $(CXXFLAGS) -o abcm2ps main.o $(OBJECTS)
+ 
+ .SUFFIXES=
+ 
+ %.o: %.cpp
+-	$(CC) -c -O $(DBG) -Wno-char-subscripts -Wno-sign-compare $<
++	$(CC) -c $(CXXFLAGS) $(DBG) $<
+ 
+ main.o: abcm2ps.cpp
+-	$(CC) -c -DREAD_FILE -o main.o $<
++	$(CC) -c -DREAD_FILE $(CXXFLAGS) -o main.o $<
+ 
+ $(OBJECTS) main.o abcm2ps.o: abcparse.h abc2ps.h
+unchanged:
+--- a/src-tr-sco/Makefile
++++ b/src-tr-sco/Makefile
+@@ -6,7 +6,7 @@ OBJS=$(ADIR)/str.o
+ .SUFFIXES=
+ 
+ tr-sco: $(OBJS) tr-sco.cpp
+-	$(CC) -O $(DBG) -o tr-sco -I$(ADIR) tr-sco.cpp $(OBJS)
++	$(CC) $(CXXFLAGS) $(DBG) -o tr-sco -I$(ADIR) tr-sco.cpp $(OBJS)
+ 
+ $(ADIR)/%.o: $(ADIR)/%.cpp $(ADIR)/%.h
+ 	make -C $(ADIR) $(@F)
+unchanged:
+--- a/src-wav2score/Makefile
++++ b/src-wav2score/Makefile
+@@ -2,7 +2,7 @@ include ../Makefile.inc
+ CC=g++
+ ADIR=../src
+ OBJS=$(ADIR)/x-widgets.o $(ADIR)/snd-interface.o $(ADIR)/str.o wav2score.o fft.o
+-OPT=-O -Wuninitialized -Wno-multichar
++OPT=$(CXXFLAGS)
+ 
+ .SUFFIXES=
+ 
+@@ -10,7 +10,7 @@ wav2score: $(OBJS)
+ 	$(CC) $(OBJS) -o wav2score $(LDFLAGS)
+ 
+ %.o: %.cpp
+-	$(CC) -c -I../src $(OPT) $(CFLAGS) $<
++	$(CC) -c -I../src $(OPT) $(CXXFLAGS) $(AMUC_CFLAGS) $<
+ 
+ $(ADIR)/x-widgets.o: $(ADIR)/x-widgets.cpp $(ADIR)/x-widgets.h
+ 	@cd $(ADIR); make x-widgets.o
+unchanged:
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -16,7 +16,7 @@ amuc: $(OBJS)
+ 	$(CC) $(OBJS) $(A2PS_DIR)/abc2ps.a -o amuc $(LDFLAGS)
+ 
+ %.o: %.cpp
+-	$(CC) -c -O $(DBG) $(CFLAGS) -Wno-multichar $<
++	$(CC) -c $(CXXFLAGS) $(AMUC_CFLAGS) $(DBG) $<
+ 
+ amuc-headers.h: str.h x-widgets.h dump-wav.h colors.h midi-out.h templates.h ps-out.h \
+                 amuc.h read-waves.h physical-mod.h midi-keyb.h mono-synth.h sound.h \
+only in patch2:
+unchanged:
+--- a/Makefile.inc
++++ b/Makefile.inc
+@@ -1,3 +1,3 @@
+-CFLAGS=  -I/usr/include/alsa  -I/usr/include/freetype2 -I/usr/include/libpng16  -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libdrm  
++AMUC_CFLAGS=  -I/usr/include/alsa  -I/usr/include/freetype2 -I/usr/include/libpng16  -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libdrm  
+ LDFLAGS= -lX11  -lasound  -lXft  -lcairo  -ljack -lpthread 
+ JACK_MIN_VERSION=1.9.10
