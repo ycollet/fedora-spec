@@ -162,20 +162,37 @@ Or mediawriter:
 $ dnf install mediawriter
 $ mediawriter
 ```
-Or livecd-iso-to-disk:
+
+Once the USB key is installed, you can add data persistency using livecd-iso-to-disk:
 ```
 $ dnf install livecd-tools
-$ livecd-iso-to-disk --reset-mbr Audinux.iso /dev/sdc
+```
+
+Locate where is your usb disk:
+```
+$ dmesg | tail
+or
+$ lsblk
+```
+
+Then, reformat to ext4 the usb disk:
+```
+$ mkfs.ext4 /dev/sdb
 ```
 
 To add a persistent home directory of size 2Go:
 ```
-$ livecd-iso-to-disk --reset-mbr --home-size-mb 2048 Audinux.iso /dev/sdc
+$ livecd-iso-to-disk --reset-mbr --format --msdos --home-size-mb 2048 Audinux.iso /dev/sdb
 ```
 
 To add a data persistency on your USB key:
 ```
-$ livecd-iso-to-disk --reset-mbr --overlay-size-mb 2048 Audinux.iso /dev/sdc
+$ livecd-iso-to-disk --reset-mbr --format --msdos --unencrypted-home --overlay-size-mb 2048 Audinux.iso /dev/sdb
+```
+
+To add both data persistency add home persistency on your USB key:
+```
+$ livecd-iso-to-disk --reset-mbr --format --msdos --unencrypted-home --overlay-size-mb 2048 --home-size-mb 2048 Audinux.iso /dev/sdb
 ```
 
 You can find a lot of informations related to USB stick and tools to generate these sticks here:
