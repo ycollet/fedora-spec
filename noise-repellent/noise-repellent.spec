@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 87b4380eae2b69b09bba8a8b181f24153079100d
 %global gittag0 master
@@ -7,16 +5,12 @@
 
 Name:    noise-repellent-lv2
 Version: 0.1.5.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A lv2 plug-in for broadband noise reduction.
-
-Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/lucianodato/noise-repellent
+URL:     https://github.com/lucianodato/noise-repellent	
 
 Source0: https://github.com/lucianodato/noise-repellent/archive/%{commit0}.tar.gz#/noise-repellent-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -43,7 +37,7 @@ Limitations
 * It was developed to be used with Ardour however it is known to work with other hosts
 
 %prep
-%setup -qn noise-repellent-%{commit0}
+%autosetup -n noise-repellent-%{commit0}
 
 %build
 
@@ -64,6 +58,9 @@ DESTDIR=%{buildroot} ninja install
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.5-3
+- update to 0.1.5-3 - fix debug build
+
 * Mon Jan 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.5-2
 - update to 0.1.5-2
 
