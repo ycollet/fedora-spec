@@ -35,9 +35,7 @@ ccrma/puredata.spec
 rack
 
 juce/juce.spec
-hydrogen/hydrogen.spec
 faust/faust.spec
-traverso/traverso.spec
 vl1/vl1.spec
 zytrax/zytrax.spec
 fluxus/fluxus.spec
