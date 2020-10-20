@@ -1,23 +1,18 @@
-%global debug_package %{nil}
-%define revision 19646
+# Global variables for github repository
+%global commit0 ad624e7e46b043183d3ab669e6cf54cba887e1a6
+%global gittag0 master
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    postfish
-Version: %{revision}.svn
+Version: 2005.01.01
 Release: 2%{?dist}
 Summary: The Postfish is a digital audio post-processing, restoration, filtering and mixdown tool.
-Group:   Applications/Multimedia
 License: GPLv2+
+URL:     https://gitlab.xiph.org/xiph/postfish
 
-URL:     https://svn.xiph.org/trunk/postfish
-# The source for this package was pulled from upstream's vcs.  Use the
-# following commands to generate the tarball:
-#  svn export -r 19646 https://svn.xiph.org/trunk/postfish postfish-19646
-#  tar cvfz postfish-19646.tar.gz postfish-19646
-
-Source0: postfish-%{revision}.tar.gz
+Source0: https://gitlab.xiph.org/xiph/%{name}/-/archive/%{commit0}/postfish-%{commit0}.tar.gz
 Source1: postfish.png
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source2: Makefile.postfish
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
@@ -43,12 +38,15 @@ If the input audio is being taken from files, Postfish also provides simple forw
 The next major update of Postfish will also include automation to allow mixdown settings to be 'recorded' and applied automatically during rendering.
 
 %prep
-%setup -qn postfish-%{revision}
+%autosetup -n postfish-%{commit0}
+
+cp %{SOURCE2} Makefile
 
 %build
 
-sed -i -e "s/PREFIX=\/usr\/local/PREFIX=\/usr/g" Makefile
-make VERBOSE=1 %{?_smp_mflags}
+%set_build_flags
+
+%make_build all
 
 %install
 
@@ -83,19 +81,6 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
 %doc README
 %license COPYING
@@ -104,11 +89,14 @@ fi
 %{_sysconfdir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr>
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 2005.01.01-2
+- fix debug build + update to gitlab version
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2005.01.01-1
 - update for Fedora 29
 
-* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr>
+* Sat May 12 2018 Yann Collette <ycollette.nospam@free.fr> - 2005.01.01-1
 - switch to 19646
 
-* Wed Sep 13 2017 Yann Collette <ycollette.nospam@free.fr> - Initial version
+* Wed Sep 13 2017 Yann Collette <ycollette.nospam@free.fr> - 2005.01.01-1
 - Initial version

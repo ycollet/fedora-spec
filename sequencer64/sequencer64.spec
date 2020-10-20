@@ -3,15 +3,13 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    sequencer64
 Version: 0.96.8
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: MIDI sequencer
-
 License: GPL
 URL:     https://github.com/ahlstromcj/sequencer64
+
 Source0: https://github.com/ahlstromcj/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/ahlstromcj/sequencer64-doc/archive/0.95.2.tar.gz#/%{name}-doc-0.95.2.tar.gz
 
@@ -78,6 +76,9 @@ sh autogen.sh
 %{_datadir}/%{name}/doc/**
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 0.96.8-3
+- fix debug build
+
 * Mon Jul 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.96.8-2
 - update to 0.96.8-2
 

@@ -10,13 +10,10 @@ Name:    raffosynth
 Version: 0.1.0
 Release: 1%{?dist}
 Summary: This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plugin for Linux.
-Group:   Applications/Multimedia
 License: GPLv3+
-
 URL:     https://github.com/nicoroulet/moog
-Source0: https://github.com/nicoroulet/moog/archive/%{commit0}.tar.gz#/moog-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/nicoroulet/moog/archive/%{commit0}.tar.gz#/moog-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -27,31 +24,32 @@ This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plug
 
 %package -n lv2-%{name}
 Summary: This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plugin for Linux.
-Group:   Applications/Multimedia
 
 %description -n lv2-%{name}
 This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plugin for Linux.
 
 %prep
-%setup -qn moog-%{commit0}
+%autosetup -n RaffoSynth-%{commit0}
 
 %build
 
-make INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ CFLAGS="-std=c99 %{build_cflags} -fPIC" %{?_smp_mflags}
+%set_build_flags
+
+%make_build INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ CFLAGS="-std=c99 %{build_cflags} -fPIC"
 
 %install
 
-rm -rf %{buildroot}
-make INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ install
-
-%clean
-rm -rf %{buildroot}
+%make_install INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/
 
 %files -n lv2-%{name}
-%doc README.md LICENSE.md
+%doc README.md
+%license LICENSE.md
 %{_libdir}/lv2/*
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette dot nospam at free dot fr> - 0.1.0-2
+- fix debug build
+
 * Tue Apr 16 2019 Yann Collette <ycollette dot nospam at free dot fr> - 0.1.0-1
 - Initial version of the spec file
 
