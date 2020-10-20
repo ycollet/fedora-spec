@@ -3,21 +3,14 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    gxtuner
 Version: 3.0.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A tuner for jack, with full jack session managment support
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/brummer10/gxtuner
-Source0: https://github.com/brummer10/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/brummer10/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: gtk3-devel
@@ -30,21 +23,26 @@ BuildRequires: zita-resampler-devel
 A tuner for jack, with full jack session managment support
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
-%make_build 
+%set_build_flags
+
+%make_build STRIP=true 
 
 %install 
 
-%make_install
+%make_install STRIP=true
 
 %files
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 3.0-3
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 3.0-2
 - update for Fedora 29
 

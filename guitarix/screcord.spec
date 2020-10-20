@@ -3,30 +3,18 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    lv2-screcord-plugin
 Version: 0.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A simple Lv2 capture plugin
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/brummer10/screcord.lv2
+
 Source0: screcord.lv2.tar.gz
+Source1: screcord-source.sh
 
-# git clone https://github.com/brummer10/screcord.lv2
-# cd screcord.lv2
-# git checkout v0.2
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz screcord.lv2.tar.gz screcord.lv2/*
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# ./screcord-source.sh <tag>
+# ./screcord-source.sh v0.2
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -38,23 +26,30 @@ BuildRequires: libffi-devel
 A simple Lv2 capture plugin
 
 %prep
-%setup -qn screcord.lv2
+%autosetup -n screcord.lv2
 
 %build
 
+%set_build_flags
+
 cd Xputty
-make
+%make_build -j1
 cd ..
-make INSTALL_DIR=%{buildroot}%{_libdir}/lv2
+%make_build INSTALL_DIR=%{buildroot}%{_libdir}/lv2 STRIP=true
 
 %install 
 
-make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 install
+make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 STRIP=true install
 
 %files
+%doc README.md
+%license LICENSE
 %{_libdir}/lv2/sc_record.lv2/*
 
 %changelog
+* Tue OCt 20 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2-3
+- fix debug build
+
 * Mon Dec 16 2019 Yann Collette <ycollette.nospam@free.fr> - 0.2-2
 - update to 0.2-2
 
