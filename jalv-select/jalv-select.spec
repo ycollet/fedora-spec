@@ -5,7 +5,7 @@
 
 Name:    jalv_select
 Version: 1.3.0.%{shortcommit0}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A LV2 synthetizer launcher for Jack audio
 URL:     https://github.com/brummer10/jalv_select
 
@@ -21,7 +21,7 @@ BuildRequires: gtkmm24-devel
 BuildRequires: lv2-devel
 BuildRequires: lilv-devel
 
-Requires: jalv jalv-qt jalv-gtk jal-gtkmm
+Requires: jalv jalv-qt jalv-gtk jalv-gtkmm
 
 %description
 A little GUI to select lv2 plugs from a list
@@ -56,6 +56,9 @@ desktop-file-install --vendor '' \
 %{_mandir}/man1/jalv.select.*
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-4
+- fix typo
+
 * Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
 - fix debug build
 
