@@ -1,14 +1,12 @@
-%global debug_package %{nil}
-
 Name:    hydrogen
 Version: 1.0.1
-Release: 11%{?dist}
+Release: 12%{?dist}
 Summary: Advanced drum machine for GNU/Linux
 URL:     http://www.hydrogen-music.org/
-
 License: GPLv2+
 
 Source0: https://github.com/hydrogen-music/hydrogen/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:  hydrogen-0001-fix-flags-override.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -43,10 +41,7 @@ sed -i -e "s/Sound/X-Sound/g" linux/org.hydrogenmusic.Hydrogen.desktop
 
 %build
 
-%cmake -DCMAKE_C_FLAGS:STRING=-fPIC \
-       -DCMAKE_CXX_FLAGS:STRING=-fPIC \
-       -DCMAKE_EXE_LINKER_FLAGS:STRING=-fPIC \
-       -DWANT_ALSA:BOOL=ON \
+%cmake -DWANT_ALSA:BOOL=ON \
        -DWANT_CPPUNIT:BOOL=OFF \
        -DWANT_DEBUG:BOOL=OFF \
        -DWANT_JACK:BOOL=ON \
@@ -95,6 +90,9 @@ desktop-file-install --vendor '' \
 %exclude %{_includedir}/%{name}
 
 %changelog
+* Thu Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-12
+- fix debug build
+
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-11
 - update for Fedora 33
 
