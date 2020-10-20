@@ -35,17 +35,10 @@ ccrma/puredata.spec
 rack
 
 juce/juce.spec
-guitarix/gxmatcheq.spec
-guitarix/screcord.spec
-guitarix/gxtuner.spec
 hydrogen/hydrogen.spec
 faust/faust.spec
-moog/moog.spec
-sequencer64/sequencer64.spec
 traverso/traverso.spec
 vl1/vl1.spec
-goatracker/goatracker.spec
-postfish/postfish.spec
 zytrax/zytrax.spec
 fluxus/fluxus.spec
 grandorgue/GrandOrgue.spec
