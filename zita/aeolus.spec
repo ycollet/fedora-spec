@@ -1,4 +1,4 @@
-%define aeolus_ver 0.9.8
+%define aeolus_ver 0.9.9
 %define stops_ver  0.3.0
 
 %define desktop_vendor planetccrma
@@ -8,13 +8,11 @@ Name:    aeolus
 Version: %{aeolus_ver}%{?aeolus_rel:.%{aeolus_rel}}
 Release: 1%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     http://www.kokkinizita.net/linuxaudio/aeolus/index.html
+
 Source0: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/aeolus-%{aeolus_ver}%{?aeolus_rel:-%{aeolus_rel}}.tar.bz2
 Source1: https://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-%{stops_ver}.tar.bz2
 Source2: aeolus.desktop
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
@@ -29,11 +27,6 @@ BuildRequires: readline-devel
 BuildRequires: libX11-devel libXft-devel
 BuildRequires: perl
 
-# for some reason building on fc15 generates a dependency on a weirdly
-# named "package" (somebignumber.debug) that of course does not exist,
-# so disable debuginfo package generation
-%global debug_package %{nil}
-
 %description
 Aeolus is a synthesised (i.e. not sampled) pipe organ emulator that
 should be good enough to make an organist enjoy playing it. It is a
@@ -45,9 +38,8 @@ of course, stereo, surround or Ambisonics output, flexible audio
 controls including a large church reverb.
 
 %prep
-%setup -q -n aeolus-%{aeolus_ver}
+%autosetup -n aeolus-%{aeolus_ver}
 
-%build
 cd source
 # change the default stops directory to point to the installed stops
 %{__perl} -p -i -e "s|\".stops\", \"stops\"|\".stops\", \"%{_datadir}/aeolus/stops\"|g" mainwin.cc
@@ -62,26 +54,33 @@ cd source
 %{__perl} -p -i -e "s|-march=native||" Makefile
 %endif
 
-%{__make} PREFIX=%{_prefix} %{?_smp_mflags}
+%build
+
+cd source
+
+%set_build_flags
+
+%make_build PREFIX=/usr
 
 %install
-%{__rm} -rf %{buildroot}
-%{__mkdir} -p %{buildroot}%{_bindir}
-%{__mkdir} -p %{buildroot}%{_libdir}
-%{__mkdir} -p %{buildroot}%{_datadir}/aeolus
+
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_libdir}
+mkdir -p %{buildroot}%{_datadir}/aeolus
+
 cd source
-%{__make} PREFIX=%{buildroot}%{_prefix} install
+%make_install PREFIX=/usr
 
 # install the stops
 (cd %{buildroot}%{_datadir}/aeolus; %{__tar} xjf %{SOURCE1}; %{__mv} stops-* stops)
-%{__rm} -f %{buildroot}%{_datadir}/aeolus/stops/Makefile
+rm -f %{buildroot}%{_datadir}/aeolus/stops/Makefile
 # make sure they are readable
 find %{buildroot}%{_datadir}/aeolus/stops -type f -exec chmod 644 {} \;
 
 # set reasonable default startup options:
 # jack driver, point to stops, store presets in user home directory
-%{__mkdir} -p %{buildroot}%{_sysconfdir}
-%{__cat} << EOF > %{buildroot}%{_sysconfdir}/aeolus.conf
+mkdir -p %{buildroot}%{_sysconfdir}
+cat << EOF > %{buildroot}%{_sysconfdir}/aeolus.conf
 # Aeolus default options
 -J -S %{_datadir}/aeolus/stops -u
 EOF
@@ -90,17 +89,14 @@ EOF
 BASE="Application AudioVideo Audio"
 XTRA="X-MIDI X-Jack X-Synthesis Midi"
 
-%{__mkdir} -p %{buildroot}%{_datadir}/applications
+mkdir -p %{buildroot}%{_datadir}/applications
+
 desktop-file-install --vendor %{desktop_vendor} \
   --dir %{buildroot}%{_datadir}/applications    \
   `for c in ${BASE} ${XTRA} ; do echo "--add-category $c " ; done` \
   %{SOURCE2}
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS INSTALL
 %license COPYING
 %{_bindir}/*
@@ -110,6 +106,9 @@ desktop-file-install --vendor %{desktop_vendor} \
 %{_datadir}/applications/%{desktop_vendor}-aeolus.desktop
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.8-2
+- fix debug build
+
 * Tue May 12 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.8-1
 - update to 0.9.8
 
