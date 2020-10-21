@@ -31,6 +31,7 @@ iannix/iannix.spec		(???) - pb with qmake-qt5
 mv-6pm/mv-6pm.spec		(???) - pb with qmake-qt5
 oxefmsynth/oxefmsynth.spec	(???) - pb with debugsource ...
 mx44/mx44.spec			no more source. Put the source on github ...
+rack				fail with some fedora flags
 
 x42/sisco.spec
 x42/avldrums.spec
@@ -40,10 +41,7 @@ ccrma/puredata.spec
 openframeworks/openframeworks.spec
 juce/juce.spec
 
-rack
-
 faust/faust.spec
-fluxus/fluxus.spec
 grandorgue/GrandOrgue.spec
 veejay/veejay-server.spec
 veejay/veejay-gui.spec
