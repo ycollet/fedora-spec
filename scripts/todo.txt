@@ -27,7 +27,10 @@ ninjam/ninjam-server.spec 	(???)
 purr-data/purr-data.spec	has a pure binary dependency
 zytrax/zytrax.sp<ec		(???)
 processing/processing.spec	precompiled java package
-iannix/iannix.spec		(???)
+iannix/iannix.spec		(???) - pb with qmake-qt5
+mv-6pm/mv-6pm.spec		(???) - pb with qmake-qt5
+oxefmsynth/oxefmsynth.spec	(???) - pb with debugsource ...
+mx44/mx44.spec			no more source. Put the source on github ...
 
 x42/sisco.spec
 x42/avldrums.spec
@@ -44,11 +47,8 @@ fluxus/fluxus.spec
 grandorgue/GrandOrgue.spec
 veejay/veejay-server.spec
 veejay/veejay-gui.spec
-mv-6pm/mv-6pm.spec
-oxefmsynth/oxefmsynth.spec
 tunefish/tunefish.spec
 loudness-scanner/loudness-scanner.spec
-mx44/mx44.spec
 lebiniou/lebiniou-data.spec
 socallab/SocaLabs-plugins.spec
 picoloop/picoloop.spec
