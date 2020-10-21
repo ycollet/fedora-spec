@@ -1,0 +1,38 @@
+unchanged:
+--- a/Makefile.vstlinux
++++ b/Makefile.vstlinux
+@@ -57,13 +57,7 @@ LIBS:=-lX11
+ LIBS+=-lpthread
+ LIBS+=-ldl
+ 
+-CXXFLAGS+=-fPIC -D__cdecl=
+-
+-ifeq ($(DEBUG),YES)
+-    CXXFLAGS+=-g -O0
+-else
+-    CXXFLAGS+=-s -O3
+-endif
++CXXFLAGS+=-D__cdecl=
+ 
+ ARCH := $(shell getconf LONG_BIT)
+ ifneq ($(ARCH),32)
+only in patch2:
+unchanged:
+--- a/Makefile.standalone
++++ b/Makefile.standalone
+@@ -44,15 +44,6 @@ SOURCES+=src/synth/synthesizer.cpp
+ 
+ UNAME_S:=$(shell uname -s)
+ 
+-ifeq ($(DEBUG),YES)
+-    CXXFLAGS+=-g -O0
+-else
+-    CXXFLAGS+=-O3
+-    ifneq ($(UNAME_S),Darwin)
+-        LDFLAGS+=-s
+-    endif
+-endif
+-
+ ifeq ($(OS),Windows_NT)
+     EXECUTABLE_NAME:=$(EXECUTABLE_NAME).exe
+     CXX:=g++.exe

@@ -1,13 +1,25 @@
-diff --git a/MVGlobals.cpp b/MVGlobals.cpp
-index bb46ba8..e96283a 100644
---- a/MVGlobals.cpp
-+++ b/MVGlobals.cpp
+From f7e0ec5984a7bca4b1900d9e0f559ce67bb2e097 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Wed, 21 Oct 2020 08:00:55 +0200
+Subject: [PATCH] use global presets
+
+---
+ src/MVGlobals.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/MVGlobals.cpp b/src/MVGlobals.cpp
+index a80ef70..29ee247 100644
+--- a/src/MVGlobals.cpp
++++ b/src/MVGlobals.cpp
 @@ -21,7 +21,7 @@
- 
  #include <QDir>
  
+ bool Globals::bHasGui = true;
 -QString Globals::userDir = QDir::homePath() + "/.6pm";
 +QString Globals::userDir = "/usr/share/mv-6pm";
  QString Globals::userPresetsDir = userDir + "/Presets";
  QString Globals::userMidiMapsDir = userDir + "/MidiMaps";
  
+-- 
+2.26.2
+

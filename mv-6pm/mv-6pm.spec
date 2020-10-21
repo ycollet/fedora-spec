@@ -1,19 +1,15 @@
-# Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 Name:    6PM
 Version: 0.9
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A Jack audio synthetizer
 URL:     http://sourceforge.net/projects/mv-6pm/
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
 Source0: https://sourceforge.net/projects/mv-6pm/files/6PM_v0.9.tgz
 Source1: mv-6pm.desktop
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch0:  mv-6pm-use-global-presets.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: pkgconfig(Qt5Core)
@@ -30,30 +26,30 @@ BuildRequires: jack-audio-connection-kit-devel
 6PM is a phase modulation (PM) synthesizer made of six oscillators. 
 
 %prep
-%setup -qn %{name}_v%{version}
+%autosetup -p1 -n %{name}_v%{version}
 
 %build
 
 cd src
-qmake-qt5 6PM.pro
-make VERBOSE=1 %{?_smp_mflags}
+%qmake_qt5 "CONFIG+=nostrip" 6PM.pro
+%make_build
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/mv-6pm/
-%__install -m 755 -d %{buildroot}/%{_datadir}/mv-6pm/MidiMaps
-%__install -m 755 -d %{buildroot}/%{_datadir}/mv-6pm/Presets
-%__cp -r MidiMaps/* %{buildroot}%{_datadir}/mv-6pm/MidiMaps/
-%__cp -r Presets/* %{buildroot}%{_datadir}/mv-6pm/Presets/
+install -m 755 -d %{buildroot}/%{_datadir}/mv-6pm/
+install -m 755 -d %{buildroot}/%{_datadir}/mv-6pm/MidiMaps
+install -m 755 -d %{buildroot}/%{_datadir}/mv-6pm/Presets
+cp -r MidiMaps/* %{buildroot}%{_datadir}/mv-6pm/MidiMaps/
+cp -r Presets/* %{buildroot}%{_datadir}/mv-6pm/Presets/
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 src/6pm %{buildroot}%{_bindir}/%{name}
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 644 src/6pm %{buildroot}%{_bindir}/%{name}
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 src/images/icon.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
+install -m 644 src/images/icon.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # install mv-6pm.desktop properly.
 desktop-file-install --vendor '' \
@@ -64,30 +60,18 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
-
 %files
-%doc README Changelog LICENSE
+%doc README Changelog
+%license LICENSE
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/mv-6pm/*
 %{_datadir}/icons/hicolor/*
 
-
 %changelog
+* Wed Oct 21 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-2
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-1
 - update for Fedora 29
 
