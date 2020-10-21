@@ -25,27 +25,27 @@ ninjam/ninjam-client.spec 	(???)
 ninjam/abninjam.spec 		(???)
 ninjam/ninjam-server.spec 	(???)
 purr-data/purr-data.spec	has a pure binary dependency
+zytrax/zytrax.sp<ec		(???)
+processing/processing.spec	precompiled java package
+iannix/iannix.spec		(???)
 
 x42/sisco.spec
 x42/avldrums.spec
 x42/matrixmixer.spec
 r128gain/r128gain.spec
 ccrma/puredata.spec
+openframeworks/openframeworks.spec
+juce/juce.spec
 
 rack
 
-juce/juce.spec
 faust/faust.spec
-vl1/vl1.spec
-zytrax/zytrax.spec
 fluxus/fluxus.spec
 grandorgue/GrandOrgue.spec
-iannix/iannix.spec
 veejay/veejay-server.spec
 veejay/veejay-gui.spec
 mv-6pm/mv-6pm.spec
 oxefmsynth/oxefmsynth.spec
-processing/processing.spec
 tunefish/tunefish.spec
 loudness-scanner/loudness-scanner.spec
 mx44/mx44.spec
@@ -74,8 +74,6 @@ portalmod/tap-lv2.spec
 portalmod/mda-lv2.spec
 portalmod/mod-pitchshifter.spec
 portalmod/swh-lv2.spec
-zita/tetraproc.spec
-zita/aeolus.spec
 qutecsound/qutecsound.spec
 cm/cm.spec
 din/din.spec
@@ -86,4 +84,3 @@ zrythm/zrythm.spec
 ossia/ossia-score.spec
 sfark/libsfark.spec
 sfark/sfark.spec
-openframeworks/openframeworks.spec

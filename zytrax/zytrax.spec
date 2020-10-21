@@ -1,4 +1,3 @@
-# Disable production of debug package. Problem with fedora 23
 %global debug_package %{nil}
 
 # Global variables for github repository
@@ -8,17 +7,13 @@
 
 Name:    zytrax
 Version: 0.9.0.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: ZyTrax is an easy to use music sequencer with an interface heavily inspired by 90's tracker software 
 URL:     https://github.com/reduz/zytrax.git
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
 Source0: https://github.com/reduz/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: SConstruct-zytrax
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make scons
@@ -44,7 +39,7 @@ automation envelopes, smart automations, zoomable patterns and a
 simple pattern/orderlist layout).
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 cp %{SOURCE1} SConstruct
 
@@ -52,7 +47,11 @@ cp %{SOURCE1} SConstruct
 
 export XDG_CURRENT_DESKTOP="kde"
 
-scons 
+%set_build_flags
+
+export CCFLAGS="$CXXFLAGS"
+
+scons --environment-overrides
 
 cat > zytrax.desktop << EOF
 [Desktop Entry]
@@ -67,12 +66,12 @@ EOF
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 bin/zytrax %{buildroot}%{_bindir}/
-%__install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
-%__install -m 644 zytrax.png %{buildroot}/%{_datadir}/pixmaps/
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 zytrax.desktop %{buildroot}/%{_datadir}/applications/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 644 bin/zytrax %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
+install -m 644 zytrax.png %{buildroot}/%{_datadir}/pixmaps/
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 644 zytrax.desktop %{buildroot}/%{_datadir}/applications/
 
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
@@ -82,22 +81,16 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}/%{_datadir}/applications \
         %{buildroot}/%{_datadir}/applications/zytrax.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
 %files
-%doc README.md LICENSE
+%doc README.md
+%license LICENSE
 %{_bindir}/*
 %{_datadir}/applications/zytrax.desktop
 %{_datadir}/pixmaps/zytrax.png
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.0-2
+- fix debug build
+
 * Sat Jun 08 2019 Yann Collette <ycollette.nospam@free.fr> - 0.9.0-1
 - Initial spec file 1.0alpha-1

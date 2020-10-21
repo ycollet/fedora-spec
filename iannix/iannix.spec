@@ -1,25 +1,21 @@
-# http://www.iannix.org/
+%global debug_package %{nil}
 
 # Global variables for github repository
 %global commit0 1294f84ba809ebf5262a1c7071a18ac5ff4109b0
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    IanniX
 Version: 0.9.20.%{shortcommit0}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A graphic / MIDI / OSC player
 URL:     https://github.com/iannix/Iannix
-
 License: GPLv2+
 
 Source0: https://github.com/iannix/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: iannix.xml
 Patch0:  iannix-0001-fix-missing-glew.patch
-PAtch1:  iannix-0002-add-missing-header.patch
+Patch1:  iannix-0002-add-missing-header.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -38,7 +34,10 @@ to your real-time environment.
 
 %build
 
-qmake-qt5 IanniX.pro
+%set_build_flags
+
+%qmake_qt5 "CONFIG += nostrip" IanniX.pro
+
 %make_build
 
 %install
@@ -73,7 +72,10 @@ desktop-file-install --vendor '' \
 %{_datadir}/icons/hicolor/*
 
 %changelog
-* Fri OCt 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-3
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-4
+- fix debug build
+
+* Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-3
 - update for Fedora 33
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9.20-2

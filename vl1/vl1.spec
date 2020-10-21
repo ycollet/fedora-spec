@@ -3,30 +3,18 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    VL1-emulator
 Version: 1.1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: An emulator of Casio VL-Tone VL1
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/linuxmao-org/VL1-emulator
 
-# git clone https://github.com/linuxmao-org/VL1-emulator
-# cd VL1-emulator
-# git checkout 1.1.0.0
-# git submodule init
-# git submodule update
-# rm -rf .git dpf/.git
-# cd ..
-# tar cvfz VL1-emulator.tar.gz VL1-emulator/*
+# ./vl1-source.sh <tag>
+# ./vl1-source.sh 1.1.0.0
 
 Source0: VL1-emulator.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source1: vl1-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -41,18 +29,21 @@ BuildRequires: cairo-devel
 An emulator of Casio VL-Tone VL1, based on source code by PolyValens
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} all
+
+%set_build_flags
+
+%make_build PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true
 
 %install
 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} install
+%make_install PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 -d %{buildroot}/%{_libdir}/lv2/vl1.lv2
-%__install -m 755 -d %{buildroot}/%{_libdir}/vst
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 -d %{buildroot}/%{_libdir}/lv2/vl1.lv2
+install -m 755 -d %{buildroot}/%{_libdir}/vst
 
 cp bin/vl1 %{buildroot}/%{_bindir}/
 cp -r bin/vl1.lv2/* %{buildroot}/%{_libdir}/lv2/vl1.lv2/
@@ -64,5 +55,8 @@ cp bin/vl1-vst.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/vst/*
 
 %changelog
+* Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0.0-2
+- fix debug build
+
 * Thu Jan 16 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0.0-1
 - Initial build
