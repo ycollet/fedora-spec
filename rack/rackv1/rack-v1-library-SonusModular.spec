@@ -1,14 +1,14 @@
 # Global variables for github repository
-%global commit0 7a64e3f78bda52968a267b3980c8d871323609f1
+%global commit0 06e84f9483aae0a0b49d0afd40f09afc9cde489a
 
-%global gittag0 1.3.0
+%global gittag0 1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-SonusModular
-Version: 1.3.0
+Version: 1.4.0
 Release: 3%{?dist}
 Summary: SonusModular plugin for Rack
 
@@ -106,5 +106,5 @@ cp -r SonusModular_plugin/dist/SonusModular/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
 - initial specfile
