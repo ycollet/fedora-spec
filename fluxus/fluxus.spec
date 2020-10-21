@@ -1,6 +1,3 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 ba9aee218dd4a9cfab914ad78bdb6d59e9a37400
 %global gittag0 master
@@ -11,15 +8,11 @@ Version: 0.17rc5.%{shortcommit0}
 Release: 3%{?dist}
 Summary: A 3D game engine for livecoding worlds into existence
 URL:     http://pawfal.org/fluxus/
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
 Source0: https://gitlab.com/nebogeo/%{name}/-/archive/%{commit0}/fluxus-%{commit0}.tar.gz
 Source1: https://github.com/defaultxr/fluxus-mode/raw/master/fluxus-mode.el
 Source2: fluxus-SConstruct
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python3-scons
@@ -78,15 +71,14 @@ and can be used within it’s own livecoding environment or from within
 the DrRacket IDE. Web Page: http://www.pawfal.org/fluxus/
 
 %package emacs
-Summary: Fluxus support for Emacs
-Group: Applications/Multimedia
+Summary:  Fluxus support for Emacs
 Requires: fluxus = %{version}-%{release}
 
 %description emacs
 Fluxus support for the Emacs text editor.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 cp %{SOURCE2} SConstruct
 
@@ -99,6 +91,11 @@ sed -i -e "s/FluxusCollectsLocation = Prefix + \"\/lib\"/FluxusCollectsLocation 
 #./makehelpmap.scm
 
 %install
+
+%set_build_flags
+
+export CXXFLAGS="-fPIC $CXXFLAGS"
+export CFLAGS="-fPIC $CFLAGS"
 
 scons -Q install DESTDIR="%{buildroot}" Prefix=/usr RacketPrefix=/usr
 
@@ -121,24 +118,7 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/fluxus.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-, root, root, 0755)
 %{_bindir}/fluxus
 %{_bindir}/fluxa
 %{_libdir}/fluxus-019/*
@@ -148,10 +128,12 @@ fi
 %{_datadir}/applications/fluxus.desktop
 
 %files emacs
-%defattr(-,root,root,-)
 %{_datadir}/emacs/site-lisp/fluxus
 
 %changelog
+* Wed Oct 21 2020 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-3
+- fix debug build
+
 * Sun Nov 24 2019 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-2
 - install examples in share + fixes
 
