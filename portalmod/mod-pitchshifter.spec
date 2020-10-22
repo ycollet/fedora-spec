@@ -3,21 +3,14 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    mod-pitchshifter
 Version: 0.9.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: mod-pitchshifter LV2 set of plugins from portalmod
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/portalmod/mod-pitchshifter
-Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -32,15 +25,22 @@ BuildRequires: SuperLU-devel
 mod-pitchshifter LV2 set of plugins from portalmod
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
+
+sed -i -e "s/-Wl,--strip-all//" Makefile.mk
 
 %build
-make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags}
 
-%install 
-make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
+%set_build_flags
+
+%make_build INSTALL_PATH=%{_libdir}/lv2
+
+%install
+
+%make_install INSTALL_PATH=%{_libdir}/lv2
 
 %files
+%doc README.md
 %{_libdir}/lv2/*
 
 %changelog
