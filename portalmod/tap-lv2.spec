@@ -3,21 +3,14 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 Name:    tap-lv2
 Version: 0.9.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: TAP LV2 set of plugins from portalmod
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/portalmod/tap-lv2
-Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -26,18 +19,31 @@ BuildRequires: lv2-devel
 TAP LV2 set of plugins from portalmod
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
+
+sed -i -e "s/-Wl,--strip-all//g" Makefile.mk
 
 %build
-make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags}
+
+%set_build_flags
+
+export SPECCFLAGS="$CFLAGS"
+
+%make_build INSTALL_PATH=%{_libdir}/lv2
 
 %install 
-make INSTALL_PATH=%{buildroot}%{_libdir}/lv2 %{?_smp_mflags} install
+
+%make_install INSTALL_PATH=%{_libdir}/lv2
 
 %files
+%doc README.md README CREDITS
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9-3
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.9-2
 - update for Fedora 29
 

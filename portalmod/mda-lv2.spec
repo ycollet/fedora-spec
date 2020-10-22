@@ -3,21 +3,14 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 Name:    mda-lv2
 Version: 0.9.%{shortcommit0}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: MDA LV2 set of plugins from portalmod
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/portalmod/mda-lv2
-Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/portalmod/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -27,7 +20,7 @@ BuildRequires: python2
 MDA LV2 set of plugins synth from portalmod
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 # For Fedora 29
 %if 0%{?fedora} >= 29
@@ -35,6 +28,9 @@ MDA LV2 set of plugins synth from portalmod
 %endif
 
 %build
+
+%set_build_flags
+
 ./waf configure --libdir=%{buildroot}%{_libdir}
 ./waf
 
@@ -42,9 +38,14 @@ MDA LV2 set of plugins synth from portalmod
 ./waf -j1 install
 
 %files
+%doc README
+%license COPYING
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.2-3
+- fix debug build
+
 * Wed Nov 6 2019 Yann Collette <ycollette.nospam@free.fr> - 0.9.2
 - fix for Fedora 31
 
