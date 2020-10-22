@@ -1,19 +1,17 @@
-%global debug_package %{nil}
-
 %define revision 2330
 
 Name:    GrandOrgue
 Version: 0.3.1.%{revision}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: GrandOrgue is a sample based pipe organ simulator.
 License: GPLv2+
-
 URL:     http://sourceforge.net/projects/ourorgan
-# The source for this package was pulled from upstream's vcs.  Use the
-# following commands to generate the tarball:
-#  svn export -r 2330 http://svn.code.sf.net/p/ourorgan/svn/trunk ourorgan-2330
-#  tar cvfz ourorgan-2330.tar.gz ourorgan-2330
-Source0:      ourorgan-%{revision}.tar.gz
+
+# ./GrandOrgue-source.sh <rev>
+# ./GrandOrgue-source.sh 2330
+
+Source0: ourorgan-%{revision}.tar.gz
+Source1: GrandOrgue-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
@@ -50,7 +48,6 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-
 %files
 %doc README AUTHORS
 %license license.txt
@@ -60,10 +57,13 @@ desktop-file-install --vendor '' \
 %{_libdir}/*
 
 %changelog
-* Wed Sep 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
+* Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-4
+- fix debug build
+
+* Wed Sep 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-3
 - fix for fedora 33
 
-* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-1
+* Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
 - update to release 2330
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.3.1-2
