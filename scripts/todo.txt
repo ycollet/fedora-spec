@@ -64,7 +64,6 @@ kxstudio/helm.spec
 kxstudio/protrekkr.spec
 performer/performer.spec
 orca/orca.spec
-portalmod/mod-pitchshifter.spec
 qutecsound/qutecsound.spec
 din/din.spec
 drc/drc.spec
