@@ -2,7 +2,7 @@
 
 Name:    stochas
 Version: 1.3.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A VST3 MIDI sequencer
 License: GPLv3
 
@@ -41,9 +41,7 @@ sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
 %build
 
-%define _lto_cflags %{nil}
-
-%cmake -DCMAKE_STRIP="true" 
+%cmake  
 
 %cmake_build
 
