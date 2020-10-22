@@ -32,6 +32,8 @@ mv-6pm/mv-6pm.spec		(???) - pb with qmake-qt5
 oxefmsynth/oxefmsynth.spec	(???) - pb with debugsource ...
 mx44/mx44.spec			no more source. Put the source on github ...
 rack				fail with some fedora flags
+tunefish/tunefish.spec		(???) - maybe because it's a vst
+surge/stochas.spec		juce maybe ...
 
 x42/sisco.spec
 x42/avldrums.spec
@@ -42,18 +44,12 @@ openframeworks/openframeworks.spec
 juce/juce.spec
 
 faust/faust.spec
-grandorgue/GrandOrgue.spec
-veejay/veejay-server.spec
-veejay/veejay-gui.spec
-tunefish/tunefish.spec
 loudness-scanner/loudness-scanner.spec
-lebiniou/lebiniou-data.spec
 socallab/SocaLabs-plugins.spec
 picoloop/picoloop.spec
 foxdot/FoxDotQuark.spec
 foxdot/foxdot.spec
 foxdot/BatLib.spec
-surge/stochas.spec
 glava/glava.spec
 xjadeo/xjadeo.spec
 vopa/vopa.spec
@@ -68,12 +64,8 @@ kxstudio/helm.spec
 kxstudio/protrekkr.spec
 performer/performer.spec
 orca/orca.spec
-portalmod/tap-lv2.spec
-portalmod/mda-lv2.spec
 portalmod/mod-pitchshifter.spec
-portalmod/swh-lv2.spec
 qutecsound/qutecsound.spec
-cm/cm.spec
 din/din.spec
 drc/drc.spec
 ryukau/ryukau.spec
