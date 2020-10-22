@@ -1,18 +1,12 @@
-%global debug_package %{nil}
-
 Name:    common-music
 Version: 3.10.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Common Music (CM) is a real-time music composition system implemented in JUCE/C++ and Scheme.
 URL:     https://sourceforge.net/projects/commonmusic
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
 # original tarfile can be found here:
 Source0: https://sourceforge.net/projects/commonmusic/files/cm/%{version}/cm-%{version}.zip
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: premake4
@@ -32,7 +26,7 @@ In Grace musical algorithms can run in real time, or faster-than-real time when 
 Grace provides two coding languages for designing musical algorithms: S7 Scheme, and SAL, an easy-to-learn but expressive algol-like language. 
 
 %prep
-%setup -qn cm-%{version}
+%autosetup -n cm-%{version}
 
 # For Fedora 29
 %if 0%{?fedora} >= 29
@@ -43,15 +37,19 @@ Grace provides two coding languages for designing musical algorithms: S7 Scheme,
 
 find juce/modules -type f -exec chmod a-x {} \;
 
+%set_build_flags
+
 premake4 --with-jack
-make config=release
+# Remove strip option for debug symbol generation
+sed -i -e "s/-L. -s/-L./g" Grace.make
+%make_build config=release
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 bin/Grace %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 bin/Grace %{buildroot}%{_bindir}/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/cm/res/
+install -m 755 -d %{buildroot}/%{_datadir}/cm/res/
 cp -ra res/* %{buildroot}/%{_datadir}/cm/res/
 
 %files
@@ -60,7 +58,10 @@ cp -ra res/* %{buildroot}/%{_datadir}/cm/res/
 %{_datadir}/cm/res/*
 
 %changelog
-* Tue May 2 2019 Yann Collette <ycollette.nospam@free.fr> - 3.10.2-2
+* Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 3.10.2-3
+- fix debug build
+
+* Thu May 2 2019 Yann Collette <ycollette.nospam@free.fr> - 3.10.2-2
 - Fix release mode and fix for Fedora 30
 
 * Mon Mar 4 2019 Yann Collette <ycollette.nospam@free.fr> - 3.10.2-1

@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 6a7202284a2a5af9144e76505f948c4df6127c44
 %global gittag0 master
@@ -7,16 +5,12 @@
 
 Name:    veejay-gui
 Version: 1.5.57
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A 'visual' instrument and realtime video sampler (for live video improvisation)
 URL:     https://github.com/c0ntrol/veejay
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
 Source0: https://github.com/c0ntrol/veejay/archive/%{commit0}.tar.gz#/veejay-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: alsa-lib-devel
@@ -53,11 +47,13 @@ You can cluster to allow a number of machines to work together over the network 
 The engine is historically based upon mjpegtools's lavplay and processes all video in YUV planar It performs at its best, currently with MJPEG AVI (through ffmpeg/libav) or one of veejay's internal formats. Veejay is built upon a servent architecture.
 
 %prep
-%setup -qn veejay-%{commit0}
+%autosetup -n veejay-%{commit0}
 
 find . -name "*.c" ! -name vj-vloopback.c ! -name v4l2utils.c -exec sed -i -e "s/PIX_FMT/AV_PIX_FMT/g" {} \;
 
 %build
+
+%set_build_flags
 
 export LIBAVUTIL_CFLAGS=-I/usr/include/compat-ffmpeg28
 export LIBAVCODEC_CFLAGS=-I/usr/include/compat-ffmpeg28
@@ -65,10 +61,15 @@ export LIBAVFORMAT_CFLAGS=-I/usr/include/compat-ffmpeg28
 export LIBSWSCALE_CFLAGS=-I/usr/include/compat-ffmpeg28
 export PKG_CONFIG_PATH=%{buildroot}%{_libdir}/pkgconfig
 
+export CFLAGS="-fPIC $CFLAGS"
+export CFLAGS=`echo $CFLAGS | sed -e "s/-Werror=format-security//g"`
+export CXXFLAGS="-fPIC $CXXFLAGS"
+export LDFLAGS="-fPIC $LDFLAGS"
+
 cd veejay-current
 cd veejay-client
 ./autogen.sh
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
+%configure --prefix=%{_prefix} --libdir=%{_libdir}
 
 sed -i -e "s/libpng16/freetype/g" config.h
 
@@ -79,13 +80,13 @@ find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
 
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28"
 
 cd ..
 
 cd veejay-utils
 ./autogen.sh
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
+%configure --prefix=%{_prefix} --libdir=%{_libdir}
 
 sed -i -e "s/libpng16/freetype/g" config.h
 
@@ -96,13 +97,13 @@ find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
 
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28"
 
 cd ..
 
 cd plugin-packs/lvdgmic/
 ./autogen.sh
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
+%configure --prefix=%{_prefix} --libdir=%{_libdir}
 
 sed -i -e "s/libpng16/freetype/g" config.h
 
@@ -113,47 +114,37 @@ find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
 
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags} CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
-
-cd ../..
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28"
 
 %install
 
 cd veejay-current
 cd veejay-client
-%{__make} DESTDIR=%{buildroot} install CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28/"
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/"
 cd ..
 
 cd veejay-utils
-%{__make} DESTDIR=%{buildroot} install CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28"
 cd ..
 
 cd plugin-packs/lvdgmic/
-%{__make} DESTDIR=%{buildroot} install CFLAGS="-I/usr/include/compat-ffmpeg28" LDFLAGS="-L/usr/lib64/compat-ffmpeg28"
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28"
 cd ../..
 
 chrpath --delete $RPM_BUILD_ROOT/usr/bin/reloaded
 chrpath --delete $RPM_BUILD_ROOT/usr/bin/sayVIMS
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
+%doc veejay-current/veejay-server/README veejay-current/veejay-server/AUTHORS veejay-current/veejay-server/ChangeLog
+%license veejay-current/veejay-server/COPYING
 %{_bindir}/*
 %{_datadir}/*
 %{_libdir}/*
 
 %changelog
+* Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-3
+- fix debug build
+
 * Sun Nov 17 2019 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-2
 - fix illegal instruction pb and rename to veejay-gui
 
