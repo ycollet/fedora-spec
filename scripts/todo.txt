@@ -9,7 +9,20 @@ sonic-pi	-> cmake - check ruby version
 Add new packages:
  Element
  Dplug
-
+ SmartGuitarAmp -> https://github.com/keyth72/SmartGuitarAmp
+ improviz-performance -> https://github.com/rumblesan/improviz-performance
+ osmid -> https://github.com/llloret/osmid
+ Squeezer -> https://github.com/mzuther/Squeezer
+ DAFx19-Gamelanizer/ -> https://github.com/lukemcraig/DAFx19-Gamelanizer
+ ladspa-t5-plugins -> https://gitlab.com/t-5/ladspa-t5-plugins
+ OwlSim -> https://github.com/pingdynasty/OwlSim
+ slplugins -> https://github.com/figbug/slplugins
+ DeLooper -> https://github.com/sonejostudios/DeLooper
+ morphex -> https://github.com/MarcSM/morphex
+ CF3 -> https://github.com/MtnViewJohn/context-free.git
+ 
+ supercollider-study -> https://github.com/rumblesan/super-collider-study
+ 
 Add source.sh file in spec file:
 Source1: source.sh
 
@@ -38,27 +51,15 @@ mx44/mx44.spec			no more source. Put the source on github ...
 rack				fail with some fedora flags
 tunefish/tunefish.spec		(???) - maybe because it's a vst
 surge/stochas.spec		juce maybe ...
+ryukau/ryukau.spec		gcc hangs during compilation of parameter.cpp
+orca/orca.spec			really special build system
+socallab/SocaLabs-plugins.spec	build fails because of a juce path
+qutecsound/qutecsound.spec	(???) - pb with qmake-qt5
 
-x42/sisco.spec
-x42/avldrums.spec
-x42/matrixmixer.spec
-r128gain/r128gain.spec
-ccrma/puredata.spec
 openframeworks/openframeworks.spec
 juce/juce.spec
 
-faust/faust.spec
-loudness-scanner/loudness-scanner.spec
-socallab/SocaLabs-plugins.spec
 picoloop/picoloop.spec
-foxdot/FoxDotQuark.spec
-foxdot/foxdot.spec
-foxdot/BatLib.spec
-glava/glava.spec
-xjadeo/xjadeo.spec
-vopa/vopa.spec
-kapitonov/kapitonov-pp.spec
-rnbc/padthv1.spec
 kxstudio/carla.spec
 kxstudio/distrho-ports.spec
 kxstudio/drmr.spec
@@ -67,11 +68,6 @@ kxstudio/premake4.spec
 kxstudio/helm.spec
 kxstudio/protrekkr.spec
 performer/performer.spec
-orca/orca.spec
-qutecsound/qutecsound.spec
-din/din.spec
-drc/drc.spec
-ryukau/ryukau.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
 ossia/ossia-score.spec
