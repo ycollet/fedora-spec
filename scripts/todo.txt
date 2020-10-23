@@ -6,6 +6,10 @@ qscintilla	-> fail to build for qt4
 miniaudicle	-> qscintilla was missing
 sonic-pi	-> cmake - check ruby version
 
+Add new packages:
+ Element
+ Dplug
+
 Add source.sh file in spec file:
 Source1: source.sh
 
@@ -71,5 +75,3 @@ ryukau/ryukau.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
 ossia/ossia-score.spec
-sfark/libsfark.spec
-sfark/sfark.spec
