@@ -3,19 +3,14 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    vopa-lv2
 Version: 1.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A LV2 amplifier controlled via MIDI messages
 URL:     https://github.com/ycollet/vopa
-Source0: https://github.com/ycollet/vopa/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Group:   Applications/Multimedia
 License: GPLv2+
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/ycollet/vopa/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -24,21 +19,26 @@ BuildRequires: lv2-devel
 A LV2 amplifier controlled via MIDI messages
 
 %prep
-%setup -qn vopa-%{commit0}
+%autosetup -n vopa-%{commit0}
 
 %build
 
-make INSTALLDIR=%{buildroot}/%{_libdir}/lv2/ %{?_smp_mflags}
+%set_build_flags
+%make_build INSTALLDIR=%{buildroot}/%{_libdir}/lv2/
 
 %install 
-make INSTALLDIR=%{buildroot}/%{_libdir}/lv2/ %{?_smp_mflags} install
+
+%make_install INSTALLDIR=%{buildroot}/%{_libdir}/lv2/
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- fix debug build
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - update for Fedora 29
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
