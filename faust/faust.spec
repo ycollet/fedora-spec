@@ -1,17 +1,16 @@
-%global debug_package %{nil}
-
 Name:	 faust
 Version: 2.27.2
-Release: 22%{?dist}
+Release: 23%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
 # The rest is GPLv2+
 License: GPLv2+ and BSD
-URL:     http://faust.grame.fr/
+URL:     http://faust.grame.fr
 
-# To get source from 2.27.2 tag: ./source.sh 2.27.2
+# To get source from 2.27.2 tag: ./faust-source.sh 2.27.2
 
 Source0: faust.tar.gz
+Source1: faust-source.sh
 
 BuildRequires: gcc-c++
 BuildRequires: doxygen
@@ -24,6 +23,7 @@ BuildRequires: texlive-latex
 BuildRequires: texlive-collection-basic
 BuildRequires: texlive-collection-fontsrecommended
 BuildRequires: texlive-mdwtools
+BuildRequires: libmicrohttpd-devel
 
 %description
 Faust AUdio STreams is a functional programming language for real-time audio
@@ -104,7 +104,6 @@ Requires:  %{name} = %{version}-%{release}
 Faust AUdio STreams is a functional programming language for real-time audio
 signal processing. These libraries are part of the standard Faust libraries.
 
-
 %prep
 %autosetup -n faust
 
@@ -154,17 +153,20 @@ sed -i -e "s/\$(BUILDLOCATION)\/lib/\$(BUILDLOCATION)\/%{_lib}/g" Makefile
 
 
 %build
+
+%set_build_flags
+
 # Build the main executable
-make PREFIX=%{_prefix} LIBDIR=%{_libdir} MODE=SHARED %{?_smp_mflags}
+%make_build PREFIX=%{_prefix} LIBDIR=%{_libdir} MODE=SHARED
 cd architecture/osclib/oscpack
-make lib
+%make_build PREFIX=%{_prefix} LIBDIR=%{_libdir} MODE=SHARED lib
 
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_datadir}/%{name}
 mkdir -p %{buildroot}/%{_libdir}
-make install PREFIX=%{_prefix} LIBDIR=%{_libdir} INCLUDEDIR=%{_includedir} DESTDIR=%{buildroot}
+%make_install PREFIX=%{_prefix} LIBDIR=%{_libdir} INCLUDEDIR=%{_includedir}
 
 # install liboscpack manually
 pushd .
@@ -251,6 +253,9 @@ mv %{buildroot}/%{_bindir}/usage.sh %{buildroot}/%{_datadir}/faust/
 %{_datadir}/faust/*.lib
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.2-23
+- fix debug build
+
 * Mon Aug 17 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.2-22
 - Update to 2.27.2-22. Fix python in faust2appl tools
 

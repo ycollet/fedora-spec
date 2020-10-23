@@ -1,25 +1,15 @@
-# Global variables for github repository
-%global commit0 0816047d7fb48e7d2f7ba88cd484a240c00d8528
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
-# Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    qutecsound
-Version: 0.9.6
+Version: 0.9.8.1
 Release: 2%{?dist}
 Summary: A csound file editor
 URL:     https://github.com/CsoundQt/CsoundQt
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
-Source0: https://github.com/CsoundQt/CsoundQt/archive/%{commit0}.tar.gz#/CsoundQt-%{shortcommit0}.tar.gz
+Source0: https://github.com/CsoundQt/CsoundQt/archive/v%{version}.tar.gz#/CsoundQt-%{version}.tar.gz
 Source1: qutecsound.desktop
 Source2: qutecsound.xml
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils
@@ -28,14 +18,22 @@ BuildRequires: csound-devel
 BuildRequires: csound-manual
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtquickcontrols2-devel
-#BuildRequires: qt5-qtbase-gui
-#BuildRequires: qt5-linguist
 
 %description
-CsoundQt is a frontend for Csound featuring a highlighting editor with autocomplete, interactive widgets and integrated help. It is a cross-platform and aims to be a simple yet powerful and complete development environment for Csound. It can open files created by MacCsound. Csound is a musical programming language with a very long history, with roots in the origins of computer music. It is still being maintained by an active community and despite its age, is still one of the most powerful tools for sound processing and synthesis. CsoundQt hopes to bring the power of Csound to a larger group of people, by reducing Csound''s intial learning curve, and by giving users more immediate control of their sound. It hopes to be both a simple tool for the beginner, as well as a powerful tool for experienced users.
+CsoundQt is a frontend for Csound featuring a highlighting editor with autocomplete,
+interactive widgets and integrated help. It is a cross-platform and aims to be a simple
+yet powerful and complete development environment for Csound.
+It can open files created by MacCsound.
+Csound is a musical programming language with a very long history, with roots in the
+origins of computer music. It is still being maintained by an active community and despite
+its age, is still one of the most powerful tools for sound processing and synthesis.
+CsoundQt hopes to bring the power of Csound to a larger group of people,
+by reducing Csound''s intial learning curve, and by giving users more immediate control of
+their sound. It hopes to be both a simple tool for the beginner, as well as a powerful
+tool for experienced users.
 
 %prep
-%setup0 -qn CsoundQt-%{commit0}
+%autosetup -n CsoundQt-%{version}
 
 %build
 
@@ -51,33 +49,33 @@ CsoundQt is a frontend for Csound featuring a highlighting editor with autocompl
 
 # DEBUG: DEFINES+="Q_NULLPTR=0" is an awful hack ...
 
-qmake-qt5 CSOUND_LIBRARY_DIR=/usr/%{_lib} DEFINES+="Q_NULLPTR=0" qcs.pro
-make VERBOSE=1 %{?_smp_mflags}
-cd ..
+%set_build_flags
+
+%qmake_qt5 CSOUND_LIBRARY_DIR=/usr/%{_lib} DEFINES+="Q_NULLPTR=0" CONFIG+=nostrip qcs.pro
+%make_build
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 bin/CsoundQt-d-cs6 %{buildroot}%{_bindir}/%{name}
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 644 bin/CsoundQt-d-cs6 %{buildroot}%{_bindir}/%{name}
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
-%__install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
+install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
+install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/templates
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/doc
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/examples
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/templates
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/doc
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/examples
 
-%__install -m 644 templates/* %{buildroot}%{_datadir}/%{name}/templates/
-%__install -m 644 doc/*       %{buildroot}%{_datadir}/%{name}/doc/
-%__install -m 644 COPYING     %{buildroot}%{_datadir}/%{name}/doc/
-%__cp      -r     examples/*  %{buildroot}%{_datadir}/%{name}/examples/
+cp -r templates/* %{buildroot}%{_datadir}/%{name}/templates/
+cp -r doc/*       %{buildroot}%{_datadir}/%{name}/doc/
+cp -r examples/*  %{buildroot}%{_datadir}/%{name}/examples/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 images/qtcs.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
+install -m 644 images/qtcs.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # install qutecsound.desktop properly.
 desktop-file-install --vendor '' \
@@ -87,21 +85,8 @@ desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc ChangeLog
+%doc ChangeLog README.md
 %license COPYING
 %{_bindir}/qutecsound
 %{_datadir}/applications/qutecsound.desktop
@@ -110,6 +95,9 @@ fi
 %{_datadir}/%{name}/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.8.1-2
+- update to 0.9.8.1-2
+
 * Mon Nov 11 2019 Yann Collette <ycollette.nospam@free.fr> - 0.9.6-2
 - update to 0.9.6
 

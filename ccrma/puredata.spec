@@ -8,14 +8,10 @@
 Summary: Pure Data
 Name:    puredata
 Version: %{pkgver}
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
-URL:     http://msp.ucsd.edu/software.html
+URL:     https://puredata.info/
 Source0: http://msp.ucsd.edu/Software/pd-%{pdver}.src.tar.gz
-
-# in f27 we are getting leftover debuginfo packages that kill the build
-# this is a hack
-%global debug_package %{nil}
 
 # additional files for the gui package
 # desktop file
@@ -141,6 +137,8 @@ perl -p -i -e "s|/usr/local/lib|%{_libdir}|g" src/s_path.c
 
 %build
 
+%set_build_flags
+
 # now do the build, use "puredata" as the program name
 ./autogen.sh
 %configure --enable-alsa --enable-jack --program-transform-name 's/pd$$/puredata/'
@@ -244,6 +242,9 @@ sed -i -e "s/lib/lib64/g" $RPM_BUILD_ROOT%{_bindir}/pd-gui
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.51.2-2
+- fix debug build
+
 * Thu Sep 24 2020 Yann Collette <ycollette.nospam@free.fr> - 0.51.2-1
 - update to 0.51.2-1
 
