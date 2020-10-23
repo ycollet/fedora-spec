@@ -1,6 +1,3 @@
-# Disable production of debug package. Problem with fedora 23
-# %global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 094dec9b009268814751d3801fc7a5068381c90b
 %global gittag0 master
@@ -8,17 +5,13 @@
 
 Name:    glava
 Version: 1.6.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: GLava is an OpenGL audio spectrum visualizer
 URL:     https://github.com/wacossusca34/glava.git
-Group:   Applications/Multimedia
-
 License: GPLv2+
 
 # original tarfile can be found here:
 Source0: https://github.com/wacossusca34/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: libXrender-devel
@@ -32,23 +25,29 @@ BuildRequires: libXext-devel
 GLava is an OpenGL audio spectrum visualizer. Its primary use case is for desktop windows or backgrounds. Displayed to the left is the radial shader module. Development is active, and reporting issues is encouranged.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
+
+# disable stripping
+sed -i -e "s/strip /true /g" Makefile
 
 %build
 
-make  %{?_smp_mflags} CFLAGS="%{build_cxxflags}" 
+%make_build CFLAGS="%{build_cxxflags}" 
 
 %install
 
-make  %{?_smp_mflags} CFLAGS="%{build_cxxflags}" DESTDIR=%{buildroot} install
+%make_install INSTALL=unix CFLAGS="%{build_cxxflags}"
 
 %files
-%doc README.md LICENSE CONTRIBUTING.md
-
+%doc README.md CONTRIBUTING.md
+%license LICENSE
 %{_bindir}/*
 %{_sysconfdir}/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.3-2
+- fix package
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 1.6.3-1
 - update to 1.6.3-1
 

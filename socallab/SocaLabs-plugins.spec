@@ -16,21 +16,18 @@
 #
 
 # Global variables for github repository
-%global commit0 90b32239575969394de456146fe2a99c55152c18
+%global commit0 8479da129a8bb955870ad3059a22e8f8802630ca
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    SocaLabs-plugins
 Version: 20200512
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Various VST/LV2 Plugins from SocaLabs.com
 License: BSD-3-Clause
-Group:   Applications/Multimedia
 URL:     https://github.com/FigBug/slPlugins
 
-Source0: slPlugins-%{version}.tar.xz
+Source0: https://github.com/FigBug/slPlugins/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: generate-lv2-ttl.py
 Source2: LV2.mak.in
 Source3: AppConfig.h.in
@@ -55,15 +52,14 @@ BuildRequires: python-unversioned-command
 Requires: alsa
 
 %description
-
 https://socalabs.com/
 
 SocaLabs Audio Plugins
 
 %package -n lv2-%{name}
 Summary: Various VST/LV2 Plugins from SocaLabs.com (LV2)
-%description -n lv2-%{name}
 
+%description -n lv2-%{name}
 https://socalabs.com/
 
 SocaLabs Audio Plugins
@@ -72,13 +68,12 @@ SocaLabs Audio Plugins
 Summary: Various VST/LV2 Plugins from SocaLabs.com (VST)
 
 %description -n vst-%{name}
-
 https://socalabs.com/
 
 SocaLabs Audio Plugins
 
 %prep
-%setup -qn slPlugins-%{version}
+%autosetup -n slPlugins-%{commit0}
 
 %build
 
@@ -125,7 +120,7 @@ cat ci/pluginlist.txt | while read PLUGIN; do
   
   cd plugins/$PLUGIN/Builds/LinuxMakefile
   
-  %make_build CONFIG=Release CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" STRIP=true
+  %make_build CONFIG=Release CFLAGS="%{build_cflags}" CXXFLAGS="%{build_cxxflags}" STRIP=true
   
   cp ./build/$PLUGIN        $CURRENT_PATH/bin/standalone/
   cp ./build/$PLUGIN.so     $CURRENT_PATH/bin/vst/
@@ -151,16 +146,14 @@ cp -r bin/lv2/*.lv2 %{buildroot}%{_libdir}/lv2/
 %{_bindir}/*
 
 %files -n lv2-%{name}
-%doc README.md
-%license LICENSE.md
 %{_libdir}/lv2/
 
 %files -n vst-%{name}
-%doc README.md
-%license LICENSE.md
 %{_libdir}/vst/
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 20200512-5
+- fix debug build
 
 * Tue Jun 2 2020 Yann Collette <ycollette.nospam@free.fr> - 20200512-1
 - Initial release

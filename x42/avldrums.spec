@@ -3,9 +3,6 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 # git clone https://github.com/x42/avldrums.lv2.git
 # cd avldrums.lv2
 # git checkout v0.4.1
@@ -17,15 +14,16 @@
 
 Name:    lv2-avldrums-x42-plugin
 Version: 0.4.1.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/x42/avldrums.lv2.git
-Source0: avldrums.lv2.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# ./avldrums-source.sh <tag>
+# ./avldrums-source.sh v0.4.1
+
+Source0: avldrums.lv2.tar.gz
+Source1: avldrums-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -38,22 +36,26 @@ BuildRequires: mesa-libGLU-devel
 avldrums.lv2 is a simple Drum Sample Player Plugin, dedicated to the http://www.bandshed.net/avldrumkits/
 
 %prep
-%setup -qn avldrums.lv2
+%autosetup -n avldrums.lv2
 
 %build
 
-%make_build PREFIX=%{buildroot}%{_usr} LV2DIR=%{buildroot}%{_libdir}/lv2
+%set_build_flags
+
+%make_build PREFIX=/usr LV2DIR=%{_libdir}/lv2 STRIP=true
 
 %install 
 
-make submodules
-make PREFIX=%{buildroot}%{_usr} LV2DIR=%{buildroot}%{_libdir}/lv2 install
+%make_install PREFIX=/usr LV2DIR=%{_libdir}/lv2 STRIP=true
 
 %files
 %{_libdir}/lv2/avldrums.lv2/*
 
 %changelog
-* Tue Dec 31 2019 Yann Collette <ycollette.nospam@free.fr> - 0.4.1
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.1-2
+- fix debug build
+
+* Tue Dec 31 2019 Yann Collette <ycollette.nospam@free.fr> - 0.4.1-1
 - update to 0.4.1
 
 * Thu Oct 17 2019 Yann Collette <ycollette.nospam@free.fr> - 0.4.0

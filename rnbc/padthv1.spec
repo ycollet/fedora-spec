@@ -1,69 +1,65 @@
-# Disable production of debug package.
-%global debug_package %{nil}
+Summary: padthv1 is an old-school all-digital 4-oscillator subtractive polyphonic synthesizer with stereo fx.
+Name:    padthv1
+Version: 0.9.17
+Release: 1%{?dist}
+URL:     http://sourceforge.net/projects/%{name}
+License: GPLv2+
 
-Summary:       padthv1 is an old-school all-digital 4-oscillator subtractive polyphonic synthesizer with stereo fx.
-Name:          padthv1
-Version:       0.9.13
-Release:       1%{?dist}
-URL:           http://sourceforge.net/projects/%{name}
-Source0:       https://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-License:       GPLv2+
+Source0: https://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Patch0:  padthv1-0001-disable-strip.patch
 
-Requires:      hicolor-icon-theme
+Requires: hicolor-icon-theme
 
+BuildRequires: gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-linguist
 BuildRequires: lv2-devel >= 1.2.0
-BuildRequires: autoconf
-BuildRequires: automake
 BuildRequires: desktop-file-utils
 BuildRequires: libsndfile-devel
 BuildRequires: fftw-devel
 BuildRequires: liblo-devel
+BuildRequires: libappstream-glib
 
 %description
 %{name} is an old-school all-digital 4-oscillator subtractive polyphonic synthesizer with stereo fx.
 
 %package -n lv2-%{name}
-Summary:       An LV2 port of synthv1
-Requires:      lv2
-Requires:      %{name}%{?_isa} = %{version}-%{release}
+Summary:  An LV2 port of synthv1
+Requires: lv2
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description -n lv2-%{name}
 An LV2 plugin of the padthv1 synthesizer
 
 %prep
-%setup -q
+%autosetup -p1
 
-# configure hard-codes prepending searches of /usr (already implicit, causes problems),
-# and /usr/local (not needed here), so force it's non-use
-sed -i.ac_with_paths -e "s|^ac_with_paths=.*|ac_with_paths=|g" configure configure.ac
-
-autoconf -f
-sed -i -e 's|-msse -mfpmath=sse -ffast-math|%{optflags} -fPIC|' padthv1_lv2.pro
-sed -i -e 's|-msse -mfpmath=sse -ffast-math|%{optflags} -fPIC|' padthv1_jack.pro
+# Remove cruft from appdata file
+pushd src/appdata
+iconv -f utf-8 -t ascii//IGNORE -o tmpfile %{name}.appdata.xml 2>/dev/null || :
+mv -f tmpfile %{name}.appdata.xml
+popd
 
 %build
 
-autoreconf
-
-export QTDIR=%{_qt5_prefix}
-%configure --enable-qt5 --enable-jack --enable-nsm --enable-liblo
-make
+%configure
+%make_build
 
 %install
 
-make DESTDIR=%{buildroot} install
+%make_install
 chmod +x %{buildroot}%{_libdir}/lv2/%{name}.lv2/%{name}.so
 install -m 0644 src/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{name}.appdata.xml
 
 %files
-%doc COPYING AUTHORS README
+%doc AUTHORS README
+%license COPYING
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/*/*
 %{_bindir}/%{name}_jack
@@ -75,6 +71,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_libdir}/lv2/%{name}.lv2/
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.17-1
+- update to 0.9.17-1 + fix debug build
+
 * Fri Mar 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.13-1
 - update to 0.9.13-1
 

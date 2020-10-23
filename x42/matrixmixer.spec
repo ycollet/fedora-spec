@@ -3,19 +3,15 @@
 %global gittag0 v0.3.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    matrixmixer.lv2
 Version: 0.3.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A LV2 matrix mixer
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/x42/matrixmixer.lv2
-Source0: matrixmixer.lv2.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: matrixmixer.lv2.tar.gz
+Source1: matrixmixer-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -30,21 +26,26 @@ BuildRequires: mesa-libGLU-devel
 A LV2 matrix mixer
 
 %prep
-%setup -qn %{name}
+%autosetup -n %{name}
 
 %build
 
-make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 matrixmixer_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags}
+%make_build PREFIX=/usr LV2DIR=%{_libdir}/lv2 matrixmixer_VERSION=%{version} STRIP=true
 
 %install 
 
-make DESTDIR=%{buildroot} PREFIX=/usr LV2DIR=%{_libdir}/lv2 matrixmixer_VERSION=%{version} LDFLAGS=-lpthread %{?_smp_mflags} install
+%make_install PREFIX=/usr LV2DIR=%{_libdir}/lv2 matrixmixer_VERSION=%{version} STRIP=true
 
 %files
+%doc README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/lv2/*
 %{_datadir}/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.0-2
+- fix debug build
+
 * Fri May 8 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.0-1
 - Initial spec file

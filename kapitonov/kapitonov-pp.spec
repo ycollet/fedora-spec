@@ -3,19 +3,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-%global debug_package %{nil}
-
 Name:    kpp
 Version: 1.2.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A set of plugins for guitar sound processing
 URL:     https://github.com/olegkapitonov/Kapitonov-Plugins-Pack
 Group:   Applications/Multimedia
 License: GPLv2+
 
 Source0: https://github.com/olegkapitonov/Kapitonov-Plugins-Pack/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++ sed
 BuildRequires: jack-audio-connection-kit-devel
@@ -53,19 +49,20 @@ Kapitonov plugins pack.
 A set of plugins for guitar sound processing - LADSPA version
 
 %prep
-%setup -qn Kapitonov-Plugins-Pack-%{commit0}
+%autosetup -n Kapitonov-Plugins-Pack-%{commit0}
 
 %build
 
-CFLAGS="%{build_cflags}" CXXFLAGS="%{build_cxxflags}" VERBOSE=1 meson --prefix=/usr -Dlv2dir=%{_lib}/lv2 -Dladspadir=%{_lib}/ladspa build
+%set_build_flags
+VERBOSE=1 meson --prefix=/usr -Dlv2dir=%{_lib}/lv2 -Dladspadir=%{_lib}/ladspa build
 cd build
 
-DESTDIR=%{buildroot} VERBOSE=1 ninja 
+%ninja_build
 
 %install
 
 cd build
-DESTDIR=%{buildroot} ninja install
+%ninja_install
 
 %files -n ladspa-kpp-plugins
 %{_libdir}/ladspa/*
@@ -73,7 +70,14 @@ DESTDIR=%{buildroot} ninja install
 %files -n lv2-kpp-plugins
 %{_libdir}/lv2/*
 
+%files
+%doc README.md guide.md guide_ru.md
+%license LICENSE.txt
+
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-2
+- fix debug build
+
 * Wed May 27 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-1
 - update to 1.2.1-1
 
