@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 e558feb824132d71004af82cc3a235566b89bec8
 %global gittag0 2.24
@@ -8,15 +6,12 @@
 Summary: sfArk library
 Name:    sfArkLib
 Version: 2.24.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
-
 URL:     https://github.com/raboof/sfArkLib
+
 Source0: https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  libsfark-0001-fix-install-path.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: zlib-devel
@@ -28,32 +23,30 @@ A simple command-line tool to convert sfArk files to sf2
 based on this library can be found at https://github.com/raboof/sfArkXTm
 
 %package devel
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Summary:  Development files for %{name}
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 The %{name}-devel package contains header files for %{name}.
 
 %prep
-%setup -qn %{name}-%{commit0}
-
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{commit0}
 
 %build
 
-%{__make} DESTDIR=%{buildroot} LIB_PATH=%{_libdir} INC_PATH=%{_includedir} %{_smp_mflags}
+%set_build_flags
+
+%make_build LIB_PATH=%{_libdir} INC_PATH=%{_includedir}
 
 %install
 
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} LIB_PATH=%{_libdir} INC_PATH=%{_includedir} install
+install -m 755 -d %{buildroot}/%{_libdir}
+install -m 755 -d %{buildroot}/%{_includedir}
 
-%clean
-%{__rm} -rf %{buildroot}
+install -m 644 sfArkLib.h  %{buildroot}/%{_includedir}/
+install -m 755 libsfark.so %{buildroot}/%{_libdir}
 
 %files
-%defattr(-,root,root,-)
 %doc README.md
 %license COPYING
 %{_libdir}/*
@@ -62,6 +55,9 @@ The %{name}-devel package contains header files for %{name}.
 %{_includedir}/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette dot nospam at free.fr> 2.24-2
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 2.24-1
 - update for Fedora 29
 

@@ -3,21 +3,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Summary: sfArk tool
 Name:    sfarkxtc
 Version: 0.1.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
-
 URL:     https://github.com/raboof/sfarkxtc
+
 Source0: https://github.com/raboof/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  sfark-0001-fix-install-path.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: sfArkLib-devel
@@ -29,29 +23,27 @@ sfArk extractor, console version
 Converts soundfonts in the legacy sfArk v2 file format to sf2
 
 %prep
-%setup -qn %{name}-%{commit0}
-
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{commit0}
 
 %build
 
-%{__make} DESTDIR=%{buildroot} BIN_PATH=%{_bindir} %{_smp_mflags}
+%set_build_flags
+
+%make_build BIN_PATH=%{_bindir}
 
 %install
 
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} BIN_PATH=%{_bindir} install
-
-%clean
-%{__rm} -rf %{buildroot}
+%make_install BIN_PATH=%{_bindir}
 
 %files
-%defattr(-,root,root,-)
 %doc README.md
 %license COPYING
 %{_bindir}/*
 
 %changelog
+* Fri Oct 22 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1-2
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - update for Fedora 29
 
