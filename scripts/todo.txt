@@ -55,18 +55,15 @@ ryukau/ryukau.spec		gcc hangs during compilation of parameter.cpp
 orca/orca.spec			really special build system
 socallab/SocaLabs-plugins.spec	build fails because of a juce path
 qutecsound/qutecsound.spec	(???) - pb with qmake-qt5
+picoloop/picoloop.spec		complex ...
+kxstudio/drmr.spec		cmake pv with strip probably
+kxstudio/protrekkr.spec		(???)
 
 openframeworks/openframeworks.spec
 juce/juce.spec
 
-picoloop/picoloop.spec
 kxstudio/carla.spec
-kxstudio/distrho-ports.spec
-kxstudio/drmr.spec
 kxstudio/Cadence.spec
-kxstudio/premake4.spec
-kxstudio/helm.spec
-kxstudio/protrekkr.spec
 performer/performer.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
