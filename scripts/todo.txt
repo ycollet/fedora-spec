@@ -20,6 +20,11 @@ Add new packages:
  DeLooper -> https://github.com/sonejostudios/DeLooper
  morphex -> https://github.com/MarcSM/morphex
  CF3 -> https://github.com/MtnViewJohn/context-free.git
+ minicomputer -> http://minicomputer.sourceforge.net/
+ freqtweak
+ dexed
+ mephisto -> https://open-music-kontrollers.ch/lv2/mephisto/
+ xmonk -> https://github.com/brummer10/Xmonk.lv2
  
  supercollider-study -> https://github.com/rumblesan/super-collider-study
  
