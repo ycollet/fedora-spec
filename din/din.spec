@@ -1,16 +1,11 @@
-%global debug_package %{nil}
-
 Summary: DIN is a synth of a 3rd kind
 Name:    din
-Version: 46.2.0
+Version: 48.0.0
 Release: 1%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     https://dinisnoise.org/
 
-Source0: https://archive.org/download/dinisnoise_source_code/din-46.2.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://archive.org/download/dinisnoise_source_code/din-48.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -36,15 +31,17 @@ You had pulse, sine, triangle and sawtooth,
 And went forth and made electronic music.
 
 %prep
-%setup -qn %{name}-46.2
+%autosetup -n %{name}-48
+
+# __line conflict with std c++ headers
+sed -i -e "s/__line/__dinline/g" src/line.h
 
 %build
-CFLAGS="-D__UNIX_JACK__ -D__LINUX_ALSA__" CXXFLAGS="-D__UNIX_JACK__ -D__LINUX_ALSA__" LDFLAGS=-ljack ./configure --prefix=%{_prefix} --libdir=%{_libdir}
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags}
+CFLAGS="-D__UNIX_JACK__ -D__LINUX_ALSA__ %{build_cflags}" CXXFLAGS="-D__UNIX_JACK__ -D__LINUX_ALSA__ %{build_cxxflags}" LDFLAGS="-ljack %{build_ldflags}" ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+%make_build
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} install
+%make_install
 
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications pixmaps/din.desktop
 
@@ -52,7 +49,6 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications pixmaps/din.desk
 %{__rm} -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS CHANGELOG BUGS INSTALL NEWS README TODO
 %license COPYING
 %{_bindir}/*
@@ -62,5 +58,8 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications pixmaps/din.desk
 %{_datadir}/pixmaps/din.png
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette dot nospam at free.fr> 48.0.0-1
+- update to 48.0.0 and fix debug build
+
 * Mon May 11 2020 Yann Collette <ycollette dot nospam at free.fr> 46.2.0-1
 - Initial spec file
