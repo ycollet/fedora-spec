@@ -3,9 +3,6 @@
 %global gittag0 2020-07-14
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 Name:    DISTRHO-Ports
 Version: 1.0.1.%{shortcommit0}
 Release: 4%{?dist}
@@ -34,24 +31,28 @@ A set of LV2 plugins
 %prep
 %autosetup -n %{name}-%{commit0}
 
+sed -i -e "/-Wl,--strip-all/d" meson.build
+
 %build
 
-mkdir build
-DESTDIR=%{buildroot} VERBOSE=1 meson build --buildtype release --prefix=/usr -Dbuild-lv2=true -Dbuild-vst3=true
+%set_build_flags
 
-cd build
-DESTDIR=%{buildroot} VERBOSE=1 %ninja_build 
+%meson -Dbuild-lv2=true -Dbuild-vst3=true
+%meson_build 
 
 %install 
 
-cd build
-DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
+%meson_install
 
 %files
+%doc README.md
 %{_libdir}/lv2/*
 %{_libdir}/vst/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-5
+- fix debug build
+
 * Tue Jul 14 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-4
 - update to 2020-07-14 (1.0.1)
 

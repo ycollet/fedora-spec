@@ -1,21 +1,15 @@
-%global debug_package %{nil}
-
 %global commit0 abdedd527e6e1cf86636f0f1e8a3e75b06ed166a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    helm
 Version: 1.0.0.%{shortcommit0}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A LV2 / standalone synth
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/mtytel/helm
 
 Source0: https://github.com/mtytel/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: liblo-devel
@@ -33,7 +27,7 @@ BuildRequires: libcurl-devel
 A LV2 / standalone synth
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 # For Fedora 29
 %if 0%{?fedora} >= 29
@@ -43,26 +37,17 @@ A LV2 / standalone synth
 sed -i "s/\/lib\//\/lib64\//g" Makefile
 
 %build
-make DESTDIR=%{buildroot} standalone lv2 %{?_smp_mflags}
 
-%install 
-make DESTDIR=%{buildroot} standalone lv2 %{?_smp_mflags} install
+%set_build_flags
+%make_build STRIP=true standalone lv2
 
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
+%install
 
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+%make_install STRIP=true standalone lv2
 
 %files
+%doc changelog README.md
+%license COPYING
 %{_bindir}/*
 %{_libdir}/lv2/*
 %{_libdir}/lxvst/*
@@ -73,6 +58,9 @@ fi
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-4
+- fix debug build
+
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0beta-3
 - update for Fedora 29
 

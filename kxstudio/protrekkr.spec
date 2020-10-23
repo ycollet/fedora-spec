@@ -7,7 +7,7 @@
 
 Name:    protrekkr
 Version: 1.0.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A jack tracker
 License: GPLv2+
 URL:     https://github.com/falkTX/protrekkr
@@ -30,12 +30,14 @@ A jack tracker
 
 cp %SOURCE1 makefile.linux
 sed -i -e "12,14d" src/extralibs/sdl_draw/makefile.linux
+sed -i -e "s/FLAGS = -O2/FLAGS = \$(CXXFLAGS)/g" src/extralibs/sdl_draw/makefile.linux
 
 %build
+
 %set_build_flags
 
 cd src/extralibs/sdl_draw
-make -f makefile.linux
+%make_build -f makefile.linux
 cd ../../..
 	
 # -Werror=format-security -Wall
@@ -57,22 +59,22 @@ Type=Application
 Categories=AudioVideo;Audio;
 EOF
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 release/distrib/ptk_linux %{buildroot}%{_bindir}/%{name}
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 644 release/distrib/ptk_linux %{buildroot}%{_bindir}/%{name}
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/instruments/
-%__install -m 644 release/distrib/instruments/* %{buildroot}%{_datadir}/%{name}/instruments/
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/modules/
-%__install -m 644 release/distrib/modules/* %{buildroot}%{_datadir}/%{name}/modules/
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/presets/
-%__install -m 644 release/distrib/presets/* %{buildroot}%{_datadir}/%{name}/presets/
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/reverbs/
-%__install -m 644 release/distrib/reverbs/* %{buildroot}%{_datadir}/%{name}/reverbs/
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/skins/
-%__install -m 644 release/distrib/skins/* %{buildroot}%{_datadir}/%{name}/skins/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/instruments/
+install -m 644 release/distrib/instruments/* %{buildroot}%{_datadir}/%{name}/instruments/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/modules/
+install -m 644 release/distrib/modules/* %{buildroot}%{_datadir}/%{name}/modules/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/presets/
+install -m 644 release/distrib/presets/* %{buildroot}%{_datadir}/%{name}/presets/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/reverbs/
+install -m 644 release/distrib/reverbs/* %{buildroot}%{_datadir}/%{name}/reverbs/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/skins/
+install -m 644 release/distrib/skins/* %{buildroot}%{_datadir}/%{name}/skins/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 protrekkr.jpg %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.jpg
+install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
+install -m 644 protrekkr.jpg %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.jpg
 
 %files
 %doc README
@@ -81,6 +83,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+- fix debug build
+
 * Mon Aug 31 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
 - update to master - remove internal zlib dependency + cleanup
 

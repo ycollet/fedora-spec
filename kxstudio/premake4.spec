@@ -1,12 +1,8 @@
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Summary: Tool for describing builds
 Name:    premake4
 Version: 4.4beta5
 Release: 1%{?dist}
 License: GPLv3+
-Group:   Developpment
 URL:     http://sourceforge.net/projects/premake/
 
 Source0: https://sourceforge.net/projects/premake/files/Premake/4.4/premake-4.4-beta5-src.zip
@@ -14,27 +10,36 @@ Source0: https://sourceforge.net/projects/premake/files/Premake/4.4/premake-4.4-
 BuildRequires: gcc gcc-c++
 
 %description
-Describe your software project with a full-featured scripting language and let Premake write the build scripts for you. With one file your project can support both IDE-addicted Windows coders and Linux command-line junkies!
+Describe your software project with a full-featured scripting language
+and let Premake write the build scripts for you. With one file your project
+can support both IDE-addicted Windows coders and Linux command-line junkies!
 
 %prep
 %autosetup -n premake-4.4-beta5
 
+sed -i -e "s/ -s//g" build/gmake.unix/Premake4.make
+
 %build
+
+%set_build_flags
 
 cd build/gmake.unix/
 %make_build
 
 %install
-%__install -m 755 -d %{buildroot}/%{_bindir}/
+
+install -m 755 -d %{buildroot}/%{_bindir}/
 cp bin/release/premake4 %{buildroot}/%{_bindir}/premake4
 
 %files
-%defattr(-,root,root,-)
 %doc BUILD.txt CHANGES.txt README.txt
 %license LICENSE.txt
 %{_bindir}/*
 
 %changelog
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 4.4-beta5-1
+- fix debug build
+
 * Mon Mar 4 2019 Yann Collette <ycollette.nospam@free.fr> - 4.4-beta5-1
 - update to 4.4-beta5
 

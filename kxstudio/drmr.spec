@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 a593de0836790a3437b861cf0eb7acd1b581e512
 %global gittag0 lv2unstable
@@ -7,16 +5,12 @@
 
 Name:    drmr
 Version: 1.0.0.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A drum LV2 plugin
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/falkTX/drmr
-Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: gtk2-devel
@@ -30,23 +24,27 @@ BuildRequires: cmake
 A drum LV2 plugin
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
-%cmake -DLV2_INSTALL_DIR:Path=%{_lib}/lv2 .
+%cmake -DLV2_INSTALL_DIR:Path=%{_lib}/lv2
 
-make VERBOSE=1 %{?_smp_mflags}
+%cmake_build
 
 %install
-make VERBOSE=1 DESTDIR=%{buildroot} %{?_smp_mflags} install
+
+%cmake_install
 
 %files
 %{_libdir}/lv2/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- fix debug build
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - update for Fedora 29
 
-* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0
+* Sat Jun 06 2015 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
