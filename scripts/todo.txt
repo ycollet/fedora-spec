@@ -35,6 +35,12 @@ Add check section:
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
+JUCE:
+set the default path for:
+Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules/
+And set some other folders ...
+Lokk at .config/Projucer/Projucer.settings
+
 Fix debug generation:
 
 purr-data/purr-data.spec	has a pure binary dependency
