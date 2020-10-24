@@ -1,5 +1,5 @@
 Name:    redkite
-Version: 1.0.3
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: A cross-platform GUI toolkit in C++.
 URL:     https://gitlab.com/iurie-sw/redkite
@@ -40,6 +40,9 @@ sed -i -e "s/${CMAKE_INSTALL_PREFIX}\/lib/${CMAKE_INSTALL_PREFIX}\/%{_lib}/g" CM
 %{_mandir}/*
 
 %changelog
+* Sat Oct 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+- update to 1.1.0-3
+
 * Wed Sep 30 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-3
 - update to 1.0.3-3 - fix for fedora 33
 
@@ -52,7 +55,7 @@ sed -i -e "s/${CMAKE_INSTALL_PREFIX}\/lib/${CMAKE_INSTALL_PREFIX}\/%{_lib}/g" CM
 * Fri Jul 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1
 - update to 1.0.1-1
 
-* Thu Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
+* Fri Jun 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - update to 1.0.0-1
 
 * Sat May 09 2020 Bruno Vernay <brunovern.a@gmail.com> - 0.8.1-2
