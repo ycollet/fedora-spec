@@ -1,0 +1,46 @@
+From f4dc157765d87ce5df8babcaf7ff023d5e9c4063 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 24 Oct 2020 18:03:13 +0200
+Subject: [PATCH] soundbanks in share
+
+---
+ Source/GlobalIncludes.h | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/Source/GlobalIncludes.h b/Source/GlobalIncludes.h
+index 3303e99f..826b9155 100644
+--- a/Source/GlobalIncludes.h
++++ b/Source/GlobalIncludes.h
+@@ -71,10 +71,9 @@
+ 
+ 
+ 
+-//#ifdef ODIN_LINUXXXX
+-//#define ODIN_STORAGE_PATH File::getSpecialLocation(File::SpecialLocationType::commonApplicationDataDirectory).getFullPathName() +                    \
+-// 	    File::getSeparatorString() + "odin2"
+-//#else 
++#ifdef ODIN_LINUX
++#define ODIN_STORAGE_PATH "/usr/share/odin2"
++#else 
+ #ifdef ODIN_MAC
+ #define ODIN_STORAGE_PATH File::getSpecialLocation(File::SpecialLocationType::commonApplicationDataDirectory).getFullPathName() +                    \
+  	    File::getSeparatorString()  + "Audio" + File::getSeparatorString() + "Presets" + File::getSeparatorString() + "odin2"
+@@ -82,7 +81,7 @@
+ #define ODIN_STORAGE_PATH File::getSpecialLocation(File::SpecialLocationType::commonApplicationDataDirectory).getFullPathName() +                    \
+  	    File::getSeparatorString()  + "odin2"
+ #endif
+-//#endif
++#endif
+ #define CONFIG_FILE_PATH ODIN_STORAGE_PATH + File::getSeparatorString() + "odin2.conf"
+ 
+ 
+@@ -548,4 +547,4 @@ public:
+ 	static int compareElements(const File &first, const File &second) {
+ 		return first.getFileName().compareIgnoreCase(second.getFileName());
+ 	}
+-};
+\ No newline at end of file
++};
+-- 
+2.26.2
+
