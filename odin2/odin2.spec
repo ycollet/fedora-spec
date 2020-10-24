@@ -17,19 +17,24 @@ Source1: odin2-build.tar.gz
 Patch0:  odin2-0001-soundbanks-in-share.patch
 
 BuildRequires: gcc gcc-c++
-BuildRequires: libX11-devel
-BuildRequires: cmake
-BuildRequires: xcb-util-cursor-devel
-BuildRequires: libxkbcommon-x11-devel
-BuildRequires: rsync
 BuildRequires: python2
 BuildRequires: cairo-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
+BuildRequires: libX11-devel
 BuildRequires: xcb-util-keysyms-devel
 BuildRequires: xcb-util-devel
 #BuildRequires: JUCE == 6.0.1
 BuildRequires: JUCE
+BuildRequires: libXrandr-devel
+BuildRequires: xcb-util-cursor-devel
+BuildRequires: libxkbcommon-x11-devel
+BuildRequires: libXinerama-devel
+BuildRequires: libcurl-devel
+BuildRequires: alsa-lib-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: mesa-libGL-devel
+BuildRequires: libXcursor-devel
 
 %description
 A VST3 synthetizer
