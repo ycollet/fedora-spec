@@ -39,7 +39,8 @@ JUCE:
 set the default path for:
 Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules/
 And set some other folders ...
-Lokk at .config/Projucer/Projucer.settings
+Look at .config/Projucer/Projucer.settings
+Change paths in getFallbackPathForOS in extras/ProJucer/Source/Settings/jucer_StoredSettings.cpp
 
 Fix debug generation:
 
