@@ -37,8 +37,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 Fix debug generation:
 
-plebtracker/plebtracker.spec	(???)
+purr-data/purr-data.spec	has a pure binary dependency
 improviz/improviz.spec 		(Cabal ...)
+processing/processing.spec	precompiled java package
+
+plebtracker/plebtracker.spec	(???)
 airwindows/airwindows.spec 	(???)
 amuc/amuc.spec 			(???)
 ams-lv2/lvtk.spec 		(???)
@@ -46,9 +49,7 @@ psi-plugins 			error with fedora 33 + lv2-devel
 ninjam/ninjam-client.spec 	(???)
 ninjam/abninjam.spec 		(???)
 ninjam/ninjam-server.spec 	(???)
-purr-data/purr-data.spec	has a pure binary dependency
 zytrax/zytrax.sp<ec		(???)
-processing/processing.spec	precompiled java package
 iannix/iannix.spec		(???) - pb with qmake-qt5
 mv-6pm/mv-6pm.spec		(???) - pb with qmake-qt5
 oxefmsynth/oxefmsynth.spec	(???) - pb with debugsource ...
@@ -61,7 +62,7 @@ orca/orca.spec			really special build system
 socallab/SocaLabs-plugins.spec	build fails because of a juce path
 qutecsound/qutecsound.spec	(???) - pb with qmake-qt5
 picoloop/picoloop.spec		complex ...
-kxstudio/drmr.spec		cmake pv with strip probably
+kxstudio/drmr.spec		cmake pb with strip probably
 kxstudio/protrekkr.spec		(???)
 
 openframeworks/openframeworks.spec
@@ -69,3 +70,13 @@ performer/performer.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
 ossia/ossia-score.spec
+odin2/odin2.spec
+
+Cadence:
+../widgets/pixmapdial.cpp: In member function 'virtual void PixmapDial::paintEvent(QPaintEvent*)':
+../widgets/pixmapdial.cpp:231:26: error: aggregate 'QPainterPath ballPath' has incomplete type and cannot be defined
+  231 |             QPainterPath ballPath;
+      |                          ^~~~~~~~
+../widgets/pixmapdial.cpp:278:26: error: aggregate 'QPainterPath ballPath' has incomplete type and cannot be defined
+  278 |             QPainterPath ballPath;
+      |                          ^~~~~~~~
