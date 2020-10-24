@@ -1,24 +1,12 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
-# Global variables for github repository
-%global commit0 1e71c07a492f01022f9064560c95c2bcd938847c
-%global gittag0 5.4.7
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    JUCE
-Version: 5.4.7.%{shortcommit0}
+Version: 6.0.4
 Release: 3%{?dist}
 Summary: JUCE Framework
-URL:     https://github.com/WeAreROLI/JUCE
-Group:   Applications/Multimedia
-
+URL:     https://github.com/juce-framework/JUCE
 License: GPLv2+
 
 # original tarfile can be found here:
-Source0: https://github.com/WeAreROLI/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/juce-framework/JUCE/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: lv2-devel
@@ -41,82 +29,69 @@ Code::Blocks, CLion and Linux Makefiles as well as containing a source code edit
 live-coding engine which can be used for rapid prototyping.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 %build
 
-cd doxygen
+%set_build_flags
+
+export CXXFLAGS="-DJUCER_ENABLE_GPL_MODE $CXXFLAGS"
+export CFLAGS="-DJUCER_ENABLE_GPL_MODE $CFLAGS"
+
+cd docs/doxygen
 sed -i -e "s/python/python2/g" Makefile
 
-# Remove old compilation flags and use compilation flags from Fedora
-sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3/-O0/g" Makefile
-
 mkdir build
-make %{?_smp_mflags} CONFIG=Release # CXXFLAGS="%{build_cxxflags}" 
-cd ../extras
+%make_build CONFIG=Release STRIP=true 
+cd ../../extras
 
 cd AudioPluginHost/Builds/LinuxMakefile/
-
-sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3/-O0/g" Makefile
-sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
-
-
-make %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
+%make_build CONFIG=Release STRIP=true
 cd ../../..
 
 cd BinaryBuilder/Builds/LinuxMakefile/
-
-sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3/-O0/g" Makefile
-sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
-
-make %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
+%make_build CONFIG=Release STRIP=true
 cd ../../..
 
 cd Projucer/Builds/LinuxMakefile/
-
-sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3/-O0/g" Makefile
-sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
-
-make  %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
+%make_build CONFIG=Release STRIP=true
 cd ../../..
 
 cd UnitTestRunner/Builds/LinuxMakefile/
-
-sed -i -e "s/-march=native//g" Makefile
-sed -i -e "s/-O3/-O0/g" Makefile
-sed -i -e "s/#define JUCER_ENABLE_GPL_MODE 0/#define JUCER_ENABLE_GPL_MODE 1/g" ../../JuceLibraryCode/AppConfig.h
-
-make %{?_smp_mflags} CONFIG=Release #CXXFLAGS="%{build_cxxflags}"
+%make_build CONFIG=Release STRIP=true
 cd ../../..
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 extras/AudioPluginHost/Builds/LinuxMakefile/build/AudioPluginHost %{buildroot}%{_bindir}/
-%__install -m 755 extras/BinaryBuilder/Builds/LinuxMakefile/build/BinaryBuilder     %{buildroot}%{_bindir}/
-%__install -m 755 extras/Projucer/Builds/LinuxMakefile/build/Projucer               %{buildroot}%{_bindir}/
-%__install -m 755 extras/UnitTestRunner/Builds/LinuxMakefile/build/UnitTestRunner   %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 extras/AudioPluginHost/Builds/LinuxMakefile/build/AudioPluginHost %{buildroot}%{_bindir}/
+install -m 755 extras/BinaryBuilder/Builds/LinuxMakefile/build/BinaryBuilder     %{buildroot}%{_bindir}/
+install -m 755 extras/Projucer/Builds/LinuxMakefile/build/Projucer               %{buildroot}%{_bindir}/
+install -m 755 extras/UnitTestRunner/Builds/LinuxMakefile/build/UnitTestRunner   %{buildroot}%{_bindir}/
 
-%__install -m 755 -d %{buildroot}/%{_usrsrc}/JUCE/
-%__install -m 755 -d %{buildroot}/%{_usrsrc}/JUCE/examples/
-cp -ra examples/*    %{buildroot}/%{_usrsrc}/JUCE/examples/
-%__install -m 755 -d %{buildroot}/%{_usrsrc}/JUCE/modules/
-cp -ra modules/*     %{buildroot}/%{_usrsrc}/JUCE/modules/
+install -m 755 -d %{buildroot}/%{_usrsrc}/JUCE/
+install -m 755 -d %{buildroot}/%{_usrsrc}/JUCE/examples/
+cp -ra examples/* %{buildroot}/%{_usrsrc}/JUCE/examples/
+install -m 755 -d %{buildroot}/%{_usrsrc}/JUCE/modules/
+cp -ra modules/*  %{buildroot}/%{_usrsrc}/JUCE/modules/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/JUCE/doc/
-cp -ra doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
+install -m 755 -d         %{buildroot}/%{_datadir}/JUCE/doc/
+cp -ra docs/doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 
 %files
-%doc README.md LICENSE.md 
+%doc README.md
+%license LICENSE.md 
 %{_bindir}/*
 %{_datadir}/*
 %{_usrsrc}/*
 
 %changelog
+* Sat Oct 24 2020 Yann Collette <ycollette.nospam@free.fr> - 6.0.4-3
+- update to 6.0.4-3
+
+* Sat Oct 24 2020 Yann Collette <ycollette.nospam@free.fr> - 6.0.1-3
+- update to 6.0.1-3
+
 * Mon Feb 10 2020 Yann Collette <ycollette.nospam@free.fr> - 5.4.7-3
 - update to 5.4.7
 
