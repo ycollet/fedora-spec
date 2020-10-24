@@ -13,6 +13,7 @@ License: GPLv2+
 URL:     https://github.com/TheWaveWarden/odin2
 
 Source0: https://github.com/TheWaveWarden/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: odin2-build.tar.gz
 Patch0:  odin2-0001-soundbanks-in-share.patch
 
 BuildRequires: gcc gcc-c++
@@ -27,7 +28,8 @@ BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 BuildRequires: xcb-util-keysyms-devel
 BuildRequires: xcb-util-devel
-BuildRequires: JUCE == 6.0.1
+#BuildRequires: JUCE == 6.0.1
+BuildRequires: JUCE
 
 %description
 A VST3 synthetizer
@@ -47,13 +49,13 @@ VST3 version of %{name}
 
 %set_build_flags
 
+Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules/
 Projucer --resave Odin.jucer
 
 export HOME=`pwd`
 mkdir -p .vst3
 mkdir -p .lv2
 mkdir -p .local/share/Surge
-
 
 cd Builds/LinuxMakefile
 %make_build CONFIG=Release STRIP=true
