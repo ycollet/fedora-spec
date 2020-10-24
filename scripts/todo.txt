@@ -65,10 +65,6 @@ kxstudio/drmr.spec		cmake pv with strip probably
 kxstudio/protrekkr.spec		(???)
 
 openframeworks/openframeworks.spec
-juce/juce.spec
-
-kxstudio/carla.spec
-kxstudio/Cadence.spec
 performer/performer.spec
 zrythm/libcyaml.spec
 zrythm/zrythm.spec
