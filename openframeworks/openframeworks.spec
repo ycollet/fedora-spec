@@ -1,12 +1,8 @@
-# Disable production of debug package. Problem with fedora 23
-%global debug_package %{nil}
-
 Name:    openFrameworks
 Version: 0.11.0
 Release: 2%{?dist}
 Summary: openFrameworks library / code
 URL:     https://github.com/openframeworks/openFrameworks
-
 License: GPLv2+
 
 # to get the sources:
@@ -14,6 +10,7 @@ License: GPLv2+
 
 Source0: openFrameworks.tar.gz
 Source1: of-make-workspace
+Source2: source.sh
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: freeimage-devel
@@ -77,6 +74,8 @@ else
     LIBSPATH=linux
 fi
 
+%set_build_flags
+
 cd libs/openFrameworksCompiled/project
 %make_build Release
 
@@ -91,13 +90,13 @@ cd libs/openFrameworksCompiled/project
 
 %install
 
-%__install -dm755 %{buildroot}/%{_bindir}/
-%__install -Dm755 apps/projectGenerator/commandLine/bin/projectGenerator %{buildroot}/%{_bindir}/projectGenerator
+install -dm755 %{buildroot}/%{_bindir}/
+install -Dm755 apps/projectGenerator/commandLine/bin/projectGenerator %{buildroot}/%{_bindir}/projectGenerator
 
-%__install -dm755 %{buildroot}/opt/openFrameworks
+install -dm755 %{buildroot}/opt/openFrameworks
 cp -R . %{buildroot}/opt/openFrameworks
 
-%__install -Dm775 %{SOURCE1} %{buildroot}/opt/openFrameworks/scripts/of-make-workspace
+install -Dm775 %{SOURCE1} %{buildroot}/opt/openFrameworks/scripts/of-make-workspace
 
 sed -i -e "s/env python/env python2/g" %{buildroot}/opt/openFrameworks/scripts/dev/parsePRs.py
 
