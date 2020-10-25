@@ -7,6 +7,7 @@ License: GPLv2+
 
 # to get the sources:
 # ./source.sh 0.11.0
+# ./source.sh patch-release
 
 Source0: openFrameworks.tar.gz
 Source1: of-make-workspace
