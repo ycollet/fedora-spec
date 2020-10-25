@@ -1,12 +1,13 @@
 Name:    JUCE
 Version: 6.0.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: JUCE Framework
 URL:     https://github.com/juce-framework/JUCE
 License: GPLv2+
 
 # original tarfile can be found here:
 Source0: https://github.com/juce-framework/JUCE/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:  juce-0001-set-default-path.patch
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: lv2-devel
@@ -29,7 +30,7 @@ Code::Blocks, CLion and Linux Makefiles as well as containing a source code edit
 live-coding engine which can be used for rapid prototyping.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 
@@ -86,6 +87,9 @@ cp -ra docs/doxygen/doc/* %{buildroot}/%{_datadir}/JUCE/doc/
 %{_usrsrc}/*
 
 %changelog
+* Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 6.0.4-4
+- adjust default paths
+
 * Sat Oct 24 2020 Yann Collette <ycollette.nospam@free.fr> - 6.0.4-3
 - update to 6.0.4-3
 
