@@ -1,5 +1,5 @@
 Name:    sfizz
-Version: 0.5.0
+Version: 0.5.1
 Release: 3%{?dist}
 License: BSD-2-Clause
 Summary: Sampler plugin and library for SFZ instruments
@@ -9,7 +9,7 @@ Source0: sfizz-%{version}.tar.gz
 Source1: sfizz_source.sh
 
 # ./sfizz_source.sh <tag>
-# ./sfizz_source.sh 0.4.0
+# ./sfizz_source.sh 0.5.1
 
 Requires: libsndfile
 Requires: jack-audio-connection-kit
@@ -78,6 +78,9 @@ Header files for the Sfizz library.
 %exclude %{_libdir}/libsfizz.a
 
 %changelog
+* Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-3
+- update to 0.5.1-3
+
 * Fri Oct 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.0-3
 - update to 0.5.0-3 - fix for fedora 33
 
