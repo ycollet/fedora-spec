@@ -1,11 +1,7 @@
-%global debug_package %{nil}
-
 Name:    zrythm
 Version: 1.0.0.a401
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
@@ -42,6 +38,7 @@ BuildRequires: python3-sphinx-intl
 BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
+BuildRequires: breeze-icon-theme
 
 %description
 Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
@@ -67,15 +64,13 @@ sed -i -e "s/meson_version: '>= 0.55.0'/meson_version: '>= 0.52.0'/g" meson.buil
 %build
 
 mkdir build
-DESTDIR=%{buildroot} VERBOSE=1 meson -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr build
+%meson -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr
 
-cd build
-DESTDIR=%{buildroot} VERBOSE=1 %ninja_build 
+%meson_build 
 
 %install 
 
-cd build
-DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
+%meson_install
 
 desktop-file-install --vendor '' \
         --add-category=X-Sound \

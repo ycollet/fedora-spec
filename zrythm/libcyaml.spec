@@ -2,14 +2,10 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:     libcyaml
 Version:  1.1.0
-Release:  1%{?dist}
+Release:  2%{?dist}
 Summary:  C library for reading and writing YAML
-
 License:  ISC
 Packager: Alexandros Theodotou
 
@@ -36,6 +32,8 @@ The %{name}-devel package contains header files for %{name}.
 
 %build
 
+%set_build_flags
+
 %make_build PREFIX=/usr LIBDIR=%{_lib}
 
 %install
@@ -44,7 +42,6 @@ mkdir -p %{buildroot}%{_libdir}/pkgconfig %{buildroot}%{_includedir}
 %make_install PREFIX=/usr LIBDIR=%{_lib}
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/*
 
 %files devel
