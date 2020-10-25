@@ -1,24 +1,15 @@
 %global debug_package %{nil}
 
-# Global variables for github repository
-%global commit0 0657978769355f0238545c2db6f3eae5b6479dce
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    Carla
-Version: 2.1.0
+Version: 2.2.0
 Release: 6%{?dist}
 Summary: A rack manager JACK
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/falkTX/Carla
 
-Source0: https://github.com/falkTX/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/falkTX/Carla/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: carla-change-lib.sh
 Source2: carla-change-py.sh
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: python-qt5-devel
@@ -45,7 +36,7 @@ Requires(pre): python3-qt5
 A rack manager for JACK
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 %ifarch x86_64 amd64
 %{SOURCE1}
@@ -53,27 +44,13 @@ A rack manager for JACK
 %{SOURCE2}
 
 %build
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} %{?_smp_mflags}
+%make_build PREFIX=/usr LIBDIR=%{_libdir}
 
 %install 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir}  %{?_smp_mflags} install
+%make_install PREFIX=/usr LIBDIR=%{_libdir}
 
 # Create a vst directory
-%__install -m 755 -d %{buildroot}/%{_libdir}/vst/
-
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+install -m 755 -d %{buildroot}/%{_libdir}/vst/
 
 %files
 %{_bindir}/*
@@ -88,6 +65,9 @@ fi
 %{_datadir}/mime/*
 
 %changelog
+* Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-6
+- update to 2.2.0-6
+
 * Thu Apr 16 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.0-6
 - update to 2.1.0-6
 
