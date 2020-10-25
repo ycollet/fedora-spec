@@ -1,11 +1,11 @@
 Name:    element
-Version: 0.44.0
+Version: 0.45.1
 Release: 1%{?dist}
 Summary: This is the community version of Element, a modular AU/LV2/VST/VST3 audio plugin host.
 URL:     https://github.com/kushview/Element
 License: GPL3
 
-# ./element-source.sh 0.44.0
+# ./element-source.sh 0.45.1
 
 Source0: Element.tar.gz
 Source1: GitVersion.h
@@ -72,7 +72,11 @@ desktop-file-install --vendor '' \
 %{_libdir}/*
 %{_datadir}/applications/*
 %{_datadir}/element/*
+%{_datadir}/icons/hicolor/*
 
 %changelog
+* Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 0.45.1-1
+- update to 0.45.1
+
 * Wed Oct 14 2020 Yann Collette <ycollette.nospam@free.fr> - 0.44.0-1
 - Initial spec file
