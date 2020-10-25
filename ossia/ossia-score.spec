@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 f7e34e37d376e18ec097fa42957c9ecb42d50b9f
 %global gittag0 master
@@ -10,26 +8,13 @@ Version: 2.5.2
 Release: 1%{?dist}
 Summary: ossia score is a sequencer for audio-visual artists, designed to create interactive shows
 URL:     https://github.com/OSSIA/score
-Group:   Applications/Multimedia
 License: CeCILL License v2
 
-# git clone https://github.com/OSSIA/score
-# cd score
-# git checkout v2.5.2
-# git submodule init
-# git submodule update
-# cd 3rdparty/libossia/
-# git submodule init
-# git submodule update
-# cd ../..
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# mv score score-v2.5.2
-# tar cvfz score-v2.5.2.tar.gz score-v2.5.2/*
+# ./ossia-source.sh <tag>
+# ./ossia-source.sh v2.5.2
 
 Source0: https://gitlab.com/OSSIA/score/-/archive/v%{version}/score-v%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source1: ossia-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -66,24 +51,19 @@ sed -i -e "s/BOOST_MINOR 70/BOOST_MINOR 69/g" 3rdparty/libossia/cmake/OssiaDeps.
 
 %build
 
-mkdir build
-cd build
-
 %cmake -DCMAKE_BUILD_TYPE=RELEASE \
        -DSCORE_CONFIGURATION=static-release \
        -DCMAKE_AR=/usr/bin/gcc-ar \
        -DCMAKE_RANLIB=/usr/bin/gcc-ranlib \
-       -DPORTAUDIO_ONLY_DYNAMIC=1 ..
+       -DPORTAUDIO_ONLY_DYNAMIC=1
 
-make DESTDIR=%{buildroot} %{?_smp_mflags}
+%cmake_build
 
 %install
 
-cd build
+%cmake_install
 
-make DESTDIR=%{buildroot} install
-
-%__install -m 755 -d %{buildroot}/%{_datadir}/Ossia/
+install -m 755 -d %{buildroot}/%{_datadir}/Ossia/
 mv %{buildroot}/%{_usr}/Ossia %{buildroot}/%{_datadir}/Ossia/Qml
 
 # remove lib, it contains only static libs
@@ -91,25 +71,16 @@ rm -rf %{buildroot}/%{_usr}/lib
 
 rm -f %{buildroot}/%{_usr}/include/.gitignore
 
-%post
-touch --no-create %{_datadir}/mime/packages &>/dev/null || :
-update-desktop-database &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  update-mime-database %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
 %files
-%doc LICENSE.txt INSTALL.md README.md AUTHORS
+%doc INSTALL.md README.md AUTHORS
+%license LICENSE.txt
 %{_bindir}/*
 %{_includedir}/*
 %{_datadir}/*
 
 %changelog
+* Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 2.5.2-2
+- fix debug build
+
 * Wed Oct 23 2019 Yann Collette <ycollette.nospam@free.fr> - 2.5.2-1
 - initial version of the spec file
