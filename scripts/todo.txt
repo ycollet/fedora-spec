@@ -24,7 +24,9 @@ Add new packages:
  dexed
  mephisto -> https://open-music-kontrollers.ch/lv2/mephisto/
  xmonk -> https://github.com/brummer10/Xmonk.lv2
- ZPlugins -> https://git.zrythm.org/cgit/zplugins/
+ zrythm - ZPlugins -> https://git.zrythm.org/cgit/zplugins/
+ zrythm - reproc -> https://github.com/DaanDeMeyer/reproc
+ emissioncontrol2 -> https://github.com/EmissionControl2/EmissionControl2
  
  supercollider-study -> https://github.com/rumblesan/super-collider-study
  
