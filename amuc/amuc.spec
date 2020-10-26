@@ -56,6 +56,8 @@ install -m 644 doc/* %{buildroot}/%{_docdir}/amuc/
 rm %{buildroot}/%{_docdir}/amuc/amuc.1
 
 %files
+%doc README
+%license LICENSE
 %{_bindir}/*
 %{_datadir}/amuc/*
 %{_docdir}/amuc/*
