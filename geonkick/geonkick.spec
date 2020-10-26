@@ -1,5 +1,5 @@
 Name:    geonkick
-Version: 2.3.8
+Version: 2.4.0
 Release: 2%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
@@ -15,7 +15,7 @@ BuildRequires: libsndfile-devel
 BuildRequires: rapidjson-devel
 BuildRequires: cmake make
 BuildRequires: desktop-file-utils
-BuildRequires: redkite
+BuildRequires: redkite == 1.2.0
 BuildRequires: libX11-devel
 BuildRequires: cairo-devel
 
@@ -49,13 +49,16 @@ sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" pl
 %{_datadir}/*
 
 %changelog
+* Mon Oct 26 2020 Yann Collette <ycollette.nospam@free.fr> - 2.4.0-2
+- Update to 2.4.0-2
+
 * Wed Sep 30 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.8-2
 - Update to 2.3.8-2 - fix for fedora 33
 
 * Tue Sep 22 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.8-1
 - Update to 2.3.8-1
 
-* Mon Aug 18 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.7-1
+* Tue Aug 18 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.7-1
 - Update to 2.3.7-1
 
 * Thu Aug 13 2020 Yann Collette <ycollette.nospam@free.fr> - 2.3.4-1
