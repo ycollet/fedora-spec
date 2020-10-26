@@ -51,12 +51,10 @@ orca/orca.spec			really special build system
 ryukau/ryukau.spec		gcc hangs during compilation of parameter.cpp
 performer/performer.spec	ui_setlist.h missing - cmake 3.18 pb probably
 socallab/SocaLabs-plugins.spec	build fails because of a default juce path / maybe use juce 5.4 ...
-
-surge/stochas.spec		juce maybe ...
+surge/stochas.spec		jucaid compilation pb - maybe due tu %set_build_flags ...
 
 zrythm/zrythm.spec
 ossia/ossia-score.spec
-odin2/odin2.spec
 
 ** Check install 644 / 755 usage:
 A misuse of these permissions may let the debug build fail
