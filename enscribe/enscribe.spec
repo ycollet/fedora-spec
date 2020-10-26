@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Summary: Enscribe creates digital audio watermark images from photgraphic images.
 Name:    enscribe
 Version: 0.1.0
@@ -30,25 +28,20 @@ compression, reverb, chorus, etc. Heavy EQ and flange can stripe out vertical
 sections, but they can also ruin an otherwise good song too.
 
 %prep
-%setup -q
-
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%autosetup -p1
 
 # Force Fedora's optflags
 sed -i 's|gcc |gcc %{optflags} |' makefile
 
 %build
 
+%set_build_flags
+
 %make_build PREFIX=%{_prefix}
 
 %install
 
 %make_install PREFIX=%{_prefix}
-
-# mkdir -p $RPM_BUILD_ROOT%{_bindir}/
-# %__install -m 644 enscribe %{buildroot}%{_bindir}/enscribe
 
 %files
 %doc README
