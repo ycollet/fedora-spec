@@ -26,52 +26,42 @@ Add new packages:
  xmonk -> https://github.com/brummer10/Xmonk.lv2
  zrythm - ZPlugins -> https://git.zrythm.org/cgit/zplugins/
  zrythm - reproc -> https://github.com/DaanDeMeyer/reproc
+ zrythm - lsp-dsp -> add a devel package
  emissioncontrol2 -> https://github.com/EmissionControl2/EmissionControl2
  
  supercollider-study -> https://github.com/rumblesan/super-collider-study
  
-Add source.sh file in spec file:
+** Add source.sh file in spec file:
 Source1: source.sh
 
-Add check section:
+** Add check section:
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
-Fix debug generation:
+** Fix debug generation:
 
 purr-data/purr-data.spec	has a pure binary dependency
 improviz/improviz.spec 		(Cabal ...)
 processing/processing.spec	precompiled java package
-
-plebtracker/plebtracker.spec	(???)
-airwindows/airwindows.spec 	(???)
-amuc/amuc.spec 			(???)
+rack				fail with some fedora flags
 ams-lv2/lvtk.spec 		(???)
 psi-plugins 			error with fedora 33 + lv2-devel
-ninjam/ninjam-client.spec 	(???)
-ninjam/abninjam.spec 		(???)
-ninjam/ninjam-server.spec 	(???)
-zytrax/zytrax.sp<ec		(???)
-iannix/iannix.spec		(???) - pb with qmake-qt5
-mv-6pm/mv-6pm.spec		(???) - pb with qmake-qt5
-oxefmsynth/oxefmsynth.spec	(???) - pb with debugsource ...
-mx44/mx44.spec			no more source. Put the source on github ...
-rack				fail with some fedora flags
-tunefish/tunefish.spec		(???) - maybe because it's a vst
-surge/stochas.spec		juce maybe ...
-ryukau/ryukau.spec		gcc hangs during compilation of parameter.cpp
-orca/orca.spec			really special build system
-socallab/SocaLabs-plugins.spec	build fails because of a juce path
-qutecsound/qutecsound.spec	(???) - pb with qmake-qt5
 picoloop/picoloop.spec		complex ...
-kxstudio/drmr.spec		cmake pb with strip probably
-kxstudio/protrekkr.spec		(???)
-performer/performer.spec	cmake pb with strip probably
+orca/orca.spec			really special build system
+ryukau/ryukau.spec		gcc hangs during compilation of parameter.cpp
+performer/performer.spec	ui_setlist.h missing - cmake 3.18 pb probably
+socallab/SocaLabs-plugins.spec	build fails because of a default juce path / maybe use juce 5.4 ...
+
+surge/stochas.spec		juce maybe ...
 
 zrythm/zrythm.spec
 ossia/ossia-score.spec
 odin2/odin2.spec
 
+** Check install 644 / 755 usage:
+A misuse of these permissions may let the debug build fail
+
+** Fix Cadence build on FC33:
 Cadence:
 ../widgets/pixmapdial.cpp: In member function 'virtual void PixmapDial::paintEvent(QPaintEvent*)':
 ../widgets/pixmapdial.cpp:231:26: error: aggregate 'QPainterPath ballPath' has incomplete type and cannot be defined
@@ -82,3 +72,4 @@ Cadence:
       |                          ^~~~~~~~
 
 Odin2: doesn't load into Carla.
+ -> copy the whole plugin directory structure
