@@ -45,10 +45,10 @@ cd src/tunefish4/Builds/LinuxMakefile
 cd src/tunefish4/Builds/LinuxMakefile
 
 install -m 755 -d %{buildroot}%{_libdir}/vst/
-install -m 644 build/*.so %{buildroot}/%{_libdir}/vst/
+install -m 755 build/*.so %{buildroot}/%{_libdir}/vst/
 
 install -m 755 -d %{buildroot}%{_libdir}/vst/tf4programs
-install -m644 ../../../../patches/tf4programs/* %{buildroot}/%{_libdir}/vst/tf4programs
+install -m 644 ../../../../patches/tf4programs/* %{buildroot}/%{_libdir}/vst/tf4programs
 
 %files
 %doc README.md

@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 fe078ea036991081c3a28bb388a3fecd0e8e3a5d
 %global gittag0 master
@@ -47,11 +45,11 @@ export CXXFLAGS="-fPIC $CXXFLAGS"
 %make_build 
 
 install -m 755 -d %{buildroot}%{_bindir}/
-install -m 644 oxeconverter %{buildroot}/%{_bindir}/
-install -m 644 oxefmsynth %{buildroot}/%{_bindir}/
+install -m 755 oxeconverter %{buildroot}/%{_bindir}/
+install -m 755 oxefmsynth %{buildroot}/%{_bindir}/
 
 install -m 755 -d %{buildroot}%{_libdir}/vst/
-install -m 644 *.so %{buildroot}/%{_libdir}/vst/
+install -m 755 *.so %{buildroot}/%{_libdir}/vst/
 
 install -m 755 -d %{buildroot}%{_libdir}/vst/skins/default/
 install -m 755 -d %{buildroot}%{_libdir}/vst/skins/dx7/

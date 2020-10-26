@@ -1,15 +1,11 @@
-%global debug_package %{nil}
-
 Name:    mx44
-Version: 0.44.2
+Version: 0.44.3
 Release: 1%{?dist}
 Summary: A JACK patchbay in flow matrix style
 URL:     http://web.comhem.se/luna/
-Source0: http://web.comhem.se/luna/Mx44.2.tar.gz
-Group:   Applications/Multimedia
 License: GPLv2+
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/ycollet/Mx44/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -20,30 +16,37 @@ BuildRequires: alsa-lib-devel
 Mx44 is a polyphonic multichannel midi realtime software synthesizer.
 
 %prep
-%setup -qn Mx44.2
+%autosetup -n Mx44-%{version}
 
 %build
 
+%set_build_flags
+
 cd src
-make %{?_smp_mflags}
+%make_build
 
 %install
 
 cd src
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 mx44 %{buildroot}/%{_bindir}/
-%__install -m 755 -d %{buildroot}/%{_datadir}/Mx44/
-%__install -m 644 ../data/mx44patch %{buildroot}/%{_datadir}/Mx44/
-%__install -m 644 ../data/gtk-2.0/gtkrc %{buildroot}/%{_datadir}/Mx44/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 mx44 %{buildroot}/%{_bindir}/
+install -m 755 -d %{buildroot}/%{_datadir}/Mx44/
+install -m 644 ../data/mx44patch %{buildroot}/%{_datadir}/Mx44/
+install -m 644 ../data/gtk-2.0/gtkrc %{buildroot}/%{_datadir}/Mx44/
 
 %files
+%doc README
+%license COPYING
 %{_bindir}/*
 %{_datadir}/*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.44.2
-- Update for Fdora 29
+* Mon Oct 26 2020 Yann Collette <ycollette.nospam@free.fr> - 0.44.3-1
+- change source URL + fix debug build + fix makefiles
 
-* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.44.2
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 0.44.2-1
+- Update for Fedora 29
+
+* Tue Oct 24 2017 Yann Collette <ycollette.nospam@free.fr> - 0.44.2-1
 - inital release

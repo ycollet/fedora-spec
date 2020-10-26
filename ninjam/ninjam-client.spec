@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Name:    ninjam-client
 Version: 0.0.1
 Release: 2%{?dist}
@@ -20,15 +18,19 @@ A realtime network sound client
 %prep
 %autosetup -n ninjam
 
+sed -i -e "s/-s //g" cursesclient/Makefile
+
 %build
 
+%set_build_flags
+
 cd cursesclient
-%make_build OPTFLAGS=-fpermissive
+%make_build OPTFLAGS="-fpermissive $CFLAGS"
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 cursesclient/cninjam %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 cursesclient/cninjam %{buildroot}%{_bindir}/
 
 %files
 %{_bindir}/*

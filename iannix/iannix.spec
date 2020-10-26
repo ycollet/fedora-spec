@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 1294f84ba809ebf5262a1c7071a18ac5ff4109b0
 %global gittag0 master
@@ -42,17 +40,17 @@ to your real-time environment.
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 iannix.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 644 iannix.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 iannix %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 iannix %{buildroot}%{_bindir}/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
-%__install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
+install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 iannix.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
+install -m 644 iannix.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # install polyphon.desktop properly.
 desktop-file-install --vendor '' \

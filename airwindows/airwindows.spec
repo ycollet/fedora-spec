@@ -1,7 +1,5 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
-%global commit0 6eb63993bc6b04b7000846fb9b122e2b6469bddd
+%global commit0 bda54733c70a8857bea04a3511e0c247acee79e1
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -9,7 +7,6 @@ Name:    airwindows
 Version: 0.0.1
 Release: 3%{?dist}
 Summary: A set of VST2 plugins
-
 License: MIT
 URL:     https://github.com/airwindows/airwindows
 
@@ -55,7 +52,7 @@ cd plugins/LinuxVST
 cd plugins/LinuxVST/
 
 %__install -m 755 -d %{buildroot}%{_libdir}/vst/
-%__install -m 644 %{__cmake_builddir}/*.so %{buildroot}/%{_libdir}/vst/
+%__install -m 755 %{__cmake_builddir}/*.so %{buildroot}/%{_libdir}/vst/
 
 %files
 %doc plugins/LinuxVST/README.md
@@ -63,11 +60,14 @@ cd plugins/LinuxVST/
 %{_libdir}/*
 
 %changelog
-* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Mon Oct 26 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-4
+- update to bda54733c70a8857bea04a3511e0c247acee79e1
+
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-3
 - update to 6eb63993bc6b04b7000846fb9b122e2b6469bddd
 
-* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+* Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
 - update to fa61072ea31a876ab28d80bf5edcae717ab6ddf3 - fix for fedora 33
 
-* Wed Jul 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
+* Wed Jul 29 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - Initial spec file

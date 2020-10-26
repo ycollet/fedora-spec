@@ -26,6 +26,8 @@ A drum LV2 plugin
 %prep
 %autosetup -n %{name}-%{commit0}
 
+sed -i -e "/set(CMAKE_C_FLAGS/d" CMakeLists.txt
+
 %build
 
 %cmake -DLV2_INSTALL_DIR:Path=%{_lib}/lv2

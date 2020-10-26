@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 355f0243480dde6c691e783489793eb445a88967
 %global gittag0 master
@@ -40,21 +38,21 @@ sed -i -e "s/strip/#strip/g" Makefile
 
 %install 
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 src/amuc %{buildroot}/%{_bindir}/
-%__install -m 644 src-abcm2ps/abcm2ps %{buildroot}/%{_bindir}/
-%__install -m 644 src-wav2score/wav2score %{buildroot}/%{_bindir}/
-%__install -m 644 src-tr-sco/tr-sco %{buildroot}/%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 src/amuc %{buildroot}/%{_bindir}/
+install -m 755 src-abcm2ps/abcm2ps %{buildroot}/%{_bindir}/
+install -m 755 src-wav2score/wav2score %{buildroot}/%{_bindir}/
+install -m 755 src-tr-sco/tr-sco %{buildroot}/%{_bindir}/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/amuc/samples/
-%__install -m 644 samples/* %{buildroot}/%{_datadir}/amuc/samples/
-%__install -m 755 -d %{buildroot}/%{_datadir}/amuc/samples/
-%__install -m 644 samples/* %{buildroot}/%{_datadir}/amuc/samples/
-%__install -m 644 tunes/* %{buildroot}/%{_datadir}/amuc/
-%__install -m 755 -d %{buildroot}/%{_mandir}/man1/
-%__install -m 644 doc/amuc.1 %{buildroot}/%{_mandir}/man1/
-%__install -m 755 -d %{buildroot}/%{_docdir}/amuc/
-%__install -m 644 doc/* %{buildroot}/%{_docdir}/amuc/
+install -m 755 -d %{buildroot}/%{_datadir}/amuc/samples/
+install -m 644 samples/* %{buildroot}/%{_datadir}/amuc/samples/
+install -m 755 -d %{buildroot}/%{_datadir}/amuc/samples/
+install -m 644 samples/* %{buildroot}/%{_datadir}/amuc/samples/
+install -m 644 tunes/* %{buildroot}/%{_datadir}/amuc/
+install -m 755 -d %{buildroot}/%{_mandir}/man1/
+install -m 644 doc/amuc.1 %{buildroot}/%{_mandir}/man1/
+install -m 755 -d %{buildroot}/%{_docdir}/amuc/
+install -m 644 doc/* %{buildroot}/%{_docdir}/amuc/
 rm %{buildroot}/%{_docdir}/amuc/amuc.1
 
 %files

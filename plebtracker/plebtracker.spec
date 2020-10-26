@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 f6aa7078c3f39e9c8b025e70e7dbeab19119e213
 %global gittag0 master
@@ -53,9 +51,9 @@ cd Tracker/src
 ## INTERPRETER
 
 cd Interpreter/src
-%__install -m 644 plebplay   %{buildroot}/%{_bindir}/
-%__install -m 644 plebitp    %{buildroot}/%{_bindir}/
-%__install -m 644 plebrender %{buildroot}/%{_bindir}/
+%__install -m 755 plebplay   %{buildroot}/%{_bindir}/
+%__install -m 755 plebitp    %{buildroot}/%{_bindir}/
+%__install -m 755 plebrender %{buildroot}/%{_bindir}/
 
 %__install -m 644 ../doc/plebitp.1    %{buildroot}/%{_datadir}/man/man1/
 %__install -m 644 ../doc/plebplay.1   %{buildroot}/%{_datadir}/man/man1/
@@ -65,9 +63,9 @@ cd ../..
 ## TRACKER
 
 cd Tracker/src
-%__install -m 644 plebtrk       %{buildroot}/%{_bindir}/
-%__install -m 644 plebtrkdaemon %{buildroot}/%{_bindir}/
-%__install -m 644 plebtrkraw    %{buildroot}/%{_bindir}/
+%__install -m 755 plebtrk       %{buildroot}/%{_bindir}/
+%__install -m 755 plebtrkdaemon %{buildroot}/%{_bindir}/
+%__install -m 755 plebtrkraw    %{buildroot}/%{_bindir}/
 
 %__install -m 644 ../doc/plebtrk.1       %{buildroot}/%{_datadir}/man/man1/
 %__install -m 644 ../doc/plebtrkdaemon.1 %{buildroot}/%{_datadir}/man/man1/
@@ -89,7 +87,7 @@ cd ../..
 
 %changelog
 * Mon Oct 19 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1-2
-- fix debug build - WIP
+- fix debug build
 
 * Fri Jun 7 2019 Yann Collette <ycollette dot nospam at free.fr> 0.1-1
 - Initial release of spec file

@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 0b96ba56379eb179423e9dcbec31a08bf0326c9f
 %global gittag0 master
@@ -60,7 +58,7 @@ Categories=AudioVideo;Audio;
 EOF
 
 install -m 755 -d %{buildroot}/%{_bindir}/
-install -m 644 release/distrib/ptk_linux %{buildroot}%{_bindir}/%{name}
+install -m 755 release/distrib/ptk_linux %{buildroot}%{_bindir}/%{name}
 
 install -m 755 -d %{buildroot}/%{_datadir}/%{name}/instruments/
 install -m 644 release/distrib/instruments/* %{buildroot}%{_datadir}/%{name}/instruments/

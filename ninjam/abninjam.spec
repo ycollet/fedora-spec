@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Name:    abNinjam
 Version: 0.0.8
 Release: 3%{?dist}
@@ -49,6 +47,9 @@ sed -i -e "/MAKE_DIRECTORY/d" cmake/VSTConfig.cmake
 
 %cmake_install
 
+chmod a+x %{buildroot}%{_libdir}/vst/abNinjam.vst3/Contents/x86_64-linux/*.so
+chmod a+x %{buildroot}%{_libdir}/lv2/abNinjam.lv2/*.so
+
 %files
 %doc README.md
 %license LICENSE 
@@ -62,7 +63,7 @@ sed -i -e "/MAKE_DIRECTORY/d" cmake/VSTConfig.cmake
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-2
 - update to 0.0.8-2 - fix for fedora 33
 
-* Wed Jun 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-1
+* Fri Jun 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.8-1
 - update to 0.0.8-1
 
 * Sun Jun 7 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.7-1

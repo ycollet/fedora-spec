@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Name:    6PM
 Version: 0.9
 Release: 2%{?dist}
@@ -46,7 +44,7 @@ cp -r MidiMaps/* %{buildroot}%{_datadir}/mv-6pm/MidiMaps/
 cp -r Presets/* %{buildroot}%{_datadir}/mv-6pm/Presets/
 
 install -m 755 -d %{buildroot}/%{_bindir}/
-install -m 644 src/6pm %{buildroot}%{_bindir}/%{name}
+install -m 755 src/6pm %{buildroot}%{_bindir}/%{name}
 
 install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
 install -m 644 src/images/icon.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png

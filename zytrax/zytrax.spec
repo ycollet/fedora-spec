@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 # Global variables for github repository
 %global commit0 97b79d17b390f70890928cebf74bb28acf32ecea
 %global gittag0 master
@@ -67,7 +65,7 @@ EOF
 %install
 
 install -m 755 -d %{buildroot}/%{_bindir}/
-install -m 644 bin/zytrax %{buildroot}%{_bindir}/
+install -m 755 bin/zytrax %{buildroot}%{_bindir}/
 install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
 install -m 644 zytrax.png %{buildroot}/%{_datadir}/pixmaps/
 install -m 755 -d %{buildroot}/%{_datadir}/applications/

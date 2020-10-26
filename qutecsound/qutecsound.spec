@@ -1,8 +1,6 @@
-%global debug_package %{nil}
-
 Name:    qutecsound
 Version: 0.9.8.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A csound file editor
 URL:     https://github.com/CsoundQt/CsoundQt
 License: GPLv2+
@@ -60,7 +58,7 @@ install -m 755 -d %{buildroot}/%{_datadir}/applications/
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 install -m 755 -d %{buildroot}/%{_bindir}/
-install -m 644 bin/CsoundQt-d-cs6 %{buildroot}%{_bindir}/%{name}
+install -m 755 bin/CsoundQt-d-cs6 %{buildroot}%{_bindir}/%{name}
 
 install -m 755 -d %{buildroot}/%{_datadir}/mime/packages/
 install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
@@ -95,6 +93,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/%{name}/*
 
 %changelog
+* Mon Oct 26 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.8.1-3
+- fix debug build
+
 * Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.8.1-2
 - update to 0.9.8.1-2
 

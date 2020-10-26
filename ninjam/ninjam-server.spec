@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Name:    ninjam-server
 Version: 0.0.1
 Release: 2%{?dist}
@@ -29,10 +27,10 @@ cd ninjam/server
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 644 ninjam/server/ninjamsrv %{buildroot}%{_bindir}/
-%__install -m 755 -d %{buildroot}/%{_datadir}/ninjam/
-%__install -m 644 ninjam/server/example.cfg %{buildroot}%{_datadir}/ninjam/
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 ninjam/server/ninjamsrv %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}/%{_datadir}/ninjam/
+install -m 644 ninjam/server/example.cfg %{buildroot}%{_datadir}/ninjam/
 
 %files
 %doc ninjam/server/license.txt ninjam/server/cclicense.txt
