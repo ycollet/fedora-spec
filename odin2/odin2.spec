@@ -64,7 +64,7 @@ cd Builds/LinuxMakefile
 
 %install 
 
-install -m 755 -d %{buildroot}%{_libdir}/vst3/
+install -m 755 -d %{buildroot}%{_libdir}/vst3/Odin2.vst3/
 install -m 755 -d %{buildroot}%{_bindir}/
 install -m 755 -d %{buildroot}%{_datadir}/odin2/Soundbanks/
 
@@ -72,7 +72,7 @@ cp -r Soundbanks/* %{buildroot}%{_datadir}/odin2/Soundbanks/
 rm %{buildroot}%{_datadir}/odin2/Soundbanks/User\ Patches/.gitignore 
 
 install -m 755 -p Builds/LinuxMakefile/build/Odin2 %{buildroot}/%{_bindir}/
-cp -ra Builds/LinuxMakefile/build/* %{buildroot}/%{_libdir}/vst3/
+cp -ra Builds/LinuxMakefile/build/Odin2.vst3/* %{buildroot}/%{_libdir}/vst3/Odin2.vst3/
 chmod a+x %{buildroot}/%{_libdir}/vst3/Odin2.vst3/Contents/x86_64-linux/Odin2.so
 
 %files
