@@ -3,9 +3,6 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-#%global debug_package %{nil}
-
 Name:    mod-distortion
 Version: 0.9.%{shortcommit0}
 Release: 2%{?dist}

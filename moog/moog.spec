@@ -3,9 +3,6 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    raffosynth
 Version: 0.1.0
 Release: 1%{?dist}
@@ -31,11 +28,14 @@ This is a digital emulator of a minimoog synthesizer, built as an LV2 audio plug
 %prep
 %autosetup -n RaffoSynth-%{commit0}
 
+sed -i -e "s/FLAGS = -O3 -std=c++11/FLAGS = -std=c++11 \$(SPEC_CFLAGS)/g" Makefile
+sed -i -e "s/CFLAGS = -std=c99 -O3/CFLAGS = -std=c99 \$(SPEC_CFLAGS)/g" Makefile
+
 %build
 
 %set_build_flags
 
-%make_build INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ CFLAGS="-std=c99 %{build_cflags} -fPIC"
+%make_build INSTALL_DIR=%{buildroot}/usr/%{_lib}/lv2/ SPEC_CFLAGS="%{build_cflags} -fPIC"
 
 %install
 

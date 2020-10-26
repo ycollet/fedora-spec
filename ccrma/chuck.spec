@@ -1,5 +1,3 @@
-%global debug_package %{nil}
-
 Summary: Real-time audio synthesis and graphics/multimedia language
 Name:    chuck
 Version: 1.4.0.0
