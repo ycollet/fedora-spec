@@ -22,11 +22,6 @@ Add new packages:
  freqtweak            -> https://github.com/essej/freqtweak
  dexed                -> https://github.com/asb2m10/dexed
  mephisto             -> https://open-music-kontrollers.ch/lv2/mephisto/
- xmonk                -> https://github.com/brummer10/Xmonk.lv2
- xpolymonk            -> https://github.com/brummer10/XPolyMonk.lv2
- littlefly            -> https://github.com/brummer10/LittleFly.lv2
- fatgrog              -> https://github.com/brummer10/FatFrog.lv2
- zrythm - reproc      -> https://github.com/DaanDeMeyer/reproc (for zrythm)
  zrythm - lsp-dsp     -> add a devel package for zrythm
  emissioncontrol2     -> https://github.com/EmissionControl2/EmissionControl2
  regrader             -> https://github.com/igorski/regrader
@@ -54,6 +49,6 @@ ryukau/ryukau.spec             -> gcc hangs during compilation of parameter.cpp
 performer/performer.spec       -> ui_setlist.h missing - cmake 3.18 pb probably
 socallab/SocaLabs-plugins.spec -> build fails because of a default juce path / maybe use juce 5.4 ...
 surge/stochas.spec             -> jucaid compilation pb - maybe due tu %set_build_flags ...
+zrythm/ztoolkit                -> it's a static library ...
 
-zrythm/zrythm.spec
 ossia/ossia-score.spec
