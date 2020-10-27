@@ -7,6 +7,7 @@ URL:     https://github.com/falkTX/Cadence
 
 Source0: https://github.com/falkTX/Cadence/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Patch0:  cadence_001_fedora_support.patch
+Patch1:  cadence_002_add_missing_include.patch
 
 BuildRequires: gcc
 BuildRequires: gcc-c++
@@ -44,6 +45,8 @@ A JACK control center
 %make_install PREFIX=/usr SKIP_STRIPPING=true
 
 %files
+%doc README.md
+%license COPYING
 %{_bindir}/*
 %{_datadir}/applications/*
 %{_datadir}/cadence/*
