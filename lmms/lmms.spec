@@ -1,6 +1,6 @@
 Name:    lmms-mao
 Version: 1.2.2
-Release: 9%{?dist}
+Release: 10%{?dist}
 Summary: Linux MultiMedia Studio
 URL:     http://lmms.sourceforge.net/
 
@@ -29,17 +29,11 @@ AutoReqProv: no
 #       system's fltk)
 License: GPLv2+ and GPLv2 and (GPLv2+ or MIT) and GPLv3+ and MIT and LGPLv2+ and (LGPLv2+ with exceptions) and Copyright only
 
-# git clone https://github.com/lmms/lmms
-# cd lmms
-# git checkout v1.2.2
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz lmms.tar.gz lmms/
-# rm -rf lmms
+# ./lmms-source.sh <tag>
+# ./lmms-source.sh v1.2.2
 
 Source0: lmms.tar.gz
+Source1: lmms-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -65,6 +59,10 @@ BuildRequires: fltk-fluid
 BuildRequires: fltk-devel
 BuildRequires: Carla-devel
 BuildRequires: bash-completion
+
+Requires: Carla
+Requires: stk
+Requires: libgig
 
 %global __provides_exclude_from ^%{_libdir}/lmms/.*$
 %global __requires_exclude ^libvstbase\\.so.*$|^libZynAddSubFxCore\\.so.*$
@@ -153,6 +151,9 @@ desktop-file-install --vendor '' \
 %{_includedir}/lmms
 
 %changelog
+* Mon Oct 26 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-10
+- update to 1.2.2-10 - add missing requires + rebuilt because of carla
+
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-9
 - update to 1.2.2-9 - fix for fedora 33
 
