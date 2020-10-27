@@ -39,6 +39,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
 BuildRequires: breeze-icon-theme
+BuildRequires: libreproc-devel
 
 %description
 Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
@@ -59,12 +60,12 @@ sed -i -e '/meson.add_install_script/,+2d' meson.build
 # Compile using -O0 because of jack xruns
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
 # Remove summary which is only available on meson 0.53 and stick to version 0.52
-sed -i -e "s/meson_version: '>= 0.55.0'/meson_version: '>= 0.52.0'/g" meson.build
+#sed -i -e "s/meson_version: '>= 0.55.0'/meson_version: '>= 0.52.0'/g" meson.build
 
 %build
 
 mkdir build
-%meson -Dmanpage=true -Duser_manual=true --buildtype release --prefix=/usr
+%meson -Dmanpage=true -Duser_manual=true -Dlsp_dsp=disabled --buildtype release --prefix=/usr
 
 %meson_build 
 
