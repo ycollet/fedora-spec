@@ -29,8 +29,9 @@ Add new packages:
  zrythm - reproc      -> https://github.com/DaanDeMeyer/reproc (for zrythm)
  zrythm - lsp-dsp     -> add a devel package for zrythm
  emissioncontrol2     -> https://github.com/EmissionControl2/EmissionControl2
+ regrader             -> https://github.com/igorski/regrader
  
- supercollider-study -> https://github.com/rumblesan/super-collider-study
+ supercollider-study  -> https://github.com/rumblesan/super-collider-study
  
 ** Add source.sh file in spec file:
 Source1: source.sh
