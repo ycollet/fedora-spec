@@ -15,7 +15,6 @@ Add new packages:
  DAFx19-Gamelanizer/  -> https://github.com/lukemcraig/DAFx19-Gamelanizer
  ladspa-t5-plugins    -> https://gitlab.com/t-5/ladspa-t5-plugins
  OwlSim               -> https://github.com/pingdynasty/OwlSim
- slplugins            -> https://github.com/figbug/slplugins
  DeLooper             -> https://github.com/sonejostudios/DeLooper
  morphex              -> https://github.com/MarcSM/morphex
  CF3                  -> https://github.com/MtnViewJohn/context-free.git
@@ -24,7 +23,9 @@ Add new packages:
  dexed                -> https://github.com/asb2m10/dexed
  mephisto             -> https://open-music-kontrollers.ch/lv2/mephisto/
  xmonk                -> https://github.com/brummer10/Xmonk.lv2
- zrythm - ZPlugins    -> https://git.zrythm.org/cgit/zplugins/
+ xpolymonk            -> https://github.com/brummer10/XPolyMonk.lv2
+ littlefly            -> https://github.com/brummer10/LittleFly.lv2
+ fatgrog              -> https://github.com/brummer10/FatFrog.lv2
  zrythm - reproc      -> https://github.com/DaanDeMeyer/reproc (for zrythm)
  zrythm - lsp-dsp     -> add a devel package for zrythm
  emissioncontrol2     -> https://github.com/EmissionControl2/EmissionControl2
