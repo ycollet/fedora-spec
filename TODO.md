@@ -9,7 +9,6 @@ sonic-pi	 -> cmake - check ruby version
 Add new packages:
  Dplug                -> https://github.com/AuburnSounds/Dplug
  SmartGuitarAmp       -> https://github.com/keyth72/SmartGuitarAmp
- improviz-performance -> https://github.com/rumblesan/improviz-performance
  osmid                -> https://github.com/llloret/osmid
  Squeezer             -> https://github.com/mzuther/Squeezer
  DAFx19-Gamelanizer/  -> https://github.com/lukemcraig/DAFx19-Gamelanizer
@@ -17,7 +16,6 @@ Add new packages:
  OwlSim               -> https://github.com/pingdynasty/OwlSim
  DeLooper             -> https://github.com/sonejostudios/DeLooper
  morphex              -> https://github.com/MarcSM/morphex
- minicomputer         -> http://minicomputer.sourceforge.net/
  freqtweak            -> https://github.com/essej/freqtweak
  dexed                -> https://github.com/asb2m10/dexed
  mephisto             -> https://open-music-kontrollers.ch/lv2/mephisto/
@@ -38,7 +36,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 purr-data/purr-data.spec       -> has a pure binary dependency
 improviz/improviz.spec         -> (Cabal ...)
-processing/processing.spec     -> precompiled java package
+processing/processing.spec     -> precompiled java package -> noarch ...
 rack				           -> fail with some fedora flags
 ams-lv2/lvtk.spec              -> (???)
 psi-plugins                    -> error with fedora 33 + lv2-devel
