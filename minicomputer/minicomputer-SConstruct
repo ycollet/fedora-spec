@@ -1,3 +1,4 @@
+import os
 
 if ARGUMENTS.get('64bit', 0):
 	env = Environment(CCFLAGS = '-m64')
@@ -8,7 +9,8 @@ else:
 
 env.Append(CCFLAGS = ['-g','-O3','-msse','-fwhole-program','-ftree-vectorize','-ffast-math', '-funit-at-a-time', '-fpeel-loops', '-ftracer','-funswitch-loops','-fprefetch-loop-arrays','-mfpmath=sse'])
 
-env = Environment(CCFLAGS = [''])
+env = Environment(CCFLAGS = os.environ['CXXFLAGS'])
+env = Environment(LDFLAGS = os.environ['LDFLAGS'])
 env['LIBS'] = ['m']
 conf = Configure(env)
 
@@ -40,11 +42,11 @@ if not guiconf.CheckLibWithHeader('pthread', 'pthread.h','c'):
 	print('Did not find pthread library, exiting!')
 	Exit(1)
 guienv = guiconf.Finish()
-guienv.Append(CPPFLAGS = ['-O3','-Wall','-fmessage-length=0'])
+guienv.Append(CPPFLAGS = os.environ['CXXFLAGS'])
 
 env.Program('minicomputerCPU','cpu/main.c');
 
 guienv.Program('minicomputer',['editor/main.cpp','editor/Memory.cpp','editor/syntheditor.cxx']);
 
-env.Alias(target="install", source=env.Install(dir="/usr/local/bin", source="minicomputer"));
-env.Alias(target="install", source=env.Install(dir="/usr/local/bin", source="minicomputerCPU"));
+env.Alias(target="install", source=env.Install(dir="/usr/bin", source="minicomputer"));
+env.Alias(target="install", source=env.Install(dir="/usr/bin", source="minicomputerCPU"));
