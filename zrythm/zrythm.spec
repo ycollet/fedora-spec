@@ -1,6 +1,6 @@
 Name:    zrythm
 Version: 1.0.0.a401
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
@@ -38,8 +38,9 @@ BuildRequires: python3-sphinx-intl
 BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
-BuildRequires: breeze-icon-theme
 BuildRequires: libreproc-devel
+
+Requires: breeze-icon-theme
 
 %description
 Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
@@ -98,6 +99,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Wed Oct 28 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.4.0.1-4
+- fix requires breeze
+
 * Sun Oct 4 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.4.0.1-2
 - update to 1.0.0-alpha.4.0.1-2
 
