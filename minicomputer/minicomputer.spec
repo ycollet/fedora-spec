@@ -9,7 +9,10 @@ Source0: https://sourceforge.net/projects/minicomputer/files/minicomputer/versio
 Source1: minicomputer-SConstruct
 
 BuildRequires: gcc gcc-c++
+BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: liblo-devel
+BuildRequires: fltk-devel
 BuildRequires: scons
 
 %description
