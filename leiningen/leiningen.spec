@@ -1,20 +1,15 @@
 Name:    leiningen
-Version: 2.9.1
+Version: 2.9.4
 Release: 1%{?dist}
 Summary: Clojure project automation tool
-
 License: EPL
 URL:     https://github.com/technomancy/leiningen
 
-Source0: https://github.com/technomancy/leiningen/releases/download/%{version}/leiningen-%{version}-standalone.zip
-Source1: https://github.com/technomancy/leiningen/raw/%{version}/bin/lein
-Source2: https://github.com/technomancy/leiningen/raw/%{version}/resources/leiningen.png
-Source3: https://raw.githubusercontent.com/technomancy/leiningen/%{version}/bash_completion.bash
-Source4: https://raw.githubusercontent.com/technomancy/leiningen/%{version}/zsh_completion.zsh
+Source0: https://github.com/technomancy/leiningen/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1: https://github.com/technomancy/leiningen/releases/download/%{version}/leiningen-%{version}-standalone.zip
+Source2: https://github.com/technomancy/leiningen/raw/%{version}/bin/lein
 
 BuildArch: noarch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: jpackage-utils
 BuildRequires: java-devel
@@ -23,7 +18,7 @@ BuildRequires: clojure
 BuildRequires: wget
 BuildRequires: sed
 
-Requires: java
+Requires: clojure java
 
 %description
 Working on Clojure projects with tools designed for Java can be an
@@ -32,32 +27,32 @@ Clojure. Leiningen handles fetching dependencies, running tests,
 packaging your projects and can be easily extended with a number of
 plugins.
 
+%prep
+%autosetup -n %{name}-%{version}
+
 %build
 
-chmod +x %{SOURCE1}
-
 %install
-install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
-install -pm 644 %{SOURCE0} $RPM_BUILD_ROOT/%{_javadir}/%{name}-%{version}-standalone.jar
+install -d -m 755 %{buildroot}%{_javadir}
+install -pm 644 %{SOURCE1} %{buildroot}/%{_javadir}/%{name}-%{version}-standalone.jar
 
-install -d -m 755 $RPM_BUILD_ROOT%{_bindir}
-install -pm 755 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/lein
+install -d -m 755 %{buildroot}%{_bindir}
+install -pm 755 %{SOURCE2} %{buildroot}%{_bindir}/lein
 
-install -d -m 755 $RPM_BUILD_ROOT%{_datadir}/pixmaps/
-install -pm 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.png
+install -d -m 755 %{buildroot}%{_datadir}/pixmaps/
+install -pm 644 resources/%{name}.png %{buildroot}%{_datadir}/pixmaps/%{name}.png
 
-install -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
-install -pm 644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/lein
+install -d -m 755 %{buildroot}%{_sysconfdir}/bash_completion.d
+install -pm 644 bash_completion.bash %{buildroot}%{_sysconfdir}/bash_completion.d/lein
 
-install -d -m 755 $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
-install -pm 644 %{SOURCE4} $RPM_BUILD_ROOT%{_datadir}/zsh/site-functions/_lein
+install -d -m 755 %{buildroot}%{_datadir}/zsh/site-functions
+install -pm 644 zsh_completion.zsh %{buildroot}%{_datadir}/zsh/site-functions/_lein
 
-sed -i -e "/LEIN_JAR=/d" $RPM_BUILD_ROOT%{_bindir}/lein
-sed -i -e "6iLEIN_JAR=/usr/share/java/leiningen-%{version}-standalone.jar" $RPM_BUILD_ROOT%{_bindir}/lein
-sed -i -e "7iCLASSPATH=" $RPM_BUILD_ROOT%{_bindir}/lein
+sed -i -e "/export LEIN_VERSION/i LEIN_JAR=/usr/share/java/leiningen-%{version}-standalone.jar" %{buildroot}%{_bindir}/lein
 
 %files
-
+%doc README.md TUTORIAL.md NEWS.md CONTRIBUTING.md
+%license COPYING
 %{_javadir}/*
 %{_bindir}/lein
 %dir %{_sysconfdir}/bash_completion.d
@@ -68,6 +63,9 @@ sed -i -e "7iCLASSPATH=" $RPM_BUILD_ROOT%{_bindir}/lein
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Oct 28 2020 Yann Collette <ycollette.nospam@free.fr> - 2.9.4-1
+- update to 2.9.4-1
+
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 2.9.1-1
 - update to 2.9.1-1
 
