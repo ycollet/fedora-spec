@@ -1,13 +1,7 @@
 import os
 
-if ARGUMENTS.get('64bit', 0):
-	env = Environment(CCFLAGS = '-m64')
-	guienv = Environment(CPPFLAGS = '-m64')
-else:
-	env = Environment(CCFLAGS = '')
-	guienv = Environment(CPPFLAGS = '')
-
-env.Append(CCFLAGS = ['-g','-O3','-msse','-fwhole-program','-ftree-vectorize','-ffast-math', '-funit-at-a-time', '-fpeel-loops', '-ftracer','-funswitch-loops','-fprefetch-loop-arrays','-mfpmath=sse'])
+env = Environment(CCFLAGS = '')
+guienv = Environment(CPPFLAGS = '')
 
 env = Environment(CCFLAGS = os.environ['CXXFLAGS'])
 env = Environment(LDFLAGS = os.environ['LDFLAGS'])
@@ -43,6 +37,7 @@ if not guiconf.CheckLibWithHeader('pthread', 'pthread.h','c'):
 	Exit(1)
 guienv = guiconf.Finish()
 guienv.Append(CPPFLAGS = os.environ['CXXFLAGS'])
+guienv.Append(LDFLAGS = os.environ['LDFLAGS'])
 
 env.Program('minicomputerCPU','cpu/main.c');
 

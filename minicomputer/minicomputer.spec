@@ -31,8 +31,6 @@ scons DESTDIR="%{buildroot}" Prefix=/usr
 
 %install
 
-#YC: install manually
-
 install -m 755 -d %{buildroot}/%{_bindir}/
 install -m 755 -d %{buildroot}/%{_datadir}/%{name}/doc/
 install -m 755 -d %{buildroot}/%{_datadir}/%{name}/presets/
@@ -41,6 +39,7 @@ install -m 755 -d %{buildroot}/%{_datadir}/pixmaps/
 cp minicomputerManual.pdf %{buildroot}/%{_datadir}/%{name}/doc/
 cp minicomputer.xpm       %{buildroot}/%{_datadir}/pixmaps/
 cp minicomputer           %{buildroot}/%{_bindir}/
+cp minicomputerCPU        %{buildroot}/%{_bindir}/
 cp -r factoryPresets/*    %{buildroot}/%{_datadir}/%{name}/presets/
 
 %files
