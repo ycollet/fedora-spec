@@ -1,0 +1,50 @@
+
+if ARGUMENTS.get('64bit', 0):
+	env = Environment(CCFLAGS = '-m64')
+	guienv = Environment(CPPFLAGS = '-m64')
+else:
+	env = Environment(CCFLAGS = '')
+	guienv = Environment(CPPFLAGS = '')
+
+env.Append(CCFLAGS = ['-g','-O3','-msse','-fwhole-program','-ftree-vectorize','-ffast-math', '-funit-at-a-time', '-fpeel-loops', '-ftracer','-funswitch-loops','-fprefetch-loop-arrays','-mfpmath=sse'])
+
+env = Environment(CCFLAGS = [''])
+env['LIBS'] = ['m']
+conf = Configure(env)
+
+if not conf.CheckLibWithHeader('jack', 'jack/jack.h','c'):
+	print('Did not find jack, exiting!')
+	Exit(1)
+if not conf.CheckLibWithHeader('lo', 'lo/lo.h','c'):
+	print('Did not find liblo for OSC, exiting!')
+	Exit(1)
+if not conf.CheckLibWithHeader('asound', 'alsa/asoundlib.h','c'):
+	print('Did not find alsa, exiting!')
+	Exit(1)
+if not conf.CheckLibWithHeader('pthread', 'pthread.h','c'):
+	print('Did not find pthread library, exiting!')
+	Exit(1)
+env = conf.Finish()
+
+guiconf = Configure(guienv)
+if not guiconf.CheckLibWithHeader('lo', 'lo/lo.h','c'):
+	print('Did not find liblo for OSC, exiting!')
+	Exit(1)
+if not guiconf.CheckLibWithHeader('fltk', 'FL/Fl.H','c++'):
+	print('Did not find FLTK for the gui, exiting!')
+	Exit(1)
+if not guiconf.CheckLibWithHeader('asound', 'alsa/asoundlib.h','c'):
+	print('Did not find alsa, exiting!')
+	Exit(1)
+if not guiconf.CheckLibWithHeader('pthread', 'pthread.h','c'):
+	print('Did not find pthread library, exiting!')
+	Exit(1)
+guienv = guiconf.Finish()
+guienv.Append(CPPFLAGS = ['-O3','-Wall','-fmessage-length=0'])
+
+env.Program('minicomputerCPU','cpu/main.c');
+
+guienv.Program('minicomputer',['editor/main.cpp','editor/Memory.cpp','editor/syntheditor.cxx']);
+
+env.Alias(target="install", source=env.Install(dir="/usr/local/bin", source="minicomputer"));
+env.Alias(target="install", source=env.Install(dir="/usr/local/bin", source="minicomputerCPU"));
