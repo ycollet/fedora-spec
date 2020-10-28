@@ -17,7 +17,6 @@ Add new packages:
  OwlSim               -> https://github.com/pingdynasty/OwlSim
  DeLooper             -> https://github.com/sonejostudios/DeLooper
  morphex              -> https://github.com/MarcSM/morphex
- CF3                  -> https://github.com/MtnViewJohn/context-free.git
  minicomputer         -> http://minicomputer.sourceforge.net/
  freqtweak            -> https://github.com/essej/freqtweak
  dexed                -> https://github.com/asb2m10/dexed
