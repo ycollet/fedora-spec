@@ -3,12 +3,13 @@
 Name:    improviz
 Summary: A live-coded visual performance tool
 Version: 0.9.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 URL:     https://github.com/rumblesan/improviz
 
 Source0: https://github.com/rumblesan/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: improviz.yaml
+Source2: https://github.com/rumblesan/improviz-performance/archive/main.zip#/improviz-performance.zip
 
 BuildRequires: ghc
 BuildRequires: ghc-network-devel
@@ -25,6 +26,7 @@ BuildRequires: mesa-libGLU-devel
 BuildRequires: glfw-devel
 BuildRequires: libXxf86vm-devel
 BuildRequires: desktop-file-utils
+BuildRequires: unzip
 
 %description
 Improviz is a live-coding environment built for creating visual performances of abstract shapes,
@@ -37,13 +39,11 @@ It's very much a work in progress but is definitely stable enough to use for per
 sed -i -e "/-fwarn-unused-binds/a \ \ cxx-options:         -fPIC\n\ \ cc-options:          -fPIC" improviz.cabal
 sed -i -e "s/-threaded/-threaded -fPIC/g" improviz.cabal
 
+unzip %{SOURCE2}
+
 %build
 
 %set_build_flags
-
-#export CFLAGS="-fPIC $CFLAGS"
-#export CXXFLAGS="-fPIC $CXXFLAGS"
-#export LDFLAGS="-fPIC $LDFLAGS"
 
 export CFLAGS="-fPIC"
 export CXXFLAGS="-fPIC"
@@ -60,6 +60,7 @@ cp $IMPROVIZ %{buildroot}/%{_bindir}/
 
 install -m 755 -d %{buildroot}/%{_datadir}/%{name}/
 install -m 755 -d %{buildroot}/%{_datadir}/%{name}/config/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/examples/
 
 cp -ra docs         %{buildroot}/%{_datadir}/%{name}/
 cp -ra examples     %{buildroot}/%{_datadir}/%{name}/
@@ -71,6 +72,7 @@ cp -ra test         %{buildroot}/%{_datadir}/%{name}/
 cp -ra textures     %{buildroot}/%{_datadir}/%{name}/
 cp -ra usercode     %{buildroot}/%{_datadir}/%{name}/
 cp -a %{SOURCE1}    %{buildroot}/%{_datadir}/%{name}/config/
+cp -ra improviz-performance-main/* %{buildroot}/%{_datadir}/%{name}/examples/
 
 %files
 %doc README.md
@@ -79,6 +81,9 @@ cp -a %{SOURCE1}    %{buildroot}/%{_datadir}/%{name}/config/
 %{_datadir}/%{name}/*
 
 %changelog
+* Wed Oct 28 2020 Yann Collette <ycollette dot nospam at free.fr> 0.9.0-3
+- add a set of examples
+
 * Wed Oct 21 2020 Yann Collette <ycollette dot nospam at free.fr> 0.9.0-2
 - update to 0.9.0
 
