@@ -56,6 +56,7 @@ Xvfb %{X_display} >& Xvfb.log &
 trap "kill $! || true" EXIT
 sleep 10
 
+Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules/
 Projucer --resave BespokeSynth.jucer
 
 %build
