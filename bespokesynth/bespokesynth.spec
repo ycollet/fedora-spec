@@ -59,6 +59,8 @@ sleep 10
 Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules/
 Projucer --resave BespokeSynth.jucer
 
+sed -i -e "s/python-config/python2-config/g" Builds/LinuxMakefile/Makefile
+
 %build
 
 %define _lto_cflags %{nil}
