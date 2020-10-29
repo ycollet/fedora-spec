@@ -34,6 +34,7 @@ BuildRequires: webkit2gtk3-devel
 BuildRequires: libglvnd-devel
 BuildRequires: libusbx-devel
 BuildRequires: libpng-devel
+BuildRequires: xorg-x11-server-Xvfb
 
 %description
 A software modular synth
@@ -44,6 +45,16 @@ A software modular synth
 tar xvfj %{SOURCE1}
 
 sed -i -e "s/\.\.\/\.\.\/MacOSX\/build\/Release\/data/\/usr\/share\/BespokeSynth\/data/g" Source/OpenFrameworksPort.cpp
+
+# For JUCE >= 6, no need to start an X server
+%define X_display ":98"
+#############################################
+### Launch a virtual framebuffer X server ###
+#############################################
+export DISPLAY=%{X_display}
+Xvfb %{X_display} >& Xvfb.log &
+trap "kill $! || true" EXIT
+sleep 10
 
 Projucer --resave BespokeSynth.jucer
 
