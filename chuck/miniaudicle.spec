@@ -1,16 +1,13 @@
 Summary: Light weight ChucK development environment
 Name:    miniaudicle
 Version: 1.3.5.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
-Group:   Applications/Multimedia
 URL:     http://audicle.cs.princeton.edu/mini/
-Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
+
+Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: bison flex
@@ -31,7 +28,7 @@ environment, or in conjunction with traditional command-line modes of
 'chuck' operation and with other chuck tools.
 
 %prep
-%setup -q -n miniAudicle-%{version}%{?beta:-%{?beta}}
+%autosetup -n miniAudicle-%{version}%{?beta:-%{?beta}}
 
 %build
 # build alsa version
@@ -45,40 +42,39 @@ perl -p -i -e "s|CFLAGS \+=|CFLAGS \+= %{optflags}|g" miniAudicle.pro
 perl -p -i -e "s|/usr/local/lib/chuck|%{_libdir}/chuck|g" chuck/src/chuck_dl.cpp
 
 # build alsa version
-%{__make} linux-alsa
-%{__mv} miniAudicle miniAudicle-alsa
+%make_build linux-alsa
+mv miniAudicle miniAudicle-alsa
 
 # build pulse version
-%{__make} clean
-%{__make} linux-pulse
-%{__mv} miniAudicle miniAudicle-pulse
+%make_build clean
+%make_build linux-pulse
+mv miniAudicle miniAudicle-pulse
 
 # build jack version
-%{__make} clean
-%{__make} linux-jack
+%make_build clean
+%make_build linux-jack
 
 %install
-%{__rm} -rf %{buildroot}
-%{__mkdir} -p %{buildroot}%{_bindir}
+
+mkdir -p %{buildroot}%{_bindir}
 cd src
 # install jack version (last built)
-%{__install} -m 755 miniAudicle %{buildroot}%{_bindir}/miniAudicle
+install -m 755 miniAudicle %{buildroot}%{_bindir}/miniAudicle
 # install alsa version
-%{__install} -m 755 miniAudicle-alsa %{buildroot}%{_bindir}/miniAudicle-alsa
+install -m 755 miniAudicle-alsa %{buildroot}%{_bindir}/miniAudicle-alsa
 # install pulse version
-%{__install} -m 755 miniAudicle-pulse %{buildroot}%{_bindir}/miniAudicle-pulse
-
-%clean
-%{__rm} -rf %{buildroot}
+install -m 755 miniAudicle-pulse %{buildroot}%{_bindir}/miniAudicle-pulse
 
 %files
-%defattr(-,root,root,-)
 %doc BUGS README.linux VERSIONS
 %license COPYING
 %{_bindir}/miniAudicle*
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+* Thu Oct 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.5.2-2
+- fix for fedora 33
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 1.3.5.2-1
 - update for Fedora 29
 
 * Sun Dec  3 2017 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
