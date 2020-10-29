@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 ecb84aaf0016bfd2f2c1b7b3934fda857141cf95
+%global commit0 6c817399560a4558ff3e9825a7ae0fe7db08507c
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -12,9 +12,7 @@ URL:     https://github.com/awwbees/BespokeSynth
 
 Source0: https://github.com/awwbees/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: http://ycollette.free.fr/LMMS/vst.tar.bz2
-# Replace python-config by python2-config
-Source2: Makefile.bespokesynth
-Source3: Bespoke-GLSLfix.sh
+Source2: Bespoke-GLSLfix.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make
@@ -22,7 +20,7 @@ BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: JUCE
+BuildRequires: JUCE == 5.4.7.1e71c07
 BuildRequires: python2-devel
 BuildRequires: libcurl-devel
 BuildRequires: freetype-devel
@@ -44,9 +42,10 @@ A software modular synth
 %autosetup -n %{name}-%{commit0}
 
 tar xvfj %{SOURCE1}
-cp %{SOURCE2} Builds/LinuxMakefile/Makefile
 
 sed -i -e "s/\.\.\/\.\.\/MacOSX\/build\/Release\/data/\/usr\/share\/BespokeSynth\/data/g" Source/OpenFrameworksPort.cpp
+
+Projucer --resave BespokeSynth.jucer
 
 %build
 
@@ -54,14 +53,14 @@ sed -i -e "s/\.\.\/\.\.\/MacOSX\/build\/Release\/data/\/usr\/share\/BespokeSynth
 
 export CURRENTDIR=`pwd`
 cd Builds/LinuxMakefile
-%{make_build} V=1 DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_libdir} CONFIG=Release CPPFLAGS="%{build_cxxflags}" CXXFLAGS="-I$CURRENTDIR/vst/vstsdk2.4/ -I/usr/include/freetype2" %{?_smp_mflags}
+%{make_build} PREFIX=/usr LIBDIR=%{_libdir} CONFIG=Release CPPFLAGS="%{build_cxxflags}" CXXFLAGS="-I$CURRENTDIR/vst/vstsdk2.4/ -I/usr/include/freetype2" LDFLAGS="-lpython%{python3_version} $LDFLAGS"
 
 %install 
 
 cd Builds/LinuxMakefile
-%__install -m 755 -d %{buildroot}/%{_bindir}/
-%__install -m 755 build/BespokeSynth %{buildroot}/%{_bindir}/
-%__install -m 755 %{SOURCE3} %{buildroot}/%{_bindir}/Bespoke-GLSLfix
+install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 build/BespokeSynth %{buildroot}/%{_bindir}/
+install -m 755 %{SOURCE2} %{buildroot}/%{_bindir}/Bespoke-GLSLfix
 chmod a+x %{buildroot}/%{_bindir}/Bespoke-GLSLfix
 
 cd ../..
