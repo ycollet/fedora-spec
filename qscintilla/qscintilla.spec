@@ -1,10 +1,11 @@
 
 %global scintilla_ver 3.10.1
-%global sip_ver 4.19.7
+# sip_ver for Fedora 31: 4.19.19, for Fedora 33: 4.19.24.
+%global sip_ver 4.19.19
 
 %global py3 1
 %global qt4 1
-#%global qt5 1
+# global qt5 1 # add a % before global
 
 ## f29+ no longer using separate sipdir for python3
 %global py3_sipdir %{_datadir}/sip
@@ -12,15 +13,15 @@
 
 Summary: A Scintilla port to Qt
 Name:    qscintilla
-Version: 2.11.2
+Version: 2.11.5
 Release: 10%{?dist}
 
 License: GPLv3
 Url:     http://www.riverbankcomputing.com/software/qscintilla/
 %if 0%{?snap:1}
-Source0: https://www.riverbankcomputing.com/static/Downloads/QScintilla/%{version}/QScintilla_gpl-%{version}-snapshot-%{snap}.tar.gz
+Source0: https://www.riverbankcomputing.com/static/Downloads/QScintilla/%{version}/QScintilla-%{version}-snapshot-%{snap}.tar.gz
 %else
-Source0: https://www.riverbankcomputing.com/static/Downloads/QScintilla/%{version}/QScintilla_gpl-%{version}.tar.gz
+Source0: https://www.riverbankcomputing.com/static/Downloads/QScintilla/%{version}/QScintilla-%{version}.tar.gz
 %endif
 
 ## upstreamable patches
@@ -162,7 +163,7 @@ BuildArch: noarch
 %endif
 
 %prep
-%setup -q -n QScintilla_gpl-%{version}%{?snap:-snapshot-%{snap}}
+%setup -q -n QScintilla-%{version}%{?snap:-snapshot-%{snap}}
 
 %patch100 -p1 -b .sip_check
 %patch101 -p1 -b .qurl
@@ -334,7 +335,7 @@ test -x %{buildroot}%{python3_sitearch}/PyQt4/Qsci.so
 %ldconfig_scriptlets
 
 %files -f qscintilla-qt4.lang
-%doc NEWS README
+%doc NEWS Python3-qt4/README
 %license LICENSE
 %{_qt4_libdir}/libqscintilla2_qt4.so.15*
 %{_qt4_plugindir}/designer/libqscintillaplugin.so
@@ -370,7 +371,7 @@ test -x %{buildroot}%{python3_sitearch}/PyQt4/Qsci.so
 %ldconfig_scriptlets qt5
 
 %files qt5 -f qscintilla-qt5.lang
-%doc NEWS README
+%doc NEWS Python3-qt5/README
 %license LICENSE
 %{_qt5_libdir}/libqscintilla2_qt5.so.15*
 %{_qt5_plugindir}/designer/libqscintillaplugin.so
@@ -406,6 +407,9 @@ test -x %{buildroot}%{python3_sitearch}/PyQt4/Qsci.so
 
 
 %changelog
+* Thu Oct 29 2020 Yann Collette <ycollette.nospam@free.fr> - 2.11.5-10
+- update to 2.11.5
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.2-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
