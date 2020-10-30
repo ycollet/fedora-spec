@@ -30,7 +30,7 @@ purr-data/purr-data.spec       -> has a pure binary dependency
 improviz/improviz.spec         -> (Cabal ...)
 processing/processing.spec     -> precompiled java package -> noarch ...
 rack                           -> fail with some fedora flags
-ams-lv2/lvtk.spec              -> (???)
+ams-lv2/lvtk.spec              -> static library
 psi-plugins                    -> error with fedora 33 + lv2-devel
 picoloop/picoloop.spec         -> complex ...
 orca/orca.spec                 -> really special build system
