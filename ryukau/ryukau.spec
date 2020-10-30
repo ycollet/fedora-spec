@@ -29,11 +29,16 @@ Some audio plugins (LV2 and VST) from ruykau
 %prep
 %autosetup -n %{name}
 
+# Too expensive to compile
+sed -i -e "/CubicPadSynth/d" Makefile
+sed -i -e "/LightPadSynth/d" Makefile
+sed -i -e "/L4Reverb/d" Makefile
+
 %build
 
 %set_build_flags
 
-%make_build PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%{build_cflags}" CXXFLAGS="%{build_cxxflags}" LDFLAGS="%{build_ldflags} -ldl"
+%make_build PREFIX=/usr LIBDIR=%{_lib} VERBOSE=1 SKIP_STRIPPING=true CFLAGS="%{build_cflags}" CXXFLAGS="%{build_cxxflags}" LDFLAGS="%{build_ldflags} -ldl" -j1
 
 %install
 
