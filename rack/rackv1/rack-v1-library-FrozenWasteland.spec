@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 079add5a48beeb53bc48cb5e941259946a41578c
-
 %global gittag0 1.15.8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,24 +10,11 @@ Name:    rack-v1-FrozenWasteland
 Version: 1.15.8
 Release: 3%{?dist}
 Summary: FrozenWasteland plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/almostEric/FrozenWasteland
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
 Source1: https://github.com/almostEric/FrozenWasteland/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -95,7 +81,7 @@ cp -n %{SOURCE2} FrozenWasteland_plugin/plugin.json
 %build
 
 cd FrozenWasteland_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

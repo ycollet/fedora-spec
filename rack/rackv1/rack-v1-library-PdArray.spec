@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 da36d4bab7d0027d50890c7fb1a44de47b02d30c
-
 %global gittag0 1.0.5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,24 +10,11 @@ Name:    rack-v1-PdArray
 Version: 1.0.5
 Release: 3%{?dist}
 Summary: PdArray plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/mgunyho/PdArray
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
 Source1: https://github.com/mgunyho/PdArray/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -95,7 +81,7 @@ cp -n %{SOURCE2} PdArray_plugin/plugin.json
 %build
 
 cd PdArray_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

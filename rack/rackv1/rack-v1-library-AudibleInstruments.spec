@@ -10,37 +10,14 @@ Name:    rack-v1-AudibleInstruments
 Version: 1.3.1
 Release: 3%{?dist}
 Summary: AudibleInstruments plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/VCVRack/AudibleInstruments
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
-# git clone https://github.com/VCVRack/AudibleInstruments.git
-# cd AudibleInstruments
-# git checkout v1.2.0
-# git submodule init
-# git submodule update
-# cd eurorack
-# git submodule init
-# git submodule update
-# cd ..
-# find . -name ".git" -exec rm -rf {} \;
-# cd ..
-# tar cvfz AudibleInstruments.tar.gz AudibleInstruments/*
+# ./audible-instruments-source.sh <tag>
+# ./audible-instruments-source.sh v1.2.0
 
 Source0: Rack.tar.gz
 Source1: AudibleInstruments.tar.gz
@@ -107,7 +84,7 @@ cp -n %{SOURCE2} AudibleInstruments_plugin/plugin.json
 %build
 
 cd AudibleInstruments_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 a9f8dfbb3a6c0d4123a987bfab431c045594b2a9
+%global commit0 16d14c98873e5349889d925cc484fc9a90f0e413
 %global gittag0 v0.6.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,42 +8,20 @@
 
 Name:    rack-v1-AudibleInstruments
 Version: 0.6.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A plugin for Rack
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/VCVRack/AudibleInstruments
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
-# git clone --recursive https://github.com/VCVRack/AudibleInstruments.git
-# cd AudibleInstruments
-# #git checkout v0.6.0
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd ..
-# tar cvfz AudibleInstruments.tar.gz AudibleInstruments
-# rm -rf AudibleInstruments
+# ./audible-instruments-source.sh <tag>
+# ./audible-instruments-source.sh v0.6.0
+# ./audible-instruments-source.sh 16d14c98873e5349889d925cc484fc9a90f0e413
 
 Source0: Rack.tar.gz
 Source1: AudibleInstruments.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -69,7 +47,7 @@ BuildRequires: jq
 Based on Mutable Instruments - https://mutable-instruments.net/ Eurorack modules.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -104,7 +82,7 @@ tar xvfz %{SOURCE1} --directory=audibleinstruments_plugin --strip-components=1
 %build
 
 cd audibleinstruments_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 
@@ -115,6 +93,9 @@ cp -r audibleinstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
+* Thu Jan 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
+- update to 0.6.0-4
+
 * Thu Jan 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
 - update to a9f8dfbb3a6c0d4123a987bfab431c045594b2a9 to get plugin.json
 

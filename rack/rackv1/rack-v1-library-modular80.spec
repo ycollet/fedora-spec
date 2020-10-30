@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 4b73bfb8692331177ba037e355e6c0bc6e41f185
-
 %global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,24 +10,11 @@ Name:    rack-v1-modular80
 Version: 1.0.1
 Release: 3%{?dist}
 Summary: modular80 plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/cschol/modular80
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 # git clone --branch v1 --recursive https://github.com/cschol/modular80.git
 # find modular80 -name ".git" -exec rm -rf {} \;
@@ -99,7 +85,7 @@ cp -n %{SOURCE2} modular80_plugin/plugin.json
 %build
 
 cd modular80_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 c8d43f7ef698b5c847764c07a446be65337c7d2e
-
 %global gittag0 1.3.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,24 +10,11 @@ Name:    rack-v1-CharredDesert
 Version: 1.3.1
 Release: 3%{?dist}
 Summary: CharredDesert plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/SVModular/CharredDesert
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 # git clone https://github.com/SVModular/CharredDesert
 # cd CharredDesert
@@ -104,7 +90,7 @@ cp -n %{SOURCE2} CharredDesert_plugin/plugin.json
 %build
 
 cd CharredDesert_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

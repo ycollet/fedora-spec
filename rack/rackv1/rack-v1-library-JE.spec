@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 89fecee9302ae457ed6f83985486ea860d659dd2
-
 %global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,24 +10,11 @@ Name:    rack-v1-JE
 Version: 1.0.0
 Release: 3%{?dist}
 Summary: JE plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/eres-j/VCVRack-plugin-JE
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 # git clone --branch v1.0.0 --recursive https://github.com/eres-j/VCVRack-plugin-JE.git
 # find VCVRack-plugin-JE -name ".git" -exec rm -rf {} \;
@@ -99,7 +85,7 @@ cp -n %{SOURCE2} JE_plugin/plugin.json
 %build
 
 cd JE_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

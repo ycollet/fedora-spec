@@ -5,40 +5,18 @@
 
 Name:    Rack-v1
 Version: 1.1.6
-Release: 8%{?dist}
+Release: 9%{?dist}
 Summary: A modular synthetizer
-
-Group:   Applications/Multimedia
 License: GPLv2+
-URL:     https://github.com/VCVRack/Rack.git
+URL:     https://github.com/VCVRack/Rack
 
 %define with_glew  %{?_with_glew:  1} %{?!_with_glew:  0}
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
-
-# git clone https://github.com/VCVRack/manual.git
-# cd manual
-# find . -name ".git" -exec rm -rf {} \;
-# cd ..
-# tar cvfz Rack-manual.tar.gz manual/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
 Source1: Rack-manual.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -62,19 +40,20 @@ BuildRequires: python3-sphinx
 BuildRequires: python3-recommonmark
 BuildRequires: python3-sphinx_rtd_theme
 
+Requires: rack-v1-Fundamental
+
 %description
 A modular synthetizer
 
 %package doc
 Summary:   Documentation files for Rack
-Group:     Applications/Multimedia
 BuildArch: noarch
 
 %description doc
 Documentation files for Rack
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -85,7 +64,7 @@ sed -i -e "s/-fno-finite-math-only//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
 
 # %{build_cxxflags}
-echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
+echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-rack -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
@@ -120,21 +99,21 @@ sed -i -e "s/sphinx-build/sphinx-build-3/g" manual/Makefile
 
 cd dep
 cd glfw
-cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
+c%make_build-DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
 make
-make install
+%make_buildinstall
 cd ..
 
 %if %{with_glew}
-make lib/libGLEW.a
+%make_buildlib/libGLEW.a
 %endif
 
 cd ..
 
-make DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags}
+%make_build PREFIX=/usr LIBDIR=%{_lib}
 
 cd manual
-make html
+%make_buildhtml
 
 %install 
 
@@ -147,11 +126,11 @@ mkdir -p %{buildroot}%{_libexecdir}/Rack1/plugins/
 
 install -m 755 Rack         %{buildroot}%{_bindir}/
 install -m 644 res/icon.png %{buildroot}%{_datadir}/pixmaps/rack.png
-cp -r res %{buildroot}%{_libexecdir}/Rack1/
+cp -r res                   %{buildroot}%{_libexecdir}/Rack1/
 
 cp -r manual/_build/html/* %{buildroot}%{_datadir}/Rack/html/
 
-cp LICENSE* CHANGELOG.md cacert.pem Core.json template.vcv %{buildroot}%{_libexecdir}/Rack1/
+cp cacert.pem Core.json template.vcv %{buildroot}%{_libexecdir}/Rack1/
 
 cat > %{buildroot}%{_datadir}/applications/Rack.desktop << EOF
 [Desktop Entry]
@@ -165,6 +144,8 @@ Categories=AudioVideo;
 EOF
 
 %files
+%doc README.md CHANGELOG.md
+%license LICENSE-GPLv3.txt LICENSE-dist.txt LICENSE.md
 %{_bindir}/*
 %{_datadir}/*
 %{_libexecdir}/*
@@ -173,6 +154,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Fri Oct 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-9
+- update to 1.1.6-9
+
 * Wed Jan 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-8
 - update to 1.1.6-8
 

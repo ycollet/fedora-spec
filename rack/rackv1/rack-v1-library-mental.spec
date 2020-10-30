@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 a7896af7899e0cd38557e1b03d381067a4cd7ec0
-
 %global gittag0 0.6.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,25 +10,12 @@ Name:    rack-v1-mental
 Version: 0.6.3
 Release: 3%{?dist}
 Summary: mental plugin for Rack
-
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     https://github.com/Strum/Strums_Mental_VCV_Modules
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
 Source1: https://github.com/Strum/Strums_Mental_VCV_Modules/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -61,7 +47,7 @@ BuildRequires: jq
 mental plugin for Rack.
 
 %prep
-%setup -qn Rack
+%autosetup -n Rack
 
 CURRENT_PATH=`pwd`
 
@@ -98,7 +84,7 @@ cp -n %{SOURCE2} mental_plugin/plugin.json
 %build
 
 cd mental_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 

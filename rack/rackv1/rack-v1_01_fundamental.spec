@@ -1,37 +1,22 @@
 # Global variables for github repository
-%global commit0 eb41dd7cdf1112530c1a8059cfa3a99a402944ef
+%global commit0 5799ee2a9b21492b42ebcb9b65d5395ef5c1cbe2
 %global gittag0 v1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# Disable production of debug package.
-%global debug_package %{nil}
-
 Name:    rack-v1-Fundamental
 Version: 1.4.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A plugin for Rack
 License: GPLv2+
 URL:     https://github.com/VCVRack/Fundamental
 
 %define with_glew  %{?_with_glew:  1} %{?!_with_glew:  0}
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v0.6.2b
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
 Source1: https://github.com/VCVRack/Fundamental/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source2: Fundamental_plugin.json
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -94,8 +79,6 @@ sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 mkdir fundamental_plugin
 tar xvfz %{SOURCE1} --directory=fundamental_plugin --strip-components=1 
 
-cp %{SOURCE2} fundamental_plugin/plugin.json
-
 # Remove libsamplerate download and install
 sed -i -e "7,20d" fundamental_plugin/Makefile
 
@@ -103,7 +86,7 @@ sed -i -e "7,20d" fundamental_plugin/Makefile
 
 cd fundamental_plugin
 
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 
@@ -114,6 +97,9 @@ cp -r fundamental_plugin/dist/Fundamental/* %{buildroot}%{_libexecdir}/Rack1/plu
 %{_libexecdir}/*
 
 %changelog
+* Fri OCt 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-5
+- update to 1.4.0-5
+
 * Tue Sep 8 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-4
 - update to 1.4.0-4.
 

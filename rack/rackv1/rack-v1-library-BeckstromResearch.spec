@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 017fb891331f39d7a182ad1a6febe28567a1a00d
-
 %global gittag0 0.6.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,24 +10,11 @@ Name:    rack-v1-BeckstromResearch
 Version: 0.6.0
 Release: 3%{?dist}
 Summary: BeckstromResearch plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/chrisbeckstrom/Beckstrom_Research_Rack
 
-# git clone https://github.com/VCVRack/Rack.git Rack
-# cd Rack
-# git checkout v1.1.6
-# git submodule init
-# git submodule update
-# find . -name ".git" -exec rm -rf {} \;
-# cd dep
-# wget https://bitbucket.org/jpommier/pffft/get/29e4f76ac53b.zip
-# unzip 29e4f76ac53b.zip
-# mkdir include
-# cp jpommier-pffft-29e4f76ac53b/*.h include/
-# rm  29e4f76ac53b.zip
-# cd ../..
-# tar cvfz Rack.tar.gz Rack/*
+# ./rack-source.sh <tag>
+# ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
 Source1: https://github.com/chrisbeckstrom/Beckstrom_Research_Rack/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -95,7 +81,7 @@ cp -n %{SOURCE2} BeckstromResearch_plugin/plugin.json
 %build
 
 cd BeckstromResearch_plugin
-make RACK_DIR=.. DESTDIR=%{buildroot} PREFIX=/usr LIBDIR=%{_lib} %{?_smp_mflags} dist
+%make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist
 
 %install 
 
