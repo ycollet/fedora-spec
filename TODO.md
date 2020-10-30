@@ -17,10 +17,6 @@
  
  supercollider-study -> https://github.com/rumblesan/super-collider-study
 
-** Rack
-Add rack-v1-Fundamental as a Require in the spec file.
-Debug jack crashing which need to remove the .Rack directory
-
 ** Add source.sh file in spec file:
 Source1: source.sh
 
