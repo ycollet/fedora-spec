@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:    stochas
-Version: 1.3.3
+Version: 1.3.4
 Release: 3%{?dist}
 Summary: A VST3 MIDI sequencer
 License: GPLv3
 
 # Use ./source-stochas.sh to get the sources (latest master for now)
-# ./source-stochas.sh v1.3.3
+# ./source-stochas.sh v1.3.4
 
 URL:     https://github.com/surge-synthesizer/stochas
 Source0: stochas.tar.gz
@@ -47,18 +47,18 @@ sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
 %install 
 
-%__install -m 755 -d %{buildroot}%{_libdir}/vst3/
+install -m 755 -d %{buildroot}%{_libdir}/vst3/
 %if 0%{?fedora} < 33
-%__install -m 644 -p stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
+install -m 644 -p stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
 %else
-%__install -m 644 -p %{_host}/stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
+install -m 644 -p %{_host}/stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
 %endif
 
-%__install -m 755 -d %{buildroot}%{_bindir}/
+install -m 755 -d %{buildroot}%{_bindir}/
 %if 0%{?fedora} < 33
-%__install -m 644 -p stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
+install -m 644 -p stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
 %else
-%__install -m 644 -p %{_host}/stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
+install -m 644 -p %{_host}/stochas_artefacts/Standalone/Stochas %{buildroot}/%{_bindir}/
 %endif
 
 %files
@@ -70,6 +70,9 @@ sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 %{_libdir}/vst3/*
 
 %changelog
+* Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.4-2
+- update to 1.3.4
+
 * Sat Oct 3 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.3-2
 - fix for fedora 33
 
