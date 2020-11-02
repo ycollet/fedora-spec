@@ -1,5 +1,5 @@
 Name:    fasttracker2
-Version: 1.37
+Version: 1.38
 Release: 3%{?dist}
 Summary: Module tracker software for creating music
 License: GPLv3+
@@ -59,6 +59,9 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %{_bindir}/*
 
 %changelog
+* Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.38-3
+- update to 1.38-3
+
 * Thu Oct 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.37-3
 - update to 1.37-3
 
