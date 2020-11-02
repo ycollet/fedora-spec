@@ -1,15 +1,15 @@
 Name:    mamba
-Version: 1.6.0
+Version: 1.7.0
 Release: 2%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: BSD
 
 URL:     https://github.com/brummer10/Mamba
 
-# To get the source code: ./mamba_source.sh v1.6
+# To get the source code: ./mamba_source.sh v1.7
 
 Source0: Mamba.tar.gz
-Source1: mamba_source.sh
+Source1: mamba-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -64,6 +64,9 @@ with the synth of your choice.
 %{_datadir}/*
 
 %changelog
+* Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.0-2
+- update to 1.7.0-2
+
 * Tue Oct 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.6.0-2
 - fix description, license and missing file
 
