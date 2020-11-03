@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 44c516c29b1e88220887834e2078cb03c7fd70b9
-%global gittag0 1.3.1
+%global commit0 d14a3e3833e0c7c4330b24eef3958c090d8815f9
+%global gittag0 1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AudibleInstruments
-Version: 1.3.1
+Version: 1.4.0
 Release: 3%{?dist}
 Summary: AudibleInstruments plugin for Rack
 License: GPLv2+
@@ -95,5 +95,5 @@ cp -r AudibleInstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
 - initial specfile

@@ -1,6 +1,5 @@
 # Global variables for github repository
 %global commit0 9f6a131bf724cf62b8731144fd36b8faca45c290
-
 %global gittag0 1.1.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -11,7 +10,6 @@ Name:    rack-v1-ChortlingHamsterModules
 Version: 1.1.2
 Release: 3%{?dist}
 Summary: ChortlingHamsterModules plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/chortlinghamster/modules
 

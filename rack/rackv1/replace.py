@@ -16,7 +16,7 @@ def get_git_revision_hash(git_path):
     os.chdir(git_path)
     commit_id = subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode("utf-8")
     os.chdir(curr_path)
-    return commit_id
+    return commit_id.rstrip()
 
 path_to_library_git = 'library'
 path_to_spec_files = 'spec'

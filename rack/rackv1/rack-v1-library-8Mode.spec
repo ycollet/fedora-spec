@@ -10,7 +10,6 @@ Name:    rack-v1-8Mode
 Version: 0.6.1
 Release: 3%{?dist}
 Summary: 8Mode plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/8Mode/8Mode-VCV_Modules
 

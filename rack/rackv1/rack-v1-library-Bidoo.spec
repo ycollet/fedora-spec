@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 08695f4cf9be834866091be672f950aec9163bfd
-%global gittag0 1.1.27
+%global commit0 db35db3cf7251424975a3d049ceebe26167a51b2
+%global gittag0 1.1.28
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Bidoo
-Version: 1.1.27
+Version: 1.1.28
 Release: 3%{?dist}
 Summary: Bidoo plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r Bidoo_plugin/dist/Bidoo/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Bido
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.27-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.28-3
 - initial specfile

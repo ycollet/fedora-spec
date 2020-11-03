@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 0d55621572212b4b69617157faceb8821ee946cf
-%global gittag0 1.3.1
+%global commit0 aaac8a288d4641354ce2ef80fa39cc717fa33265
+%global gittag0 1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-ChowDSP
-Version: 1.3.1
+Version: 1.4.0
 Release: 3%{?dist}
 Summary: ChowDSP plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r ChowDSP_plugin/dist/ChowDSP/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
 - initial specfile

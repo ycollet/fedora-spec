@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 16d14c98873e5349889d925cc484fc9a90f0e413
-%global gittag0 v0.6.0
+%global commit0 d14a3e3833e0c7c4330b24eef3958c090d8815f9
+%global gittag0 v1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AudibleInstruments
-Version: 0.6.0
+Version: 1.4.0
 Release: 4%{?dist}
 Summary: A plugin for Rack
 License: GPLv2+
@@ -17,8 +17,7 @@ URL:     https://github.com/VCVRack/AudibleInstruments
 # ./rack-source.sh v1.1.6
 
 # ./audible-instruments-source.sh <tag>
-# ./audible-instruments-source.sh v0.6.0
-# ./audible-instruments-source.sh 16d14c98873e5349889d925cc484fc9a90f0e413
+# ./audible-instruments-source.sh v1.4.0
 
 Source0: Rack.tar.gz
 Source1: AudibleInstruments.tar.gz
@@ -93,8 +92,11 @@ cp -r audibleinstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
+* Thu Now 03 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
+- update to 1.4.0-3
+
 * Thu Jan 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
-- update to 0.6.0-4
+- update to 0.6.0-3
 
 * Thu Jan 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
 - update to a9f8dfbb3a6c0d4123a987bfab431c045594b2a9 to get plugin.json

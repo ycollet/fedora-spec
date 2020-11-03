@@ -10,7 +10,6 @@ Name:    rack-v1-AaronStatic
 Version: 1.0.0
 Release: 3%{?dist}
 Summary: AaronStatic plugin for Rack
-
 License: GPLv2+
 URL:     https://github.com/aaronstatic/AaronStatic_modules
 

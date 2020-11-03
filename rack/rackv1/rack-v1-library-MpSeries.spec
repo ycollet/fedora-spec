@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 93877d5f247894772b2932d31ac54e205b5c45c6
-%global gittag0 1.0.1
+%global gittag0 1.0.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-MpSeries
-Version: 1.0.1
+Version: 1.0.2
 Release: 3%{?dist}
 Summary: MpSeries plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r MpSeries_plugin/dist/MpSeries/* %{buildroot}%{_libexecdir}/Rack1/plugins-v
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-3
 - initial specfile
