@@ -1,16 +1,11 @@
-# Global variables for github repository
-%global commit0 af32cc761feb79d929d006306ded975a01e4f4ac
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: Pattern-controlled audio stream / sample re-sequencer LV2 plugin
 Name:    lv2-BJumblr
-Version: 1.4.0
+Version: 1.4.2
 Release: 2%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BJumblr
 
-Source0: https://github.com/sjaehn/BJumblr/archive/%{commit0}.tar.gz#/BJumblr-%{shortcommit0}.tar.gz
+Source0: https://github.com/sjaehn/BJumblr/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -23,7 +18,7 @@ BuildRequires: libsndfile-devel
 BJumblr is a pattern-controlled audio stream / sample re-sequencer LV2 plugin
 
 %prep
-%autosetup -n BJumblr-%{commit0}
+%autosetup -n BJumblr-%{version}
 
 %build
 
@@ -39,10 +34,13 @@ BJumblr is a pattern-controlled audio stream / sample re-sequencer LV2 plugin
 %{_libdir}/lv2/*
 
 %changelog
+* Wed Nov 4 2020 Yann Collette <ycollette dot nospam at free.fr> 1.4.2-2
+- updata to 1.4.2-2
+
 * Fri Jul 24 2020 Yann Collette <ycollette dot nospam at free.fr> 1.4.0-2
 - updata to 1.4.0-2
 
-* Fri Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.2-2
+* Thu Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.2-2
 - updata to 1.2.2-2
 
 * Sat May 16 2020 Yann Collette <ycollette dot nospam at free.fr> 1.2.0-2
