@@ -1,21 +1,11 @@
 Summary: Guitar Amplifier emulator
 Name:    rakarrack
-Version: 0.6.2
+Version: 0.6.3
 Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
-URL:     git://git.code.sf.net/p/rakarrack/git
-Source0: rakarrack.tar.gz
-#Patch0:  rakarrack-0001-fix-distortion-and-ftlk.patch
-Patch0: rakarrack-0002-fix-format-use.patch
+URL:     http://rakarrack.sourceforge.net/
 
-# git clone git://git.code.sf.net/p/rakarrack/git rakarrack
-# cd rakarrack
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz rakarrack.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://github.com/ycollet/rakarrack/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel
@@ -39,36 +29,46 @@ years. Josep Andreu say on the IRC chat 'I can made an app based on the effects 
 hiden on code of ZynAddSubFX (by Paul Nasca Octavian)'. Some time after here is the
 result of our work...
 
-This app has 42 effects: EQ Lineal, Compressor, Distortion, Overdrive, Echo, Chorus,
-Phaser, Flanger, Reverb , Parametric EQ, Wah Wah, Alienwha, Harmonizer etc.
+This app has 42 effects:
+  * EQ Lineal
+  * Compressor
+  * Distortion
+  * Overdrive
+  * Echo
+  * Chorus
+  * Phaser
+  * Flanger
+  * Reverb
+  * Parametric EQ
+  * Wah Wah
+  * Alienwha
+  * Harmonizer
+  * etc.
 The effects are procesed in cascade... The order of effects are configurable by the user.
 The state of rack can be saved as 'presets'. Sets of presets can be stored as 'banks'.
 The rack also has an integrated tuner and can receive MIDI control orders and can send MIDI
 notes to MIDI devices like synthesizers.
 
 %prep
-%setup -qn %{name}
-
-%patch0 -p1 
+%autosetup -n %{name}-%{version}
 
 %build
+
 ./autogen.sh
 %configure
-%{__make} %{_smp_mflags}
+%make_build
 
 %install
-%{__make} DESTDIR=%{buildroot} install
+%make_install
 
-# desktop file categories
-BASE="X-PlanetCCRMA X-Fedora Application AudioVideo"
-XTRA="X-Synthesis X-MIDI X-Jack"
-%{__mkdir} -p %{buildroot}%{_datadir}/applications
-
-%clean
-%{__rm} -rf %{buildroot}
+desktop-file-install --vendor '' \
+        --add-category=X-Sound \
+        --add-category=Midi \
+        --add-category=X-Jack \
+        --dir %{buildroot}/%{_datadir}/applications \
+        %{buildroot}/%{_datadir}/applications/rakarrack.desktop
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README
 %license COPYING
 %{_bindir}/*
@@ -79,6 +79,9 @@ XTRA="X-Synthesis X-MIDI X-Jack"
 %{_datadir}/rakarrack/*
 
 %changelog
+* Wed Nov 4 2020 Yann Collette <ycollette dot nospam at free.fr> 0.6.3-2
+- update to 0.6.3-2
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free.fr> 1.5.1-1
 - update for Fedora 29
 
