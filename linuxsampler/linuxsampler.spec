@@ -1,19 +1,16 @@
 # svn co https://svn.linuxsampler.org/svn/linuxsampler/trunk linuxsampler
 # define svn 2680
 
-Summary: Linux Sampler
-Name: linuxsampler
-Version: 2.1.0
-Release: 1%{?dist}
-License: GPL
-Group: Applications/Multimedia
-URL: http://www.linuxsampler.org/
+Summary:      Linux Sampler
+Name:         linuxsampler
+Version:      2.1.1
+Release:      1%{?dist}
+License:      GPL
+URL:          http://www.linuxsampler.org/
 Distribution: Planet CCRMA
-Vendor: Planet CCRMA
+Vendor:       Planet CCRMA
 
 Source0: http://download.linuxsampler.org/packages/linuxsampler-%{version}.tar.bz2
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automake autoconf libtool pkgconfig
 BuildRequires: libgig-devel alsa-lib-devel sqlite-devel
@@ -29,53 +26,41 @@ features, comparable to both hardware and commercial Windows/Mac
 software samplers.
 
 %package devel
-Summary: Linux Sampler development files
-Group: Development/Libraries
+Summary:  Linux Sampler development files
 Requires: %{name} = %{version}-%{release}
 
 %description devel
 Libraries and include files for Linux Sampler development
 
 %package dssi
-Summary: Linux Sampler DSSI plugin
-Group: Applications/Multimedia
+Summary:  Linux Sampler DSSI plugin
 Requires: %{name} = %{version}-%{release}
 
 %description dssi
 Linuxsampler plugin for the Disposable Soft Synth Interface (DSSI).
 
 %package -n lv2-linuxsampler-plugins
-Summary: Linux Sampler LV2 plugin
-Group: Applications/Multimedia
+Summary:  Linux Sampler LV2 plugin
 Requires: %{name} = %{version}-%{release}
 
 %description -n lv2-linuxsampler-plugins
 Linuxsampler plugin for the LV2 plugin standard.
 
 %prep
-%setup -q -n linuxsampler%{!?svn:-%{version}}
+%autosetup -n linuxsampler%{!?svn:-%{version}}
 if [ -f Makefile.cvs ]; then make -f Makefile.cvs; fi
 
 %build
 %configure
-%{__make} %{?__smp_mflags}
+%make_build
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} install
+%make_install
 # add path to linuxsampler libraries
 mkdir -p %{buildroot}%{_sysconfdir}/ld.so.conf.d/
 echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsampler.conf
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog NEWS README
 %license COPYING
 %{_bindir}/linuxsampler
@@ -87,8 +72,6 @@ echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsa
 %{_bindir}/lscp
 
 %files devel
-%defattr(-,root,root)
-%doc
 %{_libdir}/linuxsampler/*.so
 %{_libdir}/linuxsampler/*.a
 %exclude %{_libdir}/linuxsampler/*.la
@@ -108,6 +91,9 @@ echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsa
 %exclude %{_libdir}/lv2/linuxsampler.lv2/linuxsampler.la
 
 %changelog
+* Thu Nov 5 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-1
+- update to 2.1.1
+
 * Sun Aug 28 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 2.0.0-1
 - update to 2.0.0
 
