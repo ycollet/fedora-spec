@@ -1,25 +1,20 @@
-# Global variables for github repository
-%global commit0 49c3dff7f286df007129eb7db029423559b35ef3
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: Multimachine jam sessions over the internet
 Name:    jacktrip
-Version: 1.1.0
+Version: 1.2.1
 Release: 2%{?dist}
 License: STK
-Group:   Applications/Multimedia
 URL:     https://ccrma.stanford.edu/software/jacktrip/
-Source0: https://github.com//jacktrip/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
+Source0: https://github.com/jacktrip/jacktrip/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+
 BuildRequires: gcc gcc-c++
-BuildRequires: qt4-devel
-BuildRequires: jack-audio-connection-kit-devel alsa-lib-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: alsa-lib-devel
+BuildRequires: rtaudio-devel
+BuildRequires: meson
 
 %description
 JackTrip is a Linux and Mac OS X-based system used for multi-machine
@@ -33,31 +28,28 @@ It is currently being developed and actively tested at CCRMA by the
 SoundWIRE group.
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 %build
-cd jacktrip/src
-./build
-%{__make}
+
+%meson
+%meson_build
 
 %install
-%{__rm} -rf %{buildroot}
-cd jacktrip/src
-%{__mkdir} -p %{buildroot}%{_bindir}
-%{__make} INSTALL_ROOT=%{buildroot} release-install
 
-%clean
-%{__rm} -rf %{buildroot}
-
+%meson_install
 
 %files
-%defattr(-,root,root,-)
-%doc jacktrip/CHANGESLOG.txt jacktrip/TODO.txt jacktrip/INSTALL.txt
+%doc CHANGESLOG.txt TODO.txt INSTALL.txt INSTALL_meson.md README.md
+%license LICENSE
 %{_bindir}/jacktrip
 
 %changelog
+* Thu Nov 05 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-2
+- update to 1.2.1
+
 * Fri May 1 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
-- update 1.1.0
+- update to 1.1.0
 
 * Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
 - update for Fedora 29
