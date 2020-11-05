@@ -1,16 +1,13 @@
-Summary: LinuxSampler Control Protocol library
-Name: liblscp
-Version: 0.5.8
-Release: 1%{?dist}
-License: GPL
-Group: System Environment/Libraries
-URL: http://qsampler.sourceforge.net/qsampler-index.html
+Summary:      LinuxSampler Control Protocol library
+Name:         liblscp
+Version:      0.6.0
+Release:      1%{?dist}
+License:      GPL
+URL:          http://qsampler.sourceforge.net/qsampler-index.html
 Distribution: Planet CCRMA
-Vendor: Planet CCRMA
+Vendor:       Planet CCRMA
 
 Source0: http://download.linuxsampler.org/packages/liblscp-%{version}.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automake, autoconf, libtool
 BuildRequires: linuxsampler-devel
@@ -20,35 +17,27 @@ BuildRequires: gcc gcc-c++
 LinuxSampler Control Protocol library
 
 %package devel
-Summary: LinuxSampler Control Protocol library developer resources
-Group: Development/Libraries
+Summary:  LinuxSampler Control Protocol library developer resources
 Requires: %{name} = %{version}-%{release}
 
 %description devel
 LinuxSampler Control Protocol library developer resources
 
 %prep
-%setup -q
+%autosetup
 if [ -f Makefile.cvs ]; then make -f Makefile.cvs; fi
 
 %build
 %configure
-%{__make} %{?_smp_mflags}
+%make_build
 
 %install
-%{__rm} -rf %{buildroot}
-%{makeinstall}
-
-%clean
-%{__rm} -rf %{buildroot}
+%make_install
 
 %files
-%defattr(-,root,root,-)
-%doc
 %{_libdir}/liblscp.so.*
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/lscp
 %{_libdir}/liblscp.so
 %{_libdir}/liblscp.a
@@ -56,8 +45,11 @@ if [ -f Makefile.cvs ]; then make -f Makefile.cvs; fi
 %{_libdir}/pkgconfig/lscp.pc
 
 %changelog
+* Thu Nov 5 2020 Yann Collette <ycollette.nospam@free.fr> 0.6.8-1
+- update to 0.6.0-1
+
 * Mon Nov 5 2018 Yann Collette <ycollette.nospam@free.fr> 0.5.8-1
-- update to 0.5.8
+- update to 0.5.8-1
 
 * Sun Aug 28 2016 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 0.5.7-1
 - update to 0.5.7
