@@ -1,19 +1,16 @@
 # svn co https://svn.linuxsampler.org/svn/libgig/trunk libgig
 # define svn 3425
 
-Summary: C++ library for loading Gigasampler files and DLS Level 1/2 files.
-Name:    libgig
-Version: 4.1.0
-Release: 1%{?svn:.svn%{svn}.1}%{?dist}
-License: GPL
-Group:   System Environment/Libraries
+Summary:      C++ library for loading Gigasampler files and DLS Level 1/2 files.
+Name:         libgig
+Version:      4.2.0
+Release:      1%{dist}
+License:      GPL
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
+URL:          http://www.linuxsampler.org/libgig/
 
-Source0: http://download.linuxsampler.org/packages/libgig-%{version}%{?svn:-svn%{svn}}.tar.bz2
-URL:     http://www.linuxsampler.org/libgig/
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: http://download.linuxsampler.org/packages/libgig-%{version}.tar.bz2
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool pkgconfig
@@ -28,36 +25,29 @@ BuildRequires: e2fsprogs-devel
 C++ library for loading Gigasampler files and DLS Level 1/2 files.
 
 %package devel
-Summary: C++ library for loading Gigasampler files and DLS Level 1/2 files.
-Group: Development/Libraries
+Summary:  C++ library for loading Gigasampler files and DLS Level 1/2 files.
 Requires: %{name} = %{version}-%{release}
 
 %description devel
 C++ library for loading Gigasampler files and DLS Level 1/2 files.
 
 %prep
-%setup -q -n libgig%{!?svn:-%{version}}
+%autosetup -n libgig-%{version}
 if [ -f Makefile.cvs ]; then make -f Makefile.cvs; fi
 
 %build
 %configure
-%{__make} %{?__smp_mflags}
-%{__make} docs
+%make_build
+make docs
 
 %install
-%{__rm} -rf %{buildroot}
-%{__mkdir} -p %{buildroot}
-%{makeinstall}
+%make_install
 
 # move libgig.* to /usr/_libdir/
 mv %{buildroot}%{_libdir}/libgig/lib* %{buildroot}%{_libdir}/
 rmdir %{buildroot}%{_libdir}/libgig
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog NEWS README TODO doc/html
 %license COPYING
 %{_bindir}/*
@@ -66,7 +56,6 @@ rmdir %{buildroot}%{_libdir}/libgig
 %{_mandir}/man1/*
 
 %files devel
-%defattr(-,root,root)
 %doc doc/html/*
 %{_libdir}/libgig.a
 %{_libdir}/libakai.a
@@ -77,6 +66,9 @@ rmdir %{buildroot}%{_libdir}/libgig
 %{_includedir}/*
 
 %changelog
+* Thu Nov 05 2020 Yann Collette <ycollette dot nospam at free dot fr> 4.2.0-1
+- update to 4.2.0-1
+
 * Mon Oct 15 2018 Yann Collette <ycollette dot nospam at free dot fr> 4.1.0-1
 - update for Fedora 29
 
