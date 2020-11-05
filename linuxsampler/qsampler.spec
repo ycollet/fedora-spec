@@ -1,13 +1,11 @@
-%define	desktop_vendor planetccrma
-
-Summary: LinuxSampler GUI front-end
-Name: qsampler
-Version: 0.6.3
-Release: 1%{?dist}
-License: GPL
-URL: http://qsampler.sourceforge.net/qsampler-index.html
+Summary:      LinuxSampler GUI front-end
+Name:         qsampler
+Version:      0.6.3
+Release:      1%{?dist}
+License:      GPL
+URL:          http://qsampler.sourceforge.net/qsampler-index.html
 Distribution: Planet CCRMA
-Vendor: Planet CCRMA
+Vendor:       Planet CCRMA
 
 Source0: https://download.sf.net/qsampler/qsampler-%{version}.tar.gz
 
