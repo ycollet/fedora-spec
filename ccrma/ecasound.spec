@@ -26,7 +26,7 @@ BuildRequires: ncurses-devel readline-devel
 BuildRequires: alsa-lib-devel audiofile-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel libsndfile-devel
-BuildRequires: hevea python2-docutils
+BuildRequires: hevea python3-docutils
 BuildRequires: liboil-devel
 %if 0%{?fedora} > 17
 BuildRequires: texlive texlive-latex-bin-bin texlive-texconfig 
