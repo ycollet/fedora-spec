@@ -1,5 +1,5 @@
 # find out stuff about python
-%define pythonbin %(if [ -x /usr/bin/python2 ] ; then echo "python2" ; else echo "python" ; fi)
+%define pythonbin %(if [ -x /usr/bin/python2 ] ; then echo "python2" ; else echo "python3" ; fi)
 %define python_pkgsdir %(echo `%{pythonbin} -c "import sys; print (sys.prefix + '/%{_lib}/python' + sys.version[:3])"`)
 %define python_version %(echo `%{pythonbin} -c "import sys; print (sys.version[:3])"`)
 %define python_compile_opt %{pythonbin} -O -c "import compileall; compileall.compile_dir('.')"
@@ -9,26 +9,24 @@
 
 Summary: ecasound - multitrack audio processing tool
 Name:    ecasound
-Version: 2.9.1
+Version: 2.9.3
 Release: 1%{?dist}
 Epoch:   1
 URL:     http://www.eca.cx/ecasound
-Source:  http://ecasound.seul.org/download/ecasound-%{version}.tar.gz
 License: GPL
-Group:   Applications/Multimedia
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
+Source:  http://ecasound.seul.org/download/ecasound-%{version}.tar.gz
+
 BuildRequires: gcc gcc-c++
-BuildRequires: ruby ruby-devel python python-devel 
+BuildRequires: ruby ruby-devel python2 python2-devel python3 
 BuildRequires: ncurses-devel readline-devel
 BuildRequires: alsa-lib-devel audiofile-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel libsndfile-devel
-BuildRequires: hevea python-docutils
+BuildRequires: hevea python2-docutils
 BuildRequires: liboil-devel
 %if 0%{?fedora} > 17
 BuildRequires: texlive texlive-latex-bin-bin texlive-texconfig 
@@ -49,9 +47,8 @@ parameters can be controlled by operator objects like oscillators
 and MIDI-CCs. A versatile console mode user-interface is included 
 in the package.
 
-%package 	devel
-Summary: Ecasound - development files
-Group: Applications/Multimedia
+%package devel
+Summary:  Ecasound - development files
 Requires: ecasound >= %{version}-%{release}
 	
 %description devel
@@ -59,9 +56,8 @@ The ecasound-devel package contains the header files and static libraries
 necessary for building apps like ecawave and ecamegapedal that
 directly link against ecasound libraries.
 
-%package -n 	libecasoundc
-Summary: Ecasound - libecasoundc
-Group: Applications/Multimedia
+%package -n libecasoundc
+Summary:  Ecasound - libecasoundc
 Requires: ecasound >= %{version}-%{release}
 
 %description -n libecasoundc
@@ -70,24 +66,22 @@ C implementation of the Ecasound Control Interface
 (ECI). Both static library files and and header 
 files are included in the package.
 
-%package -n 	pyecasound
-Summary: Python bindings to ecasound control interface.
-Group: Applications/Multimedia
+%package -n pyecasound
+Summary:  Python bindings to ecasound control interface.
 Requires: ecasound
 
 %description -n pyecasound
 Python bindings to Ecasound Control Interface (ECI).
 
-%package -n 	rubyecasound
-Summary: Ruby bindings to ecasound control interface.
-Group: Applications/Multimedia
+%package -n rubyecasound
+Summary:  Ruby bindings to ecasound control interface.
 Requires: ecasound
 
 %description -n rubyecasound
 Ruby bindings to Ecasound Control Interface (ECI).
 
 %prep
-%setup -q -n ecasound-%{version}
+%autosetup -n ecasound-%{version}
 
 %build
 # add redhat/fedora optimizations, do not build with -g
@@ -95,7 +89,7 @@ export AM_CFLAGS=" `echo %{optflags}|sed 's/-O2 -g//g'`"
 export AM_CXXFLAGS=" `echo %{optflags}|sed 's/-O2 -g//g'`"
 
 %configure --with-largefile --enable-shared --with-python-modules=%{_libdir}/python%{python_version}
-%{__make} %{?_smp_mflags}
+%make_build
 
 # build the documentation
 %if %makepdf
@@ -106,23 +100,23 @@ make docs
 %endif
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR="%{buildroot}" install
+%make_install
 ( cd pyecasound
   %python_compile_opt
   %python_compile
-  %{__mkdir} -p %{buildroot}%{python_pkgsdir}/site-packages/
-  %{__install} *.pyc *.pyo %{buildroot}%{python_pkgsdir}/site-packages/
+  mkdir -p %{buildroot}%{python_pkgsdir}/site-packages/
+  install *.py *.pyc *.pyo %{buildroot}%{python_pkgsdir}/site-packages/
+  rm %{buildroot}%{python_pkgsdir}/site-packages/test{1,2}_stresstest.py
 )
 # ruby file is installed in the wrong place
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
-mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
+cp rubyecasound/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
+rm -rf $RPM_BUILD_ROOT%{_usr}/local/share/ruby/
 
-%clean
-%{__rm} -rf %{buildroot}
+# Fix python / python2
+sed -i -e "s/env python$/env python2/g" $RPM_BUILD_ROOT%{_bindir}/ecamonitor
 
 %files
-%defattr(-, root, root)
 %doc NEWS README INSTALL AUTHORS BUGS TODO examples
 %license COPYING COPYING.GPL COPYING.LGPL
 %if %makepdf
@@ -141,12 +135,10 @@ mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
 %{_bindir}/ecasignalview
 %{_datadir}/ecasound/ecasoundrc
 %{_datadir}/ecasound/ecasound.el
-%config %{_datadir}/ecasound/ecasoundrc
 %config %{_datadir}/ecasound/generic_oscillators
 %config %{_datadir}/ecasound/effect_presets
 
 %files devel
-%defattr(-, root, root)
 %if %makepdf
 %doc Documentation/programmers_guide/ecasound_programmers_guide.*
 %doc Documentation/programmers_guide/ecasound_eci_doc.pdf
@@ -161,7 +153,6 @@ mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
 %{_libdir}/libkvutils.a
 
 %files -n libecasoundc
-%defattr(-, root, root)
 %{_bindir}/libecasoundc-config
 %{_includedir}/libecasoundc
 %{_libdir}/libecasoundc.la
@@ -178,7 +169,10 @@ mv $RPM_BUILD_ROOT/ecasound.rb $RPM_BUILD_ROOT%{_datadir}/ruby/vendor_ruby/
 %{_datadir}/ruby/vendor_ruby/ecasound.rb
 
 %changelog
-* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> -
+* Thu Nov 05 2020 Yann Collette <ycollette.nospam@free.fr> - 2.9.3-1
+- update to 2.9.3-1
+
+* Mon Oct 15 2018 Yann Collette <ycollette.nospam@free.fr> - 2.9.1-1
 - update for Fedora 29
 
 * Mon Nov  9 2015 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 2.9.1-1
