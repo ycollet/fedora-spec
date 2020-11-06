@@ -1,10 +1,10 @@
 Summary: BambooTracker is a music tracker for the Yamaha YM2608 sound chip
 Name:    BambooTracker
-Version: 0.4.4
+Version: 0.4.5
 Release: 1%{?dist}
 License: GPL
-
 URL:     https://github.com/rerrahkr/BambooTracker
+
 Source0: https://github.com/rerrahkr/BambooTracker/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
@@ -33,19 +33,6 @@ cd BambooTracker
 
 cd BambooTracker
 %make_install INSTALL_ROOT=%{buildroot} PREFIX=/usr
-cd ..
-
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
-%__install -m 644 BambooTracker.desktop %{buildroot}%{_datadir}/applications/
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/demos/
-cp -r demos/* %{buildroot}%{_datadir}/%{name}/demos/
-%__install -m 755 -d %{buildroot}/%{_datadir}/man/man1
-%__install -m 644 BambooTracker.1 %{buildroot}%{_datadir}/man/man1/%{name}.1
-%__install -m 755 -d %{buildroot}/%{_datadir}/man/fr/man1
-%__install -m 644 BambooTracker.fr.1 %{buildroot}%{_datadir}/man/fr/man1/%{name}.1
-
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/
-%__install -m 644 img/icon.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 desktop-file-install --vendor '' \
         --add-category=Midi \
@@ -60,6 +47,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/*
 
 %changelog
+* Fri Nov 06 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.5-1
+- update to version 0.4.5-1
+
 * Sun Aug 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.4-1
 - update to version 0.4.4-1
 
