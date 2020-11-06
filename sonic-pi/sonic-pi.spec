@@ -1,24 +1,20 @@
 # Do not check any files here for requires
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
 
-# Global variables for github repository
-%global commit0 69b6eee667fdd6c69c7fa7b1c87139d125c0573b
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 %global debug_package %{nil}
 
 Name:    sonic-pi
 Version: 3.2.2
-%global gittag0 v%{version}
 Release: 6%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
 
-Source0: https://github.com/samaaron/%{name}/archive/%{gittag0}/%{name}-%{version}.tar.gz
+Source0: https://github.com/samaaron/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1: osmid.tar.gz
+Source2: sonic-pi-source.sh
 
-# Use source.sh to get source files
+# Use sonic-pi-source.sh to get source files
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
@@ -46,6 +42,7 @@ Requires(pre): supercollider-sc3-plugins
 Requires(pre): supercollider
 Requires(pre): ruby
 Requires(pre): aubio
+Requires(pre): osmid
 
 %description
 Sonic Pi is an open source programming environment designed to explore and
@@ -63,20 +60,6 @@ find . -type f -exec sed -i -e "s|!/usr/bin/env bash|!/usr/bin/bash|g" {} \;
 find . -type f -exec sed -i -e "s|!/bin/sh|!/usr/bin/sh|g" {} \;
 find . -type f -exec sed -i -e "s|!/bin/bash|!/usr/bin/bash|g" {} \;
 
-cd app/server/native/
-tar xvfz %{SOURCE1}
-cd osmid
-mkdir build
-cd build
-%set_build_flags
-cmake ..
-make
-cp m2o o2m ..
-
-pwd
-
-cd ../../../../..
-
 cd app/gui/qt
 
 sed -i -e "/add_subdirectory(external\/QScintilla-2.11.4)/d" CMakeLists.txt
@@ -84,7 +67,11 @@ sed -i -e "s/QScintilla/qscintilla2-qt5/g" CMakeLists.txt
 sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\/..\";/return QString(\"\/usr\/share\/sonic-pi\");/g" mainwindow.cpp
 
 cd ../../..
+
 sed -i -e "s/env python/env python3/g" app/server/ruby/vendor/ffi-1.11.3/ext/ffi_c/libffi/generate-darwin-source-and-headers.py
+
+# remove make clean
+sed -i -e "/make clean/d" app/server/ruby/bin/compile-extensions.rb
 
 %build
 
@@ -121,8 +108,8 @@ mkdir -p %{buildroot}%{_datadir}/pixmaps/
 cp app/gui/qt/images/icon-smaller.png %{buildroot}%{_datadir}/pixmaps/
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
-cp -ra app/server/native/osmid/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
-cp -ra app/server/native/osmid/o2m %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
+ln -s /usr/bin/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
+ln -s /usr/bin/o2m %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
@@ -188,15 +175,19 @@ Categories=Application;AudioVideo;Audio;Development;IDE;Music;Education;
 X-AppInstall-Package=%{name}
 EOF
 
-desktop-file-install  --vendor "fedora" \
-                      --dir=%{buildroot}%{_datadir}/applications/ \
-                      %{buildroot}%{_datadir}/applications/%{name}.desktop 
-
+desktop-file-install --vendor '' \
+        --add-category=X-Sound \
+        --add-category=Midi \
+        --add-category=Sequencer \
+        --add-category=X-Jack \
+        --dir %{buildroot}/%{_datadir}/applications \
+        %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
-%{_datadir}
+%doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
+%license LICENSE.md
 %{_bindir}/sonic-pi
-%doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  LICENSE.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
+%{_datadir}
 
 %changelog
 * Fri Apr 24  2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-6

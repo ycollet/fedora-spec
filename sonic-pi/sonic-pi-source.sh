@@ -1,3 +1,5 @@
+#!/bin/bash
+
 spectool -g sonic-pi.spec
 
 #Install osmid (for MIDI support)
