@@ -1,10 +1,10 @@
 Name:    mamba
-Version: 1.7.0
-Release: 2%{?dist}
+Version: 1.7
+Release: 3%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: BSD
 
-URL:     https://github.com/brummer10/Mamba
+URL: https://github.com/brummer10/Mamba
 
 # To get the source code: ./mamba_source.sh v1.7
 
@@ -20,6 +20,7 @@ BuildRequires: libsigc++20-devel
 BuildRequires: libsmf-devel
 BuildRequires: fluidsynth-devel
 BuildRequires: alsa-lib-devel
+BuildRequires: desktop-file-utils
 
 %description
 Mamba is not only a Virtual MIDI keyboard, it's also a MIDI looper.
@@ -57,13 +58,24 @@ with the synth of your choice.
 
 %make_install
 
+desktop-file-install --vendor '' \
+        --add-category=X-Sound \
+        --add-category=Midi \
+        --add-category=X-Jack \
+        --dir %{buildroot}/%{_datadir}/applications \
+        %{buildroot}/%{_datadir}/applications/Mamba.desktop
+
 %files
 %doc README.md
 %license LICENSE
-%{_bindir}/*
-%{_datadir}/*
+%{_bindir}/%{name}
+%{_datadir}/applications/Mamba.desktop
+%{_datadir}/pixmaps/Mamba.png
 
 %changelog
+* Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7-3
+- update to 1.7-3
+
 * Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.0-2
 - update to 1.7.0-2
 
