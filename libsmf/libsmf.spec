@@ -1,7 +1,7 @@
-Summary: MIDI library
+Summary: LibSMF is a BSD-licensed C library for handling SMF ("*.mid") files
 Name:    libsmf
 Version: 1.3
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 URL:     https://github.com/stump/libsmf
 
@@ -13,6 +13,7 @@ BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: pkgconfig
 BuildRequires: glib2-devel
+BuildRequires: doxygen
 
 %description
 LibSMF is a BSD-licensed C library for handling SMF ("*.mid") files.
@@ -29,7 +30,7 @@ The %{name}-devel package contains header files for %{name}.
 
 %package static
 Summary:  Static library for %{name}
-Requires: %{name}%{?_isa} = %{version}-%{release}
+Requires: %{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 The %{name}-static package contains static library for %{name}.
@@ -43,9 +44,14 @@ autoreconf --force --install
 %configure
 %make_build
 
+doxygen doxygen.cfg
+
 %install
 
 %make_install
+
+install -m 755 -d %{buildroot}/%{_datadir}/doc/%{name}/
+cp -ra api %{buildroot}/%{_datadir}/doc/%{name}/
 
 %files
 %doc NEWS
@@ -53,6 +59,7 @@ autoreconf --force --install
 %{_bindir}/smfsh
 %{_libdir}/libsmf.so.*
 %{_datadir}/man/man1/smfsh.*
+%{_datadir}/doc/%{name}/api/*
 
 %files devel
 %{_includedir}/*
@@ -64,6 +71,9 @@ autoreconf --force --install
 %{_libdir}/libsmf.a
 
 %changelog
+* Sat Nov 08 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-5
+- fix spec file
+
 * Fri Nov 06 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-4
 - fix spec file
 
