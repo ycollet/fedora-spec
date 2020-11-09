@@ -1,6 +1,6 @@
 Summary: Software Synthesizer
 Name:    amsynth
-Version: 1.11.0
+Version: 1.12.0
 Release: 2%{?dist}
 License: GPL
 URL:     https://github.com/amsynth/amsynth
@@ -86,6 +86,9 @@ export CXXFLAGS="-fPIC -std=c++11"
 %{_libdir}/vst/*
 
 %changelog
+* Mon Nov 09 2020 Yann Collette <ycollette dot nospam at free.fr> 1.12.0-2
+- update to 1.12.0-2
+
 * Sun Sep 20 2020 Yann Collette <ycollette dot nospam at free.fr> 1.11.0-2
 - update to 1.11.0-2
 
