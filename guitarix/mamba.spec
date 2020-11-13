@@ -1,15 +1,12 @@
 Name:    mamba
 Version: 1.7
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: BSD
 
 URL: https://github.com/brummer10/Mamba
 
-# To get the source code: ./mamba_source.sh v1.7
-
-Source0: Mamba.tar.gz
-Source1: mamba-source.sh
+Source0: https://github.com/brummer10/Mamba/releases/download/v%{version}/Mamba_%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -46,7 +43,7 @@ exit fluidsynth to use Mamba as plain Virtual MIDI keyboard
 with the synth of your choice.
 
 %prep
-%autosetup -n Mamba
+%autosetup -n Mamba_%{version}
 
 %build
 
@@ -73,6 +70,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/pixmaps/Mamba.png
 
 %changelog
+* Fri Nov 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7-4
+- update to 1.7-4
+
 * Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7-3
 - update to 1.7-3
 
