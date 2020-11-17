@@ -1,21 +1,15 @@
 Summary: Collection of SuperCollider plugins
 Name:    supercollider-sc3-plugins
-Version: 3.11.0
+Version: 3.11.1
 Release: 4%{?dist}
 License: GPL
 URL:     http://sc3-plugins.sourceforge.net/
 
-# git clone https://github.com/supercollider/sc3-plugins
-# cd sc3-plugins
-# git checkout Version-3.11.0
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz sc3-plugins.tar.gz
-# rm -rf sc3-plugins
+# ./supercollider-sc3-source.sh <tag>
+# ./supercollider-sc3-source.sh Version-3.11.1
 
 Source0: sc3-plugins.tar.gz
+Source1: supercollider-sc3-source.sh
 
 Distribution: Planet CCRMA
 Vendor:       Planet CCRMA
@@ -60,10 +54,15 @@ find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf
 %cmake_install
 
 %files
+%doc README.md DEVELOPING.md
+%license license.txt
 %{_datadir}/SuperCollider/Extensions/SC3plugins
 %{_libdir}/SuperCollider/plugins/*
 
 %changelog
+* Tue Nov 17 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.1-4
+- update to 3.11.1
+
 * Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.0-4
 - fix for fedora 33
 
