@@ -14,7 +14,8 @@
  zrythm - lsp-dsp    -> add a devel package for zrythm
  emissioncontrol2    -> https://github.com/EmissionControl2/EmissionControl2
  regrader            -> https://github.com/igorski/regrader
- 
+ mapmap              -> https://github.com/mapmapteam/mapmap
+ openshow            -> https://github.com/mapmapteam/openshow
  supercollider-study -> https://github.com/rumblesan/super-collider-study
 
 ** Add source.sh file in spec file:
