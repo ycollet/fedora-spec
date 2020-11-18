@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 338bfe17ec2e8d137d545bdf3bc43b06e02e3ed5
-%global gittag0 1.1.0
+%global commit0 439726b02d5211e521be73528c8586047583156b
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-az
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: az plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r az_plugin/dist/az/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/az/
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile
