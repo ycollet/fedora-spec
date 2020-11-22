@@ -7,7 +7,7 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
-Version: 3.11.1
+Version: 3.11.2
 Release: 3%{?dist}
 License: GPL
 URL:     http://supercollider.sourceforge.net/
@@ -165,6 +165,9 @@ install -m0644 SCVersion.txt $RPM_BUILD_ROOT%{_includedir}/SuperCollider/
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Sun Nov 15 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.2-3
+- update to 3.11.2
+
 * Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.1-3
 - fix for Fedora 33
 
