@@ -1,11 +1,11 @@
 Name:    mod-gxpitchshifter
-Version: 1.0.0
+Version: 1.0.1
 Release: 1%{?dist}
 Summary: Guitarix compatible mod-pitchshifter LV2 set of plugins from portalmod
 License: GPLv2+
 URL:     https://github.com/ycollet/mod-pitchshifter
 
-Source0: https://github.com/ycollet/mod-pitchshifter/archive/v1.0.0.tar.gz#/%{name}-%{version}.tar.gz
+Source0: https://github.com/ycollet/mod-pitchshifter/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -39,5 +39,8 @@ sed -i -e "s/-Wl,--strip-all//" Makefile.mk
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Nov 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-1
+- update to 1.0.1-1
+
 * Thu Nov 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
 - Initial build
