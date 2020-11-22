@@ -13,6 +13,7 @@ BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: pkgconfig
 BuildRequires: chrpath
+BuildRequires: gettext
 
 # Drumgizmo LV2 plugin
 BuildRequires: lv2-devel
