@@ -1,14 +1,11 @@
 Summary: Software Synthesizer
 Name:    drumgizmo
-Version: 0.9.18.1
-Release: 1%{?dist}
+Version: 0.9.19
+Release: 2%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     https://www.drumgizmo.org/wiki/doku.php
 
 Source0: http://www.drumgizmo.org/releases/drumgizmo-%version/drumgizmo-%version.tar.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gcc gcc-c++
 BuildRequires: autoconf
@@ -34,27 +31,22 @@ BuildRequires: alsa-lib-devel
 DrumGizmo is an open source, multichannel, multilayered, cross-platform drum plugin and stand-alone application. It enables you to compose drums in midi and mix them with a multichannel approach. It is comparable to that of mixing a real drumkit that has been recorded with a multimic setup.
 
 %prep
-%setup -qn %{name}-%version
+%autosetup -n %{name}-%{version}
 
 %build
 
 %configure --enable-lv2 --libdir=%{_libdir} 
 # --disable-cli --with-lv2dir=
 
-%{__make} DESTDIR=%{buildroot} %{_smp_mflags}
+%make_build
 
 %install
 
-%{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} install
+%make_install
 
 chrpath --delete $RPM_BUILD_ROOT%{_bindir}/drumgizmo
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README
 %license COPYING
 %{_bindir}/*
@@ -62,6 +54,9 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/drumgizmo
 %{_datadir}/man/*
 
 %changelog
+* Sun Nov 22 2020 Yann Collette <ycollette dot nospam at free.fr> 0.9.19-2
+- update to 0.9.19-2
+
 * Thu Oct 24 2019 Yann Collette <ycollette dot nospam at free.fr> 0.9.18.1-2
 - update to 0.9.18.1-2
 
