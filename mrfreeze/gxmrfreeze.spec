@@ -1,5 +1,5 @@
 Name:    lv2-gxmrfreeze
-Version: 0.4
+Version: 0.5
 Release: 1%{?dist}
 Summary: An audio, Guitarix compatible, freeze LV2 plugin
 License: GPLv2+
@@ -38,5 +38,8 @@ fftwf-wisdom -n -x -o mrfreeze.wisdom rof1024 rob1024 rof1536 rob1536 rof2048 ro
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Nov 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5-1
+- update to 0.5
+
 * Sun Nov 22 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4-1
 - Initial build
