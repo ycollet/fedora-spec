@@ -1,5 +1,5 @@
 Name:    mamba
-Version: 1.8
+Version: 1.9
 Release: 4%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: BSD
@@ -70,6 +70,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/pixmaps/Mamba.png
 
 %changelog
+* Thu Nov 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.9-4
+- update to 1.9-4
+
 * Mon Nov 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.8-4
 - update to 1.8-4
 
