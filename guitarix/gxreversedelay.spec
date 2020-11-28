@@ -1,20 +1,17 @@
 # Global variables for github repository
-%global commit0 c45294df6b45016f6c2ec2e44840af9a948f06db
+%global commit0 b34579b58726257bdbc05bd885b4dc308eefa5d8
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    lv2-GxReverseDelay
 Version: 0.1.%{shortcommit0}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Digital reverse delay LV2 plugin
 License: GPLv2+
 URL:     https://github.com/brummer10/GxReverseDelay.lv2
 
 Source0: https://github.com/brummer10/GxReverseDelay.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch0:  gxreversedelay-0001-cleanup-flags.patch
-%if 0%{?fedora} <= 32
-Patch1:  gxreversedelay-0002-Revert-allow-building-against-latest-LV2.patch
-%endif
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -44,5 +41,8 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 STRIP=true install
 %{_libdir}/lv2/gx_reversedelay.lv2/*
 
 %changelog
+* Sat Nov 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1-2
+- upstream fix for build on F32 and F33
+
 * Sat Nov 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1-1
 - Initial build
