@@ -11,6 +11,10 @@ License: GPLv2+
 URL:     https://github.com/brummer10/GxReverseDelay.lv2
 
 Source0: https://github.com/brummer10/GxReverseDelay.lv2/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch0:  gxreversedelay-0001-cleanup-flags.patch
+%if 0%{?fedora} <= 32
+Patch1:  gxreversedelay-0002-Revert-allow-building-against-latest-LV2.patch
+%endif
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -22,7 +26,7 @@ BuildRequires: glib2-devel
 Digital reverse delay LV2 plugin.
 
 %prep
-%autosetup -n GxReverseDelay.lv2-%{commit0}
+%autosetup -p1 -n GxReverseDelay.lv2-%{commit0}
 
 %build
 
@@ -37,7 +41,7 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 STRIP=true install
 %files
 %doc README.md
 %license LICENSE
-%{_libdir}/lv2/gx_matcheq.lv2/*
+%{_libdir}/lv2/gx_reversedelay.lv2/*
 
 %changelog
 * Sat Nov 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1-1

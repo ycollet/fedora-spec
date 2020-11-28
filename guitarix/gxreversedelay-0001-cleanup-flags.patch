@@ -1,0 +1,62 @@
+From 68bdd38fb04d3e180dea76b6e6ce1afc68a2c363 Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sat, 28 Nov 2020 17:33:48 +0100
+Subject: [PATCH] cleanup flags
+
+---
+ Makefile | 30 +++---------------------------
+ 1 file changed, 3 insertions(+), 27 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 72a164f..d0cf02d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,4 +1,3 @@
+-	
+ 	STRIP ?= strip
+ 	# check if user is root
+ 	user = $(shell whoami)
+@@ -8,37 +7,14 @@
+ 	INSTALL_DIR = ~/.lv2
+ 	endif
+ 
+-	# check CPU and supported optimization flags
+-	ifneq ($(shell cat /proc/cpuinfo | grep sse3 ) , )
+-		SSE_CFLAGS = -msse3 -mfpmath=sse
+-	else ifneq ($(shell cat /proc/cpuinfo | grep sse2 ) , )
+-		SSE_CFLAGS = -msse2 -mfpmath=sse
+-	else ifneq ($(shell cat /proc/cpuinfo | grep sse ) , )
+-		SSE_CFLAGS = -msse -mfpmath=sse
+-		else ifneq ($(shell cat /proc/cpuinfo | grep ARM ) , )
+-		ifneq ($(shell cat /proc/cpuinfo | grep ARMv7 ) , )
+-			ifneq ($(shell cat /proc/cpuinfo | grep vfpd32 ) , )
+-				SSE_CFLAGS = -march=armv7-a -mfpu=vfpv3 
+-			else ifneq ($(shell cat /proc/cpuinfo | grep vfpv3 ) , )
+-				SSE_CFLAGS = -march=armv7-a -mfpu=vfpv3
+-			endif
+-		else
+-			ARMCPU = "YES"
+-		endif
+-	else
+-		SSE_CFLAGS =
+-	endif
+-
+ 	# set bundle name
+ 	NAME = gx_reversedelay
+ 	BUNDLE = $(NAME).lv2
+ 	VER = 0.1
+ 	# set compile flags
+-	CXXFLAGS += -D_FORTIFY_SOURCE=2 -I. -I./dsp -I./plugin -fPIC -DPIC -O2 \
+-	 -Wall -fstack-protector -funroll-loops -ffast-math -fomit-frame-pointer -fstrength-reduce \
+-	 -ffunction-sections -fdata-sections -Wl,--gc-sections -Wl,-z,relro,-z,now $(SSE_CFLAGS)
+-	LDFLAGS += -I. -shared -lm -Wl,-z,noexecstack 
+-	GUI_LDFLAGS += -I./gui -shared -Wl,-z,noexecstack -lm `pkg-config --cflags --libs cairo` -L/usr/X11/lib -lX11
++	CXXFLAGS += -fPIC -I. -I./dsp -I./plugin
++	LDFLAGS += -I. -shared -lm 
++	GUI_LDFLAGS += -I./gui -shared -lm `pkg-config --cflags --libs cairo` -L/usr/X11/lib -lX11
+ 	# invoke build files
+ 	OBJECTS = plugin/$(NAME).cpp 
+ 	GUI_OBJECTS = gui/$(NAME)_x11ui.c
+-- 
+2.26.2
+
