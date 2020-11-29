@@ -16,8 +16,18 @@ URL:     https://github.com/baconpaul/BaconPlugs/
 # ./rack-source.sh <tag>
 # ./rack-source.sh v1.1.6
 
+# git clone https://github.com/baconpaul/BaconPlugs
+# cd BaconPlugs
+# git submodule init
+# git submodule update
+# find . -name .git -exec rm -rf {} \:
+# cd ..
+# tar cvfz BaconPlugs.tar.gz BaconPlugs
+# rm -rf BaaconPlugs
+
+
 Source0: Rack.tar.gz
-Source1: https://github.com/baconpaul/BaconPlugs//archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: BaconPlugs.tar.gz
 Source2: BaconMusic_plugin.json
 
 BuildRequires: gcc gcc-c++
@@ -34,7 +44,6 @@ BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 BuildRequires: jansson-devel
 BuildRequires: gtk2-devel
-BuildRequires: rtaudio-devel
 BuildRequires: rtmidi-devel
 BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
@@ -55,7 +64,7 @@ sed -i -e "s/-fno-finite-math-only//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
 
 # %{build_cxxflags}
-echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
+echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
@@ -71,7 +80,6 @@ sed -i -e "s/dep\/lib\/libz.a/-lz/g" Makefile
 sed -i -e "s/dep\/lib\/libspeexdsp.a/-lspeexdsp/g" Makefile
 sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
-sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 
 mkdir BaconMusic_plugin
 tar xvfz %{SOURCE1} --directory=BaconMusic_plugin --strip-components=1 
@@ -79,6 +87,14 @@ tar xvfz %{SOURCE1} --directory=BaconMusic_plugin --strip-components=1
 cp -n %{SOURCE2} BaconMusic_plugin/plugin.json
 
 %build
+
+cd dep
+cd rtaudio
+cmake -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=FALSE -DCMAKE_BUILD_TYPE=DEBUG .
+make
+make install
+cd ..
+cd ..
 
 cd BaconMusic_plugin
 %make_build RACK_DIR=.. PREFIX=/usr LIBDIR=%{_lib} dist

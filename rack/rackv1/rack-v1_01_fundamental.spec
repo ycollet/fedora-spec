@@ -32,7 +32,6 @@ BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 BuildRequires: jansson-devel
 BuildRequires: gtk2-devel
-BuildRequires: rtaudio-devel
 BuildRequires: rtmidi-devel
 BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
