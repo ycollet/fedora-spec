@@ -19,6 +19,7 @@ BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
+BuildRequires: make
 BuildRequires: libtool
 BuildRequires: pkgconfig
 BuildRequires: glib2-devel
@@ -85,7 +86,7 @@ rm %{buildroot}/%{_libdir}/libsmf.la
 %{_libdir}/libsmf.a
 
 %files doc
-%{_datadir}/doc/%{name}/api/*
+%{_datadir}/doc/%{name}/api/
 
 %changelog
 * Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-9
