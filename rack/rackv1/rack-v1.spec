@@ -5,12 +5,10 @@
 
 Name:    Rack-v1
 Version: 1.1.6
-Release: 9%{?dist}
+Release: 10%{?dist}
 Summary: A modular synthetizer
 License: GPLv2+
 URL:     https://github.com/VCVRack/Rack
-
-%define with_glew  %{?_with_glew:  1} %{?!_with_glew:  0}
 
 # ./rack-source.sh <tag>
 # ./rack-source.sh v1.1.6
@@ -57,26 +55,15 @@ Documentation files for Rack
 
 CURRENT_PATH=`pwd`
 
-sed -i -e "s/-march=core2//g" compile.mk
 sed -i -e "s/-march=nocona//g" compile.mk
-sed -i -e "s/-ffast-math//g" compile.mk
-sed -i -e "s/-fno-finite-math-only//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
 
-# %{build_cxxflags}
 echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-rack -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
-sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
-%if %{with_glew}
-sed -i -e "s/-lGLEW/dep\/lib\/libGLEW.a/g" Makefile
-%endif
 
-#sed -i -e "s/dep\/lib\/libGLEW.a/dep\/%{_lib}\/libGLEW.a/g" Makefile
 sed -i -e "s/dep\/lib\/libGLEW.a/-lGLEW/g" Makefile
-
-sed -i -e "s/dep\/lib\/libglfw3.a/dep\/%{_lib}\/libglfw3.a/g" Makefile
-
+sed -i -e "s/dep\/lib\/libglfw3.a/-lglfw/g" Makefile
 sed -i -e "s/dep\/lib\/libjansson.a/-ljansson/g" Makefile
 sed -i -e "s/dep\/lib\/libcurl.a/-lcurl/g" Makefile
 sed -i -e "s/dep\/lib\/libssl.a/-lssl/g" Makefile
@@ -91,29 +78,31 @@ sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
 sed -i -e "s/systemDir = \".\";/systemDir = \"\/usr\/libexec\/Rack1\";/g" src/asset.cpp
 sed -i -e "s/pluginsPath = userDir + \"\/plugins-v\"/pluginsPath = systemDir + \"\/plugins-v\"/g" src/asset.cpp
 
+# This options seems to make Rack hangs after a restart ...
+sed -i -e "s/options.flags |= RTAUDIO_JACK_DONT_CONNECT/\/\/options.flags |= RTAUDIO_JACK_DONT_CONNECT/g" src/audio.cpp
+
 tar xvfz %{SOURCE1}
 
 sed -i -e "s/sphinx-build/sphinx-build-3/g" manual/Makefile
 
 %build
 
+export CFLAGS=
+export CXXFLAGS=
+export LDFLAGS=
+
 cd dep
 cd glfw
-c%make_build-DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
-make
-%make_buildinstall
+cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
+%make_build
+%make_install
 cd ..
-
-%if %{with_glew}
-%make_buildlib/libGLEW.a
-%endif
-
 cd ..
 
 %make_build PREFIX=/usr LIBDIR=%{_lib}
 
 cd manual
-%make_buildhtml
+%make_build html
 
 %install 
 
@@ -154,7 +143,10 @@ EOF
 %{_datadir}/*
 
 %changelog
-* Fri Oct 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-9
+* Sun Nov 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-10
+- disable compilation flags
+
+* Thu Oct 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-9
 - update to 1.1.6-9
 
 * Wed Jan 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-8
