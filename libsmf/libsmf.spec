@@ -1,12 +1,19 @@
 Summary: LibSMF is a BSD-licensed C library for handling SMF ("*.mid") files
 Name:    libsmf
 Version: 1.3
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 URL:     https://github.com/stump/%{name}
 
 Source0: %{url}/archive/%{name}-%{version}.tar.gz
-Patch0:  libsmf-0001-fixe-various-problems.patch
+Patch0: libsmf-0001-Fix-buffer-overflow-on-tempo-change-event.patch
+Patch1: libsmf-0002-Fix-validity-checks-of-escaped-data.patch
+Patch2: libsmf-0003-Fix-buffer-overflow-by-reducing-length-of-truncated-.patch
+Patch3: libsmf-0004-Stop-parsing-tracks-after-the-first-failure.-Fixes-h.patch
+Patch4: libsmf-0005-Handle-non-EOT-terminated-tracks.-Fixes-raised-asser.patch
+Patch5: libsmf-0006-Fix-the-assertion-problem-is_sysex_byte-status.patch
+Patch6: libsmf-0007-Fix-a-logic-error-in-Escape-event-handling.patch
+Patch7: libsmf-0008-Fix-a-memory-leak-in-case-of-loading-failure.patch
 
 BuildRequires: gcc
 BuildRequires: gcc-c++
@@ -81,6 +88,9 @@ rm %{buildroot}/%{_libdir}/libsmf.la
 %{_datadir}/doc/%{name}/api/*
 
 %changelog
+* Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-9
+- add patches
+
 * Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-6
 - fix spec file + add doc subpackage
 

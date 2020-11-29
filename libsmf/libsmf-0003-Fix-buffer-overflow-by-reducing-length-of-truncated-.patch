@@ -1,0 +1,35 @@
+From 64b31a2c9cfd07715c94c1ca23b074825f76d52a Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 08:27:45 +0100
+Subject: [PATCH 3/8] Fix buffer overflow by reducing length of truncated
+ tracks
+
+---
+ src/smf_load.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index eb558dc..6c0909f 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -768,11 +768,17 @@ smf_event_is_valid(const smf_event_t *event)
+ static int
+ parse_mtrk_chunk(smf_track_t *track)
+ {
++	smf_t *smf = track->smf;
+ 	smf_event_t *event;
+ 
+ 	if (parse_mtrk_header(track))
+ 		return (-1);
+ 
++	if (track->file_buffer + track->file_buffer_length > smf->file_buffer + smf->file_buffer_length) {
++		/* Truncated track? */
++		track->file_buffer_length = smf->file_buffer_length - (track->file_buffer - smf->file_buffer);
++	}
++
+ 	for (;;) {
+ 		event = parse_next_event(track);
+ 
+-- 
+2.26.2
+

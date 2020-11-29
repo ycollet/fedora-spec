@@ -1,0 +1,29 @@
+From 644b5e6b2257a918c10f6dceeaaa80d5a9924e5f Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 09:02:03 +0100
+Subject: [PATCH 5/8] Handle non-EOT-terminated tracks. Fixes raised assertion
+ buffer_length == 0.
+
+---
+ src/smf_load.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index c1be16d..e17a65f 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -780,6 +780,11 @@ parse_mtrk_chunk(smf_track_t *track)
+ 	}
+ 
+ 	for (;;) {
++		if (track->next_event_offset == track->file_buffer_length) {
++			g_warning("SMF warning: The track did not finish with the End of Track event.");
++			break;
++		}
++
+ 		event = parse_next_event(track);
+ 
+ 		/* Couldn't parse an event? */
+-- 
+2.26.2
+

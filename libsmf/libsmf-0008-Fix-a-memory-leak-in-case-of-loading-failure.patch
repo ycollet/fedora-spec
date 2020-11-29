@@ -1,0 +1,36 @@
+From 433efab4b44df9d40376b886acff7eb5aff55694 Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 10:55:27 +0100
+Subject: [PATCH 8/8] Fix a memory leak in case of loading failure
+
+---
+ src/smf_load.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index 01ea81f..84f7221 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -890,13 +890,17 @@ smf_load_from_memory(const void *buffer, const int buffer_length)
+ 	smf->file_buffer_length = buffer_length;
+ 	smf->next_chunk_offset = 0;
+ 
+-	if (parse_mthd_chunk(smf))
++	if (parse_mthd_chunk(smf)) {
++		smf_delete(smf);
+ 		return (NULL);
++        }
+ 
+ 	for (i = 1; i <= smf->expected_number_of_tracks; i++) {
+ 		smf_track_t *track = smf_track_new();
+-		if (track == NULL)
++		if (track == NULL) {
++			smf_delete(smf);
+ 			return (NULL);
++		}
+ 
+ 		smf_add_track(smf, track);
+ 
+-- 
+2.26.2
+

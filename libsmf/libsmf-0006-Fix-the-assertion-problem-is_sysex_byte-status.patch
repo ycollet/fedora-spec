@@ -1,0 +1,40 @@
+From fa0d7f82620519a6e9af20a64e3355d60439aef9 Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 10:20:30 +0100
+Subject: [PATCH 6/8] Fix the assertion problem `is_sysex_byte(status)`
+
+---
+ src/smf_load.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index e17a65f..7027ed7 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -503,11 +503,21 @@ extract_midi_event(const unsigned char *buf, const int buffer_length, smf_event_
+ 		return (-1);
+ 	}
+ 
+-	if (is_sysex_byte(status))
++	if (is_sysex_byte(status)) {
++		if (c == buf) {
++			g_critical("SMF error: running status is not applicable to System Exclusive events.");
++			return (-2);
++		}
+ 		return (extract_sysex_event(buf, buffer_length, event, len, last_status));
++	}
+ 
+-	if (is_escape_byte(status))
++	if (is_escape_byte(status)) {
++		if (c == buf) {
++			g_critical("SMF error: running status is not applicable to Escape events.");
++			return (-2);
++		}
+ 		return (extract_escaped_event(buf, buffer_length, event, len, last_status));
++	}
+ 
+ 	/* At this point, "c" points to first byte following the status byte. */
+ 	message_length = expected_message_length(status, c, buffer_length - (c - buf));
+-- 
+2.26.2
+

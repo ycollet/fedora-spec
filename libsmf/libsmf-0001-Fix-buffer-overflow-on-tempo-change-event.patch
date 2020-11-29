@@ -1,0 +1,28 @@
+From 4ca8ca9694782ae4c0b4288f14eb6e106502324d Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 07:21:12 +0100
+Subject: [PATCH 1/8] Fix buffer overflow on tempo change event
+
+---
+ src/smf_tempo.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/smf_tempo.c b/src/smf_tempo.c
+index a5592f1..d9a4df9 100644
+--- a/src/smf_tempo.c
++++ b/src/smf_tempo.c
+@@ -133,6 +133,11 @@ maybe_add_to_tempo_map(smf_event_t *event)
+ 
+ 	/* Tempo Change? */
+ 	if (event->midi_buffer[1] == 0x51) {
++		if (event->midi_buffer_length < 6) {
++			g_critical("Tempo Change event seems truncated.");
++			return;
++		}
++
+ 		int new_tempo = (event->midi_buffer[3] << 16) + (event->midi_buffer[4] << 8) + event->midi_buffer[5];
+ 		if (new_tempo <= 0) {
+ 			g_critical("Ignoring invalid tempo change.");
+-- 
+2.26.2
+

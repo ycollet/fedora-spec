@@ -1,0 +1,34 @@
+From d6ccfb8f25d7a273592d7126f4a6629ff21b6c7c Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 07:48:37 +0100
+Subject: [PATCH 2/8] Fix validity checks of escaped data
+
+---
+ src/smf_load.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index 7389654..eb558dc 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -283,7 +283,7 @@ expected_sysex_length(const unsigned char status, const unsigned char *second_by
+ {
+ 	int sysex_length, len;
+ 
+-	assert(status == 0xF0);
++	assert(status == 0xF0 || status == 0xF7);
+ 
+ 	if (buffer_length < 3) {
+ 		g_critical("SMF error: end of buffer in expected_sysex_length().");
+@@ -441,7 +441,7 @@ extract_escaped_event(const unsigned char *buf, const int buffer_length, smf_eve
+ 
+ 	message_length = expected_escaped_length(status, c, buffer_length - 1, &vlq_length);
+ 
+-	if (message_length < 0)
++	if (message_length <= 0)
+ 		return (-3);
+ 
+ 	c += vlq_length;
+-- 
+2.26.2
+

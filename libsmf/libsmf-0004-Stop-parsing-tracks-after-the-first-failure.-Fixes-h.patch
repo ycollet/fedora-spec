@@ -1,0 +1,25 @@
+From 81c101b88788859cfbe71bcc47496c778bde6439 Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 08:28:26 +0100
+Subject: [PATCH 4/8] Stop parsing tracks after the first failure. Fixes heap
+ use after free.
+
+---
+ src/smf_load.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index 6c0909f..c1be16d 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -889,6 +889,7 @@ smf_load_from_memory(const void *buffer, const int buffer_length)
+ 		if (parse_mtrk_chunk(track)) {
+ 			g_warning("SMF warning: Cannot load track.");
+ 			smf_track_delete(track);
++			break;
+ 		}
+ 
+ 		track->file_buffer = NULL;
+-- 
+2.26.2
+

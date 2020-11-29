@@ -1,0 +1,31 @@
+From 854a03a699a2387c31b7d0ce63b56fa60126e17a Mon Sep 17 00:00:00 2001
+From: JP Cimalando <jp-dev@inbox.ru>
+Date: Mon, 28 Jan 2019 10:41:31 +0100
+Subject: [PATCH 7/8] Fix a logic error in Escape event handling
+
+---
+ src/smf_load.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/smf_load.c b/src/smf_load.c
+index 7027ed7..01ea81f 100644
+--- a/src/smf_load.c
++++ b/src/smf_load.c
+@@ -460,12 +460,12 @@ extract_escaped_event(const unsigned char *buf, const int buffer_length, smf_eve
+ 
+ 	memcpy(event->midi_buffer, c, message_length);
+ 
+-	if (smf_event_is_valid(event)) {
++	if (!smf_event_is_valid(event)) {
+ 		g_critical("Escaped event is invalid.");
+ 		return (-1);
+ 	}
+ 
+-	if (smf_event_is_system_realtime(event) || smf_event_is_system_common(event)) {
++	if (!(smf_event_is_system_realtime(event) || smf_event_is_system_common(event))) {
+ 		g_warning("Escaped event is not System Realtime nor System Common.");
+ 	}
+ 
+-- 
+2.26.2
+
