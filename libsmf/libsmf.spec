@@ -89,7 +89,7 @@ rm %{buildroot}/%{_libdir}/libsmf.la
 %{_datadir}/doc/%{name}/api/
 
 %changelog
-* Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-9
+* Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-8
 - add patches
 
 * Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-6
