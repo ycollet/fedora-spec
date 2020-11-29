@@ -1,11 +1,6 @@
-# Global variables for github repository
-%global commit0 01e5e0301d6c1f6b3d52e717fa2ba7098dd4b49c
-%global gittag0 v1.1.6
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    Rack-v1
 Version: 1.1.6
-Release: 10%{?dist}
+Release: 11%{?dist}
 Summary: A modular synthetizer
 License: GPLv2+
 URL:     https://github.com/VCVRack/Rack
@@ -26,11 +21,11 @@ BuildRequires: glew-devel
 BuildRequires: glfw-devel
 BuildRequires: portmidi-devel
 BuildRequires: portaudio-devel
+BuildRequires: pulseaudio-libs-devel
 BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
 BuildRequires: jansson-devel
 BuildRequires: gtk2-devel
-BuildRequires: rtaudio-devel
 BuildRequires: rtmidi-devel
 BuildRequires: speex-devel
 BuildRequires: speexdsp-devel
@@ -57,8 +52,8 @@ CURRENT_PATH=`pwd`
 
 sed -i -e "s/-march=nocona//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
-
-echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtaudio -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-rack -I$CURRENT_PATH/dep/include" >> compile.mk
+# -I/usr/include/rtaudio
+echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I/usr/include/rtmidi -I$CURRENT_PATH/dep/nanosvg/src  -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-rack -I$CURRENT_PATH/dep/include" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 
@@ -73,13 +68,11 @@ sed -i -e "s/dep\/lib\/libz.a/-lz/g" Makefile
 sed -i -e "s/dep\/lib\/libspeexdsp.a/-lspeexdsp/g" Makefile
 sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
-sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio/g" Makefile
+# We use provided RtAudio library because Rack hangs when using jack and fedora rtaudio
+sed -i -e "s/dep\/lib\/librtaudio.a/dep\/%{_lib}\/librtaudio.a -lpulse-simple -lpulse/g" Makefile
 
 sed -i -e "s/systemDir = \".\";/systemDir = \"\/usr\/libexec\/Rack1\";/g" src/asset.cpp
 sed -i -e "s/pluginsPath = userDir + \"\/plugins-v\"/pluginsPath = systemDir + \"\/plugins-v\"/g" src/asset.cpp
-
-# This options seems to make Rack hangs after a restart ...
-sed -i -e "s/options.flags |= RTAUDIO_JACK_DONT_CONNECT/\/\/options.flags |= RTAUDIO_JACK_DONT_CONNECT/g" src/audio.cpp
 
 tar xvfz %{SOURCE1}
 
@@ -94,8 +87,13 @@ export LDFLAGS=
 cd dep
 cd glfw
 cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
-%make_build
-%make_install
+make
+make install
+cd ..
+cd rtaudio
+cmake -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=FALSE -DCMAKE_BUILD_TYPE=DEBUG .
+make
+make install
 cd ..
 cd ..
 
@@ -143,6 +141,9 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Sun Nov 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-11
+- fixing ...
+
 * Sun Nov 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-10
 - disable compilation flags
 
