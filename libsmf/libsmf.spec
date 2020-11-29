@@ -1,13 +1,15 @@
 Summary: LibSMF is a BSD-licensed C library for handling SMF ("*.mid") files
 Name:    libsmf
 Version: 1.3
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
-URL:     https://github.com/stump/libsmf
+URL:     https://github.com/stump/%{name}
 
-Source0: https://github.com/stump/%{name}/archive/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/%{name}-%{version}.tar.gz
+Patch0:  libsmf-0001-fixe-various-problems.patch
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc
+BuildRequires: gcc-c++
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
@@ -35,11 +37,16 @@ Requires: %{name}-devel%{?_isa} = %{version}-%{release}
 %description static
 The %{name}-static package contains static library for %{name}.
 
+%package doc
+Summary:  Documentation for %{name}
+
+%description doc
+The %{name}-doc package contains documentation for %{name}.
+
 %prep
-%autosetup -n %{name}-%{name}-%{version}
+%autosetup -p1 -n %{name}-%{name}-%{version}
 
 %build
-
 autoreconf --force --install
 %configure
 %make_build
@@ -47,11 +54,13 @@ autoreconf --force --install
 doxygen doxygen.cfg
 
 %install
-
 %make_install
 
-install -m 755 -d %{buildroot}/%{_datadir}/doc/%{name}/
-cp -ra api %{buildroot}/%{_datadir}/doc/%{name}/
+install -m 755 -d %{buildroot}/%{_datadir}/doc/%{name}/api/
+cp -ra api/* %{buildroot}/%{_datadir}/doc/%{name}/api/
+
+# Remove unnecessary file
+rm %{buildroot}/%{_libdir}/libsmf.la
 
 %files
 %doc NEWS
@@ -59,18 +68,22 @@ cp -ra api %{buildroot}/%{_datadir}/doc/%{name}/
 %{_bindir}/smfsh
 %{_libdir}/libsmf.so.*
 %{_datadir}/man/man1/smfsh.*
-%{_datadir}/doc/%{name}/api/*
 
 %files devel
-%{_includedir}/*
+%{_includedir}/smf.h
 %{_libdir}/libsmf.so
-%{_libdir}/libsmf.la
 %{_libdir}/pkgconfig/smf.pc
 
 %files static
 %{_libdir}/libsmf.a
 
+%files doc
+%{_datadir}/doc/%{name}/api/*
+
 %changelog
+* Sun Nov 29 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-6
+- fix spec file + add doc subpackage
+
 * Sun Nov 08 2020 Yann Collette <ycollette dot nospam at free.fr> 1.3-5
 - fix spec file
 
