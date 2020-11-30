@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 8e70eedbaeb7998a276331eb5eeb1015b1bc8807
+%global commit0 2a06dc45b2b19fcce91e9abfeaa7124791868498
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    airwindows
 Version: 0.0.1
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: A set of VST2 plugins
 License: MIT
 URL:     https://github.com/airwindows/airwindows
@@ -60,6 +60,9 @@ install -m 755 %{__cmake_builddir}/*.so %{buildroot}/%{_libdir}/vst/
 %{_libdir}/*
 
 %changelog
+* Mon Nov 30 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-6
+- update to 2a06dc45b2b19fcce91e9abfeaa7124791868498
+
 * Mon Nov 16 2020 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-5
 - update to 8e70eedbaeb7998a276331eb5eeb1015b1bc8807
 
