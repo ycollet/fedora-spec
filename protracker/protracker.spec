@@ -1,12 +1,12 @@
 Summary: Chiptune tracker for making chiptune-like music on a modern computer.
 Name:    protracker2
-Version: 1.25.1
+Version: 1.26.1
 Release: 4%{?dist}
 License: BSD
 URL:     https://16-bits.org/pt.php
 
 #Source0: https://github.com/8bitbubsy/pt2-clone/archive/v%{version}.tar.gz#/pt2-clone-%{version}.tar.gz
-Source0: https://github.com/8bitbubsy/pt2-clone/archive/v1.25_fix.tar.gz#/pt2-clone-%{version}.tar.gz
+Source0: https://github.com/8bitbubsy/pt2-clone/archive/v1.26_fix.tar.gz#/pt2-clone-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make
@@ -22,7 +22,7 @@ Obsoletes: protracker
 
 %prep
 # autosetup -n pt2-clone-%{version}
-%autosetup -n pt2-clone-1.25_fix
+%autosetup -n pt2-clone-1.26_fix
 
 %build
 
@@ -74,6 +74,9 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %{_datadir}/icons/*
 
 %changelog
+* Mon Nov 30 2020 Yann Collette <ycollette.nospam@free.fr> - 1.26.1-4
+- update to 1.26.1-4 (1.26_fix)
+
 * Wed Nov 18 2020 Yann Collette <ycollette.nospam@free.fr> - 1.25.1-4
 - update to 1.25.1-4 (1.25_fix)
 
