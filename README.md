@@ -90,7 +90,7 @@ This script will download a zip a put everything in /tmp/prepare/ directory.
 
 As a root user:
 ```
-$ livecd-creator --verbose --config=fedora-32-live-jam-kde.ks --fslabel=Audinux --releasever 32
+$ livecd-creator --verbose --config=fedora-32-live-jam-xfce.ks --fslabel=Audinux --releasever 32
 ```
 
 To create the LiceCD using livemedia-creator:
@@ -98,17 +98,17 @@ To create the LiceCD using livemedia-creator:
 As a root user (---old-chroot == --old-chroot):
 ```
 $ mock -r /etc/mock/fedora-32-x86_64.cfg --isolation=simple --init --install lorax-lmc-novirt wget unzip libblockdev-lvm libblockdev-btrfs libblockdev-swap libblockdev-loop libblockdev-crypto libblockdev-mpath libblockdev-dm libblockdev-mdraid libblockdev-nvdimm
-$ mock -r /etc/mock/fedora-32-x86_64.cfg --copyin fedora-32-live-jam-kde.ks --copyin prepare.sh /builddir
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --copyin fedora-32-live-jam-xfce.ks --copyin prepare.sh /builddir
 $ mock -r /etc/mock/fedora-32-x86_64.cfg --enable-network --shell
 $ cd /builddir
 $ ./prepare.sh
-$ livemedia-creator --make-iso --ks fedora-32-live-jam-kde.ks --project Audinux --iso-name livecd-fedora-32-mao.iso --iso-only --releasever 32 --volid Audinux --image-name Audinux --resultdir /var/lmc --no-virt --tmp /var/tmp
+$ livemedia-creator --make-iso --ks fedora-32-live-jam-xfce.ks --project Audinux --iso-name livecd-fedora-32-mao.iso --iso-only --releasever 32 --volid Audinux --image-name Audinux --resultdir /var/lmc --no-virt --tmp /var/tmp
 ```
 
 To check the potential changes from the kickstart file:
 $ dnf install pykickstart.noarch rpmfusion-free-remix-kickstarts.noarch spin-kickstarts.noarch
 $ ksflatten -c /usr/share/spin-kickstarts/fedora-live-xfce.ks -o xfce.ks
-$ meld fedora-32-live-jam-kde.ks xfce.ks &
+$ meld fedora-32-live-jam-xfce.ks xfce.ks &
 
 To test the ISO file:
 
@@ -280,4 +280,16 @@ dracut-install: ERROR: installing 'sr_mod'
 dracut: FAILED:  /usr/lib/dracut/dracut-install -D /var/tmp/dracut.P90ngs/initramfs --kerneldir /lib/modules/5.8.11-200.fc32.x86_64/ -m sr_mod sd_mod ide_cd cdrom =ata sym53c8xx aic7xxx ehci_hcd uhci_hcd ohci_hcd usb_storage usbhid uas firewire-sbp2 firewire-ohci sbp2 ohci1394 ieee1394 mmc_block sdhci sdhci-pci pata_pcmcia mptsas virtio_blk virtio_pci virtio_scsi virtio_net virtio_mmio virtio_balloon virtio-rng
 dracut-install: ERROR: installing 'ext4'
 dracut: FAILED:  /usr/lib/dracut/dracut-install -D /var/tmp/dracut.P90ngs/initramfs --kerneldir /lib/modules/5.8.11-200.fc32.x86_64/ -m vfat msdos isofs ext4 xfs btrfs squashfs
+```
+
+To use the "patched" version of livecdtools:
+```
+$ git clone https://github.com/ycollet/livecd-tools.git
+$ git checkout livecd-tools-27.1
+$ git cherry-pick 27fefb509baf8642b5e382c56e0a941cf81ba7b2
+$ git cherry-pick 487f1d24030c30897485365a399500b631dd36c4
+$ export PYTHONPATH=<livecd-tools-dir>:$PYTHONPATH
+$ export PATH=<livecd-tools-dir>/tools:PATH
+
+$ livecd-creator --verbose --config=fedora-32-live-jam-xfce.ks --fslabel=Audinux --releasever 32
 ```
