@@ -19,7 +19,7 @@ xconfig --startxonboot
 # Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 8192 --fstype ext4
+part / --size 16384 --fstype ext4
 services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 # Shutdown after installation
@@ -458,12 +458,8 @@ chkconfig
 -xfce4-sensors-plugin
 
 # drop some system-config things
-#-system-config-boot
-#-system-config-network
 -system-config-rootpassword
-#-system-config-services
 -policycoreutils-gui
-#-libcrypt-nss
 python3
 
 # alsa
@@ -478,7 +474,6 @@ alsa-plugins-samplerate
 alsa-plugins-upmix
 alsa-plugins-vdownmix
 a2jmidid
-#YC aj-snapshot
 
 # jack 
 jack-audio-connection-kit
@@ -536,7 +531,7 @@ ardour5
 ardour5-audiobackend-alsa
 ardour5-audiobackend-jack
 ardour5-audiobackend-dummy
-#YC seq24
+seq24
 qtractor
 non-daw
 non-mixer
@@ -574,10 +569,7 @@ ladspa-wasp-plugins
 
 # lv2 plugins
 lv2
-#YC lv2-avw-plugins
-#YC pyliblo missing lv2-fil-plugins
 lv2-invada-plugins
-#YC lv2-kn0ck0ut
 lv2-ll-plugins
 swh-lv2
 lv2-vocoder-plugins
@@ -588,10 +580,8 @@ lv2-c++-tools
 lv2-samplv1
 lv2-synthv1
 lv2-drumkv1
-#YC lv2-triceratops
 lv2-newtonator
 lv2-x42-plugins
-#YC lv2-fomp-plugins
 lv2-sorcer
 lv2-fabla
 lv2-artyfx-plugins
@@ -611,6 +601,11 @@ tap-lv2
 mda-lv2
 rkrlv2
 ams-lv2
+#YC lv2-avw-plugins
+#YC pyliblo missing lv2-fil-plugins
+#YC lv2-kn0ck0ut
+#YC lv2-triceratops
+#YC lv2-fomp-plugins
 
 # dssi
 nekobee-dssi
@@ -651,7 +646,8 @@ japa
 radium-compressor
 #YC solfege
 linuxsampler
-qsampler
+#libgig
+#qsampler
 projectM-jack
 projectM-pulseaudio
 
