@@ -1,7 +1,7 @@
 Summary:      LinuxSampler GUI front-end
 Name:         qsampler
 Version:      0.6.3
-Release:      1%{?dist}
+Release:      2%{?dist}
 License:      GPL
 URL:          http://qsampler.sourceforge.net/qsampler-index.html
 Distribution: Planet CCRMA
@@ -69,6 +69,9 @@ desktop-file-install                         \
 %{_datadir}/qsampler/translations/qsampler_fr.qm
 
 %changelog
+* Wed Dec 02 2020 Yann Collette <ycollette.nospam@free.fr> 0.6.3-2
+- override fedora version
+
 * Mon Aug 3 2020 Yann Collette <ycollette.nospam@free.fr> 0.6.3-1
 - update to 0.6.3
 
