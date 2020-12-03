@@ -29,6 +29,8 @@ for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep +
         continue
     if 'VCV-Prototype.json' in json_file:
         continue
+    if 'settings.json' in json_file:
+        continue
     
     print('Reading %s json library file\n' % json_file)
     
