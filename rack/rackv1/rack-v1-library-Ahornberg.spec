@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 2e0f1775c412f8a6c4ac15f79e1945cbf6e66c06
-%global gittag0 1.2.0
+%global commit0 c9c0fbba13a5043f129a4b470b1bf86af8a42047
+%global gittag0 1.3.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Ahornberg
-Version: 1.2.0
+Version: 1.3.0
 Release: 3%{?dist}
 Summary: Ahornberg plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r Ahornberg_plugin/dist/Ahornberg/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
 - initial specfile

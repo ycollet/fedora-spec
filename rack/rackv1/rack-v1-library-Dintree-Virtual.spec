@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 46808b06136322a61a6427e1175e5ac16bc9bff7
-%global gittag0 1.0.11
+%global commit0 36391f79d5bc78351440674ceb94c664d0c98a4f
+%global gittag0 1.0.13
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Dintree-Virtual
-Version: 1.0.11
+Version: 1.0.13
 Release: 3%{?dist}
 Summary: Dintree-Virtual plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r Dintree-Virtual_plugin/dist/Dintree-Virtual/* %{buildroot}%{_libexecdir}/R
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.11-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.13-3
 - initial specfile
