@@ -1,5 +1,5 @@
 Name:    dragonfly-reverb
-Version: 3.2.1
+Version: 3.2.3
 Release: 3%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -7,7 +7,7 @@ License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 # To get the sources:
-# ./source.sh 3.2.1
+# ./source.sh 3.2.3
 
 Source0: dragonfly-reverb.tar.gz
 
@@ -69,6 +69,9 @@ cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 %{_datadir}/pixmaps/*
 
 %changelog
+* Thu Dec 8 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.3-3
+- update to 3.2.3-3
+
 * Sat Oct 3 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.1-3
 - update to 3.2.1-3 - fix for fedora 33
 
