@@ -1,5 +1,5 @@
 Name:          milkytracker
-Version:       1.02.00
+Version:       1.03.00
 Release:       2%{?dist}
 Summary:       Module tracker software for creating music
 License:       GPLv3+
@@ -56,6 +56,9 @@ desktop-file-install \
 %{_datadir}/doc/MilkyTracker/*
 
 %changelog
+* Thu Dec 10 2020 Yann Collette <ycollette dot nospam at free dot fr> 1.03.00-2
+- Update to 1.03.00-2
+
 * Thu Oct 1 2020 Yann Collette <ycollette dot nospam at free dot fr> 1.02.00-2
 - Update for Fedora 33
 
