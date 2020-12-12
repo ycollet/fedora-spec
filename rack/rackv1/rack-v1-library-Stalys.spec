@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 eaea966a74d921cf728de27e2ad551a0b11e8b4f
-%global gittag0 1.2.1
+%global commit0 e33777805c6d999d510de2fce1946034513ebba8
+%global gittag0 1.3.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Stalys
-Version: 1.2.1
+Version: 1.3.1
 Release: 3%{?dist}
 Summary: Stalys plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r Stalys_plugin/dist/Stalys/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/St
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.1-3
 - initial specfile
