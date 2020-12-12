@@ -1,12 +1,12 @@
 Name:    jamulus
-Version: 3.6.1
+Version: 3.6.2
 Release: 7%{?dist}
 Summary: Internet jam session software
 URL:     https://github.com/corrados/jamulus/
 License: GPLv2
 
 # original tarfile can be found here:
-Source0: https://github.com/corrados/jamulus/archive/r3_6_1.tar.gz#/%{name}-%{version}.tar.gz
+Source0: https://github.com/corrados/jamulus/archive/r3_6_2.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -23,7 +23,7 @@ real-time rehearsal over the internet. It uses Jack Audio Connection Kit
 and Opus audio codec to manage the audio session. 
 
 %prep
-%autosetup -n %{name}-r3_6_1
+%autosetup -n %{name}-r3_6_2
 
 # Remove Opus source code, we use Opus library from Fedora
 #rm -rf libs/opus
@@ -77,6 +77,9 @@ desktop-file-install                         \
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sat Dec 12 2020 Yann Collette <ycollette.nospam@free.fr> - 3.6.2-7
+- update to 3.6.2-7
+
 * Sun Nov 22 2020 Yann Collette <ycollette.nospam@free.fr> - 3.6.1-7
 - update to 3.6.1-7
 
