@@ -1,6 +1,6 @@
 Name:    surge
 Version: 1.7.1
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: A VST3 / LV2 synthetizer
 License: GPLv2+
 
@@ -77,8 +77,8 @@ mkdir -p .local/share/Surge
 
 ./build-linux.sh -l install
 
-install -m 755 -d %{buildroot}%{_libdir}/vst3/
-install -m 755 -p .vst3/Surge.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/
+install -m 755 -d %{buildroot}%{_libdir}/vst3/Surge.vst3/
+cp -r .vst3/Surge.vst3/* %{buildroot}/%{_libdir}/vst3/Surge.vst3/
 
 %__install -m 755 -d %{buildroot}%{_libdir}/lv2/
 cp -r .lv2/* %{buildroot}/%{_libdir}/lv2/
@@ -96,6 +96,9 @@ rsync -rav .local/share/surge/* %{buildroot}/%{_datadir}/Surge/
 %{_libdir}/vst3/*
 
 %changelog
+* Sun Dec 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.1-7
+- fix install
+
 * Sat Oct 24 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.1-6
 - fix permissions on vst3
 
