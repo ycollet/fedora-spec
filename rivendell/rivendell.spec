@@ -1,18 +1,13 @@
 %global __python %{__python3}
 
-# Global variables for github repository
-%global commit0 e80533c0ecc86989766079109f6f2f8b60a6f664
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: A radio automation system
 Name:    rivendell
-Version: 3.4.1
+Version: 3.5.0
 Release: 1%{?dist}
 License: LGPL
 URL:     https://github.com/ElvishArtisan/rivendell
 
-Source0: https://github.com/ElvishArtisan//%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/ElvishArtisan/rivendell/releases/download/v%{version}/rivendell-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel
@@ -54,7 +49,7 @@ audio content.  Modules for the production and management of podcast
 audio are also included.
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 sed -i -e "s/instdir = @LOCAL_PREFIX@\/lib/instdir = @LOCAL_PREFIX@\/%{_lib}/g" lib/Makefile.am
 
@@ -167,6 +162,9 @@ fi
 %{_unitdir}/*
 
 %changelog
+* Sun Dec 13 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.0-1
+- update to 3.5.0
+
 * Wed Jul 22 2020 Yann Collette <ycollette.nospam@free.fr> - 3.4.1-1
 - update to 3.4.1
 
