@@ -5,7 +5,7 @@
 
 Name:    odin2
 Version: 2.2.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A VST3 synthetizer
 License: GPLv2+
 URL:     https://github.com/TheWaveWarden/odin2
@@ -57,7 +57,7 @@ Projucer --resave Odin.jucer
 export HOME=`pwd`
 mkdir -p .vst3
 mkdir -p .lv2
-mkdir -p .local/share/Surge
+mkdir -p .local/share/Odin2
 
 cd Builds/LinuxMakefile
 %make_build CONFIG=Release STRIP=true
