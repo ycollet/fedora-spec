@@ -1,3 +1,5 @@
+%define _lto_cflags %{nil}
+
 Name:    lebiniou
 Version: 3.51
 Release: 3%{?dist}
