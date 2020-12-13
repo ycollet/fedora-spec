@@ -93,9 +93,29 @@ As a root user:
 $ livecd-creator --verbose --config=fedora-32-live-jam-xfce.ks --fslabel=Audinux --releasever 32
 ```
 
+```
+# To build using the EPEL 7 version of livecd-tools:
+
+$ mock -r /etc/mock/epel-7-x86_64.cfg --isolation=simple --init --install wget unzip livecd-tools
+$ mock -r /etc/mock/epel-7-x86_64.cfg --copyin fedora-32-live-jam-xfce.ks --copyin prepare.sh /builddir
+$ mock -r /etc/mock/epel-7-x86_64.cfg --enable-network --shell
+
+# To build using the Fedora 32 version of livecd-tools:
+
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --isolation=simple --init --install wget unzip livecd-tools
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --copyin fedora-32-live-jam-xfce.ks --copyin prepare.sh /builddir
+$ mock -r /etc/mock/fedora-32-x86_64.cfg --enable-network --shell
+
+# Then: preinstall the required files and start livecd-creator
+
+$ cd /builddir
+$ ./prepare.sh
+$ livecd-creator --verbose --config=fedora-32-live-jam-xfce.ks --fslabel=Audinux --releasever 32
+```
+
 To create the LiceCD using livemedia-creator:
 
-As a root user (---old-chroot == --old-chroot):
+As a root user:
 ```
 $ mock -r /etc/mock/fedora-32-x86_64.cfg --isolation=simple --init --install lorax-lmc-novirt wget unzip libblockdev-lvm libblockdev-btrfs libblockdev-swap libblockdev-loop libblockdev-crypto libblockdev-mpath libblockdev-dm libblockdev-mdraid libblockdev-nvdimm
 $ mock -r /etc/mock/fedora-32-x86_64.cfg --copyin fedora-32-live-jam-xfce.ks --copyin prepare.sh /builddir
@@ -246,28 +266,6 @@ index bd03075..2023050 100644
 ```
 Bug in livecd-creator:
 ```
-Losetup remove /dev/loop1
-Traceback (most recent call last):
-  File "/usr/bin/livecd-creator", line 258, in <module>
-    sys.exit(main())
-  File "/usr/bin/livecd-creator", line 232, in main
-    creator.configure()
-  File "/usr/lib/python3.8/site-packages/imgcreate/creator.py", line 799, in configure
-    self._create_bootconfig()
-  File "/usr/lib/python3.8/site-packages/imgcreate/live.py", line 259, in _create_bootconfig
-    self._configure_bootloader(self.__ensure_isodir())
-  File "/usr/lib/python3.8/site-packages/imgcreate/live.py", line 839, in _configure_bootloader
-    self._configure_syslinux_bootloader(isodir)
-  File "/usr/lib/python3.8/site-packages/imgcreate/live.py", line 680, in _configure_syslinux_bootloader
-    linux, basic, check = self.__get_image_stanzas(isodir)
-  File "/usr/lib/python3.8/site-packages/imgcreate/live.py", line 583, in __get_image_stanzas
-    default = self.__is_default_kernel(kernel, kernels)
-  File "/usr/lib/python3.8/site-packages/imgcreate/live.py", line 503, in __is_default_kernel
-    if kernel.startswith(b"kernel-") and kernel[7:] == self._default_kernel:
-TypeError: startswith first arg must be str or a tuple of str, not bytes
-```
-
-```
  Exécution du scriptlet: kernel-core-5.8.11-200.fc32.x86_64                                                                                                 1803/1803 
 /etc/dracut.conf.d/99-liveos.conf:filesystems+="vfat msdos isofs ext4 xfs btrfs squashfs "
 /etc/dracut.conf.d/99-liveos.conf:add_drivers+="sr_mod sd_mod ide-cd cdrom =ata sym53c8xx aic7xxx ehci_hcd uhci_hcd ohci_hcd usb_storage usbhid uas firewire-sbp2 firewire-ohci sbp2 ohci1394 ieee1394 mmc_block sdhci sdhci-pci pata_pcmcia mptsas virtio_blk virtio_pci virtio_scsi virtio_net virtio_mmio virtio_balloon virtio-rng  "
@@ -280,6 +278,75 @@ dracut-install: ERROR: installing 'sr_mod'
 dracut: FAILED:  /usr/lib/dracut/dracut-install -D /var/tmp/dracut.P90ngs/initramfs --kerneldir /lib/modules/5.8.11-200.fc32.x86_64/ -m sr_mod sd_mod ide_cd cdrom =ata sym53c8xx aic7xxx ehci_hcd uhci_hcd ohci_hcd usb_storage usbhid uas firewire-sbp2 firewire-ohci sbp2 ohci1394 ieee1394 mmc_block sdhci sdhci-pci pata_pcmcia mptsas virtio_blk virtio_pci virtio_scsi virtio_net virtio_mmio virtio_balloon virtio-rng
 dracut-install: ERROR: installing 'ext4'
 dracut: FAILED:  /usr/lib/dracut/dracut-install -D /var/tmp/dracut.P90ngs/initramfs --kerneldir /lib/modules/5.8.11-200.fc32.x86_64/ -m vfat msdos isofs ext4 xfs btrfs squashfs
+```
+
+After installing grub2-efi-x64-cdboot in the ks file:
+```
+The authconfig command is not available.
+Removed /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+success
+The 'rhgb' entity is not available.
+The '/usr/lib/anaconda-runtime/checkisomd5' entity is not available.
+The 'checkisomd5' entity is not available.
+The 'rhgb' entity is not available.
+The '/usr/lib/anaconda-runtime/checkisomd5' entity is not available.
+The 'checkisomd5' entity is not available.
+Unmounting directory /var/tmp/imgcreate-rk0djegr/install_root
+Losetup remove /dev/loop1
+Traceback (most recent call last):
+  File "/home/collette/repositories/github/livecd-tools/tools/livecd-creator", line 258, in <module>
+    sys.exit(main())
+  File "/home/collette/repositories/github/livecd-tools/tools/livecd-creator", line 232, in main
+    creator.configure()
+  File "/home/collette/repositories/github/livecd-tools/imgcreate/creator.py", line 800, in configure
+    self._create_bootconfig()
+  File "/home/collette/repositories/github/livecd-tools/imgcreate/live.py", line 259, in _create_bootconfig
+    self._configure_bootloader(self.__ensure_isodir())
+  File "/home/collette/repositories/github/livecd-tools/imgcreate/live.py", line 843, in _configure_bootloader
+    self._configure_efi_bootloader(isodir)
+  File "/home/collette/repositories/github/livecd-tools/imgcreate/live.py", line 829, in _configure_efi_bootloader
+    cfg += self.__get_efi_image_stanzas(isodir, self.name)
+  File "/home/collette/repositories/github/livecd-tools/imgcreate/live.py", line 796, in __get_efi_image_stanzas
+    cfg += self.__get_efi_image_stanza(fslabel = self.fslabel,
+  File "/home/collette/repositories/github/livecd-tools/imgcreate/live.py", line 774, in __get_efi_image_stanza
+    if self._isDracut:
+AttributeError: 'x86LiveImageCreator' object has no attribute '_isDracut'
+```
+
+With:
+```
+dracut-live
+grub2
+grub2-tools
+grub2-efi
+# grub2-efi-x64-cdboot
+shim-x64
+# shim-unsigned-x64
+
+kernel
+kernel-modules
+kernel-modules-extra
+kernel-tools
+```
+
+```
+The 'rhgb' entity is not available.
+The '/usr/lib/anaconda-runtime/checkisomd5' entity is not available.
+The 'checkisomd5' entity is not available.
+Missing EFI file (/boot/efi/EFI/*/gcdx64.efi)
+Missing EFI file (/boot/efi/EFI/*/fonts/unicode.pf2)
+Failed to copy EFI files, no EFI Support will be included.
+usage: mkefiboot [-h] [--debug] [-d] [-a] [-l LABEL] [-i ICONFILE] [-n DISKNAME] [-p PRODUCT] EFIBOOTDIR OUTPUTFILE
+mkefiboot: error: /var/tmp/imgcreate-d14k30jg/iso-2murjnwc/EFI/BOOT is not a directory
+usage: mkefiboot [-h] [--debug] [-d] [-a] [-l LABEL] [-i ICONFILE] [-n DISKNAME] [-p PRODUCT] EFIBOOTDIR OUTPUTFILE
+mkefiboot: error: /var/tmp/imgcreate-d14k30jg/iso-2murjnwc/EFI/BOOT is not a directory
+setfiles: /etc/selinux/targeted/contexts/files/file_contexts: line 1394 has invalid context system_u:object_r:motd_var_run_t:s0
+setfiles: /etc/selinux/targeted/contexts/files/file_contexts: line 1394 has invalid context system_u:object_r:motd_var_run_t:s0
+/etc/selinux/targeted/contexts/files/file_contexts: Invalid argument
+Error creating Live CD : SELinux relabel failed.
+Unmounting directory /var/tmp/imgcreate-d14k30jg/install_root
+Losetup remove /dev/loop1
 ```
 
 To use the "patched" version of livecdtools:
