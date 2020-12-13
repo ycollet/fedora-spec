@@ -1,5 +1,5 @@
 Name:    lebiniou
-Version: 3.50
+Version: 3.51
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -23,9 +23,10 @@ BuildRequires: libsndfile-devel
 BuildRequires: SDL2_ttf-devel
 BuildRequires: ImageMagick-devel
 BuildRequires: ffmpeg-devel
+BuildRequires: jansson-devel
+BuildRequires: ulfius-devel
 BuildRequires: perl-podlators
 BuildRequires: gtk-update-icon-cache
-BuildRequires: jansson-devel
 BuildRequires: desktop-file-utils
 
 Requires(pre): lebiniou-data
@@ -41,11 +42,15 @@ sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_li
 
 %build
 
+%set_build_flags
+
 autoreconf --install
 
 LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
+CFLAGS=" -I/usr/include/ffmpeg -fPIC $CFLAGS"; export CFLAGS
 # report: --enable-jackaudio doesn't work ...
-%configure --prefix=%{_prefix} --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir} CFLAGS="%{build_cxxflags}"
+
+%configure --prefix=%{_prefix} --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir}
 
 %make_build 
 
@@ -67,6 +72,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Mon Dec 7 2020 Yann Collette <ycollette.nospam@free.fr> - 3.51-3
+- update to 3.51-3
+
 * Sat Oct 31 2020 Yann Collette <ycollette.nospam@free.fr> - 3.50-3
 - update to 3.50-3
 
