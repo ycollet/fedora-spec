@@ -8,6 +8,7 @@ Url:            https://github.com/captnfab/PianoBooster
 Source0:        https://github.com/captnfab/PianoBooster/archive/v%{version}.tar.gz#/PianoBooster-%{version}.tar.gz
 
 BuildRequires:  cmake
+BuildRequires:  jack-audio-connection-kit-devel
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(ftgl)
@@ -52,9 +53,7 @@ is really recommended.
 %build
 
 %cmake -DUSE_SYSTEM_FONT=ON \
-       -DNO_DOCS=ON \
-       -DNO_LICENSE=ON \
-       -DNO_CHANGELOG=ON \
+       -DUSE_JACK=ON \
        -DWITH_MAN=ON
 
 %cmake_build
