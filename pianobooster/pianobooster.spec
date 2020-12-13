@@ -1,5 +1,5 @@
 Name:           pianobooster
-Version:        0.7.2b
+Version:        1.0.0
 Release:        7%{?dist}
 Summary:        A MIDI file player that teaches you how to play the piano
 License:        GPL-3.0-or-later
@@ -74,11 +74,13 @@ is really recommended.
 %dir %{_datadir}/games/%{name}/translations
 %{_datadir}/games/%{name}/music/*.zip
 %{_datadir}/games/%{name}/translations/%{name}*.qm
-%{_datadir}/games/%{name}/translations/music*.qm
 %{_datadir}/games/%{name}/translations/*.json
 %{_mandir}/man6/%{name}.6*
 
 %changelog
+* Sun Dec 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
+- update to 1.0.0
+
 * Thu Oct 1 2020 Yann Collette <ycollette.nospam@free.fr> - 0.7.2b-2
 - fix for Fedora 33
 
