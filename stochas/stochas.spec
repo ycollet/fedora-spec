@@ -2,7 +2,7 @@
 
 Name:    stochas
 Version: 1.3.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A VST3 MIDI sequencer
 License: GPLv3
 
@@ -47,11 +47,11 @@ sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
 %install 
 
-install -m 755 -d %{buildroot}%{_libdir}/vst3/
+install -m 755 -d %{buildroot}%{_libdir}/vst3/Stochas.vst3/
 %if 0%{?fedora} < 33
-install -m 644 -p stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
+cp -r stochas_artefacts/VST3/Stochas.vst3/* %{buildroot}/%{_libdir}/vst3/Stochas.vst3/	
 %else
-install -m 644 -p %{_host}/stochas_artefacts/VST3/Stochas.vst3/Contents/x86_64-linux/*.so %{buildroot}/%{_libdir}/vst3/	
+cp -r %{_host}/stochas_artefacts/VST3/Stochas.vst3/* %{buildroot}/%{_libdir}/vst3/Stochas.vst3/	
 %endif
 
 install -m 755 -d %{buildroot}%{_bindir}/
@@ -70,6 +70,9 @@ install -m 644 -p %{_host}/stochas_artefacts/Standalone/Stochas %{buildroot}/%{_
 %{_libdir}/vst3/*
 
 %changelog
+* Sun Dec 13 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.4-3
+- update to 1.3.4-3 - fix install
+
 * Mon Nov 2 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.4-2
 - update to 1.3.4
 
