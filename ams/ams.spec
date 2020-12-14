@@ -1,31 +1,30 @@
-# Global variables for github repository
-%global commit0 5e31138352eceaef69ceac4a6a7e02debcf1a88b
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary:  Alsa Modular Synth, a realtime modular synthesizer
 Name:     ams
-Version:  2.1.2
+Version:  2.2.0
 Release:  5%{?dist}
 URL:      http://alsamodular.sourceforge.net
-Source0:  https://github.com/ycollet/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:  https://github.com/ycollet/ams/archive/Release-220.tar.gz#/%{name}-%{version}.tar.gz
 License:  GPLv2+
+
+BuildRequires: gcc-c++
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: alsa-lib-devel
+BuildRequires: zita-alsa-pcmi-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: ladspa-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: fftw3-devel
+BuildRequires: qt5-qtbase-gui
+BuildRequires: qt5-linguist
+BuildRequires: desktop-file-utils
+BuildRequires: qtchooser
 
 Requires: ladspa-cmt-plugins 
 Requires: ladspa-swh-plugins 
 Requires: ladspa-vco-plugins 
 Requires: ladspa-rev-plugins 
 Requires: ladspa-mcp-plugins
-
-BuildRequires: gcc-c++
-BuildRequires: autoconf automake
-BuildRequires: desktop-file-utils alsa-lib-devel zita-alsa-pcmi-devel
-BuildRequires: jack-audio-connection-kit-devel ladspa-devel
-BuildRequires: qt5-qtbase-devel
-BuildRequires: qt5-qtbase-gui
-BuildRequires: qt5-linguist
-BuildRequires: fftw3-devel
-BuildRequires: qtchooser
 
 %description
 AlsaModularSynth is a realtime modular synthesizer and effect
@@ -37,7 +36,7 @@ capability and JACK Support.
 NOTE: Example files are in /usr/share/ams
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-Release-220
 
 autoreconf -i
 
@@ -70,6 +69,9 @@ desktop-file-install \
 %{_datadir}/pixmaps/%{name}*
 
 %changelog
+* Mon Dec 14 2020 Yann Collette <ycollette.nospam@free.fr> - 2.2.0-5
+- update to 2.2.0
+
 * Sat Jan 11 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.2-5
 - fix a bug in a sequencer + apply change from fedora spec repo
 
