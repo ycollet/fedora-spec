@@ -1,12 +1,12 @@
 Name:    zam-plugins
-Version: 3.13
+Version: 3.14
 Release: 3%{?dist}
 Summary: Zam LV2 set of plugins
 License: GPLv2+
 URL:     https://github.com/zamaudio/zam-plugins
 
-# ./source.sh 3.13
-Source0: zam-plugins-3.13.tar.xz
+# ./zam-source.sh 3.14
+Source0: zam-plugins-%{version}.tar.xz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -33,11 +33,9 @@ Summary: Zam VST plugin
 Zam VST plugin
 
 %prep
-%autosetup -n zam-plugins-3.13
+%autosetup -n zam-plugins-%{version}
 
 %build
-
-%define _lto_cflags %{nil}
 
 %make_build PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags" all
 
@@ -58,6 +56,9 @@ Zam VST plugin
 %{_libdir}/vst/* 
 
 %changelog
+* Sun Dec 20 2020 Yann Collette <ycollette.nospam@free.fr> - 3.14-3
+- update to 3.14
+
 * Sun Jul 19 2020 Yann Collette <ycollette.nospam@free.fr> - 3.13-3
 - fix debug build
 
