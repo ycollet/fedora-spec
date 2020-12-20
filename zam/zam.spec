@@ -37,6 +37,8 @@ Zam VST plugin
 
 %build
 
+%define _lto_cflags %{nil}
+
 %make_build PREFIX=/usr LIBDIR=%{_lib} SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags" all
 
 %install 
