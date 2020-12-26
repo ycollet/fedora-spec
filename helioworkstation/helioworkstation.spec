@@ -1,13 +1,14 @@
 Name:    helio-workstation
-Version: 3.1.0
+Version: 3.3.0
 Release: 1%{?dist}
 Summary: An audio sequencer
 URL:     https://github.com/helio-fm/helio-workstation
 License: GPLv2+
 
-# ./source.sh 3.1
+# ./helioworkstation-source.sh 3.3
 
 Source0: helio-workstation.tar.gz
+Source1: helioworkstation-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -33,24 +34,24 @@ Helio Workstation is free and open-source music sequencer, designed to be used o
 
 %set_build_flags
 
-cd Projects//LinuxMakefile/
+cd Projects/LinuxMakefile/
 %make_build STRIP=true
 
 %install
 
-%__install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 -d %{buildroot}/%{_bindir}/
 cp -a Projects/LinuxMakefile/build/Helio %{buildroot}/%{_bindir}/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/applications/
+install -m 755 -d %{buildroot}/%{_datadir}/applications/
 cp -a Projects/Deployment/Linux/Debian/x64/usr/share/applications/Helio.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/icons/
+install -m 755 -d %{buildroot}/%{_datadir}/icons/
 cp -ra Projects/Deployment/Linux/Debian/x64/usr/share/icons/* %{buildroot}%{_datadir}/icons/
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/doc/%{name}/
+install -m 755 -d %{buildroot}/%{_datadir}/doc/%{name}/
 cp -ra Docs/* %{buildroot}/%{_datadir}/doc/%{name}/
 
-# install konfyt.desktop properly.
+# install helioworkstation.desktop properly.
 desktop-file-install --vendor '' \
         --add-category=AudioVideo \
         --add-category=X-Midi \
@@ -67,5 +68,8 @@ desktop-file-install --vendor '' \
 %{_datadir}/doc/%{name}/*
 
 %changelog
+* Sat Dec 26 2020 Yann Collette <ycollette.nospam@free.fr> - 3.3.0-1
+- update to 3.3.0-1
+
 * Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.0-1
-- Initial spec file 3.1.0
+- Initial spec file 3.1.0-1
