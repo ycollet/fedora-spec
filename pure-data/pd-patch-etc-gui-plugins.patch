@@ -12,16 +12,14 @@ Last-Update: 2016-02-17
  tcl/pd-gui.tcl | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tcl/pd-gui.tcl b/tcl/pd-gui.tcl
-index 3033698..6cfcc73 100755
---- a/tcl/pd-gui.tcl
-+++ b/tcl/pd-gui.tcl
-@@ -786,7 +786,7 @@ proc load_startup_plugins {} {
+--- puredata.orig/tcl/pd-gui.tcl
++++ puredata/tcl/pd-gui.tcl
+@@ -791,7 +791,7 @@
      load_plugin_script [file join $::sys_guidir pd_docsdir.tcl]
  
      # load other installed plugins
--    foreach pathdir [concat $::sys_searchpath $::sys_temppath $::sys_staticpath] {
-+    foreach pathdir [concat $::sys_searchpath $::sys_temppath "/etc/pd/plugins-enabled" $::sys_staticpath] {
+-    foreach pathdir [concat $::sys_temppath $::sys_searchpath $::sys_staticpath] {
++    foreach pathdir [concat $::sys_temppath $::sys_searchpath "/etc/pd/plugins-enabled" $::sys_staticpath] {
          set dir [file normalize $pathdir]
          if { ! [file isdirectory $dir]} {continue}
          if { [ catch {

@@ -9,11 +9,9 @@ add it manually
  src/s_path.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/src/s_path.c b/src/s_path.c
-index d6c85c5..1b5defe 100644
---- a/src/s_path.c
-+++ b/src/s_path.c
-@@ -261,6 +261,10 @@ void sys_setextrapath(const char *p)
+--- puredata.orig/src/s_path.c
++++ puredata/src/s_path.c
+@@ -264,6 +264,10 @@
  #endif
      /* add built-in "extra" path last so its checked last */
      STUFF->st_staticpath = namelist_append(STUFF->st_staticpath, p, 0);
