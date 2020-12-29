@@ -17,6 +17,15 @@
  mapmap              -> https://github.com/mapmapteam/mapmap
  openshow            -> https://github.com/mapmapteam/openshow
  supercollider-study -> https://github.com/rumblesan/super-collider-study
+ marsyas             -> http://marsyas.info/
+ vapoursynth         -> http://www.vapoursynth.com/
+                     -> https://github.com/dubhater/vapoursynth-fluxsmooth
+					 -> https://github.com/HolyWu/L-SMASH-Works
+					 -> https://github.com/dubhater/vapoursynth-mvtools
+					 -> https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock
+
+** Add BuildRequires make in spec file which requires it:
+BuildRequires: make
 
 ** Add source.sh file in spec file:
 Source1: source.sh
