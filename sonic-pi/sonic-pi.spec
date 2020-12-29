@@ -1,5 +1,11 @@
+# Have a look at:
+# https://github.com/archlinux/svntogit-community/tree/packages/sonic-pi/trunk
+
 # Do not check any files here for requires
 %global __requires_exclude_from (^.*/vendor/.*$|^.*/native/.*$)
+
+%global __mangle_shebangs_exclude_from /vendor/
+%global __mangle_shebangs_exclude ruby
 
 %global debug_package %{nil}
 
@@ -53,12 +59,6 @@ sonic ideas into reality.
 
 %prep
 %autosetup -n %{name}-%{version} 
-
-# Managing shebang
-find . -type f -exec sed -i -e "s|!/usr/bin/env ruby|!/usr/bin/ruby|g" {} \;
-find . -type f -exec sed -i -e "s|!/usr/bin/env bash|!/usr/bin/bash|g" {} \;
-find . -type f -exec sed -i -e "s|!/bin/sh|!/usr/bin/sh|g" {} \;
-find . -type f -exec sed -i -e "s|!/bin/bash|!/usr/bin/bash|g" {} \;
 
 cd app/gui/qt
 
