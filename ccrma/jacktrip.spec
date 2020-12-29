@@ -1,6 +1,6 @@
 Summary: Multimachine jam sessions over the internet
 Name:    jacktrip
-Version: 1.2.1
+Version: 1.2.2
 Release: 2%{?dist}
 License: STK
 URL:     https://ccrma.stanford.edu/software/jacktrip/
@@ -45,6 +45,9 @@ SoundWIRE group.
 %{_bindir}/jacktrip
 
 %changelog
+* Tue Dec 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-2
+- update to 1.2.2-1
+
 * Thu Nov 05 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.1-2
 - update to 1.2.1
 
