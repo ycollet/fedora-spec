@@ -1,6 +1,6 @@
 Name:    lmms-mao
 Version: 1.2.2
-Release: 10%{?dist}
+Release: 11%{?dist}
 Summary: Linux MultiMedia Studio
 URL:     http://lmms.sourceforge.net/
 
@@ -104,10 +104,10 @@ sed -i -e "s/-std=c11/-std=c11 -fPIC -DPIC/g" src/3rdparty/rpmalloc/CMakeLists.t
 
 %cmake -DWANT_SDL:BOOL=OFF \
        -DWANT_PORTAUDIO:BOOL=OFF \
-       -DWANT_CAPS:BOOL=OFF \
-       -DWANT_TAP:BOOL=OFF \
+       -DWANT_CAPS:BOOL=ON \
+       -DWANT_TAP:BOOL=ON \
        -DWANT_SWH:BOOL=ON \
-       -DWANT_CALF:BOOL=OFF \
+       -DWANT_CALF:BOOL=ON \
        -DWANT_CARLA:BOOL=ON \
        -DWANT_QT5:BOOL=ON \
        -DWANT_VST:BOOL=OFF \
@@ -151,6 +151,9 @@ desktop-file-install --vendor '' \
 %{_includedir}/lmms
 
 %changelog
+* Wed Dec 30 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-11
+- update to 1.2.2-11 - activate calf, tap, caps ladspa plugins ... Seems to be missing now
+
 * Mon Oct 26 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-10
 - update to 1.2.2-10 - add missing requires + rebuilt because of carla
 
