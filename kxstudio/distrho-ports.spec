@@ -1,16 +1,13 @@
-# Global variables for github repository
-%global commit0 a953bed05844d4a0ba349f75c75b56a430c8b11a
-%global gittag0 2020-07-14
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gittag0 2020-12-27
 
 Name:    DISTRHO-Ports
-Version: 1.0.1.%{shortcommit0}
+Version: 1.0.2
 Release: 4%{?dist}
 Summary: A set of LV2 plugins
 License: GPLv2+
 URL:     https://github.com/DISTRHO/DISTRHO-Ports
 
-Source0: https://github.com/DISTRHO/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/DISTRHO/DISTRHO-Ports/archive/%{gittag0}.tar.gz#/%{name}-%{gittag0}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: ladspa-devel
@@ -29,7 +26,7 @@ BuildRequires: meson
 A set of LV2 plugins
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{gittag0}
 
 sed -i -e "/-Wl,--strip-all/d" meson.build
 
@@ -50,7 +47,10 @@ sed -i -e "/-Wl,--strip-all/d" meson.build
 %{_libdir}/vst/*
 
 %changelog
-* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-5
+* Wed Dec 30 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-4
+- update to 2020-12-27 (1.0.2)
+
+* Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-4
 - fix debug build
 
 * Tue Jul 14 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-4
