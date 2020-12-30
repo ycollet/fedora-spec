@@ -41,6 +41,9 @@ Source1: source.sh
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
+** lvtk
+fix pkgconfig file installation
+
 ** Fix debug generation:
 
 purr-data/purr-data.spec       -> has a pure binary dependency
