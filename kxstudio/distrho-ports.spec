@@ -45,6 +45,7 @@ sed -i -e "/-Wl,--strip-all/d" meson.build
 %doc README.md
 %{_libdir}/lv2/*
 %{_libdir}/vst/*
+%{_libdir}/vst3/*
 
 %changelog
 * Wed Dec 30 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-4
