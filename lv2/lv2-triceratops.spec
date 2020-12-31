@@ -8,6 +8,8 @@ License:        ISC
 URL:            https://sourceforge.net/projects/triceratops/
 Source0:        https://sourceforge.net/projects/triceratops/files/triceratops_%{version}.tar.gz
 
+BuildRequires:  gcc-c++
+BuildRequires:  make
 BuildRequires:  jack-audio-connection-kit-devel
 BuildRequires:  libsamplerate-devel
 BuildRequires:  libsndfile-devel

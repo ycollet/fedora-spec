@@ -7,6 +7,7 @@ License: GPLv2+
 URL:     http://drobilla.net/
 Source0: http://deb.debian.org/debian/pool/main/f/fomp/fomp_1.2.0.orig.tar.bz2
 
+BuildRequires: gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: python2
 
@@ -26,6 +27,10 @@ octaves for faithful Moog-like modulation.
 
 %prep
 %autosetup -n fomp-%{version} 
+
+# Force use of python2
+sed -i -e "s|env python|env python2|g" waf
+sed -i -e "s|env python|env python2|g" wscript
 
 %build
 %set_build_flags

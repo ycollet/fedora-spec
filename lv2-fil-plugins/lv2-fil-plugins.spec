@@ -12,11 +12,12 @@ License: LGPLv2+ and GPLv2 and GPLv2+
 Group:   Applications/Multimedia
 URL:     http://nedko.arnaudov.name/soft/lv2fil/
 
-Source:  http://nedko.arnaudov.name/soft/lv2fil/download/%{pkgname}-%{version}.tar.bz2
+Source:  https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/lv2fil/2.0+20100312.git18130f5a+dfsg0-2/lv2fil_2.0+20100312.git18130f5a+dfsg0.orig.tar.gz#/lv2fil-2.0.tar.gz
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-BuildRequires: gcc gcc-c++ sed
+BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: sed
+BuildRequires: make
 BuildRequires: liblo-devel
 BuildRequires: lv2-devel
 BuildRequires: python2
@@ -24,7 +25,7 @@ BuildRequires: python2
 Requires: lv2
 Requires: pycairo
 Requires: pygtk2
-Requires: python2-pyliblo
+Requires: python3-pyliblo
 
 %description
 Stereo and mono LV2 plugins, four-band parametric equalizers.
@@ -46,17 +47,19 @@ differently colored curve for each section and separate curve for
 total equalization effect.
 
 %prep
-%setup -q -n %{pkgname}-%{version}
-
-# For Fedora 29
-%if 0%{?fedora} >= 29
-  find . -type f -exec sed -i -e "s/env python/env python2/g" {} \;
-%endif
+%autosetup -n lv2fil-2.0+20100312.git18130f5a+dfsg0
 
 sed -i -e "s/lv2core/lv2/g" wscript
 
+# Force python2 usage
+sed -i -e "s/env python/env python2/g" waf
+sed -i -e "s/env python/env python2/g" wscript
+sed -i -e "s/env python/env python2/g" lv2plugin.py
+sed -i -e "s/env python/env python2/g" ui
+sed -i -e "s/\"python\"/\"python2\"/g" lv2_ui.c
+
 %build
-export CFLAGS="%{optflags}"
+%set_build_flags
 export LINKFLAGS="-lm"
 ./waf configure --lv2-dir=%{_libdir}/lv2
 ./waf %{?_smp_mflags} -v
@@ -68,11 +71,7 @@ rm -rf %{buildroot}
 chmod 755 %{buildroot}%{_libdir}/lv2/filter.lv2/filter.so
 chmod 755 %{buildroot}%{_libdir}/lv2/filter.lv2/ui
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS README NEWS
 %license COPYING
 %{_libdir}/lv2/filter.lv2/
