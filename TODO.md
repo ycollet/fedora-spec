@@ -24,13 +24,6 @@
 					 -> https://github.com/dubhater/vapoursynth-mvtools
 					 -> https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock
 
-Add the following missing LV2 plugins:
-- lv2-avw-plugins                 -> https://src.fedoraproject.org/rpms/lv2-avw-plugins
-- pyliblo missing lv2-fil-plugins -> https://src.fedoraproject.org/rpms/lv2-fil-plugins
-- lv2-kn0ck0ut                    -> https://src.fedoraproject.org/rpms/lv2-kn0ck0ut
-- lv2-triceratops                 -> https://src.fedoraproject.org/rpms/lv2-triceratops
-- lv2-fomp-plugins                -> https://src.fedoraproject.org/rpms/lv2-fomp-plugins
-
 ** Add BuildRequires make in spec file which requires it:
 BuildRequires: make
 
