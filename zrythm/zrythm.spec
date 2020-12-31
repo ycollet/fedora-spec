@@ -1,11 +1,11 @@
 Name:    zrythm
-Version: 1.0.0.a601
+Version: 1.0.0.a701
 Release: 4%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.6.0.1.tar.gz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.7.0.1.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -52,16 +52,16 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%autosetup -n zrythm-1.0.0-alpha.6.0.1
+%autosetup -n zrythm-1.0.0-alpha.7.0.1
 
 # Use sphinx for Python 3
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
-sed -i -e '/meson.add_install_script/,+2d' meson.build
 
 # Compile using -O0 because of jack xruns
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
-# Remove summary which is only available on meson 0.53 and stick to version 0.52
-#sed -i -e "s/meson_version: '>= 0.55.0'/meson_version: '>= 0.52.0'/g" meson.build
+
+# Search for libpulse.pc instead of pulseaudio.pc
+sed -i -e "s/'pulseaudio'/'libpulse'/g" meson.build
 
 %build
 
@@ -99,10 +99,13 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Thu Dec 31 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.7.0.1-4
+- update to 1.0.0-alpha.7.0.1-4
+
 * Sat Dec 12 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.6.0.1-4
 - update to 1.0.0-alpha.6.0.1-4
 
-* Mon Nov 17 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.5.0.1-4
+* Tue Nov 17 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.5.0.1-4
 - update to 1.0.0-alpha.5.0.1-4
 
 * Wed Oct 28 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.4.0.1-4
