@@ -1,13 +1,15 @@
 Name:    receivemidi
-Version: 1.0.6
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: A command line tool to receive MIDI event
 License: GPLv3
-
 URL:     https://github.com/gbevin/ReceiveMIDI
-Source0: https://github.com/gbevin/ReceiveMIDI/archive/%{version}.tar.gz#/ReceiveMIDI-%{version}.tar.gz
 
-BuildRequires: gcc gcc-c++
+Source0: %{url}/archive/%{version}.tar.gz#/ReceiveMIDI-%{version}.tar.gz
+
+BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: make
 BuildRequires: libX11-devel
 BuildRequires: xcb-util-cursor-devel
 BuildRequires: libxkbcommon-x11-devel
@@ -36,8 +38,8 @@ cd Builds/LinuxMakefile
 
 cd Builds/LinuxMakefile
 
-%__install -m 755 -d %{buildroot}%{_bindir}/
-%__install -m 755 -p build/receivemidi %{buildroot}/%{_bindir}/
+install -m 755 -d %{buildroot}%{_bindir}/
+install -m 755 -p build/receivemidi %{buildroot}/%{_bindir}/
 
 %files
 %doc README.md
@@ -45,6 +47,9 @@ cd Builds/LinuxMakefile
 %{_bindir}/*
 
 %changelog
+* Sat Jan 2 2021 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+- update to 1.1.0
+
 * Sun Oct 4 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-3
 - fix debug + install
 
