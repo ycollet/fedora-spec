@@ -1,12 +1,11 @@
 Name:    fasttracker2
-Version: 1.41.1
+Version: 1.42
 Release: 3%{?dist}
 Summary: Module tracker software for creating music
 License: GPLv3+
 URL:     https://16-bits.org/ft2.php
 
-# Source0: https://github.com/8bitbubsy/ft2-clone/archive/v%{version}.tar.gz#/ft2-clone-%{version}.tar.gz
-Source0: https://github.com/8bitbubsy/ft2-clone/archive/v1.41_fix.tar.gz#/ft2-clone-%{version}.tar.gz
+Source0: https://github.com/8bitbubsy/ft2-clone/archive/v%{version}.tar.gz#/ft2-clone-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: SDL2-devel
@@ -19,8 +18,7 @@ FastTracker 2 is a music tracker created by Fredrik "Mr. H" Huss and Magnus "Vog
 The source code of FastTracker 2 is written in Pascal using Borland Pascal 7 and TASM. The program works natively under MS-DOS.
 
 %prep
-# autosetup -n ft2-clone-%{version}
-%autosetup -n ft2-clone-1.41_fix
+%autosetup -n ft2-clone-%{version}
 
 %build
 
@@ -61,6 +59,9 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 %{_bindir}/*
 
 %changelog
+* Sat Jan 3 2021 Yann Collette <ycollette.nospam@free.fr> - 1.42-3
+- update to 1.42-3
+
 * Thu Nov 19 2020 Yann Collette <ycollette.nospam@free.fr> - 1.41-3
 - update to 1.41-3
 
