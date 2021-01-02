@@ -23,6 +23,8 @@
 					 -> https://github.com/HolyWu/L-SMASH-Works
 					 -> https://github.com/dubhater/vapoursynth-mvtools
 					 -> https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock
+frequanalizer        -> https://github.com/ffAudio/Frequalizer
+paulstretch          -> https://bitbucket.org/xenakios/paulstretchplugin/src/master/
 
 ** Add BuildRequires make in spec file which requires it:
 BuildRequires: make
