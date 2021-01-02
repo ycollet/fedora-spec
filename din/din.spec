@@ -1,13 +1,15 @@
 Summary: DIN is a synth of a 3rd kind
 Name:    din
-Version: 48.0.0
+Version: 49.1.0
 Release: 1%{?dist}
 License: GPL
 URL:     https://dinisnoise.org/
 
-Source0: https://archive.org/download/dinisnoise_source_code/din-48.tar.gz
+Source0: https://archive.org/download/dinisnoise_source_code/din-49.1.tar.gz
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: make
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: tcl-devel
@@ -31,22 +33,29 @@ You had pulse, sine, triangle and sawtooth,
 And went forth and made electronic music.
 
 %prep
-%autosetup -n %{name}-48
+%autosetup -n %{name}-49.1
 
 # __line conflict with std c++ headers
 sed -i -e "s/__line/__dinline/g" src/line.h
 
 %build
-CFLAGS="-D__UNIX_JACK__ -D__LINUX_ALSA__ %{build_cflags}" CXXFLAGS="-D__UNIX_JACK__ -D__LINUX_ALSA__ %{build_cxxflags}" LDFLAGS="-ljack %{build_ldflags}" ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+%set_build_flags
+
+# To select an api:
+# __UNIX_JACK__
+# __LINUX_ALSA__
+
+CFLAGS="-D__UNIX_JACK__ $CFLAGS" CXXFLAGS="-D__UNIX_JACK__ $CXXFLAGS" LDFLAGS="-ljack $LDFLAGS" ./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %make_build
 
 %install
 %make_install
 
-desktop-file-install --dir=%{buildroot}%{_datadir}/applications pixmaps/din.desktop
-
-%clean
-%{__rm} -rf %{buildroot}
+desktop-file-install                         \
+  --add-category="Audio"                     \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  pixmaps/din.desktop
 
 %files
 %doc AUTHORS CHANGELOG BUGS INSTALL NEWS README TODO
@@ -58,6 +67,9 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications pixmaps/din.desk
 %{_datadir}/pixmaps/din.png
 
 %changelog
+* Sat Jan 2 2021 Yann Collette <ycollette dot nospam at free.fr> 49.1.0-1
+- update to 49.1.0
+
 * Fri Oct 23 2020 Yann Collette <ycollette dot nospam at free.fr> 48.0.0-1
 - update to 48.0.0 and fix debug build
 
