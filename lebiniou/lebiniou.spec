@@ -1,7 +1,7 @@
 %define _lto_cflags %{nil}
 
 Name:    lebiniou
-Version: 3.51
+Version: 3.52.0
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -61,10 +61,10 @@ CFLAGS=" -I/usr/include/ffmpeg -fPIC $CFLAGS"; export CFLAGS
 %make_install
 
 desktop-file-install                         \
-  --add-category="Audio"                     \
+  --add-category="AudioVideo"                \
   --delete-original                          \
   --dir=%{buildroot}%{_datadir}/applications \
-  %{buildroot}/%{_datadir}/applications/%{name}.desktop
+  %{buildroot}/%{_datadir}/applications/net.biniou.LeBiniou.desktop
 
 %files
 %doc README.md AUTHORS ChangeLog THANKS
@@ -74,6 +74,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Sun Jan 3 2021 Yann Collette <ycollette.nospam@free.fr> - 3.52-3
+- update to 3.52-3
+
 * Mon Dec 7 2020 Yann Collette <ycollette.nospam@free.fr> - 3.51-3
 - update to 3.51-3
 
