@@ -14,20 +14,24 @@ This patch ensures that the "puredata" namespace is used throughout
  src/s_main.c | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
---- puredata.orig/configure.ac
-+++ puredata/configure.ac
+diff --git a/configure.ac b/configure.ac
+index abd683e..ffe1adf 100644
+--- a/configure.ac
++++ b/configure.ac
 @@ -2,7 +2,7 @@
  ##### Prelude #####
  
  AC_PREREQ(2.59)
--AC_INIT([pd], [0.51.3])
-+AC_INIT([puredata], [0.51.3])
+-AC_INIT([pd], [0.51.4])
++AC_INIT([puredata], [0.51.4])
  AC_CONFIG_SRCDIR(src/m_pd.c)
  AC_CONFIG_AUX_DIR([m4/config])
  AC_CONFIG_MACRO_DIR([m4/generated])
---- puredata.orig/src/s_main.c
-+++ puredata/src/s_main.c
-@@ -635,7 +635,7 @@
+diff --git a/src/s_main.c b/src/s_main.c
+index d0a1e93..7b706a2 100644
+--- a/src/s_main.c
++++ b/src/s_main.c
+@@ -635,7 +635,7 @@ void sys_findprogdir(char *progname)
  #else
      strncpy(sbuf, sbuf2, MAXPDSTRING-30);
      sbuf[MAXPDSTRING-30] = 0;

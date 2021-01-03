@@ -2,8 +2,8 @@
 # Pure Data vanilla build
 #
 
-%define pdver 0.51-3
-%define pkgver 0.51.3
+%define pdver 0.51-4
+%define pkgver 0.51.4
 
 Summary: Pure Data
 Name:    puredata
@@ -40,6 +40,10 @@ Patch3: pd-patch-helpbrowser_puredata-doc.patch
 Patch4: pd-patch-etc-gui-plugins.patch
 Patch5: pd-patch-fixmanpage.patch
 Patch6: pd-patch-privacy.patch
+Patch7: bugfix-when-undoing-object-move-while-zooming-x-2.patch
+Patch8: fixed-vertical-offset-issue-in-triggerize_line-fn.patch
+Patch9: make-sure-object-is-visible-for-drawing-cords-and-gatom-l.patch
+Patch10: start-jack-port-numbers-at-1-rather-than-0-like-all-other.patch
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: autoconf automake libtool
@@ -240,6 +244,9 @@ sed -i -e "s/lib/lib64/g" $RPM_BUILD_ROOT%{_bindir}/pd-gui
 %{_mandir}/man1/pdsend.1.gz
 
 %changelog
+* Sun Jan 3 2021 Yann Collette <ycollette.nospam@free.fr> - 0.51.4-2
+- update to 0.51.4
+
 * Mon Dec 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.51.3-2
 - update to 0.51.3
 

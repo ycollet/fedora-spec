@@ -12,9 +12,11 @@ Last-Update: 2015-05-20
  src/s_main.c | 12 ++++++++----
  1 file changed, 8 insertions(+), 4 deletions(-)
 
---- puredata.orig/src/s_main.c
-+++ puredata/src/s_main.c
-@@ -32,8 +32,12 @@
+diff --git a/src/s_main.c b/src/s_main.c
+index 7b706a2..3c3efc5 100644
+--- a/src/s_main.c
++++ b/src/s_main.c
+@@ -32,8 +32,12 @@ char *pd_version = "Pd-" stringify(PD_MAJOR_VERSION) "." \
  stringify(PD_MINOR_VERSION) "." stringify(PD_BUGFIX_VERSION) "\
   (" stringify(PD_TEST_VERSION) ")";
  
@@ -29,7 +31,7 @@ Last-Update: 2015-05-20
  
  void pd_init(void);
  int sys_argparse(int argc, char **argv);
-@@ -376,8 +380,8 @@
+@@ -376,8 +380,8 @@ int sys_main(int argc, char **argv)
      if (sys_argparse(argc-1, argv+1))           /* parse cmd line args */
          return (1);
      sys_afterargparse();                    /* post-argparse settings */
