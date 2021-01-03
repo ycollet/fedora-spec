@@ -1,11 +1,11 @@
 Name:    zrythm
-Version: 1.0.0.a701
+Version: 1.0.0.a711
 Release: 4%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.7.0.1.tar.gz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.7.1.1.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -28,17 +28,18 @@ BuildRequires: guile22-devel
 BuildRequires: gtksourceview3-devel
 BuildRequires: graphviz-devel
 BuildRequires: libzstd-devel
+BuildRequires: libchromaprint-devel
+BuildRequires: libreproc-devel
 BuildRequires: meson
 BuildRequires: help2man
 BuildRequires: pandoc
 BuildRequires: texi2html
-BuildRequires: libchromaprint-devel
 BuildRequires: python3-sphinx
 BuildRequires: python3-sphinx-intl
 BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
-BuildRequires: libreproc-devel
+BuildRequires: rubygem-sass
 
 Requires: breeze-icon-theme
 
@@ -52,7 +53,7 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%autosetup -n zrythm-1.0.0-alpha.7.0.1
+%autosetup -n zrythm-1.0.0-alpha.7.1.1
 
 # Use sphinx for Python 3
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
@@ -62,6 +63,9 @@ sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, languag
 
 # Search for libpulse.pc instead of pulseaudio.pc
 sed -i -e "s/'pulseaudio'/'libpulse'/g" meson.build
+
+# Disable warning treated as errors with sphinx
+sed -i -e "s/'-W',/#'-W',/g" doc/user/meson.build
 
 %build
 
@@ -99,6 +103,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Sun JAn 3 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.7.1.1-4
+- update to 1.0.0-alpha.7.1.1-4
+
 * Thu Dec 31 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.7.0.1-4
 - update to 1.0.0-alpha.7.0.1-4
 
