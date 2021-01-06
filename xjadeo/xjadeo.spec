@@ -1,16 +1,11 @@
-# Global variables for github repository
-%global commit0 e3b3d2a9c20f56662043e4645f651ea707f6553d
-%global gittag0 v0.8.9
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: Jack Video Monitor
 Name:    xjadeo
-Version: 0.8.9
+Version: 0.8.10
 Release: 4%{?dist}
 License: GPL
 URL:     http://xjadeo.sourceforge.net/
 
-Source0: https://github.com/x42/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/x42/xjadeo/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: xjadeo.desktop
 
 BuildRequires: gcc gcc-c++
@@ -38,7 +33,7 @@ Please refer to the documentation in the doc folder for any details,
 or visit http://xjadeo.sf.net/
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 %build
 
@@ -65,10 +60,11 @@ install -m 644 src/xjadeo/icons/xjadeoH128.png %{buildroot}/%{_datadir}/icons/xj
 install -m 755 -d %{buildroot}/%{_datadir}/applications/
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-# desktop file categories
-BASE="X-PlanetCCRMA X-Fedora Application AudioVideo"
-XTRA="X-MIDI X-Jack"
-mkdir -p %{buildroot}%{_datadir}/applications
+desktop-file-install                         \
+  --add-category="AudioVideo"                \
+  --delete-original                          \
+  --dir=%{buildroot}%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
 %doc AUTHORS ChangeLog INSTALL NEWS README xjadeo.lsm
@@ -80,6 +76,9 @@ mkdir -p %{buildroot}%{_datadir}/applications
 %{_datadir}/icons/*
 
 %changelog
+* Wed Jan 6 2021 Yann Collette <ycollette dot nospam at free.fr> 0.8.10-4
+- update to 0.8.10
+
 * Fri Oct 23 2020 Yann Collette <ycollette dot nospam at free.fr> 0.8.9-4
 - fix debug build
 
