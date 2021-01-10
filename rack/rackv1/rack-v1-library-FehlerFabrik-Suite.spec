@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 c40ba762f7bfb9b4ca49f4511f19c53f097270be
-%global gittag0 1.1.0
+%global commit0 e203a51480ad423517c521b2cd7c3c1407023852
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-FehlerFabrik-Suite
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: FehlerFabrik-Suite plugin for Rack
 License: GPLv2+
@@ -78,8 +78,8 @@ tar xvfz %{SOURCE1} --directory=FehlerFabrik-Suite_plugin --strip-components=1
 
 cp -n %{SOURCE2} FehlerFabrik-Suite_plugin/plugin.json
 
-sed -i -e "s/OBJECTS += /#OBJECTS += /g" FehlerFabrik-Suite_plugin/Makefile
-sed -i -e "s/DEPS += /#DEPS += /g" FehlerFabrik-Suite_plugin/Makefile
+# Remove build of libsamplerate
+sed -i -e "s/OBJECTS/#OBJECTS/g" FehlerFabrik-Suite_plugin/Makefile
 
 %build
 
@@ -95,5 +95,5 @@ cp -r FehlerFabrik-Suite_plugin/dist/FehlerFabrik-Suite/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile

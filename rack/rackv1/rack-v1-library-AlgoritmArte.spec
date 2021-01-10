@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 a0bfe70d81a75e94fd2c84ddcf5ab1627a738c99
-%global gittag0 1.3.0
+%global commit0 ec6cb20db7377f20fdd81f21988574e54b38b348
+%global gittag0 1.4.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-AlgoritmArte
-Version: 1.3.0
+Version: 1.4.0
 Release: 3%{?dist}
 Summary: AlgoritmArte plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r AlgoritmArte_plugin/dist/AlgoritmArte/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
 - initial specfile
