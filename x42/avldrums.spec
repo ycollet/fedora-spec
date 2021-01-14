@@ -3,24 +3,15 @@
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
-# git clone https://github.com/x42/avldrums.lv2.git
-# cd avldrums.lv2
-# git checkout v0.4.1
-# git submodule init
-# git submodule update
-# find . -name "*.git" -exec rm -rf {} \; -print
-# cd ..
-# tar cvfz avldrums.lv2.tar.gz avldrums.lv2
-
 Name:    lv2-avldrums-x42-plugin
-Version: 0.4.1.%{shortcommit0}
+Version: 0.4.2.%{shortcommit0}
 Release: 2%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
 License: GPLv2+
 URL:     https://github.com/x42/avldrums.lv2.git
 
 # ./avldrums-source.sh <tag>
-# ./avldrums-source.sh v0.4.1
+# ./avldrums-source.sh v0.4.2
 
 Source0: avldrums.lv2.tar.gz
 Source1: avldrums-source.sh
@@ -52,6 +43,9 @@ avldrums.lv2 is a simple Drum Sample Player Plugin, dedicated to the http://www.
 %{_libdir}/lv2/avldrums.lv2/*
 
 %changelog
+* Thu Jan 14 2021 Yann Collette <ycollette.nospam@free.fr> - 0.4.2-2
+- update to 0.4.2
+
 * Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.1-2
 - fix debug build
 
