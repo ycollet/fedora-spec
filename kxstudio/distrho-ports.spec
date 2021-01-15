@@ -1,7 +1,7 @@
-%global gittag0 2020-12-27
+%global gittag0 2021-01-15
 
 Name:    DISTRHO-Ports
-Version: 1.0.2
+Version: 1.0.3
 Release: 4%{?dist}
 Summary: A set of LV2 plugins
 License: GPLv2+
@@ -48,6 +48,9 @@ sed -i -e "/-Wl,--strip-all/d" meson.build
 %{_libdir}/vst3/*
 
 %changelog
+* Fri Jan 15 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-4
+- update to 2021-01-15 (1.0.3)
+
 * Wed Dec 30 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.2-4
 - update to 2020-12-27 (1.0.2)
 
