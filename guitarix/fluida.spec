@@ -1,5 +1,5 @@
 Name:    fluida
-Version: 0.5
+Version: 0.6
 Release: 1%{?dist}
 Summary: Fluidsynth as LV2 plugin 
 License: BSD
@@ -38,5 +38,8 @@ Fluidsynth as LV2 plugin.
 %{_libdir}/lv2/*
 
 %changelog
+* Fri Jan 15 2021 Yann Collette <ycollette.nospam@free.fr> - 0.6-1
+- update to 0.6-1
+
 * Sat Nov 28 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5-1
 - Initial spec file
