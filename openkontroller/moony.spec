@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    moony.lv2
-Version: 0.34.0
+Version: 0.36.0
 Release: 2%{?dist}
 Summary: Realtime Lua as programmable glue in LV2
 URL:     https://github.com/OpenMusicKontrollers/moony.lv2
@@ -46,6 +46,9 @@ VERBOSE=1 %ninja_install
 %{_libdir}/lv2/*
 
 %changelog
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.36.0-2
+- update to 0.36.0-2
+
 * Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.34.0-2
 - fix debug build
 
