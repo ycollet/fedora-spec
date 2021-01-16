@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    eteroj.lv2
-Version: 0.6.0
+Version: 0.8.0
 Release: 3%{?dist}
 Summary: OSC injection/ejection from/to UDP/TCP/Serial for LV2
 URL:     https://github.com/OpenMusicKontrollers/eteroj.lv2
@@ -44,6 +44,9 @@ DESTDIR=%{buildroot} ninja install
 %{_libdir}/lv2/*
 
 %changelog
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.8.0-3
+- update to 0.8.0-3
+
 * Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.0-3
 - fix debug build
 
