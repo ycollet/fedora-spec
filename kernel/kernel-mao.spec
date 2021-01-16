@@ -1,11 +1,11 @@
 # Kernel major version
 %define kmaj  5
 # Kernel minor version
-%define kmin  6
+%define kmin  10
 # Kernel patch version
-%define kpat  19
+%define kpat  4
 # RT patch version
-%define krt   12
+%define krt   22
 # package version
 %define krel  11
 
@@ -25,8 +25,6 @@ Source0: https://cdn.kernel.org/pub/linux/kernel/v%{kmaj}.x/linux-%{kver}.tar.gz
 Source1: kernel-config-%{kmaj}.%{kmin}
 
 Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kver}-rt%{krt}.patch.gz
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: openssl-devel, openssl
 BuildRequires: kmod, patch, bash, tar
@@ -70,9 +68,7 @@ This package provides real time kernel headers and makefiles sufficient to build
 against the %{version} kernel package.
 
 %prep
-%setup -q -n linux-%{kver}
-
-%patch0 -p1
+%autosetup -p1 -n linux-%{kver}
 
 cp %{SOURCE1} .config
 sed -i -e "s/EXTRAVERSION =/EXTRAVERSION = -rt%{krt}%{fcver}/g" Makefile
@@ -186,6 +182,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 5.10.4-rt22-11
+- update to 5.10.4-rt22-11 - vanilla RT kernel
+
 * Sun Aug 23 2020 Yann Collette <ycollette.nospam@free.fr> - 5.6.19-rt12-11
 - update to 5.6.19-rt12-11 - vanilla RT kernel
 
