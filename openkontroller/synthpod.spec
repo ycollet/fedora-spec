@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 c6cd3720b987f73ed5f412db9607433b3769f1db
+%global commit0 cb301d2b037cae7afe82559b0c5184e55da759d7
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    synthpod
-Version: 0.1.1
+Version: 0.1.2
 Release: 4%{?dist}
 Summary: Lightweight Nonlinear LV2 Plugin Container
 URL:     https://github.com/OpenMusicKontrollers/synthpod
@@ -37,7 +37,7 @@ BuildRequires: libevdev-devel
 Lightweight Nonlinear LV2 Plugin Container
 
 %prep
-%setup -qn %{name}-%{commit0}
+%autosetup -n %{name}-%{commit0}
 
 %build
 
@@ -60,6 +60,9 @@ VERBOSE=1 %ninja_install
 %{_datarootdir}/*
 
 %changelog
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.1.2-4
+- update to last master
+
 * Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.1-4
 - fix debug build
 
