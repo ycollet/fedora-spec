@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    midi_matrix.lv2
-Version: 0.26.0
+Version: 0.28.0
 Release: 4%{?dist}
 Summary: A LV2 Plugin Bundle
 License: GPLv2+
@@ -47,6 +47,9 @@ VERBOSE=1 %ninja_install
 %{_libdir}/lv2/*
 
 %changelog
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.28.0-4
+- update to 0.28.0-4 
+
 * Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.26.0-4
 - fix debug build 
 
