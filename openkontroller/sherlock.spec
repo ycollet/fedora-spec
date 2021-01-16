@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    sherlock.lv2
-Version: 0.24.0
+Version: 0.26.0
 Release: 3%{?dist}
 Summary: An investigative LV2 plugin bundle
 URL:     https://github.com/OpenMusicKontrollers/sherlock.lv2
@@ -46,6 +46,9 @@ VERBOSE=1 %ninja_install
 %{_libdir}/lv2/*
 
 %changelog
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.26.0-3
+- update to 0.26.0-3
+
 * Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.24.0-3
 - update to 0.24.0-3
 
