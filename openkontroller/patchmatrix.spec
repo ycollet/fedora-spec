@@ -4,7 +4,7 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    patchmatrix
-Version: 0.20.0
+Version: 0.22.0
 Release: 3%{?dist}
 Summary: A JACK patchbay in flow matrix style
 URL:     https://github.com/OpenMusicKontrollers/patchmatrix
@@ -48,11 +48,14 @@ VERBOSE=1 %ninja_install
 %{_datadir}/*
 
 %changelog
-* Mon OCt 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-3
+* Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.22.0-3
+- update to 0.22.0-2
+
+* Mon Oct 19 2020 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-3
 - fix debug build
 
 * Sat Jul 18 2020 Yann Collette <ycollette.nospam@free.fr> - 0.20.0-2
-- update to 0.26.0-2
+- update to 0.20.0-2
 
 * Wed Nov 13 2019 Yann Collette <ycollette.nospam@free.fr> - 0.16.0-2
 - update to 0.16.0-2
