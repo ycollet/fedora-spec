@@ -1,5 +1,5 @@
 Name:    zplugins
-Version: 0.1.7
+Version: 0.2.1
 Release: 1%{?dist}
 Summary: A collection of audio DSP LV2 plugins
 License: GPLv2+
@@ -39,5 +39,8 @@ export CFLAGS="-fPIC $CFLAGS"
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Jan 17 2021 Yann Collette <ycollette.nospam@free.fr> - 0.2.1-1
+- update to 0.2.1-1
+
 * Tue Oct 27 2020 Yann Collette <ycollette.nospam@free.fr> - 0.1.7-1
 - Initial build
