@@ -8,6 +8,9 @@ import subprocess
 import glob
 import os
 
+path_to_library_git = 'library'
+path_to_spec_files = 'spec'
+
 # this script must be started a level before the 'library' rack repo
 # A directory 'spec' with a file 'template.spec' containing the tag SLUGNAME, VERSION, COMMITID and SOURCEURL must be created
 
@@ -18,11 +21,7 @@ def get_git_revision_hash(git_path):
     os.chdir(curr_path)
     return commit_id.rstrip()
 
-path_to_library_git = 'library'
-path_to_spec_files = 'spec'
-
-# we iterate through library/manifests/*.json and we generate spec/*.spec
-for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep + '*.json'):
+def proceed(json_file):
     # read json file
     # skip some files:
     if 'Core.json' in json_file:
@@ -86,3 +85,8 @@ for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep +
                     print(line.replace('JSONFILE', slug_name + '_plugin.json'), end='')
                 else:
                     print(line, end='')
+    
+if __name__ == "__main__":
+    # we iterate through library/manifests/*.json and we generate spec/*.spec
+    for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep + '*.json'):
+        proceed(json_file)
