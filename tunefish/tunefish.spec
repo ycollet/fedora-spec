@@ -1,10 +1,10 @@
 # Global variables for github repository
-%global commit0 a199cb0270b22b9f0361438fd257b66a02d8e8ce
+%global commit0 d56812e8d99d8ce2753deb6d631190c9a1223423
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    tunefish
-Version: 4.1.0.%{shortcommit0}
+Version: 4.2.0.%{shortcommit0}
 Release: 2%{?dist}
 Summary: Tunefish virtual analog synthesizer - additive wavetable-based synthesizer VST plugin (git version)
 License: GPLv3
@@ -56,6 +56,9 @@ install -m 644 ../../../../patches/tf4programs/* %{buildroot}/%{_libdir}/vst/tf4
 %{_libdir}/*
 
 %changelog
+* Sun Jan 17 2021 Yann Collette <ycollette.nospam@free.fr> - 4.2.0.d56812e8-2
+- update to 4.2.0-2
+
 * Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 4.1.0.a199cb02-2
 - fix debug build
 
