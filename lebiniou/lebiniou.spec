@@ -1,7 +1,7 @@
 %define _lto_cflags %{nil}
 
 Name:    lebiniou
-Version: 3.52.0
+Version: 3.53.0
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -74,6 +74,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Mon Jan 18 2021 Yann Collette <ycollette.nospam@free.fr> - 3.53-3
+- update to 3.53-3
+
 * Sun Jan 3 2021 Yann Collette <ycollette.nospam@free.fr> - 3.52-3
 - update to 3.52-3
 
