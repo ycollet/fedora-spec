@@ -3,9 +3,9 @@
 # Kernel minor version
 %define kmin  10
 # Kernel patch version
-%define kpat  4
+%define kpat  8
 # RT patch version
-%define krt   22
+%define krt   24
 # package version
 %define krel  11
 
@@ -35,8 +35,6 @@ BuildRequires: net-tools, hostname, bc, elfutils-devel
 BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
 BuildRequires: grub2-tools
 BuildRequires: sed, rsync
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Provides: kernel = %{version}
 Provides: kernel-rt-mao = %{version}
@@ -182,6 +180,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Tue Jan 19 2021 Yann Collette <ycollette.nospam@free.fr> - 5.10.8-rt24-11
+- update to 5.10.8-rt24-11 - vanilla RT kernel
+
 * Sat Jan 16 2021 Yann Collette <ycollette.nospam@free.fr> - 5.10.4-rt22-11
 - update to 5.10.4-rt22-11 - vanilla RT kernel
 

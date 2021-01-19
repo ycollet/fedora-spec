@@ -1,18 +1,20 @@
 Use build_config.sh from fedora kernel spec repo:
 
-$ wget https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.6.19.tar.gz
-$ wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.6/older/patch-5.6.19-rt12.patch.gz
-$ tar xvfz linux-5.6.19.tar.gz
-$ gunzip patch-5.6.19-rt12.patch.gz
-$ cd linux-5.6.19
-$ patch -p1 < ../patch-5.6.19-rt12.patch
+$ wget https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.8.tar.gz
+$ wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.6/older/patch-5.10.8-rt24.patch.gz
+$ tar xvfz linux-5.10.8.tar.gz
+$ gunzip patch-5.10.8-rt24.patch.gz
+$ cd linux-5.10.8
+$ patch -p1 < ../patch-5.10.8-rt24.patch
+
+Since some kernel, I bypassed this step and just build vanilla RT kernels.
 
 $ git clone https://src.fedoraproject.org/rpms/kernel.git
 $ cd kernel
 $ git switch f32
-$ ./build_config.sh kernel-5.6.19
+$ ./build_config.sh kernel-5.10.8
 
-Copy kernel-5.6.19-x86_64.config as '.config' in the linux kernel source directory.
+Copy kernel-5.10.8-x86_64.config as '.config' in the linux kernel source directory.
 
 $ make xconfig
 
@@ -23,7 +25,7 @@ Enable CONFIG_HZ_1000 (menu Processor type and features -> Timer frequency -> 10
 
 Save the configuration file.
 
-Copy back .config file into kernel-config-5.16.
+Copy back .config file into kernel-config-5.10.
 
 To clean-up the boot menu:
 
