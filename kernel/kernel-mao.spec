@@ -26,15 +26,41 @@ Source1: kernel-config-%{kmaj}.%{kmin}
 
 Patch0: https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/%{kmaj}.%{kmin}/older/patch-%{kver}-rt%{krt}.patch.gz
 
-BuildRequires: openssl-devel, openssl
-BuildRequires: kmod, patch, bash, tar
-BuildRequires: bzip2, xz, findutils, gzip, m4, perl-interpreter, perl-Carp, perl-devel, perl-generators, make, diffutils, gawk
+BuildRequires: openssl-devel
+BuildRequires: openssl
+BuildRequires: kmod
+BuildRequires: patch
+BuildRequires: bash
+BuildRequires: tar
+BuildRequires: bzip2
+BuildRequires: xz
+BuildRequires: findutils
+BuildRequires: gzip
+BuildRequires: m4
+BuildRequires: perl-interpreter
+BuildRequires: perl-Carp
+BuildRequires: perl-devel
+BuildRequires: perl-generators
+BuildRequires: make
+BuildRequires: diffutils
+BuildRequires: gawk
 BuildRequires: gcc
-BuildRequires: binutils, redhat-rpm-config, bison, flex
-BuildRequires: net-tools, hostname, bc, elfutils-devel
-BuildRequires: rpm-build, rpm, elfutils, elfutils-libelf-devel
+BuildRequires: binutils
+BuildRequires: redhat-rpm-config
+BuildRequires: bison
+BuildRequires: flex
+BuildRequires: net-tools
+BuildRequires: hostname
+BuildRequires: bc
+BuildRequires: elfutils-devel
+BuildRequires: rpm-build
+BuildRequires: rpm
+BuildRequires: elfutils
+BuildRequires: elfutils-libelf-devel
 BuildRequires: grub2-tools
-BuildRequires: sed, rsync
+BuildRequires: sed
+BuildRequires: rsync
+BuildRequires: dwarves
 
 Provides: kernel = %{version}
 Provides: kernel-rt-mao = %{version}
