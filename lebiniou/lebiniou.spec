@@ -1,5 +1,5 @@
 Name:    lebiniou
-Version: 3.53.1
+Version: 3.53.2
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -72,6 +72,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Wed Jan 20 2021 Yann Collette <ycollette.nospam@free.fr> - 3.53.2-3
+- update to 3.53.2-3
+
 * Wed Jan 20 2021 Yann Collette <ycollette.nospam@free.fr> - 3.53.1-3
 - update to 3.53.1-3
 
