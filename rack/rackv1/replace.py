@@ -25,11 +25,11 @@ def proceed(json_file):
     # read json file
     # skip some files:
     if 'Core.json' in json_file:
-        continue
+        return
     if 'VCV-Prototype.json' in json_file:
-        continue
+        return
     if 'settings.json' in json_file:
-        continue
+        return
     
     print('Reading %s json library file\n' % json_file)
     
@@ -37,13 +37,13 @@ def proceed(json_file):
         conf_rack = json.load(fjson)
         if 'license' in conf_rack and conf_rack['license'] == 'proprietary':
             print('Proprietary license\n')
-            continue
+            return
         if 'license' in conf_rack and conf_rack['license'] == 'Proprietary':
             print('Proprietary license\n')
-            continue
+            return
         if 'license' in conf_rack and conf_rack['license'] == 'PROPRIETARY':
             print('Proprietary license\n')
-            continue
+            return
         
         slug_name = conf_rack['slug']
         version   = conf_rack['version']
@@ -55,7 +55,7 @@ def proceed(json_file):
         
         if not os.path.exists(path_to_library_git + os.sep + 'repos' + os.sep + slug_name):
             print('repos slug_name doesn\'t exists\n')
-            continue
+            return
         
         commit_id = get_git_revision_hash(path_to_library_git + os.sep + 'repos' + os.sep + slug_name)
 
@@ -87,6 +87,9 @@ def proceed(json_file):
                     print(line, end='')
     
 if __name__ == "__main__":
-    # we iterate through library/manifests/*.json and we generate spec/*.spec
-    for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep + '*.json'):
-        proceed(json_file)
+    if len(sys.argv) != 1:
+        proceed(path_to_library_git + os.sep + 'manifests' + os.sep + sys.argv[1] + '.json')
+    else:
+        # we iterate through library/manifests/*.json and we generate spec/*.spec
+        for json_file in glob.glob(path_to_library_git + os.sep + 'manifests' + os.sep + '*.json'):
+            proceed(json_file)
