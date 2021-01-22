@@ -1,271 +1,146 @@
-VERSION = 0.6.1		./dBiz/Makefile						done
-VERSION = 0.6.12	./AS/Makefile						done
-VERSION = 0.6.0		./Sculpt-O-Sound/Makefile				done
-VERSION = 0.6.2		./Alikins-rack-plugins/Makefile				done
-VERSION = 0.6.2		./Formula/Makefile					done
-VERSION = 0.6.21	./LFSR/Makefile						done
-VERSION = 0.6.8		./cf/Makefile						done
-VERSION = 0.6.3		./modular80/Makefile					done
-VERSION = 0.6.3		./DHE-Modules/Makefile					done
-VERSION = 0.6.0		./qwelk/Makefile					done
-VERSION = 0.6.0dev	./vcvrack-rtlsdr/Makefile				done
-VERSION = 0.6.3		./huaba/Makefile					done
-VERSION = 0.6.0		./LOGinstruments/Makefile				done
-VERSION = 0.6.4		./CharredDesert/Makefile				done
-VERSION = 0.6.1		./SerialRacker/Makefile					done
-VERSION = 0.6.3.1	./AmalgamatedHarmonics/Makefile				done
-VERSION = 0.6.0		./NLNRI_VCVRackPlugins/Makefile				done
-VERSION = 0.6.2		./SynthKit/Makefile					done
-VERSION = 0.6.3		./Strums_Mental_VCV_Modules/Makefile			done
-VERSION = 0.6.0		./Beckstrom_Research_Rack/Makefile			done
-VERSION = 0.6.4		./trowaSoft-VCV/Makefile				done
-VERSION = 0.6.0		./VCVRack-Simple/Makefile				done
-VERSION = 0.6.0		./southpole-vcvrack/Makefile				done
-VERSION = 0.6.1		./vcv-karatesnoopy/Makefile				done
-VERSION = 0.6.0		./ESeries/Makefile					done
-VERSION = 0.6.4		./computerscare-vcv-modules/Makefile			done
-VERSION = 0.6.1		./vcvmods/Makefile					done
-VERSION = 0.6.0		./Befaco/Makefile					done
-VERSION = 0.6.10	./ImpromptuModular/Makefile				done
-VERSION = 0.6.10	./BogaudioModules/Makefile				done
-VERSION = 0.6.10	./SquinkyVCV/Makefile					done
-VERSION = 0.6.2		./RackPlugins/Makefile					done
-VERSION = 0.6.0		./vcv-gratrix/Makefile					done
-VERSION = 0.6.1		./21kHz-rack-plugins/Makefile				done
-VERSION = 0.6.2		./BaconPlugs/Makefile					done
-VERSION = 0.6.0		./Torpedo/Makefile					done
-VERSION = 0.6.4		./Geodesics/Makefile					done
-VERSION = 0.6.8		./SubmarineFree/Makefile				done
-VERSION = 0.6.4		./DrumKit/Makefile					done
-VERSION = 0.5.0		./CastleRocktronics/Makefile				KO (0.5.0)
-VERSION = 0.6.3		./JW-Modules/Makefile					done
-VERSION = 0.6.21	./Bidoo/Makefile					done
-VERSION = 0.6.2		./SubmarineUtility/Makefile				done
-VERSION = 0.6.0		./aP-Modules/Makefile					done
-VERSION = 0.6.9		./Koralfx-Modules/Makefile				done
-VERSION = 0.6.1 	./vcv-link/Makefile					KO (Ableton link)
-VERSION = 0.6.0		./PvC/Makefile						done
-VERSION = 0.6.1		./submarine-prototype-vcv/Makefile			done
-VERSION = 0.6.0		./hetrickcv/Makefile					done
-VERSION = 0.6.0		./Nohmad/Makefile					done
-VERSION = 0.6.1		./NauModular/Makefile					done
-VERSION = 0.6.0		./MrLumps/Makefile					done
-VERSION = 0.6.0		./BBI/Makefile						done
-VERSION = 0.6.1		./RJModules/Makefile					done
-VERSION = 0.6.2		./unless_modules/Makefile				done
-VERSION = 0.6.3		./VCV-Rack-Plugins/Makefile				done
-VERSION = 0.6.4		./PG-Instruments/Makefile				done
-VERSION = 0.6.0		./stochasm/Makefile					done
-VERSION = 0.6.0		./vcv_luckyxxl/Makefile					done
-VERSION = 0.6.3		./AudibleInstruments/Makefile				done
-VERSION = 0.6.6		./ValleyRackFree/Makefile				done
-VERSION = 0.6.3		./ML_modules/Makefile					done
-VERSION = 0.6.7		./FrozenWasteland/Makefile				KO
-VERSION = 0.6.0		./VCVMicroTools/Makefile				done
-VERSION = 0.6.1		./RODENTMODULES/Makefile				done
-VERSION = 0.6.4		./LRTRack/Makefile					done
-VERSION = 0.6.6		./VCV_moDllz/Makefile					done
-VERSION = 0.6.2		./Fundamental/Makefile					done
-VERSION = 0.6.0		./arjo_modules/Makefile					done
-VERSION = 0.6.4		./Ohmer-Modules/Makefile				done
-VERSION = 0.6.2		./Erratic/Makefile					done
-VERSION = 0.6.0		./ArableInstruments/Makefile				done
-VERSION = 0.6.2		./sonusmodular/Makefile					done
-VERSION = 0.6.1		./BokontepByteBeatMachine/Makefile			done
-VERSION = 0.6.4		./TriggerFish-VCV/Makefile				done
-VERSION = 0.6.1         ./HolonicSystems-Free/Makefile				done
-VERSION = 0.6.2         ./ModularFungi/Makefile					done
-VERSION = 0.6.2         ./mtsch-plugins/Makefile				done
-VERSION = 0.6.1         ./NocturnalEncoder/Makefile				done
-VERSION = 0.6.2         ./noobhour/Makefile					done
-VERSION = 0.6.0         ./Southpole-parasites/Makefile				done
-VERSION = 0.6.5         ./rcm/Makefile						done
-VERSION = 0.6.0.2       ./STS/Makefile						done
-VERSION = 0.6.0		./ArableInstruments/Makefile (ParableInstruments)	KO
-VERSION = 0.6.2 	./QuantalAudio/Makefile	     				done
-VERSION = 0.6.9 	./rcm/Makefile						done
-VERSION = 0.6.12 	./AS/Makefile	     					done
-VERSION = 0.6.3 	./Bark/Makefile	     					done
-VERSION = 0.6.1 	./LabSeven/Makefile   					done
-VERSION = 0.6.6 	./SkJack/Makefile     					done
-VERSION = 0.6.2 	./Skylights/Makefile   					done
-VERSION = 0.6.3 	./Edge/Makefile   					done
-VERSION = 0.6.0 	./MicMusic/Makefile   					done
-VERSION = 0.6.3 	./Quadraphonics/Makefile				done
-VERSION = 0.6.3		./UnforgettableLuncheon/Makefile			done
-VERSION = 0.6.1		./8Mode/Makefile					done
-VERSION = 0.6.0		./ExpertSleepers-Encoders/Makefile			done
-VERSION = 0.6.2		./WhatTheRack/Makefile					done
-VERSION = 0.6.0		./Via-for-Rack/Makefile					done
-VERSION = 0.6.2		./sb-StochKit/Makefile					done
-VERSION = 0.6.4		./CatroModulo/Makefile					done
-VERSION = 0.6.4		./ZZC/Makefile						done
-VERSION = 0.6.2		./Circlefade/Makefile					done
-VERSION = 0.6.0		./CountModula/Makefile					done
-VERSION = 0.6.15	./SquinkyLabs-Plug1/Makefile				done
-
-KO prefixed files does not build ...
-
-01 - Fundamental
-02 - Befaco
-03 - ESeries
-04 - AudibleInstruments
-05 - Alikins-rack-plugins
-06 - AmalgamatedHarmonics
-07 - BaconPlugs
-08 - Beckstrom_Research_Rack
-09 - BogaudioModules
-10 - computerscare-vcv-modules
-11 - dBiz
-12 - DHE-Modules
-13 - Erratic
-14 - LFSR
-15 - LRTRack
-16 - SerialRacker
-17 - SquinkyVCV
-18 - SubmarineFree
-19 - SubmarineUtility
-20 - trowaSoft-VCV
-21 - VCV_moDllz
-22 - vcvmods
-23 - VCV-Rack-Plugins
-24 - vcvrack-rtlsdr
-25 - ArableInstruments
-26 - AS
-27 - SculptOSound
-28 - Formula
-29 - cf
-30 - modular80
-31 - qwelk
-32 - huaba
-33 - LOGinstruments
-34 - CharredDesert
-35 - NLNRI
-36 - SynthKit
-37 - StrumsMental
-38 - VCVRackSimple
-39 - SouthPole
-40 - vcv-karatesnoopy
-41 - ImpromptuModular
-42 - RackPlugins
-43 - vcv-gratix
-44 - 21KhzRack
-45 - Torpedo
-46 - Geodesics
-47 - DrumKit
-KO - 48 - CasteRocktronic
-49 - JW-Modules
-50 - Bidoo
-51 - aP-Modules
-52 - KoralFX
-KO - 53 - vcv-link
-54 - PvC
-55 - SubmarineProto
-56 - hetrickcv
-57 - Nohmad
-58 - NauModular
-59 - MrLumps
-60 - BBI
-61 - RJModules
-62 - unless_modules
-63 - PG-Instruments
-64 - stochasm
-65 - vcv_luckyxxl
-66 - ValleyRackFree
-67 - ML_Modules
-KO - 68 - FrozenWasteland
-69 - VCVMicroTools
-70 - RodentModules
-71 - arjo_modules
-72 - Ohmer-Modules
-73 - sonusmodular
-74 - Bokontep
-75 - TriggerFish
-76 - HolonicSystems-Free
-77 - ModularFungi
-78 - mtsch-plugins
-79 - NocturnalEncoder
-80 - noobhour
-81 - Southpole-parasites
-82 - rcm
-83 - STS
-KO - 84 - ParableInstruments
-85 - QuantalAudio
-86 - EH_modules
-87 - rcm
-88 - AS
-89 - Bark
-90 - LabSeven
-91 - SkJack
-92 - Skylights
-93 - Edge
-94 - MicMusic
-95 - Quadraphonics
-96 - UnforgettableLuncheon
-97 - 8Mode
-98 - ExpertSleepers-Encoders
-99 - WhatTheRack
-100 - Via-for-Rack
-101 - sb-StockKit
-102 - CatroModulo
-103 - ZZC
-104 - Circlefade
-105 - CountModula
-106 - SquinkyLabs-Plug1
-
-* Download sources:
-
-** Sources to be download manually:
-
-rack_04_audibleinstruments.spec:Source1: AudibleInstruments.tar.gz
-rack_25_ArableInstruments.spec:Source1: ArableInstruments.tar.gz
-rack_30_modular80.spec:Source1: modular80.tar.gz
-rack_34_CharredDesert.spec:Source1: CharredDesert.tar.gz
-rack_36_SynthKit.spec:Source1: SynthKit.tar.gz
-rack_39_SouthPole.spec:Source1: southpole-vcvrack.tar.gz
-rack_47_DrumKit.spec:Source1: DrumKit.tar.gz
-rack_53_vcv-link.spec:Source1: vcv-link.tar.gz
-rack_62_unless_modules.spec:Source1: unless_modules.tar.gz
-rack_73_sonusmodular.spec:Source1: sonusmodular.tar.gz
-rack_84_ArableInstruments.spec:Source1: ArableInstruments.tar.gz
-rack_100_Via-for-Rack.spec:Source1: Via-for-Rack.tar.gz
-
-** All the others can be downloaded with spectool -g
-
-for Ext in 01 02 03 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 26 27 28 29 31 32 33 35 37 38 40 41 42 43 44 45 46 48 49 50 51 52 54 55 56 57 58 59 60 61 63 64 65 66 67 68 69 70 71 72 74 75 76 77 78 79 80 81 82 83 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 102 103 104 105 106
-do
-  Files=`ls rack_$Ext*.spec`
-  echo "Building $Files"
-  spectool -g $Files
-done
-
-* Building all the spec files:
-
-** Remove all files from ~/rpmbuild/SRPMS
-
-rm ~/rpmbuild/SRPMS/*
-
-for Ext in 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 49 50 51 52 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106
-do
-  Files=`ls rack_$Ext*.spec`
-  echo "Building $Files"
-  rpmbuild -ba $Files
-done
-
-** Upload srpms packages to copr:
-
-cd ~/rpmbuild/SRPMS
-for Files in *.src.rpm
-do
-  echo "Uploading $Files"
-  copr-cli build linuxmao $Files
-done
-
-Todo:
-https://github.com/Aepelzen/AepelzensModules
-https://github.com/NikolajAndersson/RackPlugins
-https://github.com/hdavid/VCVRack-Holon.ist
-https://github.com/JerrySievert/FXKit
-
-rack-squinkyVCV-0.6.5b-2.fc30.x86_64 and rack-squinkylabs-plug1-0.6.15-2.fc30.x86_64 the same ?
-
+rack-v1-library-21kHz.spec					OK
+rack-v1-library-23volts.spec					OK
+rack-v1-library-8Mode.spec					FAIL (BUILD)
+rack-v1-library-AaronStatic.spec				OK
+rack-v1-library-Ahornberg.spec					FAIL (URL - wrong commit)
+rack-v1-library-Alikins.spec					OK
+rack-v1-library-alto777_LFSR.spec				OK
+rack-v1-library-AmalgamatedHarmonics.spec			OK
+rack-v1-library-AnimatedCircuits.spec				OK
+rack-v1-library-aP-Modules.spec					FAIL (BUILD)
+rack-v1-library-ArableInstruments.spec				OK
+rack-v1-library-AriaSalvatrice.spec				OK
+rack-v1-library-aridacity.spec					OK
+rack-v1-library-arjo_modules.spec				FAIL (BUILD)
+rack-v1-library-AS.spec						OK
+rack-v1-library-AudibleInstruments.spec				OK
+rack-v1-library-AuntyLangtonsFree.spec				OK
+rack-v1-library-BaconMusic.spec					FAIL (BUILD)
+rack-v1-library-Bark.spec					OK
+rack-v1-library-BeckstromResearch.spec				FAIL (BUILD)
+rack-v1-library-Befaco.spec					OK
+rack-v1-library-Bidoo.spec					OK
+rack-v1-library-Bogaudio.spec					OK
+rack-v1-library-BOKONTEPByteBeatMachine.spec			FAIL (BUILD)
+rack-v1-library-CatroBlanco.spec				OK
+rack-v1-library-CatroModulo.spec				OK
+rack-v1-library-cf.spec						OK
+rack-v1-library-CharredDesert.spec				FAIL (BUILD)
+rack-v1-library-Chiptuner.spec					OK
+rack-v1-library-ChordController.spec				OK
+rack-v1-library-ChortlingHamsterModules.spec			OK
+rack-v1-library-Circlefade.spec					OK
+rack-v1-library-computerscare.spec				OK
+rack-v1-library-com-soundchasing-stochasm.spec			FAIL (BUILD)
+rack-v1-library-CountModula.spec				OK
+rack-v1-library-CYC.spec					OK
+rack-v1-library-dBiz.spec					OK
+rack-v1-library-DHE-Modules.spec				OK
+rack-v1-library-DrumKit.spec					OK
+rack-v1-library-Edge.spec					OK
+rack-v1-library-EH_modules.spec					FAIL (BUILD)
+rack-v1-library-ErraticInstruments.spec				FAIL (BUILD)
+rack-v1-library-ESeries.spec					OK
+rack-v1-library-ExpertSleepers-Encoders.spec			OK
+rack-v1-library-FrankBuss.spec					OK
+rack-v1-library-FrozenWasteland.spec				OK 
+rack-v1-library-Geodesics.spec					OK
+rack-v1-library-GlueTheGiant.spec				OK
+rack-v1-library-GoodSheperd.spec				OK
+rack-v1-library-Gratrix.spec					FAIL (BUILD)
+rack-v1-library-HamptonHarmonics.spec				OK
+rack-v1-library-HetrickCV.spec					FAIL (BUILD)
+rack-v1-library-HolonicSystems-Free.spec			OK
+rack-v1-library-huaba.spec					OK
+rack-v1-library-ILovePerlin.spec				OK
+rack-v1-library-ImpromptuModular.spec				OK
+rack-v1-library-JE.spec						OK
+rack-v1-library-JW-Modules.spec					OK
+rack-v1-library-KarateSnoopy.spec				OK
+rack-v1-library-kocmoc.spec					OK
+rack-v1-library-Koralfx-Modules.spec				OK
+rack-v1-library-Kosmodules-Free.spec				OK
+rack-v1-library-LabSeven.spec					OK
+rack-v1-library-LifeFormModular.spec				OK
+rack-v1-library-LittleUtils.spec				OK
+rack-v1-library-LOGinstruments.spec				OK
+rack-v1-library-LomasModules.spec				OK
+rack-v1-library-luckyxxl.spec					OK
+rack-v1-library-mental.spec					OK
+rack-v1-library-MicMusic.spec					OK
+rack-v1-library-MindMeldModular.spec				OK
+rack-v1-library-ML_modules.spec					OK
+rack-v1-library-MockbaModular.spec				OK
+rack-v1-library-moDllz.spec					OK
+rack-v1-library-modular80.spec					OK
+rack-v1-library-ModularFungi.spec				OK
+rack-v1-library-Mog.spec					OK
+rack-v1-library-MosquitoLabs.spec				OK
+rack-v1-library-MrLumps.spec					FAIL (BUILD)
+rack-v1-library-mscHack.spec					OK
+rack-v1-library-MSM.spec					OK
+rack-v1-library-mtsch-plugins.spec				FAIL (BUILD)
+rack-v1-library-MyLittleTools.spec				OK
+rack-v1-library-NauModular.spec					FAIL (BUILD)
+rack-v1-library-NEXSwitches.spec				OK
+rack-v1-library-NocturnalEncoder.spec				FAIL (BUILD)
+rack-v1-library-Nohmad.spec					FAIL (BUILD)
+rack-v1-library-NonlinearCircuits.spec				OK
+rack-v1-library-NonLinearInstruments.spec			FAIL (BUILD)
+rack-v1-library-noobhour.spec					OK
+rack-v1-library-Nozoid.spec					OK
+rack-v1-library-Ohmer.spec					OK
+rack-v1-library-OrangeLine.spec					OK
+rack-v1-library-ParableInstruments.spec				OK
+rack-v1-library-PdArray.spec					OK
+rack-v1-library-pfzzz.spec					OK
+rack-v1-library-PG-Instruments.spec				FAIL (BUILD)
+rack-v1-library-Prism.spec					OK
+rack-v1-library-PS-PurrSoftware.spec				OK
+rack-v1-library-PvC.spec					FAIL (BUILD)
+rack-v1-library-Quadraphonics.spec				FAIL (BUILD)
+rack-v1-library-QuantalAudio.spec				OK
+rack-v1-library-Qwelk.spec					FAIL (BUILD)
+rack-v1-library-RacketScience.spec				OK
+rack-v1-library-rcm.spec					OK
+rack-v1-library-repelzen.spec					OK
+rack-v1-library-ReTunesFree.spec				OK
+rack-v1-library-RJModules.spec					OK
+rack-v1-library-RODENTMODULES.spec				FAIL (BUILD)
+rack-v1-library-SA-Seasons.spec					OK
+rack-v1-library-sb-StochKit.spec				OK
+rack-v1-library-scanner-darkly-collection-one.spec		OK
+rack-v1-library-Sckitam.spec					OK
+rack-v1-library-Sculpt-O-Sound.spec				FAIL (BUILD)
+rack-v1-library-SerialRacker.spec				FAIL (BUILD)
+rack-v1-library-SignalFlux.spec					OK
+rack-v1-library-SkJack.spec					OK
+rack-v1-library-Skylights.spec					OK
+rack-v1-library-SLM.spec					OK
+rack-v1-library-s-ol.spec					FAIL (custom git server ...)
+rack-v1-library-SonusModular.spec				OK
+rack-v1-library-Southpole-parasites.spec			FAIL (submodules - samplerate) - check if flag wrt rack-v1-library-Southpole 
+rack-v1-library-Southpole.spec					OK
+rack-v1-library-squinkylabs-plug1.spec				OK
+rack-v1-library-Starling_Via.spec				FAIL (submodules)
+rack-v1-library-stocaudio.spec					FAIL (submodules - samplerate)
+rack-v1-library-Stoermelder-P1.spec				OK
+rack-v1-library-STS.spec					FAIL (URL - no more on github ?)
+rack-v1-library-SubmarineFree.spec				OK
+rack-v1-library-SubmarineUtility.spec				FAIL (submodules)
+rack-v1-library-SurgeRack.spec					FAIL (submodules)
+rack-v1-library-SynthKit.spec					FAIL (BUILD)
+rack-v1-library-TercerBrazo.spec				OK
+rack-v1-library-TheXOR.spec					OK
+rack-v1-library-TinyTricks.spec					OK
+rack-v1-library-TriggerFish-Elements.spec			OK
+rack-v1-library-trowaSoft.spec					OK
+rack-v1-library-UnforgettableLuncheon.spec			FAIL (BUILD)
+rack-v1-library-unless_modules.spec				OK
+rack-v1-library-Valley.spec					OK
+rack-v1-library-vitamin.spec					OK
+rack-v1-library-voxglitch.spec					OK
+rack-v1-library-WhatTheRack.spec				OK
+rack-v1-library-wiqid-anomalies.spec				OK
+rack-v1-library-WrongPeople.spec				FAIL (submodules)
+rack-v1-library-ZZC.spec					OK
