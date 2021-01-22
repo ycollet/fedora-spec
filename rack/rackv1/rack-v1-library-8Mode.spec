@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 1343400426ff41f5d767b420351520435a8dcc7a
-%global gittag0 0.6.1
+%global gittag0 1.0.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-8Mode
-Version: 0.6.1
+Version: 1.0.0
 Release: 3%{?dist}
 Summary: 8Mode plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r 8Mode_plugin/dist/8Mode/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/8Mod
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 0.6.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - initial specfile
