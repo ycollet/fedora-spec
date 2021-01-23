@@ -1,5 +1,5 @@
 Name:	 faust
-Version: 2.27.2
+Version: 2.30.5
 Release: 23%{?dist}
 Summary: Compiled language for real-time audio signal processing
 # Examples are BSD
@@ -7,7 +7,7 @@ Summary: Compiled language for real-time audio signal processing
 License: GPLv2+ and BSD
 URL:     http://faust.grame.fr
 
-# To get source from 2.27.2 tag: ./faust-source.sh 2.27.2
+# To get source from 2.30.5 tag: ./faust-source.sh 2.30.5
 
 Source0: faust.tar.gz
 Source1: faust-source.sh
@@ -253,6 +253,9 @@ mv %{buildroot}/%{_bindir}/usage.sh %{buildroot}/%{_datadir}/faust/
 %{_datadir}/faust/*.lib
 
 %changelog
+* Sat Jan 23 2021 Yann Collette <ycollette.nospam@free.fr> - 2.30.5-23
+- update to 2.30.5-23
+
 * Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 2.27.2-23
 - fix debug build
 
