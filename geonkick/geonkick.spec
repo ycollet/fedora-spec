@@ -1,5 +1,5 @@
 Name:    geonkick
-Version: 2.6.1
+Version: 2.7.0
 Release: 2%{?dist}
 Summary: Drum Software Synthesizer
 URL:     https://gitlab.com/iurie-sw/geonkick
@@ -49,6 +49,9 @@ sed -i -e "s|\${CMAKE_INSTALL_PREFIX}/lib|\${CMAKE_INSTALL_PREFIX}/%{_lib}|g" pl
 %{_datadir}/*
 
 %changelog
+* Sun Jan 24 2021 Yann Collette <ycollette.nospam@free.fr> - 2.7.0-2
+- Update to 2.7.0-2
+
 * Tue Dec 29 2020 Yann Collette <ycollette.nospam@free.fr> - 2.6.1-2
 - Update to 2.6.1-2
 
