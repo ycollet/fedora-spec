@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 1ec545dd618e4ad066542f1deb3f2e78158c1b4a
-%global gittag0 1.1.0
+%global commit0 35a5bb145cd0fc3e96c469a231a9a0f63fa9b4de
+%global gittag0 1.1.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-RareBreeds_Orbits
-Version: 1.1.0
+Version: 1.1.1
 Release: 3%{?dist}
 Summary: RareBreeds_Orbits plugin for Rack
 License: GPLv2+
@@ -92,5 +92,5 @@ cp -r RareBreeds_Orbits_plugin/dist/RareBreeds_Orbits/* %{buildroot}%{_libexecdi
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.1-3
 - initial specfile
