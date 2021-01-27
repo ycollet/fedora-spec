@@ -1,11 +1,11 @@
 Name:    surge
-Version: 1.8.0
+Version: 1.8.1
 Release: 7%{?dist}
 Summary: A VST3 / LV2 synthetizer
 License: GPLv2+
 
 # To get the sources, use:
-# $ ./source-surge.sh 1.8.0
+# $ ./source-surge.sh 1.8.1
 
 URL:     https://github.com/surge-synthesizer/surge
 Source0: surge.tar.gz
@@ -98,6 +98,9 @@ rsync -rav .local/share/surge/* %{buildroot}/%{_datadir}/Surge/
 %{_libdir}/vst3/*
 
 %changelog
+* Wed Jan 27 2021 Yann Collette <ycollette.nospam@free.fr> - 1.8.1-7
+- update to 1.8.1-7
+
 * Sun Jan 17 2021 Yann Collette <ycollette.nospam@free.fr> - 1.8.0-7
 - update to 1.8.0-7
 
