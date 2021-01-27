@@ -30,6 +30,11 @@ $ yum install filename.rpm
 $ dnf install filename.rpm
 ```
 
+To mirror the COPR repository:
+$ mkdir -p rpm-copr/33
+$ cd rpm-copr/33
+$ dnf reposync --release=33 --repoid=copr:copr.fedorainfracloud.org:ycollet:linuxmao --destdir .  --downloadcomp
+
 To test the rebuild of the package using mock:
 ```
 $ mock -r /etc/mock/fedora-32-x86_64.cfg --rebuild polyphone-2.0.1-1.fc32.src.rpm
