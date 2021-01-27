@@ -17,7 +17,7 @@ BuildRequires: xcb-util-cursor-devel
 BuildRequires: libxkbcommon-x11-devel
 BuildRequires: rsync
 BuildRequires: git
-BuildRequires: python2
+BuildRequires: python3
 BuildRequires: cairo-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
@@ -52,10 +52,15 @@ VST3 version of %{name}
 
 sed -i -e "s/find_package/#find_package/g" cmake/versiontools.cmake
 
+# manage python
 sed -i -e "s/COMMAND python /COMMAND python2 /g" CMakeLists.txt
-for Files in `find . -name "*.py" -exec grep -l "bin/python" {} \;`
+for Files in `find . -name "*.py" -exec grep -l "bin/python$" {} \;`
 do
-  sed -i -e "s/env python$/env python2/g" $Files
+  sed -i -e "s/env python$/env python3/g" $Files
+done
+for Files in `find . -type f -executable -exec grep -l "env python$" {} \;`
+do
+  sed -i -e "s/env python$/env python3/g" $Files
 done
 
 %build
