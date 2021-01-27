@@ -1,11 +1,11 @@
 Name:    liquidsfz
-Version: 0.2.1
+Version: 0.2.3
 Release: 1%{?dist}
 License: BSD-2-Clause
 Summary: Sampler plugin and library for SFZ and Hydrogen instruments
 Url:     https://github.com/swesterfeld/liquidsfz
 
-Source0: https://github.com/swesterfeld/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 Requires: jack-audio-connection-kit
 
@@ -64,5 +64,8 @@ chrpath --delete %{buildroot}/%{_libdir}/lv2/liquidsfz.lv2/liquidsfz_lv2.so
 %{_libdir}/pkgconfig/liquidsfz.pc
 
 %changelog
+* Wed Jan 27 2021 Yann Collette <ycollette.nospam@free.fr> - 0.2.3-1
+- update to 0.2.3-1
+
 * Wed Oct 21 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.1-1
 - initial release of the spec file
