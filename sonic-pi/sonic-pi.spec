@@ -7,24 +7,20 @@
 %global __mangle_shebangs_exclude_from /vendor/
 %global __mangle_shebangs_exclude ruby
 
+%global _smp_build_ncpus 1
 %global debug_package %{nil}
 
 Name:    sonic-pi
-Version: 3.2.2
+Version: 3.3.0
 Release: 6%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
 
 Source0: https://github.com/samaaron/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source1: osmid.tar.gz
-Source2: sonic-pi-source.sh
-
-# Use sonic-pi-source.sh to get source files
 
 BuildRequires: gcc gcc-c++
 BuildRequires: qt5-qtbase-devel
-BuildRequires: qscintilla-qt5-devel
 BuildRequires: qwt-qt5-devel
 BuildRequires: qt5-linguist
 BuildRequires: supercollider-devel
@@ -35,6 +31,7 @@ BuildRequires: aubio-devel
 BuildRequires: boost-devel
 BuildRequires: libcurl-devel
 BuildRequires: openssl-devel
+BuildRequires: rtmidi-devel
 BuildRequires: erlang-erts
 BuildRequires: ruby
 BuildRequires: rubygem-rake
@@ -62,8 +59,8 @@ sonic ideas into reality.
 
 cd app/gui/qt
 
-sed -i -e "/add_subdirectory(external\/QScintilla-2.11.4)/d" CMakeLists.txt
-sed -i -e "s/QScintilla/qscintilla2-qt5/g" CMakeLists.txt
+#sed -i -e "/add_subdirectory(external\/QScintilla-2.11.4)/d" CMakeLists.txt
+#sed -i -e "s/QScintilla/qscintilla2-qt5/g" CMakeLists.txt
 sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\/..\";/return QString(\"\/usr\/share\/sonic-pi\");/g" mainwindow.cpp
 
 cd ../../..
@@ -71,38 +68,30 @@ cd ../../..
 sed -i -e "s/env python/env python3/g" app/server/ruby/vendor/ffi-1.11.3/ext/ffi_c/libffi/generate-darwin-source-and-headers.py
 
 # remove make clean
-sed -i -e "/make clean/d" app/server/ruby/bin/compile-extensions.rb
+#sed -i -e "/make clean/d" app/server/ruby/bin/compile-extensions.rb
+
+sed -i -e "s/erl -make//g" app/linux-prebuild.sh
 
 %build
 
-cd app/gui/qt
+cd app
 
-ruby ../../server/ruby/bin/compile-extensions.rb
-ruby ../../server/ruby/bin/i18n-tool.rb -t
-cp -f utils/ruby_help.tmpl utils/ruby_help.h
-ruby ../../server/ruby/bin/qt-doc.rb -o utils/ruby_help.h
-lrelease-qt5 SonicPi.pro
-
-cd ..
-mkdir build
-cd build
 %set_build_flags
-cmake -DCMAKE_BUILD_TYPE=RELEASE ../qt
-make
 
-#Build Erlang files
-cd ../../server/erlang
-erlc osc.erl
-erlc pi_server.erl
+./linux-prebuild.sh
+./linux-config.sh
+
+cd build
+cmake --build . --config Release
 
 %install
 mkdir -p %{buildroot}%{_bindir}/
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
 mkdir -p %{buildroot}%{_datadir}/%{name}/etc/
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp -ra app/gui/qt/theme/* %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
-cp app/gui/build/sonic-pi %{buildroot}%{_bindir}/%{name}
-cp -ra etc/*              %{buildroot}%{_datadir}/%{name}/etc/
+cp -ra app/gui/qt/theme/*    %{buildroot}%{_datadir}/%{name}/app/gui/qt/theme/
+cp app/build/gui/qt/sonic-pi %{buildroot}%{_bindir}/%{name}
+cp -ra etc/*                 %{buildroot}%{_datadir}/%{name}/etc/
 
 mkdir -p %{buildroot}%{_datadir}/pixmaps/
 cp app/gui/qt/images/icon-smaller.png %{buildroot}%{_datadir}/pixmaps/
@@ -111,8 +100,8 @@ mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 ln -s /usr/bin/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 ln -s /usr/bin/o2m %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 
-mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
-cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
+#mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
+#cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
 cp -ra  app/server/ruby/bin/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
@@ -158,9 +147,6 @@ ln -s %{_datadir}/%{name}/app/server/ruby/vendor/rugged-0.28.4.1/ext/rugged/rugg
 
 find %{buildroot}%{_datadir}/%{name}/etc/wavetables/ -name "AdventureKidWaveforms.txt" -exec chmod a-x {} \;
 
-# cleanup
-rm %{buildroot}%{_datadir}/%{name}/app/server/ruby/vendor/parslet/example/email_parser.rb
-
 cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
@@ -184,13 +170,16 @@ desktop-file-install --vendor '' \
         %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 %files
-%doc CHANGELOG.md  COMMUNITY.md  CONTRIBUTORS.md  HOW-TO-CONTRIBUTE.md  INSTALL.md  README.md  SYNTH_DESIGN.md  TESTING.md  TRANSLATION.md
+%doc CHANGELOG.md  COMMUNITY.md FAQ.md CONTRIBUTORS.md HOW-TO-CONTRIBUTE.md README.md SYNTH_DESIGN.md TESTING.md TRANSLATION.md TRANSLATION-WORKFLOW.md
 %license LICENSE.md
 %{_bindir}/sonic-pi
 %{_datadir}
 
 %changelog
-* Fri Apr 24  2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-6
+* Thu Jan 28 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.0-6
+- update to 3.3.0-6
+
+* Fri Apr 24 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-6
 - fix for Fedora a32
 
 * Mon Apr 6 2020 Yann Collette <ycollette.nospam@free.fr> 3.2.2-5
