@@ -12,7 +12,7 @@
 
 Name:    sonic-pi
 Version: 3.3.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -161,6 +161,14 @@ Categories=Application;AudioVideo;Audio;Development;IDE;Music;Education;
 X-AppInstall-Package=%{name}
 EOF
 
+# Cleanup
+
+find %{buildroot}/%{_datadir}/%{name}/app/server/ruby/vendor -name "*.o" \
+                                                             -o -name "*.c" -o -name "*.h" \
+                                                             -o -name "*.txt" -o -name "*.a" \
+							     -o -name "*.html" -o -name "*.text" \
+							     -o -name "\.?*" -o -name "*.md" -exec rm -rf {} \;
+
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
         --add-category=Midi \
@@ -176,6 +184,9 @@ desktop-file-install --vendor '' \
 %{_datadir}
 
 %changelog
+* Fri Jan 29 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.0-7
+- update to 3.3.0-7 - do some cleanup
+
 * Thu Jan 28 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.0-6
 - update to 3.3.0-6
 
