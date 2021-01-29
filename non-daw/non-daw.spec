@@ -1,20 +1,11 @@
-# Version: d958df0486c7397c243f5ac36bf4acbc461a1e50
-
 Name:    non-daw
-Version: 1.2.0
-Release: 10.gitd958df04%{?dist}
+Version: 1.3.0
+Release: 10%{?dist}
 Summary: A digital audio workstation for JACK
-
-Group:   Applications/Multimedia
 License: GPLv2+
 URL:     http://non.tuxfamily.org/
-Source0: non-20191215-gitd958df0486c7397c243f5ac36bf4acbc461a1e50.tar.bz2
-# sh non-snapshot.sh gitd958df0486c7397c243f5ac36bf4acbc461a1e50
-#Source1: non-snapshot.sh
-# notified upstream of the following along with incorrect FSF address headers
-#Patch2:  non-daw-0001-add-lib64-in-ladspa-search-path.patch
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0: https://git.tuxfamily.org/non/non.git/snapshot/non-daw-v%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: non-ntk-devel
@@ -37,14 +28,12 @@ Non-daw is a digital audio workstation for JACK
 
 %package -n non-mixer
 Summary: A digital audio mixer for JACK
-Group:   Applications/Multimedia
 
 %description -n non-mixer
 non-mixer is a powerful, reliable and fast modular Digital Audio Mixer
 
 %package -n non-session-manager
 Summary: A session manager for JACK
-Group:   Applications/Multimedia
 
 %description -n non-session-manager
 non-session-manager is an audio project session manager. It preserves
@@ -52,16 +41,13 @@ application state including JACK and MIDI connections between audio sessions.
 
 %package -n non-sequencer
 Summary: A MIDI sequencer for JACK
-Group:   Applications/Multimedia
 
 %description -n non-sequencer
 non-sequencer is a powerful, lightweight, real-time, pattern-based MIDI 
 sequencer
 
 %prep
-%setup -q -n non-20191215
-
-#%patch2 -p1
+%autosetup -n non-daw-v%{version}
 
 # For Fedora 29
 %if 0%{?fedora} >= 19
@@ -69,31 +55,19 @@ sequencer
 %endif
 
 %build
-CFLAGS="%{optflags}" CXXFLAGS="%{optflags} -std=c++11" ./waf configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-debug
+%set_build_flags
+CXXFLAGS="$CXXFLAGS -std=c++11" ./waf configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-debug
 ./waf -j4 -v 
 
 %install 
 ./waf install --destdir=%{buildroot} --docdir=%{buildroot}/%{_docdir}/
 for i in %{buildroot}%{_datadir}/applications/*.desktop; do
-    sed -i -e 's|\/usr\/bin\/||' $i
-    desktop-file-validate $i;
-done;
+  sed -i -e 's|\/usr\/bin\/||' $i
+  desktop-file-validate $i;
+done
+
 # correct permissions
 chmod 755 %{buildroot}%{_bindir}/*
-
-%post 
-update-desktop-database -q
-touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-
-%postun
-update-desktop-database -q
-if [ $1 -eq 0 ]; then
-  touch --no-create %{_datadir}/icons/hicolor >&/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
-fi
-
-%posttrans 
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %license COPYING
@@ -133,6 +107,9 @@ fi
 %{_datadir}/pixmaps/non-sequencer
 
 %changelog
+* Fri Jan 29 2021 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-10
+- update to 1.3.0-10
+
 * Sun Dec 15 2019 Yann Collette <ycollette.nospam@free.fr> - 1.2.0-10.gitd958df04
 - update for Fedora 29
 - update to d958df0486c7397c243f5ac36bf4acbc461a1e50
