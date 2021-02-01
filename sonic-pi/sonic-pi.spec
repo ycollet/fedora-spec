@@ -11,7 +11,7 @@
 %global debug_package %{nil}
 
 Name:    sonic-pi
-Version: 3.3.0
+Version: 3.3.1
 Release: 7%{?dist}
 Summary: A musical programming environment 
 License: MIT
@@ -68,9 +68,12 @@ cd ../../..
 sed -i -e "s/env python/env python3/g" app/server/ruby/vendor/ffi-1.11.3/ext/ffi_c/libffi/generate-darwin-source-and-headers.py
 
 # remove make clean
-#sed -i -e "/make clean/d" app/server/ruby/bin/compile-extensions.rb
-
+sed -i -e "/make clean/d" app/server/ruby/bin/compile-extensions.rb
 sed -i -e "s/erl -make//g" app/linux-prebuild.sh
+
+# remove aubio for prebuild
+sed -i -e "/aubio/d" app/linux-prebuild.sh
+sed -i -e "/aubio/d" app/external/linux_build_externals.sh
 
 %build
 
@@ -99,9 +102,6 @@ cp app/gui/qt/images/icon-smaller.png %{buildroot}%{_datadir}/pixmaps/
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 ln -s /usr/bin/m2o %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
 ln -s /usr/bin/o2m %{buildroot}%{_datadir}/%{name}/app/server/native/osmid/
-
-#mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/erlang/
-#cp -ra app/server/erlang/*.beam %{buildroot}%{_datadir}/%{name}/app/server/erlang/
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
 cp -ra  app/server/ruby/bin/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/bin/
@@ -169,6 +169,7 @@ find %{buildroot}/%{_datadir}/%{name}/app/server/ruby/vendor -name "*.o" \
 							     -o -name "*.html" -o -name "*.text" \
 							     -o -name "\.?*" -o -name "*.md" -exec rm -rf {} \;
 
+# Install desktop file
 desktop-file-install --vendor '' \
         --add-category=X-Sound \
         --add-category=Midi \
@@ -184,6 +185,9 @@ desktop-file-install --vendor '' \
 %{_datadir}
 
 %changelog
+* Mon Feb 1 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.1-7
+- update to 3.3.1-7
+
 * Fri Jan 29 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.0-7
 - update to 3.3.0-7 - do some cleanup
 
