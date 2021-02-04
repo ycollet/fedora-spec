@@ -1,7 +1,7 @@
 %global __python %{__python3}
 
 Name:    raysession
-Version: 0.10.0
+Version: 0.10.1
 Release: 1%{?dist}
 Summary: A JACK session manager
 
@@ -93,6 +93,9 @@ desktop-file-install                         \
 %{_sysconfdir}/xdg/raysession/client_templates/*
 
 %changelog
+* Thu Feb 4 2021 Yann Collette <ycollette.nospam@free.fr> - 0.10.1-1
+- update to 0.10.1-1
+
 * Tue Nov 10 2020 Yann Collette <ycollette.nospam@free.fr> - 0.10.0-1
 - update to 0.10.0-1
 
