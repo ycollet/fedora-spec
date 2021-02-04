@@ -13,7 +13,8 @@ timezone Europe/Paris
 
 auth --useshadow --passalgo=sha512
 # SELinux configuration
-selinux --enforcing
+#YC: pb when relabeling ...
+#selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
 # Clear the Master Boot Record
@@ -412,6 +413,8 @@ grub2-tools
 grub2-efi
 #shim
 #shim-unsigned
+shim-x64
+grub2-efi-x64-cdboot
 
 # save some space
 -mpage
