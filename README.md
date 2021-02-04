@@ -140,7 +140,7 @@ To test the ISO file:
 Install QEmu-KVM and the SDL interface.
 
 ```
-$ dnf install qemu-system-x86-core
+$ dnf install qemu-system-x86-core qemu-kvm
 $ dnf install qemu-ui-sdl qemu-audio-sdl
 ```
 
@@ -365,3 +365,26 @@ $ export PATH=<livecd-tools-dir>/tools:PATH
 
 $ livecd-creator --verbose --config=fedora-32-live-jam-xfce.ks --fslabel=Audinux --releasever 32
 ```
+
+Manage kernel-rt-mao in livecd-creator:
+In /usr/lib/python3.8/site-packages/imgcreate/live.py:
+* at the beginning of "def __is_default_kernel", add
+
+    if kernel.startswith(b"kernel-rt"):
+        return False
+
+    if kernel.startswith(b"kernel-core"):
+        return False
+
+* in def __get_image_stanzas(self, isodir):
+  remove
+              elif kernel.startswith("kernel-"):
+                long = "%s (%s)" % (self.product, kernel[7:])
+
+In /usr/lib/python3.8/site-packages/imgcreate/fs.py:
+In def resize2fs(fs, size=None, minimal=False, ops=''):
+
+	# COMMENT THIS PART
+        #if ret != 0:
+        #    raise ResizeError("fsck after resize returned an error (%d)!" %
+        #                      (ret,))
