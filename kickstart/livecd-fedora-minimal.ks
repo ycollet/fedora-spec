@@ -8,6 +8,7 @@ firewall --disabled
 part / --size 2048
 
 repo --name=development --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=rawhide&arch=$basearch
+repo --name="CoprLinuxMAO" --baseurl=https://copr-be.cloud.fedoraproject.org/results/ycollet/linuxmao/fedora-$releasever-$basearch/
 
 %packages
 @standard
