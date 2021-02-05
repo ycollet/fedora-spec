@@ -13,26 +13,29 @@ timezone Europe/Paris
 
 auth --useshadow --passalgo=sha512
 # SELinux configuration
-selinux --enforcing
+#YC: pb when relabeling ...
+#selinux --disabled
+selinux --permissive
+#selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
 # Clear the Master Boot Record
 zerombr
 clearpart --all --initlabel
-part / --size 8192 --fstype ext4
-services --disabled="sshd" --enabled="NetworkManager,zram-swap"
+part / --size 16384 --fstype ext4
+services --disabled="sshd" --enabled="NetworkManager"
 network --bootproto=dhcp --device=link --activate
 # Shutdown after installation
 shutdown
-rootpw --plaintext audinux
+rootpw --plaintext audinuxaudinux
 
 #enable threaded irqs
 bootloader --location=none --append="threadirqs nopti"
 
-repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/development/$releasever/Everything/$basearch/os/
-repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/development/$releasever/Everything/$basearch/os/
-# repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/release/testing/$releasever/$basearch/
-# repo --name=rpmfusion-free-update    --baseurl=http://download1.rpmfusion.org/free/fedora/release/$releasever/$basearch/
+repo --name=rpmfusion                --baseurl=http://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-non-free       --baseurl=http://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-update-testing --baseurl=http://download1.rpmfusion.org/free/fedora/updates/testing/$releasever/$basearch/
+repo --name=rpmfusion-free-update    --baseurl=http://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
 
 repo --name=fedora  --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
@@ -48,10 +51,9 @@ repo --name="CoprLinuxMAO" --baseurl=https://copr-be.cloud.fedoraproject.org/res
 @standard
 @core
 @fonts
-@input-methods
-@multimedia
 @hardware-support
 dnf
+anaconda-live
 
 # exclude input methods:
 -scim*
@@ -180,7 +182,7 @@ if [ -n "\$configdone" ]; then
 fi
 
 # add fedora user with no passwd
-action "Adding live user" useradd \$USERADDARGS -c "Live System User" audinux
+action "Adding live user" useradd \$USERADDARGS -m -c "Live System User" audinux
 passwd -d audinux > /dev/null
 usermod -aG wheel    audinux > /dev/null
 usermod -aG jackuser audinux > /dev/null
@@ -288,8 +290,8 @@ FOE
 if [ -n "\$xdriver" ]; then
    cat > /etc/X11/xorg.conf.d/00-xdriver.conf <<FOE
 Section "Device"
-	Identifier	"Videocard0"
-	Driver	"\$xdriver"
+    Identifier "Videocard0"
+    Driver "\$xdriver"
 EndSection
 FOE
 fi
@@ -387,6 +389,18 @@ fi
 
 %packages
 
+@admin-tools
+@input-methods
+@multimedia
+@networkmanager-submodules
+@printing
+@standard
+aajohan-comfortaa-fonts
+chkconfig
+glibc-all-langpacks
+gnome-keyring-pam
+initscripts
+
 # system packages
 
 # Explicitly specified here:
@@ -412,6 +426,8 @@ grub2-tools
 grub2-efi
 #shim
 #shim-unsigned
+shim-x64
+grub2-efi-x64-cdboot
 
 # save some space
 -mpage
@@ -430,8 +446,8 @@ grub2-efi
 -sane-backends
 
 # XFCE
-@xfce-desktop
 @xfce-apps
+@xfce-desktop
 @xfce-extra-plugins
 @xfce-media
 @xfce-office
@@ -458,12 +474,8 @@ chkconfig
 -xfce4-sensors-plugin
 
 # drop some system-config things
-#-system-config-boot
-#-system-config-network
 -system-config-rootpassword
-#-system-config-services
 -policycoreutils-gui
-#-libcrypt-nss
 python3
 
 # alsa
@@ -478,7 +490,6 @@ alsa-plugins-samplerate
 alsa-plugins-upmix
 alsa-plugins-vdownmix
 a2jmidid
-#YC aj-snapshot
 
 # jack 
 jack-audio-connection-kit
@@ -536,7 +547,7 @@ ardour5
 ardour5-audiobackend-alsa
 ardour5-audiobackend-jack
 ardour5-audiobackend-dummy
-#YC seq24
+seq24
 qtractor
 non-daw
 non-mixer
@@ -574,10 +585,7 @@ ladspa-wasp-plugins
 
 # lv2 plugins
 lv2
-#YC lv2-avw-plugins
-#YC pyliblo missing lv2-fil-plugins
 lv2-invada-plugins
-#YC lv2-kn0ck0ut
 lv2-ll-plugins
 swh-lv2
 lv2-vocoder-plugins
@@ -588,13 +596,11 @@ lv2-c++-tools
 lv2-samplv1
 lv2-synthv1
 lv2-drumkv1
-#YC lv2-triceratops
 lv2-newtonator
 lv2-x42-plugins
-#YC lv2-fomp-plugins
 lv2-sorcer
 lv2-fabla
-#FC33 lv2-artyfx-plugins
+#YC lv2-artyfx-plugins
 lv2-EQ10Q-plugins
 lv2-linuxsampler-plugins
 lv2-mdaEPiano
@@ -611,9 +617,14 @@ tap-lv2
 mda-lv2
 rkrlv2
 ams-lv2
+#YC lv2-avw-plugins
+#YC pyliblo missing lv2-fil-plugins
+#YC lv2-kn0ck0ut
+#YC lv2-triceratops
+#YC lv2-fomp-plugins
 
 # dssi
-#FC33 nekobee-dssi
+#YC: nekobee-dssi
 whysynth-dssi
 xsynth-dssi
 hexter-dssi
@@ -638,7 +649,7 @@ mscore
 lilypond
 
 # audio utilities
-#FC33 jamin
+jamin
 lash
 jack_capture
 jaaa
@@ -651,7 +662,8 @@ japa
 radium-compressor
 #YC solfege
 linuxsampler
-qsampler
+#libgig
+#qsampler
 projectM-jack
 projectM-pulseaudio
 
@@ -667,11 +679,11 @@ rakarrack
 
 #language
 chuck
-#FC33 miniaudicle
+miniaudicle
 supercollider
 supercollider-sc3-plugins
 supercollider-vim
-#FC33 sonic-pi
+sonic-pi
 lmms-mao
 faust
 faust-tools
@@ -865,8 +877,6 @@ cp /usr/share/applications/liveinst.desktop /home/audinux/Desktop
 # and mark it as executable (new Xfce security feature)
 chmod +x /home/audinux/Desktop/liveinst.desktop
 
-# no updater applet in live environment
-rm -f /etc/xdg/autostart/org.mageia.dnfdragora-updater.desktop
 # this goes at the end after all other changes. 
 chown -R audinux:audinux /home/audinux
 restorecon -R /home/audinux
