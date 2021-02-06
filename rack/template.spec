@@ -42,6 +42,7 @@ BuildRequires: jq
 
 %description
 SLUGNAME plugin for Rack.
+DESCRIPTION
 
 %prep
 %autosetup -n Rack

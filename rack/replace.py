@@ -45,9 +45,12 @@ def proceed(json_file):
             print('Proprietary license\n')
             return
         
-        slug_name = conf_rack['slug']
-        version   = conf_rack['version']
-        sourceurl = conf_rack['sourceUrl'].replace('.git','') # remove the trailing '.git'
+        slug_name   = conf_rack['slug']
+        version     = conf_rack['version']
+        sourceurl   = conf_rack['sourceUrl'].replace('.git','') # remove the trailing '.git'
+        description = ''
+        if 'modules' in conf_rack and 'description' in conf_rack['modules'][0]:
+            description = conf_rack['modules'][0]['description']
 
         if not os.path.exists(path_to_spec_files + os.sep + 'template.spec'):
             print('template file not found in %s\n' % path_to_spec_files + os.sep)
@@ -59,10 +62,11 @@ def proceed(json_file):
         
         commit_id = get_git_revision_hash(path_to_library_git + os.sep + 'repos' + os.sep + slug_name)
 
-        print('SLUGNAME  -> %s\n' % slug_name)
-        print('VERSION   -> %s\n' % version)
-        print('SOURCEURL -> %s\n' % sourceurl)
-        print('COMMITID  -> %s\n' % commit_id)
+        print('SLUGNAME    -> %s\n' % slug_name)
+        print('VERSION     -> %s\n' % version)
+        print('SOURCEURL   -> %s\n' % sourceurl)
+        print('COMMITID    -> %s\n' % commit_id)
+        print('DESCRIPTION -> %s\n' % description)
         
         spec_filename = 'rack-v1-library-' + slug_name + '.spec'
         
@@ -81,6 +85,8 @@ def proceed(json_file):
                     print(line.replace('COMMITID',  commit_id), end='')
                 elif 'SOURCEURL' in line:
                     print(line.replace('SOURCEURL', sourceurl), end='')
+                elif 'DESCRIPTION' in line:
+                    print(line.replace('DESCRIPTION', description), end='')
                 elif 'JSONFILE' in line:
                     print(line.replace('JSONFILE', slug_name + '_plugin.json'), end='')
                 else:
