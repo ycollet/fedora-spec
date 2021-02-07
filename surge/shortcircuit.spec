@@ -14,13 +14,16 @@ Source0: shortcircuit.tar.gz
 Source1: source-shortcircuit.sh
 
 BuildRequires: gcc gcc-c++
-BuildRequires: libX11-devel
 BuildRequires: cmake
-BuildRequires: xcb-util-cursor-devel
-BuildRequires: libxkbcommon-x11-devel
 BuildRequires: rsync
 BuildRequires: git
 BuildRequires: python3
+BuildRequires: python3-devel
+BuildRequires: libX11-devel
+BuildRequires: alsa-lib-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: xcb-util-cursor-devel
+BuildRequires: libxkbcommon-x11-devel
 BuildRequires: libcurl-devel
 BuildRequires: webkit2gtk3-devel
 BuildRequires: gtk3-devel
