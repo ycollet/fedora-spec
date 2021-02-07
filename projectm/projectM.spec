@@ -1,15 +1,16 @@
 Name:    projectM-mao
-Version: 3.1.7
+Version: 3.1.8
 Release: 11%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
+
 Source0: https://github.com/projectM-visualizer/projectm/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: milkdrop-script.txt
 # Patch0:  projectm-0001-manage-home-dir-for-conf-file.patch
 
 BuildRequires: gcc gcc-c++
-BuildRequires: automake autoconf libtool
+BuildRequires: automake autoconf libtool make
 BuildRequires: ftgl-devel glew-devel
 BuildRequires: libgomp pulseaudio-libs-devel
 BuildRequires: SDL2-devel
@@ -228,6 +229,9 @@ sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_data
 %{_datadir}/applications/projectM-mao-alsa.desktop
 
 %changelog
+* Sun Feb 7 2021 Yann Collette <ycollette.nospam@free.fr> - 3.1.8-11
+- update to 3.1.8-11
+
 * Sat Sep 19 2020 Yann Collette <ycollette.nospam@free.fr> - 3.1.7-11
 - update to 3.1.7-11
 
