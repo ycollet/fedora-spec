@@ -1,16 +1,11 @@
-# Global variables for github repository
-%global commit0 dbb6e2e2429e1ea3a2dc31a46951289347216681
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Summary: Beat / envelope shaper LV2 plugin
 Name:    lv2-BShapr
-Version: 0.9.0
+Version: 0.10
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BShapr
 
-Source0: https://github.com/sjaehn/BShapr/archive/%{commit0}.tar.gz#/BShapr-%{shortcommit0}.tar.gz
+Source0: https://github.com/sjaehn/BShapr/archive/v%{version}.tar.gz#/BShapr-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -22,7 +17,7 @@ BuildRequires: cairo-devel
 Beat / envelope shaper LV2 plugin
 
 %prep
-%autosetup -n BShapr-%{commit0}
+%autosetup -n BShapr-%{version}
 
 %build
 
@@ -38,6 +33,9 @@ Beat / envelope shaper LV2 plugin
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Feb 7 2021 Yann Collette <ycollette dot nospam at free.fr> 0.10.0-1
+- update to 0.10.0-1
+
 * Mon May 25 2020 Yann Collette <ycollette dot nospam at free.fr> 0.9.0-1
 - update to 0.9.0-1
 
