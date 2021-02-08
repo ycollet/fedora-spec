@@ -12,7 +12,7 @@
 
 Name:    sonic-pi
 Version: 3.3.1
-Release: 7%{?dist}
+Release: 8%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -59,8 +59,6 @@ sonic ideas into reality.
 
 cd app/gui/qt
 
-#sed -i -e "/add_subdirectory(external\/QScintilla-2.11.4)/d" CMakeLists.txt
-#sed -i -e "s/QScintilla/qscintilla2-qt5/g" CMakeLists.txt
 sed -i -e "s/return QCoreApplication::applicationDirPath() + \"\/..\/..\/..\/..\";/return QString(\"\/usr\/share\/sonic-pi\");/g" mainwindow.cpp
 
 cd ../../..
@@ -71,9 +69,46 @@ sed -i -e "s/env python/env python3/g" app/server/ruby/vendor/ffi-1.11.3/ext/ffi
 sed -i -e "/make clean/d" app/server/ruby/bin/compile-extensions.rb
 sed -i -e "s/erl -make//g" app/linux-prebuild.sh
 
+# remove some compiled ruby package
+sed -i -e "/interception/d" app/server/ruby/bin/compile-extensions.rb
+
 # remove aubio for prebuild
 sed -i -e "/aubio/d" app/linux-prebuild.sh
 sed -i -e "/aubio/d" app/external/linux_build_externals.sh
+
+# remove osx rubygem
+rm -rf app/server/ruby/vendor/narray-0.6.1.1/
+rm -rf app/server/ruby/vendor/ruby-coreaudio-0.0.12-patched/
+
+rm -rf app/server/ruby/vendor/interception/
+
+rm -rf app/server/ruby/vendor/ast-2.0.0/
+rm -rf app/server/ruby/vendor/blankstate/
+rm -rf app/server/ruby/vendor/sys-proctable-1.2.2/
+
+# activesupport
+# atomic
+# benchmark-ips-2.3.0
+# ffi-1.11.3
+# gettext-3.2.2
+# i18n
+# kramdown-2.1.0
+# locale-2.1.2
+# metaclass-0.0.4
+# minitest-5.8.1
+# mocha-1.1.0
+# multi_json
+# polyglot-0.3.5
+# rake-compiler-1.1.0
+# rouge
+# ruby-beautify
+# ruby-prof-0.15.8
+# rugged-0.28.4.1
+# text-1.3.1
+# thread_safe
+# tomlrb-2.0.0
+# treetop
+# websocket-ruby-1.2.8
 
 %build
 
