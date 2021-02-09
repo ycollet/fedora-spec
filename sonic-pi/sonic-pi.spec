@@ -84,31 +84,30 @@ rm -rf app/server/ruby/vendor/interception/
 
 rm -rf app/server/ruby/vendor/ast-2.0.0/
 rm -rf app/server/ruby/vendor/blankstate/
-rm -rf app/server/ruby/vendor/sys-proctable-1.2.2/
+#rm -rf app/server/ruby/vendor/sys-proctable-1.2.2/
 
-# activesupport
-# atomic
-# benchmark-ips-2.3.0
-# ffi-1.11.3
-# gettext-3.2.2
-# i18n
-# kramdown-2.1.0
-# locale-2.1.2
-# metaclass-0.0.4
-# minitest-5.8.1
-# mocha-1.1.0
-# multi_json
-# polyglot-0.3.5
-# rake-compiler-1.1.0
-# rouge
-# ruby-beautify
-# ruby-prof-0.15.8
-# rugged-0.28.4.1
-# text-1.3.1
-# thread_safe
-# tomlrb-2.0.0
-# treetop
-# websocket-ruby-1.2.8
+# rm -rf app/server/ruby/vendor/activesupport
+# rm -rf app/server/ruby/vendor/atomic
+# rm -rf app/server/ruby/vendor/benchmark-ips-2.3.0
+# rm -rf app/server/ruby/vendor/ffi-1.11.3
+# rm -rf app/server/ruby/vendor/gettext-3.2.2
+# rm -rf app/server/ruby/vendor/i18n
+# rm -rf app/server/ruby/vendor/kramdown-2.1.0
+# rm -rf app/server/ruby/vendor/locale-2.1.2
+# rm -rf app/server/ruby/vendor/metaclass-0.0.4
+# rm -rf app/server/ruby/vendor/minitest-5.8.1
+# rm -rf app/server/ruby/vendor/mocha-1.1.0
+# rm -rf app/server/ruby/vendor/multi_json
+# rm -rf app/server/ruby/vendor/polyglot-0.3.5
+# rm -rf app/server/ruby/vendor/rake-compiler-1.1.0
+# rm -rf app/server/ruby/vendor/rouge
+# rm -rf app/server/ruby/vendor/ruby-prof-0.15.8
+# rm -rf app/server/ruby/vendor/rugged-0.28.4.1
+# rm -rf app/server/ruby/vendor/text-1.3.1
+# rm -rf app/server/ruby/vendor/thread_safe
+# rm -rf app/server/ruby/vendor/tomlrb-2.0.0
+# rm -rf app/server/ruby/vendor/treetop
+# rm -rf app/server/ruby/vendor/websocket-ruby-1.2.8
 
 %build
 
@@ -203,6 +202,13 @@ find %{buildroot}/%{_datadir}/%{name}/app/server/ruby/vendor -name "*.o" \
                                                              -o -name "*.txt" -o -name "*.a" \
 							     -o -name "*.html" -o -name "*.text" \
 							     -o -name "\.?*" -o -name "*.md" -exec rm -rf {} \;
+
+# Remove source for compiled rubygem
+rm -rf app/server/ruby/vendor/rugged-0.28.4.1/
+rm -rf app/server/ruby/vendor/ffi-1.11.3/
+rm -rf app/server/ruby/vendor/atomic/
+rm -rf app/server/ruby/vendor/ruby-prof-0.15.8
+rm -rf app/server/ruby/vendor/interception
 
 # Install desktop file
 desktop-file-install --vendor '' \
