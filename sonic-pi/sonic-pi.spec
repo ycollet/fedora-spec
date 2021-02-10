@@ -12,7 +12,7 @@
 
 Name:    sonic-pi
 Version: 3.3.1
-Release: 8%{?dist}
+Release: 9%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -80,34 +80,15 @@ sed -i -e "/aubio/d" app/external/linux_build_externals.sh
 rm -rf app/server/ruby/vendor/narray-0.6.1.1/
 rm -rf app/server/ruby/vendor/ruby-coreaudio-0.0.12-patched/
 
+# remove unused rubygem
 rm -rf app/server/ruby/vendor/interception/
-
 rm -rf app/server/ruby/vendor/ast-2.0.0/
 rm -rf app/server/ruby/vendor/blankstate/
-#rm -rf app/server/ruby/vendor/sys-proctable-1.2.2/
-
-# rm -rf app/server/ruby/vendor/activesupport
-# rm -rf app/server/ruby/vendor/atomic
-# rm -rf app/server/ruby/vendor/benchmark-ips-2.3.0
-# rm -rf app/server/ruby/vendor/ffi-1.11.3
-# rm -rf app/server/ruby/vendor/gettext-3.2.2
-# rm -rf app/server/ruby/vendor/i18n
-# rm -rf app/server/ruby/vendor/kramdown-2.1.0
-# rm -rf app/server/ruby/vendor/locale-2.1.2
-# rm -rf app/server/ruby/vendor/metaclass-0.0.4
-# rm -rf app/server/ruby/vendor/minitest-5.8.1
-# rm -rf app/server/ruby/vendor/mocha-1.1.0
-# rm -rf app/server/ruby/vendor/multi_json
-# rm -rf app/server/ruby/vendor/polyglot-0.3.5
-# rm -rf app/server/ruby/vendor/rake-compiler-1.1.0
-# rm -rf app/server/ruby/vendor/rouge
-# rm -rf app/server/ruby/vendor/ruby-prof-0.15.8
-# rm -rf app/server/ruby/vendor/rugged-0.28.4.1
-# rm -rf app/server/ruby/vendor/text-1.3.1
-# rm -rf app/server/ruby/vendor/thread_safe
-# rm -rf app/server/ruby/vendor/tomlrb-2.0.0
-# rm -rf app/server/ruby/vendor/treetop
-# rm -rf app/server/ruby/vendor/websocket-ruby-1.2.8
+rm -rf app/server/ruby/vendor/benchmark-ips-2.3.0
+rm -rf app/server/ruby/vendor/metaclass-0.0.4
+rm -rf app/server/ruby/vendor/mocha-1.1.0
+rm -rf app/server/ruby/vendor/rake-compiler-1.1.0
+rm -rf app/server/ruby/vendor/rouge
 
 %build
 
