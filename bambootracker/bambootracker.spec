@@ -1,6 +1,6 @@
 Summary: BambooTracker is a music tracker for the Yamaha YM2608 sound chip
 Name:    BambooTracker
-Version: 0.4.5
+Version: 0.4.6
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/rerrahkr/BambooTracker
@@ -11,6 +11,8 @@ BuildRequires: gcc gcc-c++
 BuildRequires: make
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
+BuildRequires: rtmidi-devel
+BuildRequires: rtaudio-devel
 BuildRequires: qt5-qtmultimedia-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtbase-gui
@@ -27,7 +29,7 @@ BambooTracker is a music tracker for the Yamaha YM2608 (OPNA) sound chip which w
 
 cd BambooTracker
 %qmake_qt5 "PREFIX=/usr" BambooTracker.pro
-%make_build PREFIX=/usr
+%make_build PREFIX=/usr CXXFLAGS="-fPIC -I/usr/include/rtmidi -I/usr/include/rtaudio"
 
 %install
 
@@ -47,6 +49,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/*
 
 %changelog
+* Thu Feb 11 2021 Yann Collette <ycollette.nospam@free.fr> - 0.4.6-1
+- update to version 0.4.6-1
+
 * Fri Nov 06 2020 Yann Collette <ycollette.nospam@free.fr> - 0.4.5-1
 - update to version 0.4.5-1
 
