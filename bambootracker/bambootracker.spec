@@ -5,14 +5,16 @@ Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/rerrahkr/BambooTracker
 
-Source0: https://github.com/rerrahkr/BambooTracker/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+# To get the sources: ./bambootracker_source.sh v0.4.6
+Source0: BambooTracker.tar.gz
+Source1: bambootracker_source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make
 BuildRequires: alsa-lib-devel
+BuildRequires: pulseaudio-libs-devel
+BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: desktop-file-utils
-BuildRequires: rtmidi-devel
-BuildRequires: rtaudio-devel
 BuildRequires: qt5-qtmultimedia-devel
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtbase-gui
@@ -23,17 +25,18 @@ BuildRequires: qtchooser
 BambooTracker is a music tracker for the Yamaha YM2608 (OPNA) sound chip which was used in NEC PC-8801/9801 series computers.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}
 
 %build
 
-cd BambooTracker
-%qmake_qt5 "PREFIX=/usr" BambooTracker.pro
-%make_build PREFIX=/usr CXXFLAGS="-fPIC -I/usr/include/rtmidi -I/usr/include/rtaudio"
+%qmake_qt5 "PREFIX=/usr" CONFIG+=release CONFIG+=use_alsa CONFIG+=use_pulse CONFIG+=use_jack Project.pro
+%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-submodules-RtAudio-RtAudio-pro
+%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-submodules-RtMidi-RtMidi-pro
+%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-BambooTracker
+%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-data
 
 %install
 
-cd BambooTracker
 %make_install INSTALL_ROOT=%{buildroot} PREFIX=/usr
 
 desktop-file-install --vendor '' \
