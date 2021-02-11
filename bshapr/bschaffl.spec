@@ -1,6 +1,6 @@
 Summary: Pattern-controlled MIDI amp & time stretch LV2 plugin to produce shuffle / swing effects
 Name:    lv2-BSchaffl
-Version: 1.4.2
+Version: 1.4.4
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BSchaffl
@@ -35,6 +35,9 @@ Pattern-controlled MIDI amp & time stretch LV2 plugin to produce shuffle / swing
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Feb 11 2021 Yann Collette <ycollette dot nospam at free.fr> 1.4.4-1
+- update to 1.4.4-1
+
 * Mon Jan 11 2021 Yann Collette <ycollette dot nospam at free.fr> 1.4.2-1
 - update to 1.4.2-1
 
