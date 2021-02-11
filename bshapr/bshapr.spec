@@ -1,3 +1,5 @@
+%define _lto_cflags %{nil}
+
 Summary: Beat / envelope shaper LV2 plugin
 Name:    lv2-BShapr
 Version: 0.10
