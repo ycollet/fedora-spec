@@ -1,6 +1,6 @@
 Summary: An audio stream chopping LV2 plugin
 Name:    lv2-BChoppr
-Version: 1.10.2
+Version: 1.10.4
 Release: 2%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BChoppr
@@ -34,6 +34,9 @@ Each chop can be leveled up or down (gating). BChoppr is the successor of BSlizr
 %{_libdir}/lv2/*
 
 %changelog
+* Thu Feb 11 2021 Yann Collette <ycollette dot nospam at free.fr> 1.10.4-2
+- updata to 1.10.4-2
+
 * Fri Jan 29 2021 Yann Collette <ycollette dot nospam at free.fr> 1.10.2-2
 - updata to 1.10.2-2
 
@@ -43,7 +46,7 @@ Each chop can be leveled up or down (gating). BChoppr is the successor of BSlizr
 * Thu Aug 27 2020 Yann Collette <ycollette dot nospam at free.fr> 1.8.0-2
 - updata to 1.8.0-2
 
-* Fri Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 1.6.4-2
+* Thu Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 1.6.4-2
 - updata to 1.6.4
 
 * Fri Apr 24 2020 Yann Collette <ycollette dot nospam at free.fr> 1.4.0-2
