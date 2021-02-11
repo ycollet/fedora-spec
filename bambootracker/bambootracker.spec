@@ -30,10 +30,8 @@ BambooTracker is a music tracker for the Yamaha YM2608 (OPNA) sound chip which w
 %build
 
 %qmake_qt5 "PREFIX=/usr" CONFIG+=release CONFIG+=use_alsa CONFIG+=use_pulse CONFIG+=use_jack Project.pro
-%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-submodules-RtAudio-RtAudio-pro
-%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-submodules-RtMidi-RtMidi-pro
-%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-BambooTracker
-%make_build PREFIX=/usr CXXFLAGS="-fPIC" sub-data
+make qmake_all
+%make_build PREFIX=/usr CXXFLAGS="-fPIC"
 
 %install
 
