@@ -1,5 +1,5 @@
 Name:    lebiniou
-Version: 3.53.3
+Version: 3.54.0
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -8,6 +8,7 @@ License: GPLv2+
 
 # original tarfile can be found here:
 Source0: https://gitlab.com/lebiniou/lebiniou/-/archive/version-%{version}/lebiniou-version-%{version}.tar.gz
+Patch0: lebiniou-0001-fix-cleancss-detection.patch
 
 BuildRequires: gcc gcc-c++ make sed
 BuildRequires: autoconf automake libtool
@@ -25,6 +26,9 @@ BuildRequires: ImageMagick-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: jansson-devel
 BuildRequires: ulfius-devel
+BuildRequires: ffmpeg-devel
+BuildRequires: uglify-js
+BuildRequires: nodejs-clean-css
 BuildRequires: perl-podlators
 BuildRequires: gtk-update-icon-cache
 BuildRequires: desktop-file-utils
@@ -36,7 +40,7 @@ As an artist, composer, VJ or just fan, lebiniou allows you to create live visua
 As a listener, lebiniou allows you to watch an everlasting and totally unseen creation reacting to the music.
 
 %prep
-%autosetup -n %{name}-version-%{version}
+%autosetup -p1 -n %{name}-version-%{version}
 
 sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_lib}\"/g" configure.ac
 
@@ -72,6 +76,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Sun Feb 14 2021 Yann Collette <ycollette.nospam@free.fr> - 3.54.0-3
+- update to 3.54.0-3
+
 * Fri Jan 29 2021 Yann Collette <ycollette.nospam@free.fr> - 3.53.3-3
 - update to 3.53.3-3
 

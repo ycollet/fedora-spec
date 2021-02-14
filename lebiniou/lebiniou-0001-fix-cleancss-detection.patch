@@ -1,0 +1,31 @@
+From f70309ec68f7a15a929a9f915710fe6af6c9fdfa Mon Sep 17 00:00:00 2001
+From: Yann Collette <ycollette.nospam@free.fr>
+Date: Sun, 14 Feb 2021 17:39:15 +0100
+Subject: [PATCH] fix cleancss detection
+
+---
+ configure.ac | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 40745b5..a149857 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -44,13 +44,7 @@ else
+ fi
+ 
+ # Check for cleancss
+-AC_CHECK_PROG([CLEANCSS], [cleancss], [yes])
+-if [ test "x$CLEANCSS" = "xyes" ]; then
+-   CLEANCSS="cleancss"
+-   with_cleancss="yes"
+-else
+-   AC_MSG_ERROR([You must have cleancss installed])
+-fi
++with_cleancss="yes"
+ 
+ # Check OS family/flavor
+ os_family="unknown"
+-- 
+2.26.2
+
