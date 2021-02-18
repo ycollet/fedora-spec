@@ -27,8 +27,6 @@ BuildRequires: ffmpeg-devel
 BuildRequires: jansson-devel
 BuildRequires: ulfius-devel
 BuildRequires: ffmpeg-devel
-BuildRequires: uglify-js
-BuildRequires: nodejs-clean-css
 BuildRequires: perl-podlators
 BuildRequires: gtk-update-icon-cache
 BuildRequires: desktop-file-utils
