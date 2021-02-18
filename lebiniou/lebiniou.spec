@@ -1,5 +1,5 @@
 Name:    lebiniou
-Version: 3.54.0
+Version: 3.54.1
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -8,7 +8,7 @@ License: GPLv2+
 
 # original tarfile can be found here:
 Source0: https://gitlab.com/lebiniou/lebiniou/-/archive/version-%{version}/lebiniou-version-%{version}.tar.gz
-Patch0: lebiniou-0001-fix-cleancss-detection.patch
+#Patch0: lebiniou-0001-fix-cleancss-detection.patch
 
 BuildRequires: gcc gcc-c++ make sed
 BuildRequires: autoconf automake libtool
@@ -54,7 +54,7 @@ LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 CFLAGS=" -I/usr/include/ffmpeg -fPIC $CFLAGS"; export CFLAGS
 # report: --enable-jackaudio doesn't work ...
 
-%configure --prefix=%{_prefix} --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir}
+%configure --prefix=%{_prefix} --without-cleancss --without-uglifyjs --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir}
 
 %make_build 
 
@@ -76,6 +76,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Wed Feb 17 2021 Yann Collette <ycollette.nospam@free.fr> - 3.54.1-3
+- update to 3.53.1-3
+
 * Sun Feb 14 2021 Yann Collette <ycollette.nospam@free.fr> - 3.54.0-3
 - update to 3.54.0-3
 
