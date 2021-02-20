@@ -1,5 +1,5 @@
 Name:    projectM-mao
-Version: 3.1.11
+Version: 3.1.12
 Release: 11%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 License: LGPLv2+
@@ -229,6 +229,9 @@ sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_data
 %{_datadir}/applications/projectM-mao-alsa.desktop
 
 %changelog
+* Sat Feb 20 2021 Yann Collette <ycollette.nospam@free.fr> - 3.1.12-11
+- update to 3.1.12-11
+
 * Sun Feb 14 2021 Yann Collette <ycollette.nospam@free.fr> - 3.1.11-11
 - update to 3.1.11-11
 
