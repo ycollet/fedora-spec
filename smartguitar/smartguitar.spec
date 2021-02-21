@@ -27,6 +27,7 @@ BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libXcursor-devel
+BuildRequires: gtk3-devel
 
 %description
 Guitar plugin made with JUCE that uses neural network models to emulate real world hardware.
@@ -52,7 +53,7 @@ export HOME=`pwd`
 mkdir -p .vst3
 
 cd plugins/SmartAmp/Builds/LinuxMakefile
-%make_build CONFIG=Release STRIP=true CXXFLAGS=-I/usr/include/eigen3
+%make_build CONFIG=Release STRIP=true CXXFLAGS="-I/usr/include/eigen3 -I/usr/include/freetype2"
 
 %install 
 
