@@ -28,6 +28,7 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libXcursor-devel
 BuildRequires: gtk3-devel
+BuildRequires: webkit2gtk3-devel
 
 %description
 Guitar plugin made with JUCE that uses neural network models to emulate real world hardware.
