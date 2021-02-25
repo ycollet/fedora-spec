@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 ac320d9a07a55c6a1a08c147ace0ed741c66300e
-%global gittag0 1.0.0
+%global gittag0 1.0.1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-captvolt
-Version: 1.0.0
+Version: 1.0.1
 Release: 3%{?dist}
 Summary: captvolt plugin for Rack
 License: GPLv2+
@@ -41,7 +41,7 @@ BuildRequires: jq
 
 %description
 captvolt plugin for Rack.
-Raw SID 6851/8580 chip emulation using ReSID engine
+Raw SID 6581/8580 chip emulation using ReSID engine
 
 %prep
 %autosetup -n Rack
@@ -91,5 +91,5 @@ cp -r captvolt_plugin/dist/captvolt/* %{buildroot}%{_libexecdir}/Rack1/plugins-v
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.1-3
 - initial specfile
