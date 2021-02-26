@@ -9,7 +9,7 @@ Version: 1.0.0
 Release: 1%{?dist}
 Summary: A LV2 / VST3 / standalone wavetable synth
 License: GPLv2+
-URL:     https://github.com/mtytel/vital
+URL:     https://vital.audio
 
 Source0: https://github.com/mtytel/vital/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # Source1: https://web.archive.org/web/20181016150224/https://download.steinberg.net/sdk_downloads/vstsdk3610_11_06_2018_build_37.zip
@@ -30,7 +30,9 @@ BuildRequires: libcurl-devel
 BuildRequires: libsecret-devel
 
 %description
-Vitalium is a spectral warping wavetable synthesizer.
+Vitalium is a powerful wavetable synthesizer with realtime modulation feedback
+vitalium is a MIDI enabled polyphonic music synthesizer with an easy to use
+parameter modulation system with real-time graphical feedback.
 
 %prep
 %autosetup -n vital-%{commit0}
@@ -43,6 +45,8 @@ sed -i -e "s/install_effects_vst install_effects_vst3/install_effects_vst3/g" Ma
 sed -i -e "s/standalone install_icons/standalone/g" Makefile
 # Rename executable
 find . -name "Makefile*" -exec sed -i -e "s/[vV]ial/vitalium/g" {} \;
+# remove icon from desktop
+sed -i -e "/Icon=/d" standalone/vital.desktop
 
 unzip %{SOURCE1}
 
@@ -54,7 +58,19 @@ make DESTDIR=%{buildroot} CONFIG=Release CXXFLAGS=-I`pwd`/VST_SDK/VST2_SDK STRIP
 
 %install
 
-%make_install CONFIG=Release STRIP=true LIBDIR=%{_libdir} 
+mkdir -p %{buildroot}%{_bindir}/
+mkdir -p %{buildroot}%{_libdir}/
+mkdir -p %{buildroot}%{_libdir}/vst3/vitalium.vst3/Contents/x86_64-linux/
+mkdir -p %{buildroot}%{_libdir}/lv2/vitalium.lv2/
+mkdir -p %{buildroot}%{_datadir}/applications/
+
+cp standalone/builds/linux/build/vitalium %{buildroot}%{_bindir}/
+
+cp plugin/builds/linux_vst/build/vitalium.vst3/Contents/x86_64-linux/vitalium.so %{buildroot}%{_libdir}/vst3/vitalium.vst3/Contents/x86_64-linux/
+
+cp -ra plugin/builds/linux_lv2/vitalium.lv2/* %{buildroot}%{_libdir}/lv2/vitalium.lv2/
+
+install -m644 standalone/vital.desktop %{buildroot}%{_datadir}/applications/vitalium.desktop
 
 %files
 %doc README.md
@@ -62,6 +78,7 @@ make DESTDIR=%{buildroot} CONFIG=Release CXXFLAGS=-I`pwd`/VST_SDK/VST2_SDK STRIP
 %{_bindir}/*
 %{_libdir}/lv2/*
 %{_libdir}/vst3/*
+%{_datadir}/applications/*
 
 %changelog
 * Wed Feb 24 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-1
