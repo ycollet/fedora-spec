@@ -1,18 +1,15 @@
 Name:    jack_mixer
-Version: 13
+Version: 15
 Release: 1%{?dist}
 Summary: jack_mixer is GTK (2.x) JACK audio mixer with look similar to it`s hardware counterparts
-URL:     https://repo.or.cz/jack_mixer.git
+URL:     https://github.com/jack-mixer/jack_mixer
 
 License: GPLv2+
 
-# ./sources.sh release-13
-
-Source0: jack_mixer.tar.gz
-Source1: python.m4
+Source0: https://github.com/jack-mixer/jack_mixer/archive/release-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc
-BuildRequires: autoconf automake libtool
+BuildRequires: meson
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -20,6 +17,9 @@ BuildRequires: glib2-devel
 BuildRequires: python3-devel
 BuildRequires: python3-cairo
 BuildRequires: python3-gobject-base
+BuildRequires: python3-pyxdg
+BuildRequires: python3-Cython
+BuildRequires: python3-docutils
 
 Requires: python3-cairo
 Requires: python3-gobject-base
@@ -29,40 +29,38 @@ jack_mixer is Gtk Jack audio mixer with look similar to it`s hardware counterpar
 It has lot of useful features, apart from being able to mix multiple Jack audio streams. 
 
 %prep
-%autosetup -n %{name}
+%autosetup -n %{name}-release-%{version}
 
 # Remove unsupported desktop Categories
 sed -i -e "s/GTK;GNOME;//g" data/jack_mixer.desktop
 sed -i -e "s/Player;//g"    data/jack_mixer.desktop
-sed -i -e "45,46d" autogen.sh
 
 %build
 
-%set_build_flags
-
-cp %{SOURCE1} m4/python.m4
-./autogen.sh
-PYTHON=%{__python3} ./configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir}
-
-%make_build
+%meson
+%meson_build
 
 %install
 
-%make_install
+%meson_install
 
 desktop-file-install --vendor '' \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/jack_mixer.desktop
 
 %files
-%doc NEWS AUTHORS README.md
+%doc CHANGELOG.md AUTHORS README.md
 %license COPYING
 %{_bindir}/*
 %{_usr}/lib/*
+%{_libdir}/*
 %{_datadir}/applications/*
 %{_datadir}/icons/*
-%{_datadir}/jack_mixer/*
+%{_datadir}/man/*
 
 %changelog
+* Fri Feb 26 2021 Yann Collette <ycollette.nospam@free.fr> - 15-1
+- update to 15
+
 * Fri Jul 17 2020 Yann Collette <ycollette.nospam@free.fr> - 13-1
 - Initial spec file
