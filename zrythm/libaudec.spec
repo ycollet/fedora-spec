@@ -1,5 +1,5 @@
 Name:    libaudec-devel
-Version: 0.2.3
+Version: 0.3.3
 Release: 1%{?dist}
 Summary: libaudec (lib audio decoder) is a wrapper library over ffmpeg, sndfile and libsamplerate for reading and resampling audio files
 License: GPLv2+
@@ -22,16 +22,12 @@ and resampling audio files, based on Robin Gareus' 'audio_decoder' code
 
 %build
 
-mkdir build
-DESTDIR=%{buildroot} VERBOSE=1 meson --prefix=/usr build
-
-cd build
-DESTDIR=%{buildroot} VERBOSE=1 %ninja_build 
+%meson
+%meson_build 
 
 %install 
 
-cd build
-DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
+%meson_install
 
 %files
 %doc README.md
@@ -41,6 +37,9 @@ DESTDIR=%{buildroot} VERBOSE=1 %ninja_install
 %{_includedir}/audec/*
 
 %changelog
+* Sat Feb 27 2021 Yann Collette <ycollette.nospam@free.fr> - 0.3.3-1
+- update to 0.3.3-1
+
 * Sat Aug 15 2020 Yann Collette <ycollette.nospam@free.fr> - 0.2.3-1
 - update to 0.2.3-1
 
