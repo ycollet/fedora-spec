@@ -1,6 +1,5 @@
 ** Add new packages
  Dplug               -> https://github.com/AuburnSounds/Dplug
- SmartGuitarAmp      -> https://github.com/keyth72/SmartGuitarAmp
  osmid               -> https://github.com/llloret/osmid
  Squeezer            -> https://github.com/mzuther/Squeezer
  DAFx19-Gamelanizer  -> https://github.com/lukemcraig/DAFx19-Gamelanizer
@@ -25,6 +24,8 @@
 					 -> https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock
 frequanalizer        -> https://github.com/ffAudio/Frequalizer
 paulstretch          -> https://bitbucket.org/xenakios/paulstretchplugin/src/master/
+NoiseTorch           -> https://github.com/lawl/NoiseTorch
+CadMus               -> https://github.com/josh-richardson/cadmus
 
 ** Add BuildRequires make in spec file which requires it:
 BuildRequires: make
@@ -44,7 +45,6 @@ fix pkgconfig file installation
 purr-data/purr-data.spec       -> has a pure binary dependency
 improviz/improviz.spec         -> (Cabal ...)
 processing/processing.spec     -> precompiled java package -> noarch ...
-rack                           -> fail with some fedora flags
 ams-lv2/lvtk.spec              -> static library
 psi-plugins                    -> error with fedora 33 + lv2-devel
 picoloop/picoloop.spec         -> complex ...
@@ -57,4 +57,3 @@ ossia/ossia-score.spec         -> don't build anymore. Wait for next release
 
 ** Fedora 33 - To be fixed:
 performer -> cmake + ui_setlist.h missing - pb cmake 3.18 ...
-sonic-pi  -> cmake - check ruby version
