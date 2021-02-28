@@ -1,11 +1,11 @@
 Name:    helio-workstation
-Version: 3.3.0
+Version: 3.4.0
 Release: 1%{?dist}
 Summary: An audio sequencer
 URL:     https://github.com/helio-fm/helio-workstation
 License: GPLv2+
 
-# ./helioworkstation-source.sh 3.3
+# ./helioworkstation-source.sh 3.4
 
 Source0: helio-workstation.tar.gz
 Source1: helioworkstation-source.sh
@@ -68,6 +68,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/doc/%{name}/*
 
 %changelog
+* Sun Feb 28 2021 Yann Collette <ycollette.nospam@free.fr> - 3.4.0-1
+- update to 3.4.0-1
+
 * Sat Dec 26 2020 Yann Collette <ycollette.nospam@free.fr> - 3.3.0-1
 - update to 3.3.0-1
 
