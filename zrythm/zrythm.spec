@@ -1,11 +1,11 @@
 Name:    zrythm
-Version: 1.0.0.a1301
+Version: 1.0.0.a1304
 Release: 4%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.13.0.1.tar.gz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.13.0.4.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -53,7 +53,7 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%autosetup -n zrythm-1.0.0-alpha.13.0.1
+%autosetup -n zrythm-1.0.0-alpha.13.0.4
 
 # Use sphinx for Python 3
 sed -i -e "s/'sphinx-build'/'sphinx-build-3'/g" meson.build
@@ -109,6 +109,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Sun Feb 28 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.13.0.4-4
+- update to 1.0.0-alpha.13.0.4-4
+
 * Sun Feb 28 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.13.0.1-4
 - update to 1.0.0-alpha.13.0.1-4
 
