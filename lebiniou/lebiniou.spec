@@ -1,14 +1,12 @@
 Name:    lebiniou
-Version: 3.54.1
+Version: 3.55.0
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
 
 License: GPLv2+
 
-# original tarfile can be found here:
 Source0: https://gitlab.com/lebiniou/lebiniou/-/archive/version-%{version}/lebiniou-version-%{version}.tar.gz
-#Patch0: lebiniou-0001-fix-cleancss-detection.patch
 
 BuildRequires: gcc gcc-c++ make sed
 BuildRequires: autoconf automake libtool
@@ -29,6 +27,7 @@ BuildRequires: ulfius-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: perl-podlators
 BuildRequires: gtk-update-icon-cache
+BuildRequires: python3-htmlmin
 BuildRequires: desktop-file-utils
 
 Requires(pre): lebiniou-data
@@ -38,7 +37,7 @@ As an artist, composer, VJ or just fan, lebiniou allows you to create live visua
 As a listener, lebiniou allows you to watch an everlasting and totally unseen creation reacting to the music.
 
 %prep
-%autosetup -p1 -n %{name}-version-%{version}
+%autosetup -n %{name}-version-%{version}
 
 sed -i -e "s/LEBINIOU_LIBDIR=\"\$prefix\/lib\"/LEBINIOU_LIBDIR=\"\$prefix\/%{_lib}\"/g" configure.ac
 
@@ -52,7 +51,14 @@ LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 CFLAGS=" -I/usr/include/ffmpeg -fPIC $CFLAGS"; export CFLAGS
 # report: --enable-jackaudio doesn't work ...
 
-%configure --prefix=%{_prefix} --without-cleancss --without-uglifyjs --enable-alsa --enable-pulseaudio --enable-sndfile --enable-caca --libdir=%{_libdir}
+%configure --prefix=%{_prefix} \
+	   --without-cleancss \
+	   --without-uglifyjs \
+	   --enable-alsa \
+	   --enable-pulseaudio \
+	   --enable-sndfile \
+	   --enable-caca \
+	   --libdir=%{_libdir}
 
 %make_build 
 
@@ -74,6 +80,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Sun Feb 28 2021 Yann Collette <ycollette.nospam@free.fr> - 3.55.0-3
+- update to 3.55.0-3
+
 * Wed Feb 17 2021 Yann Collette <ycollette.nospam@free.fr> - 3.54.1-3
 - update to 3.53.1-3
 
