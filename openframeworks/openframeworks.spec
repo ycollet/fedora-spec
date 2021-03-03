@@ -1,17 +1,17 @@
 Name:    openFrameworks
-Version: 0.11.0
+Version: 0.11.1
 Release: 2%{?dist}
 Summary: openFrameworks library / code
 URL:     https://github.com/openframeworks/openFrameworks
 License: GPLv2+
 
 # to get the sources:
-# ./source.sh 0.11.0
-# ./source.sh patch-release
+# ./source_openframeworks.sh 0.11.1
+# ./source_openframeworks.sh patch-release
 
 Source0: openFrameworks.tar.gz
 Source1: of-make-workspace
-Source2: source.sh
+Source2: source_openframeworks.sh
 
 BuildRequires: gcc gcc-c++ make
 BuildRequires: freeimage-devel
@@ -114,6 +114,9 @@ rm -rf %{buildroot}/opt/openFrameworks/.travis.yml
 /opt/%{name}/*
 
 %changelog
+* Wed Mar 3 2021 Yann Collette <ycollette.nospam@free.fr> - 0.11.1-2
+- update to 0.11.1
+
 * Tue Oct 6 2020 Yann Collette <ycollette.nospam@free.fr> - 0.11.0-2
 - fix for fedora 33
 
