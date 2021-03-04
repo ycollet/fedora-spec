@@ -12,6 +12,7 @@ URL:     https://github.com/michaelwillis/dragonfly-reverb/
 # ./dragonfly-source.sh 3.2.4
 
 Source0: dragonfly-reverb.tar.gz
+Source1: dragonfly-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: make
