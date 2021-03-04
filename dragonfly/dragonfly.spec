@@ -1,5 +1,7 @@
+%define _lto_cflags %{nil}
+
 Name:    dragonfly-reverb
-Version: 3.2.3
+Version: 3.2.4
 Release: 3%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -7,11 +9,12 @@ License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 # To get the sources:
-# ./source.sh 3.2.3
+# ./dragonfly-source.sh 3.2.4
 
 Source0: dragonfly-reverb.tar.gz
 
 BuildRequires: gcc gcc-c++
+BuildRequires: make
 BuildRequires: lv2-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: fftw-devel
@@ -25,8 +28,6 @@ A free hall-style reverb based on freeverb3 algorithms
 %autosetup -n %{name}
 
 %build
-
-%define _lto_cflags %{nil}
 
 %make_build SKIP_STRIPPING=true CFLAGS="%optflags" CXXFLAGS="%optflags"
 
@@ -69,6 +70,9 @@ cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 %{_datadir}/pixmaps/*
 
 %changelog
+* Thu Mar 4 2021 Yann Collette <ycollette.nospam@free.fr> - 3.2.4-3
+- update to 3.2.4-3
+
 * Thu Dec 8 2020 Yann Collette <ycollette.nospam@free.fr> - 3.2.3-3
 - update to 3.2.3-3
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage: ./source.sh <TAG>
-# ./source.sh 3.1.2
+# ./dragonfly-source.sh 3.2.4
 
 git clone https://github.com/michaelwillis/dragonfly-reverb
 cd dragonfly-reverb
