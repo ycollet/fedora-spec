@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage: ./source-chowcentaur.sh <tag>
-#        ./source-chowcentaur.sh master
+#        ./source-chowcentaur.sh 1.3.0
 
 git clone https://github.com/jatinchowdhury18/KlonCentaur
 cd KlonCentaur
