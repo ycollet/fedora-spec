@@ -1,7 +1,7 @@
 %define _lto_cflags %{nil}
 
 Name:    dragonfly-reverb
-Version: 3.2.4
+Version: 3.2.5
 Release: 3%{?dist}
 Summary: DragonFly reverberation plugin
 
@@ -9,7 +9,7 @@ License: GPLv2+
 URL:     https://github.com/michaelwillis/dragonfly-reverb/
 
 # To get the sources:
-# ./dragonfly-source.sh 3.2.4
+# ./dragonfly-source.sh 3.2.5
 
 Source0: dragonfly-reverb.tar.gz
 Source1: dragonfly-source.sh
@@ -71,6 +71,9 @@ cp dragonfly-room-screenshot.png  %{buildroot}/%{_datadir}/pixmaps/
 %{_datadir}/pixmaps/*
 
 %changelog
+* Fri Mar 5 2021 Yann Collette <ycollette.nospam@free.fr> - 3.2.5-3
+- update to 3.2.5-3
+
 * Thu Mar 4 2021 Yann Collette <ycollette.nospam@free.fr> - 3.2.4-3
 - update to 3.2.4-3
 
