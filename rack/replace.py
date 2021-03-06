@@ -47,7 +47,10 @@ def proceed(json_file):
         
         slug_name   = conf_rack['slug']
         version     = conf_rack['version']
-        sourceurl   = conf_rack['sourceUrl'].replace('.git','') # remove the trailing '.git'
+        if 'sourceUrl' in conf_rack:
+            sourceurl = conf_rack['sourceUrl'].replace('.git','') # remove the trailing '.git'
+        else:
+            sourceurl = ''
         description = ''
         if 'modules' in conf_rack and 'description' in conf_rack['modules'][0]:
             description = conf_rack['modules'][0]['description']
