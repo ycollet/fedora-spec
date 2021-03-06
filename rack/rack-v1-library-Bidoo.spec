@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 db35db3cf7251424975a3d049ceebe26167a51b2
-%global gittag0 1.1.28
+%global commit0 bc79cdb30a5f8c2de4e5aefaab4d3eb76da4a5f8
+%global gittag0 1.1.29
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Bidoo
-Version: 1.1.28
+Version: 1.1.29
 Release: 3%{?dist}
 Summary: Bidoo plugin for Rack
 License: GPLv2+
@@ -44,6 +44,10 @@ Bidoo plugin for Rack.
 The ultimate mastering tool for Rack.
 Once plugged in your Rack, you gonna
  sound FAAAAT.
+
+Picture is taken from a very good LP
+TERA MELOS.
+
 
 %prep
 %autosetup -n Rack
@@ -93,5 +97,5 @@ cp -r Bidoo_plugin/dist/Bidoo/* %{buildroot}%{_libexecdir}/Rack1/plugins-v1/Bido
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.28-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.29-3
 - initial specfile

@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 49f76a0d1f5dd2e08f0967470976740e042e874e
-%global gittag0 1.2.2
+%global commit0 a473d20f9f523f04b652f57fd71c9a95f190bcbc
+%global gittag0 1.2.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Sha-Bang-Modules
-Version: 1.2.2
+Version: 1.2.3
 Release: 3%{?dist}
 Summary: Sha-Bang-Modules plugin for Rack
 License: GPLv2+
@@ -91,5 +91,5 @@ cp -r Sha-Bang-Modules_plugin/dist/Sha-Bang-Modules/* %{buildroot}%{_libexecdir}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.3-3
 - initial specfile

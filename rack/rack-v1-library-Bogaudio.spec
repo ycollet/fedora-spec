@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 fed085727aa8dbf6e7fd24fa407cfa808d1c9e8d
-%global gittag0 1.1.36
+%global commit0 a2d42c1242f183dc4117d76f757f5d33a11cce6d
+%global gittag0 1.1.37
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Bogaudio
-Version: 1.1.36
+Version: 1.1.37
 Release: 3%{?dist}
 Summary: Bogaudio plugin for Rack
 License: GPLv2+
@@ -91,5 +91,5 @@ cp -r Bogaudio_plugin/dist/Bogaudio/* %{buildroot}%{_libexecdir}/Rack1/plugins-v
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.36-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.37-3
 - initial specfile
