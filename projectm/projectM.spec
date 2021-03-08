@@ -208,6 +208,8 @@ install -m 644 fonts/Vera.ttf     %{buildroot}%{_datadir}/projectM-mao/fonts/
 # Cleanup install
 rm %{buildroot}%{_bindir}/projectM-unittest
 rm %{buildroot}%{_libdir}/pkgconfig/libprojectM.pc
+rm %{buildroot}%{_datadir}/projectM-mao/presets/*.a
+rm %{buildroot}%{_datadir}/projectM-mao/presets/*.la
 
 # fix config.inp path and font path
 sed -i -e "s/usr\/share\/projectM\/presets/usr\/share\/projectM-mao\/presets/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
