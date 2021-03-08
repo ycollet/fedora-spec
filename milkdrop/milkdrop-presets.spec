@@ -1,9 +1,8 @@
 Summary: Additional presets for ProjectM
 Name:    projectM-extra-presets
 Version: 1.0.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
-Group:   Applications/Multimedia
 URL:     http://projectm.sourceforge.net
 
 Source0: https://sourceforge.net/projects/projectm/files/presets-samples/presets-2.0.0-Source.tar.gz
@@ -14,8 +13,6 @@ Source4: http://ycollette.free.fr/Milkdrop/milkdrop-md-presets.zip
 Source5: http://ycollette.free.fr/Milkdrop/milkdrop-megapack.zip
 Source6: http://ycollette.free.fr/Milkdrop/milkdrop-vlc-presets.zip
 Source7: http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
 
@@ -65,19 +62,17 @@ Extra presets for projectM (yin presets)
 echo "Nothing to build."
 
 %install
-rm -rf $RPM_BUILD_ROOT
 
-# These directories are owned by hydrogen:
-install -dm 0755 $RPM_BUILD_ROOT%{_datadir}/projectM/presets
+install -dm 0755 $RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets
 
-tar xvfz %{SOURCE0} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
-tar xvfz %{SOURCE1} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
-tar xvfz %{SOURCE2} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
-tar xvfz %{SOURCE3} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+tar xvfz %{SOURCE0} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+tar xvfz %{SOURCE1} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+tar xvfz %{SOURCE2} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+tar xvfz %{SOURCE3} --one-top-level=$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
 
 pushd .
 
-cd $RPM_BUILD_ROOT%{_datadir}/projectM/presets
+cd $RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets
 
 mv presets-2.0.0-Source              presets-2.0.0
 mv presets-projectm-2.0.0-Source     projectm-2.0.0
@@ -86,14 +81,14 @@ mv presets_milkdrop_104-2.0.0-Source milkdrop-1.0.4
 
 popd
 
-7za x %{SOURCE4} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
-7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
-7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
-7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectM/presets/
+7za x %{SOURCE4} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
 
 pushd .
 
-cd $RPM_BUILD_ROOT%{_datadir}/projectM/presets
+cd $RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets
 
 mv milkdrop-md-presets  md
 mv milkdrop-megapack    megapack
@@ -123,7 +118,6 @@ rm -rf presets-2.0.0/CMakeFiles
 
 find . -name "amandio c*" -exec rm {} \;
 find . -name "*.bak" -exec rm {} \;
-#find . -name "*.prjm" -exec rm {} \;
 
 # Rename
 find . -name "*.MILK" -exec mv {} `basename {} .MILK`.milk \;
@@ -133,39 +127,38 @@ find . -name "*.mil"  -exec mv {} `basename {} .mil`.milk \;
 
 # Manage permissions
 
-chmod a+rwx,g+rx,o+rx md megapack vlc bltc201 tryptonaut yin
+find %{buildroot}%{_datadir}/projectM-mao -type d -exec chmod 755 {} \;
 
-find . -name "*.milk"  -exec chmod a-x {} \;
+find . -name "*.milk" -exec chmod 644 {} \;
 
 popd
 
-%clean
-
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%{_datadir}/projectM/presets/presets-2.0.0/*
-%{_datadir}/projectM/presets/projectm-2.0.0/*
-%{_datadir}/projectM/presets/milkdrop-2.0.0/*
-%{_datadir}/projectM/presets/milkdrop-1.0.4/*
-%{_datadir}/projectM/presets/vlc/*
+%{_datadir}/projectM-mao/presets/presets-2.0.0/*
+%{_datadir}/projectM-mao/presets/projectm-2.0.0/*
+%{_datadir}/projectM-mao/presets/milkdrop-2.0.0/*
+%{_datadir}/projectM-mao/presets/milkdrop-1.0.4/*
+%{_datadir}/projectM-mao/presets/vlc/*
 
 %files md
-%{_datadir}/projectM/presets/md/*
+%{_datadir}/projectM-mao/presets/md/*
 
 %files megapack
-%{_datadir}/projectM/presets/megapack/*
+%{_datadir}/projectM-mao/presets/megapack/*
 
 %files bltc201
-%{_datadir}/projectM/presets/bltc201/*
+%{_datadir}/projectM-mao/presets/bltc201/*
 
 %files tryptonaut
-%{_datadir}/projectM/presets/tryptonaut/*
+%{_datadir}/projectM-mao/presets/tryptonaut/*
 
 %files yin
-%{_datadir}/projectM/presets/yin/*
+%{_datadir}/projectM-mao/presets/yin/*
 
 %changelog
+* Sun Mar 7 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+- fix permissions
+
 * Sun Nov 24 2019 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-2
 - don't remove prjm files
 

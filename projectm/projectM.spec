@@ -1,13 +1,13 @@
 Name:    projectM-mao
 Version: 3.1.12
-Release: 11%{?dist}
+Release: 12%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
 
 Source0: https://github.com/projectM-visualizer/projectm/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: milkdrop-script.txt
-# Patch0:  projectm-0001-manage-home-dir-for-conf-file.patch
+Source2: projectm-configure.ac
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool make
@@ -40,6 +40,7 @@ developing applications that use %{name}.
 %package -n projectM-mao-jack
 Summary: The projectM visualization plugin for jack
 License: GPLv2+ and MIT
+Requires: projectM-mao-SDL
 
 %description -n projectM-mao-jack
 This package allows the use of the projectM visualization plugin through any
@@ -48,6 +49,7 @@ JACK compatible applications.
 %package -n projectM-mao-pulseaudio
 Summary: The projectM visualization plugin for pulseaudio
 License: GPLv2+ and MIT
+Requires: projectM-mao-SDL
 
 %description -n projectM-mao-pulseaudio
 This package allows the use of the projectM visualization plugin through any
@@ -56,6 +58,7 @@ pulseaudio compatible applications.
 %package -n projectM-mao-alsa
 Summary: The projectM visualization plugin for ALSA
 License: GPLv2+ and MIT
+Requires: projectM-mao-SDL
 
 %description -n projectM-mao-alsa
 This package allows the use of the projectM visualization plugin through any
@@ -75,6 +78,18 @@ SDL compatible applications.
 sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/libprojectM/projectM.cpp
 sed -i -e "s/\/usr\/local\/share\/projectM/\/usr\/share\/projectM-mao/g" src/projectM-sdl/pmSDL.hpp
 
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-MusicPlugin/getConfigFilename.h
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-libvisual/actor_projectM.cpp
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/museum/projectM-xmms/main.cpp
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-jack/projectM-jack.cpp
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-qt/qpresetfiledialog.hpp
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-qt/qprojectm_mainwindow.hpp
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-test/getConfigFilename.h
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-pulseaudio/qprojectM-pulseaudio.cpp
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/projectM-jack/Makefile.am
+
+cp %{SOURCE2} configure.ac
+
 %build
 
 ./autogen.sh
@@ -83,13 +98,13 @@ export QT_SELECT=5
 
 %configure --prefix=%{_prefix} --libdir=%{_libdir} --datadir=%{_datadir} --enable-sdl --disable-qt --disable-pulseaudio --disable-jack
 
-sed -i -e "s/pkgdatadir = \$(datadir)\/projectM/pkgdatadir = \$(datadir)\/projectM-mao/g" Makefile
+sed -i -e "s/share\/projectM/share\/projectM-mao/g" src/libprojectM/libprojectM.pc
 
-%make_build PREFIX=%{_prefix} %{?_smp_mflags}
+%make_build PREFIX=%{_prefix}
 
 %install
 
-%make_install PREFIX=%{_prefix} install
+%make_install PREFIX=%{_prefix}
 
 #
 # Write bash command to select the audio driver
@@ -99,7 +114,7 @@ sed -i -e "s/pkgdatadir = \$(datadir)\/projectM/pkgdatadir = \$(datadir)\/projec
 cat > %{buildroot}/%{_bindir}/%{name}-jack <<EOF
 #!/bin/bash
 
-SDL_AUDIODRIVER=jack projectMSDL
+SDL_AUDIODRIVER=jack projectM-mao-sdl
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
 
@@ -107,7 +122,7 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-jack
 cat > %{buildroot}/%{_bindir}/%{name}-pulse <<EOF
 #!/bin/bash
 
-SDL_AUDIODRIVER=pulse projectMSDL
+SDL_AUDIODRIVER=pulse projectM-mao-sdl
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
 
@@ -115,7 +130,7 @@ chmod a+x %{buildroot}/%{_bindir}/%{name}-pulse
 cat > %{buildroot}/%{_bindir}/%{name}-alsa <<EOF
 #!/bin/bash
 
-SDL_AUDIODRIVER=alsa projectMSDL
+SDL_AUDIODRIVER=alsa projectM-mao-sdl
 EOF
 chmod a+x %{buildroot}/%{_bindir}/%{name}-alsa
 
@@ -178,6 +193,8 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-pul
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-sdl.desktop
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications projectM-mao-alsa.desktop
 
+mv %{buildroot}%{_datadir}/projectM %{buildroot}%{_datadir}/projectM-mao
+
 find %{buildroot}%{_datadir}/projectM-mao/presets/ -name "*.milk" -exec chmod a-x {} \;
 
 # Install the documentation related to scripts
@@ -192,13 +209,12 @@ install -m 644 fonts/Vera.ttf     %{buildroot}%{_datadir}/projectM-mao/fonts/
 rm %{buildroot}%{_bindir}/projectM-unittest
 rm %{buildroot}%{_libdir}/pkgconfig/libprojectM.pc
 
-# transfert binary presets
-mv %{buildroot}%{_datadir}/projectM/presets/* %{buildroot}%{_datadir}/projectM-mao/presets/
-rmdir %{buildroot}%{_datadir}/projectM/presets
-
 # fix config.inp path and font path
 sed -i -e "s/usr\/share\/projectM\/presets/usr\/share\/projectM-mao\/presets/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
 sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
+
+# fix permissions
+find %{buildroot}%{_datadir}/projectM-mao -type d -exec chmod 755 {} \;
 
 %files
 %doc src/libprojectM/ChangeLog
@@ -229,6 +245,9 @@ sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_data
 %{_datadir}/applications/projectM-mao-alsa.desktop
 
 %changelog
+* Sun Mar 7 2021 Yann Collette <ycollette.nospam@free.fr> - 3.1.12-12
+- fix permissions
+
 * Sat Feb 20 2021 Yann Collette <ycollette.nospam@free.fr> - 3.1.12-11
 - update to 3.1.12-11
 
