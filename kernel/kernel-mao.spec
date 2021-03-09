@@ -3,9 +3,9 @@
 # Kernel minor version
 %define kmin  10
 # Kernel patch version
-%define kpat  17
+%define kpat  21
 # RT patch version
-%define krt   32
+%define krt   34
 # package version
 %define krel  11
 
@@ -206,6 +206,9 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 /usr/src/kernels/%{kver}-rt%{krt}%{fcver}
 
 %changelog
+* Tue Mar 09 2021 Yann Collette <ycollette.nospam@free.fr> - 5.10.21-rt34-11
+- update to 5.10.21-rt34-11 - vanilla RT kernel
+
 * Fri Feb 19 2021 Yann Collette <ycollette.nospam@free.fr> - 5.10.17-rt32-11
 - update to 5.10.17-rt32-11 - vanilla RT kernel
 
