@@ -44,6 +44,8 @@ VST3 version of %{name}
 
 %build
 
+sed -i -e "s/-march=native//g" Builds/LinuxMakefile/Makefile
+
 %set_build_flags
 
 export HOME=`pwd`
@@ -79,5 +81,8 @@ cp  images/sonobus_logo@2x.png %{buildroot}/%{_datadir}/pixmaps/sonobus.png
 %{_libdir}/vst3/*
 
 %changelog
+* Fri Mar 12 2021 Yann Collette <ycollette.nospam@free.fr> - 1.3.2-2
+- Fix invalid binaries
+
 * Sun Feb 21 2021 Yann Collette <ycollette.nospam@free.fr> - 1.3.2-1
 - Initial spec file
