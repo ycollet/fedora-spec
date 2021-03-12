@@ -38,6 +38,9 @@ Source1: source.sh
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
+** Check before packaging:
+remove -march=native from Makefiles if it's present
+
 ** lvtk
 fix pkgconfig file installation
 
