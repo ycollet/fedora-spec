@@ -70,9 +70,13 @@ chmod +x %{buildroot}/%{_datadir}/applications/sonobus.desktop
 mkdir -p %{buildroot}/%{_datadir}/pixmaps
 cp  images/sonobus_logo@2x.png %{buildroot}/%{_datadir}/pixmaps/sonobus.png
 
+cp deps/aoo/LICENSE LICENSE-aoo
+cp deps/ff_meters/LICENSE.md LICENSE-ff_meters.md
+cp deps/juce/LICENSE.md LICENSE-juce.md
+
 %files
 %doc README.md
-%license LICENSE
+%license LICENSE LICENSE-aoo LICENSE-ff_meters.md LICENSE-juce.md
 %{_bindir}/*
 %{_datadir}/pixmaps/*
 %{_datadir}/applications/*
