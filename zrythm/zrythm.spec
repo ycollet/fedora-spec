@@ -1,11 +1,11 @@
 Name:    zrythm
-Version: 1.0.0.a1311
+Version: 1.0.0.a1401
 Release: 4%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.13.1.1.tar.gz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.14.0.1.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -53,7 +53,7 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%autosetup -n zrythm-1.0.0-alpha.13.1.1
+%autosetup -n zrythm-1.0.0-alpha.14.0.1
 
 # Compile using -O0 because of jack xruns
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
@@ -63,6 +63,9 @@ sed -i -e "s/'pulseaudio'/'libpulse'/g" meson.build
 
 # Disable warning treated as errors with sphinx
 sed -i -e "s/'-W',/#'-W',/g" doc/user/meson.build
+
+# Fix version of cyaml
+sed -i -e "s/99.1.0/1.1.0/g" meson.build
 
 %build
 
@@ -100,6 +103,9 @@ desktop-file-install --vendor '' \
 %exclude %{_libdir}/libcm_reproc.a
 
 %changelog
+* Sat Mar 13 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.14.0.1-4
+- update to 1.0.0-alpha.14.0.1-4
+
 * Mon Mar 8 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.13.1.1-4
 - update to 1.0.0-alpha.13.1.1-4
 
