@@ -248,7 +248,44 @@ The source package is located in rpmbuild/SRPMS.
 You can also check the following link:
 https://docs.fedoraproject.org/en-US/quick-docs/creating-rpm-packages/
 
-Addentum
+# To test a GUI packages:
+
+Install the package to be tested + dnf (if you want to install something else) + libX11-xcb (some GUI requires this package to be able to start inside the chroot).
+```
+$ mock -r /etc/mock/fedora-33-x86_64.cfg --dnf --install linux-show-player-0.5.2-1.fc33.noarch.rpm dnf libX11-xcb
+```
+
+Now, enable X session connections to the host:
+```
+$ xhost +
+```
+
+Then, start a shell chroot (and enable network connection if you want to complete manually the installation):
+```
+$ mock -r /etc/mock/fedora-33-x86_64.cfg --enable-network --shell
+```
+
+Export the host display when you are in the chroot:
+```
+<mock-chroot> sh-5.0# export DISPLAY=:0.0
+```
+
+And now start the application you wanted to test:
+```
+<mock-chroot> sh-5.0# linux-show-player
+```
+
+After the tests, exit from the chroot:
+```
+<mock-chroot> sh-5.0# exit
+```
+
+And cleanup the chroot:
+```
+$ mock -r /etc/mock/fedora-33-x86_64.cfg --clean
+```
+
+# Addentum
 
 For livecd-creator, there is problem during fsck phase and I needed to comment out a test:
 ```
