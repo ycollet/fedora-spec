@@ -25,7 +25,10 @@ A C library that may be linked into a C/C++ program to produce symbolic backtrac
 %build
 
 %set_build_flags
+export CFLAGS="-fPIC $CFLAGS"
+
 %configure
+
 %make_build
 
 %install 
