@@ -15,14 +15,14 @@ BuildRequires: python3-setuptools
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 
-Requires: python3-gobject
-Requires: python3-qt5-base
-Requires: python3-mido
-Requires: portmidi
-Requires: python-jack-client
-Requires: gstreamer1-plugins-good
-Requires: gstreamer1-libav
-Requires: python3-sortedcontainers
+Requires(pre): python3-gobject
+Requires(pre): python3-qt5-base-gui
+Requires(pre): python3-mido
+Requires(pre): portmidi
+Requires(pre): python-jack-client
+Requires(pre): gstreamer1-plugins-good
+Requires(pre): gstreamer1-libav
+Requires(pre): python3-sortedcontainers
 
 %description
 Linux Show Player (LiSP) - Sound player designed for stage productions.
