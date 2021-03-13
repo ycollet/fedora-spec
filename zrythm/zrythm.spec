@@ -30,6 +30,7 @@ BuildRequires: graphviz-devel
 BuildRequires: libzstd-devel
 BuildRequires: libchromaprint-devel
 BuildRequires: libreproc-devel
+BuildRequires: libbacktrace-devel
 BuildRequires: meson
 BuildRequires: help2man
 BuildRequires: pandoc
