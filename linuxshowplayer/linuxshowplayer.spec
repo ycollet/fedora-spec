@@ -10,6 +10,7 @@ Source0: https://github.com/FrancescoCeruti/linux-show-player/archive/v%{version
 
 BuildArch: noarch
 
+BuildRequires: python3-devel
 BuildRequires: python3-setuptools
 
 BuildRequires: alsa-lib-devel
