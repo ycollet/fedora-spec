@@ -12,7 +12,7 @@
 # published by the Open Source Initiative.
 
 Name:    ChowCentaur
-Version: 1.3.0
+Version: 1.3.6
 Release: 1%{?dist}
 Summary: Digital emulation of the Klon Centaur guitar pedal
 License: BSD-3-Clause
@@ -86,6 +86,9 @@ cp -r cmake-build/ChowCentaur/ChowCentaur_artefacts/Release/LV2/*.lv2 %{buildroo
 %{_libdir}/lv2/
 
 %changelog
+* Sun Mar 14 2021 Yann Collette <ycollette.nospam@free.fr> - 1.3.6-1
+- update to 1.3.6
+
 * Fri Mar 5 2021 Yann Collette <ycollette.nospam@free.fr> - 1.3.0-1
 - update to 1.3.0
 
