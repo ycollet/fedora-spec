@@ -27,6 +27,7 @@ paulstretch          -> https://bitbucket.org/xenakios/paulstretchplugin/src/mas
 NoiseTorch           -> https://github.com/lawl/NoiseTorch
 CadMus               -> https://github.com/josh-richardson/cadmus
 LinuxShowPlayer      -> https://github.com/FrancescoCeruti/linux-show-player
+tangamp              -> https://github.com/sadko4u/tamgamp.lv2
 
 ** Add BuildRequires make in spec file which requires it:
 BuildRequires: make
