@@ -1,11 +1,11 @@
 Summary: DIN is a synth of a 3rd kind
 Name:    din
-Version: 49.1.0
+Version: 50.0.0
 Release: 1%{?dist}
 License: GPL
 URL:     https://dinisnoise.org/
 
-Source0: https://archive.org/download/dinisnoise_source_code/din-49.1.tar.gz
+Source0: https://archive.org/download/dinisnoise_source_code/din-50.tar.gz
 
 BuildRequires: gcc
 BuildRequires: gcc-c++
@@ -33,7 +33,7 @@ You had pulse, sine, triangle and sawtooth,
 And went forth and made electronic music.
 
 %prep
-%autosetup -n %{name}-49.1
+%autosetup -n %{name}-50
 
 # __line conflict with std c++ headers
 sed -i -e "s/__line/__dinline/g" src/line.h
@@ -67,6 +67,9 @@ desktop-file-install                         \
 %{_datadir}/pixmaps/din.png
 
 %changelog
+* Sun Mar 14 2021 Yann Collette <ycollette dot nospam at free.fr> 50.0.0-1
+- update to 50.0.0
+
 * Sat Jan 2 2021 Yann Collette <ycollette dot nospam at free.fr> 49.1.0-1
 - update to 49.1.0
 
