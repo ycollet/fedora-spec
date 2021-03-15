@@ -1,6 +1,6 @@
 Summary: LV2 audio effect plugin for sequenced slicing of stereo audio input signals. Each slice can be levelled up or down to get a step sequencer-like effect.
 Name:    lv2-BSlizr
-Version: 1.2.10
+Version: 1.2.12
 Release: 2%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BSlizr
@@ -33,6 +33,9 @@ LV2 audio effect plugin for sequenced slicing of stereo audio input signals. Eac
 %{_libdir}/lv2/*
 
 %changelog
+* Mon Mar 15 2021 Yann Collette <ycollette dot nospam at free.fr> 1.2.12-2
+- update to 1.2.12-2
+
 * Thu Feb 11 2021 Yann Collette <ycollette dot nospam at free.fr> 1.2.10-2
 - update to 1.2.10-2
 
