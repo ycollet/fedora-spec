@@ -1,12 +1,12 @@
 # Global variables for github repository
-%global commit0 67c9a32a86de5b67586b91117d49c4d63680283e
+%global commit0 50cc35124c17d2c42b8b097b558eaa07eab438b7
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary: B.Harvestr is an experimental granular synthesizer LV2 plugin
 Name:    lv2-BHarvestr
 Version: 0.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BHarvestr
 
@@ -44,7 +44,10 @@ Therefore, future versions of this plugin may be completely incompatible to this
 %{_libdir}/lv2/*
 
 %changelog
-* Fri Jun 25 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1.0-2
+* Mon Mar 15 2021 Yann Collette <ycollette dot nospam at free.fr> 0.1.0-3
+- updata to 0.1.0-3 - last master version
+
+* Fri Jun 26 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1.0-2
 - updata to 0.1.0-2 - last master version
 
 * Wed May 13 2020 Yann Collette <ycollette dot nospam at free.fr> 0.1.0-1
