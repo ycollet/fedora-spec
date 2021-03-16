@@ -1,7 +1,7 @@
-%global gittag0 2021-01-15
+%global gittag0 2021-03-15
 
 Name:    DISTRHO-Ports
-Version: 1.0.3
+Version: 1.1.0
 Release: 4%{?dist}
 Summary: A set of LV2 plugins
 License: GPLv2+
@@ -20,6 +20,8 @@ BuildRequires: libXinerama-devel
 BuildRequires: libXcursor-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: mesa-libGLU-devel
+BuildRequires: fftw-devel
+BuildRequires: cmake
 BuildRequires: meson
 
 %description
@@ -48,6 +50,9 @@ sed -i -e "/-Wl,--strip-all/d" meson.build
 %{_libdir}/vst3/*
 
 %changelog
+* Mon Mar 15 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.4-4
+- update to 2021-03-15 (1.0.3)
+
 * Fri Jan 15 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.3-4
 - update to 2021-01-15 (1.0.3)
 
