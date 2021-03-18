@@ -1,12 +1,12 @@
 Name:    jack_mixer
-Version: 15
+Version: 15.1
 Release: 1%{?dist}
 Summary: jack_mixer is GTK (2.x) JACK audio mixer with look similar to it`s hardware counterparts
 URL:     https://github.com/jack-mixer/jack_mixer
 
 License: GPLv2+
 
-Source0: https://github.com/jack-mixer/jack_mixer/archive/release-%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: https://github.com/jack-mixer/jack_mixer/archive/release-15-1.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc
 BuildRequires: meson
@@ -29,7 +29,7 @@ jack_mixer is Gtk Jack audio mixer with look similar to it`s hardware counterpar
 It has lot of useful features, apart from being able to mix multiple Jack audio streams. 
 
 %prep
-%autosetup -n %{name}-release-%{version}
+%autosetup -n %{name}-release-15-1
 
 # Remove unsupported desktop Categories
 sed -i -e "s/GTK;GNOME;//g" data/jack_mixer.desktop
@@ -59,6 +59,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/man/*
 
 %changelog
+* Thu Mar 18 2021 Yann Collette <ycollette.nospam@free.fr> - 15.1-1
+- update to 15.1
+
 * Fri Feb 26 2021 Yann Collette <ycollette.nospam@free.fr> - 15-1
 - update to 15
 
