@@ -1,6 +1,6 @@
 Name:    projectM-mao
 Version: 3.1.12
-Release: 12%{?dist}
+Release: 13%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
@@ -8,6 +8,7 @@ URL:     https://github.com/projectM-visualizer/projectm
 Source0: https://github.com/projectM-visualizer/projectm/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: milkdrop-script.txt
 Source2: projectm-configure.ac
+Source3: projectm-config.inp
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool make
@@ -213,8 +214,9 @@ rm %{buildroot}%{_datadir}/projectM-mao/presets/*.a
 rm %{buildroot}%{_datadir}/projectM-mao/presets/*.la
 
 # fix config.inp path and font path
-sed -i -e "s/usr\/share\/projectM\/presets/usr\/share\/projectM-mao\/presets/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
-sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
+cp %{SOURCE3} %{buildroot}%{_datadir}/projectM-mao/
+# sed -i -e "s/usr\/share\/projectM\/presets/usr\/share\/projectM-mao\/presets/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
+# sed -i -e "s/Vera/\/usr\/share\/projectM-mao\/fonts\/Vera/g" %{buildroot}%{_datadir}/projectM-mao/config.inp
 
 # fix permissions
 find %{buildroot}%{_datadir}/projectM-mao -type d -exec chmod 755 {} \;

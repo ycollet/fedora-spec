@@ -1,0 +1,35 @@
+Aspect Correction = 1
+Duration = 30
+Easter Egg Parameter = 1
+Hard Cut Sensitivity = 1
+Shuffle Enabled = 0
+Smooth Preset Duration = 5
+Soft Cut Ratings Enabled = 0
+Texture Size = 512
+
+Preset Path = /usr/share/projectM-mao/presets # preset location
+Title Font = /usr/share/projectM-mao/fonts/Vera.ttf
+Menu Font = /usr/share/projectM-mao/fonts/VeraMono.ttf
+
+Texture Size = 512              # Size of internal rendering texture
+Mesh X  = 220                   # Width of PerPixel Equation mesh
+Mesh Y  = 125                   # Height of PerPixel Equation mesh
+FPS  = 35                       # Frames Per Second
+Fullscreen  = false
+Window Width  = 512             # startup window width
+Window Height = 512             # startup window height
+
+Smooth Transition Duration = 5  # in seconds
+Preset Duration = 30            # in seconds
+Easter Egg Parameter = 1
+
+Hard Cut Sensitivity = 10       # Lower to make hard cuts more frequent
+Aspect Correction = true        # Custom Shape Aspect Correction
+
+Hard Cuts Enabled = false  # Hard Cuts are preset transitions that occur when your music becomes louder.
+                           # They only occur after a hard cut duration threshold has passed. 
+Hard Cut Duration = 60     # Number of seconds before you become eligible for a hard cut.
+Hard Cut Sensitivity = 1.0 # Volume sensitivity before a hard cut is triggered.
+
+Beat Sensitivity = 4.0 # Beat Sensitivity impacts how reactive your visualizations are to volume, bass,
+                       # mid-range, and treble. Default 1.0. Range: 0 - 5 (from "dead" to VERY reactive).
