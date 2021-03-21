@@ -67,6 +67,7 @@ ALSA compatible applications.
 %package -n projectM-mao-SDL
 Summary: The projectM visualization plugin for SDL
 License: GPLv2+ and LGPLv2+ and MIT
+Requires: projectM-mao
 
 %description -n projectM-mao-SDL
 This package allows the use of the projectM visualization plugin through any
