@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 b49f7bf5b48edac65b9874fad3ce6ca7599765cd
+%global commit0 4e6939b6c529fd2dad5b7725e347163972125da7
 %global gittag0 1.0.21
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -41,6 +41,7 @@ BuildRequires: jq
 
 %description
 JW-Modules plugin for Rack.
+
 
 %prep
 %autosetup -n Rack
