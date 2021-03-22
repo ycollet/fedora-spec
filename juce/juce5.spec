@@ -36,8 +36,8 @@ live-coding engine which can be used for rapid prototyping.
 
 %set_build_flags
 
-export CXXFLAGS="-DJUCER_ENABLE_GPL_MODE $CXXFLAGS"
-export CFLAGS="-DJUCER_ENABLE_GPL_MODE $CFLAGS"
+export CXXFLAGS="$CXXFLAGS -DJUCER_ENABLE_GPL_MODE -O0"
+export CFLAGS="$CFLAGS -DJUCER_ENABLE_GPL_MODE -O0"
 
 cd doxygen
 sed -i -e "s/python/python2/g" Makefile
