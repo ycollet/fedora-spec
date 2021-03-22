@@ -13,6 +13,7 @@ Source4: http://ycollette.free.fr/Milkdrop/milkdrop-md-presets.zip
 Source5: http://ycollette.free.fr/Milkdrop/milkdrop-megapack.zip
 Source6: http://ycollette.free.fr/Milkdrop/milkdrop-vlc-presets.zip
 Source7: http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip
+Source8: http://ycollette.free.fr/Milkdrop/CreamOfTheCrop_20200216.zip
 
 BuildArch: noarch
 
@@ -56,6 +57,13 @@ Group:   Applications/Multimedia
 %description yin
 Extra presets for projectM (yin presets)
 
+%package creamofthecrop
+Summary: Extra presets for projectM (Cream Of The Crop presets)
+Group:   Applications/Multimedia
+
+%description creamofthecrop
+Extra presets for projectM (yin presets)
+
 %prep
 
 %build
@@ -85,11 +93,13 @@ popd
 7za x %{SOURCE5} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
 7za x %{SOURCE6} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
 7za x %{SOURCE7} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
+7za x %{SOURCE8} -o$RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets/
 
 pushd .
 
 cd $RPM_BUILD_ROOT%{_datadir}/projectM-mao/presets
-
+mkdir $RPM_BUILD_ROOT%{_datadir}/projectM-mao/textures
+ 
 mv milkdrop-md-presets  md
 mv milkdrop-megapack    megapack
 mv milkdrop-vlc-presets vlc
@@ -97,6 +107,24 @@ mv milkdrop-vlc-presets vlc
 mv presets/presets_bltc201    bltc201
 mv presets/presets_tryptonaut tryptonaut
 mv presets/presets_yin        yin
+
+# Cream of the crop
+mv Presets/Dancer    cotc-dancer
+mv Presets/Drawing   cotc-drawing
+mv Presets/Fractal   cotc-fractal
+mv Presets/Geometric cotc-geometric
+mv Presets/Hypnotic  cotc-hypnotic
+mv Presets/Particles cotc-particles
+mv Presets/Reaction  cotc-reaction
+mv Presets/Sparkle   cotc-sparkle
+mv Presets/Supernova cotc-supernova
+mv 'Presets/! Transition' cotc-transition
+mv Presets/Waveform  cotc-wavefrom
+
+rm README.txt
+rm -rf User\ Profile
+
+mv Textures/* ../textures/
 
 find . -name "..[a-zA-Z]*"   -exec rm {} \;
 find . -name ".[a-zA-Z]*"    -exec rm {} \;
@@ -154,6 +182,10 @@ popd
 
 %files yin
 %{_datadir}/projectM-mao/presets/yin/*
+	
+%files creamofthecrop
+%{_datadir}/projectM-mao/presets/cotc-*
+%{_datadir}/projectM-mao/textures/*
 
 %changelog
 * Sun Mar 7 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
