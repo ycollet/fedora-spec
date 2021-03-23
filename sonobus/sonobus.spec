@@ -1,5 +1,5 @@
 Name:    sonobus
-Version: 1.3.2
+Version: 1.4.1
 Release: 3%{?dist}
 Summary: A peer to peer audio application
 License: GPLv2+
@@ -56,12 +56,12 @@ cd Builds/LinuxMakefile
 
 %install 
 
-install -m 755 -d %{buildroot}/%{_libdir}/vst3/SonoBus.vst3/
+install -m 755 -d %{buildroot}/%{_libdir}/vst3/sonobus.vst3/
 install -m 755 -d %{buildroot}/%{_bindir}/
 
-install -m 755 -p Builds/LinuxMakefile/build/SonoBus %{buildroot}/%{_bindir}/
-cp -ra Builds/LinuxMakefile/build/SonoBus.vst3/* %{buildroot}/%{_libdir}/vst3/SonoBus.vst3/
-chmod a+x %{buildroot}/%{_libdir}/vst3/SonoBus.vst3/Contents/x86_64-linux/SonoBus.so
+install -m 755 -p Builds/LinuxMakefile/build/sonobus %{buildroot}/%{_bindir}/
+cp -ra Builds/LinuxMakefile/build/sonobus.vst3/* %{buildroot}/%{_libdir}/vst3/sonobus.vst3/
+chmod a+x %{buildroot}/%{_libdir}/vst3/sonobus.vst3/Contents/x86_64-linux/sonobus.so
 
 mkdir -p %{buildroot}/%{_datadir}/applications
 cp  Builds/LinuxMakefile/sonobus.desktop %{buildroot}/%{_datadir}/applications/sonobus.desktop
@@ -85,6 +85,12 @@ cp deps/juce/LICENSE.md LICENSE-juce.md
 %{_libdir}/vst3/*
 
 %changelog
+* Tue Mar 23 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.1-3
+- update to 1.4.1-3
+
+* Tue Mar 23 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.0-3
+- update to 1.4.0-3
+
 * Fri Mar 12 2021 Yann Collette <ycollette.nospam@free.fr> - 1.3.2-2
 - Fix invalid binaries
 
