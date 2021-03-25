@@ -1,12 +1,12 @@
 Name:    openFrameworks
-Version: 0.11.1
+Version: 0.11.2
 Release: 2%{?dist}
 Summary: openFrameworks library / code
 URL:     https://github.com/openframeworks/openFrameworks
 License: GPLv2+
 
 # to get the sources:
-# ./source_openframeworks.sh 0.11.1
+# ./source_openframeworks.sh 0.11.2
 # ./source_openframeworks.sh patch-release
 
 Source0: openFrameworks.tar.gz
@@ -114,6 +114,9 @@ rm -rf %{buildroot}/opt/openFrameworks/.travis.yml
 /opt/%{name}/*
 
 %changelog
+* Thu Mar 25 2021 Yann Collette <ycollette.nospam@free.fr> - 0.11.2-2
+- update to 0.11.2
+
 * Wed Mar 3 2021 Yann Collette <ycollette.nospam@free.fr> - 0.11.1-2
 - update to 0.11.1
 

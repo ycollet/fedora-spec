@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./source.sh 0.11.0
+# ./source_openframeworks.sh 0.11.2
 
 # original tarfile can be found here:
 git clone https://github.com/openframeworks/openFrameworks
