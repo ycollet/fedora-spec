@@ -1,5 +1,5 @@
 Name:    sonobus
-Version: 1.4.1
+Version: 1.4.2
 Release: 3%{?dist}
 Summary: A peer to peer audio application
 License: GPLv2+
@@ -85,6 +85,9 @@ cp deps/juce/LICENSE.md LICENSE-juce.md
 %{_libdir}/vst3/*
 
 %changelog
+* Thu Mar 25 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.2-3
+- update to 1.4.2-3
+
 * Tue Mar 23 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.1-3
 - update to 1.4.1-3
 
