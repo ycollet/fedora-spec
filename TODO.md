@@ -7,7 +7,6 @@
  DeLooper            -> https://github.com/sonejostudios/DeLooper
  morphex             -> https://github.com/MarcSM/morphex
  freqtweak           -> https://github.com/essej/freqtweak
- dexed               -> https://github.com/asb2m10/dexed (in distrho)
  mephisto            -> https://open-music-kontrollers.ch/lv2/mephisto/
  zrythm - lsp-dsp    -> add a devel package for zrythm
  emissioncontrol2    -> https://github.com/EmissionControl2/EmissionControl2
@@ -26,7 +25,6 @@ paulstretch          -> https://bitbucket.org/xenakios/paulstretchplugin/src/mas
 NoiseTorch           -> https://github.com/lawl/NoiseTorch
 CadMus               -> https://github.com/josh-richardson/cadmus
 tangamp              -> https://github.com/sadko4u/tamgamp.lv2
-zynthian             -> https://github.com/zynthian/zynthian-data (package lv2 presets)
 tascar               -> https://github.com/HoerTech-gGmbH/tascar/
 
 ** Add BuildRequires make in spec file which requires it:
