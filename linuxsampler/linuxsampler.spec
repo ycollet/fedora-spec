@@ -1,10 +1,7 @@
-# svn co https://svn.linuxsampler.org/svn/linuxsampler/trunk linuxsampler
-# define svn 2680
-
 Summary:      Linux Sampler
 Name:         linuxsampler
 Version:      2.1.1
-Release:      1%{?dist}
+Release:      2%{?dist}
 License:      GPL
 URL:          http://www.linuxsampler.org/
 Distribution: Planet CCRMA
@@ -51,7 +48,8 @@ Linuxsampler plugin for the LV2 plugin standard.
 if [ -f Makefile.cvs ]; then make -f Makefile.cvs; fi
 
 %build
-%configure
+
+%configure CXXFLAGS="-std=c++11 $CXXFLAGS"
 %make_build
 
 %install
@@ -91,6 +89,9 @@ echo "%{_libdir}/linuxsampler" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/linuxsa
 %exclude %{_libdir}/lv2/linuxsampler.lv2/linuxsampler.la
 
 %changelog
+* Sat Mar 27 2021 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-2
+- update to 2.1.1-2 - fixes for Fedora 34
+
 * Thu Nov 5 2020 Yann Collette <ycollette.nospam@free.fr> - 2.1.1-1
 - update to 2.1.1
 
