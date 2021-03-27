@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RELEASEVER=32
+RELEASEVER=33
 
 for Files in `dnf --releasever $RELEASEVER list --available | grep ycollet | grep src | cut -d" " -f1 | sed -e "s/\.src//g"`
 do

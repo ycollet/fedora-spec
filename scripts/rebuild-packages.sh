@@ -59,6 +59,6 @@ FILELIST=""
 
 for Files in $FILELIST
 do
-    copr-cli build --chroot fedora-33-x86_64 linuxmao $Files
+    copr-cli build --chroot fedora-34-x86_64 linuxmao $Files
 done
 
