@@ -36,6 +36,10 @@ DrumGizmo is an open source, multichannel, multilayered, cross-platform drum plu
 
 %build
 
+%set_build_flags
+
+export CXXFLAGS="-std=c++11 -include cstdint $CXXFLAGS"
+
 %configure --enable-lv2 --libdir=%{_libdir} 
 # --disable-cli --with-lv2dir=
 
