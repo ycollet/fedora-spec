@@ -49,7 +49,9 @@ with the synth of your choice.
 
 %set_build_flags
 
-%make_build CXXFLAGS="%build_cxxflags -I/usr/include/cairo -I/usr/include/sigc++-2.0/ -I/usr/%{_lib}/sigc++-2.0/include" 
+export CXXFLAGS="-D__cpluscplus -std=c++11 -fPIC -I/usr/include/cairo -I/usr/include/sigc++-2.0/ -I/usr/%{_lib}/sigc++-2.0/include $CXXFLAGS"
+
+%make_build 
 
 %install 
 
