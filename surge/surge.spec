@@ -70,7 +70,7 @@ done
 ./build-linux.sh cmake
 
 cd buildlin
-cmake -DCMAKE_C_FLAGS="-Wno-error -O2 -g -fPIC" -DCMAKE_CXX_FLAGS="-Wno-error -O2 -g -fPIC" .
+cmake -DCMAKE_C_FLAGS="-Wno-error -O2 -g -fPIC" -DCMAKE_CXX_FLAGS="-include limits -std=c++11 -Wno-error -O2 -g -fPIC" .
 cd ..
 
 ./build-linux.sh build
@@ -87,10 +87,10 @@ mkdir -p .local/share/Surge
 install -m 755 -d %{buildroot}%{_libdir}/vst3/Surge.vst3/
 cp -r .vst3/Surge.vst3/* %{buildroot}/%{_libdir}/vst3/Surge.vst3/
 
-%__install -m 755 -d %{buildroot}%{_libdir}/lv2/
+install -m 755 -d %{buildroot}%{_libdir}/lv2/
 cp -r .lv2/* %{buildroot}/%{_libdir}/lv2/
 
-%__install -m 755 -d %{buildroot}%{_datadir}/Surge/
+install -m 755 -d %{buildroot}%{_datadir}/Surge/
 rsync -rav .local/share/surge/* %{buildroot}/%{_datadir}/Surge/
 
 %files
