@@ -26,6 +26,21 @@ NoiseTorch           -> https://github.com/lawl/NoiseTorch
 CadMus               -> https://github.com/josh-richardson/cadmus
 tangamp              -> https://github.com/sadko4u/tamgamp.lv2
 tascar               -> https://github.com/HoerTech-gGmbH/tascar/
+midieditor           -> https://github.com/markusschwenk/midieditor/
+
+** Cleanup
+Remove mv-6pm or 6pm. Both are normally the same package
+
+** Todo for 34
+- update snd to 21.1
+- add gamin from src.fedoraproject.org (if required)
+- check std::numeric_limits pb (gcc 11 / C++17 ?)
+- Socalab -> /usr/bin/ld: /usr/lib64/libglib-2.0.so.0: error adding symbols: DSO missing from command line
+- error: 'numeric_limits' is not a member of 'std'
+- rivendell: rdcart.cpp:365:39: error: ordered comparison of pointer with integer zero ('const void*' and 'int')
+- kmidimon: needs drumstick-devel
+- glava: <artificial>:(.text+0x1005): undefined reference to `glfwGetX11Window'
+- ecasound: python3 missing
 
 ** Add BuildRequires make in spec file which requires it:
 BuildRequires: make
