@@ -50,40 +50,42 @@
 # HS
 # faust
 # abNinjam
-# din
 # BespokeSynth
 # Carla
 # ecasound
 # element
-# drumgizgmo
 # fluxus
 # glava
-# gigedit
-# gxtuner
 # hydrogen-drumkits
 # infamous-plugins
 # kmidimon
 # kpp
-# mamba
 # miniaudicle
-# zrythm
-# rack-v1-voxglitch 
+# sonobus
+# SocaLabs-plugins
+# rivendell
+
+# Maybe a preprocessor bug related to freetype-config output.
 # veejay-server
 # veejay-gui
-# rack-v1-TheXOR
-# sonic-pi
-# surge
-# supercollider
-# rack-v1-rcm
-# sonobus
-# snd
-# SocaLabs-plugins
-# rack-v1-luckyxxl
-# rack-v1-MindMeldModular
-# rivendell
-# rack-v1-JE
-# rack-v1-ImpromptuModular
-#
+# sonic-pi a problem due to ruby 3.0
+# Mamba problem with template and C code ...
+
+# OK - rack-v1-JE
+# OK - rack-v1-luckyxxl
+# OK - rack-v1-MindMeldModular
+# OK - rack-v1-ImpromptuModular
+# OK - rack-v1-voxglitch 
+# OK - rack-v1-TheXOR
+# OK - rack-v1-rcm
+# OK - supercollider
+# OK - zrythm
+# OK - din
+# OK - snd
+# OK - surge
+# OK - gxtuner
+# OK - gigedit
+# OK - drumgizgmo
 
 # Reorder srpm file in FILELIST: dependencies first
 
