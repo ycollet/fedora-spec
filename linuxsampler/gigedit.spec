@@ -33,7 +33,13 @@ before editing them in gigedit.
 %autosetup
 
 %build
+
+%set_build_flags
+
+export CXXFLAGS="-std=c++11 $CXXFLAGS"
+
 %configure 
+
 %make_build
 
 %install
