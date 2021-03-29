@@ -12,7 +12,7 @@
 
 Name:    sonic-pi
 Version: 3.3.1
-Release: 9%{?dist}
+Release: 10%{?dist}
 Summary: A musical programming environment 
 License: MIT
 URL:     http://sonic-pi.net/
@@ -132,6 +132,9 @@ cp -ra  app/server/ruby/bin/* %{buildroot}%{_datadir}/%{name}/app/server/ruby/bi
 %if 0%{?fedora} >= 32
 %define rb_version "2.7.0"
 %endif
+%if 0%{?fedora} >= 34
+%define rb_version "3.0.0"
+%endif
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/app/server/ruby/rb-native/%{rb_version}/
 
@@ -207,6 +210,9 @@ desktop-file-install --vendor '' \
 %{_datadir}
 
 %changelog
+* Mon Mar 29 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.1-10
+- update to 3.3.1-10 - fixed for Fedora 34
+
 * Mon Feb 1 2021 Yann Collette <ycollette.nospam@free.fr> 3.3.1-7
 - update to 3.3.1-7
 
