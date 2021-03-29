@@ -1,62 +1,57 @@
-%define pkgver 20.3
+%define pkgver 21.2
 %define tarname snd-%{pkgver}
 %define snd_date "11/01/2017"
 
 %define	desktop_vendor planetccrma
 
-%define build_motif 1
-%define build_gtk   1
-%define build_s7    1
-
-%define motif_version 2.3.0-0.3%{?dist}
-
 # configuration options (note: check later --with-rt)
-%define config_options --prefix=%{_prefix} --with-s7 --with-alsa --with-jack --with-ladspa --with-doc-dir=%{_datadir}/doc/snd-%{pkgver}
-
-# find motif
-%if "%(if [ -d /opt/openmotif ] ; then echo "1" ; else echo "0" ; fi)" == "1"
-%define motifprefix --with-motif-prefix=/opt/openmotif%{_prefix}
-%define motifldflags export LDFLAGS='-Wl,-rpath -Wl,/opt/openmotif%{_prefix}/%{_lib}'
-%endif
+%define config_options --prefix=%{_prefix} --with-alsa --with-jack --with-ladspa --with-doc-dir=%{_datadir}/doc/snd-%{pkgver}
 
 Summary: A sound editor (%{pkgver}, %{snd_date})
 Name:    snd
 Version: %{pkgver}
 Release: 1%{?dist}
 License: LGPL
-Group:   Applications/Multimedia
 
 Source:	 https://ccrma.stanford.edu/software/snd/snd-%{pkgver}.tar.gz
 Source1: snd.png
 Source2: snd.desktop
 Patch0:  snd-13-docdir.patch
-Patch1:  snd-14-lpthread.patch
 URL:     https://ccrma.stanford.edu/software/snd/
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 Requires: hicolor-icon-theme
 
-BuildRequires: gcc gcc-c++
-BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel
-BuildRequires: libsamplerate-devel vorbis-tools speex-tools
-BuildRequires: gsl-devel fftw-devel ladspa-devel liblrdf-devel
-BuildRequires: gamin-devel gettext-devel desktop-file-utils
+BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: make
+BuildRequires: alsa-lib-devel
+BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: libsamplerate-devel
+BuildRequires: vorbis-tools
+BuildRequires: speex-tools
+BuildRequires: gsl-devel
+BuildRequires: fftw-devel
+BuildRequires: ladspa-devel
+BuildRequires: liblrdf-devel
+# BuildRequires: gamin-devel
+BuildRequires: gettext-devel
+BuildRequires: desktop-file-utils
 BuildRequires: libXpm-devel
-BuildRequires: libtimidity-devel timidity++
-BuildRequires: flac flac-devel
-BuildRequires: mpg123 mpg123-devel
-%if "%{build_motif}" == "1"
-BuildRequires:  openmotif-devel
-%endif
-%if "%{build_gtk}" == "1"
-BuildRequires: gtk3-devel gtkglext-devel
-%endif
+BuildRequires: libtimidity-devel
+BuildRequires: timidity++
+BuildRequires: flac
+BuildRequires: flac-devel
+BuildRequires: mpg123
+BuildRequires: mpg123-devel
+BuildRequires: gtk3-devel
+BuildRequires: gtkglext-devel
 
-Requires: mpg123 flac timidity++
+Requires: mpg123
+Requires: flac
+Requires: timidity++
 
 %description
 Snd is a sound editor modelled loosely after Emacs and an old,
@@ -68,19 +63,8 @@ pub/Lisp/%{tarname}.tar.gz.
 
 This package contains snd version %{pkgver}, dated %{snd_date}.
 
-%package motif
-Summary: Motif version of snd (%{pkgver}, %{snd_date})
-Group: Applications/Multimedia
-Requires: snd == %{version}-%{release}
-Requires: openmotif >= %{motif_version}
-
-%description motif
-A version of the Snd editor (%{pkgver} of %{snd_date}) compiled with the
-Motif gui.
-
 %package gtk
 Summary: Gtk version of snd (%{pkgver}, %{snd_date})
-Group: Applications/Multimedia
 Requires: snd == %{version}-%{release}
 
 %description gtk
@@ -89,7 +73,6 @@ gui.
 
 %package utils
 Summary: Sndplay and friends (Snd %{pkgver}, %{snd_date})
-Group: Applications/Multimedia
 # always conflict with the (old) sndplay packages from cm/clm/cmn
 Conflicts: sndplay-oss sndplay
 
@@ -110,12 +93,9 @@ access to many sound file headers and data types, and most of the
 features of the audio hardware.
 
 %prep
-%setup -q -n snd-%{pkgver}
-%patch0 -p1
-%patch1 -p1
+%autosetup -p1 -n snd-%{pkgver}
 
 %build
-%{?motifldflags}
 
 # change all html href tags to point to the absolute location of
 # the html documentation
@@ -129,53 +109,35 @@ done
 # by default
 %{__perl} -p -i -e "s|/usr/share/doc/snd-10/snd.html|/usr/share/doc/snd-%{pkgver}/snd.html|g" index.scm
 
-# build Motif version
-%if %{build_motif}
-    ./configure %{config_options} %{?motifprefix} --with-gl --with-static-xm=yes
-    %{__make} %{?_smp_mflags}
-    %{__mv} snd snd-motif
-    %{__make} clean
-    %{__rm} -f config.cache
-%endif
-
 # build Gtk version
-%if %{build_gtk}
-    ./configure %{config_options} --with-gtk=yes
-    %{__make} %{?_smp_mflags}
-    %{__mv} snd snd-gtk
-    %{__make} clean
-    %{__rm} -f config.cache
-%endif
+./configure %{config_options} --with-gtk=yes
+%make_build
+mv snd snd-gtk
+make clean
+rm -f config.cache
 
 # build snd utilities
 ./configure --with-no-gui %{config_options}
 # removed sndsine for now
 # audinfo is not happy (9/26/2005)
 perl -p -i -e 's|LIBS = -ldl |LIBS = -lpthread -ldl |' makefile
-%{__make}  %{?_smp_mflags} sndplay sndinfo 
+%make_build sndplay sndinfo 
 
 %install
-%{?motifldflags}
-%{__rm} -rf %{buildroot}
-%{__mkdir} -p %{buildroot}%{_bindir}/
-%{__mkdir} -p %{buildroot}%{_mandir}/man1
-%{__install} -m 644 snd.1 %{buildroot}%{_mandir}/man1
-%if %{build_motif}
-    %{__install} -m 755 snd-motif %{buildroot}%{_bindir}/snd
-%endif
-%if %{build_gtk}
-    %{__install} -m 755 snd-gtk %{buildroot}%{_bindir}/snd-gtk
-%endif
+mkdir -p %{buildroot}%{_bindir}/
+mkdir -p %{buildroot}%{_mandir}/man1
+install -m 644 snd.1 %{buildroot}%{_mandir}/man1
+install -m 755 snd-gtk %{buildroot}%{_bindir}/snd-gtk
 # removed sndsine for now
-%{__install} -m 755 sndplay sndinfo %{buildroot}%{_bindir}
+install -m 755 sndplay sndinfo %{buildroot}%{_bindir}
 
 # scheme source code
-%{__mkdir} -p %{buildroot}%{_libdir}/snd/scheme
-(%{__tar} cf - *.scm)|(cd %{buildroot}/%{_libdir}/snd/scheme; %{__tar} xpf -)
+mkdir -p %{buildroot}%{_libdir}/snd/scheme
+(tar cf - *.scm)|(cd %{buildroot}/%{_libdir}/snd/scheme; %{__tar} xpf -)
 
 # install icon to the proper freedesktop location
-%{__mkdir} -p %{buildroot}%{_datadir}/icons/hicolor/32x32/apps
-%{__install} -m 644 %{SOURCE1} %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/32x32/apps
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/
 
 # menu categories
 BASE="Application AudioVideo Audio"
@@ -188,39 +150,18 @@ desktop-file-install --vendor %{desktop_vendor} \
   %{SOURCE2}
 
 #--- a configuration file with the default scheme paths ready to go
-%{__mkdir} -p %{buildroot}/etc
-%{__cat} << EOF > %{buildroot}/etc/snd.conf
+mkdir -p %{buildroot}/etc
+cat << EOF > %{buildroot}/etc/snd.conf
 ;; Default snd configuration file
 ;;
 ;; add paths to begin of default load path (last in the list is the 
 ;; first in the search order)
-%if 0%{?build_s7}
-(set! *load-path* (cons "%{_libdir}/snd/scheme" *load-path*))
-%else
-(set! %load-path (cons "%{_libdir}/snd/scheme" %load-path))
-%endif
+(set! *load-path (cons "%{_libdir}/snd/scheme" *load-path))
 EOF
 
-%if 0%{?fedora} >= 6
 # sndinfo conflicts with a utility in csound (from fedora extras), so
 # rename it snd-info
 mv %{buildroot}%{_bindir}/sndinfo %{buildroot}%{_bindir}/snd-info
-%endif
-
-%clean
-%{__rm} -rf %{buildroot}
-
-%post
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
-
-%postun
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
 
 %files
 %defattr(-, root, root)
@@ -233,28 +174,19 @@ fi
 %{_libdir}/snd/scheme
 %config(noreplace) /etc/snd.conf
 
-%if %{build_motif}
-%files motif
-%defattr(-, root, root)
-%{_bindir}/snd
-%endif
-
-%if %{build_gtk}
 %files gtk
 %defattr(-, root, root)
 %{_bindir}/snd-gtk
-%endif
 
 %files utils
 %defattr(-, root, root)
 %{_bindir}/sndplay
-%if 0%{?fedora} >= 6
 %{_bindir}/snd-info
-%else
-%{_bindir}/sndinfo
-%endif
 
 %changelog
+* Mon Mar 29 2021 Yann Collette <ycollette.nospam@free.fr> -
+- update to 21.2
+
 * Fri May 1 2020 Yann Collette <ycollette.nospam@free.fr> -
 - update to 20.3
 
