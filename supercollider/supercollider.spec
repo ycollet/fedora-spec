@@ -97,9 +97,9 @@ sed -i -e "280,281d" CMakeLists.txt
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
 
 %ifarch x86_64
-%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
+%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="-std=c++11 %{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %else
-%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="%{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
+%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="-std=c++11 %{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %endif
 
 %cmake_build

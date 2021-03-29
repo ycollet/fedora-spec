@@ -45,7 +45,7 @@ sed -i -e "s/__line/__dinline/g" src/line.h
 # __UNIX_JACK__
 # __LINUX_ALSA__
 
-CFLAGS="-D__UNIX_JACK__ $CFLAGS" CXXFLAGS="-D__UNIX_JACK__ $CXXFLAGS" LDFLAGS="-ljack $LDFLAGS" ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+CFLAGS="-D__UNIX_JACK__ $CFLAGS" CXXFLAGS="-std=c++11 -D__UNIX_JACK__ $CXXFLAGS" LDFLAGS="-ljack $LDFLAGS" ./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %make_build
 
 %install
