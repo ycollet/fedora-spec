@@ -1,11 +1,11 @@
 # Global variables for github repository
-%global commit0 6a7202284a2a5af9144e76505f948c4df6127c44
+%global commit0 330a3e25b1134b6ab1d92ccdf34f3ede659f17e6
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:    veejay-gui
 Version: 1.5.57
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A 'visual' instrument and realtime video sampler (for live video improvisation)
 URL:     https://github.com/c0ntrol/veejay
 License: GPLv2+
@@ -142,6 +142,9 @@ chrpath --delete $RPM_BUILD_ROOT/usr/bin/sayVIMS
 %{_libdir}/*
 
 %changelog
+* Mon Mar 29 2021 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-4
+- update to last master
+
 * Thu Oct 22 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-3
 - fix debug build
 
