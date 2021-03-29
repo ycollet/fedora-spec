@@ -8,7 +8,7 @@
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
 Version: 3.11.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
 URL:     http://supercollider.sourceforge.net/
 
@@ -96,10 +96,11 @@ sed -i -e "280,281d" CMakeLists.txt
 # remove all git directories
 find . -type d -name .git -printf "\"%h/%f\"\n" | xargs rm -rf 
 
+# -DSYSTEM_BOOST=ON 
 %ifarch x86_64
-%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="-std=c++11 %{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
+%cmake -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="-std=c++11 %{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DLIB_SUFFIX="64" -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %else
-%cmake -DSYSTEM_BOOST=ON -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="-std=c++11 %{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
+%cmake -DCMAKE_C_FLAGS="%{optflags}" -DCMAKE_CXX_FLAGS="-std=c++11 %{optflags}" -DCMAKE_BUILD_TYPE=RELEASE -DSUPERNOVA=ON -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %endif
 
 %cmake_build
@@ -165,8 +166,11 @@ install -m0644 SCVersion.txt $RPM_BUILD_ROOT%{_includedir}/SuperCollider/
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Mon Mar 29 2021 Yann Collette <ycollette.nospam@free.fr> 3.11.2-4
+- update to 3.11.4 - fixes for fedora 34
+
 * Sun Nov 15 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.2-3
-- update to 3.11.2
+- update to 3.11.3
 
 * Fri Oct 2 2020 Yann Collette <ycollette.nospam@free.fr> 3.11.1-3
 - fix for Fedora 33
