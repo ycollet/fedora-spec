@@ -20,7 +20,7 @@ BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: JUCE == 5.4.7.1e71c07
+BuildRequires: JUCE5
 BuildRequires: python2-devel
 BuildRequires: libcurl-devel
 BuildRequires: freetype-devel
@@ -56,8 +56,8 @@ Xvfb %{X_display} >& Xvfb.log &
 trap "kill $! || true" EXIT
 sleep 10
 
-Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules/
-Projucer --resave BespokeSynth.jucer
+Projucer5 --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE5/modules/
+Projucer5 --resave BespokeSynth.jucer
 
 sed -i -e "s/python-config/python2-config/g" Builds/LinuxMakefile/Makefile
 
@@ -67,7 +67,7 @@ sed -i -e "s/python-config/python2-config/g" Builds/LinuxMakefile/Makefile
 
 export CURRENTDIR=`pwd`
 cd Builds/LinuxMakefile
-%{make_build} PREFIX=/usr LIBDIR=%{_libdir} CONFIG=Release CPPFLAGS="%{build_cxxflags}" CXXFLAGS="-I$CURRENTDIR/vst/vstsdk2.4/ -I/usr/include/freetype2" LDFLAGS="-lpython%{python3_version} $LDFLAGS"
+%{make_build} PREFIX=/usr LIBDIR=%{_libdir} CONFIG=Release CPPFLAGS="%{build_cxxflags}" CXXFLAGS="-std=c++11 -I$CURRENTDIR/vst/vstsdk2.4/ -I/usr/include/freetype2" LDFLAGS="-lpython%{python3_version} $LDFLAGS"
 
 %install 
 
