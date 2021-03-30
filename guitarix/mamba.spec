@@ -37,6 +37,7 @@ Mamba includes also support by fluidsynth,
 you could load a soundfont and directly play along.
 
 Mamba will keep it's settings, so once a soundfont is loaded,
+
 on the next start you could just play along with the keyboard.
 You could load a new soundfont at any time. You could as well
 exit fluidsynth to use Mamba as plain Virtual MIDI keyboard
@@ -44,6 +45,15 @@ with the synth of your choice.
 
 %prep
 %autosetup -n Mamba_%{version}
+
+cat > src/Mamba.h.tmp <<EOF
+extern "C++" {
+#include <type_traits>
+}
+EOF
+cat src/Mamba.h >> src/Mamba.h.tmp
+rm src/Mamba.h
+mv src/Mamba.h.tmp src/Mamba.h
 
 %build
 
