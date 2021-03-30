@@ -48,6 +48,7 @@ sed -i -e "s/-march=native//g" Builds/LinuxMakefile/Makefile
 
 %set_build_flags
 
+export CXXFLAGS="-std=c++14 $CXXFLAGS"
 export HOME=`pwd`
 mkdir -p .vst3
 
