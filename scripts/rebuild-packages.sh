@@ -50,19 +50,14 @@
 # HS
 # faust
 # abNinjam
-# BespokeSynth
-# Carla
 # ecasound
 # element
 # fluxus
 # glava
 # hydrogen-drumkits
-# infamous-plugins
 # kmidimon
 # kpp
 # miniaudicle
-# sonobus
-# SocaLabs-plugins
 # rivendell
 
 # Maybe a preprocessor bug related to freetype-config output.
@@ -70,6 +65,10 @@
 # veejay-gui
 # sonic-pi a problem due to ruby 3.0
 # Mamba problem with template and C code ...
+# sonobus pb with Juce and the use of deleted function
+# SocaLabs-plugins pb with projucer resave project
+# BespokeSynth doesn't build anymore ...
+# infamous-plugins pb with lv2-1.18.0
 
 # OK - rack-v1-JE
 # OK - rack-v1-luckyxxl
