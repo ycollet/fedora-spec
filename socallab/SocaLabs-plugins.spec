@@ -96,7 +96,7 @@ mkdir -p $CURRENT_PATH/bin/standalone/
 mkdir -p $CURRENT_PATH/bin/vst/
 mkdir -p $CURRENT_PATH/bin/lv2/
 
-Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/juce/modules
+Projucer --set-global-search-path linux defaultJuceModulePath /usr/src/JUCE/modules
 
 cat ci/pluginlist.txt | while read PLUGIN; do
   PLUGIN=$(echo $PLUGIN|tr -d '\n\r ')
@@ -120,7 +120,7 @@ cat ci/pluginlist.txt | while read PLUGIN; do
   
   cd plugins/$PLUGIN/Builds/LinuxMakefile
   
-  %make_build CONFIG=Release CFLAGS="%{build_cflags}" CXXFLAGS="%{build_cxxflags}" STRIP=true
+  %make_build CONFIG=Release CFLAGS="%{build_cflags}" CXXFLAGS="-std=c++11 %{build_cxxflags}" STRIP=true
   
   cp ./build/$PLUGIN        $CURRENT_PATH/bin/standalone/
   cp ./build/$PLUGIN.so     $CURRENT_PATH/bin/vst/
