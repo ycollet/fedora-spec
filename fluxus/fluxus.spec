@@ -94,8 +94,8 @@ sed -i -e "s/FluxusCollectsLocation = Prefix + \"\/lib\"/FluxusCollectsLocation 
 
 %set_build_flags
 
-export CXXFLAGS="-fPIC $CXXFLAGS"
-export CFLAGS="-fPIC $CFLAGS"
+export CXXFLAGS="-std=c++11 -fPIC $CXXFLAGS"
+export CFLAGS="-std=c++11 -fPIC $CFLAGS"
 
 scons -Q install DESTDIR="%{buildroot}" Prefix=/usr RacketPrefix=/usr
 
@@ -131,6 +131,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/emacs/site-lisp/fluxus
 
 %changelog
+* Thu Apr 01 2021 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-3
+- fix for fedora 34
+
 * Wed Oct 21 2020 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-3
 - fix debug build
 
