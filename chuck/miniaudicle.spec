@@ -8,6 +8,7 @@ Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
 
 Source0: http://audicle.cs.princeton.edu/mini/release/files/miniAudicle-%{version}%{?beta:-%{?beta}}.tgz
+Patch0:  miniaudicle-0001-fix-nullptr-check.patch
 
 BuildRequires: gcc gcc-c++ perl
 BuildRequires: bison flex
@@ -28,7 +29,7 @@ environment, or in conjunction with traditional command-line modes of
 'chuck' operation and with other chuck tools.
 
 %prep
-%autosetup -n miniAudicle-%{version}%{?beta:-%{?beta}}
+%autosetup -p1 -n miniAudicle-%{version}%{?beta:-%{?beta}}
 
 %build
 # build alsa version
@@ -36,7 +37,7 @@ cd src
 
 # insert rpm flags in qmake profile
 perl -p -i -e "s|QMAKE_LFLAGS \+=|QMAKE_LFLAGS \+= %{__global_ldflags}|g" miniAudicle.pro
-perl -p -i -e "s|CFLAGS \+=|CFLAGS \+= %{optflags}|g" miniAudicle.pro
+perl -p -i -e "s|CFLAGS \+=|CFLAGS \+= -std=c++11 %{optflags}|g" miniAudicle.pro
 
 # write proper lib path in default preferences
 perl -p -i -e "s|/usr/local/lib/chuck|%{_libdir}/chuck|g" chuck/src/chuck_dl.cpp
