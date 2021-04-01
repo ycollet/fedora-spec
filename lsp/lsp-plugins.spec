@@ -1,11 +1,11 @@
 Summary: LSP LV2 Plugins
 Name:    lsp-plugins
-Version: 1.1.29
+Version: 1.1.30
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sadko4u/lsp-plugins
 
-# ./lsp-sources.sh 1.1.29
+# ./lsp-sources.sh 1.1.30
 
 Source0: lsp-plugins.tar.gz
 
@@ -52,9 +52,11 @@ chrpath --delete $RPM_BUILD_ROOT/usr/%{_lib}/vst/lsp-plugins-lxvst-%{version}/*.
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*
-%{_sysconfdir}/xdg/menus/applications-merged/lsp-plugins.menu
 
 %changelog
+* Thu Apr 01 2021 Yann Collette <ycollette dot nospam at free.fr> 1.1.30-1
+- update to 1.1.30-1
+
 * Tue Jan 19 2021 Yann Collette <ycollette dot nospam at free.fr> 1.1.29-1
 - update to 1.1.29-1
 
