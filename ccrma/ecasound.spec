@@ -28,12 +28,8 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel libsndfile-devel
 BuildRequires: hevea python3-docutils
 BuildRequires: liboil-devel
-%if 0%{?fedora} > 17
-BuildRequires: texlive texlive-latex-bin-bin texlive-texconfig 
+BuildRequires: texlive texlive-latex-bin-bin texlive-texlive-scripts-extra 
 BuildRequires: texlive-metafont-bin texlive-comment
-%else
-BuildRequires: texlive-latex hevea
-%endif
 BuildRequires: ladspa lilv-devel liblo-devel
 
 %description
@@ -169,6 +165,9 @@ sed -i -e "s/env python$/env python2/g" $RPM_BUILD_ROOT%{_bindir}/ecamonitor
 %{_datadir}/ruby/vendor_ruby/ecasound.rb
 
 %changelog
+* Thu Apr 01 2021 Yann Collette <ycollette.nospam@free.fr> - 2.9.3-2
+- Fix for Fedora 34
+
 * Thu Nov 05 2020 Yann Collette <ycollette.nospam@free.fr> - 2.9.3-1
 - update to 2.9.3-1
 
