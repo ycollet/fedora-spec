@@ -49,26 +49,18 @@
 
 # HS
 # faust
-# abNinjam
-# ecasound
-# element
-# fluxus
-# glava
 # hydrogen-drumkits
-# kmidimon
-# kpp
-# miniaudicle
 # rivendell
 
 # Maybe a preprocessor bug related to freetype-config output.
 # veejay-server
 # veejay-gui
 # sonic-pi a problem due to ruby 3.0
-# Mamba problem with template and C code ...
-# sonobus pb with Juce and the use of deleted function
 # SocaLabs-plugins pb with projucer resave project
 # BespokeSynth doesn't build anymore ...
 # infamous-plugins pb with lv2-1.18.0
+# abNinjam pb with template ...
+# kpp faust required
 
 # OK - rack-v1-JE
 # OK - rack-v1-luckyxxl
@@ -85,6 +77,14 @@
 # OK - gxtuner
 # OK - gigedit
 # OK - drumgizgmo
+# OK - ecasound
+# OK - fluxus
+# OK - miniaudicle
+# OK - kmidimon
+# OK - glava
+# OK - sonobus
+# OK - Mamba
+# OK - element
 
 # Reorder srpm file in FILELIST: dependencies first
 
