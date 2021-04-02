@@ -1,20 +1,21 @@
+%define _lto_cflags %{nil}
+
 Name:    element
-Version: 0.45.1
+Version: 0.46.0
 Release: 1%{?dist}
 Summary: This is the community version of Element, a modular AU/LV2/VST/VST3 audio plugin host.
 URL:     https://github.com/kushview/Element
 License: GPL3
 
-# ./element-source.sh 0.45.1
+# ./element-source.sh 0.46.0
 
 Source0: Element.tar.gz
 Source1: GitVersion.h
 Source2: element-source.sh
 
-BuildRequires: gcc gcc-c++
+BuildRequires: gcc gcc-c++ make
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: alsa-lib-devel
-BuildRequires: cmake
 BuildRequires: desktop-file-utils
 BuildRequires: freetype-devel
 BuildRequires: libX11-devel
@@ -50,6 +51,9 @@ sed -i -e "s|/usr/bin/env python|/usr/bin/env python3|g" waf
 
 %build
 
+%set_build_flags
+export CXXFLAGS="-include limits $CXXFLAGS"
+
 ./waf configure --debug --prefix=%{_prefix} --libdir=%{_libdir} 
 ./waf %{?__smp_mflags}
 
@@ -69,12 +73,14 @@ desktop-file-install --vendor '' \
 %doc README.md AUTHORS.md CODE_OF_CONDUCT.md  CONTRIBUTING.md 
 %license LICENSE
 %{_bindir}/*
-%{_libdir}/*
 %{_datadir}/applications/*
 %{_datadir}/element/*
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Fri Apr 02 2021 Yann Collette <ycollette.nospam@free.fr> - 0.46.0-1
+- update to 0.46.0
+
 * Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 0.45.1-1
 - update to 0.45.1
 
