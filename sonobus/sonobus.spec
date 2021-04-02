@@ -1,5 +1,5 @@
 Name:    sonobus
-Version: 1.4.2
+Version: 1.4.3
 Release: 3%{?dist}
 Summary: A peer to peer audio application
 License: GPLv2+
@@ -13,6 +13,7 @@ BuildRequires: opus-devel
 BuildRequires: cairo-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
+BuildRequires: openssl-devel
 BuildRequires: libX11-devel
 BuildRequires: xcb-util-keysyms-devel
 BuildRequires: xcb-util-devel
@@ -48,7 +49,9 @@ sed -i -e "s/-march=native//g" Builds/LinuxMakefile/Makefile
 
 %set_build_flags
 
-export CXXFLAGS="-std=c++14 $CXXFLAGS"
+export CXXFLAGS="-include mutex $CXXFLAGS"
+export LDFLAGS="-lcrypto $LDFLAGS"
+
 export HOME=`pwd`
 mkdir -p .vst3
 
@@ -86,6 +89,9 @@ cp deps/juce/LICENSE.md LICENSE-juce.md
 %{_libdir}/vst3/*
 
 %changelog
+* Fri Apr 02 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.3-3
+- update to 1.4.3-3
+
 * Thu Mar 25 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.2-3
 - update to 1.4.2-3
 
