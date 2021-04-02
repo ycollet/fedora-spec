@@ -12,11 +12,10 @@ License: GPLv2+
 
 Source0: https://github.com/c0ntrol/veejay/archive/%{commit0}.tar.gz#/veejay-%{shortcommit0}.tar.gz
 
-BuildRequires: gcc gcc-c++ sed
+BuildRequires: gcc gcc-c++ sed make
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: gtk2-devel
 BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: libtool
@@ -35,6 +34,7 @@ BuildRequires: compat-ffmpeg28-devel
 BuildRequires: gmic-devel
 BuildRequires: chrpath
 BuildRequires: veejay-server
+BuildRequires: gtk3-devel
 
 %description
 Veejay is a Visual Instrument
