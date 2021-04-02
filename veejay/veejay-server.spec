@@ -5,14 +5,15 @@
 
 Name:    veejay-server
 Version: 1.5.57
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A 'visual' instrument and realtime video sampler (for live video improvisation) - server part
 URL:     https://github.com/c0ntrol/veejay
 License: GPLv2+
 
 Source0: https://github.com/c0ntrol/veejay/archive/%{commit0}.tar.gz#/veejay-%{shortcommit0}.tar.gz
 
-BuildRequires: gcc gcc-c++ sed
+BuildRequires: gcc gcc-c++ sed make
+BuildRequires: libgomp
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
@@ -21,10 +22,11 @@ BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: libtool
 BuildRequires: libjpeg-devel
+BuildRequires: libpng-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: libX11-devel
 BuildRequires: libxml2-devel
-BuildRequires: SDL-devel
+BuildRequires: SDL2-devel
 BuildRequires: qrencode-devel
 BuildRequires: gdk-pixbuf2-devel
 BuildRequires: freetype-devel
@@ -34,6 +36,8 @@ BuildRequires: libglade2-devel
 BuildRequires: compat-ffmpeg28-devel
 BuildRequires: gmic-devel
 BuildRequires: chrpath
+BuildRequires: veejay-core
+BuildRequires: aalib-devel
 
 %description
 Veejay is a Visual Instrument
@@ -47,8 +51,6 @@ The engine is historically based upon mjpegtools's lavplay and processes all vid
 
 %prep
 %autosetup -n veejay-%{commit0}
-
-find . -name "*.c" ! -name vj-vloopback.c ! -name v4l2utils.c -exec sed -i -e "s/PIX_FMT/AV_PIX_FMT/g" {} \;
 
 %build
 
@@ -70,7 +72,6 @@ export LDFLAGS="-fPIC $LDFLAGS"
 ./autogen.sh
 %configure --prefix=%{_prefix} --libdir=%{_libdir} 
 
-sed -i -e "s/libpng16/freetype/g" config.h
 find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
@@ -78,13 +79,91 @@ find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
 find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
 
-%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28"
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28 -lpng -lgomp"
+
+# Build plugins
+
+cd ..
+cd plugin-packs
+cd lvdasciiart
+
+./autogen.sh
+%configure --prefix=%{_prefix} --libdir=%{_libdir} 
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28 -lpng -lgomp"
+
+cd ..
+cd lvdcrop
+
+./autogen.sh
+%configure --prefix=%{_prefix} --libdir=%{_libdir} 
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28 -lpng -lgomp"
+
+cd ..
+cd lvdgmic
+
+./autogen.sh
+%configure --prefix=%{_prefix} --libdir=%{_libdir} 
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28 -lpng -lgomp"
+
+cd ..
+cd lvdshared
+
+./autogen.sh
+%configure --prefix=%{_prefix} --libdir=%{_libdir} 
+find . -name "Makefile" -exec sed -i -e "s/-march=native//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-O3/-O2/g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse2//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-msse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-mfpmath=sse//g" {} \; -print
+find . -name "Makefile" -exec sed -i -e "s/-m64//g" {} \; -print
+
+%make_build CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28 -lpng -lgomp"
 
 %install
 
 cd veejay-current
 cd veejay-server
-%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28 -I%{buildroot}%{_includedir}" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/ -L%{buildroot}%{_libdir}"
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28 -I%{buildroot}%{_includedir}" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/ -L%{buildroot}%{_libdir} -lpng -lgomp"
+
+# Install plugins
+
+cd ..
+cd plugin-packs
+cd lvdasciiart
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28 -I%{buildroot}%{_includedir}" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/ -L%{buildroot}%{_libdir} -lpng -lgomp"
+
+cd ..
+cd lvdcrop
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28 -I%{buildroot}%{_includedir}" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/ -L%{buildroot}%{_libdir} -lpng -lgomp"
+
+cd ..
+cd lvdgmic
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28 -I%{buildroot}%{_includedir}" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/ -L%{buildroot}%{_libdir} -lpng -lgomp"
+
+cd ..
+cd lvdshared
+%make_install CFLAGS="$CFLAGS -I/usr/include/compat-ffmpeg28 -I%{buildroot}%{_includedir}" LDFLAGS="$LDFLAGS -L/usr/lib64/compat-ffmpeg28/ -L%{buildroot}%{_libdir} -lpng -lgomp"
 
 %files
 %doc veejay-current/veejay-server/README veejay-current/veejay-server/AUTHORS veejay-current/veejay-server/ChangeLog
@@ -92,9 +171,11 @@ cd veejay-server
 %{_bindir}/*
 %{_datadir}/*
 %{_libdir}/*
-%{_includedir}/*
 
 %changelog
+* Fri Apr 02 2021 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-5
+- fixes for fedora 34
+
 * Mon Mar 29 2021 Yann Collette <ycollette.nospam@free.fr> - 1.5.57-4
 - update to last master
 
