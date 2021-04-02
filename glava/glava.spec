@@ -7,7 +7,7 @@ Name:    glava
 Version: 1.6.3
 Release: 2%{?dist}
 Summary: GLava is an OpenGL audio spectrum visualizer
-URL:     https://github.com/wacossusca34/glava.git
+URL:     https://github.com/wacossusca34/glava
 License: GPLv2+
 
 # original tarfile can be found here:
