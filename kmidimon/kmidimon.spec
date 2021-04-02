@@ -5,14 +5,12 @@ Name:    kmidimon
 Version: 0.7.5
 Release: 1%{?dist}
 License: GPL
-Group:   Applications/Multimedia
 URL:     http://kmetronome.sourceforge.net/kmidimon/
+
 Source0: https://sourceforge.net/projects/kmidimon/files/%{version}/kmidimon-%{version}.tar.bz2
 Source1: kmidimon.desktop
-#Patch0:  kmidimon-0.7.1-dtd.patch
 Patch0:  kmidimon-0001-remove-uninstall-target.patch
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch1:  kmidimon-0001-use-nullptr.patch
 
 Vendor:       Planet CCRMA
 Distribution: Planet CCRMA
@@ -23,28 +21,27 @@ BuildRequires: gcc gcc-c++
 BuildRequires: desktop-file-utils alsa-lib-devel 
 BuildRequires: cmake gettext-devel
 BuildRequires: kdelibs-devel
-BuildRequires: drumstick-devel
+%if 0%{?fedora} >= 34
+BuildRequires: drumstick0-devel
+%endif
 
 %description
 MIDI monitor for Linux using ALSA sequencer and KDE user interface.
 
 %prep
-%setup -q
-%patch0 -p1
+%autosetup -p1
 
 %build
 
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_CXX_FLAGS="-I/usr/include/drumstick" ..
+%set_build_flags
+export CXXFLAGS="-fPIC -I/usr/include/drumstick $CXXFLAGS"
 
-%{__make} %{?_smp_mflags}
+%cmake
+%cmake_build
 
 %install
-%{__rm} -rf %{buildroot}
 
-cd build
-%{__make} DESTDIR=%{buildroot} install
+%cmake_install
 
 # absolute symlink: /usr/share/doc/HTML/en/kmidimon/common -> /usr/share/doc/HTML/en/common
 # absolute symlink: /usr/share/doc/HTML/ja/kmidimon/common -> /usr/share/doc/HTML/ja/common
@@ -64,24 +61,7 @@ desktop-file-install --vendor %{desktop_vendor} \
 
 %{find_lang} kmidimon
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-update-desktop-database &> /dev/null
-
-%postun
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null
-fi
-update-desktop-database &> /dev/null
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
-%files -f build/kmidimon.lang
+%files -f kmidimon.lang
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog INSTALL NEWS README TODO
 %license COPYING
