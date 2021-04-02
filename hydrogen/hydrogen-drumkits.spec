@@ -6,40 +6,38 @@ License: GPLv2+ and GPLv3 and Green OpenMusic
 URL:     http://www.hydrogen-music.org
 
 Source0:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ForzeeStereo.h2drumkit
-Source1:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/circAfrique%20v4.h2drumkit
-Source2:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/BJA_Pacific.h2drumkit
-Source3:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/DeathMetal.h2drumkit
-Source4:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Millo_MultiLayered3.h2drumkit
-Source5:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Millo_MultiLayered2.h2drumkit
-Source6:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Millo-Drums_v.1.h2drumkit
-Source7:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/HardElectro1.h2drumkit
-Source8:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ElectricEmpireKit.h2drumkit
-Source9:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Classic-626.h2drumkit
-Source10: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Classic-808.h2drumkit
-Source11: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/K-27_Trash_Kit.h2drumkit
-Source12: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/EasternHop-1.h2drumkit
-Source13: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/YamahaVintageKit.h2drumkit
-Source14: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ColomboAcousticDrumkit.h2drumkit
-Source15: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ErnysPercussion.h2drumkit
-Source16: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Boss_DR-110.h2drumkit
-Source17: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/TR808909.h2drumkit
-Source18: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Techno-1.h2drumkit
-Source19: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/TD-7kit.h2drumkit
-Source20: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Synthie-1.h2drumkit
-Source21: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/HipHop-2.h2drumkit
-Source22: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/HipHop-1.h2drumkit
-Source23: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/3355606kit.h2drumkit
-Source24: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/VariBreaks.h2drumkit
-Source25: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/The%20Black%20Pearl%201.0.h2drumkit 	
-Source26: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Lightning1024.h2drumkit 	
-Source27: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/SF3007-2011-Set-03.h2drumkit 	
+Source1:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/BJA_Pacific.h2drumkit
+Source2:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/DeathMetal.h2drumkit
+Source3:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Millo_MultiLayered3.h2drumkit
+Source4:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Millo_MultiLayered2.h2drumkit
+Source5:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Millo-Drums_v.1.h2drumkit
+Source6:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/HardElectro1.h2drumkit
+Source7:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ElectricEmpireKit.h2drumkit
+Source8:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Classic-626.h2drumkit
+Source9:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Classic-808.h2drumkit
+Source10: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/K-27_Trash_Kit.h2drumkit
+Source11: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/EasternHop-1.h2drumkit
+Source12: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/YamahaVintageKit.h2drumkit
+Source13: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ColomboAcousticDrumkit.h2drumkit
+Source14: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ErnysPercussion.h2drumkit
+Source15: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Boss_DR-110.h2drumkit
+Source16: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/TR808909.h2drumkit
+Source17: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Techno-1.h2drumkit
+Source18: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/TD-7kit.h2drumkit
+Source19: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Synthie-1.h2drumkit
+Source20: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/HipHop-2.h2drumkit
+Source21: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/HipHop-1.h2drumkit
+Source22: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/3355606kit.h2drumkit
+Source23: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/VariBreaks.h2drumkit
+Source24: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Lightning1024.h2drumkit 	
+Source25: https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/SF3007-2011-Set-03.h2drumkit 	
 
 # From http://www.bandshed.net/sounds/h2drumkit/
-Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-4A-1.1.h2drumkit
-Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-4B-1.1.h2drumkit
-Source30: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-5-1.1.h2drumkit
-Source31: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-4-1.1.h2drumkit
-Source32: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-5-1.1.h2drumkit
+Source26: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-4A-1.1.h2drumkit
+Source27: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-4B-1.1.h2drumkit
+Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-5-1.1.h2drumkit
+Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-4-1.1.h2drumkit
+Source30: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-5-1.1.h2drumkit
 
 BuildArch: noarch
 
@@ -121,12 +119,6 @@ Summary: AVL-BlackPearl-4B-1.1 Hydrogen drumkit
 %description -n hydrogen-drumkit-AVL-BlackPearl-4B-1.1
 AVL-BlackPearl-4B-1.1 hydrogen drumkit
 
-%package -n hydrogen-drumkit-circAfrique_v4
-Summary: circAfrique_v4 Hydrogen drumkit
-
-%description -n hydrogen-drumkit-circAfrique_v4
-circAfrique_v4 hydrogen drumkit
-
 %package -n hydrogen-drumkit-ElectricEmpireKit
 Summary: ElectricEmpireKit Hydrogen drumkit
 
@@ -144,12 +136,6 @@ Summary: Millo_MultiLayered2 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Millo_MultiLayered2
 Millo_MultiLayered2 hydrogen drumkit
-
-%package -n hydrogen-drumkit-The_Black_Pearl_1.0
-Summary: The_Black_Pearl_1.0 Hydrogen drumkit
-
-%description -n hydrogen-drumkit-The_Black_Pearl_1.0
-The_Black_Pearl_1.0 hydrogen drumkit
 
 %package -n hydrogen-drumkit-AVL-BlackPearl-5-1.1
 Summary: AVL-BlackPearl-5-1.1 Hydrogen drumkit
@@ -287,11 +273,6 @@ cp %{SOURCE27} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 cp %{SOURCE28} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 cp %{SOURCE29} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 cp %{SOURCE30} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE31} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE32} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-
-%clean
-rm -rf %{buildroot}
 
 %files -n hydrogen-drumkit-3355606kit
 %defattr(-,root,root,-)
@@ -341,10 +322,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-4B-1.1.h2drumkit
 
-%files -n hydrogen-drumkit-circAfrique_v4
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/circAfrique%20v4.h2drumkit
-
 %files -n hydrogen-drumkit-ElectricEmpireKit
 %defattr(-,root,root,-)
 %{_datadir}/hydrogen/data/drumkits/ElectricEmpireKit.h2drumkit
@@ -356,10 +333,6 @@ rm -rf %{buildroot}
 %files -n hydrogen-drumkit-Millo_MultiLayered2
 %defattr(-,root,root,-)
 %{_datadir}/hydrogen/data/drumkits/Millo_MultiLayered2.h2drumkit
-
-%files -n hydrogen-drumkit-The_Black_Pearl_1.0
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/The%20Black%20Pearl%201.0.h2drumkit
 
 %files -n hydrogen-drumkit-AVL-BlackPearl-5-1.1
 %defattr(-,root,root,-)
