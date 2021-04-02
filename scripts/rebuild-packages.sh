@@ -32,7 +32,7 @@
 
 # libgig before linuxsampler before liblscp
 # non-ntk before ensemble-chorus
-# veejay-server before veejay-gui
+# veejay-core before veejay-server before veejay-gui
 # sonic-pi after supercollider
 
 # In Fedora now:
@@ -49,42 +49,14 @@
 
 # HS
 # faust
-# hydrogen-drumkits
-# rivendell
 
-# Maybe a preprocessor bug related to freetype-config output.
-# veejay-server
-# veejay-gui
 # sonic-pi a problem due to ruby 3.0
 # SocaLabs-plugins pb with projucer resave project
 # BespokeSynth doesn't build anymore ...
 # infamous-plugins pb with lv2-1.18.0
 # abNinjam pb with template ...
 # kpp faust required
-
-# OK - rack-v1-JE
-# OK - rack-v1-luckyxxl
-# OK - rack-v1-MindMeldModular
-# OK - rack-v1-ImpromptuModular
-# OK - rack-v1-voxglitch 
-# OK - rack-v1-TheXOR
-# OK - rack-v1-rcm
-# OK - supercollider
-# OK - zrythm
-# OK - din
-# OK - snd
-# OK - surge
-# OK - gxtuner
-# OK - gigedit
-# OK - drumgizgmo
-# OK - ecasound
-# OK - fluxus
-# OK - miniaudicle
-# OK - kmidimon
-# OK - glava
-# OK - sonobus
-# OK - Mamba
-# OK - element
+# rivendell - pb with null ptr comparison
 
 # Reorder srpm file in FILELIST: dependencies first
 
