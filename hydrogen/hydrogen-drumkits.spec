@@ -1,9 +1,8 @@
 Summary: Additional DrumKits for Hydrogen
 Name:    hydrogen-drumkits
 Version: 0.9.6
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
-Group:   Applications/Multimedia
 URL:     http://www.hydrogen-music.org
 
 Source0:  https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ForzeeStereo.h2drumkit
@@ -41,9 +40,6 @@ Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPea
 Source30: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPearl-5-1.1.h2drumkit
 Source31: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-4-1.1.h2drumkit
 Source32: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-5-1.1.h2drumkit
-Source33: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/Gimme%20A%20Hand%201.1.h2drumkit
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch: noarch
 
@@ -54,239 +50,199 @@ A collection of additional drumkits for the
 Hydrogen advanced drum machine for GNU/Linux.
 
 %package -n hydrogen-drumkit-3355606kit
-Summary:        Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Hydrogen drumkit
 
 %description -n hydrogen-drumkit-3355606kit
 Hydrogen drumkit
 
 %package -n hydrogen-drumkit-BJA_Pacific
-Summary:        BJA_Pacific Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: BJA_Pacific Hydrogen drumkit
 
 %description -n hydrogen-drumkit-BJA_Pacific
 BJA_Pacific hydrogen drumkit
 
 %package -n hydrogen-drumkit-DeathMetal
-Summary:        DeathMetal Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: DeathMetal Hydrogen drumkit
 
 %description -n hydrogen-drumkit-DeathMetal
 DeathMetal hydrogen drumkit
 
-%package -n hydrogen-drumkit-Gimme_A_Hand_1.1
-Summary:        Gimme_A_Hand_1.1 Hydrogen drumkit
-Group:          Applications/Multimedia
-
-%description -n hydrogen-drumkit-Gimme_A_Hand_1.1
-Gimme_A_Hand_1.1 hydrogen drumkit
-
 %package -n hydrogen-drumkit-Lightning1024
-Summary:        Lightning1024 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Lightning1024 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Lightning1024
 Lightning1024 hydrogen drumkit
 
 %package -n hydrogen-drumkit-TD-7kit
-Summary:        TD-7kit Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: TD-7kit Hydrogen drumkit
 
 %description -n hydrogen-drumkit-TD-7kit
 TD-7kit hydrogen drumkit
 
 %package -n hydrogen-drumkit-YamahaVintageKit
-Summary:        YamahaVintageKit Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: YamahaVintageKit Hydrogen drumkit
 
 %description -n hydrogen-drumkit-YamahaVintageKit
 YamahaVintageKit hydrogen drumkit
 
 %package -n hydrogen-drumkit-AVL-BlackPearl-4A-1.1
-Summary:        AVL-BlackPearl-4A-1.1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: AVL-BlackPearl-4A-1.1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-AVL-BlackPearl-4A-1.1
 AVL-BlackPearl-4A-1.1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Boss_DR-110
-Summary:        Boss_DR-110 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Boss_DR-110 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Boss_DR-110
 Boss_DR-110 hydrogen drumkit
 
 %package -n hydrogen-drumkit-EasternHop-1
-Summary:        EasternHop-1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: EasternHop-1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-EasternHop-1
 EasternHop-1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Millo-Drums_v.1
-Summary:        Millo-Drums_v.1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Millo-Drums_v.1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Millo-Drums_v.1
 Millo-Drums_v.1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Techno-1
-Summary:        Techno-1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Techno-1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Techno-1
 Techno-1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-AVL-BlackPearl-4B-1.1
-Summary:        AVL-BlackPearl-4B-1.1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: AVL-BlackPearl-4B-1.1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-AVL-BlackPearl-4B-1.1
 AVL-BlackPearl-4B-1.1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-circAfrique_v4
-Summary:        circAfrique_v4 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: circAfrique_v4 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-circAfrique_v4
 circAfrique_v4 hydrogen drumkit
 
 %package -n hydrogen-drumkit-ElectricEmpireKit
-Summary:        ElectricEmpireKit Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: ElectricEmpireKit Hydrogen drumkit
 
 %description -n hydrogen-drumkit-ElectricEmpireKit
 ElectricEmpireKit hydrogen drumkit
 
 %package -n hydrogen-drumkit-HardElectro1
-Summary:        HardElectro1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: HardElectro1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-HardElectro1
 HardElectro1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Millo_MultiLayered2
-Summary:        Millo_MultiLayered2 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Millo_MultiLayered2 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Millo_MultiLayered2
 Millo_MultiLayered2 hydrogen drumkit
 
 %package -n hydrogen-drumkit-The_Black_Pearl_1.0
-Summary:        The_Black_Pearl_1.0 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: The_Black_Pearl_1.0 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-The_Black_Pearl_1.0
 The_Black_Pearl_1.0 hydrogen drumkit
 
 %package -n hydrogen-drumkit-AVL-BlackPearl-5-1.1
-Summary:        AVL-BlackPearl-5-1.1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: AVL-BlackPearl-5-1.1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-AVL-BlackPearl-5-1.1
 AVL-BlackPearl-5-1.1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Classic-626
-Summary:        Classic-626 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Classic-626 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Classic-626
 Classic-626 hydrogen drumkit
 
 %package -n hydrogen-drumkit-ErnysPercussion
-Summary:        ErnysPercussion Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: ErnysPercussion Hydrogen drumkit
 
 %description -n hydrogen-drumkit-ErnysPercussion
 ErnysPercussion hydrogen drumkit
 
 %package -n hydrogen-drumkit-HipHop-1
-Summary:        HipHop-1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: HipHop-1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-HipHop-1
 HipHop-1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Millo_MultiLayered3
-Summary:        Millo_MultiLayered3 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Millo_MultiLayered3 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Millo_MultiLayered3
 Millo_MultiLayered3 hydrogen drumkit
 
 %package -n hydrogen-drumkit-TR808909
-Summary:        TR808909 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: TR808909 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-TR808909
 TR808909 hydrogen drumkit
 
 %package -n hydrogen-drumkit-AVL-RedZep-4-1.1
-Summary:        AVL-RedZep-4-1.1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: AVL-RedZep-4-1.1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-AVL-RedZep-4-1.1
 AVL-RedZep-4-1.1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Classic-808
-Summary:        Classic-808 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Classic-808 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Classic-808
 Classic-808 hydrogen drumkit
 
 %package -n hydrogen-drumkit-ForzeeStereo
-Summary:        ForzeeStereo Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: ForzeeStereo Hydrogen drumkit
 
 %description -n hydrogen-drumkit-ForzeeStereo
 ForzeeStereo hydrogen drumkit
 
 %package -n hydrogen-drumkit-HipHop-2
-Summary:        HipHop-2 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: HipHop-2 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-HipHop-2
 HipHop-2 hydrogen drumkit
 
 %package -n hydrogen-drumkit-SF3007-2011-Set-03
-Summary:        SF3007-2011-Set-03 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: SF3007-2011-Set-03 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-SF3007-2011-Set-03
 SF3007-2011-Set-03 hydrogen drumkit
 
 %package -n hydrogen-drumkit-AVL-RedZep-5-1.1
-Summary:        AVL-RedZep-5-1.1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: AVL-RedZep-5-1.1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-AVL-RedZep-5-1.1
 AVL-RedZep-5-1.1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-ColomboAcousticDrumkit
-Summary:        ColomboAcousticDrumkit Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: ColomboAcousticDrumkit Hydrogen drumkit
 
 %description -n hydrogen-drumkit-ColomboAcousticDrumkit
 ColomboAcousticDrumkit hydrogen drumkit
 
 %package -n hydrogen-drumkit-K-27_Trash_Kit
-Summary:        K-27_Trash_Kit Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: K-27_Trash_Kit Hydrogen drumkit
 
 %description -n hydrogen-drumkit-K-27_Trash_Kit
 K-27_Trash_Kit hydrogen drumkit
 
 %package -n hydrogen-drumkit-Synthie-1
-Summary:        Synthie-1 Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: Synthie-1 Hydrogen drumkit
 
 %description -n hydrogen-drumkit-Synthie-1
 Synthie-1 hydrogen drumkit
 
 %package -n hydrogen-drumkit-VariBreaks
-Summary:        VariBreaks Hydrogen drumkit
-Group:          Applications/Multimedia
+Summary: VariBreaks Hydrogen drumkit
 
 %description -n hydrogen-drumkit-VariBreaks
 VariBreaks hydrogen drumkit
@@ -294,7 +250,6 @@ VariBreaks hydrogen drumkit
 %prep
 
 %install
-rm -rf %{buildroot}
 
 # These directories are owned by hydrogen:
 mkdir -p %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
@@ -334,7 +289,6 @@ cp %{SOURCE29} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 cp %{SOURCE30} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 cp %{SOURCE31} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 cp %{SOURCE32} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE33} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 
 %clean
 rm -rf %{buildroot}
@@ -350,10 +304,6 @@ rm -rf %{buildroot}
 %files -n hydrogen-drumkit-DeathMetal
 %defattr(-,root,root,-)
 %{_datadir}/hydrogen/data/drumkits/DeathMetal.h2drumkit
-
-%files -n hydrogen-drumkit-Gimme_A_Hand_1.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Gimme%20A%20Hand%201.1.h2drumkit
 
 %files -n hydrogen-drumkit-Lightning1024
 %defattr(-,root,root,-)
@@ -476,6 +426,9 @@ rm -rf %{buildroot}
 %{_datadir}/hydrogen/data/drumkits/VariBreaks.h2drumkit
 
 %changelog
+* Fri Apr 02 2021 Yann Collette <ycollette dot nospam at free.fr> 0.9.6-5
+- fix for fedora 34
+
 * Thu Apr 16 2020 Yann Collette <ycollette dot nospam at free.fr> 0.9.6-4
 - updated list of drumkits
 
