@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 f8e7b10e8b37a7f329f355d454e7aebed4b5cb5b
-%global gittag0 1.4.1
+%global gittag0 1.4.2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-computerscare
-Version: 1.4.1
+Version: 1.4.2
 Release: 3%{?dist}
 Summary: computerscare plugin for Rack
 License: GPLv2+
@@ -91,5 +91,5 @@ cp -r computerscare_plugin/dist/computerscare/* %{buildroot}%{_libexecdir}/Rack1
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.1-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.4.2-3
 - initial specfile

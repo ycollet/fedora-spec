@@ -20,7 +20,7 @@ URL:     https://github.com/baconpaul/BaconPlugs/
 # cd BaconPlugs
 # git submodule init
 # git submodule update
-# find . -name .git -exec rm -rf {} \:
+# find . -name .git -exec rm -rf {} \;
 # cd ..
 # tar cvfz BaconPlugs.tar.gz BaconPlugs
 # rm -rf BaaconPlugs
@@ -88,14 +88,6 @@ tar xvfz %{SOURCE1} --directory=BaconMusic_plugin --strip-components=1
 cp -n %{SOURCE2} BaconMusic_plugin/plugin.json
 
 %build
-
-cd dep
-cd rtaudio
-cmake -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=FALSE -DCMAKE_BUILD_TYPE=DEBUG .
-make
-make install
-cd ..
-cd ..
 
 cd BaconMusic_plugin
 %make_build RACK_DIR=.. PREFIX=/usr STRIP=true LIBDIR=%{_lib} dist
