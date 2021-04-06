@@ -1,6 +1,9 @@
+%define use_static_glfw 0
+%define use_static_rtaudio 1
+
 Name:    Rack-v1
 Version: 1.1.6
-Release: 11%{?dist}
+Release: 13%{?dist}
 Summary: A modular synthetizer
 License: GPLv2+
 URL:     https://github.com/VCVRack/Rack
@@ -10,6 +13,7 @@ URL:     https://github.com/VCVRack/Rack
 
 Source0: Rack.tar.gz
 Source1: Rack-manual.tar.gz
+Source2: rack-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake sed
@@ -18,7 +22,12 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libzip-devel
 BuildRequires: glew-devel
+%if !%{use_static_glfw}
 BuildRequires: glfw-devel
+%endif
+%if !%{use_static_rtaudio}
+BuildRequires: rtaudio-devel
+%endif
 BuildRequires: portmidi-devel
 BuildRequires: portaudio-devel
 BuildRequires: pulseaudio-libs-devel
@@ -52,13 +61,35 @@ CURRENT_PATH=`pwd`
 
 sed -i -e "s/-march=nocona//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
-# -I/usr/include/rtaudio
-echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I/usr/include/rtmidi -I$CURRENT_PATH/dep/nanosvg/src  -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-rack -I$CURRENT_PATH/dep/include" >> compile.mk
+
+%if !%{use_static_glfw}
+NEW_FLAGS="-I/usr/include/GLFW"
+%endif
+%if !%{use_static_rtaudio}
+NEW_FLAGS="$NEW_FLAGS -I/usr/include/rtaudio"
+%endif
+
+echo "CXXFLAGS += $NEW_FLAGS -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I/usr/include/rtmidi -I$CURRENT_PATH/dep/nanosvg/src  -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-rack -I$CURRENT_PATH/dep/include" >> compile.mk
+
+%if %{use_static_glfw}
+echo "Use Static GLFW"
+%else
+echo "Do not use static GLFW"
+%endif
+%if %{use_static_rtaudio}
+echo "Use Static RTAUDIO"
+%else
+echo "Do not use static RTAUDIO"
+%endif
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 
 sed -i -e "s/dep\/lib\/libGLEW.a/-lGLEW/g" Makefile
+%if !%{use_static_glfw}
 sed -i -e "s/dep\/lib\/libglfw3.a/-lglfw/g" Makefile
+%else
+sed -i -e "s/dep\/lib\/libglfw3.a/dep\/%{_lib}\/libglfw3.a/g" Makefile
+%endif
 sed -i -e "s/dep\/lib\/libjansson.a/-ljansson/g" Makefile
 sed -i -e "s/dep\/lib\/libcurl.a/-lcurl/g" Makefile
 sed -i -e "s/dep\/lib\/libssl.a/-lssl/g" Makefile
@@ -69,14 +100,20 @@ sed -i -e "s/dep\/lib\/libspeexdsp.a/-lspeexdsp/g" Makefile
 sed -i -e "s/dep\/lib\/libsamplerate.a/-lsamplerate/g" Makefile
 sed -i -e "s/dep\/lib\/librtmidi.a/-lrtmidi/g" Makefile
 # We use provided RtAudio library because Rack hangs when using jack and fedora rtaudio
+%if !%{use_static_glfw}
+sed -i -e "s/dep\/lib\/librtaudio.a/-lrtaudio -lpulse-simple -lpulse/g" Makefile
+%else
 sed -i -e "s/dep\/lib\/librtaudio.a/dep\/%{_lib}\/librtaudio.a -lpulse-simple -lpulse/g" Makefile
-
+%endif
 sed -i -e "s/systemDir = \".\";/systemDir = \"\/usr\/libexec\/Rack1\";/g" src/asset.cpp
 sed -i -e "s/pluginsPath = userDir + \"\/plugins-v\"/pluginsPath = systemDir + \"\/plugins-v\"/g" src/asset.cpp
 
 tar xvfz %{SOURCE1}
 
 sed -i -e "s/sphinx-build/sphinx-build-3/g" manual/Makefile
+
+# Disable an assert triggered with pipewire
+sed -i -e "s/assert(!err);/\/\/assert(!err);/g" src/system.cpp
 
 %build
 
@@ -85,16 +122,20 @@ export CXXFLAGS=
 export LDFLAGS=
 
 cd dep
+%if %{use_static_glfw}
 cd glfw
 cmake -DCMAKE_INSTALL_PREFIX=.. -DGLFW_COCOA_CHDIR_RESOURCES=OFF -DGLFW_COCOA_MENUBAR=ON -DGLFW_COCOA_RETINA_FRAMEBUFFER=ON -DCMAKE_BUILD_TYPE=DEBUG .
 make
 make install
 cd ..
+%endif
+%if %{use_static_rtaudio}
 cd rtaudio
 cmake -DCMAKE_INSTALL_PREFIX=.. -DBUILD_SHARED_LIBS=FALSE -DCMAKE_BUILD_TYPE=DEBUG .
 make
 make install
 cd ..
+%endif
 cd ..
 
 %make_build PREFIX=/usr LIBDIR=%{_lib}
@@ -141,6 +182,12 @@ EOF
 %{_datadir}/*
 
 %changelog
+* Tue Apr 06 2021 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-13
+- fix for wayland ...
+
+* Sun Apr 04 2021 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-12
+- fix for pipewire ...
+
 * Sun Nov 29 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.6-11
 - fixing ...
 
