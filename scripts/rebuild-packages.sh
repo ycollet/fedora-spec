@@ -48,15 +48,16 @@
 #######################
 
 # HS
-# faust
 
+# faust
 # sonic-pi a problem due to ruby 3.0
 # SocaLabs-plugins pb with projucer resave project
 # BespokeSynth doesn't build anymore ...
-# infamous-plugins pb with lv2-1.18.0
 # abNinjam pb with template ...
 # kpp faust required
 # rivendell - pb with null ptr comparison
+# infamous-plugins pb with lv2-1.18.0
+# psi-plugin       pb with lv2-1.18.0
 
 # Reorder srpm file in FILELIST: dependencies first
 
