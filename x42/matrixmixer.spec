@@ -1,10 +1,5 @@
-# Global variables for github repository
-%global commit0 dd4617a05ea14294abf4ac753c5c0e52f1003b92
-%global gittag0 v0.3.0
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    matrixmixer.lv2
-Version: 0.3.0
+Version: 0.3.2
 Release: 2%{?dist}
 Summary: A LV2 matrix mixer
 License: GPLv2+
@@ -44,6 +39,9 @@ A LV2 matrix mixer
 %{_datadir}/*
 
 %changelog
+* Wed Apr 07 2021 Yann Collette <ycollette.nospam@free.fr> - 0.3.2-2
+- update to 0.3.2
+
 * Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.3.0-2
 - fix debug build
 
