@@ -3,7 +3,7 @@
 
 Name:    rack-v1-AudibleInstruments
 Version: 1.5.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: AudibleInstruments plugin for Rack
 License: GPLv2+
 URL:     https://github.com/VCVRack/AudibleInstruments
@@ -13,6 +13,7 @@ URL:     https://github.com/VCVRack/AudibleInstruments
 
 # ./audible-instruments-source.sh <tag>
 # ./audible-instruments-source.sh v1.5.0
+# ./audible-instruments-source.sh master # 1.5.0 not tagged yet
 
 Source0: Rack.tar.gz
 Source1: AudibleInstruments.tar.gz
@@ -48,7 +49,9 @@ Based on Mutable Instruments Braids
 CURRENT_PATH=`pwd`
 
 sed -i -e "s/-march=nocona//g" compile.mk
-sed -i -e "s/-O3/-O2/g" compile.mk
+# This plugin hangs with -O2. Works with -O0
+#sed -i -e "s/-O3/-O2/g" compile.mk
+#sed -i -e "s/-O3/-O0/g" compile.mk
 
 # %{build_cxxflags}
 echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include  -I$CURRENT_PATH/dep/rtaudio" >> compile.mk
@@ -90,5 +93,5 @@ cp -r AudibleInstruments_plugin/dist/AudibleInstruments/* %{buildroot}%{_libexec
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.5.0-4
 - initial specfile
