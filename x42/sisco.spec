@@ -1,17 +1,12 @@
-# Global variables for github repository
-%global commit0 91142a3f16d4593310ae86ea477f8610c0cd956b
-%global gittag0 v0.9.0
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    sisco.lv2
-Version: 0.9.0
+Version: 0.9.2
 Release: 1%{?dist}
 Summary: A LV2 oscilloscope
 License: GPLv2+
 URL:     https://github.com/x42/sisco.lv2
 
 # ./sisco-source.sh <tag>
-# ./sisco-source.sh v0.9.0
+# ./sisco-source.sh v0.9.2
 
 Source0: sisco.lv2.tar.gz
 Source1: sisco-source.sh
@@ -50,6 +45,9 @@ A LV2 oscilloscope
 %{_datadir}/*
 
 %changelog
+* Wed Apr 07 2021 Yann Collette <ycollette.nospam@free.fr> - 0.9.2-1
+- update to 0.9.2-1
+
 * Fri Oct 23 2020 Yann Collette <ycollette.nospam@free.fr> - 0.9.0-1
 - update to 0.9.0-1 + fix debug build
 
