@@ -45,8 +45,12 @@ VST3 version of %{name}
 
 %build
 
+%set_build_flags
+
 export HOME=`pwd`
 mkdir -p .vst3
+
+export CXXFLAGS="-include mutex $CXXFLAGS"
 
 %cmake
 %cmake_build 
