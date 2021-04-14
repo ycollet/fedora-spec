@@ -1,5 +1,5 @@
 Name:    sonobus
-Version: 1.4.3
+Version: 1.4.4
 Release: 3%{?dist}
 Summary: A peer to peer audio application
 License: GPLv2+
@@ -8,7 +8,7 @@ URL:     https://github.com/essej/sonobus
 Source0: https://github.com/essej/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
-BuildRequires: make
+BuildRequires: cmake
 BuildRequires: opus-devel
 BuildRequires: cairo-devel
 BuildRequires: fontconfig-devel
@@ -45,30 +45,27 @@ VST3 version of %{name}
 
 %build
 
-sed -i -e "s/-march=native//g" Builds/LinuxMakefile/Makefile
-
-%set_build_flags
-
-export CXXFLAGS="-include mutex $CXXFLAGS"
-export LDFLAGS="-lcrypto $LDFLAGS"
-
 export HOME=`pwd`
 mkdir -p .vst3
 
-cd Builds/LinuxMakefile
-%make_build CONFIG=Release STRIP=true VST3 Standalone
+%cmake
+%cmake_build 
 
 %install 
 
-install -m 755 -d %{buildroot}/%{_libdir}/vst3/sonobus.vst3/
 install -m 755 -d %{buildroot}/%{_bindir}/
+install -m 755 -p %__cmake_builddir/SonoBus_artefacts/Standalone/sonobus %{buildroot}/%{_bindir}/
 
-install -m 755 -p Builds/LinuxMakefile/build/sonobus %{buildroot}/%{_bindir}/
-cp -ra Builds/LinuxMakefile/build/sonobus.vst3/* %{buildroot}/%{_libdir}/vst3/sonobus.vst3/
-chmod a+x %{buildroot}/%{_libdir}/vst3/sonobus.vst3/Contents/x86_64-linux/sonobus.so
+install -m 755 -d %{buildroot}/%{_libdir}/vst3/SonoBus.vst3/
+cp -ra %__cmake_builddir/SonoBus_artefacts/VST3/SonoBus.vst3/* %{buildroot}/%{_libdir}/vst3/SonoBus.vst3/
+chmod a+x %{buildroot}/%{_libdir}/vst3/SonoBus.vst3/Contents/x86_64-linux/SonoBus.so
+
+install -m 755 -d %{buildroot}/%{_libdir}/vst3/SonoBusInstrument.vst3/
+cp -ra %__cmake_builddir/SonoBusInst_artefacts/VST3/SonoBusInstrument.vst3/* %{buildroot}/%{_libdir}/vst3/SonoBusInstrument.vst3/
+chmod a+x %{buildroot}/%{_libdir}/vst3/SonoBusInstrument.vst3/Contents/x86_64-linux/SonoBusInstrument.so
 
 mkdir -p %{buildroot}/%{_datadir}/applications
-cp  Builds/LinuxMakefile/sonobus.desktop %{buildroot}/%{_datadir}/applications/sonobus.desktop
+cp  linux/sonobus.desktop %{buildroot}/%{_datadir}/applications/sonobus.desktop
 chmod +x %{buildroot}/%{_datadir}/applications/sonobus.desktop
 
 mkdir -p %{buildroot}/%{_datadir}/pixmaps
@@ -89,6 +86,9 @@ cp deps/juce/LICENSE.md LICENSE-juce.md
 %{_libdir}/vst3/*
 
 %changelog
+* Wed Apr 14 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.4-3
+- update to 1.4.4-3
+
 * Fri Apr 02 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.3-3
 - update to 1.4.3-3
 
