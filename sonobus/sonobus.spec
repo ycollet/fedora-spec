@@ -1,5 +1,5 @@
 Name:    sonobus
-Version: 1.4.4
+Version: 1.4.5
 Release: 3%{?dist}
 Summary: A peer to peer audio application
 License: GPLv2+
@@ -50,8 +50,6 @@ VST3 version of %{name}
 export HOME=`pwd`
 mkdir -p .vst3
 
-export CXXFLAGS="-include mutex $CXXFLAGS"
-
 %cmake
 %cmake_build 
 
@@ -90,6 +88,9 @@ cp deps/juce/LICENSE.md LICENSE-juce.md
 %{_libdir}/vst3/*
 
 %changelog
+* Thu Apr 15 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.5-3
+- update to 1.4.5-3
+
 * Wed Apr 14 2021 Yann Collette <ycollette.nospam@free.fr> - 1.4.4-3
 - update to 1.4.4-3
 
