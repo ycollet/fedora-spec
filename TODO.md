@@ -27,6 +27,8 @@ CadMus               -> https://github.com/josh-richardson/cadmus
 tangamp              -> https://github.com/sadko4u/tamgamp.lv2
 tascar               -> https://github.com/HoerTech-gGmbH/tascar/
 midieditor           -> https://github.com/markusschwenk/midieditor/
+bitscript            -> https://gitlab.domainepublic.net/bipscript/bipscript
+                        https://gitlab.domainepublic.net/bipscript/ide
 
 ** Cleanup
 Remove mv-6pm or 6pm. Both are normally the same package
