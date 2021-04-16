@@ -1,0 +1,51 @@
+--- portsmf/allegro.h.orig	2013-06-22 20:54:59.000000000 +0200
++++ portsmf/allegro.h	2013-11-09 13:58:55.507385767 +0100
+@@ -49,6 +49,7 @@
+ #ifndef ALLEGRO_H
+ #define ALLEGRO_H
+ #include <assert.h>
++#include <cstring>
+ #include <istream>
+ #include <ostream>
+ 
+--- portsmf/mfmidi.h.orig	2013-06-22 20:54:58.000000000 +0200
++++ portsmf/mfmidi.h	2013-11-09 14:00:58.697380586 +0100
+@@ -1,3 +1,6 @@
++#ifndef MFMIDI_H
++#define MFMIDI_H
++
+ #define NOTEOFF 0x80
+ #define NOTEON 0x90
+ #define PRESSURE 0xa0
+@@ -95,4 +98,4 @@ private:
+     long Msgindex;
+ };
+ 
+-
++#endif // MFMIDI_H
+--- portsmf/strparse.h.orig	2013-06-22 20:54:59.000000000 +0200
++++ portsmf/strparse.h	2013-11-09 14:01:24.820712834 +0100
+@@ -1,4 +1,8 @@
+ // strparse.h -- header for String_parse class
++#ifndef STRPARSE_H
++#define STRPARSE_H
++
++#include <string>
+ 
+ class String_parse {
+ public:
+@@ -16,3 +20,5 @@ public:
+ };
+ 
+ void string_escape(std::string &result, const char *s, const char *quote);
++
++#endif // STRPARSE_H
+--- portsmf/trace.h.orig	2013-06-22 20:54:58.000000000 +0200
++++ portsmf/trace.h	2013-11-09 14:01:43.927378705 +0100
+@@ -1,2 +1,6 @@
++#ifndef TRACE_H
++#define TRACE_H
++
+ void trace(char *format, ...);
+ 
++#endif // TRACE_H
