@@ -1,5 +1,5 @@
 Name:    sfizz
-Version: 0.5.1
+Version: 1.0.0
 Release: 3%{?dist}
 License: BSD-2-Clause
 Summary: Sampler plugin and library for SFZ instruments
@@ -9,7 +9,7 @@ Source0: sfizz-%{version}.tar.gz
 Source1: sfizz_source.sh
 
 # ./sfizz_source.sh <tag>
-# ./sfizz_source.sh 0.5.1
+# ./sfizz_source.sh 1.0.0
 
 Requires: libsndfile
 Requires: jack-audio-connection-kit
@@ -25,6 +25,7 @@ BuildRequires: xcb-util-devel
 BuildRequires: xcb-util-keysyms-devel
 BuildRequires: libxkbcommon-x11-devel
 BuildRequires: cairo-devel
+BuildRequires: pango-devel
 BuildRequires: jack-audio-connection-kit-devel
 
 %description
@@ -73,11 +74,15 @@ Header files for the Sfizz library.
 %{_libdir}/libsfizz.so
 %{_includedir}/sfizz.h
 %{_includedir}/sfizz.hpp
+%{_includedir}/sfizz_message.h
 %dir %{_libdir}/pkgconfig
 %{_libdir}/pkgconfig/sfizz.pc
 %exclude %{_libdir}/libsfizz.a
 
 %changelog
+* Fri Apr 16 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+- update to 1.0.0-3
+
 * Sun Oct 25 2020 Yann Collette <ycollette.nospam@free.fr> - 0.5.1-3
 - update to 0.5.1-3
 
