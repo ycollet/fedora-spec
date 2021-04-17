@@ -1,12 +1,12 @@
 Name:    mamba
-Version: 2.1
+Version: 2.2
 Release: 4%{?dist}
 Summary: Virtual Midi Keyboard for Jack Audio Connection Kit
 License: BSD
 
 URL: https://github.com/brummer10/Mamba
 
-Source0: https://github.com/brummer10/Mamba/releases/download/v%{version}/Mamba_%{version}.tar.gz
+Source0: https://github.com/brummer10/Mamba/files/6329780/Mamba_%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -17,6 +17,7 @@ BuildRequires: libsigc++20-devel
 BuildRequires: libsmf-devel
 BuildRequires: fluidsynth-devel
 BuildRequires: alsa-lib-devel
+BuildRequires: vim-common
 BuildRequires: desktop-file-utils
 
 %description
@@ -46,20 +47,11 @@ with the synth of your choice.
 %prep
 %autosetup -n Mamba_%{version}
 
-cat > src/Mamba.h.tmp <<EOF
-extern "C++" {
-#include <type_traits>
-}
-EOF
-cat src/Mamba.h >> src/Mamba.h.tmp
-rm src/Mamba.h
-mv src/Mamba.h.tmp src/Mamba.h
-
 %build
 
 %set_build_flags
 
-export CXXFLAGS="-D__cpluscplus -std=c++11 -fPIC -I/usr/include/cairo -I/usr/include/sigc++-2.0/ -I/usr/%{_lib}/sigc++-2.0/include $CXXFLAGS"
+export CXXFLAGS="-std=c++11 -fPIC -I/usr/include/cairo -I/usr/include/sigc++-2.0/ -I/usr/%{_lib}/sigc++-2.0/include $CXXFLAGS"
 
 %make_build 
 
@@ -82,6 +74,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/pixmaps/Mamba.svg
 
 %changelog
+* Sat Apr 17 2021 Yann Collette <ycollette.nospam@free.fr> - 2.2-4
+- update to 2.2-4
+
 * Sat Jan 9 2021 Yann Collette <ycollette.nospam@free.fr> - 2.1-4
 - update to 2.1-4
 
