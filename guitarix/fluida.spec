@@ -1,12 +1,12 @@
 Name:    fluida
-Version: 0.6
+Version: 0.7
 Release: 1%{?dist}
 Summary: Fluidsynth as LV2 plugin 
 License: BSD
 
 URL: https://github.com/brummer10/Fluida.lv2
 
-Source0: https://github.com/brummer10/Fluida.lv2/releases/download/v%{version}/Fluida_%{version}.tar.gz
+Source0: https://github.com/brummer10/Fluida.lv2/files/6329806/Fluida_%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -38,6 +38,9 @@ Fluidsynth as LV2 plugin.
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Apr 18 2021 Yann Collette <ycollette.nospam@free.fr> - 0.7-1
+- update to 0.7-1
+
 * Fri Jan 15 2021 Yann Collette <ycollette.nospam@free.fr> - 0.6-1
 - update to 0.6-1
 
