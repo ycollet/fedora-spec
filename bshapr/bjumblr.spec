@@ -1,6 +1,6 @@
 Summary: Pattern-controlled audio stream / sample re-sequencer LV2 plugin
 Name:    lv2-BJumblr
-Version: 1.6.4
+Version: 1.6.6
 Release: 2%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BJumblr
@@ -34,6 +34,9 @@ BJumblr is a pattern-controlled audio stream / sample re-sequencer LV2 plugin
 %{_libdir}/lv2/*
 
 %changelog
+* Sun Apr 18 2021 Yann Collette <ycollette dot nospam at free.fr> 1.6.6-2
+- update to 1.6.6-2
+
 * Mon Mar 15 2021 Yann Collette <ycollette dot nospam at free.fr> 1.6.4-2
 - update to 1.6.4-2
 
