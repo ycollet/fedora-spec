@@ -16,6 +16,7 @@ BuildRequires: lv2-devel
 BuildRequires: python
 BuildRequires: gtk2-devel
 BuildRequires: glib2-devel
+BuildRequires: vim-common
 
 %description
 Guitarix LV2 plugins

@@ -15,6 +15,7 @@ BuildRequires: cairo-devel
 BuildRequires: liblo-devel
 BuildRequires: libsigc++20-devel
 BuildRequires: fluidsynth-devel
+BuildRequires: vim-common
 
 %description
 Fluidsynth as LV2 plugin.
