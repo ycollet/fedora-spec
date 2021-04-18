@@ -1,28 +1,15 @@
-# Global variables for github repository
-%global commit0 e40b34f3fd5dc4c6523dc826062d0ddb2578f573
-%global gittag0 v0.8
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    GxPlugins
-Version: 0.8.%{shortcommit0}
+Version: 0.9
 Release: 1%{?dist}
 Summary: LV2 Analogue simulation of a tube preamp
-
-Group:   Applications/Multimedia
 License: GPLv2+
-
 URL:     https://github.com/brummer10/GxPlugins.lv2
 
-# git clone https://github.com/brummer10/GxPlugins.lv2.git
-# cd GxPlugins.lv2
-# git checkout v0.8
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz GxPlugins.lv2.tar.gz GxPlugins.lv2
+# ./gxplugins-source.sh <tag>
+# ./gxplugins-source.sh v0.9
 
 Source0: GxPlugins.lv2.tar.gz
+Source1: gxplugins-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -461,6 +448,9 @@ make INSTALL_DIR=%{buildroot}%{_libdir}/lv2 SSE_CFLAGS="%{optflags}" STRIP=true 
 %{_libdir}/lv2/gx_maestro_fz1s.lv2/*
 
 %changelog
+* Sat Apr 18 2021 Yann Collette <ycollette.nospam@free.fr> - 0.9
+- Update to v0.9
+
 * Tue Jun 02 2020 Yann Collette <ycollette.nospam@free.fr> - 0.8
 - Update to v0.8
 
