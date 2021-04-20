@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 6aa8629bb85f67b81b5db633f42acfcd84d896d6
+%global commit0 32cdf4b7576de07bb430b9104a83a13175e6801e
 %global gittag0 1.25.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -52,7 +52,7 @@ sed -i -e "s/-march=nocona//g" compile.mk
 sed -i -e "s/-O3/-O2/g" compile.mk
 
 # %{build_cxxflags}
-echo "CXXFLAGS += -include limits -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include  -I$CURRENT_PATH/dep/rtaudio" >> compile.mk
+echo "CXXFLAGS += -I$CURRENT_PATH/include -I$CURRENT_PATH/dep/include -I$CURRENT_PATH/dep/nanovg/src -I$CURRENT_PATH/dep/nanovg/example -I$CURRENT_PATH/dep/nanosvg/src -I/usr/include/rtmidi -I$CURRENT_PATH/dep/oui-blendish -I$CURRENT_PATH/dep/osdialog -I$CURRENT_PATH/dep/jpommier-pffft-29e4f76ac53b -I$CURRENT_PATH/dep/include  -I$CURRENT_PATH/dep/rtaudio" >> compile.mk
 
 sed -i -e "s/-Wl,-Bstatic//g" Makefile
 sed -i -e "s/-lglfw3/dep\/lib\/libglfw3.a/g" Makefile
