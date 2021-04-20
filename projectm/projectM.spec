@@ -1,6 +1,6 @@
 Name:    projectM-mao
 Version: 3.1.12
-Release: 13%{?dist}
+Release: 14%{?dist}
 Summary: The libraries for the projectM music visualization plugin
 License: LGPLv2+
 URL:     https://github.com/projectM-visualizer/projectm
@@ -9,6 +9,8 @@ Source0: https://github.com/projectM-visualizer/projectm/archive/v%{version}.tar
 Source1: milkdrop-script.txt
 Source2: projectm-configure.ac
 Source3: projectm-config.inp
+Source4: Authoring_Guide.pdf
+Source5: Geiss_Guide.pdf
 
 BuildRequires: gcc gcc-c++
 BuildRequires: automake autoconf libtool make
@@ -73,6 +75,13 @@ Requires: projectM-mao
 %description -n projectM-mao-SDL
 This package allows the use of the projectM visualization plugin through any
 SDL compatible applications.
+
+%package -n projectM-mao-doc
+Summary: The projectM visualization plugin documentation
+License: GPLv2+ and LGPLv2+ and MIT
+
+%description -n projectM-mao-doc
+The projectM visualization plugin documentation.
 
 %prep
 %autosetup -n projectm-%{version}
@@ -199,9 +208,6 @@ mv %{buildroot}%{_datadir}/projectM %{buildroot}%{_datadir}/projectM-mao
 
 find %{buildroot}%{_datadir}/projectM-mao/presets/ -name "*.milk" -exec chmod a-x {} \;
 
-# Install the documentation related to scripts
-cp %{SOURCE1} %{buildroot}%{_datadir}/projectM-mao/
-
 # Install fonts
 install -m 755 -d %{buildroot}%{_datadir}/projectM-mao/fonts/
 install -m 644 fonts/VeraMono.ttf %{buildroot}%{_datadir}/projectM-mao/fonts/
@@ -220,6 +226,12 @@ cp %{SOURCE3} %{buildroot}%{_datadir}/projectM-mao/
 
 # fix permissions
 find %{buildroot}%{_datadir}/projectM-mao -type d -exec chmod 755 {} \;
+
+# Install some documentations for Milkdrop
+install -m 755 -d %{buildroot}%{_datadir}/projectM-mao/doc/
+cp %{SOURCE1} %{buildroot}%{_datadir}/projectM-mao/doc/
+cp %{SOURCE4} %{buildroot}%{_datadir}/projectM-mao/doc/
+cp %{SOURCE5} %{buildroot}%{_datadir}/projectM-mao/doc/
 
 %files
 %doc src/libprojectM/ChangeLog
@@ -248,6 +260,9 @@ find %{buildroot}%{_datadir}/projectM-mao -type d -exec chmod 755 {} \;
 %files -n projectM-mao-alsa
 %{_bindir}/projectM-mao-alsa
 %{_datadir}/applications/projectM-mao-alsa.desktop
+
+%files -n projectM-mao-doc
+%{_datadir}/projectM-mao/doc/*
 
 %changelog
 * Sun Mar 7 2021 Yann Collette <ycollette.nospam@free.fr> - 3.1.12-12
