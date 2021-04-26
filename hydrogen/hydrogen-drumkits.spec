@@ -1,7 +1,7 @@
 Summary: Additional DrumKits for Hydrogen
 Name:    hydrogen-drumkits
 Version: 0.9.6
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2+ and GPLv3 and Green OpenMusic
 URL:     http://www.hydrogen-music.org
 
@@ -39,6 +39,11 @@ Source28: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-BlackPea
 Source29: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-4-1.1.h2drumkit
 Source30: http://www.bandshed.net/sounds/h2drumkit/AVL-Drumkits-1.1/AVL-RedZep-5-1.1.h2drumkit
 
+Source31: https://freewavesamples.com/files/KawaiXD-5Kit.h2drumkit
+Source32: https://freewavesamples.com/files/RolandJD-990Kit.h2drumkit
+Source33: https://freewavesamples.com/files/YamahaRX15Kit.h2drumkit
+Source34: https://freewavesamples.com/files/YamahaTG-55Kit.h2drumkit
+
 BuildArch: noarch
 
 Requires: hydrogen >= 0.9.5
@@ -53,10 +58,10 @@ Summary: Hydrogen drumkit
 %description -n hydrogen-drumkit-3355606kit
 Hydrogen drumkit
 
-%package -n hydrogen-drumkit-BJA_Pacific
+%package -n hydrogen-drumkit-BJAPacific
 Summary: BJA_Pacific Hydrogen drumkit
 
-%description -n hydrogen-drumkit-BJA_Pacific
+%description -n hydrogen-drumkit-BJAPacific
 BJA_Pacific hydrogen drumkit
 
 %package -n hydrogen-drumkit-DeathMetal
@@ -173,11 +178,11 @@ Summary: TR808909 Hydrogen drumkit
 %description -n hydrogen-drumkit-TR808909
 TR808909 hydrogen drumkit
 
-%package -n hydrogen-drumkit-AVL-RedZep-4-1.1
-Summary: AVL-RedZep-4-1.1 Hydrogen drumkit
+%package -n hydrogen-drumkit-AVL-RedZep-4-1.0
+Summary: AVL-RedZep-4-1.0 Hydrogen drumkit
 
-%description -n hydrogen-drumkit-AVL-RedZep-4-1.1
-AVL-RedZep-4-1.1 hydrogen drumkit
+%description -n hydrogen-drumkit-AVL-RedZep-4-1.0
+AVL-RedZep-4-1.0 hydrogen drumkit
 
 %package -n hydrogen-drumkit-Classic-808
 Summary: Classic-808 Hydrogen drumkit
@@ -233,6 +238,42 @@ Summary: VariBreaks Hydrogen drumkit
 %description -n hydrogen-drumkit-VariBreaks
 VariBreaks hydrogen drumkit
 
+%package -n hydrogen-drumkit-GimmeAHand
+Summary: GimmeAHand Hydrogen drumkit
+
+%description -n hydrogen-drumkit-GimmeAHand
+GimmeAHand hydrogen drumkit
+
+%package -n hydrogen-drumkit-circAfriquev4
+Summary: circAfriquev4 Hydrogen drumkit
+
+%description -n hydrogen-drumkit-circAfriquev4
+circAfriquev4 hydrogen drumkit
+
+%package -n hydrogen-drumkit-KawaiXD-5Kit
+Summary: KawaiXD-5Kit Hydrogen drumkit
+
+%description -n hydrogen-drumkit-KawaiXD-5Kit
+KawaiXD-5Kit hydrogen drumkit
+
+%package -n hydrogen-drumkit-RolandJD-990Kit
+Summary: RolandJD-990Kit Hydrogen drumkit
+
+%description -n hydrogen-drumkit-RolandJD-990Kit
+RolandJD-990Kit hydrogen drumkit
+
+%package -n hydrogen-drumkit-YamahaRX15Kit
+Summary: YamahaRX15Kit Hydrogen drumkit
+
+%description -n hydrogen-drumkit-YamahaRX15Kit
+YamahaRX15Kit hydrogen drumkit
+
+%package -n hydrogen-drumkit-YamahaTG-55Kit
+Summary: YamahaTG-55Kit Hydrogen drumkit
+
+%description -n hydrogen-drumkit-YamahaTG-55Kit
+YamahaTG-55Kit hydrogen drumkit
+
 %prep
 
 %install
@@ -241,164 +282,227 @@ VariBreaks hydrogen drumkit
 mkdir -p %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
 
 # Now copy everything into the %{buildroot}
+CURRENT_DIR=`pwd`
 
-cp %{SOURCE0} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE1} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE2} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE3} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE4} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE5} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE6} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE7} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE8} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE9} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE10} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE11} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE12} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE13} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE14} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE15} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE16} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE17} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE18} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE19} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE20} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE21} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE22} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE23} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE24} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE25} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE26} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE27} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE28} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE29} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
-cp %{SOURCE30} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/
+cp %{SOURCE0} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE1} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE2} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE3} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE4} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE5} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE6} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE7} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE8} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE9} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE10} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE11} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE12} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE13} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE14} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE15} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE16} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE17} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE18} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE19} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE20} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE21} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE22} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE23} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE24} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE25} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE26} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE27} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE28} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE29} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE30} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvfz tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE31} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvf tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE32} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvf tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE33} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvf tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+cp %{SOURCE34} %{buildroot}/%{_datadir}/hydrogen/data/drumkits/tmp.h2drumkit
+cd %{buildroot}/%{_datadir}/hydrogen/data/drumkits/; tar xvf tmp.h2drumkit; rm tmp.h2drumkit; cd $CURRENT_DIR
+
+# cleanup
+
+rm %{buildroot}/%{_datadir}/hydrogen/data/drumkits/._BJA_Pacific
+rm %{buildroot}/%{_datadir}/hydrogen/data/drumkits/BJA_Pacific/._*
 
 %files -n hydrogen-drumkit-3355606kit
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/3355606kit.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/3355606kit/*
 
-%files -n hydrogen-drumkit-BJA_Pacific
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/BJA_Pacific.h2drumkit
+%files -n hydrogen-drumkit-BJAPacific
+%{_datadir}/hydrogen/data/drumkits/BJA*
 
 %files -n hydrogen-drumkit-DeathMetal
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/DeathMetal.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/DeathMetal/*
 
 %files -n hydrogen-drumkit-Lightning1024
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Lightning1024.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Lightning1024/*
 
 %files -n hydrogen-drumkit-TD-7kit
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/TD-7kit.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/TD-7kit/*
 
 %files -n hydrogen-drumkit-YamahaVintageKit
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/YamahaVintageKit.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/YamahaVintageKit/*
 
 %files -n hydrogen-drumkit-AVL-BlackPearl-4A-1.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-4A-1.1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-4A-1.1/*
 
 %files -n hydrogen-drumkit-Boss_DR-110
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Boss_DR-110.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Boss_DR-110/*
 
 %files -n hydrogen-drumkit-EasternHop-1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/EasternHop-1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/EasternHop-1/*
 
 %files -n hydrogen-drumkit-Millo-Drums_v.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Millo-Drums_v.1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Millo-Drums_v.1/*
 
 %files -n hydrogen-drumkit-Techno-1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Techno-1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Techno-1/*
 
 %files -n hydrogen-drumkit-AVL-BlackPearl-4B-1.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-4B-1.1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-4B-1.1/*
 
 %files -n hydrogen-drumkit-ElectricEmpireKit
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/ElectricEmpireKit.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/ElectricEmpireKit/*
 
 %files -n hydrogen-drumkit-HardElectro1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/HardElectro1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/HardElectro1/*
 
 %files -n hydrogen-drumkit-Millo_MultiLayered2
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Millo_MultiLayered2.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Millo_MultiLayered2/*
 
 %files -n hydrogen-drumkit-AVL-BlackPearl-5-1.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-5-1.1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/AVL-BlackPearl-5-1.1/*
 
 %files -n hydrogen-drumkit-Classic-626
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Classic-626.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Classic-626/*
 
 %files -n hydrogen-drumkit-ErnysPercussion
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/ErnysPercussion.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/ErnysPercussion/*
 
 %files -n hydrogen-drumkit-HipHop-1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/HipHop-1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/HipHop-1/*
 
 %files -n hydrogen-drumkit-Millo_MultiLayered3
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Millo_MultiLayered3.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Millo_MultiLayered3/*
 
 %files -n hydrogen-drumkit-TR808909
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/TR808909.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/TR808909/*
 
-%files -n hydrogen-drumkit-AVL-RedZep-4-1.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/AVL-RedZep-4-1.1.h2drumkit
+%files -n hydrogen-drumkit-AVL-RedZep-4-1.0
+%{_datadir}/hydrogen/data/drumkits/AVL-RedZep-4-1.0/*
 
 %files -n hydrogen-drumkit-Classic-808
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Classic-808.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Classic-808/*
 
 %files -n hydrogen-drumkit-ForzeeStereo
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/ForzeeStereo.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/ForzeeStereo/*
 
 %files -n hydrogen-drumkit-HipHop-2
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/HipHop-2.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/HipHop-2/*
 
 %files -n hydrogen-drumkit-SF3007-2011-Set-03
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/SF3007-2011-Set-03.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/SF3007-2011-Set-03/*
 
 %files -n hydrogen-drumkit-AVL-RedZep-5-1.1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/AVL-RedZep-5-1.1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/AVL-RedZep-5-1.1/*
 
 %files -n hydrogen-drumkit-ColomboAcousticDrumkit
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/ColomboAcousticDrumkit.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/ColomboAcousticDrumkit/*
 
 %files -n hydrogen-drumkit-K-27_Trash_Kit
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/K-27_Trash_Kit.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/K-27_Trash_Kit/*
 
 %files -n hydrogen-drumkit-Synthie-1
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/Synthie-1.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/Synthie-1/*
 
 %files -n hydrogen-drumkit-VariBreaks
-%defattr(-,root,root,-)
-%{_datadir}/hydrogen/data/drumkits/VariBreaks.h2drumkit
+%{_datadir}/hydrogen/data/drumkits/VariBreaks/*
+
+%files -n hydrogen-drumkit-KawaiXD-5Kit
+%{_datadir}/hydrogen/data/drumkits/Kawai*
+
+%files -n hydrogen-drumkit-RolandJD-990Kit
+%{_datadir}/hydrogen/data/drumkits/Roland*
+
+%files -n hydrogen-drumkit-YamahaRX15Kit
+%{_datadir}/hydrogen/data/drumkits/Yamaha*RX15*Kit/*
+
+%files -n hydrogen-drumkit-YamahaTG-55Kit
+%{_datadir}/hydrogen/data/drumkits/Yamaha*TG-55*Kit/*
 
 %changelog
+* Mon Apr 26 2021 Yann Collette <ycollette dot nospam at free.fr> 0.9.6-6
+- fix drumkit install
+
 * Fri Apr 02 2021 Yann Collette <ycollette dot nospam at free.fr> 0.9.6-5
 - fix for fedora 34
 
