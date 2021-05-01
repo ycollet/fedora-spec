@@ -1,5 +1,5 @@
 Name:    lebiniou
-Version: 3.55.0
+Version: 3.56.0
 Release: 3%{?dist}
 Summary: Lebiniou is an audio spectrum visualizer
 URL:     https://biniou.net/
@@ -60,7 +60,7 @@ CFLAGS=" -I/usr/include/ffmpeg -fPIC $CFLAGS"; export CFLAGS
 	   --enable-caca \
 	   --libdir=%{_libdir}
 
-%make_build 
+%make_build -j1 
 
 %install
 
@@ -80,6 +80,9 @@ desktop-file-install                         \
 %{_datadir}/*
 
 %changelog
+* Sat May 01 2021 Yann Collette <ycollette.nospam@free.fr> - 3.56.0-3
+- update to 3.56.0-3
+
 * Sun Feb 28 2021 Yann Collette <ycollette.nospam@free.fr> - 3.55.0-3
 - update to 3.55.0-3
 
