@@ -49,6 +49,9 @@ autoreconf --install
 
 LDFLAGS="${LDFLAGS:-%{build_ldflags}} -z muldefs" ; export LDFLAGS
 CFLAGS=" -I/usr/include/ffmpeg -fPIC $CFLAGS"; export CFLAGS
+%if 0%{?fedora} >= 34
+CFLAGS="-Wno-error $CFLAGS"; export CFLAGS
+%endif
 # report: --enable-jackaudio doesn't work ...
 
 %configure --prefix=%{_prefix} \
