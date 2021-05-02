@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 93bf73385827c6f406120ecbd87bb9fc625894ae
-%global gittag0 1.2.2
+%global gittag0 1.3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-StudioSixPlusOne
-Version: 1.2.2
+Version: 1.3
 Release: 3%{?dist}
 Summary: StudioSixPlusOne plugin for Rack
 License: GPLv2+
@@ -91,5 +91,5 @@ cp -r StudioSixPlusOne_plugin/dist/StudioSixPlusOne/* %{buildroot}%{_libexecdir}
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.2.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.3-3
 - initial specfile
