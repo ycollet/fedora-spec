@@ -7,7 +7,7 @@ CFLAGS +=
 CXXFLAGS +=
 ifdef ARCH_LIN
 	# No idea what this does. Recommended by https://ffmpeg.org/platform.html#Advanced-linking-configuration
-	LDFLAGS += -Wl,-Bsymbolic
+	LDFLAGS += -Wl,-Bsymbolic -lavformat -lavcodec -lavutil -lswscale
 endif
 ifdef ARCH_WIN
 	# Windows DLLs need to link explicitly to other DLLs

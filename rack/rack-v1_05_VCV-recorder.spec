@@ -8,7 +8,7 @@
 
 Name:    rack-v1-VCV-Recorder
 Version: 1.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A plugin for Rack
 License: GPLv2+
 URL:     https://github.com/VCVRack/VCV-Recorder.git
@@ -95,8 +95,8 @@ cp -r vcv_recorder_plugin/dist/VCV-Recorder/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
-* Fri May 07 2021 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
-- update to last master
+* Fri May 07 2021 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
+- update to last master + fix link
 
 * Tue Sep 8 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
 - update to 1.1.0
