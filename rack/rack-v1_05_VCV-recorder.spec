@@ -1,5 +1,5 @@
 # Global variables for github repository
-%global commit0 d803816bd4960d279c234fafd6b3ebb13be886c1
+%global commit0 6a5651c2538d8eb358ac7bf84ba3b0b3df88dfd7
 %global gittag0 v1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
@@ -8,7 +8,7 @@
 
 Name:    rack-v1-VCV-Recorder
 Version: 1.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 License: GPLv2+
 URL:     https://github.com/VCVRack/VCV-Recorder.git
@@ -21,7 +21,7 @@ Source1: https://github.com/VCVRack/VCV-Recorder/archive/%{commit0}.tar.gz#/%{na
 Source2: VCVRecorder-Makefile
 
 BuildRequires: gcc gcc-c++
-BuildRequires: cmake sed
+BuildRequires: sed
 BuildRequires: alsa-lib-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: libsamplerate-devel
@@ -95,6 +95,9 @@ cp -r vcv_recorder_plugin/dist/VCV-Recorder/* %{buildroot}%{_libexecdir}/Rack1/p
 %{_libexecdir}/*
 
 %changelog
+* Fri May 07 2021 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-2
+- update to last master
+
 * Tue Sep 8 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-1
 - update to 1.1.0
 
