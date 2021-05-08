@@ -8,7 +8,7 @@
 
 Name:    rack-v1-VCV-Prototype
 Version: 1.3.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A plugin for Rack
 License: GPLv2+
 URL:     https://github.com/VCVRack/VCV-Prototype
