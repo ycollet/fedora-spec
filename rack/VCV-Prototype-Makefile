@@ -27,7 +27,6 @@ QUICKJS := 1
 LUAJIT := 1
 endif
 
-
 # Duktape
 ifeq ($(DUKTAPE), 1)
 SOURCES += src/DuktapeEngine.cpp
@@ -221,12 +220,13 @@ endif
 
 $(libpd):
 	cd dep && git clone "https://github.com/libpd/libpd" --recursive
-	cd dep/libpd && git checkout fe1a0d08979efd5fc46590108845b235cb824634
-
+	cd dep/libpd && git checkout fe1a0d08979efd5fc46590108845b235cb824634 && sed -i -e "s/x_net.c/x_net.c pure-data\/src\/s_net.c/g" Makefile
 	cd dep/libpd && $(MAKE) MULTI=true BUILD_LIBPD_STATIC=true ADDITIONAL_CFLAGS='-DPD_LONGINTTYPE="long long"'
 	cd dep/libpd && $(MAKE) install prefix="$(DEP_PATH)"
 endif
 
 deps: $(DEPS)
+
+LDFLAGS += -lefsw
 
 include $(RACK_DIR)/plugin.mk
