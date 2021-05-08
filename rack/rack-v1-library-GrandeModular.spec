@@ -1,13 +1,13 @@
 # Global variables for github repository
-%global commit0 968023d2046ac5f3e09049182bc54899e2f1725b
-%global gittag0 1.7.2
+%global commit0 2805b50c4d922cafbf8aa9bd4ae7e07bd5927cbe
+%global gittag0 1.8.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-GrandeModular
-Version: 1.7.2
+Version: 1.8.0
 Release: 3%{?dist}
 Summary: GrandeModular plugin for Rack
 License: GPLv2+
@@ -41,7 +41,7 @@ BuildRequires: jq
 
 %description
 GrandeModular plugin for Rack.
-4-channel polyphonic merge and split.
+Polyphonic hard clipper and visual clip monitor.
 
 %prep
 %autosetup -n Rack
@@ -91,5 +91,5 @@ cp -r GrandeModular_plugin/dist/GrandeModular/* %{buildroot}%{_libexecdir}/Rack1
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.7.2-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.8.0-3
 - initial specfile
