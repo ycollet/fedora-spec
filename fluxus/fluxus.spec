@@ -5,7 +5,7 @@
 
 Name:    fluxus
 Version: 0.17rc5.%{shortcommit0}
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A 3D game engine for livecoding worlds into existence
 URL:     http://pawfal.org/fluxus/
 License: GPLv2+
@@ -44,7 +44,6 @@ Buildrequires: emacs w3m
 
 Requires: racket >= 5.1.1
 Requires: fftw >= 3.2.2
-Requires: jack-audio-connection-kit >= 1.9.7
 Requires: libsndfile >= 1.0.25
 Requires: liblo >= 0.26
 Requires: glew >= 1.5.8
@@ -131,6 +130,9 @@ desktop-file-install --vendor '' \
 %{_datadir}/emacs/site-lisp/fluxus
 
 %changelog
+* Mon May 10 2021 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-4
+- fix for pipewire
+
 * Thu Apr 01 2021 Yann Collette <ycollette.nospam@free.fr> - 0.17rc5-3
 - fix for fedora 34
 

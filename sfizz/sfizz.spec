@@ -1,6 +1,6 @@
 Name:    sfizz
 Version: 1.0.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD-2-Clause
 Summary: Sampler plugin and library for SFZ instruments
 Url:     https://github.com/sfztools/sfizz
@@ -12,7 +12,6 @@ Source1: sfizz_source.sh
 # ./sfizz_source.sh 1.0.0
 
 Requires: libsndfile
-Requires: jack-audio-connection-kit
 
 BuildRequires: gcc gcc-c++
 BuildRequires: cmake
@@ -80,6 +79,9 @@ Header files for the Sfizz library.
 %exclude %{_libdir}/libsfizz.a
 
 %changelog
+* Mon May 10 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-4
+- update to 1.0.0-4 - try to fix dep wrt to pipewire
+
 * Fri Apr 16 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
 - update to 1.0.0-3
 

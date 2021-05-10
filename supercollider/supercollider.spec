@@ -8,7 +8,7 @@
 Summary: Object oriented programming environment for real-time audio and video processing
 Name:    supercollider
 Version: 3.11.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPL
 URL:     http://supercollider.sourceforge.net/
 
@@ -51,10 +51,7 @@ compositions, interactive performances, installations etc.
 
 %package devel
 Summary:  Development files for SuperCollider
-Requires: supercollider = %{version}-%{release} pkgconfig 
-Requires: jack-audio-connection-kit-devel alsa-lib-devel
-Requires: libsndfile-devel
-Requires: avahi-devel
+Requires: supercollider = %{version}-%{release} 
 
 %description devel
 This package includes include files and libraries neede to develop
@@ -166,6 +163,9 @@ install -m0644 SCVersion.txt $RPM_BUILD_ROOT%{_includedir}/SuperCollider/
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+* Mon May 10 2021 Yann Collette <ycollette.nospam@free.fr> 3.11.2-5
+- update to 3.11.5 - fixes for pipewire
+
 * Mon Mar 29 2021 Yann Collette <ycollette.nospam@free.fr> 3.11.2-4
 - update to 3.11.4 - fixes for fedora 34
 
