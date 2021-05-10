@@ -51,6 +51,7 @@ Source1: source.sh
 ** Add check section:
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/*%{name}.*.xml
 
 ** Check before packaging:
 remove -march=native from Makefiles if it's present
