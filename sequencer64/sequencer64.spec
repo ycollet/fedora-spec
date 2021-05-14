@@ -1,16 +1,11 @@
-# Global variables for github repository
-%global commit0 e0873f073af03ac69d48dfe91c98fb4baf4b04c8
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:    sequencer64
-Version: 0.96.8
+Version: 0.97.0
 Release: 3%{?dist}
 Summary: MIDI sequencer
 License: GPL
 URL:     https://github.com/ahlstromcj/sequencer64
 
-Source0: https://github.com/ahlstromcj/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/ahlstromcj/sequencer64/archive/refs/tags/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: https://github.com/ahlstromcj/sequencer64-doc/archive/0.95.2.tar.gz#/%{name}-doc-0.95.2.tar.gz
 
 BuildRequires: gcc gcc-c++
@@ -44,7 +39,7 @@ Requires: %{name} = %{version}-%{release}
 The %{name}-doc package contains documentation for %{name}.
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 tar xvfz %{SOURCE1}
 
@@ -59,11 +54,11 @@ sh autogen.sh
 
 %make_install
 
-%__install -m 755 -d %{buildroot}/%{_datadir}/%{name}/doc/
-%__install -m 644 %{name}-doc-0.95.2/pdf/sequencer64-user-manual.pdf %{buildroot}%{_datadir}/%{name}/doc/
+install -m 755 -d %{buildroot}/%{_datadir}/%{name}/doc/
+install -m 644 %{name}-doc-0.95.2/pdf/sequencer64-user-manual.pdf %{buildroot}%{_datadir}/%{name}/doc/
 
 %files
-%doc ChangeLog INSTALL NEWS README README.jack VERSION TODO
+%doc ChangeLog INSTALL NEWS README.md README.jack VERSION TODO
 %{_bindir}/*
 %{_libdir}/*
 %{_datadir}/*
@@ -76,6 +71,9 @@ sh autogen.sh
 %{_datadir}/%{name}/doc/**
 
 %changelog
+* Fri May 14 2021 Yann Collette <ycollette.nospam@free.fr> - 0.97.0-3
+- update to 0.97.0
+
 * Tue Oct 20 2020 Yann Collette <ycollette.nospam@free.fr> - 0.96.8-3
 - fix debug build
 
