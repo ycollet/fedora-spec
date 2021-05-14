@@ -1,23 +1,23 @@
 # Global variables for github repository
 %global commit0 649ecaef0aa556ea8b8eae0a6be309d6dd3d20ec
-%global gittag0 1.0.0
+%global gittag0 1.1.0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-Extratone
-Version: 1.0.0
+Version: 1.1.0
 Release: 3%{?dist}
 Summary: Extratone plugin for Rack
 License: GPLv2+
-URL:     https://github.com/EaterOfSheep/sheepextratone
+URL:     https://github.com/EaterOfSheep/Extratone
 
 # ./rack-source.sh <tag>
 # ./rack-source.sh v1.1.6
 
 Source0: Rack.tar.gz
-Source1: https://github.com/EaterOfSheep/sheepextratone/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/EaterOfSheep/Extratone/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2: Extratone_plugin.json
 
 BuildRequires: gcc gcc-c++
@@ -91,5 +91,5 @@ cp -r Extratone_plugin/dist/Extratone/* %{buildroot}%{_libexecdir}/Rack1/plugins
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.1.0-3
 - initial specfile

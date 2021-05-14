@@ -1,13 +1,13 @@
 # Global variables for github repository
 %global commit0 4438d5b80f9b14cbba38627a74ae69f968142c5f
-%global gittag0 1.0.6
+%global gittag0 1.0.7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 # Disable production of debug package.
 %global debug_package %{nil}
 
 Name:    rack-v1-HolonicSystems-Free
-Version: 1.0.6
+Version: 1.0.7
 Release: 3%{?dist}
 Summary: HolonicSystems-Free plugin for Rack
 License: GPLv2+
@@ -91,5 +91,5 @@ cp -r HolonicSystems-Free_plugin/dist/HolonicSystems-Free/* %{buildroot}%{_libex
 %{_libexecdir}/*
 
 %changelog
-* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.6-3
+* Tue Feb 11 2020 Yann Collette <ycollette.nospam@free.fr> - 1.0.7-3
 - initial specfile
