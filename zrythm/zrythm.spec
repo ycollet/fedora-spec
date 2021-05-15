@@ -44,7 +44,33 @@ BuildRequires: desktop-file-utils
 BuildRequires: gtk-update-icon-cache
 BuildRequires: xdg-utils
 BuildRequires: rubygem-sass
-
+%if 0%{?fedora} < 34
+BuildRequires: coreutils
+BuildRequires: libtool
+BuildRequires: make
+BuildRequires: elfutils-libelf-devel
+BuildRequires: gettext
+BuildRequires: gtk-doc
+BuildRequires: perl-interpreter
+# for sys/inotify.h
+BuildRequires: glibc-devel
+BuildRequires: libattr-devel
+BuildRequires: libselinux-devel
+# for sys/sdt.h
+BuildRequires: systemtap-sdt-devel
+%if 0%{?rhel}
+# For gnutls-hmac.patch
+BuildRequires: pkgconfig(gnutls)
+%endif
+BuildRequires: pkgconfig(libelf)
+BuildRequires: pkgconfig(libffi)
+BuildRequires: pkgconfig(libpcre)
+BuildRequires: pkgconfig(mount)
+BuildRequires: pkgconfig(sysprof-capture-4)
+BuildRequires: pkgconfig(zlib)
+BuildRequires: python3-devel
+%endif
+ 
 Requires: breeze-icon-theme
 
 %description
