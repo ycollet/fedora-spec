@@ -1,11 +1,11 @@
 Name:    zrythm
-Version: 1.0.0.a16037
+Version: 1.0.0.a1611
 Release: 4%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
 
-Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.16.0.37.tar.gz
+Source0: https://git.zrythm.org/cgit/zrythm/snapshot/zrythm-1.0.0-alpha.16.1.1.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: git
@@ -57,7 +57,7 @@ It is written in C and uses the GTK+3 toolkit, with bits and pieces taken from o
 More info at https://www.zrythm.org
 
 %prep
-%autosetup -n zrythm-1.0.0-alpha.16.0.37
+%autosetup -n zrythm-1.0.0-alpha.16.1.1
 
 # Compile using -O0 because of jack xruns
 sed -i -e "/cc = meson.get_compiler ('c')/a add_global_arguments('-O0'\, language : 'c')" meson.build
@@ -71,6 +71,9 @@ sed -i -e "s/ sphinx_build_opts = \[ / #sphinx_build_opts = \[ /g" doc/user/meso
 # Fix version of cyaml
 sed -i -e "s/99.1.0/1.1.0/g" meson.build
 
+# disable linkcheck
+sed -i -e "149,168d" doc/user/meson.build
+
 %build
 
 # Install sphinx-furo them
@@ -78,7 +81,16 @@ export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 pip install --user furo
 
 mkdir build
-%meson -Dmanpage=true -Duser_manual=true -Dlsp_dsp=disabled --buildtype release --prefix=/usr
+%meson \
+%if 0%{?fedora} < 34
+       --wrap-mode=nofallback \
+       --force-fallback-for glib \
+%endif
+       -Dmanpage=true \
+       -Duser_manual=true \
+       -Dlsp_dsp=disabled \
+       --buildtype release \
+       --prefix=/usr
 
 %meson_build 
 
@@ -109,8 +121,22 @@ desktop-file-install --vendor '' \
 %{_sysconfdir}/bash_completion.d/zrythm
 %{_mandir}/*
 %exclude %{_libdir}/libcm_reproc.a
+%if 0%{?fedora} < 34
+%exclude %{_includedir}/glib-2.0/*
+%exclude %{_includedir}/gio-unix-2.0/*
+%{_libdir}/glib-2.0/include/*
+%{_libdir}/*.a
+%{_libdir}/pkgconfig/*
+%{_datadir}/aclocal/*
+%{_datadir}/bash-completion/completions/*
+%{_datadir}/gdb/auto-load/usr/lib64/*
+%{_datadir}/gettext/*
+%endif
 
 %changelog
+* Sat May 15 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.16.1.1-4
+- update to 1.0.0-alpha.16.1.1-4
+
 * Fri May 07 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.16.0.37-4
 - update to 1.0.0-alpha.16.0.37-4
 
