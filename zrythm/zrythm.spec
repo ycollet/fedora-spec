@@ -66,7 +66,6 @@ BuildRequires: pkgconfig(libelf)
 BuildRequires: pkgconfig(libffi)
 BuildRequires: pkgconfig(libpcre)
 BuildRequires: pkgconfig(mount)
-BuildRequires: pkgconfig(sysprof-capture-4)
 BuildRequires: pkgconfig(zlib)
 BuildRequires: python3-devel
 %endif
