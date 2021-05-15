@@ -1,13 +1,14 @@
-%global __python %{__python3}
-
 Summary: A radio automation system
 Name:    rivendell
-Version: 3.5.0
+Version: 3.6.0
 Release: 1%{?dist}
 License: LGPL
 URL:     https://github.com/ElvishArtisan/rivendell
 
 Source0: https://github.com/ElvishArtisan/rivendell/releases/download/v%{version}/rivendell-%{version}.tar.gz
+Patch0: rivendell-0001-use-nullptr.patch
+Patch1: rivendell-0001-use-nullptr-2.patch
+Patch2: rivendell-0001-use-nullptr-3.patch
 
 BuildRequires: gcc gcc-c++
 BuildRequires: alsa-lib-devel jack-audio-connection-kit-devel
@@ -49,7 +50,7 @@ audio content.  Modules for the production and management of podcast
 audio are also included.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 sed -i -e "s/instdir = @LOCAL_PREFIX@\/lib/instdir = @LOCAL_PREFIX@\/%{_lib}/g" lib/Makefile.am
 
@@ -162,6 +163,9 @@ fi
 %{_unitdir}/*
 
 %changelog
+* Sat May 15 2021 Yann Collette <ycollette.nospam@free.fr> - 3.6.0-1
+- update to 3.6.0
+
 * Sun Dec 13 2020 Yann Collette <ycollette.nospam@free.fr> - 3.5.0-1
 - update to 3.5.0
 
