@@ -1,8 +1,8 @@
 %global commit0 7d9ed352a13b
 
-Name:    paultretch
-Version: 0.0.1
-Release: 1%{?dist}
+Name:    paulstretch
+Version: 1.2.4
+Release: 2%{?dist}
 Summary: A Paulstretch VST2/VST3/Standalone plugin
 License: MIT
 URL:     https://bitbucket.org/xenakios/paulstretchplugin
@@ -35,7 +35,23 @@ BuildRequires: webkit2gtk3-devel
 BuildRequires: gtk3-devel
 
 %description
-A PAulStretch VST/VST3/Standalone plugin
+A PaulStretch VST/VST3/Standalone plugin
+
+%package -n vst3-%{name}
+Summary:  VST3 version of %{name}
+License:  GPLv2+
+Requires: %{name}
+
+%description -n vst3-%{name}
+VST3 version of %{name}
+
+%package -n vst2-%{name}
+Summary:  VST2 version of %{name}
+License:  GPLv2+
+Requires: %{name}
+
+%description -n vst2-%{name}
+VST2 version of %{name}
 
 %prep
 %autosetup -n xenakios-paulstretchplugin-%{commit0}
@@ -67,8 +83,19 @@ cp -ra  Builds/LinuxMakefile/build/PaulXStretch.vst3 %{buildroot}/%{_libdir}/vst
 %files
 %doc readme.txt
 %{_bindir}/*
-%{_libdir}/*
+
+%files -n vst2-%{name}
+%{_libdir}/vst/*
+
+%files -n vst3-%{name}
+%{_libdir}/vst3/*
 
 %changelog
+* Sun May 16 2021 Yann Collette <ycollette.nospam@free.fr> - 1.2.4-2
+- fix version
+
+* Sun May 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-2
+- fix typos + create standalone / vst2 / vst3 packages
+
 * Sun May 16 2021 Yann Collette <ycollette.nospam@free.fr> - 0.0.1-1
 - Initial spec file
