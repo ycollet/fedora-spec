@@ -21,7 +21,6 @@
 					 -> https://github.com/dubhater/vapoursynth-mvtools
 					 -> https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock
 frequanalizer        -> https://github.com/ffAudio/Frequalizer
-paulstretch          -> https://bitbucket.org/xenakios/paulstretchplugin/src/master/
 NoiseTorch           -> https://github.com/lawl/NoiseTorch
 CadMus               -> https://github.com/josh-richardson/cadmus
 tangamp              -> https://github.com/sadko4u/tamgamp.lv2
