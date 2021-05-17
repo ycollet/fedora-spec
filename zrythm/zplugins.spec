@@ -1,11 +1,11 @@
 Name:    zplugins
-Version: 0.2.3
+Version: 0.2.4
 Release: 1%{?dist}
 Summary: A collection of audio DSP LV2 plugins
 License: GPLv2+
-URL:     https://git.zrythm.org/cgit/zplugins
+URL:     https://github.com/zrythm/ZPlugins
 
-Source0: https://git.zrythm.org/cgit/zplugins/snapshot/zplugins-%{version}.tar.gz
+Source0: https://github.com/zrythm/ZPlugins/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -18,7 +18,7 @@ BuildRequires: libsndfile-devel
 A collection of audio DSP LV2 plugins
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n ZPlugins-%{version}
 
 %build
 
@@ -39,6 +39,9 @@ export CFLAGS="-fPIC $CFLAGS"
 %{_libdir}/lv2/*
 
 %changelog
+* Mon May 17 2021 Yann Collette <ycollette.nospam@free.fr> - 0.2.4-1
+- update to 0.2.4-1
+
 * Sun Jan 17 2021 Yann Collette <ycollette.nospam@free.fr> - 0.2.3-1
 - update to 0.2.3-1
 
