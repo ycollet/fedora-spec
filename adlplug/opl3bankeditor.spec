@@ -1,27 +1,22 @@
-# Global variables for github repository
-%global commit0 a8c9a70a81cc076abea2ed6c60437edb7aadca59
-%global gittag0 v1.5.1
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+# Tag: editor
+# Type: application
+# Category: Audio
 
 Name:    opl3bankeditor
 Version: 1.5.1
 Release: 2%{?dist}
 Summary: A small cross-platform editor of the OPL3 FM banks of different formats
 URL:     https://github.com/Wohlstand/OPL3BankEditor
-Group:   Applications/Multimedia
-
 License: GPLv3
 
-# git clone https://github.com/Wohlstand/OPL3BankEditor
-# git checkout v1.5.1
-# git submodule init
-# git submodule update
-# find . -name .git -exec rm -rf {} \;
-# cd ..
-# tar cvfz OPL3BankEditor.tar.gz OPL3BankEditor/*
-# rm -rf OPL3BankEditor
+Vendor:       Audinux
+Distribution: Audinux
+
+# ./opl3bankeditor-source.sh <tag>
+# ./opl3bankeditor-source.sh v1.5.1
 
 Source0: OPL3BankEditor.tar.gz
+Source1: opl3bankeditor-source.sh
 
 BuildRequires: gcc gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
@@ -31,6 +26,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-linguist
 BuildRequires: qwt-devel
+BuildRequires: desktop-file-utils
 
 %description
 A small cross-platform editor of the OPL3 FM banks of different formats
@@ -55,8 +51,13 @@ sed -i -e "/Categories/d" src/resources/opl3_bank_editor.desktop
 desktop-file-install --vendor '' \
         --add-category=Midi \
         --add-category=Audio \
+        --add-category=AudioVideo \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/opl3_bank_editor.desktop
+
+%check
+
+desktop-file-validate %{buildroot}%{_datadir}/applications/opl3_bank_editor.desktop
 
 %files
 %doc README.md changelog.txt

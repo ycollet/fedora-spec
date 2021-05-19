@@ -1,3 +1,7 @@
+# Tag: plugin, VST, LVS, MIDI
+# Type: plugin, VST, LV2
+# Category: Audio
+
 Name:    adlplug
 Version: 1.0.2
 Release: 6%{?dist}
@@ -5,9 +9,13 @@ Summary: Synthesizer plugin for ADLMIDI (VST/LV2)
 URL:     https://github.com/jpcima/ADLplug
 License: BSL-1.0
 
+Vendor:       Audinux
+Distribution: Audinux
+
 # ./adlplug-source.sh v1.0.2
 
 Source0: ADLplug.tar.gz
+Source1: adlplug-source.sh
 Patch0:  adlplug-0001-fix-JUCE-compilation.patch
 
 BuildRequires: gcc gcc-c++
@@ -16,7 +24,11 @@ BuildRequires: alsa-lib-devel
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
 BuildRequires: freetype-devel
-BuildRequires: libX11-devel libXft-devel libXrandr-devel libXinerama-devel libXcursor-devel
+BuildRequires: libX11-devel
+BuildRequires: libXft-devel
+BuildRequires: libXrandr-devel
+BuildRequires: libXinerama-devel
+BuildRequires: libXcursor-devel
 
 %description
 Synthesizer plugin for ADLMIDI (VST/LV2)
@@ -68,6 +80,7 @@ cd build_adl
 desktop-file-install --vendor '' \
         --add-category=Midi \
         --add-category=Audio \
+        --add-category=AudioVideo \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/ADLplug.desktop
 
@@ -79,8 +92,14 @@ cd build_opn
 desktop-file-install --vendor '' \
         --add-category=Midi \
         --add-category=Audio \
+        --add-category=AudioVideo \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/OPNplug.desktop
+
+%check
+
+desktop-file-validate %{buildroot}%{_datadir}/applications/ADLplug.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/OPNplug.desktop
 
 %files
 %doc README.md
