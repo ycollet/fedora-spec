@@ -1,16 +1,15 @@
-# Global variables for github repository
-%global commit0 46beb4891ac6f223b33b298b96764535d8f80e18
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+# Tag: plugin
+# Type: plugin, LV2
+# Category: Audio
 
 Name:    midimsg-lv2
-Version: 0.0.5.%{shortcommit0}
+Version: 0.0.5
 Release: 2%{?dist}
 Summary: A collection of basic LV2 plugins to translate midi messages to usable values
 License: GPLv2+
 URL:     https://github.com/blablack/midimsg-lv2
 
-Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/blablack/midimsg-lv2/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -20,7 +19,7 @@ BuildRequires: python2
 A collection of basic LV2 plugins to translate midi messages to usable values
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 # For Fedora 29
 %if 0%{?fedora} >= 29

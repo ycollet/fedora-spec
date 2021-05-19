@@ -1,16 +1,15 @@
-# Global variables for github repository
-%global commit0 5886aeb3779a37a5e4ab0b6c715216c22aae4e63
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+# Tag: plugin
+# Type: plugin, LV2
+# Category: Audio
 
 Name:    beatslash-lv2
-Version: 1.0.6.%{shortcommit0}
+Version: 1.0.6
 Release: 3%{?dist}
 Summary: beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats
 License: GPLv2+
 URL:     https://github.com/blablack/beatslash-lv2
 
-Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/blablack/beatslash-lv2/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -22,14 +21,17 @@ BuildRequires: sed
 BuildRequires: python2
 
 %description
-beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats. They are meant to be used live, but it is up to your imagination what to do!
+beatslash-lv2 is a set of LV2 plugins to mangle, slash,
+repeat and do much more with your beats.
+They are meant to be used live, but it is up to your
+imagination what to do!
 
 The set contains:
  * Beat Repeater
  * Beat Slicer
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 %build
 

@@ -1,16 +1,15 @@
-# Global variables for github repository
-%global commit0 f029b1e4ad7717d11fb3b1b8201ea5abac21d553
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+# Tag: plugin
+# Type: plugin, LV2
+# Category: Audio
 
 Name:    ams-lv2
-Version: 1.2.2.%{shortcommit0}
+Version: 1.2.2
 Release: 3%{?dist}
 Summary: AMS LV2 set of plugins (from Alsa Modular Synth)
 License: GPLv2+
 URL:     https://github.com/blablack/ams-lv2
 
-Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/blablack/ams-lv2/archive/refs/tags/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -25,7 +24,7 @@ BuildRequires: fftw-devel
 AMS LV2 set of plugins synth (from Alsa Modular Synth)
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup -n %{name}-%{version}
 
 sed -i -e "s/lvtk-plugin-1/lvtk-plugin-2/g" wscript
 sed -i -e "s/lvtk-ui-1/lvtk-ui-2/g" wscript

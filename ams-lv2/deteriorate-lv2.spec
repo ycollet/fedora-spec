@@ -1,16 +1,15 @@
-# Global variables for github repository
-%global commit0 93ea1762755d57dd44a45adee55822bacd2c0a3b
-%global gittag0 master
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+# Tag: plugin
+# Type: plugin, LV2
+# Category: Audio
 
 Name:    deteriorate-lv2
-Version: 1.0.7.%{shortcommit0}
+Version: 1.0.7
 Release: 2%{?dist}
 Summary: deteriorate-lv2 is a set of plugins to destroy and deteriorate the sound quality of a live input
 License: GPLv2+
 URL:     https://github.com/blablack/deteriorate-lv2
 
-Source0: https://github.com/blablack/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/blablack/deteriorate-lv2/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
@@ -22,12 +21,14 @@ BuildRequires: sed
 BuildRequires: python2
 
 %description
-deteriorate-lv2 is a set of plugins to destroy and deteriorate the sound quality of a live input. The set contains:
+deteriorate-lv2 is a set of plugins to destroy and
+deteriorate the sound quality of a live input.
+The set contains:
  * DownSampler
  * Granulator
 
 %prep
-%setup -qn %{name}-%{commit0}
+%setup -qn %{name}-%{version}
 
 %build
 
