@@ -41,15 +41,15 @@ Remove mv-6pm or 6pm. Both are normally the same package
 - glava: <artificial>:(.text+0x1005): undefined reference to `glfwGetX11Window'
 - ecasound: python3 missing
 
-** Add BuildRequires make in spec file which requires it:
-BuildRequires: make
-
 ** Add source.sh file in spec file:
 Source1: source.sh
 
 ** Add check section:
 %check
+
+BuildRequires: desktop-file-utils
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+BuildRequires: libappstream-glib
 appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/*%{name}.*.xml
 
 ** Check before packaging:
