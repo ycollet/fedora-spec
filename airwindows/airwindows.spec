@@ -1,3 +1,7 @@
+# Tag: plugin
+# Type: VST
+# Category: Audio
+
 # Global variables for github repository
 %global commit0 12785bb45db400eeddd79c11d830320a070bb4ca
 %global gittag0 master
@@ -9,6 +13,9 @@ Release: 27%{?dist}
 Summary: A set of VST2 plugins
 License: MIT
 URL:     https://github.com/airwindows/airwindows
+
+Vendor:       Audinux
+Distribution: Audinux
 
 Source0: https://github.com/airwindows/%{name}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # Source1: https://web.archive.org/web/20181016150224/https://download.steinberg.net/sdk_downloads/vstsdk3610_11_06_2018_build_37.zip

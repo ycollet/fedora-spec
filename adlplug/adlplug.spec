@@ -1,4 +1,4 @@
-# Tag: plugin, VST, LVS, MIDI
+# Tag: plugin, MIDI
 # Type: plugin, VST, LV2
 # Category: Audio
 
