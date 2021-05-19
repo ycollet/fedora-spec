@@ -1,10 +1,17 @@
-Summary:  Alsa Modular Synth, a realtime modular synthesizer
-Name:     ams
-Version:  2.2.0
-Release:  5%{?dist}
-URL:      http://alsamodular.sourceforge.net
-Source0:  https://github.com/ycollet/ams/archive/Release-220.tar.gz#/%{name}-%{version}.tar.gz
-License:  GPLv2+
+# Tag: modular, synthetiser, jack
+# Type: application
+# Category: Audio
+
+Summary: Alsa Modular Synth, a realtime modular synthesizer
+Name:    ams
+Version: 2.2.0
+Release: 5%{?dist}
+URL:     http://alsamodular.sourceforge.net
+Source0: https://github.com/ycollet/ams/archive/Release-220.tar.gz#/%{name}-%{version}.tar.gz
+License: GPLv2+
+
+Vendor:       Audinux
+Distribution: Audinux
 
 BuildRequires: gcc-c++
 BuildRequires: autoconf
@@ -50,14 +57,19 @@ find . -name Makefile -exec sed -i -e "s/qt=qt5/qt=5/g" {} \;
 chmod 755 %{buildroot}%{_bindir}/%{name}
 
 # desktop categories
-BASE="Application AudioVideo Audio"
+BASE="AudioVideo Audio"
 XTRA="X-MIDI X-Jack X-Synthesis Midi"
 
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install \
-  --dir %{buildroot}%{_datadir}/applications    \
-  `for c in ${BASE} ${XTRA} ; do echo "--add-category $c " ; done` \
-  src/ams.desktop
+        --dir %{buildroot}%{_datadir}/applications \
+	--remove-key=Encoding \
+        `for c in ${BASE} ${XTRA} ; do echo "--add-category $c " ; done` \
+        src/ams.desktop
+
+%check
+
+desktop-file-validate %{buildroot}%{_datadir}/applications/ams.desktop
 
 %files
 %doc AUTHORS NEWS README THANKS ChangeLog demos instruments tutorial
