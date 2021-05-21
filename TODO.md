@@ -1,4 +1,4 @@
-** Add new packages
+*** Add new packages
 
 | Package             | URL|
 |---------------------|----|
@@ -30,11 +30,10 @@
 | tascar              | https://github.com/HoerTech-gGmbH/tascar/ |
 | midieditor          | https://github.com/markusschwenk/midieditor/ |
 
-** Cleanup
+*** Cleanup
 Remove mv-6pm or 6pm. Both are normally the same package
 
-** Todo for 34
-- update snd to 21.1
+*** Todo for 34
 - add gamin from src.fedoraproject.org (if required)
 - Socalab -> /usr/bin/ld: /usr/lib64/libglib-2.0.so.0: error adding symbols: DSO missing from command line
 - error: 'numeric_limits' is not a member of 'std'
@@ -42,10 +41,10 @@ Remove mv-6pm or 6pm. Both are normally the same package
 - glava: <artificial>:(.text+0x1005): undefined reference to `glfwGetX11Window'
 - ecasound: python3 missing
 
-** Add source.sh file in spec file:
+*** Add source.sh file in spec file:
 Source1: source.sh
 
-** Add check section:
+*** Add check section:
 ```
 %check
 BuildRequires: desktop-file-utils
@@ -54,13 +53,13 @@ BuildRequires: libappstream-glib
 appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/*%{name}.*.xml
 ```
 
-** Check before packaging:
+*** Check before packaging:
 remove -march=native from Makefiles if it's present
 
-** lvtk
+*** lvtk
 fix pkgconfig file installation
 
-** Fix debug generation:
+*** Fix debug generation:
 
 | Package                        | Comment |
 |--------------------------------|---------|
@@ -77,5 +76,5 @@ fix pkgconfig file installation
 | zrythm/ztoolkit                | it's a static library ... |
 | ossia/ossia-score.spec         | don't build anymore. Wait for next release |
 
-** Fedora 33 - To be fixed:
+*** Fedora 33 - To be fixed:
 performer -> cmake + ui_setlist.h missing - pb cmake 3.18 ...
