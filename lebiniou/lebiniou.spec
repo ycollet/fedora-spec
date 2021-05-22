@@ -1,7 +1,11 @@
+# Tag: Live
+# Type: Application
+# Category: Graphic
+
 Name:    lebiniou
 Version: 3.56.1
 Release: 3%{?dist}
-Summary: Lebiniou is an audio spectrum visualizer
+Summary: Audio spectrum visualizer
 URL:     https://biniou.net/
 
 License: GPLv2+

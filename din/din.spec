@@ -1,6 +1,6 @@
-# Tag: Audio, Synthetiser
+# Tag: Jack, Alsa
 # Type: Application
-# Category: Audio, Synthetiser
+# Category: Audio, Synthetizer
 
 Summary: DIN is a synth of a 3rd kind
 Name:    din

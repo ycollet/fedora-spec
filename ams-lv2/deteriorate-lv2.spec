@@ -1,11 +1,11 @@
-# Tag: plugin
-# Type: plugin, LV2
-# Category: Audio
+# Tag: Live
+# Type: Plugin, LV2
+# Category: Audio, Effect
 
 Name:    deteriorate-lv2
 Version: 1.0.7
 Release: 2%{?dist}
-Summary: deteriorate-lv2 is a set of plugins to destroy and deteriorate the sound quality of a live input
+Summary: Set of plugins to destroy and deteriorate the sound quality of a live input
 License: GPLv2+
 URL:     https://github.com/blablack/deteriorate-lv2
 

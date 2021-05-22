@@ -1,6 +1,6 @@
-# Tag: plugin, MIDI
-# Type: plugin, VST, LV2
-# Category: Audio
+# Tag: MIDI, FM, Emulator
+# Type: Plugin, VST, LV2
+# Category: Audio, Synthetizer
 
 Name:    adlplug
 Version: 1.0.2
@@ -31,7 +31,7 @@ BuildRequires: libXinerama-devel
 BuildRequires: libXcursor-devel
 
 %description
-Synthesizer plugin for ADLMIDI (VST/LV2)
+FM synthesizer plugins, based on OPL3 and OPN2 sound chip emulations.
 
 %package -n opnplug
 Summary:    Synthesizer plugin for OPNMIDI (VST/LV2)

@@ -1,11 +1,11 @@
-# Tag: plugin
-# Type: plugin, LV2
-# Category: Audio
+# Tag: Modular, Jack, Alsa
+# Type: Plugin, LV2
+# Category: Audio, Synthetizer
 
 Name:    ams-lv2
 Version: 1.2.2
 Release: 3%{?dist}
-Summary: AMS LV2 set of plugins (from Alsa Modular Synth)
+Summary: Set of Modular Synth plugins (from Alsa Modular Synth)
 License: GPLv2+
 URL:     https://github.com/blablack/ams-lv2
 
@@ -20,8 +20,6 @@ BuildRequires: cairo-devel
 BuildRequires: lvtk
 BuildRequires: fftw-devel
 
-%description
-AMS LV2 set of plugins synth (from Alsa Modular Synth)
 
 %prep
 %autosetup -n %{name}-%{version}

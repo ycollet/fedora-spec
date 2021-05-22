@@ -1,3 +1,7 @@
+# Tag: Reverb, Convolution
+# Type: Plugin, LV2, Application
+# Category: Audio, Effect
+
 Name:    hybridreverb2
 Version: 2.1.2
 Release: 1%{?dist}

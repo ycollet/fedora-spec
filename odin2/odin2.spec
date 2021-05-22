@@ -1,3 +1,7 @@
+# Tag: Jack, Alsa
+# Type: Plugin, Application, VST
+# Category: Audio, Synthetizer
+
 # Global variables for github repository
 %global commit0 bd94faa32539ba4228ad8ccfa00dcc35ab17c4fb
 %global gittag0 master
@@ -33,8 +37,6 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: libXcursor-devel
 
-%description
-A VST3 synthetizer
 
 %package -n vst3-%{name}
 Summary:  VST3 version of %{name}

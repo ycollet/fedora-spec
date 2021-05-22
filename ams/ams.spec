@@ -1,6 +1,6 @@
-# Tag: modular, synthetiser, jack
-# Type: application
-# Category: Audio
+# Tag: Modular, Jack, Alsa
+# Type: Application
+# Category: Audio, Synthetizer
 
 Summary: Alsa Modular Synth, a realtime modular synthesizer
 Name:    ams

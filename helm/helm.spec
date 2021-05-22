@@ -1,3 +1,7 @@
+# Tag: Jack, Alsa
+# Type: Plugin, Application, LV2
+# Category: Audio, Synthetizer
+
 %global commit0 abdedd527e6e1cf86636f0f1e8a3e75b06ed166a
 %global gittag0 master
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -5,7 +9,7 @@
 Name:    helm
 Version: 1.0.0.%{shortcommit0}
 Release: 4%{?dist}
-Summary: A LV2 / standalone synth
+Summary: A LV2 / Standalone polyphonic synth with lots of modulation
 License: GPLv2+
 URL:     https://github.com/mtytel/helm
 
@@ -23,8 +27,6 @@ BuildRequires: libXinerama-devel
 BuildRequires: libXcursor-devel
 BuildRequires: libcurl-devel
 
-%description
-A LV2 / standalone synth
 
 %prep
 %autosetup -n %{name}-%{commit0}

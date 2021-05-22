@@ -1,6 +1,6 @@
-# Tag: plugin
-# Type: plugin, LV2
-# Category: Audio
+# Tag: MIDI
+# Type: Plugin, LV2
+# Category: MIDI
 
 Name:    midimsg-lv2
 Version: 0.0.5
@@ -15,8 +15,6 @@ BuildRequires: gcc gcc-c++
 BuildRequires: lv2-devel
 BuildRequires: python2
 
-%description
-A collection of basic LV2 plugins to translate midi messages to usable values
 
 %prep
 %autosetup -n %{name}-%{version}
