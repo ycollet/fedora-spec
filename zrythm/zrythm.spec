@@ -1,6 +1,6 @@
 Name:    zrythm
 Version: 1.0.0.a1611
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Zrythm is a highly automated Digital Audio Workstation (DAW) designed to be featureful and intuitive to use.
 License: GPLv2+
 URL:     https://git.zrythm.org/git/zrythm
@@ -145,20 +145,32 @@ desktop-file-install --vendor '' \
 %{_datadir}/zrythm/*
 %{_sysconfdir}/bash_completion.d/zrythm
 %{_mandir}/*
-%exclude %{_libdir}/libcm_reproc.a
+%exclude %{_libdir}/*.a
 %if 0%{?fedora} < 34
+%exclude %{_bindir}/gapplication
+%exclude %{_bindir}/gdbus
+%exclude %{_bindir}/gio
+%exclude %{_bindir}/glib-compile-schemas
+%exclude %{_bindir}/gsettings
 %exclude %{_includedir}/glib-2.0/*
 %exclude %{_includedir}/gio-unix-2.0/*
-%{_libdir}/glib-2.0/include/*
-%{_libdir}/*.a
-%{_libdir}/pkgconfig/*
-%{_datadir}/aclocal/*
-%{_datadir}/bash-completion/completions/*
-%{_datadir}/gdb/auto-load/usr/lib64/*
-%{_datadir}/gettext/*
+%exclude %{_libdir}/glib-2.0/include/*
+%exclude %{_libdir}/pkgconfig/*
+%exclude %{_datadir}/aclocal/*
+%exclude %{_datadir}/bash-completion/completions/gio
+%exclude %{_datadir}/bash-completion/completions/gapplication
+%exclude %{_datadir}/bash-completion/completions/gdbus
+%exclude %{_datadir}/bash-completion/completions/gresource
+%exclude %{_datadir}/bash-completion/completions/gsettings
+%exclude %{_datadir}/gdb/auto-load/usr/lib64/*
+%exclude %{_datadir}/gettext/*
+%exclude %{_datadir}/locale/*/LC_MESSAGES/glib20.mo
 %endif
 
 %changelog
+* Sat May 22 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.16.1.1-5
+- update to 1.0.0-alpha.16.1.1-5 - fix exclude of glib files for Fedora 32 and 33
+
 * Sat May 15 2021 Yann Collette <ycollette.nospam@free.fr> - 1.0.0-alpha.16.1.1-4
 - update to 1.0.0-alpha.16.1.1-4
 
