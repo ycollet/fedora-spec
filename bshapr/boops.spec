@@ -1,6 +1,6 @@
 Summary: Audio glitch effect sequencer LV2 plugin
 Name:    lv2-BOops
-Version: 1.2.10
+Version: 1.4.0
 Release: 1%{?dist}
 License: GPL
 URL:     https://github.com/sjaehn/BOops
@@ -8,6 +8,7 @@ URL:     https://github.com/sjaehn/BOops
 Source0: https://github.com/sjaehn/BOops/archive/%{version}.tar.gz#/BOops-%{version}.tar.gz
 
 BuildRequires: gcc gcc-c++
+BuildRequires: make
 BuildRequires: lv2-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libX11-devel
@@ -34,6 +35,9 @@ Audio glitch effect sequencer LV2 plugin
 %{_libdir}/lv2/*
 
 %changelog
+* Fri May 21 2021 Yann Collette <ycollette dot nospam at free.fr> 1.4.0-1
+- update to 1.4.0-1 
+
 * Sat May 08 2021 Yann Collette <ycollette dot nospam at free.fr> 1.2.10-1
 - update to 1.2.10-1 
 
