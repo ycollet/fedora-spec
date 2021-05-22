@@ -1,3 +1,10 @@
+*************************************************************
+**                                                         **
+** WARNIHG !!                                              **
+** This repository is now archived. The work continues on: **
+** https://github.com/audinux/fedora-spec                  **
+**                                                         **
+*************************************************************
 The repo related to these packages can be found here:
 
 https://copr.fedorainfracloud.org/coprs/ycollet/linuxmao/
