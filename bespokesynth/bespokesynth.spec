@@ -1,3 +1,7 @@
+# Tag: Modular
+# Type: Application
+# Category: Audio, Synthetizer
+
 # Global variables for github repository
 %global commit0 6c817399560a4558ff3e9825a7ae0fe7db08507c
 %global gittag0 master
@@ -36,8 +40,6 @@ BuildRequires: libusbx-devel
 BuildRequires: libpng-devel
 BuildRequires: xorg-x11-server-Xvfb
 
-%description
-A software modular synth
 
 %prep
 %autosetup -n %{name}-%{commit0}

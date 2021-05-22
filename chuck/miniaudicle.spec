@@ -1,3 +1,7 @@
+# Tag: Qt4
+# Type: IDE
+# Category: Programming
+
 Summary: Light weight ChucK development environment
 Name:    miniaudicle
 Version: 1.3.5.2

@@ -1,5 +1,9 @@
-Summary: LSP LV2 Plugins
+# Tag: Jack, Limiter, Equalizer, Compressor, Convolution, Gate, Analyzer, Reverb, Delay, MIDI
+# Type: Plugin, LV2
+# Category: Audio, Effect
+
 Name:    lsp-plugins
+Summary: Linux Studio Plugins collection
 Version: 1.1.30
 Release: 1%{?dist}
 License: GPL

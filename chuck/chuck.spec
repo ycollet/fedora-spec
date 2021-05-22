@@ -1,5 +1,9 @@
-Summary: Real-time audio synthesis and graphics/multimedia language
+# Tag: Jack, Alsa
+# Type: Language
+# Category: Audio, Synthetizer, Graphic, Programming
+
 Name:    chuck
+Summary: Real-time audio synthesis and graphics/multimedia language
 Version: 1.4.0.1
 Release: 2%{?dist}
 License: GPL

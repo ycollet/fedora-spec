@@ -1,10 +1,14 @@
+# Tag: Organ
+# Type: Plugin
+# Category: Audio, Synthetizer
+
 %define aeolus_ver 0.9.9
 %define stops_ver  0.3.0
 
 %define desktop_vendor planetccrma
 
-Summary: Aeolus, a synthesized pipe organ
 Name:    aeolus
+Summary: A synthesized pipe organ
 Version: %{aeolus_ver}%{?aeolus_rel:.%{aeolus_rel}}
 Release: 1%{?dist}
 License: GPL

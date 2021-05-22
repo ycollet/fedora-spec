@@ -1,11 +1,15 @@
+# Tag: Organ, Sampler
+# Type: Application
+# Category: Audio, Synthetizer
+
 %define revision 2330
 
 Name:    GrandOrgue
 Version: 0.3.1.%{revision}
 Release: 4%{?dist}
-Summary: GrandOrgue is a sample based pipe organ simulator.
+Summary: A sample based pipe organ simulator.
 License: GPLv2+
-URL:     http://sourceforge.net/projects/ourorgan
+URL:     https://sourceforge.net/projects/ourorgan
 
 # ./GrandOrgue-source.sh <rev>
 # ./GrandOrgue-source.sh 2330
@@ -23,8 +27,6 @@ BuildRequires: systemd-devel
 BuildRequires: wavpack-devel
 BuildRequires: fftw-devel
 
-%description
-GrandOrgue is a sample based pipe organ simulator.
 
 %prep
 %autosetup -n ourorgan-%{revision}

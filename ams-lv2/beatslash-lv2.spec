@@ -1,11 +1,11 @@
-# Tag: plugin
-# Type: plugin, LV2
-# Category: Audio
+# Tag: Live
+# Type: Plugin, LV2
+# Category: Audio, Effect
 
 Name:    beatslash-lv2
 Version: 1.0.6
 Release: 3%{?dist}
-Summary: beatslash-lv2 is a set of LV2 plugins to mangle, slash, repeat and do much more with your beats
+Summary: Set of LV2 plugins to mangle, slash, repeat and do much more with your beats
 License: GPLv2+
 URL:     https://github.com/blablack/beatslash-lv2
 

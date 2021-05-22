@@ -1,7 +1,11 @@
+# Tag: Jack, Qt5, PM
+# Type: Application
+# Category: Audio, Synthetizer
+
 Name:    6PM
 Version: 0.9
 Release: 2%{?dist}
-Summary: A Jack audio synthetizer
+Summary: Phase Modulation synthetizer made of 6 oscillators
 URL:     http://sourceforge.net/projects/mv-6pm/
 License: GPLv2+
 
@@ -21,7 +25,9 @@ BuildRequires: desktop-file-utils
 BuildRequires: jack-audio-connection-kit-devel
 
 %description
-6PM is a phase modulation (PM) synthesizer made of six oscillators. 
+6PM is a phase modulation (PM) synthesizer made of six oscillators.
+It works with Jack sound server and Qt5 GUI.
+Phase Modulation is a kind of Frequency modulation (FM) synthesis 
 
 %prep
 %autosetup -p1 -n %{name}_v%{version}

@@ -1,3 +1,7 @@
+# Tag: Live, MIDI, OSC
+# Type: Language
+# Category: Sequencer, Programming
+
 %global debug_package %{nil}
 
 # Global variables for github repository
